@@ -13,12 +13,12 @@ import "leaflet/dist/leaflet.css";
 // import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 function App({ Component, pageProps }) {
-  const [metaTitle, setMetaTitle] = useState("");
+  // const [metaTitle, setMetaTitle] = useState("");
 
-  let headerMenu;
-  let footerMenu;
-  let homeSLug;
-  let upperFooterMenu;
+  // let headerMenu;
+  // let footerMenu;
+  // let homeSLug;
+  // let upperFooterMenu;
 
   // if (!pageProps.menu) {
   //   return null;

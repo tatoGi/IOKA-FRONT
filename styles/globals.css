@@ -941,4 +941,172 @@ main {
 .search-btn svg {
   width: 18px;
   height: 18px;
-} 
+}
+
+/* About Page Updated Styles */
+.about-banner {
+  background-color: #07151F;
+  padding: 60px 0;
+  margin-bottom: 40px;
+}
+
+.about-banner .banner-content {
+  text-align: center;
+}
+
+.about-banner h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.about-banner p {
+  color: #fff;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.stat-box {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #F8F8F8;
+  margin: 0 auto 15px;
+}
+
+.stat-info h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stat-info p {
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.agency-section {
+  background: #F8F8F8;
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.agency-section h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.team-member p {
+  color: #666;
+  font-size: 14px;
+}
+
+.careers-section {
+  background: #07151F;
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.careers-section h2 {
+  color: #7ACBC4;
+  margin-bottom: 20px;
+}
+
+.careers-section h3 {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.vacancies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* ...existing code... */
+
+.breadcrumb-nav {
+  margin-top: 30px;
+}
+
+.about-banner {
+  background-color: #07151F;
+  height: 290px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.bullet-section {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.bullet-container {
+  text-align: center;
+}
+
+.bullet {
+  width: 73px;
+  height: 73px;
+  background-color: #07151F;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+.bullet-container p {
+  color: #0A273B;
+  margin-top: 10px;
+}
+
+.bullet-container button {
+  margin-top: 10px;
+}

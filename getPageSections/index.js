@@ -24,6 +24,7 @@ import VacanciesDetailPage from "@/components/content/vacancies/Detail";
 import ResultsPage from "@/components/content/results/List";
 import SeeAllPage from "@/components/content/see-all/List";
 import ContactPage from "@/components/content/contact/contact";
+import AboutPage from "@/components/content/about/about";
 
 const pageComponents = [
   { typeName: "home", listPage: HomePage },
@@ -89,7 +90,8 @@ const pageComponents = [
     listPage: VacanciesListPage
   },
   { typeName: "see-all", detailPage: SeeAllPage, listPage: SeeAllPage },
-  { typeName: "contact", detailPage: ContactPage }
+  { typeName: "contact", detailPage: ContactPage },
+  { typeName: "about", detailPage: AboutPage }
 ];
 
 function getPageSections(typeName, isDetail) {

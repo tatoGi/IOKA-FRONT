@@ -1,0 +1,827 @@
+.aboutSection {
+  width: 100%;
+  background-color: #fff;
+  
+}
+
+
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: -2rem auto 4rem;
+  position: relative;
+  z-index: 2;
+  padding: 0 2rem;
+  margin-top: 80px;
+}
+
+
+.statBox {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.statCircle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #d6cece;
+}
+
+.statBox p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.agencySection {
+  text-align: center;
+  background-color: #E6EBED;
+  padding: 3rem;
+  margin: 2rem auto;
+  border-radius: 12px;
+  height: 25rem;
+}
+
+.agencySection h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.agencySection p {
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 4.375rem 0;
+  width: 80rem;
+  height: 25.875rem;
+}
+
+.teamMember {
+  text-align: center;
+}
+
+.teamImage {
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.teamMember h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.teamMember p {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 1200px) {
+  .statsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsContainer {
+    grid-template-columns: 1fr;
+  }
+} 
+.careersSection{
+  height: 55.125rem;
+  background-color: #0A273B;
+  padding: 0 20px;
+  overflow: hidden;
+  width: 100%;
+}
+.careerstitle{
+  color:#8FE3DC;
+}
+.careersSection h3,
+.careersSection h4,
+.careersSection p {
+  color: #FFFFFF;
+}
+.careersSectiontext{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 4rem;
+  display: block;
+  text-align: center;
+}
+.careersSection h3{
+  margin-top: 8px;
+}
+.careersSection h4{
+  margin-top: 32px;
+  font-size: 40px;
+}
+.careersSection p{
+  margin-top: 8px;
+}
+.careersSection span{
+  color:#8FE3DC
+}
+
+.vacanciesGrid {
+  margin: 40px auto 0;
+  position: relative;
+  padding: 0;
+}
+
+.vacancyCard {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 10px;
+  text-align: left;
+  position: relative;
+  min-height: 292px;
+  border-top: 2px dashed rgba(143, 227, 220, 0.3);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Fix slider track styles */
+.vacanciesGrid :global(.slick-slider) {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.vacanciesGrid :global(.slick-list) {
+  margin: 0 -10px;
+  overflow: visible;
+}
+
+.vacanciesGrid :global(.slick-track) {
+  display: flex !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vacanciesGrid :global(.slick-slide) {
+  padding: 0 10px;
+}
+
+/* Update arrow positions */
+.nextArrow,
+.prevArrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #E6EBED;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.prevArrow {
+  left: 0px;
+}
+
+.nextArrow {
+  right: 0px;
+}
+
+
+/* Adjust card content spacing */
+.vacancyCard h4 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.vacancyCard button{
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #7ACBC4;
+  border-style: none;
+  margin-top: 12px;
+}
+
+.date {
+  color: #8FE3DC;
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.vacancyCard p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1200px) {
+  .vacanciesGrid {
+    max-width: 900px;
+  }
+  
+  .prevArrow {
+    left: -40px;
+  }
+  
+  .nextArrow {
+    right: -40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .vacanciesGrid {
+    max-width: 600px;
+  }
+  
+  .prevArrow {
+    left: -30px;
+  }
+  
+  .nextArrow {
+    right: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .vacanciesGrid {
+    max-width: 100%;
+    padding: 0 40px;
+  }
+  
+  .prevArrow {
+    left: 0;
+  }
+  
+  .nextArrow {
+    right: 0;
+  }
+  
+  .vacancyCard {
+    width: calc(100% - 20px) !important;
+    padding: 25px;
+    margin: 10px;
+    min-height: 250px;
+  }
+  
+  .vacancyCard h4 {
+    font-size: 20px;
+  }
+  
+  .vacancyCard p {
+    font-size: 13px;
+    -webkit-line-clamp: 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .vacanciesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vacancyCard {
+    padding: 20px;
+    min-height: 220px;
+  }
+  
+  .vacancyCard h4 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  
+  .date {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .vacancyCard p {
+    font-size: 12px;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.col4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+@media (max-width: 1200px) {
+  .col4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.testimonialSection {
+  padding: 60px 0;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonialContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonialWrapper {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 30px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+}
+
+.testimonialWrapper::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  border: 2px solid #8FE3DC;
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.testimonialImageContainer {
+  position: relative;
+  flex: 0 0 400px;
+  z-index: 2;
+}
+
+.testimonialImageWrapper {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+
+.testimonialImage {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.designElement {
+  position: absolute;
+  top: -30px;
+  right: -60px;
+  z-index: 3;
+}
+
+.curvedLine {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-right: 2px solid #8FE3DC;
+  border-radius: 0 100% 0 0;
+  transform: rotate(45deg);
+  margin-left: auto;
+}
+
+.borderText {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotate(-45deg);
+  background: #fff;
+  padding: 5px 15px;
+  color: #8FE3DC;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.testimonialContent {
+  flex: 1;
+  z-index: 2;
+  padding: 20px 0;
+}
+
+.testimonialHeader {
+  margin-bottom: 24px;
+}
+
+.testimonialName {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.testimonialRole {
+  font-size: 18px;
+  color: #666;
+  margin: 4px 0 0 0;
+}
+
+.testimonialBody {
+  color: #444;
+}
+
+.testimonialText {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  color: #666;
+}
+
+.welcomeText {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-top: 24px;
+}
+
+/* Responsive styles */
+@media (max-width: 968px) {
+  .testimonialWrapper {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .testimonialWrapper::before {
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+  }
+
+  .testimonialImageContainer {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .designElement {
+    top: -20px;
+    right: -30px;
+  }
+
+  .curvedLine {
+    width: 80px;
+    height: 80px;
+  }
+
+  .borderText {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .testimonialName {
+    font-size: 24px;
+  }
+
+  .testimonialRole {
+    font-size: 16px;
+  }
+
+  .testimonialText {
+    font-size: 14px;
+  }
+}
+
+.contactSection {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.contactContainer {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contactSubtitle {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.contactTitle {
+  color: #333;
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.contactForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F0F2F5;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.formTextarea {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F0F2F5;
+  font-size: 16px;
+  color: #333;
+  resize: vertical;
+  min-height: 150px;
+  transition: all 0.3s ease;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: #666;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  background-color: #E6E8EB;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #0A273B;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #0d3251;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .contactSection {
+    padding: 60px 0;
+  }
+
+  .contactTitle {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .formInput,
+  .formTextarea,
+  .submitButton {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactSection {
+    padding: 40px 0;
+  }
+
+  .contactTitle {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .formInput,
+  .formTextarea,
+  .submitButton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Partners Section */
+.partnersSection {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.partnersTitle {
+  font-size: 32px;
+  color: #0A273B;
+  text-align: left;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  max-width: 1560px;
+  margin: 0 auto 40px;
+}
+
+.partnersSlider {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.partnerItem {
+  padding: 0 15px;
+}
+
+.partnerImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Subscribe Section */
+.subscribeSection {
+  background-color: #F0F2F5;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.subscribeContainer {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.subscribeContent {
+  max-width: 600px;
+}
+
+.subscribeSubtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.subscribeHeading {
+  margin-bottom: 32px;
+  font-size: 32px;
+  line-height: 1.4;
+}
+
+.highlightText {
+  color: #8FE3DC;
+  display: inline;
+  margin-right: 8px;
+}
+
+.darkText {
+  color: #0A273B;
+  display: inline;
+  margin-right: 8px;
+}
+
+.subscribeForm {
+  display: flex;
+  gap: 16px;
+  max-width: 500px;
+}
+
+.subscribeInput {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+}
+
+.subscribeButton {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: #0A273B;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subscribeButton:hover {
+  background-color: #0d3251;
+}
+
+.skylineImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  max-width: 600px;
+  opacity: 0.2;
+}
+
+/* Responsive Styles */
+@media (max-width: 968px) {
+  .partnersTitle {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .subscribeContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .subscribeContent {
+    margin-bottom: 40px;
+  }
+
+  .subscribeHeading {
+    font-size: 28px;
+  }
+
+  .subscribeForm {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .skylineImage {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .partnersTitle {
+    font-size: 24px;
+  }
+
+  .subscribeHeading {
+    font-size: 24px;
+  }
+
+  .subscribeButton {
+    width: 100%;
+  }
+}

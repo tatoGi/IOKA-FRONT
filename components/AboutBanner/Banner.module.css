@@ -1,0 +1,52 @@
+.banner {
+  background-color: #0A1019;
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+  margin-top: 10rem;
+  border-radius: 0.75rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-height: 290px;
+  border-radius: 12px;
+
+}
+
+.bannerContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 3rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+} 

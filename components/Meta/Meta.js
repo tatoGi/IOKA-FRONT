@@ -1,12 +1,16 @@
+// For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended.
+// Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
+// Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
+
 import Head from "next/head";
 
 const Meta = ({
-  title = "Default Title",
+  title = "IOKA",
   keywords = "default keywords",
   description = "default description",
   url = "",
   image = "",
-  site = "Ioka"
+  site = "Ioka",
 }) => {
   return (
     <Head>

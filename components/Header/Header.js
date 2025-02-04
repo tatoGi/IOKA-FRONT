@@ -1,3 +1,7 @@
+// For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended.
+// Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
+// Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
+
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -11,7 +15,7 @@ import { usePathname } from "next/navigation";
 const Header = () => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
-  const isContactPage = pathname === "/page-components/contact";
+  const isHomePage = pathname === "/" || pathname === "/#";
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -34,37 +38,34 @@ const Header = () => {
       inputRef.current.focus(); // Focus back on the input field
     }
   };
-  // useEffect(() => {
-  //   if (props.type_id === sectionTypes.home) {
-  //     setClassN(true)
-  //   } else {
-  //     setClassN(false)
-  //   }
-  // }, [localRouter, props.type_id])
 
   useEffect(() => {
     function handleScroll() {
+      if (!isHomePage) {
+        setActiveScroll(true);
+        return;
+      }
+
       const currentScrollY = window.pageYOffset;
-      if (currentScrollY >= 20 || isContactPage) {
+      if (currentScrollY >= 20) {
         setActiveScroll(true);
       } else {
         setActiveScroll(false);
       }
     }
 
-    // Set initial state for contact page
-    if (isContactPage) {
+    // Set initial state
+    if (!isHomePage) {
       setActiveScroll(true);
     }
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isContactPage]);
+  }, [isHomePage]);
 
   return (
     <header className={activeScroll ? "scroll-header" : ""}>
       <div className="header-cont">
-        {" "}
         {/* home-header  classNme after check*/}
         <div className="container">
           <div className="header-box">
@@ -80,23 +81,23 @@ const Header = () => {
             </div>
             <div className="header-nav">
               <ul>
-                <li className="active-link">
-                  <Link href={"#"}>OFFPLAN</Link>
+                <li className={pathname === "/offplan" ? "active-link" : ""}>
+                  <Link href={"/offplan"}>OFFPLAN</Link>
                 </li>
-                <li>
-                  <Link href={"#"}>RESALE</Link>
+                <li className={pathname === "/resale" ? "active-link" : ""}>
+                  <Link href={"/resale"}>RESALE</Link>
                 </li>
-                <li>
-                  <Link href={"#"}>RENTALS</Link>
+                <li className={pathname === "/rentals" ? "active-link" : ""}>
+                  <Link href={"/rentals"}>RENTALS</Link>
                 </li>
-                <li>
-                  <Link href={"#"}>DEVELOPERS</Link>
+                <li className={pathname === "/developers" ? "active-link" : ""}>
+                  <Link href={"/developers"}>DEVELOPERS</Link>
                 </li>
-                <li>
-                  <Link href={"#"}>BLOG</Link>
+                <li className={pathname === "/blog" ? "active-link" : ""}>
+                  <Link href={"/blog"}>BLOG</Link>
                 </li>
-                <li>
-                  <Link href={"#"}>ABOUT US</Link>
+                <li className={pathname === "/page-components/about" ? "active-link" : ""}>
+                  <Link href={"/page-components/about"}>ABOUT US</Link>
                 </li>
               </ul>
             </div>
