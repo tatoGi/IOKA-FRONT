@@ -192,10 +192,11 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}>→</button>
+              <button className={styles.readMoreBtn}></button>
             </div>
             <div className={`col-md-4 ${styles.vacancyCard}`}>
               <h4>Property Consultant German Speaker</h4>
+
               <span className={styles.date}>Nov 13, 2023</span>
               <p>
                 We are looking to expand our talented sales team with Property
@@ -205,7 +206,7 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}>→</button>
+              <button className={styles.readMoreBtn}></button>
             </div>
             <div className={`col-md-4 ${styles.vacancyCard}`}>
               <h4>Property Consultant German Speaker</h4>
@@ -217,7 +218,7 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}>→</button>
+              <button className={styles.readMoreBtn}></button>
             </div>
           </Slider>
         </div>
