@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AboutBanner from "@/components/AboutBanner/Banner";
 import styles from "./AboutUs.module.css";
 import Image from "next/image";
@@ -31,6 +31,19 @@ const NextArrow = ({ onClick }) => (
 );
 
 const AboutUs = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+
+  const openModal = (job) => {
+    setSelectedJob(job);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedJob(null);
+  };
+
   // Define breadcrumb items
   const breadcrumbItems = [{ text: "Home", link: "/" }, { text: "About Us" }];
 
@@ -192,7 +205,27 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}></button>
+              <button
+                className={styles.readMoreBtn}
+                onClick={() =>
+                  openModal({
+                    title: "Property Consultant German Speaker",
+                    date: "Nov 13, 2023",
+                    responsibilities: [
+                      "Provide property investment advice to clients after careful analysis of market conditions and trends and identify their needs and preferences",
+                      "Provide customers with comprehensive and consistent support throughout the entire sales process",
+                      "Attend events and property launches organized by developers",
+                      "Finding clients in need of consultancy services through cold-calling, advertising, and business presentations",
+                      "Perform comparative market analysis to provide advice on the off-plan property value",
+                      "Discuss and follow up on opportunities with prospective buyers",
+                      "Handle daily operations including internal company CRM tools",
+                      "Follow proper documentation process for every transaction to ensure full compliance with the UAE real estate market laws and regulations",
+                      "Promote sales through available advertisement channels, open houses, events, etc.",
+                      "Collaborate with the marketing team and suggest new and innovative ideas for lead generation"
+                    ]
+                  })
+                }
+              ></button>
             </div>
             <div className={`col-md-4 ${styles.vacancyCard}`}>
               <h4>Property Consultant German Speaker</h4>
@@ -206,10 +239,31 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}></button>
+              <button
+                className={styles.readMoreBtn}
+                onClick={() =>
+                  openModal({
+                    title: "Property Consultant German Speaker",
+                    date: "Nov 13, 2023",
+                    responsibilities: [
+                      "Provide property investment advice to clients after careful analysis of market conditions and trends and identify their needs and preferences",
+                      "Provide customers with comprehensive and consistent support throughout the entire sales process",
+                      "Attend events and property launches organized by developers",
+                      "Finding clients in need of consultancy services through cold-calling, advertising, and business presentations",
+                      "Perform comparative market analysis to provide advice on the off-plan property value",
+                      "Discuss and follow up on opportunities with prospective buyers",
+                      "Handle daily operations including internal company CRM tools",
+                      "Follow proper documentation process for every transaction to ensure full compliance with the UAE real estate market laws and regulations",
+                      "Promote sales through available advertisement channels, open houses, events, etc.",
+                      "Collaborate with the marketing team and suggest new and innovative ideas for lead generation"
+                    ]
+                  })
+                }
+              ></button>
             </div>
             <div className={`col-md-4 ${styles.vacancyCard}`}>
               <h4>Property Consultant German Speaker</h4>
+
               <span className={styles.date}>Nov 13, 2023</span>
               <p>
                 We are looking to expand our talented sales team with Property
@@ -218,7 +272,27 @@ const AboutUs = () => {
                 investing in the property market, based on an analysis of the
                 market and identification of the latest trends in...
               </p>
-              <button className={styles.readMoreBtn}></button>
+              <button
+                className={styles.readMoreBtn}
+                onClick={() =>
+                  openModal({
+                    title: "Property Consultant German Speaker",
+                    date: "Nov 13, 2023",
+                    responsibilities: [
+                      "Provide property investment advice to clients after careful analysis of market conditions and trends and identify their needs and preferences",
+                      "Provide customers with comprehensive and consistent support throughout the entire sales process",
+                      "Attend events and property launches organized by developers",
+                      "Finding clients in need of consultancy services through cold-calling, advertising, and business presentations",
+                      "Perform comparative market analysis to provide advice on the off-plan property value",
+                      "Discuss and follow up on opportunities with prospective buyers",
+                      "Handle daily operations including internal company CRM tools",
+                      "Follow proper documentation process for every transaction to ensure full compliance with the UAE real estate market laws and regulations",
+                      "Promote sales through available advertisement channels, open houses, events, etc.",
+                      "Collaborate with the marketing team and suggest new and innovative ideas for lead generation"
+                    ]
+                  })
+                }
+              ></button>
             </div>
           </Slider>
         </div>
@@ -324,6 +398,63 @@ const AboutUs = () => {
         <PartnersSection />
         <SubscribeSection />
       </div>
+
+      {/* Job Application Modal */}
+      {isModalOpen && selectedJob && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <button className={styles.closeButton} onClick={closeModal}>
+              ×
+            </button>
+
+            <div className={styles.responsibilities}>
+              <h2>{selectedJob.title}</h2>
+              <div className={styles.date}>
+                <h3>Key Responsibilities</h3>
+                <ul>
+                  {selectedJob.responsibilities.map((resp, index) => (
+                    <li key={index}>{resp}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className={styles.applicationForm}>
+              <h3>Apply for this position</h3>
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <input type="text" placeholder="First Name *" required />
+                </div>
+                <div className={styles.formGroup}>
+                  <input type="text" placeholder="Last Name *" required />
+                </div>
+              </div>
+              <div className={styles.formGroup}>
+                <input type="email" placeholder="Email *" required />
+              </div>
+              <div className={styles.formGroup}>
+                <input type="tel" placeholder="Mobile *" required />
+              </div>
+              <div className={styles.formGroup}>
+                <input type="file" id="cv" required />
+                <label htmlFor="cv" className={styles.fileUpload}>
+                  Upload CV *
+                </label>
+              </div>
+              <div className={styles.formGroup}>
+                <textarea placeholder="Cover letter *" required></textarea>
+              </div>
+              <div className={styles.formCheckbox}>
+                <input type="checkbox" id="terms" required />
+                <label htmlFor="terms">I agree Terms & Privacy Policy</label>
+              </div>
+              <button type="submit" className={styles.submitButton}>
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -840,3 +840,234 @@
     width: 100%;
   }
 }
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1000px;
+  height: 90vh;
+  position: relative;
+  display: flex;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  z-index: 2;
+}
+
+.modal h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.modal .responsibilities {
+  flex: 1;
+  padding-right: 40px;
+  border-right: 1px solid #E6E8EB;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal .date {
+  border: 2px solid #7ACBC4;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for the responsibilities section */
+.modal .date::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal .date::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.modal .date::-webkit-scrollbar-thumb {
+  background: #7ACBC4;
+  border-radius: 3px;
+}
+
+.modal .date::-webkit-scrollbar-thumb:hover {
+  background: #5ba19a;
+}
+
+.modal .responsibilities h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.modal .responsibilities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal .responsibilities li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.applicationForm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.applicationForm h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+}
+
+.formGroup {
+  flex: 1;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #E6E8EB;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #666;
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.fileUpload {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #E6E8EB;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+}
+
+.fileUpload::after {
+  content: "Choose file";
+  color: #8FE3DC;
+  margin-left: auto;
+}
+
+.formGroup input[type="file"] {
+  display: none;
+}
+
+.formCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.formCheckbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #E6E8EB;
+  border-radius: 4px;
+}
+
+.formCheckbox label {
+  color: #666;
+  font-size: 14px;
+}
+
+.submitButton {
+  background: #0A273B;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.submitButton:hover {
+  background: #0d3251;
+}
+
+/* Update responsive styles */
+@media (max-width: 992px) {
+  .modal {
+    height: auto;
+    max-height: 90vh;
+  }
+
+  .modal .date {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .modal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
