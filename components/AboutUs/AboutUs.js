@@ -225,19 +225,19 @@ const AboutUs = () => {
         {/* Testimonials Section */}
         <div className={styles.testimonialSection}>
           <div className={styles.testimonialContainer}>
-            <div className={styles.testimonialWrapper}>
-              <div className={styles.testimonialImageContainer}>
-                <div className={styles.testimonialImageWrapper}>
-                  <Image
-                    src={TestimonialImage}
-                    alt="CEO Portrait"
-                    width={400}
-                    height={400}
-                    className={styles.testimonialImage}
-                  />
-                  <div className={styles.curvedConnector}></div>
-                </div>
+            <div className={styles.testimonialImageContainer}>
+              <div className={styles.testimonialImageWrapper}>
+                <Image
+                  src={TestimonialImage}
+                  alt="CEO Portrait"
+                  width={400}
+                  height={400}
+                  className={styles.testimonialImage}
+                />
+                <div className={styles.curvedConnector}></div>
               </div>
+            </div>
+            <div className={styles.testimonialWrapper}>
               <div className={styles.testimonialContent}>
                 <div className={styles.testimonialHeader}>
                   <h3 className={styles.testimonialName}>Max Musterman</h3>
