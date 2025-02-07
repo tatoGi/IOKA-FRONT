@@ -1,17 +1,15 @@
 .contactPage {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  margin-top: 7.125rem;
 }
 
 .contactInfo {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2rem;
   margin-bottom: 4rem;
-  background: #fff;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -20,7 +18,7 @@
 }
 
 .infoSection h2 {
-  color: #0066ff;
+  color: #0A273B;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: 500;
@@ -28,8 +26,8 @@
 
 .infoSection h1 {
   font-size: 2.5rem;
-  color: #1a1a1a;
-  margin-bottom: 1.5rem;
+  color: #0A273B;
+  margin-bottom: 1.3rem ;
   font-weight: bold;
 }
 
