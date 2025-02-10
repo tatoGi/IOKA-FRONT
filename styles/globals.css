@@ -369,7 +369,6 @@ main {
   padding-right: 10px;
   color: #fff;
   font-size: 14px;
-  height: 18px;
   /* Monserrat */
 }
 .footer-message form input::placeholder{
@@ -1065,6 +1064,41 @@ main {
   padding: 0 20px;
 }
 
+.vacancyCard {
+  width: 504px;
+  height: 292px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vacancyCard h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.vacancyCard p {
+  font-size: 16px;
+  color: #666;
+}
+
+@media (max-width: 1200px) {
+  .vacancies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vacancies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vacancyCard {
+    width: 100%;
+  }
+}
+
 /* ...existing code... */
 
 .breadcrumb-nav {
@@ -1110,3 +1144,45 @@ main {
 .bullet-container button {
   margin-top: 10px;
 }
+
+.vacanciesGrid {
+  margin-top: 20px;
+}
+
+.vacancyCard {
+  width: 504px;
+  height: 292px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vacancyCard h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.vacancyCard p {
+  font-size: 16px;
+  color: #666;
+}
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  color: #7ACBC4;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #0A273B;
+}
+
+/* ...existing code... */

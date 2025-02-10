@@ -90,8 +90,8 @@ const Header = () => {
                 <li className={pathname === "/rentals" ? "active-link" : ""}>
                   <Link href={"/rentals"}>RENTALS</Link>
                 </li>
-                <li className={pathname === "/developers" ? "active-link" : ""}>
-                  <Link href={"/developers"}>DEVELOPERS</Link>
+                <li className={pathname === "/page-components/developer" ? "active-link" : ""}>
+                  <Link href={"/page-components/developer"}>DEVELOPERS</Link>
                 </li>
                 <li className={pathname === "/blog" ? "active-link" : ""}>
                   <Link href={"/blog"}>BLOG</Link>
