@@ -1,9 +1,13 @@
 import React from "react";
 import AboutBanner from "@/components/AboutBanner/Banner";
+import BreadcrumbSection from "@/components/BreadcrumbSection/BreadcrumbSection";
 import styles from "./AboutUs.module.css";
 import Image from "next/image";
 import TeamImage from "../../assets/img/team-1.png";
-import Slider from "react-slick";
+import TestimonialImage from "../../assets/img/team-1.png";
+import ContactForm from "../contactForm/ContactForm";
+import PartnersSection from "../PartnersSection/PartnersSection";
+import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const AboutUs = () => {
   // Define breadcrumb items
@@ -19,16 +23,16 @@ const AboutUs = () => {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
-        },
+          slidesToShow: 2
+        }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+          slidesToShow: 1
+        }
+      }
+    ]
   };
 
   return (
@@ -84,7 +88,58 @@ const AboutUs = () => {
             market.
           </p>
         </div>
-
+        {/* Testimonials Section */}
+        <div className={styles.testimonialSection}>
+          <div className={styles.testimonialContainer}>
+            <div className={styles.testimonialImageContainer}>
+              <div className={styles.testimonialImageWrapper}>
+                <Image
+                  src={TestimonialImage}
+                  alt="CEO Portrait"
+                  width={400}
+                  height={400}
+                  className={styles.testimonialImage}
+                />
+                <div className={styles.curvedConnector}></div>
+              </div>
+            </div>
+            <div className={styles.testimonialWrapper}>
+              <div className={styles.testimonialContent}>
+                <div className={styles.testimonialHeader}>
+                  <h3 className={styles.testimonialName}>Max Musterman</h3>
+                  <p className={styles.testimonialRole}>CEO Chairman</p>
+                </div>
+                <div className={styles.testimonialBody}>
+                  <p className={styles.testimonialText}>
+                    As a brokerage rooted in one of the world's most iconic
+                    cities, we pride ourselves on clarity, efficiency, and an
+                    unwavering commitment to client satisfaction.
+                  </p>
+                  <p className={styles.testimonialText}>
+                    Our mission is to elevate your real estate experience with
+                    unparalleled expertise and dedication. We navigate the
+                    complexities of the market with precision, providing clear
+                    assistance and tailored strategies to achieve your goals
+                    seamlessly and efficiently.
+                  </p>
+                  <p className={styles.testimonialText}>
+                    At IOKA, we strive to be more than your real estate
+                    brokers—we are your reliable partners. We are dedicated to
+                    earning your trust and building long-term relationships.
+                    Understanding your unique goals is at the heart of our
+                    approach, allowing us to combine personalized service with
+                    strategic insights to deliver exceptional results with the
+                    highest standards of professionalism.
+                  </p>
+                  <p className={styles.welcomeText}>
+                    Welcome to IOKA, your trusted guide in Dubai's dynamic real
+                    estate market.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Team Section */}
         <div className={styles.teamGrid}>
           <div className={styles.teamMember}>
@@ -126,34 +181,23 @@ const AboutUs = () => {
 
         {/* Careers Section */}
         <div className={styles.careersSection}>
-          <div className={styles.careersSectiontext}>
-            <h2 className={styles.careerstitle}>CAREERS</h2>
+          <div className={styles.careersSectionContent}>
+            <h2>CAREERS</h2>
             <h3>Join An Award-winning Team</h3>
-            <h4>Current Vacancies</h4>
-            <p>
-              We are currently hiring for the below-mentioned roles. Please click
-              on the link to view the full job description and to apply online.
-            </p>
-            <span>
-              Good Luck!
-            </span>
+            <div className={styles.currentVacancies}>
+              <h4>Current Vacancies</h4>
+              <p>
+                We are currently hiring for the below mentioned roles. Please
+                click on the role to view the full job description and apply
+                with your CV and cover letter.
+              </p>
+              <span>Good Luck!</span>
+            </div>
           </div>
-         
-          <Slider {...sliderSettings} className={styles.vacanciesGrid}>
-            <div className={styles.vacancyCard}>
-              <h4>Role 1</h4>
-              <p>Job description for role 1.</p>
-            </div>
-            <div className={styles.vacancyCard}>
-              <h4>Role 2</h4>
-              <p>Job description for role 2.</p>
-            </div>
-            <div className={styles.vacancyCard}>
-              <h4>Role 3</h4>
-              <p>Job description for role 3.</p>
-            </div>
-          </Slider>
         </div>
+        <ContactForm />
+        <PartnersSection />
+        <SubscribeSection />
       </div>
     </div>
   );

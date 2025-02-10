@@ -595,3 +595,114 @@
     width: 100%;
   }
 }
+.careersSection {
+  background-color: #001B2E;
+  padding: 60px 0;
+  color: white;
+}
+
+.careersSectionContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.careersSectionContent h2 {
+  color: #8FE3DC;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.careersSectionContent h3 {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.currentVacancies {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.currentVacancies h4 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.currentVacancies p {
+  color: #ccc;
+  max-width: 600px;
+  margin: 10px auto;
+  font-size: 20px;
+}
+
+.currentVacancies span {
+  font-size: 20px;
+  color: #8FE3DC;
+}
+
+
+.jobListings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.jobCard {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  position: relative;
+  min-height: 250px;
+}
+
+.jobCard h5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.date {
+  color: #00A6E6;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.jobCard p {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.applyButton {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #00A6E6;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.applyButton:hover {
+  background-color: #0085b8;
+}
+
+@media (max-width: 768px) {
+  .jobListings {
+    grid-template-columns: 1fr;
+  }
+  
+  .careersSectionContent {
+    padding: 0 15px;
+  }
+}
