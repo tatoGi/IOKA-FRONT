@@ -1,7 +1,6 @@
 .developerSection {
   padding: 2rem 0;
   background: #f8f9fa;
-  margin-top: 10rem;
 }
 
 .cardsContainer {
@@ -67,7 +66,7 @@
 
 .contentSection {
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -139,6 +138,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 12px;
 }
 
 .buttonIcon {
@@ -153,12 +153,14 @@
   max-width: 81px;
   max-height: 32px;
   background-color: #0A273B;
+  font-size: 12px;
 }
 
 .whatsappButton {
   max-width: 121px;
   max-height: 32px;
   background-color: #7ACBC4;
+  font-size: 12px;
 }
 
 .callButton:hover {
@@ -213,7 +215,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   color: #666;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -275,3 +277,5 @@
     flex: 1;
   }
 }
+
+

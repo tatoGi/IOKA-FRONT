@@ -1186,3 +1186,51 @@ main {
 }
 
 /* ...existing code... */
+
+/* Breadcrumb Styles */
+.breadcrumb-section {
+  width: 100%;
+  padding: 12px 0;
+  background: #fff;
+  border-bottom: 2px solid #07151F;
+  margin-top: 104px; /* Match header height */
+}
+
+.breadcrumb-content {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-list li {
+  font-size: 14px;
+  color: #0A273B;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+  content: ">";
+  margin: 0 8px;
+  color: #0A273B;
+  opacity: 0.5;
+}
+
+.breadcrumb-list li a {
+  color: #0A273B;
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.breadcrumb-list li a:hover {
+  opacity: 0.8;
+}

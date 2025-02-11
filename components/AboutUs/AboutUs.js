@@ -1,6 +1,5 @@
 import React from "react";
 import AboutBanner from "@/components/AboutBanner/Banner";
-import BreadcrumbSection from "@/components/BreadcrumbSection/BreadcrumbSection";
 import styles from "./AboutUs.module.css";
 import Image from "next/image";
 import TeamImage from "../../assets/img/team-1.png";
@@ -10,9 +9,6 @@ import PartnersSection from "../PartnersSection/PartnersSection";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const AboutUs = () => {
-  // Define breadcrumb items
-  const breadcrumbItems = [{ text: "Home", link: "/" }, { text: "About Us" }];
-
   const sliderSettings = {
     dots: true,
     infinite: true,

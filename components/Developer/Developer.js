@@ -8,8 +8,10 @@ import {
   FaPhone,
   FaWhatsapp
 } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Developer = () => {
+  const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Sample images array for the slider
@@ -38,6 +40,10 @@ const Developer = () => {
 
   const prevImage = (cardIndex) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleSeeMore = (cardIndex) => {
+    router.push(`/developer/${cardIndex}`);
   };
 
   return (
@@ -109,6 +115,14 @@ const Developer = () => {
                         <FaWhatsapp size={16} style={{ marginRight: "8px" }} />
                         <span>WhatsApp</span>
                       </button>
+                      <div className={styles.seeMore}>
+                        <button
+                          className={styles.seeMoreButton}
+                          onClick={() => handleSeeMore(cardIndex)}
+                        >
+                          See More
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

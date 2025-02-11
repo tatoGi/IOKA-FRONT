@@ -63,72 +63,138 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
+  // Update the getBreadcrumbTitle function to handle page-components paths
+  const getBreadcrumbTitle = (path) => {
+    if (!path) return "";
+    const segments = path.split("/");
+    // Handle page-components paths
+    if (segments.includes("page-components")) {
+      const lastSegment = segments[segments.length - 1];
+      switch (lastSegment) {
+        case "developer":
+          return "Developers";
+        case "about":
+          return "About Us";
+        case "contact":
+          return "Contact Us";
+        default:
+          return lastSegment
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+      }
+    }
+    // Handle other paths
+    const lastSegment = segments[segments.length - 1];
+    switch (lastSegment) {
+      case "offplan":
+        return "Offplan";
+      case "resale":
+        return "Resale";
+      case "rentals":
+        return "Rentals";
+      case "blog":
+        return "Blog";
+      default:
+        return lastSegment
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+    }
+  };
+
   return (
-    <header className={activeScroll ? "scroll-header" : ""}>
-      <div className="header-cont">
-        {/* home-header  classNme after check*/}
-        <div className="container">
-          <div className="header-box">
-            <div className="left-cont-image">
-              <div className="logo-img">
-                <Link href={"/#"} className="white-logo">
-                  <Image src={Logo} alt="logo" />
-                </Link>
-                <Link href={"/#"} className="dark-logo">
-                  <Image src={LogoDark} alt="logo" />
-                </Link>
+    <>
+      <header className={activeScroll ? "scroll-header" : ""}>
+        <div className="header-cont">
+          {/* home-header  classNme after check*/}
+          <div className="container">
+            <div className="header-box">
+              <div className="left-cont-image">
+                <div className="logo-img">
+                  <Link href={"/#"} className="white-logo">
+                    <Image src={Logo} alt="logo" />
+                  </Link>
+                  <Link href={"/#"} className="dark-logo">
+                    <Image src={LogoDark} alt="logo" />
+                  </Link>
+                </div>
               </div>
-            </div>
-            <div className="header-nav">
-              <ul>
-                <li className={pathname === "/offplan" ? "active-link" : ""}>
-                  <Link href={"/offplan"}>OFFPLAN</Link>
-                </li>
-                <li className={pathname === "/resale" ? "active-link" : ""}>
-                  <Link href={"/resale"}>RESALE</Link>
-                </li>
-                <li className={pathname === "/rentals" ? "active-link" : ""}>
-                  <Link href={"/rentals"}>RENTALS</Link>
-                </li>
-                <li className={pathname === "/page-components/developer" ? "active-link" : ""}>
-                  <Link href={"/page-components/developer"}>DEVELOPERS</Link>
-                </li>
-                <li className={pathname === "/blog" ? "active-link" : ""}>
-                  <Link href={"/blog"}>BLOG</Link>
-                </li>
-                <li className={pathname === "/page-components/about" ? "active-link" : ""}>
-                  <Link href={"/page-components/about"}>ABOUT US</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="right-search-contact">
-              <div className="right-form">
-                <form action="">
-                  <input
-                    type="text"
-                    ref={inputRef}
-                    value={inputValue}
-                    onChange={handleInputChange}
-                  />
-                  <button className="searchbtn" onClick={handleSearch}>
-                    <SearchBtn />
-                  </button>
-                  <button className="clearbtn" onClick={handleClear}>
-                    <SearchCloseBtn />
-                  </button>
-                </form>
+              <div className="header-nav">
+                <ul>
+                  <li className={pathname === "/offplan" ? "active-link" : ""}>
+                    <Link href={"/offplan"}>OFFPLAN</Link>
+                  </li>
+                  <li className={pathname === "/resale" ? "active-link" : ""}>
+                    <Link href={"/resale"}>RESALE</Link>
+                  </li>
+                  <li className={pathname === "/rentals" ? "active-link" : ""}>
+                    <Link href={"/rentals"}>RENTALS</Link>
+                  </li>
+                  <li
+                    className={
+                      pathname === "/page-components/developer"
+                        ? "active-link"
+                        : ""
+                    }
+                  >
+                    <Link href={"/page-components/developer"}>DEVELOPERS</Link>
+                  </li>
+                  <li className={pathname === "/blog" ? "active-link" : ""}>
+                    <Link href={"/blog"}>BLOG</Link>
+                  </li>
+                  <li
+                    className={
+                      pathname === "/page-components/about" ? "active-link" : ""
+                    }
+                  >
+                    <Link href={"/page-components/about"}>ABOUT US</Link>
+                  </li>
+                </ul>
               </div>
-              <div className="contactBtn">
-                <Link href={"/page-components/contact"}>CONTACT US</Link>
+              <div className="right-search-contact">
+                <div className="right-form">
+                  <form action="">
+                    <input
+                      type="text"
+                      ref={inputRef}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                    />
+                    <button className="searchbtn" onClick={handleSearch}>
+                      <SearchBtn />
+                    </button>
+                    <button className="clearbtn" onClick={handleClear}>
+                      <SearchCloseBtn />
+                    </button>
+                  </form>
+                </div>
+                <div className="contactBtn">
+                  <Link href={"/page-components/contact"}>CONTACT US</Link>
+                </div>
               </div>
-            </div>
-            <div className="mobile-burger-menu">
-              <div className="burger-lines"></div>
+              <div className="mobile-burger-menu">
+                <div className="burger-lines"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+      {!isHomePage && (
+        <div className="breadcrumb-section">
+          <div className="container">
+            <div className="breadcrumb-content">
+              <ul className="breadcrumb-list">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>{getBreadcrumbTitle(pathname)}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

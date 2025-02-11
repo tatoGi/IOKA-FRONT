@@ -1,0 +1,1184 @@
+.developerShowSection {
+  width: 100%;
+}
+
+.searchSection {
+  width: 100%;
+  padding: 20px 20px;
+  background-color: #fff;
+}
+
+.searchContainer {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.searchInputWrapper {
+  position: relative;
+  margin-bottom: 44px;
+  width: 100%;
+  height: 40px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  width: 16px;
+  height: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 20px 12px 45px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 40px;
+  color: #666666;
+}
+
+.searchInput::placeholder {
+  color: #666666;
+}
+
+.filterButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.filterBtn {
+  padding: 8px 16px;
+  border: 1px solid #0A273B;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  height: 40px;
+  white-space: nowrap;
+  color: #0A273B;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterBtn svg {
+  margin-left: 4px;
+}
+
+.filterBtn:hover {
+  border-color: #D1D1D1;
+  background-color: #F8F8F8;
+}
+
+.moreFilters {
+  display: flex;
+  align-items: center;
+}
+
+.moreFiltersBtn {
+  padding: 8px 16px;
+  border: 1px solid #0A273B;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  height: 40px;
+  color: #0A273B;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  width: 142px;
+}
+
+.moreFiltersBtn:hover {
+  border-color: #D1D1D1;
+  background-color: #F8F8F8;
+}
+
+.moreFiltersBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.heroSection {
+  padding: 44px 20px;
+}
+
+.heroContent {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 0 44px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 100px;
+  border-bottom: 1px solid #07151F;
+  margin-bottom: 44px;
+}
+
+.developerInfo {
+  max-width: 730px;
+}
+
+.developerInfo h2 {
+  color: #0A273B;
+  font-size: 24px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.developerInfo p {
+  color: #0A273B;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  font-weight: normal;
+}
+
+.developerLogo {
+  width: 530px;
+  height: 360px;
+  background-color: #07151F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  padding: 20px;
+}
+
+.developerLogo img {
+  width: 300px !important;  /* Adjust this value to match the screenshot */
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.heroContent h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #8FE3DC;
+}
+
+.heroContent p {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #0A273B;
+}
+
+.statsSection {
+  padding: 60px 0;
+  background-color: #f5f5f5;
+}
+
+.statsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.statItem {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.statItem h3 {
+  font-size: 36px;
+  color: #8FE3DC;
+  margin-bottom: 10px;
+}
+
+.statItem p {
+  font-size: 16px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.projectsSection {
+  padding: 80px 0;
+}
+
+.projectsSection h2 {
+  text-align: center;
+  font-size: 36px;
+  color: #001B2E;
+  margin-bottom: 40px;
+}
+
+.projectsGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.projectCard {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+.projectImage {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.projectImage img {
+  object-fit: cover;
+}
+
+.projectInfo {
+  padding: 20px;
+}
+
+.projectInfo h3 {
+  font-size: 20px;
+  color: #001B2E;
+  margin-bottom: 5px;
+}
+
+.projectInfo p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.price {
+  color: #8FE3DC;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+@media (max-width: 1400px) {
+  .heroContent {
+    gap: 60px;
+  }
+
+  .developerInfo {
+    max-width: 650px;
+  }
+
+  .developerLogo {
+    width: 480px;
+    height: 325px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .heroContent {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .developerInfo {
+    max-width: 100%;
+  }
+
+  .developerLogo {
+    width: 100%;
+    max-width: 530px;
+    height: auto;
+    aspect-ratio: 530/360;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchContainer,
+  .heroContent {
+    padding: 0 15px;
+  }
+
+  .filterButtons {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filterBtn {
+    padding: 6px 12px;
+    font-size: 13px;
+    height: 36px;
+  }
+
+  .heroSection {
+    padding: 20px;
+  }
+
+  .heroContent {
+    flex-direction: column;
+  }
+
+  .heroContent h1 {
+    font-size: 36px;
+  }
+
+  .heroContent p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .heroContent h1 {
+    font-size: 28px;
+  }
+
+  .heroContent p {
+    font-size: 16px;
+  }
+}
+
+.listingsSection {
+  padding: 40px 20px;
+}
+
+.listingsContainer {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.listingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.listingInfo h3 {
+  font-size: 26px;
+  color: #0A273B;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.listingCount {
+  color: #7ACBC4;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sortDropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sortDropdown span {
+  color: #666666;
+  font-size: 14px;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  background: white;
+  color: #666666;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.propertyGrid {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s ease;
+  width: max-content;
+}
+
+.propertyCard {
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  width: 400px;
+  flex: 0 0 auto;
+}
+
+.propertyImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.propertyType {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #007AFF;
+  color: white;
+  padding: 10px 0px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1;
+  width: 102px;
+  height: 35px;
+  text-align: center;
+}
+
+.propertyYear {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #07151F;
+  color: white;
+  padding: 10px 17px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 1;
+  width: 60px;
+  height: 35px;
+}
+
+.propertyInfo {
+  padding: 16px;
+}
+
+.propertyInfo h4 {
+  font-size: 16px;
+  color: #0A273B;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.location {
+  color: #0A273B;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.priceStart {
+  color: #0A273B;
+  font-size: 16px;
+  font-weight: 600;
+}
+.price {
+  color: #007AFF;
+  font-size: 16px;
+  font-weight: 600;
+}
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.propertyStats {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0A273B;
+  font-size: 14px;
+}
+
+.propertyDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.propertyDetails p {
+  color: #0A273B;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.propertyActions {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: #F5F6F7;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton span {
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.actionButton:hover {
+  background-color: #E8E9EA;
+}
+
+.whatsappButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: #F5F6F7;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.whatsappButton span {
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.whatsappButton:hover {
+  background-color: #E8E9EA;
+}
+
+.callBtn {
+  background: white;
+  color: #666666;
+  border: 1px solid #E5E5E5;
+}
+
+@media (max-width: 1200px) {
+  .propertyCard {
+    width: calc(50vw - 52px);
+  }
+}
+
+@media (max-width: 768px) {
+  .listingsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .propertyCard {
+    width: calc(100vw - 80px);
+  }
+  
+  .sliderWrapper {
+    padding: 0 20px;
+  }
+}
+
+.sliderSection {
+  padding: 40px 0;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.sliderContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sliderPreview, .sliderNext {
+  width: 25%;
+  aspect-ratio: 16/9;
+  position: relative;
+  opacity: 0.5;
+  filter: brightness(0.7);
+  pointer-events: none;
+}
+
+.sliderCard {
+  width: 50%;
+  display: flex;
+  gap: 24px;
+  background: white;
+  border-radius: 0;
+  overflow: hidden;
+  border: none;
+  position: relative;
+  z-index: 2;
+}
+
+.sliderImage {
+  position: relative;
+  width: 65%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sliderContent {
+  width: 35%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sliderContent h3 {
+  font-size: 28px;
+  color: #0A273B;
+  margin-bottom: 8px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.location {
+  color: #0A273B;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.sliderPrice {
+  color: #00B5A3;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.sliderStats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666666;
+  font-size: 14px;
+}
+
+.propertyDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.agent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  margin-left: 24px;
+}
+
+.agentImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #F5F5F5;
+}
+
+.agent span {
+  color: #0A273B;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.contactButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.whatsappBtn, .callBtn {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.whatsappBtn {
+  background: #25D366;
+  color: white;
+  border: none;
+}
+
+.callBtn {
+  background: white;
+  color: #666666;
+  border: 1px solid #E5E5E5;
+}
+
+.sliderTag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(7, 21, 31, 0.8);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .sliderPreview, .sliderNext {
+    display: none;
+  }
+  
+  .sliderCard {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .sliderImage,
+  .sliderContent {
+    width: 100%;
+  }
+
+  .sliderContent {
+    padding: 24px;
+  }
+}
+
+.sliderArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 42px;
+  background: #E6EBED;
+  border: 1px solid #E5E5E5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.prevArrow {
+  left: 0;
+}
+
+.nextArrow {
+  right: 0;
+}
+
+.sliderArrow:hover {
+  background: #F8F8F8;
+  border-color: #D1D1D1;
+}
+
+.sliderArrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sliderArrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .sliderWrapper {
+    padding: 0 20px;
+  }
+  
+  .sliderArrow {
+    display: none;
+  }
+}
+
+.resaleSection {
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+.resaleHeader {
+  max-width: 1360px;
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
+
+.resaleTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resaleTitle h3 {
+  font-size: 16px;
+  color: #0A273B;
+  font-weight: 600;
+}
+
+.listingCount {
+  color: #7ACBC4;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.resaleSlider {
+  max-width: 1360px;
+  margin: 0 auto;
+  overflow: hidden;
+  touch-action: pan-x;
+  border: 1px solid #E6EBED;
+  border-radius: 16px;
+  position: relative;
+  cursor: grab;
+}
+
+.resaleSlider:active {
+  cursor: grabbing;
+}
+
+.resaleCards {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.3s ease;
+  padding: 0 24px;
+  user-select: none;
+}
+
+.resaleCard {
+  flex: 0 0 1200px;
+  display: flex;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  pointer-events: none; /* Prevents card content from interfering with drag */
+}
+
+/* Remove the scale effect and gradients for smoother sliding */
+.resaleSlider::before,
+.resaleSlider::after {
+  display: none;
+}
+
+.resaleImage {
+  position: relative;
+  width: 50%;
+  height: auto;
+}
+
+.resaleContent {
+  width: 50%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resaleContent h4 {
+  font-size: 20px;
+  color: #0A273B;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.resaleLocation {
+  color: #0A273B;
+  font-size: 14px;
+}
+
+.resalePrice {
+  color: #0A273B;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.resaleStats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+.statGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0A273B;
+  font-size: 14px;
+}
+
+.statSeparator {
+  color: #07151F;
+  font-size: 30px;
+}
+
+.resaleDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #666666;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .resaleCard {
+    flex: 0 0 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .resaleCard {
+    flex: 0 0 100%;
+  }
+}
+
+.resaleFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: -24px;
+  background-color: #E6EBED;
+  border-bottom-right-radius: 12px;
+  height: 60px;
+}
+
+.agentInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 24px;
+}
+
+.agentImage {
+  border-radius: 50%;
+}
+
+.agentInfo span {
+  color: #0A273B;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 24px;
+}
+
+.footerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.footerButton span {
+  color: #0A273B;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footerSeparator {
+  color: #07151F;
+  opacity: 1;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.awardsSection {
+  padding: 44px 20px;
+  background-color: #07151F;
+}
+
+.awardsContainer {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.awardsTitle {
+  color: #E6EBED;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.awardsSlider {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  padding-bottom: 24px;
+  touch-action: none; /* Prevent default touch behavior */
+}
+
+.awardsSlider:active {
+  cursor: grabbing;
+}
+
+.awardsCards {
+  display: flex;
+  gap: 24px;
+  padding: 0 24px;
+  margin-bottom: 16px;
+  will-change: transform; /* Optimize for animations */
+}
+
+.awardCard {
+  flex: 0 0 1079px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 32px;
+  height: 360px;
+  display: flex;
+  gap: 32px;
+  position: relative;
+}
+
+.awardLeft {
+  flex: 0 0 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.awardRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 32px;
+  border-left: 1px solid #E5E5E5;
+}
+
+.trophyImage {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 32px;
+}
+
+.awardTeamImage {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.awardContent {
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.awardContent h4 {
+  color: #0A273B;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.awardContent p {
+  color: #666666;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.awardYear {
+  display: block;
+  color: #0A273B;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.viewAwardBtn {
+  padding: 12px 24px;
+  background: #07151F;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: fit-content;
+}
+
+.viewAwardBtn:hover {
+  background: #0A273B;
+}
+
+.sliderDots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.activeDot {
+  background-color: #FFFFFF;
+} 
