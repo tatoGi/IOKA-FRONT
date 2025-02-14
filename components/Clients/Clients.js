@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Clients.module.css";
-import client1 from "../../assets/img/client-1.png";
+import client1 from "../../assets/img/Client-1.png";
 
 const testimonials = [
   {
