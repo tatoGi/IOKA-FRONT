@@ -430,7 +430,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
-  width: 400px;
+  width: 437px;
   flex: 0 0 auto;
 }
 
@@ -871,8 +871,6 @@
   margin: 0 auto;
   overflow: hidden;
   touch-action: pan-x;
-  border: 1px solid #E6EBED;
-  border-radius: 16px;
   position: relative;
   cursor: grab;
 }
@@ -885,18 +883,19 @@
   display: flex;
   gap: 24px;
   transition: transform 0.3s ease;
-  padding: 0 24px;
   user-select: none;
+  width: 100%;
 }
 
 .resaleCard {
   flex: 0 0 1200px;
   display: flex;
   background: #FFFFFF;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   pointer-events: none; /* Prevents card content from interfering with drag */
+  border-radius: 16px;
+  border: 1px solid #E6EBED;
 }
 
 /* Remove the scale effect and gradients for smoother sliding */
@@ -1040,16 +1039,19 @@
   align-items: center;
 }
 
+/* Main section container */
 .awardsSection {
   padding: 44px 20px;
   background-color: #07151F;
 }
 
+/* Content container with max width */
 .awardsContainer {
   max-width: 1360px;
   margin: 0 auto;
 }
 
+/* Section title styling */
 .awardsTitle {
   color: #E6EBED;
   font-size: 40px;
@@ -1057,95 +1059,92 @@
   margin-bottom: 32px;
 }
 
+/* Slider container */
 .awardsSlider {
-  position: relative;
-  overflow: hidden;
-  cursor: grab;
-  padding-bottom: 24px;
-  touch-action: none; /* Prevent default touch behavior */
+  margin: 0 auto;
+  padding-bottom: 60px;
+  max-width: 1079px;
 }
 
-.awardsSlider:active {
-  cursor: grabbing;
+/* Add gap between slides */
+.awardsSlider :global(.slick-slide) {
+  padding: 0 12px;
 }
 
-.awardsCards {
-  display: flex;
-  gap: 24px;
-  padding: 0 24px;
-  margin-bottom: 16px;
-  will-change: transform; /* Optimize for animations */
+.awardsSlider :global(.slick-list) {
+  margin: 0 -12px; /* Compensate for slide padding */
 }
 
+/* Individual award card */
 .awardCard {
-  flex: 0 0 1079px;
+  width: 1079px !important;
   background: #FFFFFF;
   border-radius: 16px;
   padding: 32px;
-  height: 360px;
-  display: flex;
+  min-height: 320px;
+  display: flex !important;
   gap: 32px;
   position: relative;
 }
 
+/* Left section with team photo */
 .awardLeft {
-  flex: 0 0 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 400px;
+  position: relative;
 }
 
+.awardTeamImage {
+  width: 400px;
+  height: 312px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Right section with award details */
 .awardRight {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-left: 32px;
-  border-left: 1px solid #E5E5E5;
-}
-
-.trophyImage {
-  width: 180px;
-  height: 180px;
-  object-fit: contain;
-  margin-bottom: 32px;
-}
-
-.awardTeamImage {
-  width: 100%;
-  height: 240px;
   position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 32px;
+  padding-left: 32px;
 }
 
+/* Award content container */
 .awardContent {
-  text-align: left;
+  margin-bottom: 80px;
+}
+
+/* Award title styling */
+.awardTitle {
+  color: #0A273B;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 32px;
 }
 
-.awardContent h4 {
+/* Award subtitle styling */
+.awardSubtitle {
   color: #0A273B;
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.awardContent p {
-  color: #666666;
   font-size: 20px;
-  margin-bottom: 16px;
 }
 
+/* Bottom section with year and button */
+.awardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* Year text styling */
 .awardYear {
-  display: block;
   color: #0A273B;
   font-size: 40px;
   font-weight: 600;
 }
 
+/* View Awards button styling */
 .viewAwardBtn {
   padding: 12px 24px;
   background: #07151F;
@@ -1155,30 +1154,55 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  width: fit-content;
 }
 
-.viewAwardBtn:hover {
-  background: #0A273B;
-}
-
-.sliderDots {
+/* Award icon container */
+.awardIconWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 156px;
+  height: 185px;
+  background: #FFFFFF;
+  border: 1px solid #E6EBED;
+  border-radius: 8px;
+  padding: 24px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 40px;
 }
 
+.trophyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Custom navigation dots container */
+.slickDots {
+  position: absolute;
+  bottom: -40px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Individual dot styling */
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 32px;
+  height: 4px;
+  border-radius: 0;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.activeDot {
-  background-color: #FFFFFF;
+/* Active dot styling */
+.slickDots li.slick-active .dot {
+  background-color: #4DEFE1;
 } 

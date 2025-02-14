@@ -15,69 +15,72 @@ import callVector from "../../assets/img/callvector.png";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import filterVector from "../../assets/img/filtervector.png";
 import awardimg1 from "../../assets/img/awardimg1.png";
+import awardsicon from "../../assets/img/awardsicon.png";
+import Slider from "react-slick";
 
+/**
+ * DeveloperShow Component
+ * Displays detailed information about a property developer including:
+ * - Search and filter functionality
+ * - Developer information
+ * - Property listings (Off-plan and Resale)
+ * - Awards section
+ */
 const DeveloperShow = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // State for managing different sliders
+  const [currentSlide, setCurrentSlide] = useState(0); // Controls off-plan properties slider
+  const [resaleCurrentSlide, setResaleCurrentSlide] = useState(0); // Controls resale properties slider
+  const [awardCurrentSlide, setAwardCurrentSlide] = useState(0); // Controls awards slider
+
+  // Touch interaction states
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+
+  // Mouse drag interaction states
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Refs for accessing slider DOM elements
   const sliderRef = useRef(null);
-  const propertySlides = [1, 2, 3, 4, 5]; // Add more numbers based on how many slides you have
-  const resaleSlides = [1, 2, 3, 4, 5]; // Add more numbers based on how many slides you have
-
-  // Separate state for resale slider
-  const [resaleCurrentSlide, setResaleCurrentSlide] = useState(0);
   const resaleSliderRef = useRef(null);
-
-  // Add state for awards slider
-  const [awardCurrentSlide, setAwardCurrentSlide] = useState(0);
   const awardSliderRef = useRef(null);
-  const awardSlides = [1, 2, 3]; // Number of award cards
 
+  // Sample data arrays for sliders
+  const propertySlides = [1, 2, 3, 4, 5]; // Off-plan property slides
+  const resaleSlides = [1, 2, 3, 4, 5]; // Resale property slides
+  const awardSlides = [1, 2, 3]; // Award slides
+
+  /**
+   * Handles the start of touch interaction
+   * @param {TouchEvent} e - Touch event object
+   */
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
 
+  /**
+   * Tracks touch movement for slider interaction
+   * @param {TouchEvent} e - Touch event object
+   */
   const handleTouchMove = (e) => {
     setTouchEnd(e.touches[0].clientX);
   };
 
+  /**
+   * Processes the end of touch interaction and determines slide direction
+   * Swipe threshold is 75px
+   */
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 75) {
-      // Swipe left
+      // Swipe left - next slide
       setCurrentSlide((prev) => Math.min(prev + 1, resaleSlides.length - 1));
     }
 
     if (touchStart - touchEnd < -75) {
-      // Swipe right
+      // Swipe right - previous slide
       setCurrentSlide((prev) => Math.max(prev - 1, 0));
     }
-  };
-
-  // Mouse handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeft(sliderRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Snap to nearest slide
-    const slideWidth = 1200 + 24; // card width + gap
-    const currentScroll = sliderRef.current.scrollLeft;
-    const nearestSlide = Math.round(currentScroll / slideWidth);
-    setCurrentSlide(nearestSlide);
   };
 
   // Touch handlers specifically for resale slider
@@ -103,24 +106,35 @@ const DeveloperShow = () => {
     }
   };
 
-  // Mouse handlers specifically for resale slider
+  /**
+   * Handles mouse down event for drag scrolling
+   * @param {MouseEvent} e - Mouse event object
+   */
   const handleResaleMouseDown = (e) => {
     setIsDragging(true);
     setStartX(e.pageX - resaleSliderRef.current.offsetLeft);
     setScrollLeft(resaleSliderRef.current.scrollLeft);
   };
 
+  /**
+   * Handles mouse movement during drag
+   * Calculates scroll position based on drag distance
+   * @param {MouseEvent} e - Mouse event object
+   */
   const handleResaleMouseMove = (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - resaleSliderRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
+    const walk = (x - startX) * 2; // Multiply by 2 for faster scrolling
     resaleSliderRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  /**
+   * Handles the end of mouse drag interaction
+   * Snaps to the nearest slide based on current scroll position
+   */
   const handleResaleMouseUp = () => {
     setIsDragging(false);
-    // Snap to nearest slide
     const slideWidth = 1200 + 24; // card width + gap
     const currentScroll = resaleSliderRef.current.scrollLeft;
     const nearestSlide = Math.round(currentScroll / slideWidth);
@@ -197,6 +211,36 @@ const DeveloperShow = () => {
 
     // Reset transform to use state-based transform
     awardSliderRef.current.style.transform = "";
+  };
+
+  /**
+   * Configuration for the awards slider using react-slick
+   * Includes responsive settings and custom navigation
+   */
+  const awardSliderSettings = {
+    dots: true, // Enable navigation dots
+    infinite: false, // Disable infinite loop
+    speed: 500, // Transition speed in milliseconds
+    slidesToShow: 1, // Show one slide at a time
+    slidesToScroll: 1, // Scroll one slide at a time
+    arrows: false, // Hide default arrows
+    dotsClass: styles.slickDots, // Custom class for dots container
+    customPaging: () => <div className={styles.dot} />, // Custom dot element
+    // Responsive breakpoints
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
   };
 
   return (
@@ -614,84 +658,106 @@ const DeveloperShow = () => {
         <div className={styles.awardsContainer}>
           <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
 
-          <div
-            className={styles.awardsSlider}
-            ref={awardSliderRef}
-            onTouchStart={handleAwardTouchStart}
-            onTouchMove={handleAwardTouchMove}
-            onTouchEnd={handleAwardTouchEnd}
-            onMouseDown={handleAwardMouseDown}
-            onMouseMove={handleAwardMouseMove}
-            onMouseUp={handleAwardMouseUp}
-            onMouseLeave={handleAwardMouseUp}
-          >
-            <div
-              className={styles.awardsCards}
-              style={{
-                transform: `translateX(${-awardCurrentSlide * (1079 + 24)}px)`,
-                transition: isDragging ? "none" : "transform 0.3s ease"
-              }}
-            >
-              <div className={styles.awardCard}>
-                <div className={styles.awardLeft}>
+          <Slider {...awardSliderSettings} className={styles.awardsSlider}>
+            {/* First Award Card */}
+            <div className={styles.awardCard}>
+              <div className={styles.awardLeft}>
+                <div className={styles.awardTeamImage}>
                   <Image
                     src={awardimg1}
-                    alt="Award Trophy"
-                    width={120}
-                    height={120}
-                    className={styles.trophyImage}
+                    alt="Team Photo"
+                    layout="fill"
+                    objectFit="cover"
                   />
-                  <button className={styles.viewAwardBtn}>View Awards</button>
                 </div>
               </div>
-
-              <div className={styles.awardCard}>
-                <div className={styles.awardLeft}>
-                  <div className={styles.awardTeamImage}>
-                    <Image
-                      src={awardimg1}
-                      alt="Team Photo"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
+              <div className={styles.awardRight}>
+                <div className={styles.awardContent}>
+                  <h4 className={styles.awardTitle}>Emaar Broker Awards</h4>
+                  <p className={styles.awardSubtitle}>H1 2024</p>
                 </div>
-                <div className={styles.awardRight}>
-                  <div className={styles.awardContent}>
-                    <h4>Emaar Broker Awards</h4>
-                    <p>H1 2024</p>
-                    <span className={styles.awardYear}>2024</span>
-                  </div>
-                  <button className={styles.viewAwardBtn}>View Awards</button>
-                </div>
-              </div>
-
-              <div className={styles.awardCard}>
-                <div className={styles.awardLeft}>
+                <div className={styles.awardIconWrapper}>
                   <Image
-                    src={EmaarLogo}
+                    src={awardsicon}
                     alt="Award Trophy"
-                    width={120}
-                    height={120}
+                    width={156}
+                    height={108}
                     className={styles.trophyImage}
                   />
+                </div>
+                <div className={styles.awardBottom}>
+                  <span className={styles.awardYear}>2024</span>
                   <button className={styles.viewAwardBtn}>View Awards</button>
                 </div>
               </div>
             </div>
 
-            <div className={styles.sliderDots}>
-              {[0, 1, 2].map((index) => (
-                <span
-                  key={index}
-                  className={`${styles.dot} ${
-                    index === awardCurrentSlide ? styles.activeDot : ""
-                  }`}
-                  onClick={() => setAwardCurrentSlide(index)}
-                />
-              ))}
+            {/* Second Award Card */}
+            <div className={styles.awardCard}>
+              <div className={styles.awardLeft}>
+                <div className={styles.awardTeamImage}>
+                  <Image
+                    src={awardimg1}
+                    alt="Team Photo"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
+              <div className={styles.awardRight}>
+                <div className={styles.awardContent}>
+                  <h4 className={styles.awardTitle}>Broker award 2022</h4>
+                  <p className={styles.awardSubtitle}>Q4 2022</p>
+                </div>
+                <div className={styles.awardIconWrapper}>
+                  <Image
+                    src={awardsicon}
+                    alt="Award Trophy"
+                    width={156}
+                    height={108}
+                    className={styles.trophyImage}
+                  />
+                </div>
+                <div className={styles.awardBottom}>
+                  <span className={styles.awardYear}>2022</span>
+                  <button className={styles.viewAwardBtn}>View Awards</button>
+                </div>
+              </div>
             </div>
-          </div>
+
+            {/* Third Award Card */}
+            <div className={styles.awardCard}>
+              <div className={styles.awardLeft}>
+                <div className={styles.awardTeamImage}>
+                  <Image
+                    src={awardimg1}
+                    alt="Team Photo"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
+              <div className={styles.awardRight}>
+                <div className={styles.awardContent}>
+                  <h4 className={styles.awardTitle}>15 Years Achievement</h4>
+                  <p className={styles.awardSubtitle}>2023</p>
+                </div>
+                <div className={styles.awardIconWrapper}>
+                  <Image
+                    src={awardsicon}
+                    alt="Award Trophy"
+                    width={156}
+                    height={108}
+                    className={styles.trophyImage}
+                  />
+                </div>
+                <div className={styles.awardBottom}>
+                  <span className={styles.awardYear}>2023</span>
+                  <button className={styles.viewAwardBtn}>View Awards</button>
+                </div>
+              </div>
+            </div>
+          </Slider>
         </div>
       </div>
       <SubscribeSection />

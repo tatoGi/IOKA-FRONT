@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import Footer from "@/components/Footer/Footer";
 import "leaflet/dist/leaflet.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 function App({ Component, pageProps }) {
