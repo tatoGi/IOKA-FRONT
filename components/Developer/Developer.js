@@ -1,159 +1,134 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Developer.module.css";
 import Image from "next/image";
-import Slider from "react-slick";
 import DeveloperImage from "../../assets/img/developerimg.png";
-
-
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPhone,
+  FaWhatsapp
+} from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Developer = () => {
-  // Define breadcrumb items
-  const breadcrumbItems = [{ text: "Home", link: "/" }, { text: "Developer" }];
+  const router = useRouter();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+  // Sample images array for the slider
+  const images = [DeveloperImage, DeveloperImage, DeveloperImage]; // Add more images as needed
+
+  const developerCards = Array(6).fill({
+    images: images,
+    aboutCompany: {
+      title: "About Company",
+      description: [
+        "As a brokerage rooted in one of the world's most iconic cities, we pride ourselves on clarity, efficiency, and an unwavering commitment to client satisfaction"
+      ]
+    },
+    topCommunities: [
+      "Dubai Hills Estate",
+      "Arabian Ranches 3",
+      "The Valley",
+      "Dubai Creek Harbour",
+      "Emaar Beachfront"
+    ]
+  });
+
+  const nextImage = (cardIndex) => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (cardIndex) => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleSeeMore = (cardIndex) => {
+    router.push(`/developer/${cardIndex}`);
   };
 
   return (
     <div className={styles.developerSection}>
-      {/* Statistics section */}
-      <div className="container">
-        <div className={styles.statsContainer}>
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>Global Reach</p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              1000+
-              <br />
-              PROJECTS COMPLETED
-            </p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              200+
-              <br />
-              DEVELOPERS
-            </p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              500+
-              <br />
-              HAPPY CLIENTS
-            </p>
+      <div className="container-fluid">
+        <div className={styles.sectionHeader}>
+          <div></div> {/* Empty div for flex spacing */}
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Search developers..."
+              className={styles.searchInput}
+            />
+            <button className={styles.searchButton}>Search</button>
           </div>
         </div>
+        <div className="row g-4">
+          {developerCards.map((card, cardIndex) => (
+            <div key={cardIndex} className="col-lg-6 mb-4">
+              <div className={styles.card}>
+                <div className={styles.imageWrapper}>
+                  <button
+                    className={`${styles.navButton} ${styles.prevButton}`}
+                    onClick={() => prevImage(cardIndex)}
+                  >
+                    <FaChevronLeft size={20} />
+                  </button>
+                  <Image
+                    src={card.images[currentImageIndex]}
+                    alt="Property"
+                    width={600}
+                    height={400}
+                    className={styles.propertyImage}
+                  />
+                  <button
+                    className={`${styles.navButton} ${styles.nextButton}`}
+                    onClick={() => nextImage(cardIndex)}
+                  >
+                    <FaChevronRight size={20} />
+                  </button>
+                </div>
 
-        {/* Our Developers Section */}
-        <div className={styles.developersSection}>
-          <h2>Our Developers</h2>
-          <p>
-            Meet the team of skilled developers who turn ideas into reality.
-          </p>
-        </div>
+                <div className={styles.contentSection}>
+                  <h2>{card.aboutCompany.title}</h2>
+                  {card.aboutCompany.description.map((paragraph, index) => (
+                    <p key={index} className={styles.description}>
+                      {paragraph}
+                    </p>
+                  ))}
 
-        {/* Team Section */}
-        <div className="container">
-          <div className="row">
-            <div className="col-6 col-md-4">
-              <div className={styles.teamMember}>
-                <Image
-                  src={DeveloperImage}
-                  alt="Jane Doe"
-                  width={200}
-                  height={200}
-                  className={styles.teamImage}
-                />
-                <h3>Jane Doe</h3>
-                <p>7+ Years Experience</p>
+                  <div className={styles.communitiesSection}>
+                    <h3>Top Communities</h3>
+                    <div className={styles.communityTags}>
+                      {card.topCommunities.map((community, index) => (
+                        <button key={index} className={styles.communityTag}>
+                          {community}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={styles.bottomActions}>
+                    <div className={styles.actionButtons}>
+                      <button className={styles.callButton}>
+                        <FaPhone size={16} style={{ marginRight: "8px" }} />
+                        <span>Call</span>
+                      </button>
+                      <button className={styles.whatsappButton}>
+                        <FaWhatsapp size={16} style={{ marginRight: "8px" }} />
+                        <span>WhatsApp</span>
+                      </button>
+                      <div className={styles.seeMore}>
+                        <button
+                          className={styles.seeMoreButton}
+                          onClick={() => handleSeeMore(cardIndex)}
+                        >
+                          See More
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="col-6 col-md-4">
-              <div className={styles.teamMember}>
-                <Image
-                  src={DeveloperImage}
-                  alt="John Smith"
-                  width={200}
-                  height={200}
-                  className={styles.teamImage}
-                />
-                <h3>John Smith</h3>
-                <p>5+ Years Experience</p>
-              </div>
-            </div>
-
-            <div className="col-6 col-md-4">
-              <div className={styles.teamMember}>
-                <Image
-                  src={DeveloperImage}
-                  alt="Alice Johnson"
-                  width={200}
-                  height={200}
-                  className={styles.teamImage}
-                />
-                <h3>Alice Johnson</h3>
-                <p>6+ Years Experience</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Careers Section */}
-        <div className={styles.careersSection}>
-          <div className={styles.careersSectiontext}>
-            <h2 className={styles.careerstitle}>CAREERS</h2>
-            <h3>Join Our Development Team</h3>
-            <h4>Current Vacancies</h4>
-            <p>
-              We are currently hiring for the below-mentioned roles. Please click
-              on the link to view the full job description and to apply online.
-            </p>
-            <span>
-              Good Luck!
-            </span>
-          </div>
-         
-          <Slider {...sliderSettings} className={styles.vacanciesGrid}>
-            <div className={styles.vacancyCard}>
-              <h4>Role 1</h4>
-              <p>Job description for role 1.</p>
-            </div>
-            <div className={styles.vacancyCard}>
-              <h4>Role 2</h4>
-              <p>Job description for role 2.</p>
-            </div>
-            <div className={styles.vacancyCard}>
-              <h4>Role 3</h4>
-              <p>Job description for role 3.</p>
-            </div>
-          </Slider>
+          ))}
         </div>
       </div>
     </div>
