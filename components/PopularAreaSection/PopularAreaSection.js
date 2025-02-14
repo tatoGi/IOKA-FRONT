@@ -19,9 +19,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -34,9 +32,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -49,9 +45,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -64,9 +58,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -79,9 +71,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -94,9 +84,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -109,9 +97,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>
@@ -124,9 +110,7 @@ const PopularAreaSection = () => {
               <div className="topic">Resale</div>
             </div>
             <div className="area-title">
-              <div className="ar-title">
-                International City Phase 2
-              </div>
+              <div className="ar-title">International City Phase 2</div>
               <div className="arrow-box">
                 <WhiteArrow />
               </div>

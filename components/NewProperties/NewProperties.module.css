@@ -1,0 +1,186 @@
+.newProperties {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.title {
+  display: none; /* Remove since we're using propertyCardTitle */
+}
+
+.filterButtons {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  align-items: flex-start;
+  gap: 4rem;
+  z-index: 1;
+}
+
+.filterButtons button {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 169px;
+  font-size: 20px;
+}
+
+.filterButtons button.active {
+  background-color: white;
+  color: #0A1929;
+  border: none;
+}
+
+.propertyCard {
+  background-color: #0E2133;
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.propertyCardTitle {
+  font-family: 'Times New Roman', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: white;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.imageContainer {
+  width: 100%;
+  max-width: 966px;
+  height: 338px;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+}
+
+.propertyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  gap: 4rem;
+}
+
+.leftContent {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.propertyName {
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-family: 'Times New Roman', serif;
+}
+
+.propertyType {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 2.25rem;
+  font-weight: 400;
+  font-family: 'Times New Roman', serif;
+  color: white;
+}
+
+.rightContent {
+  flex: 2;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  margin-top:48px;
+  gap: 0.5rem;
+}
+
+.features li {
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  padding-left: 1rem;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.features li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.75rem;
+  width: 523px;
+}
+
+.seeMore {
+  padding: 0.5rem 1.25rem;
+  background-color: white;
+  color: #0A1929;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  white-space: nowrap;
+  max-width: 169px;
+  height: 48px;
+
+}
+
+.seeMore:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .rightContent {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .features {
+    margin-bottom: 1rem;
+  }
+} 

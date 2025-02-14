@@ -1,0 +1,251 @@
+.home-banner {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+}
+
+.banner-slider {
+  position: relative;
+  height: 100%;
+}
+
+.swiper-item-relative {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+}
+
+.swiper-item-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 20px;
+  color: white;
+  text-align: center;
+}
+
+.text-b-i {
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.banner-content h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Tenor Sans', sans-serif;
+  letter-spacing: 1px;
+}
+
+.banner-search {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 451px;
+  z-index: 10;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.search-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  padding: 8px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.tab.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.search-container {
+  background: #fff;
+  border-radius: 100px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 60px;
+}
+
+.search-inputs {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0;
+  height: 100%;
+  position: relative;
+}
+
+/* Add vertical lines */
+.search-inputs::after,
+.search-inputs::before {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 24px; /* Adjust height of the line */
+  background-color: #E5E5E5;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Line after Where input */
+.search-inputs::before {
+  left: 158px;
+}
+
+/* Line after Size input */
+.search-inputs::after {
+  left: 316px;
+}
+
+.search-inputs input {
+  width: 158px;
+  padding: 0 20px;
+  border: none;
+  font-size: 16px;
+  background: transparent;
+  color: #333;
+  height: 100%;
+}
+
+/* Add styles for the price input container */
+.price-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 158px;
+  height: 100%;
+}
+
+.price-input-container input {
+  padding-right: 60px; /* Make room for the search button */
+}
+
+.search-inputs input::placeholder {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.search-button {
+  position: absolute;
+  right: 36px;
+  background: #7BCBC7;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.search-button:hover {
+  background: #69b3af;
+}
+
+.search-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Add overlay to banner image */
+.swiper-item-relative::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+  z-index: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .search-inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-inputs input {
+    width: 100%;
+    padding: 12px;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-inputs input:last-child {
+    border-bottom: none;
+  }
+
+  .price-input-container {
+    width: 100%;
+  }
+  
+  .price-input-container input {
+    padding-right: 12px;
+  }
+  
+  .search-button {
+    position: static;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  .banner-content h1 {
+    font-size: 32px;
+  }
+
+  .search-inputs::after,
+  .search-inputs::before {
+    display: none; /* Hide vertical lines on mobile */
+  }
+} 
