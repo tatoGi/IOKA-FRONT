@@ -81,17 +81,13 @@ const Footer = () => {
                   <div className="icon-00">
                     <PhoneIcon />
                   </div>
-                  <div className="f-text-0">
-                    1-333-232-1231
-                  </div>
+                  <div className="f-text-0">1-333-232-1231</div>
                 </Link>
                 <Link href={"#"} className="footer-contact-item">
                   <div className="icon-00">
                     <MessageIcon />
                   </div>
-                  <div className="f-text-0">
-                    example@gmail.com
-                  </div>
+                  <div className="f-text-0">example@gmail.com</div>
                 </Link>
               </div>
             </div>
@@ -128,10 +124,10 @@ const Footer = () => {
                 Your Weekly/Monthly Dose of Knowledge and Inspiration
               </div>
               <form action="#" method="POST">
-              <div className="message-icon-send">
+                <div className="message-icon-send">
                   <MessageIcon />
                 </div>
-                <input type="text" placeholder="Your Email Address" /> 
+                <input type="text" placeholder="Your Email Address" />
                 <div className="plane-icon">
                   <PlaneIcon />
                 </div>

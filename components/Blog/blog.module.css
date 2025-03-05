@@ -1,0 +1,98 @@
+.title h1{
+    font-size: 24px;
+    line-height: 29.26px;
+    margin-bottom: 16px;
+    color: #0A273B;
+}
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+.card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+.description {
+    font-size: 12px;
+    line-height: 14.63px;
+    color: #0A273B;
+    margin-bottom: 20px;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 16px;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: #0A273B;
+}
+
+.card-list {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.card-list li {
+    margin-bottom: 0.5rem;
+}
+.date {
+    font-size: 12px;
+    color: #007AFF;
+    line-height: 14.63px;
+}
+.calendarIcon {
+    margin-right: 5px;
+    color: #007AFF;
+}
+.card-button {
+    background-color: #0A273B;
+    border: none;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    width: 99px;
+    height: 32px;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pageButton {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pageButton.active {
+    background-color: #0A273B;
+    color: white;
+    border-color: #0A273B;
+}
+
+.pageButton:hover {
+    background-color: #ddd;
+}

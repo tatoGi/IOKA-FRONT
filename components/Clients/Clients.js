@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Clients.module.css";
 import client1 from "../../assets/img/Client-1.png";
+import quotetop from "../../assets/img/quetovectortop.png";
+import quotebottom from "../../assets/img/quetovectorbotton.png";
 
 const testimonials = [
   {
@@ -57,26 +59,32 @@ const Clients = () => {
         <div className={styles.testimonialGrid}>
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className={styles.testimonialCard}>
-              <div className={styles.quoteIcon}>"</div>
-              <div className={styles.clientInfo}>
-                <div className={styles.clientImage}>
+              <div className={styles.leftQuote}>
+                <Image src={quotetop} alt="quote" width={30} height={30} />
+              </div>
+              <div className={styles.rightQuote}>
+                <Image src={quotebottom} alt="quote" width={30} height={30} />
+              </div>
+              <div className={styles.cardContent}>
+                <div className={styles.clientProfile}>
                   <Image
                     src={testimonial.image}
                     alt={testimonial.name}
                     width={50}
                     height={50}
+                    className={styles.clientImage}
                   />
+                  <h3>{testimonial.name}</h3>
+                  <div className={styles.stars}>
+                    {[...Array(testimonial.rating)].map((_, index) => (
+                      <span key={index} className={styles.star}>
+                        ★
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3>{testimonial.name}</h3>
-                <div className={styles.rating}>
-                  {[...Array(testimonial.rating)].map((_, index) => (
-                    <span key={index} className={styles.star}>
-                      ★
-                    </span>
-                  ))}
-                </div>
+                <p className={styles.review}>{testimonial.review}</p>
               </div>
-              <p className={styles.review}>{testimonial.review}</p>
             </div>
           ))}
         </div>

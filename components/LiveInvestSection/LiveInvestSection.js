@@ -1,119 +1,130 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectCoverflow } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-coverflow";
 import styles from "./LiveInvestSection.module.css";
 
 const LiveInvestSection = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const sliderData = [
+    {
+      id: 1,
+      image: require("../../assets/img/homeBanner.jpg")
+    },
+    {
+      id: 2,
+      image: require("../../assets/img/homeBanner.jpg")
+    },
+    {
+      id: 3,
+      image: require("../../assets/img/homeBanner.jpg")
+    }
+  ];
+
+  const next = () =>
+    activeSlide < sliderData.length - 1 && setActiveSlide(activeSlide + 1);
+
+  const prev = () => activeSlide > 0 && setActiveSlide(activeSlide - 1);
+
+  const getStyles = (index) => {
+    if (activeSlide === index)
+      return {
+        opacity: 1,
+        transform:
+          "translateX(0) translateY(100px) translateZ(0) rotateY(0deg)",
+        zIndex: 10
+      };
+    else if (activeSlide - 1 === index)
+      return {
+        opacity: 1,
+        transform:
+          "translateX(-100px) translateY(0) translateZ(-200px) rotateY(35deg)",
+        zIndex: 9
+      };
+    else if (activeSlide + 1 === index)
+      return {
+        opacity: 1,
+        transform:
+          "translateX(240px) translateY(0) translateZ(-200px) rotateY(-35deg)",
+        zIndex: 9
+      };
+    else if (index < activeSlide - 1)
+      return {
+        opacity: 0,
+        transform:
+          "translateX(-480px) translateY(0) translateZ(-400px) rotateY(35deg)",
+        zIndex: 8
+      };
+    else if (index > activeSlide + 1)
+      return {
+        opacity: 0,
+        transform:
+          "translateX(480px) translateY(0) translateZ(-400px) rotateY(-35deg)",
+        zIndex: 8
+      };
+  };
+
   return (
-    <div className={styles.liveInvest}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.subtitle}>Live. Invest. Grow</div>
-          <h2 className={styles.title}>
-            DUBAI - YOUR PARTNER FOR ACCELERATED GROWTH
-          </h2>
-          <button className={styles.contactBtn}>Contact Us</button>
-        </div>
+    <section className={styles.liveInvestSection}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className={`${styles.content} col-md-6`}>
+            <h4>Live. Invest. Grow</h4>
+            <h2>
+              DUBAI - YOUR PARTNER FOR
+              <br />
+              ACCELERATED GROWTH
+            </h2>
+            <button className={styles.contactBtn}>Contact Us</button>
+          </div>
 
-        <div className={styles.imageGallery}>
-          <Swiper
-            modules={[Navigation, EffectCoverflow]}
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={2}
-            initialSlide={1}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 1.5,
-              slideShadows: false
-            }}
-            navigation={{
-              prevEl: `.${styles.swiperNavigation}`,
-              nextEl: `.${styles.swiperNavigationNext}`
-            }}
-            loop={true}
-            className={styles.swiper}
-          >
-            <SwiperSlide className={styles.swiperSlide}>
-              <Image
-                src={require("../../assets/img/homeBanner.jpg")}
-                alt="Property"
-                width={500}
-                height={300}
-                className={styles.image}
-                priority
-              />
-            </SwiperSlide>
-            <SwiperSlide className={styles.swiperSlide}>
-              <Image
-                src={require("../../assets/img/homeBanner.jpg")}
-                alt="Property"
-                width={500}
-                height={300}
-                className={styles.image}
-              />
-            </SwiperSlide>
-            <SwiperSlide className={styles.swiperSlide}>
-              <Image
-                src={require("../../assets/img/homeBanner.jpg")}
-                alt="Property"
-                width={500}
-                height={300}
-                className={styles.image}
-              />
-            </SwiperSlide>
-          </Swiper>
+          <div className={`${styles.sliderContainer} col-md-6`}>
+            <div className={styles.slider3D}>
+              {sliderData.map((item, i) => (
+                <div
+                  key={item.id}
+                  className={styles.slide}
+                  style={getStyles(i)}
+                >
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      src={item.image}
+                      alt="Dubai Property"
+                      width={400}
+                      height={300}
+                      objectFit="cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          <div className={styles.navigationButtons}>
-            <button className={styles.swiperNavigation}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <button
+              className={`${styles.navButton} ${styles.prevButton}`}
+              onClick={prev}
+            >
+              ‹
             </button>
-            <button className={styles.swiperNavigationNext}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <button
+              className={`${styles.navButton} ${styles.nextButton}`}
+              onClick={next}
+            >
+              ›
             </button>
           </div>
         </div>
-      </div>
-      <div className={styles.stats}>
-        <div className={styles.statItem}>
-          <span className={styles.statIcon}>★</span>
-          <div className={styles.statContent}>
-            <span className={styles.statNumber}>86K</span>
-            <span className={styles.statLabel}>RESALE PROPERTYIES</span>
+
+        <div className={styles.stats}>
+          <div className={styles.statItem}>
+            <h3>86K</h3>
+            <p>Resale Properties</p>
           </div>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statIcon}>⌂</span>
-          <div className={styles.statContent}>
-            <span className={styles.statNumber}>32K</span>
-            <span className={styles.statLabel}>OFF PLAN PROPERTIES</span>
+          <div className={styles.statItem}>
+            <h3>32K</h3>
+            <p>Off Plan Properties</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

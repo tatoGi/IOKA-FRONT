@@ -12,7 +12,9 @@ import { useRouter } from "next/router";
 
 const Developer = () => {
   const router = useRouter();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndices, setCurrentImageIndices] = useState(
+    Array(6).fill(0)
+  );
 
   // Sample images array for the slider
   const images = [DeveloperImage, DeveloperImage, DeveloperImage]; // Add more images as needed
@@ -35,11 +37,20 @@ const Developer = () => {
   });
 
   const nextImage = (cardIndex) => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndices((prev) => {
+      const newIndices = [...prev];
+      newIndices[cardIndex] = (newIndices[cardIndex] + 1) % images.length;
+      return newIndices;
+    });
   };
 
   const prevImage = (cardIndex) => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndices((prev) => {
+      const newIndices = [...prev];
+      newIndices[cardIndex] =
+        (newIndices[cardIndex] - 1 + images.length) % images.length;
+      return newIndices;
+    });
   };
 
   const handleSeeMore = (cardIndex) => {
@@ -72,7 +83,7 @@ const Developer = () => {
                     <FaChevronLeft size={20} />
                   </button>
                   <Image
-                    src={card.images[currentImageIndex]}
+                    src={card.images[currentImageIndices[cardIndex]]}
                     alt="Property"
                     width={600}
                     height={400}

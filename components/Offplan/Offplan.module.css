@@ -1,0 +1,223 @@
+.propertyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.propertyCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.propertyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #f5f5f5;
+}
+
+.propertyImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.exclusive {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #0066FF;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+  letter-spacing: 0.01em;
+}
+
+.propertyInfo {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+}
+
+.location {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.features {
+  display: flex;
+  gap: 1.5rem;
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.feature svg {
+  color: #6b7280;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.actionButton {
+  padding: 0.375rem;
+  border-radius: 6px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.actionButton:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.resultsCount {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 64px);
+  position: relative;
+  background: #fff;
+}
+
+.listSection {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  max-width: 65%;
+  border-right: 1px solid #e5e7eb;
+}
+
+.mapSection {
+  flex: 1;
+  position: sticky;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+.mapLoading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.mapSection :global(.leaflet-container) {
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove all standalone :global styles and wrap them in a local class */
+.mapWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.mapWrapper :global(.leaflet-container) {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.mapWrapper :global(.custom-marker) {
+  background: none;
+  border: none;
+}
+
+.mapWrapper :global(.marker-price) {
+  background: #0066FF;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove these unused styles */
+.customMarker,
+.markerPrice,
+.mapControls,
+.mapControlBtn,
+.mapMarker {
+  display: none;
+}
+
+.propertyCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.propertyCardLink:hover .propertyCard {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+} 

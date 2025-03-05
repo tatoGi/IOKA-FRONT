@@ -21,7 +21,6 @@ const MapComponent = dynamic(() => import("../../Map/Map"), {
 const Contact = () => {
   return (
     <div className="contact-page">
-      <h1>Contact Us</h1>
       <div className={styles.contactPage}>
         <div className={styles.contactInfo}>
           <div className={styles.infoSection}>

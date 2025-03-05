@@ -1,237 +1,254 @@
-.liveInvest {
-  background-color: #98E5E0;
-  padding: 120px 0 180px;
+.liveInvestSection {
+  background-color: #98E5D7;
+  padding: 100px 0;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.logo {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  z-index: 10;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 80px;
+  padding: 0 20px;
 }
 
 .content {
-  flex: 1;
-  max-width: 600px;
+  padding-top: 40px;
 }
 
-.subtitle {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-family: 'Tenor Sans', sans-serif;
-  font-size: 56px;
-  line-height: 1.2;
+.content h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
   color: #000;
+  font-weight: 400;
+  font-family: 'Tenor Sans', sans-serif;
+}
+
+.content h2 {
+  font-size: 48px;
+  font-weight: 300;
   margin-bottom: 40px;
-  letter-spacing: 0.5px;
+  color: #000;
+  line-height: 1.2;
+  font-family: 'Tenor Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .contactBtn {
-  background-color: #fff;
-  color: #000;
+  background-color: white;
   border: none;
-  padding: 16px 32px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 12px 35px;
+  border-radius: 30px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 173px;
 }
 
 .contactBtn:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.imageGallery {
-  flex: 1;
+.sliderContainer {
   position: relative;
-  max-width: 800px;
   height: 500px;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  margin-top: -30px;
 }
 
-.swiper {
+.slider3D {
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 50px 0;
 }
 
-.swiperSlide {
-  width: 500px;
-  height: 350px;
+.slide {
+  position: absolute;
+  width: 364px;
+  height: 364px;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  margin-left: -182px;
+  margin-top: -182px;
+  will-change: transform;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.swiperSlide img {
+.imageWrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 20px;
 }
 
-.navigationButtons {
+.navButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 100%;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 -20px;
-}
-
-.swiperNavigation,
-.swiperNavigationNext {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3);
+  background: white;
   border: none;
   cursor: pointer;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  z-index: 20;
+  font-size: 20px;
+  color: #333;
 }
 
-.swiperNavigation:hover,
-.swiperNavigationNext:hover {
-  background: rgba(0, 0, 0, 0.5);
+.prevButton {
+  left: 15%;
+}
+
+.nextButton {
+  right: 15%;
 }
 
 .stats {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
-  gap: 40px;
-  background: white;
-  padding: 24px 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: auto;
-  max-width: 600px;
-  z-index: 20;
+  justify-content: flex-end;
+  gap: 100px;
+  margin-top: 78px;
+  position: relative;
+  z-index: 5;
+  padding-left: 15px;
 }
 
 .statItem {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 20px;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.statItem:first-child {
-  border-right: 1px solid #eee;
-}
-
-.statIcon {
-  font-size: 28px;
-  color: #98E5E0;
-}
-
-.statContent {
-  display: flex;
-  flex-direction: column;
-}
-
-.statNumber {
+.statItem h3 {
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000;
+  display: flex;
+  align-items: center;
+  font-family: 'Tenor Sans', sans-serif;
 }
 
-.statLabel {
-  font-size: 14px;
-  color: #666;
+.statItem:first-child h3::before {
+  content: "★";
+  margin-right: 8px;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.statItem:last-child h3::before {
+  content: "⌂";
+  margin-right: 8px;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.statItem p {
+  font-size: 13px;
+  color: #000;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  max-width: 90px;
+  font-family: 'Tenor Sans', sans-serif;
+  font-weight: 300;
 }
 
 @media (max-width: 1200px) {
-  .container {
-    padding: 0 20px;
-    gap: 40px;
+  .slide {
+    width: 300px;
+    height: 300px;
+    margin-left: -150px;
+    margin-top: -150px;
   }
 
-  .title {
-    font-size: 48px;
+  .prevButton {
+    left: 10%;
   }
 
-  .imageGallery {
-    max-width: 600px;
+  .nextButton {
+    right: 10%;
   }
 }
 
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
+@media (max-width: 991px) {
   .content {
-    max-width: 100%;
+    padding-top: 0;
+    margin-bottom: 60px;
   }
 
-  .imageGallery {
-    width: 100%;
+  .content h2 {
+    font-size: 42px;
+  }
+
+  .sliderContainer {
+    margin-top: 0;
   }
 
   .stats {
-    position: relative;
-    margin-top: 60px;
-    bottom: auto;
+    justify-content: center;
+    padding-left: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .title {
+  .liveInvestSection {
+    padding: 60px 0;
+  }
+
+  .content h2 {
     font-size: 36px;
   }
 
   .stats {
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 30px;
+    align-items: center;
+    margin-top: 40px;
   }
 
   .statItem {
-    justify-content: center;
-    padding: 0;
-    border: none !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  .navigationButtons {
-    display: none;
+  .statItem p {
+    max-width: none;
   }
 
-  .logo {
-    top: 20px;
-    left: 20px;
+  .slide {
+    width: 260px;
+    height: 260px;
+    margin-left: -130px;
+    margin-top: -130px;
   }
-} 
+
+  .prevButton {
+    left: 5%;
+  }
+
+  .nextButton {
+    right: 5%;
+  }
+}

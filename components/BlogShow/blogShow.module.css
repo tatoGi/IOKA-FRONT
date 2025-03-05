@@ -1,0 +1,77 @@
+.blogShow img {
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    margin-bottom: 36px;
+
+}
+.title{
+    font-size: 32px;
+    line-height: 39px;
+    color: #0A273B;
+}
+.date {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    margin-bottom: 52px;
+}
+.description {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24,38px;
+}
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+.card-button {
+    background-color: #0A273B;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 16px;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: #0A273B;
+}
+
+.card-list {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.card-list li {
+    margin-bottom: 0.5rem;
+}
+.sidebar h3 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 29.26px;
+    margin-bottom: 16px;
+}
+.description p {
+    margin-bottom: 20px;
+}

@@ -113,17 +113,23 @@ const Header = () => {
               <div className="left-cont-image">
                 <div className="logo-img">
                   <Link href={"/#"} className="white-logo">
-                    <Image src={Logo} alt="logo" />
+                    <Image src={Logo} alt="logo" width={138} height={42} />
                   </Link>
                   <Link href={"/#"} className="dark-logo">
-                    <Image src={LogoDark} alt="logo" />
+                    <Image src={LogoDark} alt="logo" width={138} height={42} />
                   </Link>
                 </div>
               </div>
               <div className="header-nav">
                 <ul>
-                  <li className={pathname === "/offplan" ? "active-link" : ""}>
-                    <Link href={"/offplan"}>OFFPLAN</Link>
+                  <li
+                    className={
+                      pathname === "/page-components/offplan"
+                        ? "active-link"
+                        : ""
+                    }
+                  >
+                    <Link href={"/page-components/offplan"}>OFFPLAN</Link>
                   </li>
                   <li className={pathname === "/resale" ? "active-link" : ""}>
                     <Link href={"/resale"}>RESALE</Link>
@@ -141,7 +147,7 @@ const Header = () => {
                     <Link href={"/page-components/developer"}>DEVELOPERS</Link>
                   </li>
                   <li className={pathname === "/blog" ? "active-link" : ""}>
-                    <Link href={"/blog"}>BLOG</Link>
+                    <Link href={"/page-components/blog"}>BLOG</Link>
                   </li>
                   <li
                     className={
