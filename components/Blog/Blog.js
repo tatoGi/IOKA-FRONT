@@ -5,6 +5,7 @@ import Image from "next/image";
 import BlogIcon from '../../assets/img/calendaricon.png'; // Ensure this path is correct
 import SubscribeSection from '../SubscribeSection/SubscribeSection';
 
+// create blog // Corrected the function name
 const Blog = () => {
     const cardData = Array(12).fill({
         title: 'Advantages of living in Fujairah, UAE',
