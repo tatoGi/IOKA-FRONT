@@ -19,9 +19,7 @@ const Blog = ({ initialData }) => {
         // Fetch data from the API
         const fetchData = async (page) => {
             try {
-
                 const response = await axios.get(`${BLOGS_API}?page=${page}`);
-               
                 setCardData(response.data.data);
                 setTotalPages(response.data.last_page);
             } catch (error) {
@@ -59,7 +57,6 @@ const Blog = ({ initialData }) => {
             </div>
             <div className='row'>
                 {cardData.map((card, index) => (
-                    
                     <div className='col-md-3' key={index}>
                         <div className={`card ${styles.card}`}>
                             <Image 
