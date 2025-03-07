@@ -14,14 +14,14 @@ const Blog = ({ initialData }) => {
     const [totalPages, setTotalPages] = useState(1);
    
     const router = useRouter(); // Initialize useRouter
-    
+    console.log(BLOGS_API);
     useEffect(() => {
         // Fetch data from the API
         const fetchData = async (page) => {
             try {
 
                 const response = await axios.get(`${BLOGS_API}?page=${page}`);
-                console.log(response.data);
+               
                 setCardData(response.data.data);
                 setTotalPages(response.data.last_page);
             } catch (error) {
