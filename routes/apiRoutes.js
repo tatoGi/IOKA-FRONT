@@ -1,8 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_BASE_URL) {
-  throw new Error('NEXT_PUBLIC_API_URL environment variable is not defined');
-}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae/';
 
 export const BLOGS_API = `${API_BASE_URL}/blogs`;
 
