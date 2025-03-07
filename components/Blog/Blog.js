@@ -57,7 +57,7 @@ const Blog = ({ initialData }) => {
             </div>
             <div className='row'>
                 {cardData.map((card, index) => (
-                    
+                    console.log(card),
                     <div className='col-md-3' key={index}>
                         <div className={`card ${styles.card}`}>
                             <Image 
