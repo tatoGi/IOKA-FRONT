@@ -16,6 +16,9 @@ const Blog = ({ initialData }) => {
     const router = useRouter(); // Initialize useRouter
     
     useEffect(() => {
+        // Log the environment variable to ensure it's correctly set
+        console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
+        
         // Fetch data from the API
         const fetchData = async (page) => {
             try {
