@@ -22,6 +22,6 @@ module.exports = {
         pathname: '/**',
       }
     ],
-    domains: [new URL(API_BASE_URL).hostname], // Ensure the hostname is correct
+    domains: [new URL(API_BASE_URL).hostname, 'test.ioka.ae'], // Ensure the hostname is correct
   },
 };
