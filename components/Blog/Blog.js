@@ -21,6 +21,7 @@ const Blog = ({ initialData }) => {
             try {
 
                 const response = await axios.get(`${BLOGS_API}?page=${page}`);
+                console.log(response.data);
                 setCardData(response.data.data);
                 setTotalPages(response.data.last_page);
             } catch (error) {
