@@ -14,7 +14,7 @@ const Blog = ({ initialData }) => {
     const [totalPages, setTotalPages] = useState(1);
    
     const router = useRouter(); // Initialize useRouter
-    console.log(BLOGS_API);
+    
     useEffect(() => {
         // Fetch data from the API
         const fetchData = async (page) => {
