@@ -21,6 +21,10 @@ const BlogShow = ({ blogData }) => {
     const options = { day: '2-digit', month: 'long', year: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+  const limitTextLength = (text, maxLength) => {
+    const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
+    return strippedText.length > maxLength ? strippedText.substring(0, maxLength) + "..." : strippedText;
+};
   console.log(blogData);
   return (
     <div>
@@ -49,12 +53,12 @@ const BlogShow = ({ blogData }) => {
           <div className="col-md-3">
             <div className={styles.sidebar}>
               <h3>Similar Articles</h3>
-              {blogData.similarArticles && blogData.similarArticles.map((card, index) => (
+              {blogData.related_blogs && blogData.related_blogs.map((card, index) => (
                 <div className={`card ${styles.card}`} key={index}>
                   <Image
-                    src={baseimage}
+                    src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}` : baseimage} 
                     className={`card-img-top ${styles["card-img-top"]}`}
-                    alt="Image 1"
+                    alt={card.image_alt} 
                     width={150}
                     height={100}
                   />
@@ -67,7 +71,7 @@ const BlogShow = ({ blogData }) => {
                         <Image src={BlogIcon} alt="blogicon" width={20} height={20} /> 
                         <span className={styles.formattedDate}>{formatDate(card.date)}</span>
                       </li>
-                      <li>{card.description1}</li>
+                      <li>{limitTextLength(card.body, 108)}</li>
                     </ul>
                     <a
                       href={`/blog/show?id=${index}`}
