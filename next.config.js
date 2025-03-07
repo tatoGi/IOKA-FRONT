@@ -1,6 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae/';
-
-console.log('API_BASE_URL:', API_BASE_URL);
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae';
 
 module.exports = {
   images: {
@@ -24,15 +22,6 @@ module.exports = {
         pathname: '/**',
       }
     ],
-    domains: [
-      'a.basemaps.cartocdn.com',
-      'b.basemaps.cartocdn.com',
-      'c.basemaps.cartocdn.com',
-      new URL(API_BASE_URL).hostname, // Add the API base URL hostname
-      '127.0.0.1' // Add localhost for development
-    ],
-  },
-  env: {
-    NEXT_PUBLIC_API_URL: API_BASE_URL, // Ensure the environment variable is set
+    domains: [new URL(API_BASE_URL).hostname], // Fix the hostname here
   },
 };
