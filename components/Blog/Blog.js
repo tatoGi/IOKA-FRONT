@@ -1,27 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './blog.module.css'; // Corrected the CSS module import
 import baseimage from '../../assets/img/blogimage.png'; // Ensure this path is correct
 import Image from "next/image";
 import BlogIcon from '../../assets/img/calendaricon.png'; // Ensure this path is correct
 import SubscribeSection from '../SubscribeSection/SubscribeSection';
+import axios from 'axios';
+import { BLOGS_API } from '../../routes/apiRoutes'; // Import the route
+import { useRouter } from 'next/router'; // Import useRouter
 
-// create blog // Corrected the function name
-const Blog = () => {
-    const cardData = Array(12).fill({
-        title: 'Advantages of living in Fujairah, UAE',
-        date: '06 August, 2024',
-        description1: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard.'
-    });
-
+const Blog = ({ initialData }) => {
+    const [cardData, setCardData] = useState(initialData || []);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 12; // Number of items per page
-    const totalPages = Math.ceil(cardData.length / itemsPerPage);
+    const [totalPages, setTotalPages] = useState(1);
+   
+    const router = useRouter(); // Initialize useRouter
+
+    useEffect(() => {
+        // Fetch data from the API
+        const fetchData = async (page) => {
+            try {
+                const response = await axios.get(`${BLOGS_API}?page=${page}`);
+                setCardData(response.data.data);
+                setTotalPages(response.data.last_page);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        if (!initialData) {
+            fetchData(currentPage);
+        }
+    }, [currentPage, initialData]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    const paginatedData = cardData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const limitTextLength = (text, maxLength) => {
+        const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
+        return strippedText.length > maxLength ? strippedText.substring(0, maxLength) + "..." : strippedText;
+    };
+
+    const handleReadMore = (slug) => {
+        router.push(`/blog/${slug}`);
+    };
+
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: 'long', year: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
 
     return (
         <div className='container mt-3'>
@@ -29,19 +56,34 @@ const Blog = () => {
                 <h1>Article</h1>
             </div>
             <div className='row'>
-                {paginatedData.map((card, index) => (
+                {cardData.map((card, index) => (
+                    
                     <div className='col-md-3' key={index}>
                         <div className={`card ${styles.card}`}>
-                            <Image src={baseimage} className={`card-img-top ${styles['card-img-top']}`} alt='Image 1' />
+                            <Image 
+                                src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${encodeURIComponent(card.image)}` : baseimage} 
+                                className={`card-img-top ${styles['card-img-top']}`} 
+                                alt={card.image_alt} 
+                                width={300} // Provide width
+                                height={200} // Provide height
+                                priority={true} // Add priority property
+                            />
                             <div className={`card-body ${styles['card-body']}`}>
                                 <h5 className={`card-title ${styles['card-title']}`}>{card.title}</h5>
                                 <ul className={`list-unstyled ${styles['card-list']}`}>
                                     <li className={`${styles.date}`}>
-                                        <Image src={BlogIcon} alt='blogicon' /> {card.date}
+                                        <Image 
+                                            src={BlogIcon} 
+                                            alt='blogicon' 
+                                            width={16} 
+                                            height={16} 
+                                            style={{ marginRight: 8 }} // Corrected margin-right property
+                                        /> 
+                                        <span className={styles.formattedDate}>{formatDate(card.date)}</span>
                                     </li>
-                                    <li>{card.description1}</li>
+                                    <li>{limitTextLength(card.body, 108)}</li> {/* Limit text length to 100 characters */}
                                 </ul>
-                                <a href={`/blog/show?id=${index}`} className={`btn btn-primary ${styles['card-button']}`}>Read more</a>
+                                <button onClick={() => handleReadMore(card.slug)} className={`btn btn-primary ${styles['card-button']}`}>Read more</button>
                             </div>
                         </div>
                     </div>

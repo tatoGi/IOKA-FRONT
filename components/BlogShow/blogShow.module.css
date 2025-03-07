@@ -3,7 +3,6 @@
     height: auto;
     margin-top: 40px;
     margin-bottom: 36px;
-
 }
 .title{
     font-size: 32px;
@@ -15,6 +14,9 @@
     gap: 10px;
     margin-top: 24px;
     margin-bottom: 52px;
+}
+.formattedDate {
+    color: #7ACBC4;
 }
 .description {
     font-weight: 400;

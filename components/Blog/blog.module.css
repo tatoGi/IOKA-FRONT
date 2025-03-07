@@ -50,6 +50,9 @@
     color: #007AFF;
     line-height: 14.63px;
 }
+.formattedDate {
+    color: #7ACBC4;
+}
 .calendarIcon {
     margin-right: 5px;
     color: #007AFF;

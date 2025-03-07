@@ -91,7 +91,7 @@ const LiveInvestSection = () => {
                       alt="Dubai Property"
                       width={400}
                       height={300}
-                      objectFit="cover"
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                 </div>
