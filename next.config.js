@@ -32,4 +32,7 @@ module.exports = {
       '127.0.0.1' // Add localhost for development
     ],
   },
+  env: {
+    NEXT_PUBLIC_API_URL: API_BASE_URL, // Ensure the environment variable is set
+  },
 };
