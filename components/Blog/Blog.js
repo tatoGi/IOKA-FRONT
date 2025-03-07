@@ -53,6 +53,10 @@ const Blog = ({ initialData }) => {
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
+    const decodeImageUrl = (url) => {
+        return decodeURIComponent(url);
+    };
+
     return (
         <div className='container mt-3'>
             <div className={`${styles.title}`}>
@@ -63,7 +67,7 @@ const Blog = ({ initialData }) => {
                     <div className='col-md-3' key={index}>
                         <div className={`card ${styles.card}`}>
                             <Image 
-                                src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${encodeURIComponent(card.image)}` : baseimage} 
+                                src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}` : baseimage} 
                                 className={`card-img-top ${styles['card-img-top']}`} 
                                 alt={card.image_alt} 
                                 width={300} // Provide width
