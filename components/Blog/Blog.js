@@ -14,11 +14,12 @@ const Blog = ({ initialData }) => {
     const [totalPages, setTotalPages] = useState(1);
    
     const router = useRouter(); // Initialize useRouter
-
+    console.log(BLOGS_API);
     useEffect(() => {
         // Fetch data from the API
         const fetchData = async (page) => {
             try {
+                
                 const response = await axios.get(`${BLOGS_API}?page=${page}`);
                 setCardData(response.data.data);
                 setTotalPages(response.data.last_page);
@@ -57,7 +58,7 @@ const Blog = ({ initialData }) => {
             </div>
             <div className='row'>
                 {cardData.map((card, index) => (
-                    console.log(card),
+                    
                     <div className='col-md-3' key={index}>
                         <div className={`card ${styles.card}`}>
                             <Image 
