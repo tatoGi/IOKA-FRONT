@@ -14,7 +14,9 @@ const BlogShow = ({ blogData }) => {
   if (!blogData) {
     return <div>No blog data available</div>;
   }
-
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+};
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: 'long', year: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -24,7 +26,7 @@ const BlogShow = ({ blogData }) => {
     <div>
       <div className={`container ${styles.blogShow}`}>
         <Image 
-          src={blogData.blog.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${encodeURIComponent(blogData.blog.banner_image )}` : baseimage} 
+          src={blogData.blog.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.banner_image )}` : baseimage} 
           alt={blogData.blog.banner_image_alt} 
           width={800} 
           height={400} 
