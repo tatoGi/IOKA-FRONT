@@ -8,6 +8,7 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: none;
+    border-radius: 1rem;
 }
 .card:hover {
     transform: translateY(-5px);
@@ -27,10 +28,15 @@
     border-top-left-radius: calc(1rem - 1px);
     border-top-right-radius: calc(1rem - 1px);
     object-fit: cover;
+    
 }
 
 .card-body {
     padding: 15px;
+    height: 12.5rem; /* Keep fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This will push button to bottom */
 }
 
 .card-title {
@@ -43,7 +49,10 @@
 .card-list {
     margin-bottom: 1rem;
     color: #555;
+    font-size: 12px;
+    flex-grow: 1; /* Allow text content to expand */
 }
+
 
 .card-list li {
     margin-bottom: 0.5rem;
@@ -73,6 +82,7 @@
     display: inline-block;
     width: 99px;
     height: 32px;
+    margin-top: auto; /* This pushes button to bottom */
 }
 
 .card-button:hover {
@@ -83,7 +93,13 @@
     justify-content: center;
     margin-top: 20px;
 }
-
+/* Create a content wrapper for text elements */
+.contentWrapper{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .pageButton {
     margin: 0 5px;
     padding: 5px 10px;
