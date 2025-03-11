@@ -4,7 +4,9 @@ import SearchSection from "../SearchSection/SearchSection";
 import Image from "next/image";
 import styles from "./Offplan.module.css";
 import { Montserrat } from "next/font/google";
-import { StarIcon } from "../icons/PropertyIcons";
+import {
+  StarIcon,
+} from "../icons/PropertyIcons";
 // Configure Montserrat
 const montserrat = Montserrat({
   subsets: ["latin"], // Specify the subsets you need
@@ -13,7 +15,7 @@ const montserrat = Montserrat({
 });
 
 const Offplan = () => {
-  const [totalPages, setTotalPages] = useState(6); // Move inside component
+   const [totalPages, setTotalPages] = useState(10); // Move inside component
   const [currentPage, setCurrentPage] = useState(1); // To track current page
 
   const handlePageChange = (page) => {
@@ -28,7 +30,7 @@ const Offplan = () => {
       beds: 3,
       baths: 3,
       area: 2300,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 1,
       position: [25.2048, 55.2708] // Dubai coordinates
@@ -41,7 +43,7 @@ const Offplan = () => {
       beds: 5,
       baths: 5,
       area: 5000,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: false,
       car: 2,
       position: [25.112, 55.138] // Dubai coordinates
@@ -54,7 +56,7 @@ const Offplan = () => {
       beds: 2,
       baths: 2,
       area: 1800,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 1,
       position: [25.1972, 55.2744] // Downtown Dubai
@@ -67,7 +69,7 @@ const Offplan = () => {
       beds: 3,
       baths: 3,
       area: 2100,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: false,
       car: 2,
       position: [25.066, 55.221] // Jumeirah Village Circle
@@ -80,7 +82,7 @@ const Offplan = () => {
       beds: 3,
       baths: 3,
       area: 2400,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 1,
       position: [25.078, 55.134] // Marina coordinates
@@ -93,7 +95,7 @@ const Offplan = () => {
       beds: 7,
       baths: 8,
       area: 12000,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 5,
       position: [25.073, 55.162] // Emirates Hills
@@ -106,7 +108,7 @@ const Offplan = () => {
       beds: 4,
       baths: 4,
       area: 4000,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 2,
       position: [25.084, 55.119] // Bluewaters Island
@@ -119,7 +121,7 @@ const Offplan = () => {
       beds: 4,
       baths: 4,
       area: 3500,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: false,
       car: 3,
       position: [25.188, 55.239] // Jumeirah Beach coordinates
@@ -132,7 +134,7 @@ const Offplan = () => {
       beds: 2,
       baths: 2,
       area: 1600,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: false,
       car: 1,
       position: [25.184, 55.273] // Business Bay
@@ -145,12 +147,13 @@ const Offplan = () => {
       beds: 4,
       baths: 3,
       area: 2800,
-      image: require("/assets/img/default.webp"),
+       image: require("/assets/img/default.webp"),
       exclusive: true,
       car: 2,
       position: [25.118, 55.198] // Al Barsha
     }
   ]);
+  
 
   return (
     <div className={`container ${styles.container} ${montserrat.className}`}>
@@ -190,7 +193,7 @@ const Offplan = () => {
                   <div className={styles.features}>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/badicon.png")}
+                         src={require("/assets/img/badicon.png")}
                         alt="Bed Icon"
                         width={24}
                         height={24}
@@ -199,7 +202,7 @@ const Offplan = () => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/bathicon.png")}
+                       src={require("/assets/img/bathicon.png")}
                         alt="Bath Icon"
                         width={24}
                         height={24}
@@ -245,28 +248,26 @@ const Offplan = () => {
           ))}
         </div>
         <div className={styles.pagination}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => handlePageChange(page)}
-              className={`${styles.pageButton} ${
-                currentPage === page ? styles.active : ""
-              }`}
-            >
-              {page}
-            </button>
-          ))}
-
-          {/* Next button */}
-          {currentPage < totalPages && (
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              className={styles.pageButton}
-            >
-              Next
-            </button>
-          )}
-        </div>
+  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+    <button
+      key={page}
+      onClick={() => handlePageChange(page)}
+      className={`${styles.pageButton} ${
+        currentPage === page ? styles.active : ""
+      }`}
+    >
+      {page}
+    </button>
+  ))}
+  {/* Add Next Button */}
+  <button
+    onClick={() => handlePageChange(currentPage + 1)}
+    disabled={currentPage === totalPages} // Disable if on the last page
+    className={styles.pageButton}
+  >
+    Next
+  </button>
+</div>
       </div>
     </div>
   );

@@ -131,10 +131,10 @@ const Header = () => {
                     <Link href={"/page-components/offplan"}>OFFPLAN</Link>
                   </li>
                   <li className={pathname === "/resale" ? "active-link" : ""}>
-                    <Link href={"/resale"}>RESALE</Link>
+                    <Link href={"/page-components/rental_resale"}>RESALE</Link>
                   </li>
                   <li className={pathname === "/rentals" ? "active-link" : ""}>
-                    <Link href={"/rentals"}>RENTALS</Link>
+                    <Link href={"/page-components/rental_resale"}>RENTALS</Link>
                   </li>
                   <li
                     className={

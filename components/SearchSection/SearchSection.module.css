@@ -8,7 +8,7 @@
   max-width: 1560px;
   /* margin: 0 auto; */
   display: flex;
-  gap: 12px;
+  gap: 33.4px;
 }
 
 .searchBar {
@@ -17,7 +17,7 @@
   border: 1px solid #07151F;
   border-radius: 4px;
   padding: 8px 12px;
-  min-width: 660px;
+  min-width: 671px;
 }
 
 .searchIcon {

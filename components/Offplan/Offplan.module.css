@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.25rem;
-  padding: 1.25rem;
 }
 
 .propertyCard {
@@ -71,9 +70,11 @@
 
 .features {
   display: flex;
-  gap: 1.5rem;
+  gap: 9px;
   color: #07151F;
   margin-bottom: 1.25rem;
+  border-bottom: 1px solid #E6EBED;
+  padding-bottom: 12px; /* 12px distance from content to border */
 }
 
 .feature {
@@ -81,10 +82,13 @@
   align-items: center;
   gap: 0.375rem;
   color: #07151F;
-  font-size: 0.875rem;
+  font-size: 12px;
   font-weight: 500;
 }
-
+.feature img{
+  width: 20px;
+  height: 14px;
+}
 .feature svg {
   color: #6b7280;
 }
@@ -150,7 +154,7 @@
 } 
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-start;
   margin-top: 20px;
   margin-bottom: 142px;
 }
