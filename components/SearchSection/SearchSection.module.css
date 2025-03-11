@@ -1,24 +1,20 @@
 .searchSection {
   width: 100%;
-  padding: 16px;
   background-color: #fff;
-  border-bottom: 1px solid #e5e7eb;
+  margin-top: 38px;
 }
 
 .searchContainer {
-  max-width: 1200px;
+  max-width: 1560px;
   /* margin: 0 auto; */
-  display: flex
-;
+  display: flex;
   gap: 12px;
-  /* align-items: center; */
-  margin-left: 60px;
 }
 
 .searchBar {
   display: flex;
   align-items: center;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #07151F;
   border-radius: 4px;
   padding: 8px 12px;
   min-width: 660px;
@@ -51,7 +47,7 @@
   align-items: center;
   gap: 4px;
   padding: 8px 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #07151F;
   border-radius: 4px;
   background: white;
   color: #666;
@@ -69,7 +65,7 @@
   align-items: center;
   gap: 4px;
   padding: 8px 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #07151F;
   border-radius: 4px;
   background: white;
   color: #666;

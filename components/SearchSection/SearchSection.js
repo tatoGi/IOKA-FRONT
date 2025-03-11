@@ -7,7 +7,7 @@ import filterVector from "../../assets/img/filtervector.png";
 const SearchSection = () => {
   return (
     <div className={styles.searchSection}>
-      <div className={`container ${styles.searchContainer}`}>
+      <div className={styles.searchContainer}>
         <div className={styles.searchBar}>
           <FiSearch className={styles.searchIcon} />
           <input
