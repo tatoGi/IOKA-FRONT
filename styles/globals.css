@@ -1,5 +1,4 @@
 @import 'leaflet/dist/leaflet.css';
-
 body {
   padding: 0;
   margin: 0; 
@@ -57,7 +56,7 @@ main {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 6;
+    z-index: 100;
   }
   .header-box{
     display: flex;
@@ -93,12 +92,15 @@ main {
     list-style: none;
     transition: 0.2s;
     position: relative; 
+   
   }
   .header-nav ul li a{
-    font-size: 16px;
-    font-weight: 500;
     color: #FFFFFF;
-    line-height: 1.6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
     /* Monserrat */ 
     text-transform: uppercase;
   }

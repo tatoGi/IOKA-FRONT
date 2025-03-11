@@ -1,6 +1,5 @@
 .liveInvestSection {
   background-color: #98E5D7;
-  padding: 100px 0;
   position: relative;
   overflow: hidden;
 }
@@ -12,24 +11,25 @@
 }
 
 .content {
-  padding-top: 40px;
+  padding-top: 121px;
 }
 
 .content h4 {
-  font-size: 16px;
-  margin-bottom: 15px;
-  color: #000;
-  font-weight: 400;
-  font-family: 'Tenor Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  line-height: 100%;
+  color: #0A273B;
+  font-family: 'monserrat', sans-serif;
 }
 
 .content h2 {
   font-size: 48px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 40px;
-  color: #000;
-  line-height: 1.2;
-  font-family: 'Tenor Sans', sans-serif;
+  color: #0A273B;
+  line-height: 100%;
+  font-family: 'felix', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -42,6 +42,7 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'monserrat', sans-serif;
   font-weight: 500;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-top: 173px;
@@ -113,7 +114,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   font-size: 20px;
-  color: #333;
+  color: #8FE3DC;
 }
 
 .prevButton {
@@ -132,6 +133,8 @@
   position: relative;
   z-index: 5;
   padding-left: 15px;
+  margin-bottom: 62px;
+  font-family: 'felix', sans-serif;
 }
 
 .statItem {

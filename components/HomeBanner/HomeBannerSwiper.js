@@ -31,7 +31,7 @@ const HomeBannerSwiper = () => {
           <div className={styles["banner-content"]}>
             <div className={styles["text-b-i"]}>IOKA Development</div>
             <h1>
-              INSPIRED BY BUGATTI HYPERCARS, THIS ARCHITECTURAL MASTERPIECE
+            Inspired by Bugatti Hypercars, this Architectural Masterpiece
             </h1>
           </div>
           <div className={styles["swiper-item-img"]}>
@@ -49,7 +49,7 @@ const HomeBannerSwiper = () => {
           <div className={styles["banner-content"]}>
             <div className={styles["text-b-i"]}>IOKA Development</div>
             <h1>
-              Inspired by Bugatti Hypercars, this Architectural Masterpiece 2222
+            Inspired by Bugatti Hypercars, this Architectural Masterpiece
             </h1>
           </div>
           <div className={styles["swiper-item-img"]}>

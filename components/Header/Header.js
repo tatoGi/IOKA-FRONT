@@ -6,7 +6,6 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
 import LogoDark from "../../assets/img/ioka-logo-dark.png";
-
 import Image from "next/image";
 import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
