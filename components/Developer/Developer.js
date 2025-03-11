@@ -1,148 +1,140 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Developer.module.css";
 import Image from "next/image";
-import DeveloperImage from "../../assets/img/developerimg.png";
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaPhone,
-  FaWhatsapp
-} from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { useRouter } from "next/router";
+import axios from "axios";
+import { DEVELOPER_API } from "@/routes/apiRoutes";
 
-const Developer = () => {
+const Developer = ({ initialData }) => {
+  const [cardData, setCardData] = useState(initialData || []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [imageIndexes, setImageIndexes] = useState({}); // Track image indexes per card
+
   const router = useRouter();
-  const [currentImageIndices, setCurrentImageIndices] = useState(
-    Array(6).fill(0)
-  );
 
-  // Sample images array for the slider
-  const images = [DeveloperImage, DeveloperImage, DeveloperImage]; // Add more images as needed
+  useEffect(() => {
+    const fetchData = async (page) => {
+      try {
+        const response = await axios.get(`${DEVELOPER_API}?page=${page}`);
+        setCardData(response.data.data);
+        setTotalPages(response.data.last_page);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const developerCards = Array(6).fill({
-    images: images,
-    aboutCompany: {
-      title: "About Company",
-      description: [
-        "As a brokerage rooted in one of the world's most iconic cities, we pride ourselves on clarity, efficiency, and an unwavering commitment to client satisfaction"
-      ]
-    },
-    topCommunities: [
-      "Dubai Hills Estate",
-      "Arabian Ranches 3",
-      "The Valley",
-      "Dubai Creek Harbour",
-      "Emaar Beachfront"
-    ]
-  });
+    if (!initialData) {
+      fetchData(currentPage);
+    }
+  }, [currentPage, initialData]);
 
-  const nextImage = (cardIndex) => {
-    setCurrentImageIndices((prev) => {
-      const newIndices = [...prev];
-      newIndices[cardIndex] = (newIndices[cardIndex] + 1) % images.length;
-      return newIndices;
-    });
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
-  const prevImage = (cardIndex) => {
-    setCurrentImageIndices((prev) => {
-      const newIndices = [...prev];
-      newIndices[cardIndex] =
-        (newIndices[cardIndex] - 1 + images.length) % images.length;
-      return newIndices;
-    });
+  const handleReadMore = (slug) => {
+    router.push(`/developer/${slug}`);
   };
 
-  const handleSeeMore = (cardIndex) => {
-    router.push(`/developer/${cardIndex}`);
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+
+  const getImageUrl = (photoJson, cardId) => {
+    try {
+      const parsed = JSON.parse(photoJson);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const currentIndex = imageIndexes[cardId] || 0;
+        const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(parsed[currentIndex].file)}`;
+        console.log(`Image URL for card ${cardId}:`, imageUrl); // Debugging log
+        return imageUrl;
+      }
+      return "/default-image.jpg";
+    } catch (e) {
+      console.error("Error parsing photo JSON:", e);
+      return "/default-image.jpg";
+    }
+  };
+
+  const handleNextImage = (cardId, photoJson) => {
+    try {
+      const parsed = JSON.parse(photoJson);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        setImageIndexes((prevIndexes) => {
+          const newIndex = (prevIndexes[cardId] + 1) % parsed.length; // Loop back to first image
+          console.log(`Next image index for card ${cardId}:`, newIndex); // Debugging log
+          return {
+            ...prevIndexes,
+            [cardId]: newIndex,
+          };
+        });
+      }
+    } catch (e) {
+      console.error("Error navigating images:", e);
+    }
+  };
+
+  const handlePrevImage = (cardId, photoJson) => {
+    try {
+      const parsed = JSON.parse(photoJson);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        setImageIndexes((prevIndexes) => {
+          const newIndex = (prevIndexes[cardId] - 1 + parsed.length) % parsed.length; // Loop back to last image
+          console.log(`Previous image index for card ${cardId}:`, newIndex); // Debugging log
+          return {
+            ...prevIndexes,
+            [cardId]: newIndex,
+          };
+        });
+      }
+    } catch (e) {
+      console.error("Error navigating images:", e);
+    }
   };
 
   return (
-    <div className={styles.developerSection}>
-      <div className="container-fluid">
-        <div className={styles.sectionHeader}>
-          <div></div> {/* Empty div for flex spacing */}
-          <div className={styles.searchContainer}>
-            <input
-              type="text"
-              placeholder="Search developers..."
-              className={styles.searchInput}
-            />
-            <button className={styles.searchButton}>Search</button>
-          </div>
-        </div>
-        <div className="row g-4">
-          {developerCards.map((card, cardIndex) => (
-            <div key={cardIndex} className="col-lg-6 mb-4">
-              <div className={styles.card}>
-                <div className={styles.imageWrapper}>
-                  <button
-                    className={`${styles.navButton} ${styles.prevButton}`}
-                    onClick={() => prevImage(cardIndex)}
-                  >
-                    <FaChevronLeft size={20} />
-                  </button>
-                  <Image
-                    src={card.images[currentImageIndices[cardIndex]]}
-                    alt="Property"
-                    width={600}
-                    height={400}
-                    className={styles.propertyImage}
-                  />
-                  <button
-                    className={`${styles.navButton} ${styles.nextButton}`}
-                    onClick={() => nextImage(cardIndex)}
-                  >
-                    <FaChevronRight size={20} />
-                  </button>
-                </div>
-
-                <div className={styles.contentSection}>
-                  <h2>{card.aboutCompany.title}</h2>
-                  {card.aboutCompany.description.map((paragraph, index) => (
-                    <p key={index} className={styles.description}>
-                      {paragraph}
-                    </p>
-                  ))}
-
-                  <div className={styles.communitiesSection}>
-                    <h3>Top Communities</h3>
-                    <div className={styles.communityTags}>
-                      {card.topCommunities.map((community, index) => (
-                        <button key={index} className={styles.communityTag}>
-                          {community}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className={styles.bottomActions}>
-                    <div className={styles.actionButtons}>
-                      <button className={styles.callButton}>
-                        <FaPhone size={16} style={{ marginRight: "8px" }} />
-                        <span>Call</span>
-                      </button>
-                      <button className={styles.whatsappButton}>
-                        <FaWhatsapp size={16} style={{ marginRight: "8px" }} />
-                        <span>WhatsApp</span>
-                      </button>
-                      <div className={styles.seeMore}>
-                        <button
-                          className={styles.seeMoreButton}
-                          onClick={() => handleSeeMore(cardIndex)}
-                        >
-                          See More
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className={styles.contentSection}>
+    <h2 className={styles.companyTitle}>{card.title}</h2>
+    
+    <div className={styles.aboutSection}>
+      <h3 className={styles.sectionHeading}>About Company</h3>
+      <div className={styles.companyDescription} dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+    </div>
+  
+    <div className={styles.communitiesSection}>
+      <h3 className={styles.sectionHeading}>Top Communities</h3>
+      <div className={styles.communityGrid}>
+        {JSON.parse(card.tags).map((tag, index) => (
+          <span key={index} className={styles.communityItem}>
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
+  
+    <div className={styles.contactSection}>
+      <div className={styles.contactButtons}>
+        <button className={styles.callButton}>
+          <FaPhone size={16} />
+          <span>Call</span>
+          <span className={styles.contactNumber}>{card.phone}</span>
+        </button>
+        <button className={styles.whatsappButton}>
+          <FaWhatsapp size={16} />
+          <span>WhatsApp</span>
+          <span className={styles.contactNumber}>{card.whatsapp}</span>
+        </button>
+      </div>
+      <button 
+        className={styles.seeMoreButton}
+        onClick={() => handleReadMore(card.slug)}
+      >
+        See More
+      </button>
+    </div>
+  </div>
   );
 };
 

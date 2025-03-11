@@ -25,7 +25,9 @@ const BlogShow = ({ blogData }) => {
     const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
     return strippedText.length > maxLength ? strippedText.substring(0, maxLength) + "..." : strippedText;
 };
-  console.log(blogData);
+const handleReadMore = (slug) => {
+  router.push(`/blog/${slug}`);
+};
   return (
     <div>
       <div className={`container ${styles.blogShow}`}>
@@ -73,12 +75,8 @@ const BlogShow = ({ blogData }) => {
                       </li>
                       <li>{limitTextLength(card.body, 108)}</li>
                     </ul>
-                    <a
-                      href={`/blog/show?id=${index}`}
-                      className={`btn btn-primary ${styles["card-button"]}`}
-                    >
-                      Read more
-                    </a>
+                    <button onClick={() => handleReadMore(card.slug)} className={`btn btn-primary ${styles['card-button']}`}>Read more</button>
+
                   </div>
                 </div>
               ))}

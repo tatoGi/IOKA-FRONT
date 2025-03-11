@@ -70,10 +70,10 @@ const Blog = ({ initialData }) => {
                                 src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}` : baseimage} 
                                 className={`card-img-top ${styles['card-img-top']}`} 
                                 alt={card.image_alt} 
-                                width={300} // Provide width
+                                width={372} // Provide width
                                 height={200} // Provide height
                                 priority={true} // Add priority property
-                            />
+                            />  
                             <div className={`card-body ${styles['card-body']}`}>
                                 <h5 className={`card-title ${styles['card-title']}`}>{card.title}</h5>
                                 <ul className={`list-unstyled ${styles['card-list']}`}>
