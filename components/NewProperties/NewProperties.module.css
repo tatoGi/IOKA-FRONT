@@ -4,7 +4,7 @@
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1560px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -33,12 +33,14 @@
   transition: all 0.3s ease;
   width: 169px;
   font-size: 20px;
+  font-family: 'montserrat', sans-serif;
 }
 
 .filterButtons button.active {
   background-color: white;
   color: #0A1929;
   border: none;
+  font-family: 'montserrat', sans-serif;  
 }
 
 .propertyCard {
@@ -51,10 +53,10 @@
 }
 
 .propertyCardTitle {
-  font-family: 'Times New Roman', serif;
+  font-family: 'felix', sans-serif;
   font-size: 40px;
   font-weight: 300;
-  color: white;
+  color: #FFFFFF;
   margin-bottom: 2rem;
   padding-left: 1rem;
 }
@@ -95,7 +97,7 @@
   font-weight: 400;
   color: white;
   margin-bottom: 0.5rem;
-  font-family: 'Times New Roman', serif;
+  font-family: 'montserrat', sans-serif;
 }
 
 .propertyType {
@@ -107,7 +109,7 @@
 .price {
   font-size: 2.25rem;
   font-weight: 400;
-  font-family: 'Times New Roman', serif;
+  font-family: 'montserrat', sans-serif;
   color: white;
 }
 
@@ -126,6 +128,11 @@
   margin-left: 200px;
   margin-top:48px;
   gap: 0.5rem;
+  width: 474;
+height: 249;
+top: 144px;
+left: 1038px;
+
 }
 
 .features li {
@@ -133,7 +140,8 @@
   position: relative;
   padding-left: 1rem;
   font-size: 20px;
-  line-height: 1.5;
+  line-height:100%;
+  font-family: 'montserrat', sans-serif;
 }
 
 .features li:before {
@@ -162,6 +170,7 @@
   white-space: nowrap;
   max-width: 169px;
   height: 48px;
+  font-family: 'montserrat', sans-serif;
 
 }
 
