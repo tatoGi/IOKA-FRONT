@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { DEVELOPER_API } from '../routes/apiRoutes'; // Import the new route
-import Developer from '@/components/Developer/Developer';
+import { OFFPLAN_APi } from '../routes/apiRoutes'; // Import the API route
+import Offplan from '@/components/Offplan/Offplan';
 
 export const getServerSideProps = async () => {
     try {
-        const response = await axios.get(DEVELOPER_API); // Fetch initial data
+        const response = await axios.get(OFFPLAN_APi); // Fetch initial data
         const data = response.data && response.data.data ? response.data.data : null;
         return { props: { initialData: data, initialPagination: response.data } };
     } catch (error) {
@@ -13,9 +13,8 @@ export const getServerSideProps = async () => {
     }
 };
 
-const DeveloperPage = ({ initialData = [], initialPagination }) => { 
-   
-    return <Developer initialData={initialData} initialPagination={initialPagination}/>;
+const OffplanPage = ({ initialData = [], initialPagination }) => {
+    return <Offplan initialData={initialData} initialPagination={initialPagination} />;
 };
 
-export default DeveloperPage;
+export default OffplanPage;

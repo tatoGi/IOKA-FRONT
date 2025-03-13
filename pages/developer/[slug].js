@@ -1,6 +1,6 @@
-import BlogShow from '../../components/BlogShow/show';
+import DeveloperShow from '../../components/DeveloperShow/DeveloperShow';
 import axios from 'axios';
-import { BLOGS_API } from '../../routes/apiRoutes'; // Import the route
+import { DEVELOPER_API } from '../../routes/apiRoutes'; // Import the route
 
 export const getServerSideProps = async (context) => {
     const { slug } = context.params || {}; // Get the blog slug from the URL path
@@ -8,20 +8,20 @@ export const getServerSideProps = async (context) => {
         return { notFound: true };
     }
     try {
-        const response = await axios.get(`${BLOGS_API}/${slug}`);
-        
+        const response = await axios.get(`${DEVELOPER_API}/${slug}`);
+         
         if (!response.data) {
             return { notFound: true };
         }
-        return { props: { blogData: response.data } };
+        return { props: { developerData: response.data } };
     } catch (error) {
         console.error('Error fetching data:', error);
         return { notFound: true };
     }
 };
 
-const BlogShowPage = ({ blogData }) => {
-    return <BlogShow blogData={blogData} />;
+const DeveloperShowPage = ({ developerData  }) => {
+    return <DeveloperShow developerData={developerData}  />;
 };
 
-export default BlogShowPage;
+export default DeveloperShowPage;

@@ -1,281 +1,354 @@
-.developerSection {
-  padding: 2rem 0;
-  background: #f8f9fa;
-}
-
-.cardsContainer {
+/* General Styles */
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  padding: 0 1rem;
+  padding: 20px;
 }
 
-.card {
-  display: flex;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0px 2px #7ACBC4;
-  height: 100%;
-}
-
-.imageWrapper {
-  flex: 0 0 50%;
+/* Search Container */
+.searchContainer {
   position: relative;
-  max-width: 21.25rem;  
-  max-height: 100%;
+  max-width: 768px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
-.propertyImage {
+.searchContainer input {
+  width: 100%;
+  padding: 10px 40px;
+  border-radius: 4px;
+  border: 1px solid #07151F;
+  font-size: 16px;
+}
+
+.searchContainer .fa-search {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+/* Card Styles */
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card .img-fluid {
+  border-radius: 0 0 12px 12px;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.navButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+.card .position-relative {
+  position: relative;
+}
+
+.card .btn-light {
+  background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(4px);
   border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  z-index: 2;
-  transition: all 0.3s ease;
 }
 
-.navButton:hover {
-  background: rgba(255, 255, 255, 0.5);
+.card .btn-light:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.prevButton {
-  left: 20px;
+/* Card Content Styles */
+.card .col-md-6 {
+  padding: 20px;
 }
 
-.nextButton {
-  right: 20px;
-}
-
-.contentSection {
-  flex: 1;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.contentSection h2 {
-  font-size: 0.75rem;
-    color: #333;
-  margin-bottom: 1rem;
+.card .title {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-}
-
-.description {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-  font-size: 0.75rem;
-}
-
-.communitiesSection {
-  margin-top: 1.5rem;
-}
-
-.communitiesSection h3 {
-  font-size: 0.75rem;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 12px;
   color: #333;
-  margin-bottom: 1rem;
+}
+
+.card .description {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #666;
+}
+
+.card .communities {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-}
-
-.communityTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.communityTag {
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 2px solid #e0e0e0;
-  border-radius: 5px;
-  color: #333;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.communityTag:hover {
-  background: #f5f5f5;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-  justify-content: flex-end;
-}
-
-.callButton,
-.whatsappButton {
-  flex: 0 0 auto;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-size: 12px;
-}
-
-.buttonIcon {
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.callButton {
-  max-width: 81px;
-  max-height: 32px;
-  background-color: #0A273B;
-  font-size: 12px;
-}
-
-.whatsappButton {
-  max-width: 121px;
-  max-height: 32px;
-  background-color: #7ACBC4;
-  font-size: 12px;
-}
-
-.callButton:hover {
-  background-color: #0a1f2f;
-}
-
-.whatsappButton:hover {
-  opacity: 0.9;
-}
-
-@media (max-width: 1024px) {
-  .cardsContainer {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-  }
-
-  .imageWrapper {
-    flex: 0 0 300px;
-    max-width: 100%;
-    height: 300px;
-  }
-
-  .contentSection {
-    padding: 1.5rem;
-  }
-
-  .contentSection h2 {
-    font-size: 0.75rem;
-  }
-
-  .communityTag {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.75rem;
-  }
-}
-
-.headerSection {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.seeMoreButton {
-  padding: 8px 16px;
-  background-color: transparent;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  color: #666;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.seeMoreButton:hover {
-  background-color: #f5f5f5;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 12px;
   color: #333;
 }
 
-.sectionHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
-}
-
-.searchContainer {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.searchInput {
-  padding: 8px 16px;
+.card .badge {
+  background-color: #f8f9fa;
+  color: #343a40;
+  padding: 8px 12px;
+  border-radius: 4px;
   border: 1px solid #e0e0e0;
+  font-size: 12px;
+  font-weight: 400 !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Button Styles */
+.call {
+  width: 81px;
+  height: 32px;
   border-radius: 4px;
-  font-size: 14px;
-  width: 250px;
-  outline: none;
-  transition: border-color 0.3s ease;
+  padding: 8px 16px;
+  background-color: #0A273B;
+  color: #fff;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
 }
 
-.searchInput:focus {
-  border-color: #7ACBC4;
+.call:hover {
+  background-color: #07151F;
 }
 
-.searchButton {
+.whatsapp {
+  width: 121px;
+  height: 32px;
+  border-radius: 4px;
   padding: 8px 16px;
   background-color: #7ACBC4;
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp:hover {
+  background-color: #5AA8A1;
+}
+
+.readMore {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 100%;
+  text-align: right;
+  border: none;
+  background-color: transparent;
+  color: #0A273B;
+  max-width: 66px;
+  width: 66px;
+  height: 17px;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.readMore:hover {
+  color: #0056b3;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px; /* Space between buttons */
+}
+
+.pageButton {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  color: #0A273B;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  width: 48px;
+height: 48px;
+left: 50px;
+border-radius: 4px;
+
 }
 
-.searchButton:hover {
-  opacity: 0.9;
+.pageButton:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
 }
 
+.pageButton.active {
+  background-color: #0A273B;
+  color: #fff;
+  width: 48px;
+height: 48px;
+left: 50px;
+border-radius: 4px;
+
+}
+
+.pageButton:disabled {
+  background-color: #f8f9fa;
+  color: #ccc;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+/* Previous and Next Buttons */
+.nextButton {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  color: #333;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  width: 48px;
+height: 48px;
+left: 50px;
+border-radius: 4px;
+
+}
+.prevButtonimage{
+  width: 48px;
+  height: 48px;
+  left: 50px;
+  border-radius: 4px;
+}
+.nextButtonimage{
+  width: 48px;
+  height: 48px;
+  left: 50px;
+  border-radius: 4px;
+}
+
+.prevButton:disabled,
+.nextButton:disabled {
+  background-color: #f8f9fa;
+  color: #ccc;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+}
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .searchContainer {
-    width: 100%;
+  .container {
+    padding: 10px;
   }
-  
-  .searchInput {
-    flex: 1;
+
+  .searchContainer {
+    height: 36px;
+  }
+
+  .searchContainer input {
+    font-size: 14px;
+    padding: 8px 36px;
+  }
+
+  .card .col-md-6 {
+    padding: 15px;
+  }
+
+  .card .title {
+    font-size: 14px;
+  }
+
+  .card .description {
+    font-size: 12px;
+  }
+
+  .card .communities {
+    font-size: 14px;
+  }
+
+  .call,
+  .whatsapp {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .readMore {
+    font-size: 12px;
   }
 }
 
+@media (max-width: 576px) {
+  .card {
+    margin-bottom: 15px;
+  }
 
+  .card .col-md-6 {
+    padding: 10px;
+  }
+
+  .card .title {
+    font-size: 12px;
+  }
+
+  .card .description {
+    font-size: 10px;
+  }
+
+  .card .communities {
+    font-size: 12px;
+  }
+
+  .call,
+  .whatsapp {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+.prevButton{
+  width: 48px;
+  height: 48px;
+}
+.nextButton{
+  width: 48px;
+  height: 48px;
+}
+  .readMore {
+    font-size: 10px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .pageButton {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 4px;
+  }
+}

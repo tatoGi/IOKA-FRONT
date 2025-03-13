@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import style from "./OffplaneShow.module.css";
 import Image from "next/image";
-import bannerimage from "../../assets/img/fifth-tower.png";
-import qrimage from "../../assets/img/qr.png";
 import buildingImage from "../../assets/img/building.png";
 import dynamic from "next/dynamic";
+import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
+import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
@@ -13,44 +14,45 @@ const Map = dynamic(
   { ssr: false }
 );
 
-const OffplanShow = () => {
+const OffplanShow = ({ offplanData }) => {
   const router = useRouter();
   const { id } = router.query;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showExterior, setShowExterior] = useState(true);
 
-  const position = [25.2048, 55.2708]; // Dubai coordinates
-  const features = [
-    "36-storey residential tower with 345 units",
-    "Studios starting from 390 Sq.Ft to 420 Sq.Ft",
-    "1-bedroom apartments from 650 Sq.Ft to 670 Sq.Ft",
-    "2-bedroom apartments measuring 1,012 to 1,130 square feet",
-    "Strategic location with easy access to major Dubai attractions"
-  ];
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  const amenities = [
-    "Community Swimming Pool",
-    "Landscaped Court",
-    "Children's Area",
-    "Restaurants",
-    "Gymnasium",
-    "Tennis Court",
-    "Supermarket",
-    "Golf Club"
-  ];
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-  const nearbyPlaces = [
-    { name: "Dubai Hills Mall", distance: "7m", coords: [25.2048, 55.2718] },
-    { name: "Dubai Autodrome", distance: "10m", coords: [25.2058, 55.2728] },
-    { name: "Burj Khalifa", distance: "15m", coords: [25.2068, 55.2738] },
-    { name: "The Dubai Mall", distance: "15m", coords: [25.2078, 55.2748] },
-    { name: "Jumeirah Beach", distance: "20m", coords: [25.2088, 55.2758] },
-    { name: "Dubai World Center", distance: "28m", coords: [25.2098, 55.2768] }
-  ];
+  const position = offplanData.offplan.map_location; // Dubai coordinates
+
+  const features = offplanData.offplan.features
+    ? JSON.parse(offplanData.offplan.features)
+    : [];
+  const nearbyPlaces = offplanData.offplan.near_by
+    ? JSON.parse(offplanData.offplan.near_by)
+    : [];
+
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
 
   return (
     <>
+      {/* Banner Section */}
       <div className={`container ${style.offplanebanner}`}>
         <Image
-          src={bannerimage}
+          src={
+            offplanData.offplan.banner_photo
+              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+                  offplanData.offplan.banner_photo
+                )}`
+              : baseimage
+          }
           alt="The Fifth Tower at JVC"
           fill
           priority
@@ -58,33 +60,31 @@ const OffplanShow = () => {
           className={style.bannerImage}
         />
         <div className={style.bannerContent}>
-          <h1>THE FIFTH TOWER AT JVC</h1>
+          <h1>{offplanData.offplan.title}</h1>
         </div>
       </div>
 
+      {/* Main Content Inside Container */}
       <div className="container">
         <div className="row">
           <div className="col-md-7">
             <div className={style.propertyDetails}>
-              <h2>Off-Plan property launched by Object 1 Development</h2>
+              <h2>{offplanData.offplan.title}</h2>
               <div className={style.pricing}>
+                <span className={style.aedPricestart}>Starting Price:</span>
                 <span className={style.aedPrice}>
-                  Starting Price: AED 554,000
+                  AED {offplanData.offplan.amount_dirhams}
                 </span>
-                <span className={style.usdPrice}>USD 150,832</span>
+                <span className={style.usdPrice}>
+                  USD {offplanData.offplan.amount}
+                </span>
               </div>
               <div className={style.description}>
-                <p>
-                  The Fifth Tower is a stunning 36-storey residential
-                  development in Jumeirah Village Circle (JVC), crafted by
-                  Object 1 Development. This architectural marvel features 345
-                  thoughtfully designed units, ranging from compact studios to
-                  spacious 1- and 2- bedroom apartments. Each residence is
-                  finished to the highest standards, boasting a neutral color
-                  palette and spacious layouts that maximize comfort. The
-                  tower's eye- catching façade promises to be a new landmark in
-                  the area, seamlessly blending...
-                </p>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: offplanData.offplan.description
+                  }}
+                />
                 <button className={style.readMore}>Read more</button>
               </div>
             </div>
@@ -92,32 +92,135 @@ const OffplanShow = () => {
 
           <div className="col-md-5">
             <div className={style.qrCard}>
-              <h3>Modern Living in Jumeirah Village Circle</h3>
-              <Image
-                src={qrimage}
-                alt="QR Code"
-                width={180}
-                height={180}
-                style={{ margin: "0 auto" }}
-              />
-              <p>
-                The Fifth Tower offers elegant living space in a prime location,
-                combining modernity with convenience in the heart of Jumeirah
-                Village Circle.
-              </p>
-              <div className={style.qrButtons}>
-                <button className={style.downloadBtn}>Download Brochure</button>
-                <button className={style.enquireBtn}>Enquire now</button>
+              <div className={style.personalInfo}>
+                <Image
+                  src={
+                    offplanData.offplan.agent_image
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(
+                          offplanData.offplan.agent_image
+                        )}`
+                      : baseimage
+                  }
+                  alt={offplanData.offplan.agent_title}
+                  width={100}
+                  height={100}
+                />
+                <div className={style.consultantDetails}>
+                  <span className={style.consultantName}>
+                    {offplanData.offplan.agent_title}
+                  </span>
+                  <span className={style.languages}>
+                    Speaks: English, Spanish, Arabic, French
+                  </span>
+                  <span className={style.email}>example@gmail.com</span>
+                </div>
               </div>
+              <div className={style.contactButtons}>
+                <button
+                  className={style.contactBtnperson}
+                  onClick={() => {
+                    const formattedPhone = `+971${offplanData.offplan.agent_telephone.replace(
+                      /\D/g,
+                      ""
+                    )}`; // Example for UAE numbers
+                    window.location.href = `tel:${formattedPhone}`;
+                  }}
+                >
+                  Call
+                </button>
+                <button
+                  className={style.whatsappperson}
+                  onClick={() => {
+                    const formattedWhatsApp = `+971${offplanData.offplan.agent_whatsapp.replace(
+                      /\D/g,
+                      ""
+                    )}`; // Example for UAE numbers
+                    window.open(`https://wa.me/${formattedWhatsApp}`, "_blank");
+                  }}
+                >
+                  WhatsApp
+                </button>
+              </div>
+              <button className={style.sharelist}>Share this Listing</button>
+            </div>
+
+            <div className={style.qrCardmodern}>
+              <h3>{offplanData.offplan.qr_title}</h3>
+              <div className={style.qrbody}>
+                <Image
+                  src={
+                    offplanData.offplan.qr_photo
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(
+                          offplanData.offplan.qr_photo
+                        )}`
+                      : baseimage
+                  }
+                  alt="QR Code"
+                  width={180}
+                  height={180}
+                  style={{ margin: "0 auto" }}
+                />
+                <div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: offplanData.offplan.qr_text
+                    }}
+                  />
+                  <div className={style.qrButtons}>
+                    <button
+                      className={style.downloadBtn}
+                      onClick={() =>
+                        window.open(
+                          offplanData.offplan.download_brochure,
+                          "_blank"
+                        )
+                      }
+                    >
+                      Download Brochure
+                    </button>
+                    <button className={style.enquireBtn}>Enquire now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Add Contact Us button at the bottom */}
+            <div className={style.contactButton}>
+              <button className={style.contactBtn} onClick={openModal}>
+                Contact Us
+              </button>
+              {/* Modal */}
+              {isModalOpen && (
+                <div className={style.modalOverlay}>
+                  <div className={style.modalContent}>
+                    <button className={style.closeButton} onClick={closeModal}>
+                      &times; {/* Close icon (X) */}
+                    </button>
+                    <ContactForm />{" "}
+                    {/* Render the ContactForm inside the modal */}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
+        <div className={style.line}></div>
         <div className={style.buildingSection}>
           <div className="row">
             <div className="col-md-6">
               <Image
-                src={buildingImage}
+                src={
+                  offplanData.main_photo
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(offplanData.main_photo)}`
+                    : baseimage
+                }
                 alt="The Fifth Tower Building"
                 width={600}
                 height={400}
@@ -129,13 +232,7 @@ const OffplanShow = () => {
               <div className={style.featuresSection}>
                 <h3>Features</h3>
                 <ul className={style.featuresList}>
-                  {[
-                    "36-storey residential tower with 345 units",
-                    "Spacious studio units ranging from 380 to 624 square feet",
-                    "1-bedroom apartments sized from 844 to 1,375 square feet",
-                    "2-bedroom apartments measuring 1,112 to 1,113 square feet",
-                    "Strategic location with easy access to major Dubai attractions"
-                  ].map((feature, index) => (
+                  {features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
                 </ul>
@@ -143,18 +240,12 @@ const OffplanShow = () => {
 
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
-                <div className={style.amenitiesList}>
-                  <div className={style.amenityItem}>
-                    Community Swimming Pool
-                  </div>
-                  <div className={style.amenityItem}>Gymnasium</div>
-                  <div className={style.amenityItem}>Tennis Court</div>
-                  <div className={style.amenityItem}>Basketball Court</div>
-                  <div className={style.amenityItem}>Children's Area</div>
-                  <div className={style.amenityItem}>Supermarkets</div>
-                  <div className={style.amenityItem}>Restaurants</div>
-                  <div className={style.amenityItem}>Golf Club</div>
-                </div>
+                <div
+                  className={style.amenitiesList}
+                  dangerouslySetInnerHTML={{
+                    __html: offplanData.offplan.amenities
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -164,46 +255,137 @@ const OffplanShow = () => {
           <h3>Location</h3>
           <div className={style.mapWrapper}>
             <div className={style.mapContainer}>
-              <Map position={position} nearbyPlaces={nearbyPlaces} />
+              <Map address={offplanData.map_location} />
             </div>
             <button className={style.locationMapBtn}>Location Map</button>
           </div>
 
           <h4>Near by</h4>
           <div className={style.nearbyGrid}>
-            <div className={style.nearbyColumn}>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>Dubai Hills Mall</span>
-                <span className={style.placeDistance}>7m</span>
+            {nearbyPlaces.map((place, index) => (
+              <div key={index} className={style.nearbyColumn}>
+                <div className={style.nearbyPlace}>
+                  <span className={style.placeName}>{place.title}</span>
+                  <span className={style.placeDistance}>{place.distance}</span>
+                </div>
               </div>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>Dubai Autodrome</span>
-                <span className={style.placeDistance}>10m</span>
-              </div>
-            </div>
-            <div className={style.nearbyColumn}>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>Burj Khalifa</span>
-                <span className={style.placeDistance}>15m</span>
-              </div>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>The Dubai Mall</span>
-                <span className={style.placeDistance}>15m</span>
-              </div>
-            </div>
-            <div className={style.nearbyColumn}>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>Jumeirah Beach</span>
-                <span className={style.placeDistance}>20m</span>
-              </div>
-              <div className={style.nearbyPlace}>
-                <span className={style.placeName}>Dubai World Center</span>
-                <span className={style.placeDistance}>28m</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Exterior & Interior Section (Full Width) */}
+      <div className={style.exteriorInteriorSection}>
+        <div className={`container ${style.sectionHeader}`}>
+          <h3>{offplanData.offplan.map_location}</h3>
+          <div className={style.switcher}>
+            <button
+              className={`${style.switchButton} ${
+                showExterior ? style.active : ""
+              }`}
+              onClick={() => setShowExterior(true)}
+            >
+              Exterior
+            </button>
+            <button
+              className={`${style.switchButton} ${
+                !showExterior ? style.active : ""
+              }`}
+              onClick={() => setShowExterior(false)}
+            >
+              Interior
+            </button>
+          </div>
+        </div>
+
+        <div className={style.content}>
+          {showExterior ? (
+            <div className={style.exteriorSection}>
+              <div className="container">
+                <div className="row">
+                  {offplanData.offplan.exterior_gallery &&
+                    JSON.parse(offplanData.offplan.exterior_gallery).map(
+                      (image, index) => (
+                        <div key={index} className="col-md-3">
+                          <Image
+                            src={`${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(image)}`}
+                            alt="Exterior Image"
+                            width={300}
+                            height={200}
+                            className={style.exteriorimage} // Apply border-radius via CSS
+                          />
+                        </div>
+                      )
+                    )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className={style.interiorSection}>
+              <div className="container">
+                <div className="row">
+                  {offplanData.offplan.interior_gallery &&
+                    JSON.parse(offplanData.offplan.interior_gallery).map(
+                      (image, index) => (
+                        <div key={index} className="col-md-3">
+                          <Image
+                            src={`${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(image)}`}
+                            alt="Interior Image"
+                            width={300}
+                            height={200}
+                            className={style.exteriorimage}
+                          />
+                        </div>
+                      )
+                    )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      {/* other & properties Section 
+       ) */}
+      <div className="container">
+        <div className="row">
+          <span className={style.sectionTitle}>Other Properties</span>
+          {offplanData.lastAddedOffplans.map((property, index) => (
+            <div className="col-md-3" key={property.id}>
+              <div className={style.propertyCard}>
+                <div className={style.imageContainer}>
+                  <Image
+                    src={
+                      property.main_photo
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(property.main_photo)}`
+                        : baseimage
+                    }
+                    alt={property.title}
+                    width={300}
+                    height={200}
+                    className={style.sectionImage}
+                  />
+                  <div className={style.overlay}>
+                    <div className={style.propertyName}>{property.title}</div>
+                    <a
+                      href={`/offplan/${property.slug}`}
+                      className={style.arrowLink}
+                    >
+                      <span className={style.arrowIcon}>&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <SubscribeSection />
     </>
   );
 };

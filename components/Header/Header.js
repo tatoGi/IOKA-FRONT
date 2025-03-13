@@ -123,12 +123,12 @@ const Header = () => {
                 <ul>
                   <li
                     className={
-                      pathname === "/page-components/offplan"
+                      pathname === "/offplan"
                         ? "active-link"
                         : ""
                     }
                   >
-                    <Link href={"/page-components/offplan"}>OFFPLAN</Link>
+                    <Link href={"/offplan"}>OFFPLAN</Link>
                   </li>
                   <li className={pathname === "/resale" ? "active-link" : ""}>
                     <Link href={"/page-components/rental_resale"}>RESALE</Link>

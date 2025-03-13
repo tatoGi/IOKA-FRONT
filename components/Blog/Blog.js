@@ -59,6 +59,7 @@ const Blog = ({ initialData }) => {
     return decodeURIComponent(url);
   };
 
+
   return (
     <div className="container mt-3">
       <div className={`${styles.title}`}>

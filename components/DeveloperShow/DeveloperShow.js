@@ -27,7 +27,15 @@ import SearchSection from "../SearchSection/SearchSection";
  * - Property listings (Off-plan and Resale)
  * - Awards section
  */
-const DeveloperShow = () => {
+const DeveloperShow = (developerData) => {
+  const photos = developerData.developerData.photo
+    ? JSON.parse(developerData.developerData.photo)
+    : [];
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+  // Get the first photo (if available)
+  const firstPhoto = photos.length > 0 ? photos[0] : null;
   // State for managing different sliders
   const [currentSlide, setCurrentSlide] = useState(0); // Controls off-plan properties slider
   const [resaleCurrentSlide, setResaleCurrentSlide] = useState(0); // Controls resale properties slider
@@ -246,42 +254,38 @@ const DeveloperShow = () => {
 
   return (
     <div className={styles.developerShowSection}>
-      <SearchSection />
+      <div className="container-fluid">
+        <SearchSection />
+      </div>
+
       {/* Hero Section */}
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.developerInfo}>
-            <h2>About Developer</h2>
-            <p>
-              Mohamed Alabbar founded and still chairs Emaar Properties, with
-              Amit Jain as the CEO since 2016. The Dubai government owned Emaar
-              Properties until it went public in 2000. Emaar has six business
-              segments and 60 subsidiaries spread across 36 markets worldwide,
-              such as Emaar Malls Group (shopping malls and retail), Emaar
-              International (property development in international markets),
-              Emaar Hospitality Group (a global provider of lifestyle
-              experiences), Emaar Entertainment (provider of premium leisure and
-              entertainment attractions), and Emaar Investment Holding.
-            </p>
-            <p>
-              Downtown Dubai is one of the most popular freehold zones in Dubai
-              amongst tenants and investors. Downtown Dubai not only has
-              world-renowned attractions like the Burj Khalifa and the Dubai
-              Fountain, but also a wide variety of freehold apartments. For
-              example, Emaar properties for sale in Dubai, such as an apartment
-              in Downtown Dubai may cost from AED 900,000, while one in Emaar IL
-              Primo starts at AED 21 million.
-            </p>
+            <h2>{developerData.developerData.title} </h2>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: developerData.developerData.paragraph
+              }}
+            />
           </div>
           <div className={styles.developerLogo}>
-            <Image
-              src={EmaarLogo}
-              alt="Emaar Logo"
-              width={300}
-              height={150}
-              priority={true}
-              quality={100}
-            />
+            {firstPhoto && (
+              <Image
+                src={
+                  firstPhoto.file
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(firstPhoto.file)}`
+                    : EmaarLogo
+                }
+                alt={firstPhoto.alt}
+                width={300}
+                height={150}
+                priority={true}
+                quality={100}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -581,14 +585,36 @@ const DeveloperShow = () => {
                   />
                 </div>
               </div>
+              {console.log(developerData.developerData.awards)}
               <div className={styles.awardRight}>
                 <div className={styles.awardContent}>
-                  <h4 className={styles.awardTitle}>Emaar Broker Awards</h4>
-                  <p className={styles.awardSubtitle}>H1 2024</p>
+                  <h4 className={styles.awardTitle}>
+                    {developerData.developerData.awards[0].award_title}
+                  </h4>
+                
+                    <div
+                     className={styles.awardSubtitle}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          developerData.developerData.awards[0]
+                            .award_description
+                      }}
+                    />{" "}
+                  
                 </div>
                 <div className={styles.awardIconWrapper}>
                   <Image
-                    src={awardsicon}
+                    src={
+                      developerData.awards &&
+                      developerData.awards.length > 0 &&
+                      developerData.awards[0].award_photo
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(
+                            developerData.awards[0].award_photo
+                          )}`
+                        : EmaarLogo
+                    }
                     alt="Award Trophy"
                     width={156}
                     height={108}
@@ -596,7 +622,9 @@ const DeveloperShow = () => {
                   />
                 </div>
                 <div className={styles.awardBottom}>
-                  <span className={styles.awardYear}>2024</span>
+                  <span className={styles.awardYear}>
+                    {developerData.developerData.awards[0].award_year}
+                  </span>
                   <button className={styles.viewAwardBtn}>View Awards</button>
                 </div>
               </div>
