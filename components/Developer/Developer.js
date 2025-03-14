@@ -42,7 +42,12 @@ const Developer = ({ initialData, initialPagination }) => {
       fetchData(page); // Fetch data for the new page
     }
   };
-
+  const limitTextLength = (text, maxLength) => {
+    const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
+    return strippedText.length > maxLength
+      ? strippedText.substring(0, maxLength) + "..."
+      : strippedText;
+  };
   // Fetch data when the component mounts (if no initialData is provided)
   useEffect(() => {
     if (!initialData) {
@@ -169,7 +174,7 @@ const Developer = ({ initialData, initialPagination }) => {
                 <div className="col-md-6 d-flex flex-column p-3">
                   <h2 className={`h4 ${styles.title}`}>{card.title}</h2>
                   <div className={`flex-grow-1 ${styles.description}`}>
-                    <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+                    <p>{limitTextLength(card.paragraph, 108)}</p>
                   </div>
                   <div className="mt-3">
                     <h3 className={`h6 ${styles.communities}`}>Top Communities</h3>
