@@ -227,9 +227,7 @@ border-radius: 4px;
 .nextButton {
   padding: 8px 12px;
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
   color: #333;
-  background-color: #fff;
   font-size: 14px;
   font-weight: 500;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
@@ -245,19 +243,19 @@ border-radius: 4px;
   height: 48px;
   left: 50px;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .nextButtonimage{
   width: 48px;
   height: 48px;
   left: 50px;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .prevButton:disabled,
 .nextButton:disabled {
-  background-color: #f8f9fa;
   color: #ccc;
-  border-color: #e0e0e0;
   cursor: not-allowed;
 }
 /* Responsive Styles */

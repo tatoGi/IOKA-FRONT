@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import SearchSection from "../SearchSection/SearchSection";
 import Image from "next/image";
 import styles from "./Offplan.module.css";
@@ -19,6 +18,7 @@ const montserrat = Montserrat({
 });
 
 const Offplan = ({ initialData, initialPagination }) => {
+
   const [cardData, setCardData] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(initialPagination?.current_page || 1);
   const [totalPages, setTotalPages] = useState(initialPagination?.last_page || 1);
@@ -54,10 +54,10 @@ const Offplan = ({ initialData, initialPagination }) => {
 
   // Fetch data when the component mounts (if no initialData is provided)
   useEffect(() => {
-    if (!initialData) {
-      fetchData(currentPage);
+    if (!initialData.length && !isLoading) {
+        fetchData(currentPage);
     }
-  }, [currentPage, initialData]);
+}, []);
 
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
@@ -74,6 +74,7 @@ const Offplan = ({ initialData, initialPagination }) => {
         <LoadingWrapper isLoading={isLoading}>
           <div className={styles.propertyGrid}>
             {cardData.map((property) => (
+              
               <div
                 key={property.id}
                 className={styles.propertyCardLink}

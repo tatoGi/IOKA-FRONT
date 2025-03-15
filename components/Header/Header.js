@@ -1,7 +1,3 @@
-// For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended.
-// Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
-// Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
-
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -11,30 +7,31 @@ import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
 
-const Header = () => {
+const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/" || pathname === "/#";
+  const isHomePage = pathname === "/" || pathname === "/#"; // Check if it's the home page
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
-  console.log(inputValue);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setInputValue(value); // Converts input into an array of letters
+    setInputValue(value);
   };
+
   const handleSearch = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     if (inputValue.trim() !== "") {
       console.log("Searching for:", inputValue);
     }
   };
+
   const handleClear = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setInputValue(""); // Clear the input value
+    e.preventDefault();
+    setInputValue("");
     if (inputRef.current) {
-      inputRef.current.focus(); // Focus back on the input field
+      inputRef.current.focus();
     }
   };
 
@@ -53,7 +50,6 @@ const Header = () => {
       }
     }
 
-    // Set initial state
     if (!isHomePage) {
       setActiveScroll(true);
     }
@@ -62,11 +58,9 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-  // Update the getBreadcrumbTitle function to handle page-components paths
   const getBreadcrumbTitle = (path) => {
     if (!path) return "";
     const segments = path.split("/");
-    // Handle page-components paths
     if (segments.includes("page-components")) {
       const lastSegment = segments[segments.length - 1];
       switch (lastSegment) {
@@ -83,7 +77,6 @@ const Header = () => {
             .join(" ");
       }
     }
-    // Handle other paths
     const lastSegment = segments[segments.length - 1];
     switch (lastSegment) {
       case "offplan":
@@ -102,11 +95,18 @@ const Header = () => {
     }
   };
 
+  // Filter out the "Contact" page (type_id: 3) and sort the remaining pages by the "sort" column
+  const filteredAndSortedPages = navigationData
+    .filter((page) => page.type_id !== 3 && page.active === 1) // Exclude contact page and inactive pages
+    .sort((a, b) => a.sort - b.sort); // Sort by the "sort" column
+
+  // Find the current page based on the pathname
+  const currentPage = navigationData.find((page) => `/${page.slug}` === pathname);
+
   return (
     <>
       <header className={activeScroll ? "scroll-header" : ""}>
         <div className="header-cont">
-          {/* home-header  classNme after check*/}
           <div className="container">
             <div className="header-box">
               <div className="left-cont-image">
@@ -121,40 +121,14 @@ const Header = () => {
               </div>
               <div className="header-nav">
                 <ul>
-                  <li
-                    className={
-                      pathname === "/offplan"
-                        ? "active-link"
-                        : ""
-                    }
-                  >
-                    <Link href={"/offplan"}>OFFPLAN</Link>
-                  </li>
-                  <li className={pathname === "/resale" ? "active-link" : ""}>
-                    <Link href={"/page-components/rental_resale"}>RESALE</Link>
-                  </li>
-                  <li className={pathname === "/rentals" ? "active-link" : ""}>
-                    <Link href={"/page-components/rental_resale"}>RENTALS</Link>
-                  </li>
-                  <li
-                    className={
-                      pathname === "/page-components/developer"
-                        ? "active-link"
-                        : ""
-                    }
-                  >
-                    <Link href={"/developer"}>DEVELOPERS</Link>
-                  </li>
-                  <li className={pathname === "/blog" ? "active-link" : ""}>
-                    <Link href={"/blog"}>BLOG</Link>
-                  </li>
-                  <li
-                    className={
-                      pathname === "/page-components/about" ? "active-link" : ""
-                    }
-                  >
-                    <Link href={"/page-components/about"}>ABOUT US</Link>
-                  </li>
+                  {filteredAndSortedPages.map((page) => (
+                    <li
+                      key={page.id}
+                      className={pathname === `/${page.slug}` ? "active-link" : ""}
+                    >
+                      <Link href={`/${page.slug}`}>{page.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="right-search-contact">
@@ -175,7 +149,8 @@ const Header = () => {
                   </form>
                 </div>
                 <div className="contactBtn">
-                  <Link href={"/page-components/contact"}>CONTACT US</Link>
+                  {/* Link to the contact page (type_id: 3) */}
+                  <Link href={"/contact"}>CONTACT US</Link>
                 </div>
               </div>
               <div className="mobile-burger-menu">
@@ -185,7 +160,8 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {!isHomePage && (
+      {/* Conditionally render the breadcrumb only if it's not the home page */}
+      {currentPage && currentPage.type_id !== 1 && (
         <div className="breadcrumb-section">
           <div className="container">
             <div className="breadcrumb-content">

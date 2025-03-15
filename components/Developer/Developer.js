@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight, FaPhone, FaWhatsapp, FaSearch } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPhone,
+  FaWhatsapp,
+  FaSearch
+} from "react-icons/fa";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { DEVELOPER_API } from "@/routes/apiRoutes";
@@ -11,8 +17,12 @@ import { LoadingWrapper } from "../LoadingWrapper/index"; // Import LoadingWrapp
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
   const [filteredData, setFilteredData] = useState(initialData || []);
-   const [currentPage, setCurrentPage] = useState(initialPagination?.current_page || 1);
-    const [totalPages, setTotalPages] = useState(initialPagination?.last_page || 1);
+  const [currentPage, setCurrentPage] = useState(
+    initialPagination?.current_page || 1
+  );
+  const [totalPages, setTotalPages] = useState(
+    initialPagination?.last_page || 1
+  );
   const [imageIndexes, setImageIndexes] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Add loading state
@@ -67,8 +77,6 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   }, [searchQuery, cardData]);
 
- 
-
   // Handle "Read More" button click
   const handleReadMore = (slug) => {
     router.push(`/developer/${slug}`);
@@ -80,7 +88,9 @@ const Developer = ({ initialData, initialPagination }) => {
       const parsed = JSON.parse(photoJson);
       if (Array.isArray(parsed) && parsed.length > 0) {
         const currentIndex = imageIndexes[cardId] || 0;
-        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(parsed[currentIndex].file)}`;
+        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(
+          parsed[currentIndex].file
+        )}`;
       }
       return defaultImage;
     } catch (e) {
@@ -95,7 +105,7 @@ const Developer = ({ initialData, initialPagination }) => {
       if (Array.isArray(parsed)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) + 1) % parsed.length,
+          [cardId]: ((prev[cardId] || 0) + 1) % parsed.length
         }));
       }
     } catch (e) {
@@ -110,7 +120,7 @@ const Developer = ({ initialData, initialPagination }) => {
       if (Array.isArray(parsed)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) - 1 + parsed.length) % parsed.length,
+          [cardId]: ((prev[cardId] || 0) - 1 + parsed.length) % parsed.length
         }));
       }
     } catch (e) {
@@ -156,13 +166,13 @@ const Developer = ({ initialData, initialPagination }) => {
                     <div className="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3">
                       <button
                         onClick={() => handlePrevImage(card.id, card.photo)}
-                        className={`btn btn-light rounded-circle ${styles.prevButtonimage}`}
+                        className={`btn  rounded-circle ${styles.prevButtonimage}`}
                       >
                         <FaChevronLeft />
                       </button>
                       <button
                         onClick={() => handleNextImage(card.id, card.photo)}
-                        className={`btn btn-light rounded-circle ${styles.nextButtonimage}`}
+                        className={`btn  rounded-circle ${styles.nextButtonimage}`}
                       >
                         <FaChevronRight />
                       </button>
@@ -177,24 +187,44 @@ const Developer = ({ initialData, initialPagination }) => {
                     <p>{limitTextLength(card.paragraph, 108)}</p>
                   </div>
                   <div className="mt-3">
-                    <h3 className={`h6 ${styles.communities}`}>Top Communities</h3>
+                    <h3 className={`h6 ${styles.communities}`}>
+                      Top Communities
+                    </h3>
                     <div className="d-flex flex-wrap gap-2">
                       {JSON.parse(card.tags).map((tag, index) => (
-                        <span key={index} className={`bg-light text-dark border ${styles.badge}`}>
+                        <span
+                          key={index}
+                          className={`bg-light text-dark border ${styles.badge}`}
+                        >
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="d-flex gap-2 mt-3 align-items-center">
-                    <button className={`btn btn-primary d-flex align-items-center gap-2 ${styles.call}`}>
+                    {/* Call Button */}
+                    <button
+                      className={`btn btn-primary d-flex align-items-center gap-2 ${styles.call}`}
+                      onClick={() =>
+                        (window.location.href = `tel:${card.phone}`)
+                      } // Open phone link
+                    >
                       <FaPhone />
                       <span>Call</span>
                     </button>
-                    <button className={`btn btn-success d-flex align-items-center gap-2 ${styles.whatsapp}`}>
+
+                    {/* WhatsApp Button */}
+                    <button
+                      className={`btn btn-success d-flex align-items-center gap-2 ${styles.whatsapp}`}
+                      onClick={() =>
+                        window.open(`https://wa.me/${card.whatsapp}`, "_blank")
+                      } // Open WhatsApp link in new tab
+                    >
                       <FaWhatsapp />
                       <span>WhatsApp</span>
                     </button>
+
+                    {/* See More Button */}
                     <button
                       className={styles.readMore}
                       onClick={() => handleReadMore(card.slug)}
@@ -210,7 +240,9 @@ const Developer = ({ initialData, initialPagination }) => {
       </div>
 
       {/* Pagination */}
-      <div className={`d-flex justify-content-center mt-4 ${styles.pagination}`}>
+      <div
+        className={`d-flex justify-content-center mt-4 ${styles.pagination}`}
+      >
         {/* Previous Button */}
         <button
           className={`btn btn-outline-primary me-2 ${styles.prevButton}`}

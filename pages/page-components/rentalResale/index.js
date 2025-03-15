@@ -1,7 +1,8 @@
 import React from "react";
 import Rental_Resale_List from "@/components/content/rental_resale/list";
 
-const Rental_Resale = () => {
+const RentalResale = () => {
+  
   return (
     <div>
       <Rental_Resale_List />
@@ -9,4 +10,4 @@ const Rental_Resale = () => {
   );
 };
 
-export default Rental_Resale;
+export default RentalResale;

@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import styles from "./DeveloperShow.module.css";
 import Image from "next/image";
 import EmaarLogo from "../../assets/img/Shape.png";
-import DeveloperImage from "../../assets/img/developerimg.png";
 import AreaVector from "../../assets/img/areavector.png";
 import BathroomIcon from "../../assets/img/bathroom.png";
 import BedroomIcon from "../../assets/img/Vector2.png";
@@ -13,7 +12,6 @@ import agentInfo from "../../assets/img/agentinfo.png";
 import callVector from "../../assets/img/callvector.png";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import awardimg1 from "../../assets/img/awardimg1.png";
-import awardsicon from "../../assets/img/awardsicon.png";
 import Slider from "react-slick";
 import SearchSection from "../SearchSection/SearchSection";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct

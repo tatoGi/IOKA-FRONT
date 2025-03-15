@@ -9,59 +9,30 @@ import Footer from "@/components/Footer/Footer";
 import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { useEffect, useState } from "react";
 
 function App({ Component, pageProps }) {
-  // const [metaTitle, setMetaTitle] = useState("");
+  const [navigationData, setNavigationData] = useState([]);
 
-  // let headerMenu;
-  // let footerMenu;
-  // let homeSLug;
-  // let upperFooterMenu;
+  useEffect(() => {
+    // Fetch navigation data from the API
+    const fetchNavigationData = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+        const data = await res.json();
+        setNavigationData(data.pages);
+      } catch (error) {
+        console.error("Error fetching navigation data:", error);
+      }
+    };
 
-  // if (!pageProps.menu) {
-  //   return null;
-  // }
+    fetchNavigationData();
+  }, []);
 
-  // upperFooterMenu = pageProps.menu.filter((x) =>
-  //   x.menu_types.includes("Upper Header")
-  // );
-  // headerMenu = pageProps.menu.filter((x) => x.menu_types.includes("header"));
-  // footerMenu = pageProps.menu.filter((x) => x.menu_types.includes("footer"));
-  // homeSLug = pageProps.menu.filter((item) => item.type_id === 1);
-
-  // const image = useMemo(() => {
-  //   let file = false;
-  //   if (pageProps.page?.sluggable) {
-  //     if(pageProps?.page?.sluggable?.gallery && pageProps?.page?.sluggable?.gallery[0]?.file){
-  //        file = pageProps?.page?.sluggable?.gallery[0]?.file
-  //     }else if(pageProps?.page?.sluggable?.image && pageProps?.page?.sluggable?.image?.file){
-  //       file = pageProps?.page?.sluggable?.image?.file;
-  //     }else  if(pageProps?.page?.sluggable?.section_cover?.file){
-  //       file = pageProps?.page?.sluggable?.section_cover?.file;
-  //     }
-  //       // .sort((a, b) => a.sort - b.sort)[0]?.file;
-
-  //     return  file === false ? '/img/logo2.png' : `${process.env.NEXT_PUBLIC_IMAGE_URL}${file}`;
-  //   }
-  // }, [pageProps.page]);
-
-  // useEffect(() => {
-  //   if (pageProps.page && !pageProps.page.slugs) {
-  //      setMetaTitle(pageProps.page[locale]?.sluggable?.title);
-  //     const slugArray = Object.values(pageProps.page).map(localeData => {
-  //       return {
-  //         locale: localeData.slugs[0].locale,
-  //         slug: localeData.slugs[0].slug
-  //       };
-  //     });
-  //     setStaticPageLang(slugArray);
-  //   }
-  // }, [pageProps.page]);
   return (
     <>
       <Meta />
-      <Header />
+      <Header navigationData={navigationData} />
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -69,4 +40,5 @@ function App({ Component, pageProps }) {
     </>
   );
 }
+
 export default App;

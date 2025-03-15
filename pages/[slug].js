@@ -1,0 +1,88 @@
+import React from "react";
+import { useRouter } from "next/router";
+import Home from "@/pages/page-components/home"; // Import the Home component
+import Developer from "@/components/Developer/Developer"; // Import the Developer component
+import About from "@/pages/page-components/about"; // Import the About component
+import Contact from "@/pages/page-components/contact"; // Import the Contact component
+import OffPlan from "@/pages/page-components/offplan";
+import Rental_Resale from "@/pages/page-components/rentalResale";
+
+const DynamicPage = ({ pageData }) => {
+  const router = useRouter();
+
+  // If the page is not yet generated, show a loading state
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  // Render the appropriate component based on the page's type_id
+  const renderPage = () => {
+    switch (pageData.type_id) {
+      case 1: // Home Page
+        return <Home />;
+      case 2: // About Page
+        return <About />;
+      case 3: // Contact Page
+        return <Contact />;
+        case 5: // Rental_rase Page
+        return <Rental_Resale />;
+        case 4: // Off-Plan Page
+        return <OffPlan />;
+      case 7: // Developer Page
+        return <Developer />;
+      default:
+        return (
+          <div>
+            <h1>{pageData.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: pageData.desc }} />
+          </div>
+        );
+    }
+  };
+
+  return <>{renderPage()}</>;
+};
+
+export default DynamicPage;
+
+// Fetch all possible paths for dynamic pages
+export async function getStaticPaths() {
+  // Fetch the list of pages from your API
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+  const data = await res.json();
+  const pages = data.pages;
+
+  // Generate paths for each page
+  const paths = pages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+
+  return {
+    paths,
+    fallback: true, // Enable fallback for pages not generated at build time
+  };
+}
+
+// Fetch page data for a specific slug
+export async function getStaticProps({ params }) {
+  const { slug } = params;
+
+  // Fetch the page data for the given slug
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+  const data = await res.json();
+  const pageData = data.pages.find((page) => page.slug === slug);
+
+  // If no page is found, return a 404
+  if (!pageData) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      pageData,
+    },
+    revalidate: 10, // Revalidate the page every 10 seconds (optional)
+  };
+}
