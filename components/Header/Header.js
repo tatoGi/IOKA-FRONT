@@ -10,7 +10,8 @@ import { usePathname } from "next/navigation";
 const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/" || pathname === "/#"; // Check if it's the home page
+  const normalizedPathname = pathname.replace(/\/$/, ""); // Normalize pathname
+  const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#"; // Check if it's the home page
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -58,9 +59,19 @@ const Header = ({ navigationData }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
+  // Filter out the "Contact" page (type_id: 3) and sort the remaining pages by the "sort" column
+  const filteredAndSortedPages = navigationData
+    .filter((page) => page.type_id !== 3 && page.active === 1) // Exclude contact page and inactive pages
+    .sort((a, b) => a.sort - b.sort); // Sort by the "sort" column
+
+  // Find the current page based on the pathname
+  const currentPage = navigationData.find((page) =>
+    normalizedPathname.startsWith(`/${page.slug}`)
+  );
   const getBreadcrumbTitle = (path) => {
     if (!path) return "";
     const segments = path.split("/");
+    // Handle page-components paths
     if (segments.includes("page-components")) {
       const lastSegment = segments[segments.length - 1];
       switch (lastSegment) {
@@ -77,6 +88,7 @@ const Header = ({ navigationData }) => {
             .join(" ");
       }
     }
+    // Handle other paths
     const lastSegment = segments[segments.length - 1];
     switch (lastSegment) {
       case "offplan":
@@ -95,13 +107,22 @@ const Header = ({ navigationData }) => {
     }
   };
 
-  // Filter out the "Contact" page (type_id: 3) and sort the remaining pages by the "sort" column
-  const filteredAndSortedPages = navigationData
-    .filter((page) => page.type_id !== 3 && page.active === 1) // Exclude contact page and inactive pages
-    .sort((a, b) => a.sort - b.sort); // Sort by the "sort" column
+  // Function to get breadcrumb path
+  const getBreadcrumbPath = (path) => {
+    const segments = path.split("/").filter((segment) => segment !== ""); // Split path into segments
+    const breadcrumb = [];
+    let currentPath = "";
 
-  // Find the current page based on the pathname
-  const currentPage = navigationData.find((page) => `/${page.slug}` === pathname);
+    segments.forEach((segment) => {
+      currentPath += `/${segment}`;
+      const page = navigationData.find((page) => `/${page.slug}` === currentPath);
+      if (page) {
+        breadcrumb.push({ title: page.title, path: currentPath });
+      }
+    });
+
+    return breadcrumb;
+  };
 
   return (
     <>
@@ -124,7 +145,9 @@ const Header = ({ navigationData }) => {
                   {filteredAndSortedPages.map((page) => (
                     <li
                       key={page.id}
-                      className={pathname === `/${page.slug}` ? "active-link" : ""}
+                      className={
+                        normalizedPathname === `/${page.slug}` ? "active-link" : ""
+                      }
                     >
                       <Link href={`/${page.slug}`}>{page.title}</Link>
                     </li>
@@ -161,7 +184,7 @@ const Header = ({ navigationData }) => {
         </div>
       </header>
       {/* Conditionally render the breadcrumb only if it's not the home page */}
-      {currentPage && currentPage.type_id !== 1 && (
+      {!isHomePage && (
         <div className="breadcrumb-section">
           <div className="container">
             <div className="breadcrumb-content">

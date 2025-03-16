@@ -1,0 +1,567 @@
+.gallery {
+    display: flex;
+    gap: 10px;
+    /* Adjust gap between main and small images */
+    width: 100%;
+    /* Ensure gallery takes full width of its container */
+    margin-top: 12px;
+}
+
+/* Main Image */
+.mainImage {
+    flex: 2;
+    /* Main image takes 2 parts */
+    position: relative;
+    /* For potential overlay or adjustments */
+    max-width: 768px;
+    -height: 568px;
+    border-radius: 16px;
+
+}
+
+.mainImage img {
+    width: 100%;
+    height: 100%;
+    /* Maintain aspect ratio */
+    display: block;
+    /* Remove extra space below image */
+    border-radius: 10px;
+    /* Rounded corners */
+    object-fit: cover;
+    /* Ensure image covers the area */
+}
+
+/* Small Images Grid (Right Side) */
+.smallImagesGrid {
+    flex: 1;
+    /* Small images take 1 part */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns */
+    gap: 10px;
+    /* Gap between images */
+    position: relative;
+    /* For the "+ More" overlay */
+}
+
+.smallImage {
+    position: relative;
+    overflow: hidden;
+    /* Clip images to rounded corners */
+    width: 372px;
+    height: 272px;
+    border-radius: 16px;
+
+}
+
+.smallImage img {
+    width: 100%;
+    height: 100%;
+    /* Fill the grid cell */
+    object-fit: cover;
+    /* Cover the cell */
+    display: block;
+    /* Remove extra space below image */
+    border-radius: 10px;
+    /* Rounded corners */
+    transition: transform 0.3s ease;
+    /* Smooth hover effect */
+}
+
+.smallImage img:hover {
+    transform: scale(1.05);
+    /* Slight zoom on hover */
+}
+
+/* "+ More" Overlay */
+.moreOverlay {
+    position: absolute;
+    top: 26%;
+    left: 23%;
+    width: 90%;
+    height: 70%;
+    /* background  : rgba(0, 0, 0, 0.5); */
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Adjustments for container */
+.container {
+    max-width: 1200px;
+    /* Or your desired max width */
+    margin: 20px auto;
+    /* Center the container */
+    padding: 0 20px;
+    /* Add some padding on sides */
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    width: 800px;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+}
+
+.modalContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    z-index: 1001;
+}
+
+.closeButton:hover {
+    color: #000;
+}
+
+.modalImages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.modalImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.modalImage:hover {
+    transform: scale(1.05);
+}
+
+/* Affordable Div Styles */
+.affordable {
+    margin-top: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #0A273B;
+}
+
+.title {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-bottom: 14px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.features {
+    display: flex;
+    gap: 24px;
+    color: #07151F;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0A273B;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.feature img {
+    color: #07151F !important;
+}
+
+.prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.price {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.currency {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+}
+
+.amount {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+}
+
+.amenities {
+    font-size: 20px;
+    color: #0A273B;
+    font-family: 'montserrat', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 57px;
+}
+
+.location {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+.description {
+    margin-top: 20px;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .descriptionText {
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+    font-size: 16px;
+    color: #0A273B;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+.description h1 {
+    margin-top: 56px;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+}
+
+.body {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 16px;
+
+}
+.sharediv {
+    align-items: center;
+    width: 456px;
+    height: auto;
+    border: 1px solid #07151F;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 32px;
+  }
+  
+  .name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0A273B;
+    margin-bottom: 8px;
+  }
+  
+  .role {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A273B;
+    margin-bottom: 8px;
+  }
+  
+  .languages {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A273B;
+    margin-bottom: 8px;
+  }
+  
+  .email {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A273B;
+    margin-bottom: 16px;
+  }
+  
+  .contactButtons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .contactBtnperson, .whatsappperson {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 32px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+    width: 188px;
+  }
+  
+  .contactBtnperson {
+    background-color: #0A273B;
+    border: 1px solid #0A273B;
+    color: white;
+  }
+  
+  .whatsappperson {
+    background-color: #0A273B;
+    border: 1px solid #E5E7EB;
+    color: white;
+  }
+  
+  .shareButton {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 32px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    border: 1px solid #0A273B;
+    color: #0A273B;
+    text-align: center;
+  }
+  
+  .sidevabarlocation, .sidebarqr {
+    width: 456px;
+    height: auto;
+    border: 1px solid #07151F;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 32px;
+  }
+  
+  .sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0A273B;
+    margin-bottom: 16px;
+  }
+  
+  .mapPlaceholder {
+    width: 100%;
+    height: 150px;
+    background-color: #E5E7EB;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6B7280;
+    font-size: 14px;
+  }
+  
+  .regulatoryInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A273B;
+  }
+  .details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #E6EBED;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 36px;
+  }
+  
+  .details h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0A273B;
+    margin-bottom: 16px;
+  }
+  
+  .details_line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #07151F;
+    margin-bottom: 16px;
+  }
+  
+  .detailsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #07151F;
+  }
+  
+  .detailLabel {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0A273B;
+  }
+  
+  .detailValue {
+    font-size: 18px;
+    font-weight: 400;
+    color: #0A273B;
+  }
+  .contactButton{
+    width: 456px;
+
+  }
+  .contactButton button{
+    border-radius: 20px;
+    border: 2px solid #07151F;
+    width: 100%;  
+    color: #FFFFFF;   
+    background-color: #07151F;
+    font-size: 16px;
+    height: 44px;
+    }
+    .amenities_section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .amenities_section h4 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #0A273B;
+        margin-bottom: 16px;
+      }
+      
+      .amenitiesGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      
+      .amenityItem {
+        padding: 12px;
+        background-color: #ffffff;
+        border: 1px solid #E5E7EB;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0A273B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .gallery {
+        flex-direction: column;
+    }
+
+    .smallImagesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .moreOverlay {
+        font-size: 1rem;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .details {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .location {
+        font-size: 12px;
+    }
+
+    .modal {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .modalImages {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .modalImage {
+        height: 150px;
+    }
+}

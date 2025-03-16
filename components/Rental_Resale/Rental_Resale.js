@@ -10,6 +10,7 @@ import agentifno from "../../assets/img/agentinfo.png";
 import { useRouter } from "next/router";
 import { RENTAL_RESALE } from "@/routes/apiRoutes";
 import axios from "axios";
+import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const Rental_Resale = () => {
   const [cardData, setCardData] = useState([]);
@@ -17,8 +18,8 @@ const Rental_Resale = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Fetch data function
   const fetchData = async (page) => {
     setIsLoading(true);
     try {
@@ -34,32 +35,53 @@ const Rental_Resale = () => {
     }
   };
 
-  // Fetch data on component mount
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
 
-  // Handle "Read More" click
   const handleReadMore = (slug) => {
-    router.push(`/rental_resale/${slug}`);
+    router.push(`/rental/${slug}`);
   };
 
-  // Handle page change
   const handlePageChange = (page) => {
     if (page !== currentPage) {
       setCurrentPage(page);
     }
   };
 
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+
+  const topProperties = cardData.filter((property) => property.top === 1);
+
   return (
     <div className="container mt-3">
-      <div className={Styles.title_top}><span>Top Listings</span></div>
+      <div className={Styles.title_top}>
+        <span>Top Listings</span>
+      </div>
 
-      {/* Display Top Properties */}
-      <div className={Styles.propertyGrid}>
-        {cardData
-          .filter((property) => property.top === 1) // Filter top properties
-          .map((property) => (
+      <div className={Styles.sliderWrapper}>
+        <button
+          className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
+          onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
+          disabled={currentSlide === 0}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="#666666"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        <div
+          className={Styles.propertyGrid}
+          style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
+        >
+          {topProperties.map((property) => (
             <div
               key={property.id}
               className={Styles.propertyCardLink}
@@ -69,7 +91,16 @@ const Rental_Resale = () => {
               <div className={Styles.propertyCard}>
                 <div className={Styles.imageContainer}>
                   <Image
-                    src={property.main_photo || defaultImage}
+                    src={
+                      property.gallery_images &&
+                      JSON.parse(property.gallery_images)[0]
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(
+                            JSON.parse(property.gallery_images)[0]
+                          )}`
+                        : defaultImage
+                    }
                     alt={property.title || "Default Property Image"}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -80,9 +111,7 @@ const Rental_Resale = () => {
                   {property.exclusive && (
                     <span className={Styles.exclusive}>Exclusive</span>
                   )}
-                  {property.top && (
-                    <span className={Styles.topBadge}>Top</span>
-                  )}
+                  {property.top && <span className={Styles.topBadge}>Top</span>}
                 </div>
 
                 <div className={Styles.propertyInfo}>
@@ -129,9 +158,10 @@ const Rental_Resale = () => {
                   </div>
 
                   <div className={Styles.priceRow}>
-                    {/* Fallback to 0 if amount_dirhams or amount is undefined */}
                     <span className={Styles.price}>
-                      AED {property.amount.amount_dirhams?.toLocaleString() || "N/A"}
+                      AED{" "}
+                      {property.amount.amount_dirhams?.toLocaleString() ||
+                        "N/A"}
                     </span>
                     <span className={Styles.price}>
                       USD {property.amount.amount?.toLocaleString() || "N/A"}
@@ -146,11 +176,30 @@ const Rental_Resale = () => {
               </div>
             </div>
           ))}
+        </div>
+        <button
+          className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
+          onClick={() =>
+            setCurrentSlide((prev) =>
+              prev + 1 >= topProperties.length - 2 ? prev : prev + 1
+            )
+          }
+          disabled={currentSlide >= topProperties.length - 2}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 18L15 12L9 6"
+              stroke="#666666"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
       </div>
 
       <SearchSection />
 
-      {/* Display Resale Listings */}
       <div className={Styles.resaleSection}>
         <div className={Styles.resaleHeader}>
           <div className={Styles.resaleTitle}>
@@ -159,24 +208,67 @@ const Rental_Resale = () => {
           </div>
         </div>
 
-        <div className={Styles.resaleSlider}>
-          <div className={Styles.resaleCards}>
-            {cardData.map((listing) => (
-              <div key={listing.id} className={Styles.resaleCard}>
-                <div className={Styles.resaleImage}>
-                  <Image
-                    src={listing.main_photo || defaultImage}
-                    alt={listing.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+        <div className={Styles.resaleList}>
+          {cardData.map((listing) => {
+            const galleryImages = JSON.parse(listing.gallery_images || "[]");
+
+            return (
+              <div
+                key={listing.id}
+                className={Styles.resaleCard}
+                onClick={() => handleReadMore(listing.slug)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className={Styles.resaleImageContainer}>
+                  <div className={Styles.largeImage}>
+                    <Image
+                      src={
+                        galleryImages[0]
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(galleryImages[0])}`
+                          : defaultImage
+                      }
+                      alt={listing.title}
+                      style={{ objectFit: "cover" }}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
+                    />
+                  </div>
+                  <div className={Styles.smallImagesGrid}>
+                    {galleryImages.slice(1, 3).map((image, index) => (
+                      <div key={index} className={Styles.smallImage}>
+                        <Image
+                          src={
+                            image
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(image)}`
+                              : defaultImage
+                          }
+                          alt={`Gallery Image ${index + 1}`}
+                          style={{ objectFit: "cover" }}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 334px"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
                 <div className={Styles.resaleContent}>
                   <h4>{listing.title}</h4>
                   <p className={Styles.resaleLocation}>{listing.subtitle}</p>
-                  <p className={Styles.resalePrice}>
-                    AED {listing.amount_dirhams?.toLocaleString() || "N/A"}
-                  </p>
+                  <div className="d-flex">
+                    <p className={Styles.resalePrice}>
+                      AED{" "}
+                      {listing.amount.amount_dirhams?.toLocaleString() || "N/A"}
+                    </p>
+                    <p className={Styles.resalePrice}>
+                      USD {listing.amount.amount?.toLocaleString() || "N/A"}
+                    </p>
+                  </div>
+
                   <div className={Styles.resaleStats}>
                     <div className={Styles.statGroup}>
                       <Image
@@ -208,8 +300,11 @@ const Rental_Resale = () => {
                       <span>{listing.sq_ft} Sq.Ft</span>
                     </div>
                   </div>
+
                   <div className={Styles.resaleDetails}>
-                    <p>{listing.description}</p>
+                    {listing.details.map((detail, index) => (
+                      <p key={index}>{detail.info}</p>
+                    ))}
                   </div>
                   <div className={Styles.resaleFooter}>
                     <div className={Styles.agentInfo}>
@@ -236,13 +331,11 @@ const Rental_Resale = () => {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Pagination Controls */}
-      <div className={Styles.pagination}>
+        <div className={Styles.pagination}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
@@ -263,6 +356,8 @@ const Rental_Resale = () => {
             Next
           </button>
         </div>
+        <SubscribeSection />
+      </div>
     </div>
   );
 };

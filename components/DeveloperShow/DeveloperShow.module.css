@@ -865,43 +865,16 @@
   font-size: 14px;
   font-weight: 500;
 }
-
-.resaleSlider {
-  max-width: 1360px;
-  margin: 0 auto;
-  overflow: hidden;
-  touch-action: pan-x;
-  position: relative;
-  cursor: grab;
-}
-
-.resaleSlider:active {
-  cursor: grabbing;
-}
-
-.resaleCards {
-  display: flex;
-  gap: 24px;
-  transition: transform 0.3s ease;
-  user-select: none;
-  width: 100%;
-}
-
 .resaleCard {
   flex: 0 0 1200px;
   display: flex;
   background: #FFFFFF;
   overflow: hidden;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  pointer-events: none; /* Prevents card content from interfering with drag */
   border-radius: 16px;
   border: 1px solid #E6EBED;
-}
-
-/* Remove the scale effect and gradients for smoother sliding */
-.resaleSlider::before,
-.resaleSlider::after {
-  display: none;
+  cursor: pointer; /* Ensure the cursor changes to pointer */
+  pointer-events: auto; /* Allow pointer events */
 }
 
 .resaleImage {
