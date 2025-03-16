@@ -68,6 +68,13 @@ const Header = ({ navigationData }) => {
   const currentPage = navigationData.find((page) =>
     normalizedPathname.startsWith(`/${page.slug}`)
   );
+
+  // Find the page with type_id === 1 (Home page)
+  const homePage = navigationData.find((page) => page.type_id === 1);
+
+  // Determine the logo link based on whether a page with type_id === 1 exists
+  const logoLink = homePage ? `/${homePage.slug}` : "/";
+
   const getBreadcrumbTitle = (path) => {
     if (!path) return "";
     const segments = path.split("/");
@@ -132,10 +139,11 @@ const Header = ({ navigationData }) => {
             <div className="header-box">
               <div className="left-cont-image">
                 <div className="logo-img">
-                  <Link href={"/#"} className="white-logo">
+                  {/* Use the determined logo link */}
+                  <Link href={logoLink} className="white-logo">
                     <Image src={Logo} alt="logo" width={138} height={42} />
                   </Link>
-                  <Link href={"/#"} className="dark-logo">
+                  <Link href={logoLink} className="dark-logo">
                     <Image src={LogoDark} alt="logo" width={138} height={42} />
                   </Link>
                 </div>
@@ -184,7 +192,7 @@ const Header = ({ navigationData }) => {
         </div>
       </header>
       {/* Conditionally render the breadcrumb only if it's not the home page */}
-      {!isHomePage && (
+      {!homePage && (
         <div className="breadcrumb-section">
           <div className="container">
             <div className="breadcrumb-content">
