@@ -79,7 +79,7 @@ const Blog = ({ initialData }) => {
                     : baseimage
                 }
                 className={`card-img-top ${styles["card-img-top"]}`}
-                alt={card.image_alt}
+                alt={card.image_alt || card.title}
                 width={372} // Provide width
                 height={200} // Provide height
                 priority={true} // Add priority property

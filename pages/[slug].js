@@ -69,8 +69,7 @@ const DynamicPage = ({ pageData }) => {
 
 export default DynamicPage;
 
-
-// Fetch page data for a specific slug
+// Fetch all possible paths for dynamic pages
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
   const data = await res.json();
@@ -106,8 +105,6 @@ export async function getStaticProps({ params }) {
     const pageData = data.pages.find((page) => page.slug === slug);
 
     // Log for debugging
-    console.log("Fetched pages:", data.pages);
-    console.log("Looking for slug:", slug);
 
     if (!pageData) {
       return { notFound: true };

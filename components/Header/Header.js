@@ -1,4 +1,3 @@
-// Header.js
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -11,7 +10,10 @@ import { usePathname } from "next/navigation";
 const Header = ({ navigationData, breadcrumbData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
-  const normalizedPathname = pathname.replace(/\/$/, ""); // Normalize pathname
+  
+  // Safe check for pathname being available
+  const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : ""; // Normalize pathname
+
   const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#"; // Check if it's the home page
 
   const [inputValue, setInputValue] = useState("");
@@ -75,6 +77,7 @@ const Header = ({ navigationData, breadcrumbData }) => {
 
   // Determine the logo link based on whether a page with type_id === 1 exists
   const logoLink = homePage ? `/${homePage.slug}` : "/";
+
   return (
     <>
       <header className={activeScroll ? "scroll-header" : ""}>
@@ -135,8 +138,6 @@ const Header = ({ navigationData, breadcrumbData }) => {
           </div>
         </div>
       </header>
-      {/* Conditionally render the breadcrumb only if it's not the home page */}
-     
     </>
   );
 };
