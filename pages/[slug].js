@@ -9,24 +9,24 @@ import Rental_Resale from "@/pages/page-components/rentalResale";
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Blog from "@/pages/page-components/blog";
 
-const DynamicPage = ({ pageData }) => {
+const DynamicPage = ({ pageData  }) => {
+
   const router = useRouter();
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
+  
   // Check if pageData or pageData.title is null or undefined
   if (!pageData || !pageData.title) {
     return <div>Page data is not available.</div>;
   }
 
-
   // Generate breadcrumb data dynamically, ensuring no null or undefined segments
   const breadcrumbData = [
     { title: pageData.title, path: `/pages/${pageData.slug}` }
-];
+  ];
 
   // Render the appropriate component based on the page's type_id
   const renderPage = () => {
@@ -66,10 +66,6 @@ const DynamicPage = ({ pageData }) => {
     </div>
   );
 };
-
-export default DynamicPage;
-
-// Fetch all possible paths for dynamic pages
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
   const data = await res.json();
@@ -82,16 +78,20 @@ export async function getStaticPaths() {
   );
 
   // Generate paths for each unique slug
-  const paths = uniquePages.map((page) => ({
-    params: { slug: page.slug },
-  }));
+  const paths = uniquePages
+    .filter(page => page.slug !== '') // Ensure slug is not empty
+    .map((page) => ({
+      params: { slug: page.slug },
+    }));
+
+  // Add the root path explicitly for the home page
+  paths.push({ params: { slug: '' } });
 
   return {
     paths,
     fallback: true,
   };
 }
-
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
@@ -102,17 +102,17 @@ export async function getStaticProps({ params }) {
     }
 
     const data = await res.json();
-    const pageData = data.pages.find((page) => page.slug === slug);
+    let pageData;
 
-    // Log for debugging
-
-    if (!pageData) {
-      return { notFound: true };
+    // If the slug is empty (root path), find the home page
+    if (slug === '') {
+      pageData = data.pages.find((page) => page.type_id === 1); // Home page type_id
+    } else {
+      // Otherwise, find the page by slug
+      pageData = data.pages.find((page) => page.slug === slug);
     }
 
-    // Ensure pageData has required properties
-    if (!pageData.title || !pageData.slug || !pageData.type_id) {
-      console.error("Invalid page data:", pageData);
+    if (!pageData) {
       return { notFound: true };
     }
 
@@ -125,3 +125,4 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 }
+export default DynamicPage;

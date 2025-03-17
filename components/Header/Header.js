@@ -1,3 +1,5 @@
+// Header.js
+
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -7,12 +9,12 @@ import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
 
-const Header = ({ navigationData, breadcrumbData }) => {
+const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
   
-  // Safe check for pathname being available
-  const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : ""; // Normalize pathname
+  // Normalize pathname to handle trailing slashes
+  const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : ""; 
 
   const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#"; // Check if it's the home page
 
@@ -76,7 +78,7 @@ const Header = ({ navigationData, breadcrumbData }) => {
   const homePage = navigationData.find((page) => page.type_id === 1);
 
   // Determine the logo link based on whether a page with type_id === 1 exists
-  const logoLink = homePage ? `/${homePage.slug}` : "/";
+  const logoLink = homePage ? `/${homePage.slug}` : "/";  // Ensure it points to the home page link
 
   return (
     <>

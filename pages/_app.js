@@ -10,8 +10,9 @@ import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
-
+import Home from "@/pages/page-components/home";
 function App({ Component, pageProps }) {
+  
   const [navigationData, setNavigationData] = useState([]);
 
   useEffect(() => {
@@ -28,7 +29,15 @@ function App({ Component, pageProps }) {
 
     fetchNavigationData();
   }, []);
-
+  if (pageProps.statusCode == 404 ) 
+    return (
+      <>
+      <Meta />
+      <Header navigationData={navigationData} />
+      <Home />
+      <Footer />
+      </>
+  );
   return (
     <>
       <Meta />
