@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-import { RightOutlined } from "@ant-design/icons";  // right
+
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
   () => import("./Map"), // Create a new Map.js component
@@ -384,7 +384,7 @@ const OffplanShow = ({ offplanData }) => {
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
                     >
-                      <RightOutlined />
+                       <span className={style.arrowIcon}>&rarr;</span>
                     </a>
                   </div>
                 </div>
