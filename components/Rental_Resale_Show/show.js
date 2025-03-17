@@ -11,12 +11,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-  const limitTextLength = (text, maxLength) => {
-    const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
-    return strippedText.length > maxLength
-      ? strippedText.substring(0, maxLength) + "..."
-      : strippedText;
-  };
+
   return (
     <>
       <div className="container">
