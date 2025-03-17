@@ -210,14 +210,15 @@ const Rental_Resale = () => {
 
         <div className={Styles.resaleList}>
           {cardData.map((listing) => {
-            console.log(listing);
             const galleryImages = JSON.parse(listing.gallery_images || "[]");
 
             return (
               <div
                 key={listing.id}
                 className={Styles.resaleCard}
-                onClick={() => handleReadMore(listing.slug)}
+                onClick={() => {
+                  handleReadMore(listing.slug);
+                }}
                 style={{ cursor: "pointer" }}
               >
                 <div className={Styles.resaleImageContainer}>
