@@ -69,28 +69,6 @@ const DynamicPage = ({ pageData }) => {
 
 export default DynamicPage;
 
-// Fetch all possible paths for dynamic pages
-export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-  const data = await res.json();
-  const pages = data.pages;
-
-  // Filter out duplicate slugs
-  const uniquePages = pages.filter(
-    (page, index, self) =>
-      index === self.findIndex((p) => p.slug === page.slug)
-  );
-
-  // Generate paths for each unique slug
-  const paths = uniquePages.map((page) => ({
-    params: { slug: page.slug },
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
 
 // Fetch page data for a specific slug
 export async function getStaticPaths() {
