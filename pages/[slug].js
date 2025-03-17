@@ -66,6 +66,31 @@ const breadcrumbData = pathSegments.map((segment, index) => ({
 export default DynamicPage;
 
 // Fetch all possible paths for dynamic pages
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+  const data = await res.json();
+  const pages = data.pages;
+
+
+  // Filter out duplicate slugs
+  const uniquePages = pages.filter(
+      (page, index, self) =>
+          index === self.findIndex((p) => p.slug === page.slug)
+  );
+
+  // Generate paths for each unique slug
+  const paths = uniquePages.map((page) => ({
+      params: { slug: page.slug },
+  }));
+
+
+  return {
+      paths,
+      fallback: true,
+  };
+}
+
+// Fetch page data for a specific slug
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
@@ -92,26 +117,3 @@ export async function getStaticProps({ params }) {
   }
 }
 
-// Fetch page data for a specific slug
-export async function getStaticProps({ params }) {
-  const { slug } = params;
-
-  // Fetch the page data for the given slug
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-  const data = await res.json();
-  const pageData = data.pages.find((page) => page.slug === slug);
-
-  // If no page is found, return a 404
-  if (!pageData) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      pageData,
-    },
-    revalidate: 10, // Revalidate the page every 10 seconds (optional)
-  };
-}
