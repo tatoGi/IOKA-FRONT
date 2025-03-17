@@ -26,7 +26,7 @@ const DynamicPage = ({ pageData }) => {
 
   // Generate breadcrumb data dynamically
   const breadcrumbData = pathSegments.map((segment, index) => ({
-    title: segment.replace(/-/g, " ").charAt(0).toUpperCase() + segment.slice(1), // Format title
+    title: segment ? segment.replace(/-/g, " ").charAt(0).toUpperCase() + segment.slice(1) : "", // Safeguard against null/undefined segment
     path: `/${pathSegments.slice(0, index + 1).join('/')}`, // Generate full path
   }));
 
@@ -43,7 +43,7 @@ const DynamicPage = ({ pageData }) => {
         return <OffPlan />;
       case 5: // Rental/Resale Page
         return <Rental_Resale />;
-      case 6:
+      case 6: // Blog Page
         return <Blog />;
       case 7: // Developer Page
         return <Developer />;
@@ -106,6 +106,10 @@ export async function getStaticProps({ params }) {
 
     const data = await res.json();
     const pageData = data.pages.find((page) => page.slug === slug);
+
+    // Log for debugging
+    console.log("Fetched pages:", data.pages);
+    console.log("Looking for slug:", slug);
 
     if (!pageData) {
       return { notFound: true };
