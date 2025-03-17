@@ -45,15 +45,17 @@
 }
 
 .propertyDetails h2 {
-  font-size: 24px;
-  color: #333;
+  font-size: 32px;
+  color: #0A273B;
   margin-bottom: 16px;
+  font-family: 'montserrat', sans-serif;
 }
 
 .pricing {
   display: flex;
   gap: 16px;
   margin-bottom: 24px;
+  font-family: 'montserrat', sans-serif;
 }
 .aedPricestart{
   font-family: 'montserrat', sans-serif;
@@ -80,12 +82,15 @@
 
 .description {
   margin-bottom: 30px;
+  margin-right: 133px;
 }
 
 .description p {
-  color: #333;
+  color: #0A273B;
   line-height: 1.6;
   margin-bottom: 16px;
+  font-family: 'montserrat', sans-serif;
+  font-size: 20px;
 }
 
 .readMore {
@@ -95,6 +100,7 @@
   padding: 0;
   cursor: pointer;
   font-size: 16px;
+  font-family: 'montserrat', sans-serif;
 }
 
 
@@ -123,7 +129,9 @@
   font-size: 18px;
   color: #333;
   margin-bottom: 24px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
   text-align: left;
+  
 }
 
 .qrbody {
@@ -138,12 +146,14 @@
   line-height: 1.5;
   margin: 0; /* Remove default margin */
   flex: 1; /* Allow text to take remaining space */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .qrButtons {
   display: flex;
   gap: 12px;
   margin-top: 20px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .downloadBtn, .enquireBtn {
@@ -240,15 +250,17 @@
 }
 
 .locationSection h3 {
-  font-size: 24px;
-  color: #333;
+  font-size: 32px;
+  color: #07151F;
   margin-bottom: 24px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .locationSection h4 {
-  font-size: 20px;
-  color: #333;
+  font-size: 24px;
+  color: #07151F;
   margin: 32px 0 24px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .mapWrapper {
@@ -292,6 +304,10 @@
   z-index: 2;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  width: 392px;
+  border: 1px solid #07151F;
+  border-radius: 32px;
 }
 
 .locationMapBtn:hover {
@@ -317,13 +333,17 @@
 }
 
 .placeName {
-  color: #374151;
+  color: #07151F;
   font-weight: 500;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .placeDistance {
-  color: #0066FF;
+  color: #007AFF;
   font-weight: 500;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .qrImageWrapper {
@@ -413,10 +433,12 @@
 .consultantName {
   font-size: 16px;
   font-weight: 600; /* Montserrat 600 */
-  color: #333;
+  color: #0A273B;
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 12px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+
 }
 
 .consultantRole {
@@ -426,6 +448,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .languages {
@@ -435,6 +458,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .email {
@@ -444,6 +468,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .contactButtons {
@@ -551,13 +576,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 72px;
 }
 
 .exteriorInteriorSection h3 {
-  font-size: 24px;
-  color: #fff; /* White text for the heading */
+  font-size: 40px;
+  color: #E6EBED; /* White text for the heading */
   margin: 0; /* Remove default margin */
+  font-weight: 600;
+  
 }
 
 .switcher {
@@ -569,11 +596,13 @@
   background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
-  padding: 8px 16px;
+  padding: 6px 23px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, color 0.3s;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-size: 20px;
 }
 
 .switchButton.active {
@@ -585,13 +614,15 @@
 }
 
 .sectionTitle {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 20px;
   display: block;
   width: 100%;
   margin-top: 80px;
   margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  color: #0A273B;
 }
 
 .propertyCard {
@@ -632,13 +663,17 @@
 }
 
 .propertyName {
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  
 }
 
 .arrowLink {
-  color: #fff;
+  color: #FFFFFF;
   text-decoration: none;
   font-size: 24px;
   transition: transform 0.3s ease;
@@ -647,8 +682,8 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+  border-radius: 8px;
+  border: 1px solid;
 }
 
 .arrowLink:hover {

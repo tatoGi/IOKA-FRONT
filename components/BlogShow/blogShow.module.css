@@ -8,20 +8,24 @@
     font-size: 32px;
     line-height: 39px;
     color: #0A273B;
+    font-family: 'montserrat', sans-serif;
 }
 .date {
     display: flex;
     gap: 10px;
     margin-top: 24px;
     margin-bottom: 52px;
+    font-family: 'montserrat', sans-serif;
 }
 .formattedDate {
-    color: #7ACBC4;
+    color: #007AFF;
+    font-family: 'montserrat', sans-serif;
 }
 .description {
     font-weight: 400;
     font-size: 20px;
     line-height: 24,38px;
+    font-family: 'montserrat', sans-serif;
 }
 .card {
     margin-bottom: 20px;
@@ -54,6 +58,7 @@
 
 .card-body {
     padding: 15px;
+    font-family: 'montserrat', sans-serif;
 }
 
 .card-title {
@@ -61,6 +66,7 @@
     margin-bottom: 0.75rem;
     font-weight: 500;
     color: #0A273B;
+    font-family: 'montserrat', sans-serif;
 }
 
 .card-list {
@@ -79,4 +85,5 @@
 }
 .description p {
     margin-bottom: 20px;
+    font-family: 'montserrat', sans-serif;
 }

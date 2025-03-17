@@ -63,7 +63,7 @@ const Blog = ({ initialData }) => {
   return (
     <div className="container mt-3">
       <div className={`${styles.title}`}>
-        <h1>Article</h1>
+        <h1>Articles</h1>
       </div>
       <div className="row">
         {cardData.map((card, index) => (

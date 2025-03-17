@@ -18,10 +18,13 @@ const montserrat = Montserrat({
 });
 
 const Offplan = ({ initialData, initialPagination }) => {
-
   const [cardData, setCardData] = useState(initialData || []);
-  const [currentPage, setCurrentPage] = useState(initialPagination?.current_page || 1);
-  const [totalPages, setTotalPages] = useState(initialPagination?.last_page || 1);
+  const [currentPage, setCurrentPage] = useState(
+    initialPagination?.current_page || 1
+  );
+  const [totalPages, setTotalPages] = useState(
+    initialPagination?.last_page || 1
+  );
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -55,9 +58,9 @@ const Offplan = ({ initialData, initialPagination }) => {
   // Fetch data when the component mounts (if no initialData is provided)
   useEffect(() => {
     if (!initialData.length && !isLoading) {
-        fetchData(currentPage);
+      fetchData(currentPage);
     }
-}, []);
+  }, []);
 
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
@@ -69,12 +72,12 @@ const Offplan = ({ initialData, initialPagination }) => {
         <SearchSection />
         <div className={styles.resultsHeader}>
           <h2 className={styles.title}>New Developments for sale in Dubai</h2>
+          <span className={styles.resultsCount}>{cardData.length} results</span>
         </div>
 
         <LoadingWrapper isLoading={isLoading}>
           <div className={styles.propertyGrid}>
             {cardData.map((property) => (
-              
               <div
                 key={property.id}
                 className={styles.propertyCardLink}

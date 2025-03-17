@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import style from "./OffplaneShow.module.css";
 import Image from "next/image";
-import buildingImage from "../../assets/img/building.png";
 import dynamic from "next/dynamic";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-
+import { RightOutlined } from "@ant-design/icons"; 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
   () => import("./Map"), // Create a new Map.js component
@@ -40,7 +39,12 @@ const OffplanShow = ({ offplanData }) => {
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
-
+  const [isExpanded, setIsExpanded] = useState(false);
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+  // Limit the description length before "Read More" button
+  const shortDescription = offplanData.offplan.description.slice(0, 300); // Adjust length as needed
   return (
     <>
       {/* Banner Section */}
@@ -82,10 +86,14 @@ const OffplanShow = ({ offplanData }) => {
               <div className={style.description}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: offplanData.offplan.description
+                    __html: isExpanded
+                      ? offplanData.offplan.description
+                      : `${shortDescription}...`
                   }}
                 />
-                <button className={style.readMore}>Read more</button>
+                <button className={style.readMore} onClick={toggleReadMore}>
+                  {isExpanded ? "Read Less" : "Read More"}
+                </button>
               </div>
             </div>
           </div>
@@ -376,7 +384,7 @@ const OffplanShow = ({ offplanData }) => {
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
                     >
-                      <span className={style.arrowIcon}>&rarr;</span>
+                      <RightOutlined />
                     </a>
                   </div>
                 </div>

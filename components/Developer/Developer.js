@@ -13,6 +13,7 @@ import { DEVELOPER_API } from "@/routes/apiRoutes";
 import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 import { LoadingWrapper } from "../LoadingWrapper/index"; // Import LoadingWrapper
+import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -133,9 +134,11 @@ const Developer = ({ initialData, initialPagination }) => {
   }
 
   return (
+    <LoadingWrapper isLoading={isLoading}>
+        
     <div className="container py-4">
       {/* Search Section */}
-      <div className={`mb-4 position-relative ${styles.searchContainer}`}>
+      <div className={`mb-4 position-relative col-md-6 `}>
         <input
           type="text"
           placeholder="City, Building or community"
@@ -145,7 +148,8 @@ const Developer = ({ initialData, initialPagination }) => {
         />
         <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
       </div>
-      <LoadingWrapper isLoading={isLoading}></LoadingWrapper>
+     
+      
       {/* Developer Cards */}
       <div className="row">
         {filteredData.map((card) => (
@@ -275,7 +279,9 @@ const Developer = ({ initialData, initialPagination }) => {
           <FaChevronRight />
         </button>
       </div>
+      <SubscribeSection />
     </div>
+    </LoadingWrapper>
   );
 };
 

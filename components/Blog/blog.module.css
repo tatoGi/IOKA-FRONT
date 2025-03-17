@@ -1,8 +1,11 @@
 .title h1{
     font-size: 24px;
-    line-height: 29.26px;
+    line-height: 100%;
     margin-bottom: 16px;
     color: #0A273B;
+    font-weight: 600;
+    font-family: 'montserrat', sans-serif;
+    margin-top: 44px;
 }
 .card {
     margin-bottom: 20px;
@@ -19,6 +22,8 @@
     line-height: 14.63px;
     color: #0A273B;
     margin-bottom: 20px;
+    font-weight: 400;
+    font-family: 'montserrat', sans-serif;
 }
 .card-img-top {
     max-width: 23.25rem;
@@ -44,6 +49,7 @@
     margin-bottom: 0.75rem;
     font-weight: 500;
     color: #0A273B;
+    font-family: 'montserrat', sans-serif;
 }
 
 .card-list {
@@ -61,9 +67,15 @@
     font-size: 12px;
     color: #007AFF;
     line-height: 14.63px;
+    font-weight: 500;
+    font-family: 'montserrat', sans-serif;
 }
 .formattedDate {
-    color: #7ACBC4;
+    font-size: 12px;
+    color: #007AFF;
+    line-height: 14.63px;
+    font-weight: 500;
+    font-family: 'montserrat', sans-serif;
 }
 .calendarIcon {
     margin-right: 5px;
@@ -80,6 +92,7 @@
     color: white;
     text-decoration: none;
     display: inline-block;
+    font-family: 'montserrat', sans-serif;
     width: 99px;
     height: 32px;
     margin-top: auto; /* This pushes button to bottom */

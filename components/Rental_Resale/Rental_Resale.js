@@ -116,7 +116,7 @@ const Rental_Resale = () => {
 
                 <div className={Styles.propertyInfo}>
                   <h3 className={Styles.title}>{property.title}</h3>
-                  <p className={Styles.location}>{property.subtitle}</p>
+                  <p className={Styles.location}>{property.location_link}</p>
 
                   <div className={Styles.features}>
                     <div className={Styles.feature}>
@@ -159,12 +159,12 @@ const Rental_Resale = () => {
 
                   <div className={Styles.priceRow}>
                     <span className={Styles.price}>
-                      AED{" "}
-                      {property.amount.amount_dirhams?.toLocaleString() ||
+                    USD{" "}
+                      {property.amount.amount?.toLocaleString() ||
                         "N/A"}
                     </span>
                     <span className={Styles.price}>
-                      USD {property.amount.amount?.toLocaleString() || "N/A"}
+                    AED {property.amount.amount_dirhams?.toLocaleString() || "N/A"}
                     </span>
                     <div className={Styles.actions}>
                       <button className={Styles.actionButton}>
@@ -210,6 +210,7 @@ const Rental_Resale = () => {
 
         <div className={Styles.resaleList}>
           {cardData.map((listing) => {
+            console.log(listing);
             const galleryImages = JSON.parse(listing.gallery_images || "[]");
 
             return (
@@ -258,6 +259,7 @@ const Rental_Resale = () => {
 
                 <div className={Styles.resaleContent}>
                   <h4>{listing.title}</h4>
+                 
                   <p className={Styles.resaleLocation}>{listing.subtitle}</p>
                   <div className="d-flex">
                     <p className={Styles.resalePrice}>

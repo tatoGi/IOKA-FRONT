@@ -104,6 +104,7 @@ margin-bottom: 24px;
     color: #07151F;
     font-size: 12px;
     font-weight: 500;
+    margin-right: 1.5rem;
   }
   .feature img{
     width: 20px;
@@ -124,6 +125,7 @@ margin-bottom: 24px;
     font-size: 12px;
     font-weight: 600;
     color: #1f2937;
+    font-family: 'Montserrat', sans-serif;
   }
   
   .actions {
@@ -452,11 +454,7 @@ margin-bottom: 24px;
     font-size: 16px;
     font-weight: 600;
   }
-  .price {
-    color: #007AFF;
-    font-size: 16px;
-    font-weight: 600;
-  }
+
   .priceContainer {
     display: flex;
     align-items: center;
