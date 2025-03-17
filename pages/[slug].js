@@ -93,6 +93,28 @@ export async function getStaticPaths() {
 }
 
 // Fetch page data for a specific slug
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+  const data = await res.json();
+  const pages = data.pages;
+
+  // Filter out duplicate slugs
+  const uniquePages = pages.filter(
+    (page, index, self) =>
+      index === self.findIndex((p) => p.slug === page.slug)
+  );
+
+  // Generate paths for each unique slug
+  const paths = uniquePages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
@@ -110,6 +132,12 @@ export async function getStaticProps({ params }) {
     console.log("Looking for slug:", slug);
 
     if (!pageData) {
+      return { notFound: true };
+    }
+
+    // Ensure pageData has required properties
+    if (!pageData.title || !pageData.slug || !pageData.type_id) {
+      console.error("Invalid page data:", pageData);
       return { notFound: true };
     }
 
