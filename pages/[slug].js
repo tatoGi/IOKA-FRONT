@@ -39,7 +39,6 @@ const breadcrumbData = pathSegments.map((segment, index) => ({
       return <Rental_Resale />;
       case 6:
         return <Blog />;
-       
       case 7: // Developer Page
         return <Developer />;
       default:
@@ -68,25 +67,28 @@ export default DynamicPage;
 
 // Fetch all possible paths for dynamic pages
 export async function getStaticPaths() {
-  // Fetch the list of pages from your API
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
   const data = await res.json();
   const pages = data.pages;
 
-  // Ensure paths are unique by using a Set
-  const uniqueSlugs = new Set(pages.map((page) => page.slug));
+  console.log(pages); // Debug: Check the API response
+
+  // Filter out duplicate slugs
+  const uniquePages = pages.filter(
+      (page, index, self) =>
+          index === self.findIndex((p) => p.slug === page.slug)
+  );
 
   // Generate paths for each unique slug
-  const paths = Array.from(uniqueSlugs).map((slug) => ({
-    params: { slug },
+  const paths = uniquePages.map((page) => ({
+      params: { slug: page.slug },
   }));
 
-  // Log the paths for debugging
-  console.log("Generated paths:", paths);
+  console.log("Generated paths:", paths); // Debug: Check the generated paths
 
   return {
-    paths,
-    fallback: true, // Enable fallback for pages not generated at build time
+      paths,
+      fallback: true,
   };
 }
 
