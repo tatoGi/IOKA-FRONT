@@ -22,9 +22,10 @@ const DynamicPage = ({ pageData }) => {
     return <div>Page data is not available.</div>;
   }
 
-  const pathSegments = pageData.title.split('/'); // Use slug to create breadcrumb segments
+  // Ensure that pathSegments doesn't contain any null or undefined values
+  const pathSegments = pageData.title.split('/').filter(Boolean); // This will remove any empty segments
 
-  // Generate breadcrumb data dynamically
+  // Generate breadcrumb data dynamically, ensuring no null or undefined segments
   const breadcrumbData = pathSegments.map((segment, index) => ({
     title: segment ? segment.replace(/-/g, " ").charAt(0).toUpperCase() + segment.slice(1) : "", // Safeguard against null/undefined segment
     path: `/${pathSegments.slice(0, index + 1).join('/')}`, // Generate full path
