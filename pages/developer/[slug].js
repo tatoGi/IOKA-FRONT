@@ -1,6 +1,7 @@
 import DeveloperShow from '../../components/DeveloperShow/DeveloperShow';
 import axios from 'axios';
 import { DEVELOPER_API } from '../../routes/apiRoutes'; // Import the route
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 
 export const getServerSideProps = async (context) => {
     const { slug } = context.params || {}; // Get the blog slug from the URL path
@@ -21,7 +22,17 @@ export const getServerSideProps = async (context) => {
 };
 
 const DeveloperShowPage = ({ developerData  }) => {
-    return <DeveloperShow developerData={developerData}  />;
+    const breadcrumbData = [
+        { title: 'Home', path: '/' },
+        { title: 'Blog', path: '/blog' },
+        { title: developerData.title, path: `/blog/${developerData.slug}` }
+    ];
+    return (
+        <div>
+            <Breadcrumb breadcrumbData={breadcrumbData} />
+            <DeveloperShow developerData={developerData} />
+        </div>
+    );
 };
 
 export default DeveloperShowPage;

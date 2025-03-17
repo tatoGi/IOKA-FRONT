@@ -1,6 +1,7 @@
 import BlogShow from '../../components/BlogShow/show';
 import axios from 'axios';
 import { BLOGS_API } from '../../routes/apiRoutes'; // Import the route
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 
 export const getServerSideProps = async (context) => {
     const { slug } = context.params || {}; // Get the blog slug from the URL path
@@ -21,7 +22,18 @@ export const getServerSideProps = async (context) => {
 };
 
 const BlogShowPage = ({ blogData }) => {
-    return <BlogShow blogData={blogData} />;
+    
+    const breadcrumbData = [
+        { title: 'Home', path: '/' },
+        { title: 'Blog', path: '/blog' },
+        { title: blogData.blog.title, path: `/blog/${blogData.slug}` }
+    ];
+    return (
+        <div>
+            <Breadcrumb breadcrumbData={breadcrumbData} />
+            <BlogShow blogData={blogData} />
+        </div>
+    );
 };
 
 export default BlogShowPage;

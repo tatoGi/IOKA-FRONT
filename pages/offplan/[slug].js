@@ -1,7 +1,7 @@
 import axios from 'axios';
 import OffplanShow from '../../components/OffplanShow/show';
 import { OFFPLAN_APi } from '../../routes/apiRoutes';
-
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 export const getServerSideProps = async (context) => {
   const { slug } = context.params || {}; // Get the slug from the URL path
 
@@ -26,7 +26,18 @@ export const getServerSideProps = async (context) => {
 };
 
 const OffplanShowPage = ({ offplanData }) => {
-  return <OffplanShow offplanData={offplanData} />;
+  
+  const breadcrumbData = [
+    { title: 'Home', path: '/' },
+    { title: 'Blog', path: '/blog' },
+    { title: offplanData.offplan.title, path: `/blog/${offplanData.offplan.slug}` }
+];
+return (
+  <div>
+      <Breadcrumb breadcrumbData={breadcrumbData} />
+      <OffplanShow offplanData={offplanData} />
+  </div>
+);
 };
 
 export default OffplanShowPage;

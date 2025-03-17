@@ -1,3 +1,4 @@
+// Header.js
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -7,7 +8,7 @@ import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
 
-const Header = ({ navigationData }) => {
+const Header = ({ navigationData, breadcrumbData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
   const normalizedPathname = pathname.replace(/\/$/, ""); // Normalize pathname
@@ -74,63 +75,6 @@ const Header = ({ navigationData }) => {
 
   // Determine the logo link based on whether a page with type_id === 1 exists
   const logoLink = homePage ? `/${homePage.slug}` : "/";
-
-  const getBreadcrumbTitle = (path) => {
-    if (!path) return "";
-    const segments = path.split("/");
-    // Handle page-components paths
-    if (segments.includes("page-components")) {
-      const lastSegment = segments[segments.length - 1];
-      switch (lastSegment) {
-        case "developer":
-          return "Developers";
-        case "about":
-          return "About Us";
-        case "contact":
-          return "Contact Us";
-        default:
-          return lastSegment
-            .split("-")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-      }
-    }
-    // Handle other paths
-    const lastSegment = segments[segments.length - 1];
-    switch (lastSegment) {
-      case "offplan":
-        return "Offplan";
-      case "resale":
-        return "Resale";
-      case "rentals":
-        return "Rentals";
-      case "blog":
-        return "Blog";
-      default:
-        return lastSegment
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
-    }
-  };
-
-  // Function to get breadcrumb path
-  const getBreadcrumbPath = (path) => {
-    const segments = path.split("/").filter((segment) => segment !== ""); // Split path into segments
-    const breadcrumb = [];
-    let currentPath = "";
-
-    segments.forEach((segment) => {
-      currentPath += `/${segment}`;
-      const page = navigationData.find((page) => `/${page.slug}` === currentPath);
-      if (page) {
-        breadcrumb.push({ title: page.title, path: currentPath });
-      }
-    });
-
-    return breadcrumb;
-  };
-
   return (
     <>
       <header className={activeScroll ? "scroll-header" : ""}>
@@ -192,20 +136,7 @@ const Header = ({ navigationData }) => {
         </div>
       </header>
       {/* Conditionally render the breadcrumb only if it's not the home page */}
-      {!homePage && (
-        <div className="breadcrumb-section">
-          <div className="container">
-            <div className="breadcrumb-content">
-              <ul className="breadcrumb-list">
-                <li>
-                  <Link href="/">Home</Link>
-                </li>
-                <li>{getBreadcrumbTitle(pathname)}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+     
     </>
   );
 };

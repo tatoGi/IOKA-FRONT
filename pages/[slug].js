@@ -6,9 +6,18 @@ import About from "@/pages/page-components/about"; // Import the About component
 import Contact from "@/pages/page-components/contact"; // Import the Contact component
 import OffPlan from "@/pages/page-components/offplan";
 import Rental_Resale from "@/pages/page-components/rentalResale";
-
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'; // Import the Breadcrumb component
+import Blog from "@/pages/page-components/blog";
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
+  const pathSegments = pageData.title.split('/'); // Use slug to create breadcrumb segments
+
+// Generate breadcrumb data dynamically
+const breadcrumbData = pathSegments.map((segment, index) => ({
+  title: segment.replace(/-/g, " ").charAt(0).toUpperCase() + segment.slice(1), // Format title
+  path: `/${pathSegments.slice(0, index + 1).join('/')}`, // Generate full path
+}));
+
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {
@@ -24,10 +33,13 @@ const DynamicPage = ({ pageData }) => {
         return <About />;
       case 3: // Contact Page
         return <Contact />;
-        case 5: // Rental_rase Page
-        return <Rental_Resale />;
-        case 4: // Off-Plan Page
+      case 4: // Off-Plan Page
         return <OffPlan />;
+      case 5: // Rental/Resale Page
+      return <Rental_Resale />;
+      case 6:
+        return <Blog />;
+       
       case 7: // Developer Page
         return <Developer />;
       default:
@@ -40,7 +52,16 @@ const DynamicPage = ({ pageData }) => {
     }
   };
 
-  return <>{renderPage()}</>;
+  return (
+    <div>
+      {/* Render Breadcrumb only if type_id is not 1 */}
+      {pageData.type_id !== 1 && (
+        <Breadcrumb breadcrumbData={[{ title: 'Home', path: '/' }, ...breadcrumbData]} />
+      )}
+      {/* Render the page content */}
+      {renderPage()}
+    </div>
+  );
 };
 
 export default DynamicPage;
@@ -52,10 +73,16 @@ export async function getStaticPaths() {
   const data = await res.json();
   const pages = data.pages;
 
-  // Generate paths for each page
-  const paths = pages.map((page) => ({
-    params: { slug: page.slug },
+  // Ensure paths are unique by using a Set
+  const uniqueSlugs = new Set(pages.map((page) => page.slug));
+
+  // Generate paths for each unique slug
+  const paths = Array.from(uniqueSlugs).map((slug) => ({
+    params: { slug },
   }));
+
+  // Log the paths for debugging
+  console.log("Generated paths:", paths);
 
   return {
     paths,
