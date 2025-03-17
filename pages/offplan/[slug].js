@@ -29,7 +29,7 @@ const OffplanShowPage = ({ offplanData }) => {
   
   const breadcrumbData = [
     { title: 'Home', path: '/' },
-    { title: 'Blog', path: '/blog' },
+    { title: 'offplan', path: '/offplan' },
     { title: offplanData.offplan.title, path: `/blog/${offplanData.offplan.slug}` }
 ];
 return (
