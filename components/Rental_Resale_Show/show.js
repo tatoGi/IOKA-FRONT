@@ -5,6 +5,7 @@ import Image from "next/image";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 import { StarIcon } from "../icons/PropertyIcons";
+import dynamic from "next/dynamic";
 Modal.setAppElement("#__next");
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
@@ -13,7 +14,30 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-
+  const flattenedAddresses = RENTAL_RESALE_DATA.addresses.flat();
+  const normalizedAmenities = RENTAL_RESALE_DATA.amenities.map((item) => {
+    if (Array.isArray(item)) {
+      return item[0]; // Extract the first element if it's an array
+    } else if (typeof item === "object" && item !== null) {
+      return Object.values(item)[0]; // Extract the first value if it's an object
+    }
+    return item; // Return the item as-is if it's already a string
+  });
+  const normalizedLanguages = RENTAL_RESALE_DATA.languages
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return item[0]; // Extract the first element if it's an array
+      } else if (typeof item === "object" && item !== null) {
+        return Object.values(item)[0]; // Extract the first value if it's an object
+      }
+      return item; // Return the item as-is if it's already a string
+    })
+    .filter(Boolean); // Remove any undefined or null values
+  const languagesString = normalizedLanguages.join(", ");
+  const Map = dynamic(
+    () => import("./Map"), // Create a new Map.js component
+    { ssr: false }
+  );
   return (
     <>
       <div className="container">
@@ -122,8 +146,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
           {/* Description Section */}
           <div className={styles.addresses}>
-            {RENTAL_RESALE_DATA.addresses.map((addresses, index) => (
-              <p key={index}>{addresses}</p>
+            {flattenedAddresses.map((address, index) => (
+              <p key={index}>{address}</p>
             ))}
           </div>
         </div>
@@ -141,46 +165,17 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   />
                 </pre>
               </div>
+
               <div className={styles.details}>
                 <h3>Details</h3>
                 <span className={styles.details_line}></span>
                 <div className={styles.detailsGrid}>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Property ID:</span>
-                    <span className={styles.detailValue}>HZ10</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Garage:</span>
-                    <span className={styles.detailValue}>1</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Price:</span>
-                    <span className={styles.detailValue}>$4,550,000</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Garage Size:</span>
-                    <span className={styles.detailValue}>200 Sq Ft</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Property Size:</span>
-                    <span className={styles.detailValue}>3400 Sq Ft</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Property Type:</span>
-                    <span className={styles.detailValue}>Studio</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Bedrooms:</span>
-                    <span className={styles.detailValue}>4</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Bathrooms:</span>
-                    <span className={styles.detailValue}>2</span>
-                  </div>
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Property Status:</span>
-                    <span className={styles.detailValue}>For Sale</span>
-                  </div>
+                  {RENTAL_RESALE_DATA.details.map((detail, index) => (
+                    <div className={styles.detailItem} key={index}>
+                      <span className={styles.detailLabel}>{detail.title}</span>
+                      <span className={styles.detailValue}>{detail.info}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -188,17 +183,59 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               {/* Contact Information Section */}
               <div className={styles.sharediv}>
                 <div className={styles.content_sharediv}>
-                  <h2 className={styles.name}>Shuan Van Der Linder</h2>
-                  <span className={styles.role}>Palm Jameirah Consultant</span>
-                  <span className={styles.languages}>
-                    Speaks: English, Spanish, Arabic, French
-                  </span>
-                  <span className={styles.email}>example@gmail.com</span>
+                  <div className={styles.imageContainer_share}>
+                    <img
+                      src={
+                        RENTAL_RESALE_DATA.agent_photo
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
+                          : "/default.jpg"
+                      }
+                      alt={RENTAL_RESALE_DATA.title}
+                      className={styles.agentImage}
+                    />
+                  </div>
+                  <div className={styles.textContainer}>
+                    <h2 className={styles.name}>
+                      {RENTAL_RESALE_DATA.agent_title}
+                    </h2>
+                    <span className={styles.role}>
+                      {RENTAL_RESALE_DATA.agent_status}
+                    </span>
+                    <span className={styles.languages}>
+                      Speaks: {languagesString}
+                    </span>
+                    <span className={styles.email}>example@gmail.com</span>
+                  </div>
                 </div>
 
                 <div className={styles.contactButtons}>
-                  <button className={styles.contactBtnperson}>Call</button>
-                  <button className={styles.whatsappperson}>WhatsApp</button>
+                  <button
+                    className={styles.contactBtnperson}
+                    onClick={() => {
+                      const formattedPhone = `+971${RENTAL_RESALE_DATA.agent_call.replace(
+                        /\D/g,
+                        ""
+                      )}`;
+                      window.location.href = `tel:${formattedPhone}`;
+                    }}
+                  >
+                    Call
+                  </button>
+                  <button
+                    className={styles.whatsappperson}
+                    onClick={() => {
+                      const formattedWhatsApp = `+971${RENTAL_RESALE_DATA.agent_whatsapp.replace(
+                        /\D/g,
+                        ""
+                      )}`;
+                      window.open(
+                        `https://wa.me/${formattedWhatsApp}`,
+                        "_blank"
+                      );
+                    }}
+                  >
+                    WhatsApp
+                  </button>
                 </div>
                 <button className={styles.shareButton}>
                   <Image
@@ -211,9 +248,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
               {/* Location Map Section */}
               <div className={styles.sidevabarlocation}>
-                <h2 className={styles.sectionTitle}>Location Map</h2>
-                {/* Add your map component or image here */}
-                <div className={styles.mapPlaceholder}>Map Placeholder</div>
+                <Map location_link={RENTAL_RESALE_DATA.location_link} />
               </div>
 
               {/* Regulatory Information Section */}
@@ -236,12 +271,14 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <span className={styles.infoItem}>
                       <span className={styles.Referenceblue}>Reference | </span>
                       <span className={styles.Referenceblue_value}>
-                        L-233422
+                        {RENTAL_RESALE_DATA.reference}
                       </span>
                     </span>
                     <span className={styles.infoItem}>
                       <span className={styles.DLD}>DLD Permit Number |</span>
-                      <span className={styles.DLD_value}> 1118046093</span>
+                      <span className={styles.DLD_value}>
+                        {RENTAL_RESALE_DATA.dld_permit_number}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -255,8 +292,10 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         <div className={styles.amenities_section}>
           <h4>Amenities</h4>
           <div className={styles.amenitiesGrid}>
-            {RENTAL_RESALE_DATA.amenities.map((amenities, index) => (
-              <div className={styles.amenityItem}>{amenities}</div>
+            {normalizedAmenities.map((amenity, index) => (
+              <div key={index} className={styles.amenityItem}>
+                {amenity}
+              </div>
             ))}
           </div>
         </div>
@@ -359,7 +398,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     priority
                     unoptimized
                   />
-                
+
                   {/* Optional: Add exclusive badge */}
                 </div>
 
@@ -438,7 +477,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     priority
                     unoptimized
                   />
-                 
+
                   {/* Optional: Add exclusive badge */}
                 </div>
 
@@ -517,7 +556,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     priority
                     unoptimized
                   />
-                
+
                   {/* Optional: Add exclusive badge */}
                 </div>
 
@@ -580,7 +619,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
         <SubscribeSection />
