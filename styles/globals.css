@@ -681,6 +681,15 @@ main {
   color: #fff;
   font-weight: 400;
  font-family: 'Montserrat';
+border-radius: 16px;
+border-width: 1px;
+padding-top: 12px;
+padding-right: 32px;
+padding-bottom: 12px;
+padding-left: 32px;
+border: 1px #E6EBED solid;
+
+ 
  }
  .team-box{
   margin-top: 44px;
