@@ -109,7 +109,7 @@ const Offplan = ({ initialData, initialPagination }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3 className={styles.title}>{property.title}</h3>
-                      <p className={styles.location}>{property.subtitle}</p>
+                      <p className={styles.location}>{property.map_location}</p>
 
                       <div className={styles.features}>
                         <div className={styles.feature}>
