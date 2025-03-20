@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./LiveInvestSection.module.css";
-
+import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 const LiveInvestSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -30,21 +30,21 @@ const LiveInvestSection = () => {
       return {
         opacity: 1,
         transform:
-          "translateX(0) translateY(100px) translateZ(0) rotateY(0deg)",
+          "translateX(210px) translateY(200px) translateZ(0) rotateY(0deg)",
         zIndex: 10
       };
     else if (activeSlide - 1 === index)
       return {
         opacity: 1,
         transform:
-          "translateX(-100px) translateY(0) translateZ(-200px) rotateY(35deg)",
+          "translateX(24px) translateY(0) translateZ(-200px) rotateY(35deg)",
         zIndex: 9
       };
     else if (activeSlide + 1 === index)
       return {
         opacity: 1,
         transform:
-          "translateX(240px) translateY(0) translateZ(-200px) rotateY(-35deg)",
+          "translateX(440px) translateY(0) translateZ(-200px) rotateY(-35deg)",
         zIndex: 9
       };
     else if (index < activeSlide - 1)
@@ -65,7 +65,7 @@ const LiveInvestSection = () => {
 
   return (
     <section className={styles.liveInvestSection}>
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div className={`${styles.content} col-md-6`}>
             <h4>Live. Invest. Grow</h4>
@@ -89,8 +89,8 @@ const LiveInvestSection = () => {
                     <Image
                       src={item.image}
                       alt="Dubai Property"
-                      width={400}
-                      height={300}
+                      width={364}
+                      height={364}
                       style={{ objectFit: "cover" }}
                     />
                   </div>
@@ -114,16 +114,34 @@ const LiveInvestSection = () => {
         </div>
 
         <div className={styles.stats}>
-          <div className={styles.statItem}>
-            <h3>86K</h3>
-            <p>Resale Properties</p>
+          {/* Image and Text Container */}
+
+          <div className={styles.statImage}>
+            <Image
+              src={defaultImage}
+              alt="Stats Background"
+              width={624}
+              height={160}
+            />
           </div>
-          <div className={styles.statItem}>
-            <h3>32K</h3>
-            <p>Off Plan Properties</p>
-          </div>
+
         </div>
       </div>
+      <div className={styles.stat_text}>
+      <span>plain and simple</span>
+    </div>
+    
+          {/* Statistics on the right */}
+          <div className={styles.statItems}>
+            <div className={styles.statItem}>
+              <h3>86K</h3>
+              <p>Resale Properties</p>
+            </div>
+            <div className={styles.statItem_right}>
+              <h3>32K</h3>
+              <p>Off Plan Properties</p>
+            </div>
+          </div>
     </section>
   );
 };

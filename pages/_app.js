@@ -10,10 +10,13 @@ import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
-import Home from "@/pages/page-components/home";
+import { useRouter } from "next/router";
+import { LoadingWrapper } from "@/components/LoadingWrapper/index"; // Import LoadingWrapper
+
 function App({ Component, pageProps }) {
-  
   const [navigationData, setNavigationData] = useState([]);
+  const [isRedirecting, setIsRedirecting] = useState(false); // State to track redirection
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch navigation data from the API
@@ -29,15 +32,22 @@ function App({ Component, pageProps }) {
 
     fetchNavigationData();
   }, []);
-  if (pageProps.statusCode == 404 ) 
-    return (
-      <>
-      <Meta />
-      <Header navigationData={navigationData} />
-      <Home />
-      <Footer />
-      </>
-  );
+
+  // Redirect to /home if statusCode is 404
+  useEffect(() => {
+    if (pageProps.statusCode === 404 && typeof window !== "undefined") {
+      setIsRedirecting(true); // Set redirecting state to true
+      router.push('/home').then(() => {
+        setIsRedirecting(false); // Reset redirecting state after redirection
+      });
+    }
+  }, [pageProps.statusCode, router]);
+
+  // If redirecting, show LoadingWrapper
+  if (isRedirecting) {
+    return <LoadingWrapper />; // Show loading state while redirecting
+  }
+
   return (
     <>
       <Meta />

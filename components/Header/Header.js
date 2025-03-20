@@ -1,5 +1,3 @@
-// Header.js
-
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -13,10 +11,8 @@ const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const pathname = usePathname();
   
-  // Normalize pathname to handle trailing slashes
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : ""; 
-
-  const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#"; // Check if it's the home page
+  const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#" || normalizedPathname === "/home";
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -47,7 +43,7 @@ const Header = ({ navigationData }) => {
         setActiveScroll(true);
         return;
       }
-
+  
       const currentScrollY = window.pageYOffset;
       if (currentScrollY >= 20) {
         setActiveScroll(true);
@@ -55,30 +51,24 @@ const Header = ({ navigationData }) => {
         setActiveScroll(false);
       }
     }
-
-    if (!isHomePage) {
-      setActiveScroll(true);
-    }
-
+  
+    // Initial check to set the correct state based on the current scroll position
+    handleScroll();
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-  // Filter out the "Contact" page (type_id: 3) and sort the remaining pages by the "sort" column
   const filteredAndSortedPages = navigationData
-    .filter((page) => page.type_id !== 3 && page.active === 1) // Exclude contact page and inactive pages
-    .sort((a, b) => a.sort - b.sort); // Sort by the "sort" column
+    .filter((page) => page.type_id !== 3 && page.active === 1)
+    .sort((a, b) => a.sort - b.sort);
 
-  // Find the current page based on the pathname
   const currentPage = navigationData.find((page) =>
     normalizedPathname.startsWith(`/${page.slug}`)
   );
 
-  // Find the page with type_id === 1 (Home page)
   const homePage = navigationData.find((page) => page.type_id === 1);
-
-  // Determine the logo link based on whether a page with type_id === 1 exists
-  const logoLink = homePage ? `/${homePage.slug}` : "/";  // Ensure it points to the home page link
+  const logoLink = homePage ? `/${homePage.slug}` : "/";
 
   return (
     <>
@@ -88,7 +78,6 @@ const Header = ({ navigationData }) => {
             <div className="header-box">
               <div className="left-cont-image">
                 <div className="logo-img">
-                  {/* Use the determined logo link */}
                   <Link href={logoLink} className="white-logo">
                     <Image src={Logo} alt="logo" width={138} height={42} />
                   </Link>
@@ -97,39 +86,42 @@ const Header = ({ navigationData }) => {
                   </Link>
                 </div>
               </div>
-              <div className="header-nav">
-                <ul>
-                  {filteredAndSortedPages.map((page) => (
-                    <li
-                      key={page.id}
-                      className={
-                        normalizedPathname === `/${page.slug}` ? "active-link" : ""
-                      }
-                    >
-                      <Link href={`/${page.slug}`}>{page.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="right-search-contact">
-                <div className="right-form">
-                  <form action="">
-                    <input
-                      type="text"
-                      ref={inputRef}
-                      value={inputValue}
-                      onChange={handleInputChange}
-                    />
-                    <button className="searchbtn" onClick={handleSearch}>
-                      <SearchBtn />
-                    </button>
-                    <button className="clearbtn" onClick={handleClear}>
-                      <SearchCloseBtn />
-                    </button>
-                  </form>
+              
+                <div className="header-nav">
+                  <ul>
+                    {filteredAndSortedPages.map((page) => (
+                      <li
+                        key={page.id}
+                        className={
+                          normalizedPathname === `/${page.slug}` ? "active-link" : ""
+                        }
+                      >
+                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+          
+              <div className="right-search-contact">
+              
+                  <div className="right-form">
+                    <form action="">
+                      <input
+                        type="text"
+                        ref={inputRef}
+                        value={inputValue}
+                        onChange={handleInputChange}
+                      />
+                      <button className="searchbtn" onClick={handleSearch}>
+                        <SearchBtn />
+                      </button>
+                      <button className="clearbtn" onClick={handleClear}>
+                        <SearchCloseBtn />
+                      </button>
+                    </form>
+                  </div>
+              
                 <div className="contactBtn">
-                  {/* Link to the contact page (type_id: 3) */}
                   <Link href={"/contact"}>CONTACT US</Link>
                 </div>
               </div>

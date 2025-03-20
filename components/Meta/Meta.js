@@ -1,7 +1,3 @@
-// For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended.
-// Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
-// Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
-
 import Head from "next/head";
 
 const Meta = ({
@@ -14,6 +10,7 @@ const Meta = ({
 }) => {
   return (
     <Head>
+      {/* Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="keywords" content={keywords} />
       <meta name="description" content={description} />
@@ -27,7 +24,6 @@ const Meta = ({
       <meta property="og:site_name" content={site} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={site} />
-      {/* <meta name="twitter:creator" content="@SarahMaslinNir" /> */}
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

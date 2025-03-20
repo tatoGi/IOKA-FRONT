@@ -1,8 +1,8 @@
 @import 'leaflet/dist/leaflet.css';
+
 body {
   padding: 0;
   margin: 0; 
-  font-family: 'montserrat', sans-serif;
 }
 
 a {
@@ -96,13 +96,12 @@ main {
   }
   .header-nav ul li a{
     color: #FFFFFF;
-    font-family: 'Montserrat', sans-serif;
+    
+    font-family: 'Montserrat';
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
-    font-family: 'monserrat', sans-serif;
-   font-family: 'monserrat', sans-serif; 
     text-transform: uppercase;
   }
   .header-nav ul li::after{
@@ -150,8 +149,7 @@ main {
     right: 0;
     background: transparent;
     padding-left: 42px;
-    font-family: 'monserrat', sans-serif;
-   font-family: 'monserrat', sans-serif;
+    font-family: 'Montserrat';
     font-size: 16px;
     color: #000;
     font-weight: 400; 
@@ -205,8 +203,7 @@ main {
   .contactBtn a{
     font-size: 16px; 
     color: #fff; 
-    font-family: 'monserrat', sans-serif;
-   font-family: 'monserrat', sans-serif;
+    font-family: 'Montserrat';
     font-weight: 400;  
     text-transform: uppercase;
     height: 40px;
@@ -247,8 +244,7 @@ main {
 .follow-text, .contact-text{
   font-size: 14px;
   font-weight: 400;
-  font-family: 'monserrat', sans-serif;
- font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat';
   margin-bottom: 8px;
   color: #fff;
 }
@@ -272,7 +268,7 @@ main {
 .soc-title{
   color: #fff;
   font-weight: 400;
-  font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat';
  
   font-size: 14px;
 }
@@ -287,7 +283,7 @@ main {
 .f-text-0{
   color: #fff;
   font-weight: 400;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   font-size: 14px;
   margin-left: 10px;
 }
@@ -298,7 +294,7 @@ main {
   font-size: 16px;
   font-weight: 600;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   margin-bottom: 32px;
 }
 .footer-category ul {
@@ -316,7 +312,7 @@ main {
   font-size: 14px;
   font-weight: 400;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .copyright-0{
   width: 100%;
@@ -330,7 +326,7 @@ main {
   font-size: 14px;
   font-weight: 500;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   margin-top: 16px;
 }
 .r-c ul{
@@ -346,20 +342,20 @@ main {
   color: #fff;
   font-weight: 500;
   font-size: 14px;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .mes-f-title{
   font-size: 16px;
   font-weight: 600;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   margin-bottom: 16px;
 }
 .mes-f-text{
   font-size: 14px;
   font-weight: 400;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   margin-bottom:22px;
 }
 .footer-message form{
@@ -378,12 +374,12 @@ main {
   padding-right: 10px;
   color: #fff;
   font-size: 14px;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .footer-message form input::placeholder{
   color: #fff;
   font-size: 14px;
-  font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 .footer-message form button{
   background: transparent;
@@ -394,7 +390,7 @@ main {
   font-size: 16px;
   font-weight: 400;
   color: #fff;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   padding: 0 30px;
   display: flex;
   align-items: center;
@@ -468,17 +464,7 @@ main {
   overflow: hidden;
   /* text-transform: uppercase;  */
 }
-.swiper-handle-change .swiper-pagination-bullet{
-  width: 61px!important;
-  height: 6px!important;
-  border-radius: 2px!important;
-  background-color: #fff!important;
-  opacity: 1!important;
-  margin: 0 6px!important;
-}
-.swiper-handle-change .swiper-pagination-bullet-active{
-  background: #7ACBC4!important;
-}
+
 /* Banner  */
 
 /* Subscribe Sections */
@@ -502,14 +488,14 @@ main {
   font-weight: 400;
   text-transform: uppercase;
   margin-bottom: 12px;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .s-t-1{
   color: #7ACBC4;
   font-size: 24px;
   font-weight: 600; 
   max-width: 352px;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .s-t-1 span{
   color: #07151F;
@@ -541,13 +527,13 @@ main {
   font-weight: 400;
   border: 1px solid #07151F;
   color: #0A273B;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .subscribe-form form input::placeholder{
   font-size: 16px;
   font-weight: 400; 
   color: #0A273B;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 .subscribe-form form button{
   border: none;
@@ -562,7 +548,7 @@ main {
   font-weight: 500; 
   color: #fff;
   background: #0A273B;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
 }
 /* Subscribe Sections */
 /* Partner Section */
@@ -574,7 +560,7 @@ main {
   font-size: 40px;
   color: #0A273B;
   font-weight: 700;
- font-family: 'monserrat', sans-serif; 
+ font-family: 'Montserrat'; 
 }
 .partner-swiper-slide{
   margin-top: 32px;
@@ -602,14 +588,14 @@ main {
   font-size: 40px;
   color: #E6EBED;
   font-weight: 700;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   margin-bottom: 16px;
 }
 .news-text{
   font-size: 20px;
   color: #8FE3DC;
   font-weight: 400;
- font-family: 'monserrat', sans-serif; 
+ font-family: 'Montserrat'; 
 }
 .news-slider-s{
   margin-top: 38px;
@@ -646,7 +632,7 @@ main {
   color: #07151F;
   font-size: 12px;
   font-weight: 400;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -663,7 +649,7 @@ main {
   font-weight: 600;
   margin-top: 16px;
   text-align: center;
- font-family: 'monserrat', sans-serif;  
+ font-family: 'Montserrat';  
  }
  .news-read-more{ 
   font-size: 12px;
@@ -694,7 +680,7 @@ main {
   font-size: 16px;
   color: #fff;
   font-weight: 400;
- font-family: 'monserrat', sans-serif;
+ font-family: 'Montserrat';
  }
  .team-box{
   margin-top: 44px;
@@ -719,7 +705,7 @@ main {
   font-size: 24px;
   font-weight: 600;
   color: #FFFFFF;
- font-family: 'monserrat', sans-serif; 
+ font-family: 'Montserrat'; 
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -730,7 +716,7 @@ main {
   font-size: 24px;
   font-weight: 400;
   color: #FFFFFF;
- font-family: 'monserrat', sans-serif; 
+ font-family: 'Montserrat'; 
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -747,8 +733,7 @@ main {
   font-size: 40px;
   font-weight: 600;
   color: #0A273B;
-  font-family: 'monserrat', sans-serif;
- font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 .popular-area-box{
   margin-top: 54px;
@@ -803,8 +788,7 @@ main {
   font-size: 12px;
   font-weight: 500;
   color: #fff;
-  font-family: 'monserrat', sans-serif;
- font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat';
   border-radius: 8px;
   border: 1px solid #fff;
   padding: 5px 12px;
@@ -824,8 +808,7 @@ main {
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  font-family: 'monserrat', sans-serif;
- font-family: 'monserrat', sans-serif; 
+  font-family: 'Montserrat';
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

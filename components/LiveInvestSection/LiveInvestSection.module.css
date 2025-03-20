@@ -2,34 +2,34 @@
   background-color: #98E5D7;
   position: relative;
   overflow: hidden;
+  padding: 5% 0; /* Use percentage for padding to scale with screen size */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 2%; /* Use percentage for padding */
 }
 
 .content {
-  padding-top: 121px;
+  margin-top: 7.5625rem;
 }
 
 .content h4 {
-  font-size: 20px;
+  font-size: 1.5vw; /* Responsive font size */
   font-weight: 600;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   line-height: 100%;
   color: #0A273B;
-  font-family: 'monserrat', sans-serif;
+  font-family: "Montserrat Italic";
 }
 
 .content h2 {
-  font-size: 48px;
+  font-size: 3vw; /* Responsive font size */
   font-weight: 400;
-  margin-bottom: 40px;
   color: #0A273B;
   line-height: 100%;
-  font-family: 'felix', sans-serif;
+  font-family: "Felix Titling";
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -37,15 +37,15 @@
 .contactBtn {
   background-color: white;
   border: none;
-  padding: 12px 35px;
+  padding: 1.5% 3%; /* Responsive padding */
   border-radius: 30px;
-  font-size: 14px;
+  font-size: 1.2vw; /* Responsive font size */
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'monserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-top: 173px;
+  margin-top: 10%; /* Responsive margin */
 }
 
 .contactBtn:hover {
@@ -55,11 +55,11 @@
 }
 
 .sliderContainer {
-  position: relative;
-  height: 500px;
+  top: 10%; /* Responsive positioning */
+  margin-top: 9.5rem;
+  height: 50vh; /* Use viewport height for scaling */
   perspective: 1500px;
   transform-style: preserve-3d;
-  margin-top: -30px;
 }
 
 .slider3D {
@@ -70,22 +70,19 @@
 
 .slide {
   position: absolute;
-  width: 364px;
-  height: 364px;
-  left: 50%;
-  top: 50%;
+  width: 20vw; /* Responsive width */
+  height: 20vw; /* Responsive height */
+  border-radius: 16px;
   transform-origin: center center;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
-  margin-left: -182px;
-  margin-top: -182px;
   will-change: transform;
 }
 
 .imageWrapper {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -101,8 +98,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 2.5vw; /* Responsive width */
+  height: 2.5vw; /* Responsive height */
   border-radius: 50%;
   background: white;
   border: none;
@@ -113,38 +110,79 @@
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  font-size: 20px;
+  font-size: 1.5vw; /* Responsive font size */
   color: #8FE3DC;
 }
 
 .prevButton {
-  left: 15%;
+  left: -2vw; /* Responsive positioning */
 }
 
 .nextButton {
-  right: 15%;
+  right: -2vw; /* Responsive positioning */
 }
 
 .stats {
   display: flex;
-  justify-content: flex-end;
-  gap: 100px;
-  margin-top: 78px;
+  align-items: center;
   position: relative;
   z-index: 5;
-  padding-left: 15px;
-  margin-bottom: 62px;
-  font-family: 'felix', sans-serif;
+  padding-left: 2%; /* Responsive padding */
+  font-family: 'Felix', sans-serif;
+}
+
+.statImage {
+  position: relative;
+  width: 40vw; /* Responsive width */
+  height: 10vw; /* Responsive height */
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.statImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stat_text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #FFFFFF;
+  width: 60vw; /* Responsive width */
+  height: 12vw; /* Responsive height */
+  border-top-right-radius: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 2%; /* Responsive padding */
+  justify-content: center;
+}
+
+.stat_text span {
+  font-size: 1.5vw; /* Responsive font size */
+  color: #000;
+  font-family: 'Felix', sans-serif;
+  margin-top: 3vw; /* Responsive margin */
+}
+
+.statItems {
+  justify-content: end;
+  margin-right: 10%; /* Responsive margin */
+  margin-bottom: 5%; /* Responsive margin */
+  gap: 5vw; /* Responsive gap */
+  width: 100%;
+  display: flex;
 }
 
 .statItem {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 1vw; /* Responsive gap */
 }
 
 .statItem h3 {
-  font-size: 32px;
+  font-size: 2vw; /* Responsive font size */
   font-weight: 500;
   color: #000;
   display: flex;
@@ -154,54 +192,53 @@
 
 .statItem:first-child h3::before {
   content: "★";
-  margin-right: 8px;
-  font-size: 24px;
+  margin-right: 0.5vw; /* Responsive margin */
+  font-size: 1.5vw; /* Responsive font size */
   opacity: 0.8;
 }
 
 .statItem:last-child h3::before {
   content: "⌂";
-  margin-right: 8px;
-  font-size: 24px;
+  margin-right: 0.5vw; /* Responsive margin */
+  font-size: 1.5vw; /* Responsive font size */
   opacity: 0.8;
 }
 
 .statItem p {
-  font-size: 13px;
+  font-size: 1vw; /* Responsive font size */
   color: #000;
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.4;
-  max-width: 90px;
+  max-width: 10vw; /* Responsive max-width */
   font-family: 'Tenor Sans', sans-serif;
   font-weight: 300;
 }
 
+/* Media Queries for Specific Breakpoints */
 @media (max-width: 1200px) {
   .slide {
-    width: 300px;
-    height: 300px;
-    margin-left: -150px;
-    margin-top: -150px;
+    width: 25vw;
+    height: 25vw;
   }
 
   .prevButton {
-    left: 10%;
+    left: -3vw;
   }
 
   .nextButton {
-    right: 10%;
+    right: -3vw;
   }
 }
 
 @media (max-width: 991px) {
   .content {
     padding-top: 0;
-    margin-bottom: 60px;
+    margin-bottom: 5%;
   }
 
   .content h2 {
-    font-size: 42px;
+    font-size: 4vw;
   }
 
   .sliderContainer {
@@ -216,18 +253,18 @@
 
 @media (max-width: 768px) {
   .liveInvestSection {
-    padding: 60px 0;
+    padding: 5% 0;
   }
 
   .content h2 {
-    font-size: 36px;
+    font-size: 5vw;
   }
 
   .stats {
     flex-direction: column;
-    gap: 30px;
+    gap: 5vw;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 5%;
   }
 
   .statItem {
@@ -241,17 +278,15 @@
   }
 
   .slide {
-    width: 260px;
-    height: 260px;
-    margin-left: -130px;
-    margin-top: -130px;
+    width: 30vw;
+    height: 30vw;
   }
 
   .prevButton {
-    left: 5%;
+    left: -5vw;
   }
 
   .nextButton {
-    right: 5%;
+    right: -5vw;
   }
 }
