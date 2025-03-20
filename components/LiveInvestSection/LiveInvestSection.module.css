@@ -1,8 +1,7 @@
 .liveInvestSection {
   background-color: #98E5D7;
   position: relative;
-  overflow: hidden;
-  padding: 5% 0; /* Use percentage for padding to scale with screen size */
+  overflow: hidden; 
 }
 
 .container {
@@ -33,7 +32,21 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.content p {
+  font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+width: 326px;
+height: 100px;
+top: 305px;
+left: 180px;
+margin-top: 24px;
 
+
+
+}
 .contactBtn {
   background-color: white;
   border: none;
@@ -46,6 +59,7 @@
   font-weight: 500;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-top: 10%; /* Responsive margin */
+  margin-bottom: 8.6875rem;
 }
 
 .contactBtn:hover {
@@ -70,8 +84,8 @@
 
 .slide {
   position: absolute;
-  width: 20vw; /* Responsive width */
-  height: 20vw; /* Responsive height */
+  width: 22.75rem; /* Responsive width */
+  height: 22.75rem; /* Responsive height */
   border-radius: 16px;
   transform-origin: center center;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -115,7 +129,7 @@
 }
 
 .prevButton {
-  left: -2vw; /* Responsive positioning */
+  left: 1vw; /* Responsive positioning */
 }
 
 .nextButton {
@@ -168,9 +182,8 @@
 
 .statItems {
   justify-content: end;
-  margin-right: 10%; /* Responsive margin */
+  padding-right: 5%; /* Responsive margin */
   margin-bottom: 5%; /* Responsive margin */
-  gap: 5vw; /* Responsive gap */
   width: 100%;
   display: flex;
 }

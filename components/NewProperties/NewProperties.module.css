@@ -1,77 +1,75 @@
 .newProperties {
-  padding: 2rem 0;
+  margin-top: 5rem;
   min-height: 100vh;
+  background-color: #ffffff;
+  padding: 2rem 0;
 }
 
 .container {
-  max-width: 1560px;
   margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-}
-
-.title {
-  display: none; /* Remove since we're using propertyCardTitle */
 }
 
 .filterButtons {
-  position: absolute;
-  top: 2rem;
-  right: 3rem;
-  align-items: flex-start;
-  gap: 4rem;
-  z-index: 1;
+  display: flex;
+  float: right;
 }
 
-.filterButtons button {
+.buttonGroup {
+  display: flex;
+}
+
+.buttonGroup button {
   padding: 0.5rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #ccc;
   background: transparent;
-  color: white;
+  color: #ffff;
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 169px;
   font-size: 20px;
-  font-family: 'montserrat', sans-serif;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  width: 169px;
+height: 48px;
+border-radius: 16px;
+
 }
 
-.filterButtons button.active {
-  background-color: white;
-  color: #0A1929;
+.buttonGroup button.active {
+  background-color: #ffff;
+  color: #0A273B;
   border: none;
-  font-family: 'montserrat', sans-serif;  
+  font-family: 'Montserrat', sans-serif;
 }
 
 .propertyCard {
-  background-color: #0E2133;
+  background-color: white;
   border-radius: 2rem;
   overflow: hidden;
-  position: relative;
-  padding: 2rem;
-  margin-top: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #0A273B;
 }
 
 .propertyCardTitle {
-  font-family: 'felix', sans-serif;
+  font-family: "Felix Titling", serif;
   font-size: 40px;
-  font-weight: 300;
   color: #FFFFFF;
   margin-bottom: 2rem;
-  padding-left: 1rem;
+  padding: 2rem 2rem 0;
+}
+
+.propertyContent {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
 }
 
 .imageContainer {
-  width: 100%;
-  max-width: 966px;
-  height: 338px;
+  flex: 2;
+  height: 400px;
   position: relative;
   border-radius: 32px;
   overflow: hidden;
-  margin-bottom: 2rem;
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
 }
 
 .propertyImage {
@@ -80,44 +78,8 @@
   object-fit: cover;
 }
 
-.content {
+.propertyInfo {
   display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  gap: 4rem;
-}
-
-.leftContent {
-  flex: 1;
-  padding-left: 1rem;
-}
-
-.propertyName {
-  font-size: 20px;
-  font-weight: 400;
-  color: white;
-  margin-bottom: 0.5rem;
-  font-family: 'montserrat', sans-serif;
-}
-
-.propertyType {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  margin-bottom: 1rem;
-}
-
-.price {
-  font-size: 2.25rem;
-  font-weight: 400;
-  font-family: 'montserrat', sans-serif;
-  color: white;
-}
-
-.rightContent {
-  flex: 2;
-  display: flex;
-  justify-content: end;
-  align-items: flex-end;
 }
 
 .features {
@@ -125,71 +87,111 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  margin-left: 200px;
-  margin-top:48px;
-  gap: 0.5rem;
-  width: 474;
-height: 249;
-top: 144px;
-left: 1038px;
-
+  gap: 1rem;
 }
 
 .features li {
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffff;
+  font-family: 'Montserrat', sans-serif;
   position: relative;
-  padding-left: 1rem;
+  padding-left: 10px;
+  font-weight: 400;
   font-size: 20px;
-  line-height:100%;
-  font-family: 'montserrat', sans-serif;
+  line-height: 100%;
+  letter-spacing: 0%;
+
 }
 
 .features li:before {
   content: "•";
   position: absolute;
   left: 0;
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
 }
 
-.buttonGroup {
+.propertyDetails {
   display: flex;
-  gap: 0.75rem;
-  width: 523px;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.leftContent {
+  flex: 1;
+}
+
+.propertyName {
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.propertyType {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.price {
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rightContent {
+  display: flex;
+  align-items: flex-end;
 }
 
 .seeMore {
-  padding: 0.5rem 1.25rem;
-  background-color: white;
-  color: #0A1929;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #0A273B;
   border: none;
   border-radius: 2rem;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
-  font-size: 1rem;
-  white-space: nowrap;
-  max-width: 169px;
-  height: 48px;
-  font-family: 'montserrat', sans-serif;
-
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .seeMore:hover {
-  background-color: #f0f0f0;
+  background-color: #1a2a3a;
 }
 
-@media (max-width: 1024px) {
-  .content {
-    flex-direction: column;
-    gap: 2rem;
+@media (max-width: 768px) {
+  .filterButtons {
+    justify-content: center;
   }
-  
+
+  .buttonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttonGroup button {
+    width: 100%;
+  }
+
+  .propertyContent {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    height: 300px;
+  }
+
+  .propertyDetails {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .rightContent {
-    flex-direction: column;
-    gap: 1.5rem;
+    justify-content: flex-start;
   }
-  
-  .features {
-    margin-bottom: 1rem;
-  }
-} 
+}

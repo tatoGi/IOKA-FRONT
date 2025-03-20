@@ -30,21 +30,21 @@ const LiveInvestSection = () => {
       return {
         opacity: 1,
         transform:
-          "translateX(210px) translateY(200px) translateZ(0) rotateY(0deg)",
+          "translateX(150px) translateY(150px) translateZ(0) rotateY(0deg)",
         zIndex: 10
       };
     else if (activeSlide - 1 === index)
       return {
         opacity: 1,
         transform:
-          "translateX(24px) translateY(0) translateZ(-200px) rotateY(35deg)",
+          "translateX(0) translateY(0) translateZ(-200px) rotateY(35deg)",
         zIndex: 9
       };
     else if (activeSlide + 1 === index)
       return {
         opacity: 1,
         transform:
-          "translateX(440px) translateY(0) translateZ(-200px) rotateY(-35deg)",
+          "translateX(324px) translateY(0) translateZ(-200px) rotateY(-35deg)",
         zIndex: 9
       };
     else if (index < activeSlide - 1)
@@ -74,6 +74,12 @@ const LiveInvestSection = () => {
               <br />
               ACCELERATED GROWTH
             </h2>
+            
+            <p>Want to search for potential matches?
+From studio apartments to penthouses-
+select your layout to see what’s available.
+When you spot something that catches
+your eye, we’re here to help</p>
             <button className={styles.contactBtn}>Contact Us</button>
           </div>
 
@@ -137,7 +143,7 @@ const LiveInvestSection = () => {
               <h3>86K</h3>
               <p>Resale Properties</p>
             </div>
-            <div className={styles.statItem_right}>
+            <div className={styles.statItem}>
               <h3>32K</h3>
               <p>Off Plan Properties</p>
             </div>
