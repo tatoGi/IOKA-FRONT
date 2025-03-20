@@ -1,11 +1,13 @@
+/* Default Styles (Mobile First) */
 .propertyCard {
   background: white;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
-  width: 100%; /* Full width of the column */
-  height: 360px; /* Fixed height */
+  width: 23.25rem; /* Full width of the column */
+  height: auto; /* Auto height for responsiveness */
+  min-height: 22.5rem; /* Minimum height */
   border: 1px solid #E6EBED; /* Border width */
   padding-bottom: 16px; /* Padding at the bottom */
 }
@@ -18,7 +20,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  height: 200px; /* Adjust height as needed */
+  height: 200px; /* Fixed height for the image container */
   background: #f5f5f5;
 }
 
@@ -46,11 +48,11 @@
 }
 
 .propertyInfo {
-  padding-left: 1rem;
+  padding: 1rem;
 }
 
 .title {
-  font-size: 1.125rem;
+  font-size: 1.125rem; /* 18px */
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 8px;
@@ -109,7 +111,7 @@
 
 .actions {
   display: flex;
-  margin-left: 5rem;
+  margin-left: auto; /* Push actions to the right */
 }
 
 .actionButton {
@@ -188,4 +190,150 @@
   letter-spacing: 0%;
   text-align: right;
   color: #0A273B;
+}
+
+/* Laptop Resolution (1440px) */
+@media (min-width: 1440px) {
+  .propertyCard {
+    width: 19.20rem; /* Fixed width for laptop */
+  }
+
+  .title {
+    font-size: 1rem; /* 20px */
+  }
+
+  .location {
+    font-size: 14px;
+  }
+
+  .features {
+    gap: 10px; /* Increase gap between features */
+  }
+
+  .feature {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 12px;
+  }
+
+  .resultsCount {
+    font-size: 22px;
+  }
+}
+
+/* Desktop Resolution (1920px) */
+@media (min-width: 1920px) {
+  .propertyCard {
+    width: 23.25rem; /* Slightly larger width for desktop */
+  }
+
+  .title {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .location {
+    font-size: 16px;
+  }
+
+  .features {
+    gap: 24px; /* Increase gap between features */
+  }
+
+  .feature {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 12px;
+  }
+
+  .resultsCount {
+    font-size: 24px;
+  }
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 1200px) {
+  .propertyCard {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .features {
+    gap: 16px; /* Reduce gap between features */
+  }
+
+  .priceRow {
+    gap: 12px; /* Reduce gap in price row */
+  }
+}
+
+@media (max-width: 768px) {
+  .propertyCard {
+    height: auto; /* Auto height for smaller screens */
+  }
+
+  .imageContainer {
+    height: 150px; /* Reduce image container height */
+  }
+
+  .title {
+    font-size: 1rem; /* Reduce title font size */
+  }
+
+  .location {
+    font-size: 10px; /* Reduce location font size */
+  }
+
+  .features {
+    flex-wrap: wrap; /* Wrap features on smaller screens */
+    gap: 12px; /* Reduce gap between features */
+  }
+
+  .feature {
+    font-size: 10px; /* Reduce feature font size */
+  }
+
+  .price {
+    font-size: 10px; /* Reduce price font size */
+  }
+
+  .resultsCount {
+    font-size: 16px; /* Reduce results count font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .propertyCard {
+    padding-bottom: 12px; /* Reduce padding */
+  }
+
+  .imageContainer {
+    height: 120px; /* Further reduce image container height */
+  }
+
+  .title {
+    font-size: 0.875rem; /* Further reduce title font size */
+  }
+
+  .location {
+    font-size: 8px; /* Further reduce location font size */
+  }
+
+  .features {
+    gap: 8px; /* Further reduce gap between features */
+  }
+
+  .feature {
+    font-size: 8px; /* Further reduce feature font size */
+  }
+
+  .price {
+    font-size: 8px; /* Further reduce price font size */
+  }
+
+  .resultsCount {
+    font-size: 14px; /* Further reduce results count font size */
+  }
 }

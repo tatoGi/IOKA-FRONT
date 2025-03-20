@@ -72,32 +72,37 @@
 }
 
 .card .title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 12px;
   color: #333;
+  margin-left: 16px;
+  
+  margin-top: 16px;
 }
 
 .card .description {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 400;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #666;
+  margin-left: 16px;
 }
 
 .card .communities {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 12px;
   color: #333;
+  margin-left: 16px;
 }
 
 .card .badge {
@@ -108,7 +113,9 @@
   border: 1px solid #e0e0e0;
   font-size: 12px;
   font-weight: 400 !important;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
+  border: #07151F 1px solid;
+  margin-left: 16px;
 }
 
 /* Button Styles */
@@ -127,6 +134,7 @@
   justify-content: center;
   gap: 8px;
   transition: background-color 0.3s ease;
+  margin-left: 16px;
 }
 
 .call:hover {
@@ -155,7 +163,7 @@
 }
 
 .readMore {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
@@ -168,10 +176,30 @@
   height: 17px;
   padding: 0;
   transition: color 0.3s ease;
+  text-decoration: none;
+  margin-right: 16px;
 }
 
 .readMore:hover {
   color: #0056b3;
+}
+
+/* Button Container */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.leftButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.rightButton {
+  margin-left: auto;
 }
 
 /* Pagination Styles */
@@ -180,7 +208,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  gap: 8px; /* Space between buttons */
+  gap: 8px;
 }
 
 .pageButton {
@@ -194,10 +222,9 @@
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
   width: 48px;
-height: 48px;
-left: 50px;
-border-radius: 4px;
-
+  height: 48px;
+  left: 50px;
+  border-radius: 4px;
 }
 
 .pageButton:hover {
@@ -210,10 +237,9 @@ border-radius: 4px;
   background-color: #0A273B;
   color: #fff;
   width: 48px;
-height: 48px;
-left: 50px;
-border-radius: 4px;
-
+  height: 48px;
+  left: 50px;
+  border-radius: 4px;
 }
 
 .pageButton:disabled {
@@ -233,19 +259,20 @@ border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
   width: 48px;
-height: 48px;
-left: 50px;
-border-radius: 4px;
-
+  height: 48px;
+  left: 50px;
+  border-radius: 4px;
 }
-.prevButtonimage{
+
+.prevButtonimage {
   width: 48px;
   height: 48px;
   left: 50px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.nextButtonimage{
+
+.nextButtonimage {
   width: 48px;
   height: 48px;
   left: 50px;
@@ -258,6 +285,7 @@ border-radius: 4px;
   color: #ccc;
   cursor: not-allowed;
 }
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .container {
@@ -328,14 +356,17 @@ border-radius: 4px;
     padding: 6px 10px;
     font-size: 10px;
   }
-.prevButton{
-  width: 48px;
-  height: 48px;
-}
-.nextButton{
-  width: 48px;
-  height: 48px;
-}
+
+  .prevButton {
+    width: 48px;
+    height: 48px;
+  }
+
+  .nextButton {
+    width: 48px;
+    height: 48px;
+  }
+
   .readMore {
     font-size: 10px;
   }
@@ -348,5 +379,50 @@ border-radius: 4px;
     padding: 6px 12px;
     font-size: 12px;
     margin: 4px;
+  }
+}
+
+/* 1920px Desktop Responsiveness */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  .card {
+    width: 768px;
+    margin: 0 auto 20px;
+  }
+
+  .card .title {
+    font-size: 16px;
+  }
+
+  .card .description {
+    font-size: 14px;
+  }
+
+  .card .communities {
+    font-size: 16px;
+  }
+
+  .card .badge {
+    font-size: 14px;
+  }
+
+  .call,
+  .whatsapp {
+    font-size: 14px;
+  }
+
+  .readMore {
+    font-size: 16px;
+  }
+
+  .pagination {
+    gap: 12px;
+  }
+
+  .pageButton {
+    font-size: 16px;
   }
 }

@@ -79,7 +79,7 @@ const Offplan = ({ initialData, initialPagination }) => {
         <LoadingWrapper isLoading={isLoading}>
           <Row>
             {cardData.map((property) => (
-              <Col key={property.id} md={4} className="mb-4">
+              <Col key={property.id} md={3} className="mb-3">
                 <div
                   className={styles.propertyCardLink}
                   onClick={() => handleReadMore(property.slug)}
