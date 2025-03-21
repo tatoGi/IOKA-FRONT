@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Area from "../../assets/img/area-1.png";
+import Area from "../../assets/img/n-1.png";
 import WhiteArrow from "../icons/WhiteArrow";
 
 const PopularAreaSection = () => {

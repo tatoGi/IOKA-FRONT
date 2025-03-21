@@ -641,7 +641,6 @@ main {
  font-family: 'Montserrat';
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
   overflow: hidden;
   text-align: center;
 }
@@ -730,6 +729,7 @@ border: 1px #E6EBED solid;
   width: 100%;
   height: 328px;
   border-radius: 16px;
+  object-fit: contain;
  }
  .name{
   font-size: 24px;
@@ -780,23 +780,7 @@ border: 1px #E6EBED solid;
   overflow: hidden;
   transition: 0.3s;
 }
-.area-item::before{
-  position: absolute;
-  content: " ";
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 39, 59, 0.8);
-  top: 0;
-  left: 0;
-  z-index: 2;
-  transition: 0.5s;
-  transform: scale(1);
-}
-.area-item:hover::before{
-  transform: scale(0);
-}
-.area-item:hover{
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 8px;}
+
 .area-item img{
   width: 100%;
   height: 100%;

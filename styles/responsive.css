@@ -1,0 +1,85 @@
+/* Responsive styles for 1600px */
+@media (max-width: 1600px) {
+    .popular-area-section {
+      padding: 60px 0; /* Adjusted padding */
+    }
+  
+    .popular-area-title {
+      font-size: 36px; /* Adjusted font size */
+    }
+  
+    .popular-area-box {
+      gap: 20px; /* Adjusted gap */
+    }
+  
+    .area-item {
+      width: calc((100% / 3) - 14px); /* Adjusted width for 3 items per row */
+      height: 220px; /* Adjusted height */
+    }
+  
+    .area-title {
+      bottom: 24px; /* Adjusted position */
+      padding: 0 20px; /* Adjusted padding */
+    }
+  
+    .ar-title {
+      font-size: 14px; /* Adjusted font size */
+    }
+  
+    .arrow-box {
+      height: 28px; /* Adjusted size */
+      width: 28px; /* Adjusted size */
+    }
+  }
+  
+  /* Responsive styles for 1024px */
+  @media (max-width: 1024px) {
+    .area-item {
+      width: calc((100% / 2) - 12px); /* Adjusted width for 2 items per row */
+      height: 200px; /* Adjusted height */
+    }
+  
+    .popular-area-title {
+      font-size: 32px; /* Adjusted font size */
+    }
+  
+    .area-title {
+      bottom: 20px; /* Adjusted position */
+      padding: 0 16px; /* Adjusted padding */
+    }
+  
+    .ar-title {
+      font-size: 14px; /* Adjusted font size */
+    }
+  
+    .arrow-box {
+      height: 24px; /* Adjusted size */
+      width: 24px; /* Adjusted size */
+    }
+  }
+  
+  /* Responsive styles for 768px */
+  @media (max-width: 768px) {
+    .area-item {
+      width: 100%; /* Full width for mobile */
+      height: 180px; /* Adjusted height */
+    }
+  
+    .popular-area-title {
+      font-size: 28px; /* Adjusted font size */
+    }
+  
+    .area-title {
+      bottom: 16px; /* Adjusted position */
+      padding: 0 12px; /* Adjusted padding */
+    }
+  
+    .ar-title {
+      font-size: 12px; /* Adjusted font size */
+    }
+  
+    .arrow-box {
+      height: 20px; /* Adjusted size */
+      width: 20px; /* Adjusted size */
+    }
+  }

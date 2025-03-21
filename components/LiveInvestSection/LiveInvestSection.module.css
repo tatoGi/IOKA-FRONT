@@ -2,6 +2,7 @@
   background-color: #98e5d7;
   position: relative;
   overflow: hidden;
+  height: 921px;
 }
 
 
@@ -15,7 +16,7 @@
   margin-bottom: 1.5rem;
   line-height: 100%;
   color: #0a273b;
-  font-family: "Montserrat Italic";
+  font-family: "Montserrat";
 }
 
 .content h2 {
@@ -247,8 +248,17 @@
 }
 /* Media Queries for Laptop Screens */
 @media (max-width: 1600px) {
+  .liveInvestSection {
+    background-color: #98e5d7;
+    position: relative;
+    overflow: hidden;
+    height: 770px;
+  }
+  
   .content h4 {
     font-size: 1.25rem;
+    font-family: "Montserrat";
+    font-weight: 600;
   }
 
   .content h2 {
