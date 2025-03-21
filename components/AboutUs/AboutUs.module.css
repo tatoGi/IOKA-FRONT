@@ -173,7 +173,7 @@
 .testimonialImageContainer {
   position: absolute;
     top: 9rem;
-    left: 6rem;
+    left: 0rem;
     z-index: 2;
 }
 

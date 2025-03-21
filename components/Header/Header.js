@@ -9,9 +9,10 @@ import { usePathname } from "next/navigation";
 
 const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const pathname = usePathname();
-  
-  const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : ""; 
+
+  const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
   const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#" || normalizedPathname === "/home";
 
   const [inputValue, setInputValue] = useState("");
@@ -37,13 +38,17 @@ const Header = ({ navigationData }) => {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+  };
+
   useEffect(() => {
     function handleScroll() {
       if (!isHomePage) {
         setActiveScroll(true);
         return;
       }
-  
+
       const currentScrollY = window.pageYOffset;
       if (currentScrollY >= 20) {
         setActiveScroll(true);
@@ -51,10 +56,10 @@ const Header = ({ navigationData }) => {
         setActiveScroll(false);
       }
     }
-  
+
     // Initial check to set the correct state based on the current scroll position
     handleScroll();
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
@@ -86,47 +91,53 @@ const Header = ({ navigationData }) => {
                   </Link>
                 </div>
               </div>
-              
-                <div className="header-nav">
-                  <ul>
-                    {filteredAndSortedPages.map((page) => (
-                      <li
-                        key={page.id}
-                        className={
-                          normalizedPathname === `/${page.slug}` ? "active-link" : ""
-                        }
-                      >
-                        <Link href={`/${page.slug}`}>{page.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
+
+              {/* Mobile Burger Menu */}
+              <div className="mobile-burger-menu" onClick={toggleMobileMenu}>
+                <div className={`burger-lines ${isMobileMenuOpen ? "open" : ""}`}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
                 </div>
-          
+              </div>
+
+              {/* Navigation Menu */}
+              <div className={`header-nav ${isMobileMenuOpen ? "active" : ""}`}>
+                <ul>
+                  {filteredAndSortedPages.map((page) => (
+                    <li
+                      key={page.id}
+                      className={
+                        normalizedPathname === `/${page.slug}` ? "active-link" : ""
+                      }
+                    >
+                      <Link href={`/${page.slug}`}>{page.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <div className="right-search-contact">
-              
-                  <div className="right-form">
-                    <form action="">
-                      <input
-                        type="text"
-                        ref={inputRef}
-                        value={inputValue}
-                        onChange={handleInputChange}
-                      />
-                      <button className="searchbtn" onClick={handleSearch}>
-                        <SearchBtn />
-                      </button>
-                      <button className="clearbtn" onClick={handleClear}>
-                        <SearchCloseBtn />
-                      </button>
-                    </form>
-                  </div>
-              
+                <div className="right-form">
+                  <form action="">
+                    <input
+                      type="text"
+                      ref={inputRef}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                    />
+                    <button className="searchbtn" onClick={handleSearch}>
+                      <SearchBtn />
+                    </button>
+                    <button className="clearbtn" onClick={handleClear}>
+                      <SearchCloseBtn />
+                    </button>
+                  </form>
+                </div>
+
                 <div className="contactBtn">
                   <Link href={"/contact"}>CONTACT US</Link>
                 </div>
-              </div>
-              <div className="mobile-burger-menu">
-                <div className="burger-lines"></div>
               </div>
             </div>
           </div>
