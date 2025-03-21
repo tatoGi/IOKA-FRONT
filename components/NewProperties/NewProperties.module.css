@@ -195,3 +195,79 @@ border-radius: 16px;
     justify-content: flex-start;
   }
 }
+/* Media Query for 1600px */
+@media (max-width: 1600px) {
+
+
+  .propertyCardTitle {
+    font-size: 36px; /* Reduced font size */
+  }
+
+  .propertyContent {
+    gap: 1.5rem; /* Reduced gap */
+  }
+
+  .imageContainer {
+    height: 350px; /* Adjusted height */
+  }
+
+  .features li {
+    font-size: 18px; /* Reduced font size */
+  }
+
+  .propertyName {
+    font-size: 22px; /* Reduced font size */
+  }
+
+  .propertyType {
+    font-size: 14px; /* Reduced font size */
+  }
+
+  .price {
+    font-size: 2rem; /* Reduced font size */
+  }
+
+  .seeMore {
+    padding: 0.5rem 1.25rem; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
+  }
+
+  .buttonGroup button {
+    width: 150px; /* Adjusted button width */
+    height: 42px; /* Adjusted button height */
+    font-size: 18px; /* Reduced font size */
+  }
+}
+
+/* Media Query for 768px (Existing) */
+@media (max-width: 768px) {
+  .filterButtons {
+    justify-content: center;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttonGroup button {
+    width: 100%;
+  }
+
+  .propertyContent {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    height: 300px;
+  }
+
+  .propertyDetails {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .rightContent {
+    justify-content: flex-start;
+  }
+}
