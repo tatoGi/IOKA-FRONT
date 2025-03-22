@@ -1219,9 +1219,11 @@ border: 1px #E6EBED solid;
 }
 
 .breadcrumb-list li {
-  font-size: 14px;
-  color: #0A273B;
+  font-family: 'Montserrat';
   font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
   display: flex;
   align-items: center;
 }
@@ -1234,10 +1236,12 @@ border: 1px #E6EBED solid;
 }
 
 .breadcrumb-list li a {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
   color: #0A273B;
-  opacity: 0.5;
   text-decoration: none;
-  transition: opacity 0.3s ease;
 }
 
 .breadcrumb-list li a:hover {

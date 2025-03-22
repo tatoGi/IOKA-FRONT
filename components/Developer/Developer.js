@@ -140,7 +140,7 @@ const Developer = ({ initialData, initialPagination }) => {
       <Container fluid className="py-4">
         {/* Search Section */}
         <Row className="mb-4">
-          <Col md={6}>
+          <div className={styles.searchContainer}>
             <Form.Group className="position-relative">
               <Form.Control
                 type="text"
@@ -151,17 +151,17 @@ const Developer = ({ initialData, initialPagination }) => {
               />
               <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
             </Form.Group>
-          </Col>
+          </div>
         </Row>
 
         {/* Developer Cards */}
         <Row>
           {filteredData.map((card) => (
-            <Col key={card.id} md={6} className="mb-4">
+            <div key={card.id} className={styles.cardCol}>
               <div className={`card h-100 shadow-sm ${styles.card}`}>
                 <Row className="g-0 h-100">
                   {/* Image Section */}
-                  <Col md={6} className="position-relative">
+                  <Col md={6} className={styles.imageIndexes}>
                     <Image
                       src={getImageUrl(card.photo, card.id)}
                       alt={card.title}
@@ -195,7 +195,7 @@ const Developer = ({ initialData, initialPagination }) => {
                   <Col md={6} className="d-flex flex-column ">
                     <h2 className={`h4 ${styles.title}`}>{card.title}</h2>
                     <div className={`flex-grow-1 ${styles.description}`}>
-                      <p>{limitTextLength(card.paragraph, 108)}</p>
+                      <p>{limitTextLength(card.paragraph, 400)}</p>
                     </div>
                     <div className="mt-3">
                       <h3 className={`h6 ${styles.communities}`}>
@@ -260,7 +260,7 @@ const Developer = ({ initialData, initialPagination }) => {
                   </Col>
                 </Row>
               </div>
-            </Col>
+            </div>
           ))}
         </Row>
 
