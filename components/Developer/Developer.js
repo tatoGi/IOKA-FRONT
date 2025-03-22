@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Container, Row, Col, Button, Form, Stack } from "react-bootstrap"; // Import React Bootstrap components
 import {
   FaChevronLeft,
   FaChevronRight,
   FaPhone,
   FaWhatsapp,
-  FaSearch
+  FaSearch,
 } from "react-icons/fa";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -54,6 +53,7 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   };
 
+  // Limit text length
   const limitTextLength = (text, maxLength) => {
     const strippedText = text.replace(/(<([^>]+)>)/gi, "");
     return strippedText.length > maxLength
@@ -108,7 +108,7 @@ const Developer = ({ initialData, initialPagination }) => {
       if (Array.isArray(parsed)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) + 1) % parsed.length
+          [cardId]: ((prev[cardId] || 0) + 1) % parsed.length,
         }));
       }
     } catch (e) {
@@ -123,7 +123,7 @@ const Developer = ({ initialData, initialPagination }) => {
       if (Array.isArray(parsed)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) - 1 + parsed.length) % parsed.length
+          [cardId]: ((prev[cardId] || 0) - 1 + parsed.length) % parsed.length,
         }));
       }
     } catch (e) {
@@ -137,31 +137,27 @@ const Developer = ({ initialData, initialPagination }) => {
 
   return (
     <LoadingWrapper isLoading={isLoading}>
-      <Container fluid className="py-4">
+      <div className="container py-4">
         {/* Search Section */}
-        <Row className="mb-4">
-          <div className={styles.searchContainer}>
-            <Form.Group className="position-relative">
-              <Form.Control
-                type="text"
-                placeholder="City, Building or community"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="ps-5"
-              />
-              <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
-            </Form.Group>
-          </div>
-        </Row>
+        <div className={`mb-4 position-relative col-md-6`}>
+          <input
+            type="text"
+            placeholder="City, Building or community"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="form-control ps-5"
+          />
+          <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
+        </div>
 
         {/* Developer Cards */}
-        <Row>
+        <div className="row">
           {filteredData.map((card) => (
-            <div key={card.id} className={styles.cardCol}>
+            <div key={card.id} className="col-md-6 mb-4">
               <div className={`card h-100 shadow-sm ${styles.card}`}>
-                <Row className="g-0 h-100">
+                <div className="row g-0 h-100">
                   {/* Image Section */}
-                  <Col md={6} className={styles.imageIndexes}>
+                  <div className="col-md-6 position-relative">
                     <Image
                       src={getImageUrl(card.photo, card.id)}
                       alt={card.title}
@@ -171,28 +167,25 @@ const Developer = ({ initialData, initialPagination }) => {
                       style={{ objectFit: "cover" }}
                     />
                     {JSON.parse(card.photo)?.length > 1 && (
-                      <Stack
-                        direction="horizontal"
-                        className="position-absolute top-50 start-0 end-0 justify-content-between px-3"
-                      >
-                        <Button
+                      <div className="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3">
+                        <button
                           onClick={() => handlePrevImage(card.id, card.photo)}
-                          className={`rounded-circle ${styles.prevButtonimage}`}
+                          className={`btn rounded-circle ${styles.prevButtonimage}`}
                         >
                           <FaChevronLeft />
-                        </Button>
-                        <Button
+                        </button>
+                        <button
                           onClick={() => handleNextImage(card.id, card.photo)}
-                          className={`rounded-circle ${styles.nextButtonimage}`}
+                          className={`btn rounded-circle ${styles.nextButtonimage}`}
                         >
                           <FaChevronRight />
-                        </Button>
-                      </Stack>
+                        </button>
+                      </div>
                     )}
-                  </Col>
+                  </div>
 
                   {/* Content Section */}
-                  <Col md={6} className="d-flex flex-column ">
+                  <div className="col-md-6 d-flex flex-column">
                     <h2 className={`h4 ${styles.title}`}>{card.title}</h2>
                     <div className={`flex-grow-1 ${styles.description}`}>
                       <p>{limitTextLength(card.paragraph, 400)}</p>
@@ -201,41 +194,33 @@ const Developer = ({ initialData, initialPagination }) => {
                       <h3 className={`h6 ${styles.communities}`}>
                         Top Communities
                       </h3>
-                      <Stack
-                        direction="horizontal"
-                        gap={2}
-                        className="flex-wrap"
-                      >
+                      <div className="d-flex flex-wrap gap-2 ms-3">
                         {JSON.parse(card.tags).map((tag, index) => (
                           <span
                             key={index}
-                            className={`bg-light text-dark  ${styles.badge}`}
+                            className={`bg-light text-dark ${styles.badge}`}
                           >
                             {tag}
                           </span>
                         ))}
-                      </Stack>
+                      </div>
                     </div>
-                    <Stack
-                      direction="horizontal"
-                      gap={2}
-                      className="mt-3 align-items-center justify-content-between mb-4" // Added mb-4 here
-                    >
-                      {/* Call and WhatsApp Buttons */}
-                      <Stack direction="horizontal" gap={2}>
-                        <Button
-                          variant="primary"
-                          className={`d-flex align-items-center gap-2 ${styles.call}`}
+
+                    {/* Buttons Section */}
+                    <div className="d-flex justify-content-between align-items-center mt-3 ms-2 mb-2">
+                      {/* Left Side: Call and WhatsApp Buttons */}
+                      <div className="d-flex gap-2">
+                        <button
+                          className={`btn btn-primary d-flex align-items-center gap-2 ${styles.call}`}
                           onClick={() =>
                             (window.location.href = `tel:${card.phone}`)
                           }
                         >
                           <FaPhone />
                           <span>Call</span>
-                        </Button>
-                        <Button
-                          variant="success"
-                          className={`d-flex align-items-center gap-2 ${styles.whatsapp}`}
+                        </button>
+                        <button
+                          className={`btn btn-success d-flex align-items-center gap-2 ${styles.whatsapp}`}
                           onClick={() =>
                             window.open(
                               `https://wa.me/${card.whatsapp}`,
@@ -245,63 +230,56 @@ const Developer = ({ initialData, initialPagination }) => {
                         >
                           <FaWhatsapp />
                           <span>WhatsApp</span>
-                        </Button>
-                      </Stack>
+                        </button>
+                      </div>
 
-                      {/* See More Button */}
-                      <Button
-                        variant="link"
+                      {/* Right Side: See More Button */}
+                      <button
                         className={styles.readMore}
                         onClick={() => handleReadMore(card.slug)}
                       >
                         See More
-                      </Button>
-                    </Stack>
-                  </Col>
-                </Row>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
-        </Row>
+        </div>
 
         {/* Pagination */}
-        <Row className="mt-4">
-          <Col className="d-flex justify-content-center">
-            <Stack direction="horizontal" gap={2}>
-              <Button
-                variant="outline-primary"
-                disabled={currentPage === 1 || isLoading}
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                <FaChevronLeft />
-              </Button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <Button
-                    key={page}
-                    variant={
-                      currentPage === page ? "primary" : "outline-primary"
-                    }
-                    onClick={() => handlePageChange(page)}
-                    disabled={isLoading}
-                  >
-                    {page}
-                  </Button>
-                )
-              )}
-              <Button
-                variant="outline-primary"
-                disabled={currentPage === totalPages || isLoading}
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                <FaChevronRight />
-              </Button>
-            </Stack>
-          </Col>
-        </Row>
+        <div className={`d-flex justify-content-center mt-4 ${styles.pagination}`}>
+          <button
+            className={`btn btn-outline-primary me-2 ${styles.prevButton}`}
+            disabled={currentPage === 1 || isLoading}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            <FaChevronLeft />
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`btn btn-outline-primary mx-1 ${styles.pageButton} ${
+                currentPage === page ? styles.active : ""
+              }`}
+              disabled={isLoading}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className={`btn btn-outline-primary ms-2 ${styles.nextButton}`}
+            disabled={currentPage === totalPages || isLoading}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            <FaChevronRight />
+          </button>
+        </div>
 
         <SubscribeSection />
-      </Container>
+      </div>
     </LoadingWrapper>
   );
 };
