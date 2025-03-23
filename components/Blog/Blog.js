@@ -98,7 +98,7 @@ const Blog = ({ initialData }) => {
                             /> 
                             <span className={styles.formattedDate}>{formatDate(card.date)}</span>
                         </li>
-                        <li>{limitTextLength(card.body, 108)}</li>
+                        <li className={styles.description}>{limitTextLength(card.body, 108)}</li>
                     </ul>
                     <button 
                         onClick={() => handleReadMore(card.slug)} 

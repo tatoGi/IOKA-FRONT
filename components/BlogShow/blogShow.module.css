@@ -8,24 +8,24 @@
     font-size: 32px;
     line-height: 39px;
     color: #0A273B;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 .date {
     display: flex;
     gap: 10px;
     margin-top: 24px;
     margin-bottom: 52px;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 .formattedDate {
     color: #007AFF;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 .description {
     font-weight: 400;
     font-size: 20px;
     line-height: 24,38px;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 .card {
     margin-bottom: 20px;
@@ -58,7 +58,7 @@
 
 .card-body {
     padding: 15px;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 
 .card-title {
@@ -66,7 +66,7 @@
     margin-bottom: 0.75rem;
     font-weight: 500;
     color: #0A273B;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }
 
 .card-list {
@@ -78,12 +78,15 @@
     margin-bottom: 0.5rem;
 }
 .sidebar h3 {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 29.26px;
-    margin-bottom: 16px;
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 16px;
+
 }
 .description p {
     margin-bottom: 20px;
-    font-family: 'montserrat', sans-serif;
+     font-family: 'Montserrat';
 }

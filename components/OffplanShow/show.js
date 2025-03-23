@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
+import { RightOutlined } from '@ant-design/icons'; // Import the Ant Design icon
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
@@ -31,6 +32,9 @@ const OffplanShow = ({ offplanData }) => {
 
   const features = offplanData.offplan.features
     ? JSON.parse(offplanData.offplan.features)
+    : [];
+    const amenities = offplanData.offplan.amenities
+    ? JSON.parse(offplanData.offplan.amenities)
     : [];
   const nearbyPlaces = offplanData.offplan.near_by
     ? JSON.parse(offplanData.offplan.near_by)
@@ -234,6 +238,7 @@ const OffplanShow = ({ offplanData }) => {
                 height={400}
                 className={style.buildingImage}
                 sizes="(max-width: 768px) 100vw, 600px"
+                borderRadius="16nearbyPlacepx"
               />
             </div>
             <div className="col-md-6">
@@ -248,12 +253,11 @@ const OffplanShow = ({ offplanData }) => {
 
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
-                <div
-                  className={style.amenitiesList}
-                  dangerouslySetInnerHTML={{
-                    __html: offplanData.offplan.amenities
-                  }}
-                />
+                <div className={style.amenitiesList}>
+                  {amenities.map((amenity, index) => (
+                    <li key={index}>{amenity}</li>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -274,7 +278,7 @@ const OffplanShow = ({ offplanData }) => {
               <div key={index} className={style.nearbyColumn}>
                 <div className={style.nearbyPlace}>
                   <span className={style.placeName}>{place.title}</span>
-                  <span className={style.placeDistance}>{place.distance}</span>
+                  <span className={style.placeDistance}>{place.distance}m</span>
                 </div>
               </div>
             ))}
@@ -314,7 +318,7 @@ const OffplanShow = ({ offplanData }) => {
                   {offplanData.offplan.exterior_gallery &&
                     JSON.parse(offplanData.offplan.exterior_gallery).map(
                       (image, index) => (
-                        <div key={index} className="col-md-3">
+                        <div key={index} className="col-md-3 mb-3">
                           <Image
                             src={`${
                               process.env.NEXT_PUBLIC_API_URL
@@ -337,7 +341,7 @@ const OffplanShow = ({ offplanData }) => {
                   {offplanData.offplan.interior_gallery &&
                     JSON.parse(offplanData.offplan.interior_gallery).map(
                       (image, index) => (
-                        <div key={index} className="col-md-3">
+                        <div key={index} className="col-md-3 mb-3">
                           <Image
                             src={`${
                               process.env.NEXT_PUBLIC_API_URL
@@ -356,8 +360,7 @@ const OffplanShow = ({ offplanData }) => {
           )}
         </div>
       </div>
-      {/* other & properties Section 
-       ) */}
+      {/* other & properties Section */}
       <div className="container">
         <div className="row">
           <span className={style.sectionTitle}>Other Properties</span>
@@ -384,7 +387,7 @@ const OffplanShow = ({ offplanData }) => {
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
                     >
-                       <span className={style.arrowIcon}>&rarr;</span>
+                      <RightOutlined className={style.arrowIcon} /> {/* Use Ant Design icon */}
                     </a>
                   </div>
                 </div>

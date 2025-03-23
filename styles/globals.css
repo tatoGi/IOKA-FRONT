@@ -1201,7 +1201,7 @@ border: 1px #E6EBED solid;
   width: 100%;
   padding: 12px 0;
   background: #fff;
-  border-bottom: 2px solid #07151F;
+  border-bottom: 1px solid #07151F;
   margin-top: 104px; /* Match header height */
 }
 

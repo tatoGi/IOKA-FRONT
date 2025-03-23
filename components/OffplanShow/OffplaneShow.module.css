@@ -4,12 +4,14 @@
   height: 60vh;
   min-height: 400px;
   margin-top: 38px;
+  border-radius: 12px;
 }
 
 .bannerImageWrapper {
   position: relative;
   width: 100%;
   height: 500px; /* Adjust height as needed */
+  border-radius: 12px;
 }
 
 .bannerImage {
@@ -28,6 +30,7 @@
   justify-content: center;
   background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
   z-index: 1;
+  border-radius: 12px;
 }
 
 .bannerContent h1 {
@@ -37,6 +40,7 @@
   text-align: center;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-family: 'Montserrat';
 }
 
 .propertyDetails {
@@ -48,17 +52,17 @@
   font-size: 32px;
   color: #0A273B;
   margin-bottom: 16px;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 
 .pricing {
   display: flex;
   gap: 16px;
   margin-bottom: 24px;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 .aedPricestart{
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 24px;
   line-height: 100%;
@@ -89,7 +93,7 @@
   color: #0A273B;
   line-height: 1.6;
   margin-bottom: 16px;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-size: 20px;
 }
 
@@ -100,7 +104,7 @@
   padding: 0;
   cursor: pointer;
   font-size: 16px;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 
 
@@ -112,7 +116,7 @@
   padding: 24px;
   background: #fff;
   text-align: center;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   margin-left: auto;
   margin-right: auto;
 }
@@ -129,7 +133,7 @@
   font-size: 18px;
   color: #333;
   margin-bottom: 24px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   text-align: left;
   
 }
@@ -149,14 +153,14 @@
   line-height: 1.5;
   margin: 0; /* Remove default margin */
   flex: 1; /* Allow text to take remaining space */
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .qrButtons {
   display: flex;
   gap: 12px;
   margin-top: 20px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .downloadBtn, .enquireBtn {
@@ -203,9 +207,13 @@
 
 .featuresSection h3,
 .amenitiesSection h3 {
+  font-family: 'Montserrat';
+  font-weight: 600;
   font-size: 24px;
-  color: #333;
+  line-height: 100%;
+  letter-spacing: 0%;
   margin-bottom: 24px;
+  
 }
 
 .featuresList {
@@ -216,22 +224,36 @@
 .featuresList li {
   position: relative;
   padding-left: 24px;
-  margin-bottom: 16px;
-  color: #4B5563;
-  line-height: 1.6;
+  font-family:' Montserrat';
+font-weight: 400;
+font-size: 20px;
+line-height: 36px;
+letter-spacing: 0%;
+
 }
 
 .featuresList li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #00B98E;
+  color: #8FE3DC;
+  width: 21.002344131469727px;
+height: 15.002344131469727px;
+top: 4.5px;
+left: -0px;
+
 }
 
 .amenitiesList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  font-family: 'Montserrat';
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
 }
 
 .amenityItem {
@@ -256,14 +278,14 @@
   font-size: 32px;
   color: #07151F;
   margin-bottom: 24px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .locationSection h4 {
   font-size: 24px;
   color: #07151F;
   margin: 32px 0 24px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .mapWrapper {
@@ -307,7 +329,7 @@
   z-index: 2;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   width: 392px;
   border: 1px solid #07151F;
   border-radius: 32px;
@@ -319,34 +341,36 @@
 }
 
 .nearbyGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 24px;
+}
+
+.nearbyColumn {
+  flex: 1 1 calc(33.333% - 24px);
+  display: flex;
+  justify-content: space-between;
 }
 
 .nearbyPlace {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.nearbyPlace:last-child {
-  margin-bottom: 0;
+  width: 100%;
 }
 
 .placeName {
   color: #07151F;
   font-weight: 500;
   font-size: 20px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .placeDistance {
   color: #007AFF;
   font-weight: 500;
   font-size: 20px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .qrImageWrapper {
@@ -440,7 +464,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 12px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 
 }
 
@@ -451,7 +475,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .languages {
@@ -461,7 +485,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .email {
@@ -471,7 +495,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 4px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .contactButtons {
@@ -490,7 +514,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   white-space: nowrap;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .contactBtnperson {
@@ -517,7 +541,7 @@
   border: 1px solid #0A273B;
   background-color: #fff;
   color: #0A273B;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
 }
 
 .sharelist:hover, .contactBtnperson:hover, .whatsappperson:hover {
@@ -579,15 +603,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 72px;
+  margin-bottom: 40px; /* Adjusted margin */
 }
 
 .exteriorInteriorSection h3 {
-  font-size: 40px;
+  font-size: 32px; /* Adjusted font size */
   color: #E6EBED; /* White text for the heading */
   margin: 0; /* Remove default margin */
   font-weight: 600;
-  
 }
 
 .switcher {
@@ -604,13 +627,39 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, color 0.3s;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   font-size: 20px;
 }
 
 .switchButton.active {
   background-color: #fff;
   color: #0A273B;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exteriorSection, .interiorSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.exteriorSection .col-md-3, .interiorSection .col-md-3 {
+  flex: 1 1 calc(25% - 20px); /* Four items per row */
+  max-width: calc(25% - 20px);
+}
+
+.exteriorimage {
+  border-radius: 20px;
+  width: 100%;
+height: 272px;
+border-radius: 16px;
+  object-fit: cover;
+  
 }
 .container {
   padding: 20px;
@@ -624,16 +673,17 @@
   width: 100%;
   margin-top: 80px;
   margin-bottom: 40px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   color: #0A273B;
 }
 
 .propertyCard {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: none;
+  border-radius: 16px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  background-color: #0A273B;
 }
 
 .propertyCard:hover {
@@ -646,12 +696,15 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
+  border-radius: 16px;
+  opacity: 60%;
 }
 
 .sectionImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .overlay {
@@ -663,11 +716,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 16px;
 }
 
 .propertyName {
   color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  font-family: 'Montserrat'; /* Apply Montserrat font */
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
@@ -686,7 +740,7 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  border: 1px solid;
+  border: 1px solid #FFFFFF;
 }
 
 .arrowLink:hover {

@@ -3,11 +3,6 @@
     background-color: #fff;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
 
 .header {
     text-align: center;
@@ -19,12 +14,14 @@
     margin-bottom: 0.5rem;
     color: #0A273B;
     font-weight: 600;
+    font-family: 'Montserrat';
 }
 
 .header p {
     color: #0A273B;
     font-size: 20px;
     margin-bottom: 0.5rem;
+    font-family: "Montserrat";
 }
 
 .googleReviews {
@@ -32,14 +29,27 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
 }
+
 .googleReviews span {
     color: #0A273B;
     font-size: 24px;
+    font-family: "Montserrat";
+font-weight: 500;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
+
 }
+
 .rating {
     color: #7ACBC4 !important;
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
 }
 
 .testimonialGrid {
@@ -54,7 +64,7 @@
     border-radius: 12px;
     padding: 1.5rem;
     position: relative;
-    border: 1px solid #e6e6e6;
+    border: 1px solid #7ACBC4;
 }
 
 .leftQuote, .rightQuote {
@@ -101,9 +111,10 @@
 
 .clientProfile h3 {
     margin: 0.25rem 0;
-    color: #333;
+    color: #0A273B;
     font-weight: 500;
     font-size: 0.95rem;
+    font-family: "Montserrat";
 }
 
 .stars {
@@ -112,15 +123,21 @@
 }
 
 .star {
-    color: #ffd700;
-    font-size: 0.9rem;
+    color: #FF9500;
+    font-size: 24px;
 }
 
 .review {
-    text-align: center;
-    color: #666;
-    line-height: 1.5;
     font-size: 0.85rem;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #1B1F26B8;
+    margin-bottom: 16px;
+
 }
 
 @media (max-width: 1200px) {
@@ -139,8 +156,8 @@
     .testimonialGrid {
         grid-template-columns: 1fr;
     }
-    
+
     .header h2 {
         font-size: 1.75rem;
     }
-} 
+}
