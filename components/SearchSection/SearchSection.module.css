@@ -2,22 +2,21 @@
   width: 100%;
   background-color: #fff;
   margin-top: 38px;
+  gap: 13.4px;
 }
-
-.searchContainer {
-  max-width: 1560px;
-  /* margin: 0 auto; */
+.container{
   display: flex;
-  gap: 33.4px;
+  align-items: center;
+  gap: 13.4px;
+  width: 100%;
 }
-
 .searchBar {
   display: flex;
   align-items: center;
   border: 1px solid #07151F;
   border-radius: 4px;
-  padding: 8px 12px;
-  min-width: 671px;
+  padding: 10px 12px;
+  min-width: 100%;
 }
 
 .searchIcon {
@@ -38,7 +37,7 @@
 
 .filterButtons {
   display: flex;
-  gap: 8px;
+  gap: 13.4px;
   align-items: center;
 }
 
@@ -79,21 +78,84 @@
 }
 
 @media (max-width: 768px) {
-  .searchContainer {
-    flex-direction: column;
-  }
-  
   .searchBar {
     width: 100%;
   }
-  
+
   .filterButtons {
     width: 100%;
     overflow-x: auto;
     padding-bottom: 8px;
   }
-  
-  .filterBtn, .moreFiltersBtn {
+
+  .filterBtn,
+  .moreFiltersBtn {
     white-space: nowrap;
   }
-} 
+}
+
+@media (max-width: 1024px) {
+  .searchBar {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .searchBar {
+    min-width: 100%;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 7px 11px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .searchBar {
+    min-width: 100%;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .searchSection {
+    width: 1300px;
+    height: 40px;
+    top: 172px;
+    left: 180px;
+    justify-content: space-between;
+  }
+
+  .searchBar {
+    min-width: 590px;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 9px 13px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchSection {
+    margin-top: 20px;
+  }
+
+  .searchBar {
+    padding: 6px 10px;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
