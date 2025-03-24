@@ -1043,7 +1043,10 @@ margin-bottom: 24px;
   height: auto; /* Height adjusts automatically */
   aspect-ratio: 580 / 378; /* Maintain aspect ratio */
 }
-
+.largeImage img{
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
 .smallImagesGrid {
   display: flex;
   flex-direction: column; /* Stack small images vertically */

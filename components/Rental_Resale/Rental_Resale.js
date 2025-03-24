@@ -221,41 +221,42 @@ const Rental_Resale = () => {
                 }}
                 style={{ cursor: "pointer" }}
               >
-                <div className={Styles.resaleImageContainer}>
-                  <div className={Styles.largeImage}>
-                    <Image
-                      src={
-                        galleryImages[0]
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(galleryImages[0])}`
-                          : defaultImage
-                      }
-                      alt={listing.title}
-                      style={{ objectFit: "cover" }}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
-                    />
-                  </div>
-                  <div className={Styles.smallImagesGrid}>
-                    {galleryImages.slice(1, 3).map((image, index) => (
-                      <div key={index} className={Styles.smallImage}>
-                        <Image
-                          src={
-                            image
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(image)}`
-                              : defaultImage
-                          }
-                          alt={`Gallery Image ${index + 1}`}
-                          style={{ objectFit: "cover" }}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 334px"
-                        />
-                      </div>
-                    ))}
-                  </div>
+                <div
+                  className={Styles.largeImage}
+                 
+                >
+                  <Image
+                    src={
+                      galleryImages[0]
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(galleryImages[0])}`
+                        : defaultImage
+                    }
+                    alt={listing.title}
+                    style={{ objectFit: "cover" }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
+                  />
+                </div>
+                <div className={Styles.smallImagesGrid}>
+                  {galleryImages.slice(1, 3).map((image, index) => (
+                    <div key={index} className={Styles.smallImage}>
+                      <Image
+                        src={
+                          image
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(image)}`
+                            : defaultImage
+                        }
+                        alt={`Gallery Image ${index + 1}`}
+                        style={{ objectFit: "cover" }}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 334px"
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <div className={Styles.resaleContent}>

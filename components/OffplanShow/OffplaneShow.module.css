@@ -603,10 +603,12 @@ margin-bottom: 30px;
 }
 
 .exteriorInteriorSection h3 {
-  font-size: 32px; /* Adjusted font size */
-  color: #E6EBED; /* White text for the heading */
-  margin: 0; /* Remove default margin */
+  font-family: 'Montserrat';
   font-weight: 600;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  
 }
 
 .switcher {
