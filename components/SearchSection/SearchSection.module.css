@@ -113,8 +113,16 @@
 }
 
 @media (max-width: 1400px) {
+  .searchSection {
+    width: 100%;
+  }
+
   .searchBar {
     min-width: 100%;
+  }
+
+  .filterButtons {
+    flex-wrap: wrap;
   }
 
   .filterBtn,

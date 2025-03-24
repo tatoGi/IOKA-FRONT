@@ -207,7 +207,7 @@
   }
 
   .features {
-    gap: 10px; /* Increase gap between features */
+    gap: 8px; /* Increase gap between features */
   }
 
   .feature {
