@@ -199,6 +199,7 @@
 
 .buildingImage {
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .featuresSection,
