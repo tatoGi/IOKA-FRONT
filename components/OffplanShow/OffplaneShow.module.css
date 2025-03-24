@@ -231,7 +231,7 @@ font-weight: 400;
 font-size: 20px;
 line-height: 36px;
 letter-spacing: 0%;
-
+color: #07151F;
 }
 
 .featuresList li::before {
@@ -345,14 +345,14 @@ left: -0px;
 .nearbyGrid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 24px;
 }
 
 .nearbyColumn {
-  flex: 1 1 calc(33.333% - 24px);
+  flex: 1 1 calc(50% - 24px); /* Adjusted to display 2 items per row */
   display: flex;
   justify-content: space-between;
+  margin-bottom: 24px; /* Add margin-bottom for spacing between rows */
 }
 
 .nearbyPlace {

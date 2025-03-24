@@ -239,7 +239,7 @@ const OffplanShow = ({ offplanData }) => {
                 height={400}
                 className={style.buildingImage}
                 sizes="(max-width: 768px) 100vw, 600px"
-                borderRadius="16nearbyPlacepx"
+                borderRadius="16px"
               />
             </div>
             <div className="col-md-6">
