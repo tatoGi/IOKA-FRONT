@@ -8,6 +8,7 @@ import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm 
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import success from "../../assets/img/succsess.png";
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
@@ -20,6 +21,8 @@ const OffplanShow = ({ offplanData }) => {
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showExterior, setShowExterior] = useState(true);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryType, setGalleryType] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,6 +30,15 @@ const OffplanShow = ({ offplanData }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openGallery = (type) => {
+    setGalleryType(type);
+    setIsGalleryOpen(true);
+  };
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false);
   };
 
   const position = offplanData.offplan.map_location; // Dubai coordinates
@@ -239,7 +251,6 @@ const OffplanShow = ({ offplanData }) => {
                 height={400}
                 className={style.buildingImage}
                 sizes="(max-width: 768px) 100vw, 600px"
-                borderRadius="16px"
               />
             </div>
             <div className="col-md-6">
@@ -247,7 +258,9 @@ const OffplanShow = ({ offplanData }) => {
                 <h3>Features</h3>
                 <ul className={style.featuresList}>
                   {features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                    <li key={index}>
+                      <Image src={success} alt="success" /> {feature}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -317,9 +330,14 @@ const OffplanShow = ({ offplanData }) => {
               <div className="container">
                 <div className="row">
                   {offplanData.offplan.exterior_gallery &&
-                    JSON.parse(offplanData.offplan.exterior_gallery).map(
-                      (image, index) => (
-                        <div key={index} className="col-md-3 mb-3">
+                    JSON.parse(offplanData.offplan.exterior_gallery)
+                      .slice(0, 8) // Limit to 8 photos
+                      .map((image, index) => (
+                        <div
+                          key={index}
+                          className="col-md-3 mb-3"
+                          onClick={() => openGallery("exterior")}
+                        >
                           <Image
                             src={`${
                               process.env.NEXT_PUBLIC_API_URL
@@ -330,8 +348,7 @@ const OffplanShow = ({ offplanData }) => {
                             className={style.exteriorimage} // Apply border-radius via CSS
                           />
                         </div>
-                      )
-                    )}
+                      ))}
                 </div>
               </div>
             </div>
@@ -340,9 +357,14 @@ const OffplanShow = ({ offplanData }) => {
               <div className="container">
                 <div className="row">
                   {offplanData.offplan.interior_gallery &&
-                    JSON.parse(offplanData.offplan.interior_gallery).map(
-                      (image, index) => (
-                        <div key={index} className="col-md-3 mb-3">
+                    JSON.parse(offplanData.offplan.interior_gallery)
+                      .slice(0, 8) // Limit to 8 photos
+                      .map((image, index) => (
+                        <div
+                          key={index}
+                          className="col-md-3 mb-3"
+                          onClick={() => openGallery("interior")}
+                        >
                           <Image
                             src={`${
                               process.env.NEXT_PUBLIC_API_URL
@@ -353,14 +375,45 @@ const OffplanShow = ({ offplanData }) => {
                             className={style.exteriorimage}
                           />
                         </div>
-                      )
-                    )}
+                      ))}
                 </div>
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {isGalleryOpen && (
+        <div className={style.modalOverlay} onClick={closeGallery}>
+          <div className={style.modalContent}>
+            <button className={style.closeButton} onClick={closeGallery}>
+              &times; {/* Close icon (X) */}
+            </button>
+            <div className={`container ${style.galleryContainer}`}>
+              <div className={`row ${style.galleryRow}`}>
+                {(galleryType === "exterior"
+                  ? JSON.parse(offplanData.offplan.exterior_gallery)
+                  : JSON.parse(offplanData.offplan.interior_gallery)
+                ).map((image, index) => (
+                  <div key={index} className={`col-md-3 mb-3 ${style.galleryItem}`}>
+                    <Image
+                      src={`${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(image)}`}
+                      alt={`${galleryType} Image`}
+                      width={300}
+                      height={200}
+                      className={style.galleryImage}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* other & properties Section */}
       <div className="container">
         <div className="row">
