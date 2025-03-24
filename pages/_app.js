@@ -9,6 +9,9 @@ import Footer from "@/components/Footer/Footer";
 import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's already imported
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { LoadingWrapper } from "@/components/LoadingWrapper/index"; // Import LoadingWrapper

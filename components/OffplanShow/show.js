@@ -6,7 +6,8 @@ import dynamic from "next/dynamic";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-import { RightOutlined } from '@ant-design/icons'; // Import the Ant Design icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
@@ -387,7 +388,7 @@ const OffplanShow = ({ offplanData }) => {
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
                     >
-                      <RightOutlined className={style.arrowIcon} /> {/* Use Ant Design icon */}
+                      <FontAwesomeIcon icon={faAngleRight} /> {/* Use the FontAwesomeIcon component */}
                     </a>
                   </div>
                 </div>
