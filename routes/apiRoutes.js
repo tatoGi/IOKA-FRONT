@@ -5,4 +5,5 @@ export const DEVELOPER_API = `${API_BASE_URL}/developers`;
 export const OFFPLAN_APi = `${API_BASE_URL}/offplans`;
 export const NAVIGATION_MENU = `${API_BASE_URL}/pages`;
 export const RENTAL_RESALE = `${API_BASE_URL}/rental_resales`;
+export const SECTION_API = `${API_BASE_URL}/sections`;
 // Add more routes as needed

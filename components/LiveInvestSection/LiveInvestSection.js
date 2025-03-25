@@ -2,14 +2,25 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./LiveInvestSection.module.css";
 import homeBanner from "../../assets/img/homeBanner.jpg";
-const LiveInvestSection = () => {
-  const [activeSlide, setActiveSlide] = useState(1);
-  const sliderData = [
-    { id: 1, image: homeBanner },
-    { id: 2, image: homeBanner },
-    { id: 3, image: homeBanner },
-  ];
 
+const LiveInvestSection = ({ sectionDataTwo }) => {
+  console.log(sectionDataTwo?.additional_fields);
+  const [activeSlide, setActiveSlide] = useState(1);
+  const additionalFields = sectionDataTwo?.additional_fields || {
+    slider_images: [],
+    rolling_numbers: [],
+    subtitle: "",
+    title: "",
+    title_2: ""
+  };
+  const sliderData = additionalFields.slider_images.map((item, index) => ({
+    id: index + 1,
+    image: item.image,
+    url: item.url,
+  }));
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
   const next = () => {
     setActiveSlide((prev) => (prev === sliderData.length - 1 ? 0 : prev + 1));
   };
@@ -24,17 +35,9 @@ const LiveInvestSection = () => {
       <div className="container">
         <div className="row">
           <div className={`${styles.content} col-md-6`}>
-            <h4>Live. Invest. Grow</h4>
-            <h2>
-              DUBAI - YOUR PARTNER FOR
-              <br />
-              ACCELERATED GROWTH
-            </h2>
-            <p>
-              Want to search for potential matches? From studio apartments to
-              penthouses- select your layout to see what’s available. When you
-              spot something that catches your eye, we’re here to help
-            </p>
+            <h4>{additionalFields.subtitle}</h4>
+            <h2>{additionalFields.title}</h2>
+            <p>{additionalFields.title_2}</p>
             <button className={styles.contactBtn}>Contact Us</button>
           </div>
           <div className={`${styles.sliderContainer} col-md-6`}>
@@ -49,13 +52,19 @@ const LiveInvestSection = () => {
 
                 return (
                   <div key={item.id} className={`${styles.slide} ${positionClass}`}>
-                    <Image
-                      src={item.image}
-                      alt="Dubai Property"
-                      width={364}
-                      height={364}
-                      style={{ objectFit: "cover", borderRadius: "16px" }}
-                    />
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        src={
+                          item.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(item.image)}`
+                            : homeBanner
+                        }
+                        alt="Dubai Property"
+                        width={364}
+                        height={364}
+                        style={{ objectFit: "cover", borderRadius: "16px" }}
+                      />
+                    </a>
                   </div>
                 );
               })}
@@ -70,17 +79,14 @@ const LiveInvestSection = () => {
         </div>
       </div>
       <div className={styles.topWhiteDiv}></div>
-<div className={styles.bottomWhiteDiv}></div>
+      <div className={styles.bottomWhiteDiv}></div>
       <div className={styles.statItems}>
-      <div className={styles.statItem} style={{ marginRight: '106px' }}>
-
-          <h3>86K</h3>
-          <p>Resale Properties</p>
-        </div>
-        <div className={styles.statItem}>
-          <h3>32K</h3>
-          <p>Off Plan Properties</p>
-        </div>
+        {additionalFields.rolling_numbers.map((item, index) => (
+          <div key={index} className={styles.statItem} style={{ marginRight: index === 0 ? '106px' : '0' }}>
+            <h3>{item.number}{item.suffix}</h3>
+            <p>{item.title}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
