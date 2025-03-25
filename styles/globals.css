@@ -562,6 +562,16 @@ main {
   font-weight: 700;
  font-family: 'Montserrat'; 
 }
+.partner-title{
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+margin-top: 24px;
+
+}
 .partner-swiper-slide{
   margin-top: 32px;
 }

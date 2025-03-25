@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -11,11 +11,20 @@ import { FreeMode, Pagination } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
-import PartnerImage from "../../assets/img/partner1.png";
-import PartnerImageTwo from "../../assets/img/partner2.png";
-
-
+import { PARTNER_API } from "../../routes/apiRoutes";
+const decodeImageUrl = (url) => {
+  return decodeURIComponent(url);
+};
 const PartnersSection = () => {
+  const [partners, setPartners] = useState([]);
+
+  useEffect(() => {
+    fetch(PARTNER_API)
+      .then(response => response.json())
+      .then(data => setPartners(data))
+      .catch(error => console.error('Error fetching partners:', error));
+  }, []);
+
   return (
     <div className="partners-section">
       <div className="container">
@@ -51,46 +60,19 @@ const PartnersSection = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImage} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImageTwo} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImage} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImageTwo} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImage} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImageTwo} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImage} alt="partner" />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href={"#"} className="partners-slider-item">
-                <Image src={PartnerImageTwo} alt="partner" />
-              </Link>
-            </SwiperSlide>
+            {partners.map((partner, index) => (
+              <SwiperSlide key={index}>
+                <Link href={partner.url} className="partners-slider-item">
+                  <Image 
+                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : homeBanner} 
+                    alt={partner.name} 
+                    width={200} 
+                    height={100} 
+                  />
+                  <div className="partner-title">{partner.title}</div>
+                </Link>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
