@@ -363,17 +363,12 @@ margin-bottom: 24px;
     font-size: 14px;
   }
   
-  .sortButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border: 1px solid #E5E5E5;
+  .sortDropdown select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background: white;
-    color: #666666;
     font-size: 14px;
-    cursor: pointer;
+    color: #333;
   }
 
   .propertyImage {
@@ -691,11 +686,30 @@ margin-bottom: 24px;
     margin: 0 auto;
     margin-bottom: 24px;
   }
-  
+  .sortDropdown select{
+    border: none;
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: right;
+
+  }
+  .sortDropdown label{
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: right;
+
+  }
   .resaleTitle {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: space-between;
   }
   
   .resaleTitle h3 {
@@ -725,6 +739,7 @@ margin-bottom: 24px;
     border: 1px solid #E6EBED;
     margin-top: 24px;
     cursor: pointer;
+    height: 380px;
   }
   
   
@@ -747,6 +762,7 @@ margin-bottom: 24px;
     color: #0A273B;
     font-weight: 600;
     line-height: 1.2;
+    font-family: 'Montserrat';
   }
   
   .resaleLocation {
@@ -756,9 +772,13 @@ margin-bottom: 24px;
   
   .resalePrice {
     color: #0A273B;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 10px;
+   margin-right: 15px;
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+
   }
   
   .resaleStats {
@@ -774,6 +794,7 @@ margin-bottom: 24px;
     gap: 8px;
     color: #0A273B;
     font-size: 14px;
+    font-family: 'Montserrat';
   }
   
   .statSeparator {
@@ -785,8 +806,10 @@ margin-bottom: 24px;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    color: #666666;
-    font-size: 14px;
+    color: #0A273B;
+    font-size: 12px;
+    font-family: 'Montserrat';
+    font-weight: 400;
   }
   
   @media (min-width: 768px) {
@@ -827,7 +850,7 @@ margin-bottom: 24px;
   
   .agentInfo span {
     color: #0A273B;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
   }
   
@@ -852,7 +875,7 @@ margin-bottom: 24px;
   
   .footerButton span {
     color: #0A273B;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
   }
   
@@ -1038,10 +1061,12 @@ margin-bottom: 24px;
 }
 
 .largeImage {
+  display: block;
   position: relative;
   width: 100%; /* Full width on all screens */
-  height: auto; /* Height adjusts automatically */
+  height: 100%; /* Height adjusts automatically */
   aspect-ratio: 580 / 378; /* Maintain aspect ratio */
+  margin-right: 2px;
 }
 .largeImage img{
   border-top-left-radius: 16px;
@@ -1056,7 +1081,7 @@ margin-bottom: 24px;
 .smallImage {
   position: relative;
   width: 100%; /* Full width on all screens */
-  height: auto; /* Height adjusts automatically */
+  height: 100%; /* Height adjusts automatically */
   aspect-ratio: 334 / 189; /* Maintain aspect ratio */
 }
 
@@ -1077,7 +1102,8 @@ margin-bottom: 24px;
 
   .largeImage {
     width: 60%; /* Large image takes 60% of the container */
-    height: auto;
+    height: 100%;
+    margin-right: 2px;
   }
 
   .smallImagesGrid {
@@ -1097,7 +1123,8 @@ margin-bottom: 24px;
 
   .largeImage {
     width: 500px; /* Fixed width for large screens */
-    height: 378px; /* Fixed height for large screens */
+    height: 100%; /* Fixed height for large screens */
+    margin-right: 2px;
   }
 
   .smallImagesGrid {
@@ -1107,6 +1134,78 @@ margin-bottom: 24px;
 
   .smallImage {
     width: 334px; /* Fixed width for large screens */
-    height: 189px; /* Fixed height for large screens */
+    height: 100%; /* Fixed height for large screens */
+  }
+}
+
+@media (max-width: 1200px) {
+  .title_top {
+    font-size: 18px;
+  }
+  .propertyCard {
+    width: calc(50vw - 52px);
+  }
+  .propertyInfo h3 {
+    font-size: 1rem;
+  }
+  .location, .price, .feature span {
+    font-size: 11px;
+  }
+  .propertyImage {
+    height: 180px;
+  }
+  .resaleContent h4 {
+    font-size: 18px;
+  }
+  .resaleLocation, .resalePrice, .statGroup span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title_top {
+    font-size: 16px;
+  }
+  .propertyCard {
+    width: calc(100vw - 80px);
+  }
+  .propertyInfo h3 {
+    font-size: 0.875rem;
+  }
+  .location, .price, .feature span {
+    font-size: 10px;
+  }
+  .propertyImage {
+    height: 160px;
+  }
+  .resaleContent h4 {
+    font-size: 16px;
+  }
+  .resaleLocation, .resalePrice, .statGroup span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title_top {
+    font-size: 14px;
+  }
+  .propertyCard {
+    width: calc(100vw - 40px);
+  }
+  .propertyInfo h3 {
+    font-size: 0.75rem;
+  }
+  .location, .price, .feature span {
+    font-size: 9px;
+  }
+  .propertyImage {
+    height: 140px;
+  }
+  .resaleContent h4 {
+    font-size: 14px;
+  }
+  .resaleLocation, .resalePrice, .statGroup span {
+    font-size: 9px;
   }
 }

@@ -139,44 +139,44 @@ const Developer = ({ initialData, initialPagination }) => {
     <LoadingWrapper isLoading={isLoading}>
       <div className="container py-4">
         {/* Search Section */}
-        <div className={`mb-4 position-relative col-md-6`}>
+        <div className={`mb-4 position-relative ${styles.searchContainer}`}>
           <input
             type="text"
             placeholder="City, Building or community"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="form-control ps-5"
+            className={`form-control ${styles.searchInput}`}
           />
-          <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
+          <FaSearch className={`position-absolute ${styles.searchIcon}`} />
         </div>
 
         {/* Developer Cards */}
-        <div className="row">
+        <div className={styles.cardsContainer}>
           {filteredData.map((card) => (
-            <div key={card.id} className="col-md-6 mb-4">
-              <div className={`card h-100 shadow-sm ${styles.card}`}>
-                <div className="row g-0 h-100">
+            <div key={card.id} className={styles.cardWrapper}>
+              <div className={styles.card}>
+                <div className={styles.cardRow}>
                   {/* Image Section */}
-                  <div className="col-md-6 position-relative">
+                  <div className={styles.imageContainer}>
                     <Image
                       src={getImageUrl(card.photo, card.id)}
                       alt={card.title}
                       width={400}
                       height={300}
-                      className="img-fluid h-100"
+                      className={styles.cardImage}
                       style={{ objectFit: "cover" }}
                     />
                     {JSON.parse(card.photo)?.length > 1 && (
-                      <div className="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3">
+                      <div className={styles.imageNav}>
                         <button
                           onClick={() => handlePrevImage(card.id, card.photo)}
-                          className={`btn rounded-circle ${styles.prevButtonimage}`}
+                          className={styles.prevButtonimage}
                         >
                           <FaChevronLeft />
                         </button>
                         <button
                           onClick={() => handleNextImage(card.id, card.photo)}
-                          className={`btn rounded-circle ${styles.nextButtonimage}`}
+                          className={styles.nextButtonimage}
                         >
                           <FaChevronRight />
                         </button>
@@ -185,21 +185,16 @@ const Developer = ({ initialData, initialPagination }) => {
                   </div>
 
                   {/* Content Section */}
-                  <div className="col-md-6 d-flex flex-column">
-                    <h2 className={`h4 ${styles.title}`}>{card.title}</h2>
-                    <div className={`flex-grow-1 ${styles.description}`}>
+                  <div className={styles.cardContent}>
+                    <h2 className={styles.title}>{card.title}</h2>
+                    <div className={styles.description}>
                       <p>{limitTextLength(card.paragraph, 400)}</p>
                     </div>
-                    <div className="mt-3">
-                      <h3 className={`h6 ${styles.communities}`}>
-                        Top Communities
-                      </h3>
-                      <div className="d-flex flex-wrap gap-2 ms-3">
+                    <div className={styles.communitiesSection}>
+                      <h3 className={styles.communitiesTitle}>Top Communities</h3>
+                      <div className={styles.communitiesList}>
                         {JSON.parse(card.tags).map((tag, index) => (
-                          <span
-                            key={index}
-                            className={`bg-light text-dark ${styles.badge}`}
-                          >
+                          <span key={index} className={styles.badge}>
                             {tag}
                           </span>
                         ))}
@@ -207,26 +202,19 @@ const Developer = ({ initialData, initialPagination }) => {
                     </div>
 
                     {/* Buttons Section */}
-                    <div className="d-flex justify-content-between align-items-center mt-3 ms-2 mb-2">
+                    <div className={styles.buttonsSection}>
                       {/* Left Side: Call and WhatsApp Buttons */}
-                      <div className="d-flex gap-2">
+                      <div className={styles.contactButtons}>
                         <button
-                          className={`btn btn-primary d-flex align-items-center gap-2 ${styles.call}`}
-                          onClick={() =>
-                            (window.location.href = `tel:${card.phone}`)
-                          }
+                          className={styles.call}
+                          onClick={() => (window.location.href = `tel:${card.phone}`)}
                         >
                           <FaPhone />
                           <span>Call</span>
                         </button>
                         <button
-                          className={`btn btn-success d-flex align-items-center gap-2 ${styles.whatsapp}`}
-                          onClick={() =>
-                            window.open(
-                              `https://wa.me/${card.whatsapp}`,
-                              "_blank"
-                            )
-                          }
+                          className={styles.whatsapp}
+                          onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
                         >
                           <FaWhatsapp />
                           <span>WhatsApp</span>
@@ -234,10 +222,7 @@ const Developer = ({ initialData, initialPagination }) => {
                       </div>
 
                       {/* Right Side: See More Button */}
-                      <button
-                        className={styles.readMore}
-                        onClick={() => handleReadMore(card.slug)}
-                      >
+                      <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
                         See More
                       </button>
                     </div>
@@ -249,9 +234,9 @@ const Developer = ({ initialData, initialPagination }) => {
         </div>
 
         {/* Pagination */}
-        <div className={`d-flex justify-content-center mt-4 ${styles.pagination}`}>
+        <div className={`d-flex justify-content-center ${styles.pagination}`}>
           <button
-            className={`btn btn-outline-primary me-2 ${styles.prevButton}`}
+            className={`btn ${styles.prevButton}`}
             disabled={currentPage === 1 || isLoading}
             onClick={() => handlePageChange(currentPage - 1)}
           >
@@ -261,16 +246,14 @@ const Developer = ({ initialData, initialPagination }) => {
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`btn btn-outline-primary mx-1 ${styles.pageButton} ${
-                currentPage === page ? styles.active : ""
-              }`}
+              className={`btn ${styles.pageButton} ${currentPage === page ? styles.active : ""}`}
               disabled={isLoading}
             >
               {page}
             </button>
           ))}
           <button
-            className={`btn btn-outline-primary ms-2 ${styles.nextButton}`}
+            className={`btn ${styles.nextButton}`}
             disabled={currentPage === totalPages || isLoading}
             onClick={() => handlePageChange(currentPage + 1)}
           >

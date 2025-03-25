@@ -1,131 +1,208 @@
 /* Search Container */
 .searchContainer {
   position: relative;
+  width: 100%;
   max-width: 768px;
-  width: 100%;
-  height: 40px;
-  border-radius: 4px;
-  margin-bottom: 20px;
 }
 
-.searchContainer input {
+.searchInput {
   width: 100%;
-  padding: 10px 40px;
-  border-radius: 4px;
-  border: 1px solid #07151f;
-  font-size: 16px;
+  padding-left: 40px;
 }
 
-.searchContainer .fa-search {
-  position: absolute;
-  left: 15px;
+.searchIcon {
   top: 50%;
+  left: 10px;
   transform: translateY(-50%);
-  color: #666;
 }
 
-/* Card Styles */
+/* Container */
+.container {
+  padding: 16px;
+}
+
+/* Row */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Column */
+.col {
+  flex: 1 1 calc(50% - 16px);
+  margin-bottom: 16px;
+}
+
+/* Cards Container */
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(768px, 1fr));
+  gap: 16px;
+}
+
+/* Card Wrapper */
+.cardWrapper {
+  display: flex;
+}
+
+/* Card */
 .card {
-  border: none;
-  border-radius: 12px;
+  width: 768px;
+  height: 341px;
+  border-radius: 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e0e0e0;
   overflow: hidden;
   transition: transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.card:hover {
-  transform: scale(1.05);
+.cardRow {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 }
 
-.card .img-fluid {
-  border-radius: 0 0 12px 12px;
+/* Image Container */
+.imageContainer {
+  flex: 1;
+  position: relative;
+  height: auto;
+}
+
+.cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.card .position-relative {
-  position: relative;
+/* Image Navigation */
+.imageNav {
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  transform: translateY(-50%);
 }
 
-.card .btn-light {
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-  border: none;
-}
-
-.card .btn-light:hover {
+.prevButtonimage,
+.nextButtonimage {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Card Content Styles */
-.card .col-md-6 {
+/* Content */
+.cardContent {
+  flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.card .title {
+.title {
   font-family: "Montserrat";
   font-weight: 600;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
-  margin-bottom: 12px;
-  color: #333;
-  margin-left: 16px;
-  margin-top: 16px;
+  margin-bottom: 10px;
+  color: #0A273B;
 }
 
-.card .description {
+.description {
   font-family: "Montserrat";
   font-weight: 400;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
-  color: #666;
-  margin-left: 16px;
+  margin-bottom: 16px;
+  flex-grow: 1;
+  color: #07151F;
 }
 
-.card .communities {
-  font-family: "Montserrat";
+.communitiesSection {
+  margin-top: 20px;
+}
+
+.communitiesTitle {
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 12px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: 0%; 
   margin-bottom: 12px;
-  color: #333;
-  margin-left: 16px;
+}
+
+.communitiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .badge {
-  background-color: #f8f9fa;
-  color: #343a40;
-  padding: 7px 20px;
-  border-radius: 4px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid #e0e0e0;
+  font-weight: 400;
   font-size: 12px;
-  font-weight: 400 !important;
+  line-height: 100%;
+  letter-spacing: 0%;
   font-family: "Montserrat";
-  border: #07151f 1px solid;
 }
 
-/* Button Styles */
-.call {
-  width: 81px;
-  height: 32px;
-  border-radius: 4px;
-  padding: 8px 16px;
-  background-color: #0a273b;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  font-weight: 500;
+/* Buttons Container */
+.buttonsSection {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contactButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.call,
+.whatsapp {
+  
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
+  gap: 5px;
+  padding: 8px 16px;
+  border-radius: 4px;
   font-family: "Montserrat";
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.call {
+  background-color: #0a273b;
+  width: 81px;
+height: 32px;
+gap: 10px;
+border-radius: 4px;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+
 }
 
 .call:hover {
@@ -133,21 +210,7 @@
 }
 
 .whatsapp {
-  width: 121px;
-  height: 32px;
-  border-radius: 4px;
-  padding: 8px 16px;
   background-color: #7acbc4;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
-  font-family: "Montserrat";
 }
 
 .whatsapp:hover {
@@ -158,30 +221,24 @@
   font-family: "Montserrat";
   font-weight: 400;
   font-size: 14px;
-  line-height: 100%;
-  text-align: right;
-  border: none;
+  color: #007bff;
   background-color: transparent;
-  color: #0a273b;
-  max-width: 66px;
-  width: 66px;
-  height: 17px;
-  padding: 0;
-  transition: color 0.3s ease;
+  border: none;
   text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .readMore:hover {
   color: #0056b3;
 }
 
-/* Pagination Styles */
+/* Pagination */
 .pagination {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 8px;
+  gap: 10px;
 }
 
 .pageButton {
@@ -196,7 +253,6 @@
   cursor: pointer;
   width: 48px;
   height: 48px;
-  left: 50px;
   border-radius: 4px;
 }
 
@@ -209,10 +265,6 @@
 .pageButton.active {
   background-color: #0a273b;
   color: #fff;
-  width: 48px;
-  height: 48px;
-  left: 50px;
-  border-radius: 4px;
 }
 
 .pageButton:disabled {
@@ -222,7 +274,7 @@
   cursor: not-allowed;
 }
 
-/* Previous and Next Buttons */
+.prevButton,
 .nextButton {
   padding: 8px 12px;
   border-radius: 4px;
@@ -233,24 +285,7 @@
   cursor: pointer;
   width: 48px;
   height: 48px;
-  left: 50px;
   border-radius: 4px;
-}
-
-.prevButtonimage {
-  width: 48px;
-  height: 48px;
-  left: 50px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.nextButtonimage {
-  width: 48px;
-  height: 48px;
-  left: 50px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .prevButton:disabled,
@@ -258,18 +293,26 @@
   color: #ccc;
   cursor: not-allowed;
 }
+
 @media (max-width: 1600px) {
+  .cardsContainer {
+    display: grid
+    ;
+        grid-template-columns: repeat(auto-fit, minmax(640px, 1fr));
+        gap: 16px;
+  }
   .badge {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     color: #343a40;
     padding: 7px 20px;
     border-radius: 4px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #0A273B;
     font-size: 10px;
     font-weight: 400 !important;
     font-family: "Montserrat";
     border: #07151f 1px solid;
   }
+
   .call {
     width: 80px;
     height: 30px;
@@ -284,37 +327,42 @@
     justify-content: center;
     gap: 8px;
     transition: background-color 0.3s ease;
-    
-}
-.whatsapp {
-  width: 100px;
-  height: 30px;
-  border-radius: 4px;
-  padding: 0px 0px;
-  background-color: #7acbc4;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
-  font-family: "Montserrat";
-}
-.readMore {
-  font-family: "Montserrat";
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 100%;
-  text-align: right;
-  border: none;
-  background-color: transparent;
-  color: #0a273b;
-  padding: 0;
-  transition: color 0.3s ease;
-  text-decoration: none;
-  margin-right: 10px;
-}
+  }
+
+  .whatsapp {
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    padding: 0px 0px;
+    background-color: #7acbc4;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    font-family: "Montserrat";
+  }
+
+  .readMore {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: right;
+    border: none;
+    background-color: transparent;
+    color: #0a273b;
+    padding: 0;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  .searchContainer{
+    width: 100%;
+    max-width: 640px;
+  }
 }

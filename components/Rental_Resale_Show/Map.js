@@ -53,6 +53,7 @@ const Map = ({ location_link }) => {
         center={position} 
         zoom={13} 
         className={styles.mapContainer}
+        style={{ height: '100%' }} // Ensure the height is set
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -62,7 +63,12 @@ const Map = ({ location_link }) => {
           <Popup>📍 Property Location</Popup>
         </Marker>
       </MapContainer>
-      <div className={styles.sectionTitleBanner}>Location Map</div>
+      <div className={styles.sectionTitleBanner}>
+        <span className={styles.sectionTitleBannerText}>
+        Location Map
+        </span>
+       
+        </div>
     </div>
   );
 };

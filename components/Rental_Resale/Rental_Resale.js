@@ -53,6 +53,28 @@ const Rental_Resale = () => {
     return decodeURIComponent(url);
   };
 
+  const handleSortChange = (sortOption) => {
+    // Implement sorting logic based on sortOption
+    let sortedData = [...cardData];
+    switch (sortOption) {
+      case "newest":
+        sortedData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        break;
+      case "oldest":
+        sortedData.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        break;
+      case "priceHigh":
+        sortedData.sort((a, b) => b.amount.amount - a.amount.amount);
+        break;
+      case "priceLow":
+        sortedData.sort((a, b) => a.amount.amount - b.amount.amount);
+        break;
+      default:
+        break;
+    }
+    setCardData(sortedData);
+  };
+
   const topProperties = cardData.filter((property) => property.top === 1);
 
   return (
@@ -203,8 +225,16 @@ const Rental_Resale = () => {
       <div className={Styles.resaleSection}>
         <div className={Styles.resaleHeader}>
           <div className={Styles.resaleTitle}>
-            <h3>Resale</h3>
-            <span className={Styles.listingCount}>Listings</span>
+            <h3>Search Results</h3>
+            <div className={Styles.sortDropdown}>
+              <label htmlFor="sort">Sort:</label>
+              <select id="sort" name="sort" onChange={(e) => handleSortChange(e.target.value)}>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="priceHigh">Price: High to Low</option>
+                <option value="priceLow">Price: Low to High</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -262,7 +292,7 @@ const Rental_Resale = () => {
                 <div className={Styles.resaleContent}>
                   <h4>{listing.title}</h4>
                  
-                  <p className={Styles.resaleLocation}>{listing.subtitle}</p>
+                  <p className={Styles.resaleLocation}>{listing.location}</p>
                   <div className="d-flex">
                     <p className={Styles.resalePrice}>
                       AED{" "}

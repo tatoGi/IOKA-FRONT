@@ -151,6 +151,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
             ))}
           </div>
         </div>
+        <div className={styles.line}></div>
         {/* description Div */}
         <div className={`container ${styles.description}`}>
           <h1>Description</h1>
@@ -372,12 +373,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <span className={styles.price}>USD 1,500,000</span>{" "}
                     {/* Static USD price */}
                     <span className={styles.price}>AED 5,500,000</span>{" "}
-                    {/* Static AED price */}
-                    <div className={styles.actions}>
-                      <button className={styles.actionButton}>
-                        <StarIcon /> {/* Star icon for favorite */}
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -452,11 +448,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     {/* Static USD price */}
                     <span className={styles.price}>AED 5,500,000</span>{" "}
                     {/* Static AED price */}
-                    <div className={styles.actions}>
-                      <button className={styles.actionButton}>
-                        <StarIcon /> {/* Star icon for favorite */}
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -530,12 +522,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <span className={styles.price}>USD 1,500,000</span>{" "}
                     {/* Static USD price */}
                     <span className={styles.price}>AED 5,500,000</span>{" "}
-                    {/* Static AED price */}
-                    <div className={styles.actions}>
-                      <button className={styles.actionButton}>
-                        <StarIcon /> {/* Star icon for favorite */}
-                      </button>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -609,12 +596,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <span className={styles.price}>USD 1,500,000</span>{" "}
                     {/* Static USD price */}
                     <span className={styles.price}>AED 5,500,000</span>{" "}
-                    {/* Static AED price */}
-                    <div className={styles.actions}>
-                      <button className={styles.actionButton}>
-                        <StarIcon /> {/* Star icon for favorite */}
-                      </button>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
