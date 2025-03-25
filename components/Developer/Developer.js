@@ -188,7 +188,7 @@ const Developer = ({ initialData, initialPagination }) => {
                   <div className={styles.cardContent}>
                     <h2 className={styles.title}>{card.title}</h2>
                     <div className={styles.description}>
-                      <p>{limitTextLength(card.paragraph, 400)}</p>
+                      <p>{limitTextLength(card.paragraph, 285)}</p>
                     </div>
                     <div className={styles.communitiesSection}>
                       <h3 className={styles.communitiesTitle}>Top Communities</h3>
