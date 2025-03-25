@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import AboutUs from "@/components/AboutUs/AboutUs";
-const About = () => {
-  return (
-    <div>
-      <AboutUs />
-    </div>
-  );
+
+const About = ({ id }) => {
+  return <AboutUs id={id} />;
 };
 
 export default About;

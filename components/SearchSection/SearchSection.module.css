@@ -16,7 +16,7 @@
   border: 1px solid #07151F;
   border-radius: 4px;
   padding: 10px 12px;
-  min-width: 100%;
+  width: 100% !important;
 }
 
 .searchIcon {
@@ -96,13 +96,13 @@
 
 @media (max-width: 1024px) {
   .searchBar {
-    min-width: 100%;
+    width: 100%;
   }
 }
 
 @media (max-width: 1300px) {
   .searchBar {
-    min-width: 100%;
+    width: 100%;
   }
 
   .filterBtn,
@@ -118,7 +118,7 @@
   }
 
   .searchBar {
-    min-width: 100%;
+    width: 100%;
   }
 
   .filterButtons {
@@ -139,10 +139,11 @@
     top: 172px;
     left: 180px;
     justify-content: space-between;
+    padding: 0 54px 0 0;
   }
 
   .searchBar {
-    min-width: 550px;
+    width: 100%;
   }
 
   .filterBtn,

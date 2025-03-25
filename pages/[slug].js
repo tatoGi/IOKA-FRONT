@@ -6,11 +6,13 @@ import About from "@/pages/page-components/about";
 import Contact from "@/pages/page-components/contact";
 import OffPlan from "@/pages/page-components/offplan";
 import Rental_Resale from "@/pages/page-components/rentalResale";
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import Blog from "@/pages/page-components/blog";
 
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
+
+  console.log("pageData:", pageData); // Add this debug log
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {
@@ -33,7 +35,8 @@ const DynamicPage = ({ pageData }) => {
       case 1: // Home Page
         return <Home />;
       case 2: // About Page
-        return <About />;
+        console.log("Passing ID to About:", pageData.id);
+        return <About id={pageData.id} />;
       case 3: // Contact Page
         return <Contact />;
       case 4: // Off-Plan Page
@@ -58,7 +61,9 @@ const DynamicPage = ({ pageData }) => {
     <div>
       {/* Render Breadcrumb only if type_id is not 1 */}
       {pageData.type_id !== 1 && (
-        <Breadcrumb breadcrumbData={[{ title: 'Home', path: '/' }, ...breadcrumbData]} />
+        <Breadcrumb
+          breadcrumbData={[{ title: "Home", path: "/" }, ...breadcrumbData]}
+        />
       )}
       {/* Render the page content */}
       {renderPage()}
@@ -72,23 +77,22 @@ export async function getStaticPaths() {
 
   // Filter out duplicate slugs
   const uniquePages = pages.filter(
-    (page, index, self) =>
-      index === self.findIndex((p) => p.slug === page.slug)
+    (page, index, self) => index === self.findIndex((p) => p.slug === page.slug)
   );
 
   // Generate paths for each unique slug
   const paths = uniquePages
-    .filter(page => page.slug !== '') // Ensure slug is not empty
+    .filter((page) => page.slug !== "") // Ensure slug is not empty
     .map((page) => ({
-      params: { slug: page.slug },
+      params: { slug: page.slug }
     }));
 
   // Add the root path explicitly for the home page
-  paths.push({ params: { slug: '/' } });
+  paths.push({ params: { slug: "/" } });
 
   return {
     paths,
-    fallback: true,
+    fallback: true
   };
 }
 export async function getStaticProps({ params }) {
@@ -96,10 +100,10 @@ export async function getStaticProps({ params }) {
     const { slug } = params;
 
     // Handle the root path (`/`)
-    const isRootPath = slug === '/';
+    const isRootPath = slug === "/";
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch, status: ${res.status}`);
     }
@@ -121,7 +125,7 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { pageData },
-      revalidate: 10, // Revalidate the page every 10 seconds
+      revalidate: 10 // Revalidate the page every 10 seconds
     };
   } catch (error) {
     console.error("Error fetching page data:", error);

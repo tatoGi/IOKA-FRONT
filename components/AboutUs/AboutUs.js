@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AboutBanner from "@/components/AboutBanner/Banner";
 import styles from "./AboutUs.module.css";
 import Image from "next/image";
@@ -7,8 +7,43 @@ import TestimonialImage from "../../assets/img/team-1.png";
 import ContactForm from "../contactForm/ContactForm";
 import PartnersSection from "../PartnersSection/PartnersSection";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
+import { ABOUT_API } from "../../routes/apiRoutes"; // Import the route
+import { useRouter } from "next/router"; // Import useRouter
+import axios from "axios"; // Add axios import
+import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+const AboutUs = ({ initialData, id }) => {
+  const [cardData, setCardData] = useState(initialData || {});
+  const router = useRouter();
 
-const AboutUs = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!id) {
+        console.error("No ID provided to AboutUs component");
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${ABOUT_API}/${id}`);
+
+        if (response.data && response.data.about) {
+          setCardData(response.data.about);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (!initialData && id) {
+      fetchData();
+    }
+  }, [initialData, id]);
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+
+  // Update the testimonial section to use the fetched data
+  const testimonial = cardData.additional_fields?.testimonials?.[0] || {};
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -42,108 +77,94 @@ const AboutUs = () => {
       message: ""
     });
   };
-    const [formData, setFormData] = useState({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value
-      }));
-    };
-  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
     <div className="container">
-       {/* Testimonials Section */}
-       <div className={styles.testimonialSection}>
-          <div className={styles.testimonialContainer}>
-            <div className={styles.testimonialImageContainer}>
-              <div className={styles.testimonialImageWrapper}>
-                <Image
-                  src={TestimonialImage}
-                  alt="CEO Portrait"
-                  width={400}
-                  height={400}
-                  className={styles.testimonialImage}
-                />
-                <div className={styles.curvedConnector}></div>
-              </div>
+      {/* Testimonials Section */}
+      <div className={styles.testimonialSection}>
+        <div className={styles.testimonialContainer}>
+          <div className={styles.testimonialImageContainer}>
+            <div className={styles.testimonialImageWrapper}>
+              <Image
+                src={
+                  testimonial.image
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(testimonial.image)}`
+                    : baseimage
+                }
+                alt="CEO Portrait"
+                width={400}
+                height={400}
+                className={styles.testimonialImage}
+              />
+              <div className={styles.curvedConnector}></div>
             </div>
-            <div className={styles.testimonialWrapper}>
-              <div className={styles.testimonialContent}>
-                <div className={styles.testimonialHeader}>
-                  <h3 className={styles.testimonialName}>Max Musterman</h3>
-                  <p className={styles.testimonialRole}>CEO Chairman</p>
-                </div>
-                <div className={styles.testimonialBody}>
-                  <p className={styles.testimonialText}>
-                    As a brokerage rooted in one of the world's most iconic
-                    cities, we pride ourselves on clarity, efficiency, and an
-                    unwavering commitment to client satisfaction.
-                  </p>
-                  <p className={styles.testimonialText}>
-                    Our mission is to elevate your real estate experience with
-                    unparalleled expertise and dedication. We navigate the
-                    complexities of the market with precision, providing clear
-                    assistance and tailored strategies to achieve your goals
-                    seamlessly and efficiently.
-                  </p>
-                 
-                  <p className={styles.welcomeText}>
-                    Welcome to IOKA, your trusted guide in Dubai's dynamic real
-                    estate market.
-                  </p>
-                </div>
+          </div>
+          <div className={styles.testimonialWrapper}>
+            <div className={styles.testimonialContent}>
+              <div className={styles.testimonialHeader}>
+                <h3 className={styles.testimonialName}>
+                  {testimonial.name || "Max Musterman"}
+                </h3>
+                <p className={styles.testimonialRole}>
+                  {testimonial.position || "CEO Chairman"}
+                </p>
+              </div>
+              <div className={styles.testimonialBody}>
+                <p className={styles.testimonialText}>
+                  {testimonial.description ||
+                    "As a brokerage rooted in one of the world's most iconic cities..."}
+                </p>
+                <p className={styles.welcomeText}>
+                  {testimonial.quote ||
+                    "Welcome to IOKA, your trusted guide in Dubai's dynamic real estate market."}
+                </p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
       <AboutBanner
-        title="ABOUT US"
-        description="As a brokerage rooted in one of the world's most iconic cities, we pride ourselves on"
+        title={cardData.title || "ABOUT US"}
+        description={
+          (cardData.additional_fields?.paragraph?.title || "").replace(
+            /<\/?p>/g,
+            ""
+          ) ||
+          "As a brokerage rooted in one of the world's most iconic cities, we pride ourselves on"
+        }
       />
 
       {/* Statistics section */}
       <div className={styles.container}>
         <div className={styles.statsContainer}>
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>World Wide</p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              500+
-              <br />
-              ESTATE EXPERTS
-            </p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              $350+
-              <br />
-              MILLIONS
-              <br />
-              IN DEAL
-            </p>
-          </div>
-
-          <div className={styles.statBox}>
-            <div className={styles.statCircle}></div>
-            <p>
-              3500+
-              <br />
-              SOLD PROPERTY
-            </p>
-          </div>
+          {cardData.additional_fields?.number_boxes?.map((box, index) => (
+            <div key={index} className={styles.statBox}>
+              <div className={styles.statCircle}></div>
+              <p>
+                {box.suffix}
+                {box.number}
+                <br />
+                {box.title}
+              </p>
+            </div>
+          ))}
         </div>
 
         {/* Your Agency Section */}
@@ -154,7 +175,7 @@ const AboutUs = () => {
             market.
           </p>
         </div>
-       
+
         {/* Team Section */}
         <div className={styles.teamGrid}>
           <div className={styles.teamMember}>
@@ -194,50 +215,9 @@ const AboutUs = () => {
           </div>
         </div>
 
-      
         <div className={styles.formContainer}>
-      <h2 className={styles.title}>Feel free to write</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Your Name"
-          className={styles.input}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-          className={styles.input}
-          required
-        />
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Phone Number"
-          className={styles.input}
-          required
-        />
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Write a Message"
-          className={styles.textarea}
-          required
-        />
-        <button type="submit" className={styles.submitButton}>
-          Send a Message
-        </button>
-      </form>
-    </div>
+          <ContactForm />
+        </div>
         <PartnersSection />
         <SubscribeSection />
       </div>

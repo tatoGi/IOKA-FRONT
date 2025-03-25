@@ -1050,13 +1050,18 @@
 
 /* Individual award card */
 .awardCard {
-  width: 1079px !important;
+  width: 1079px;
+height: 360px;
+border-radius: 16px;
+border-width: 1px;
+gap: 24px;
+padding-top: 12px;
+padding-right: 16px;
+padding-bottom: 12px;
+padding-left: 16px;
   background: #FFFFFF;
   border-radius: 16px;
-  padding: 32px;
-  min-height: 320px;
   display: flex !important;
-  gap: 32px;
   position: relative;
 }
 

@@ -1,7 +1,8 @@
 import React from "react";
 import About from "@/components/content/about/about";
-const AboutPage = () => {
-  return <About />;
+
+const AboutPage = ({ id }) => {
+  return <About id={id} />;
 };
 
 export default AboutPage;
