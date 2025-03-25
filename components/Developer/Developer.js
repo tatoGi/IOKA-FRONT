@@ -53,13 +53,6 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   };
 
-  // Limit text length
-  const limitTextLength = (text, maxLength) => {
-    const strippedText = text.replace(/(<([^>]+)>)/gi, "");
-    return strippedText.length > maxLength
-      ? strippedText.substring(0, maxLength) + "..."
-      : strippedText;
-  };
 
   // Fetch data when the component mounts
   useEffect(() => {
@@ -188,7 +181,8 @@ const Developer = ({ initialData, initialPagination }) => {
                   <div className={styles.cardContent}>
                     <h2 className={styles.title}>{card.title}</h2>
                     <div className={styles.description}>
-                      <p>{limitTextLength(card.paragraph, 285)}</p>
+                    <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+                      
                     </div>
                     <div className={styles.communitiesSection}>
                       <h3 className={styles.communitiesTitle}>Top Communities</h3>

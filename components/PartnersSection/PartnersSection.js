@@ -65,7 +65,7 @@ const PartnersSection = () => {
                 <Link href={partner.url} className="partners-slider-item">
                   <Image 
                     src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : homeBanner} 
-                    alt={partner.name} 
+                    alt={partner.title} 
                     width={200} 
                     height={100} 
                   />

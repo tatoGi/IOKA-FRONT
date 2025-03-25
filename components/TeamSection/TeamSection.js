@@ -1,33 +1,39 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import TeamImage from '../../assets/img/team-1.png';
 
-const TeamSection = () => {
+const TeamSection = ({ sectionDataFive }) => {
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+  const MainTitle = sectionDataFive?.additional_fields?.title || 'Default Title';
+  const TeamMembers = sectionDataFive?.additional_fields?.team_members || [];
+  const redirectLink = sectionDataFive?.additional_fields?.Redirect_Link || '#'; // Provide a default value
   return (
     <div className="team-section">
       <div className="container">
         <div className="team-all-link">
-          <Link href={"#"} className="team-all-link-touch">
-            ABOUT US
+          <Link href={redirectLink} className="team-all-link-touch">
+            {MainTitle}
           </Link>
         </div>
         <div className="team-box">
-          <div className="team-item">
-            <Image src={TeamImage} alt='member' />
-            <div className="name">John Doe</div>
-            <div className="experience">5+ Years Experience</div>
-          </div>
-          <div className="team-item">
-            <Image src={TeamImage} alt='member' />
-            <div className="name">Max Musterman</div>
-            <div className="experience">5+ Years Experience</div>
-          </div>
-          <div className="team-item">
-            <Image src={TeamImage} alt='member' />
-            <div className="name">John Lenon</div>
-            <div className="experience">5+ Years Experience</div>
-          </div>
+          {TeamMembers.map((member, index) => (
+            <div className="team-item" key={index}>
+              <Image
+                src={
+                  member.image
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                    : homeBanner
+                }
+                alt='member'
+                width={200}
+                height={200}
+              />
+              <div className="name">{member.title}</div>
+              <div className="experience">{member.subtitle_2}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

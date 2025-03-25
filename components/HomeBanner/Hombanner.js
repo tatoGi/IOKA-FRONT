@@ -19,6 +19,11 @@ const Hombanner = ({ initialData }) => {
   const [cardData, setCardData] = useState(initialData || []);
   const [sectionOneData, setSectionOneData] = useState(null); // State for section_one data
   const [sectionTwoData, setSectionTwoData] = useState(null); // State for section_two data
+  const [sectionThreeData, setSectionThreeData] = useState(null); // State for section_three data
+  const [sectionFourData, setSectionFourData] = useState(null); // State for section_four data
+  const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
+  const [sectionSixData, setSectionSixData] = useState(null); // State for section_six data
+  const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
   const router = useRouter(); // Initialize useRouter
 
   useEffect(() => {
@@ -34,6 +39,22 @@ const Hombanner = ({ initialData }) => {
           // Find the section with section_key equal to section_two
           const sectionTwo = response.data.sections.find(section => section.section_key === "section_two");
           setSectionTwoData(sectionTwo); // Set section_two data
+          // Find the section with section_key equal to section_three
+          const sectionThree = response.data.sections.find(section => section.section_key === "section_three");
+          setSectionThreeData(sectionThree); // Set section_three data
+          // Find the section with section_key equal to section_four
+          const sectionFour = response.data.sections.find(section => section.section_key === "section_four");
+          setSectionFourData(sectionFour); // Set section_four data
+          // Find the section with section_key equal to section_five
+          const sectionFive = response.data.sections.find(section => section.section_key === "section_five");
+          setSectionFiveData(sectionFive); // Set section_five data
+        
+          // Find the section with section_key equal to section_six
+          const sectionSix = response.data.sections.find(section => section.section_key === "section_six");
+          setSectionSixData(sectionSix); // Set section_six data
+          
+          const sectionSeven = response.data.sections.find(section => section.section_key === "section_seven");
+          setSectionSevenData(sectionSeven); // Set section
         } else {
           console.error("Invalid response structure:", response.data);
         }
@@ -44,18 +65,19 @@ const Hombanner = ({ initialData }) => {
 
     fetchData();
   }, [initialData]);
-
+  
   return (
     <div className="home-banner">
       <div className="banner-slider">
         <HomeBannerSwiper sectionData={sectionOneData} /> {/* Pass section_one data */}
         <HomeBannerSearch />
         <LiveInvestSection sectionDataTwo={sectionTwoData} /> {/* Pass section_two data */}
-        <NewProperties />
-        <PopularAreaSection />
-        <TeamSection />
-        <Clients />
-        <NewsSection />
+        {/* Add components for sections three, four, five, and six */}
+        <NewProperties sectionDataThree={sectionThreeData} /> {/* Pass section_three data */}
+        <PopularAreaSection sectionDataFour={sectionFourData} /> {/* Pass section_four data */}
+        <TeamSection sectionDataFive={sectionFiveData} /> {/* Pass section_five data */}
+        <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
+        <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
         <PartnersSection />
         <SubscribeSection />
       </div>

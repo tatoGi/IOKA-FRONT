@@ -4,7 +4,6 @@ import styles from "./LiveInvestSection.module.css";
 import homeBanner from "../../assets/img/homeBanner.jpg";
 
 const LiveInvestSection = ({ sectionDataTwo }) => {
-  console.log(sectionDataTwo?.additional_fields);
   const [activeSlide, setActiveSlide] = useState(1);
   const additionalFields = sectionDataTwo?.additional_fields || {
     slider_images: [],
