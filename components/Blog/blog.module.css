@@ -138,7 +138,6 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
 .pageButton {
     margin: 0 5px;
     padding: 5px 10px;
@@ -146,14 +145,24 @@
     background-color: #fff;
     cursor: pointer;
     border-radius: 4px;
-}
-
-.pageButton.active {
+    width: 46px;
+    height: 46px;
+    border-radius: 4px;
+    left: 50px;
+  }
+  
+  .pageButton:last-child {
+    width: 84px;
+    height: 44px;
+  }
+  
+  .pageButton.active {
     background-color: #0A273B;
     color: white;
     border-color: #0A273B;
-}
-
-.pageButton:hover {
+  }
+  
+  .pageButton:hover {
     background-color: #ddd;
-}
+  }
+  

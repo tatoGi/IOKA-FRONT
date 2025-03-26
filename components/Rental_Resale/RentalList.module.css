@@ -189,6 +189,15 @@ margin-bottom: 24px;
     background-color: #fff;
     cursor: pointer;
     border-radius: 4px;
+    width: 46px;
+    height: 46px;
+    border-radius: 4px;
+    left: 50px;
+  }
+  
+  .pageButton:last-child {
+    width: 84px;
+    height: 44px;
   }
   
   .pageButton.active {
@@ -200,6 +209,7 @@ margin-bottom: 24px;
   .pageButton:hover {
     background-color: #ddd;
   }
+  
   .additionalInfo {
   margin-top: 20px;
   padding: 15px;
