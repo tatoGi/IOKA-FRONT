@@ -144,11 +144,7 @@ const AboutUs = ({ initialData, id }) => {
       <AboutBanner
         title={cardData.title || "ABOUT US"}
         description={
-          (cardData.additional_fields?.paragraph?.title || "").replace(
-            /<\/?p>/g,
-            ""
-          ) ||
-          "As a brokerage rooted in one of the world's most iconic cities, we pride ourselves on"
+          <div dangerouslySetInnerHTML={{ __html: testimonial?.description }}></div>
         }
       />
 
