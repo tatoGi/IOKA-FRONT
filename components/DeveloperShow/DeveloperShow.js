@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./DeveloperShow.module.css";
 import Image from "next/image";
-import EmaarLogo from "../../assets/img/Shape.png";
+import EmaarLogo from "../../assets/img/emmar.png";
 import AreaVector from "../../assets/img/areavector.png";
 import BathroomIcon from "../../assets/img/bathroom.png";
 import BedroomIcon from "../../assets/img/Vector2.png";
@@ -15,14 +15,7 @@ import awardimg1 from "../../assets/img/awardimg1.png";
 import Slider from "react-slick";
 import SearchSection from "../SearchSection/SearchSection";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
-/**
- * DeveloperShow Component
- * Displays detailed information about a property developer including:
- * - Search and filter functionality
- * - Developer information
- * - Property listings (Off-plan and Resale)
- * - Awards section
- */
+
 const DeveloperShow = (developerData) => {
   const photos = developerData.developerData.photo
     ? JSON.parse(developerData.developerData.photo)
@@ -33,223 +26,57 @@ const DeveloperShow = (developerData) => {
   // Get the first photo (if available)
   // State for managing different sliders
   const [currentSlide, setCurrentSlide] = useState(0); // Controls off-plan properties slider
-  const [resaleCurrentSlide, setResaleCurrentSlide] = useState(0); // Controls resale properties slider
-  const [awardCurrentSlide, setAwardCurrentSlide] = useState(0); // Controls awards slider
+
   // Get offplanListings from developerData
   const offplanListings = developerData.developerData.offplan_listings || [];
   const rentalListings =
     developerData.developerData.rental_resale_listings || [];
   const awards = developerData.developerData.awards || [];
-  // Touch interaction states
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-
-  // Mouse drag interaction states
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  // Refs for accessing slider DOM elements
-  const sliderRef = useRef(null);
-  const resaleSliderRef = useRef(null);
-  const awardSliderRef = useRef(null);
-
-  // Sample data arrays for sliders
-  const propertySlides = [1, 2, 3, 4, 5]; // Off-plan property slides
-  const resaleSlides = [1, 2, 3, 4, 5]; // Resale property slides
-  const awardSlides = [1, 2, 3]; // Award slides
-
-  /**
-   * Handles the start of touch interaction
-   * @param {TouchEvent} e - Touch event object
-   */
-  const handleTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-  };
-
-  /**
-   * Tracks touch movement for slider interaction
-   * @param {TouchEvent} e - Touch event object
-   */
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.touches[0].clientX);
-  };
-
-  /**
-   * Processes the end of touch interaction and determines slide direction
-   * Swipe threshold is 75px
-   */
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      // Swipe left - next slide
-      setCurrentSlide((prev) => Math.min(prev + 1, resaleSlides.length - 1));
-    }
-
-    if (touchStart - touchEnd < -75) {
-      // Swipe right - previous slide
-      setCurrentSlide((prev) => Math.max(prev - 1, 0));
-    }
-  };
-
-  // Touch handlers specifically for resale slider
-  const handleResaleTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-  };
-
-  const handleResaleTouchMove = (e) => {
-    setTouchEnd(e.touches[0].clientX);
-  };
-
-  const handleResaleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      // Swipe left
-      setResaleCurrentSlide((prev) =>
-        Math.min(prev + 1, resaleSlides.length - 1)
-      );
-    }
-
-    if (touchStart - touchEnd < -75) {
-      // Swipe right
-      setResaleCurrentSlide((prev) => Math.max(prev - 1, 0));
-    }
-  };
-
-  /**
-   * Handles mouse down event for drag scrolling
-   * @param {MouseEvent} e - Mouse event object
-   */
-  const handleResaleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - resaleSliderRef.current.offsetLeft);
-    setScrollLeft(resaleSliderRef.current.scrollLeft);
-  };
-
-  /**
-   * Handles mouse movement during drag
-   * Calculates scroll position based on drag distance
-   * @param {MouseEvent} e - Mouse event object
-   */
-  const handleResaleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - resaleSliderRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Multiply by 2 for faster scrolling
-    resaleSliderRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  /**
-   * Handles the end of mouse drag interaction
-   * Snaps to the nearest slide based on current scroll position
-   */
-  const handleResaleMouseUp = () => {
-    setIsDragging(false);
-    const slideWidth = 1200 + 24; // card width + gap
-    const currentScroll = resaleSliderRef.current.scrollLeft;
-    const nearestSlide = Math.round(currentScroll / slideWidth);
-    setResaleCurrentSlide(nearestSlide);
-  };
-
-  // Touch handlers for awards slider
-  const handleAwardTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-    setTouchEnd(e.touches[0].clientX); // Reset touchEnd
-  };
-
-  const handleAwardTouchMove = (e) => {
-    setTouchEnd(e.touches[0].clientX);
-    // Prevent page scroll
-    e.preventDefault();
-  };
-
-  const handleAwardTouchEnd = () => {
-    const swipeDistance = touchStart - touchEnd;
-
-    if (Math.abs(swipeDistance) > 50) {
-      // Reduced threshold for easier sliding
-      if (swipeDistance > 0 && awardCurrentSlide < 2) {
-        // Swipe left
-        setAwardCurrentSlide((prev) => prev + 1);
+  useEffect(() => {
+    const slides = document.querySelectorAll('.slick-slide');
+    slides.forEach((slide, index) => {
+      if (index !== 0) {
+        slide.setAttribute('inert', 'true');
       }
-      if (swipeDistance < 0 && awardCurrentSlide > 0) {
-        // Swipe right
-        setAwardCurrentSlide((prev) => prev - 1);
-      }
-    }
-  };
-
-  // Mouse handlers for awards slider
-  const handleAwardMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX);
-    setScrollLeft(awardCurrentSlide * (1079 + 24)); // Use card width + gap
-  };
-
-  const handleAwardMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-
-    const x = e.pageX;
-    const walk = (startX - x) * 1.5; // Increased sensitivity
-    const newPosition = scrollLeft + walk;
-
-    // Update transform directly for smooth dragging
-    if (awardSliderRef.current) {
-      awardSliderRef.current.style.transform = `translateX(${-newPosition}px)`;
-    }
-  };
-
-  const handleAwardMouseUp = () => {
-    setIsDragging(false);
-
-    if (!awardSliderRef.current) return;
-
-    const slideWidth = 1079 + 24; // card width + gap
-    const currentScroll = Math.abs(
-      parseInt(
-        awardSliderRef.current.style.transform
-          .replace("translateX(", "")
-          .replace("px)", "")
-      )
-    );
-    const nearestSlide = Math.round(currentScroll / slideWidth);
-
-    // Constrain to valid slide indices
-    const newSlide = Math.max(0, Math.min(nearestSlide, 2));
-    setAwardCurrentSlide(newSlide);
-
-    // Reset transform to use state-based transform
-    awardSliderRef.current.style.transform = "";
-  };
+    });
+  }, []);
 
   /**
    * Configuration for the awards slider using react-slick
    * Includes responsive settings and custom navigation
    */
   const awardSliderSettings = {
-    dots: true, // Enable navigation dots
-    infinite: false, // Disable infinite loop
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Show one slide at a time
-    slidesToScroll: 1, // Scroll one slide at a time
-    arrows: false, // Hide default arrows
+    className: "slider variable-width",
+    dots: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
     dotsClass: styles.slickDots, // Custom class for dots container
     customPaging: () => <div className={styles.dot} />, // Custom dot element
-    // Responsive breakpoints
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1
+    beforeChange: (current, next) => {
+      const slides = document.querySelectorAll('.slick-slide');
+      slides.forEach((slide, index) => {
+        if (index === next) {
+          slide.removeAttribute('inert');
+        } else {
+          slide.setAttribute('inert', 'true');
         }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
+      });
+    }
   };
+
+  const resaleSliderSettings = {
+    className: "slider variable-width",
+    dots: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true
+  };
+
   const limitTextLength = (text, maxLength) => {
     const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
     return strippedText.length > maxLength
@@ -475,8 +302,11 @@ const DeveloperShow = (developerData) => {
           </div>
         </div>
 
+      </div>
+
         {/* Update resale slider section */}
         <div className={styles.resaleSection}>
+          <div className="container">
           <div className={styles.resaleHeader}>
             <div className={styles.resaleTitle}>
               <h3>Resale</h3>
@@ -485,113 +315,103 @@ const DeveloperShow = (developerData) => {
               </span>
             </div>
           </div>
+          </div>
+         
 
-          <div
-            className={styles.resaleSlider}
-            ref={resaleSliderRef}
-            onTouchStart={handleResaleTouchStart}
-            onTouchMove={handleResaleTouchMove}
-            onTouchEnd={handleResaleTouchEnd}
-            onMouseDown={handleResaleMouseDown}
-            onMouseMove={handleResaleMouseMove}
-            onMouseUp={handleResaleMouseUp}
-            onMouseLeave={handleResaleMouseUp}
-          >
-            <div
-              className={styles.resaleCards}
-              style={{
-                transform: `translateX(${-resaleCurrentSlide * (1200 + 24)}px)`
-              }}
-            >
-              {rentalListings.map((listing) => (
-                <div key={listing.id} className={styles.resaleCard}>
-                  <div className={styles.resaleImage}>
-                    <Image
-                      src={
-                        listing.main_photo
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(listing.main_photo)}`
-                          : baseimage
-                      }
-                      alt={listing.title}
-                      layout="fill"
-                      objectFit="cover"
-                    />
+          <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
+            {rentalListings.map((listing) => (
+              <div key={listing.id} className={styles.resaleCard}>
+                <div className={styles.resaleImage}>
+                  <Image
+                    src={
+                      listing.main_photo
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(listing.main_photo)}`
+                        : baseimage
+                    }
+                    alt={listing.title}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className={styles.resaleContent}>
+                  <h4>{listing.title}</h4>
+                  <p className={styles.resaleLocation}>{listing.location}</p>
+                  <p className={styles.resalePrice}>AED {listing.amount}</p>
+                  <div className={styles.resaleStats}>
+                    <div className={styles.statGroup}>
+                      <Image
+                        src={BedroomIcon}
+                        alt="Bedrooms"
+                        width={16}
+                        height={16}
+                      />
+                      <span>{listing.bedroom} Br</span>
+                    </div>
+                    <div className={styles.statSeparator}>|</div>
+                    <div className={styles.statGroup}>
+                      <Image
+                        src={BathroomIcon}
+                        alt="Bathrooms"
+                        width={16}
+                        height={16}
+                      />
+                      <span>{listing.bathroom} Ba</span>
+                    </div>
+                    <div className={styles.statSeparator}>|</div>
+                    <div className={styles.statGroup}>
+                      <Image
+                        src={AreaVector}
+                        alt="Area"
+                        width={16}
+                        height={16}
+                      />
+                      <span>{listing.sq_ft} Sq.Ft</span>
+                    </div>
                   </div>
-                  <div className={styles.resaleContent}>
-                    <h4>{listing.title}</h4>
-                    <p className={styles.resaleLocation}>{listing.location}</p>
-                    <p className={styles.resalePrice}>AED {listing.amount}</p>
-                    <div className={styles.resaleStats}>
-                      <div className={styles.statGroup}>
-                        <Image
-                          src={BedroomIcon}
-                          alt="Bedrooms"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{listing.bedroom} Br</span>
-                      </div>
-                      <div className={styles.statSeparator}>|</div>
-                      <div className={styles.statGroup}>
-                        <Image
-                          src={BathroomIcon}
-                          alt="Bathrooms"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{listing.bathroom} Ba</span>
-                      </div>
-                      <div className={styles.statSeparator}>|</div>
-                      <div className={styles.statGroup}>
-                        <Image
-                          src={AreaVector}
-                          alt="Area"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{listing.sq_ft} Sq.Ft</span>
-                      </div>
+                  <div className={styles.resaleDetails}>
+                    <p>{limitTextLength(listing.description, 150)}</p>
+                    <p>6,115 Sq. Ft. BUA</p>
+                    <p>10,111 Sq. Ft. PLOT</p>
+                    <p>Lime Tree Valley</p>
+                    <p>Trakheesi Permit: 6123123124512</p>
+                  </div>
+                  <div className={styles.resaleFooter}>
+                    <div className={styles.agentInfo}>
+                      <Image
+                        src={listing.agent_image || agentInfo} // Use agent image or fallback
+                        alt="Agent"
+                        width={40}
+                        height={40}
+                        className={styles.agentImage}
+                      />
+                      <span>{listing.agent_title || "Darren Murphy"}</span>
                     </div>
-                    <div className={styles.resaleDetails}>
-                      <p>{limitTextLength(listing.description, 150)}</p>
-                    </div>
-                    <div className={styles.resaleFooter}>
-                      <div className={styles.agentInfo}>
-                        <Image
-                          src={listing.agent_image || agentInfo} // Use agent image or fallback
-                          alt="Agent"
-                          width={40}
-                          height={40}
-                          className={styles.agentImage}
-                        />
-                        <span>{listing.agent_title || "Agent Name"}</span>
-                      </div>
-                      <div className={styles.footerActions}>
-                        <button className={styles.footerButton}>
-                          <BsWhatsapp size={20} color="#34C759" />
-                          <span>WhatsApp</span>
-                        </button>
-                        <div className={styles.footerSeparator}>|</div>
-                        <button className={styles.footerButton}>
-                          <Image src={callVector} alt="Call" />
-                          <span>Call Us</span>
-                        </button>
-                      </div>
+                    <div className={styles.footerActions}>
+                      <button className={styles.footerButton}>
+                        <BsWhatsapp size={20} color="#34C759" />
+                        <span>WhatsApp</span>
+                      </button>
+                      <div className={styles.footerSeparator}>|</div>
+                      <button className={styles.footerButton}>
+                        <Image src={callVector} alt="Call" />
+                        <span>Call Us</span>
+                      </button>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            ))}
+          </Slider>
         </div>
-      </div>
-
       {/* Add Awards Section after resaleSection */}
       <div className={styles.awardsSection}>
         <div className={styles.awardsContainer}>
+          <div className="container">
           <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
+          </div>
+        
 
           <Slider {...awardSliderSettings} className={styles.awardsSlider}>
             {awards.map((award, index) => (
@@ -641,6 +461,7 @@ const DeveloperShow = (developerData) => {
               </div>
             ))}
           </Slider>
+
         </div>
       </div>
       <SubscribeSection />

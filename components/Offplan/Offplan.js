@@ -36,7 +36,7 @@ const Offplan = ({ initialData, initialPagination }) => {
   const fetchData = async (page) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${OFFPLAN_APi}?page=${page}&orderby=created_at&order=desc`);
+      const response = await axios.get(`${OFFPLAN_APi}?page=${page}`);
       const data = response.data.data;
       setCardData(Array.isArray(data) ? data : [data]);
       setCurrentPage(response.data.current_page);

@@ -51,6 +51,15 @@ const ContactForm = () => {
     }
   };
 
+  const placeholderStyle = {
+    fontFamily: 'Montserrat',
+    fontWeight: 400,
+    fontSize: '16px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+    color: '#0A273B'
+  };
+
   return (
     <div className={styles.formContainer}>
       <h2 className={styles.title}>Feel free to write</h2>
@@ -65,6 +74,7 @@ const ContactForm = () => {
           placeholder="Your Name"
           className={styles.input}
           required
+          style={placeholderStyle}
         />
         <input
           type="email"
@@ -74,6 +84,7 @@ const ContactForm = () => {
           placeholder="Email Address"
           className={styles.input}
           required
+          style={placeholderStyle}
         />
         <input
           type="tel"
@@ -83,6 +94,7 @@ const ContactForm = () => {
           placeholder="Phone Number"
           className={styles.input}
           required
+          style={placeholderStyle}
         />
         <textarea
           name="message"
@@ -91,6 +103,7 @@ const ContactForm = () => {
           placeholder="Write a Message"
           className={styles.textarea}
           required
+          style={placeholderStyle}
         />
         <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
           {isSubmitting ? 'Sending...' : 'Send a Message'}

@@ -1,53 +1,6 @@
 .developerShowSection {
   width: 100%;
 }
-
-.searchSection {
-  width: 100%;
-  padding: 20px 20px;
-  background-color: #fff;
-}
-
-.searchContainer {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.searchInputWrapper {
-  position: relative;
-  margin-bottom: 44px;
-  width: 100%;
-  height: 40px;
-}
-
-.searchIcon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666666;
-  width: 16px;
-  height: 16px;
-}
-
-.searchInput {
-  width: 100%;
-  padding: 12px 20px 12px 45px;
-  border: 1px solid #E5E5E5;
-  border-radius: 4px;
-  font-size: 14px;
-  height: 40px;
-  color: #666666;
-}
-
-.searchInput::placeholder {
-  color: #666666;
-}
-
 .filterButtons {
   display: flex;
   gap: 12px;
@@ -109,23 +62,21 @@
 }
 
 .heroSection {
-  padding: 44px 20px;
+  padding: 44px 0;
 }
 
 .heroContent {
-  max-width: 1360px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 0 44px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 100px;
+  gap: 149px;
   border-bottom: 1px solid #07151F;
   margin-bottom: 44px;
 }
 
 .developerInfo {
-  max-width: 730px;
+ width: 100%;
 }
 
 .developerInfo h2 {
@@ -144,15 +95,14 @@
 }
 
 .developerLogo {
-  width: 530px;
-  height: 360px;
+  width: 581px;
+  height: 387px;
   background-color: #07151F;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   flex-shrink: 0;
-  padding: 20px;
 }
 
 .developerLogo img {
@@ -272,98 +222,12 @@
   font-size: 18px;
 }
 
-@media (max-width: 1400px) {
-  .heroContent {
-    gap: 60px;
-  }
-
-  .developerInfo {
-    max-width: 650px;
-  }
-
-  .developerLogo {
-    width: 480px;
-    height: 325px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .heroContent {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .developerInfo {
-    max-width: 100%;
-  }
-
-  .developerLogo {
-    width: 100%;
-    max-width: 530px;
-    height: auto;
-    aspect-ratio: 530/360;
-  }
-}
-
-@media (max-width: 768px) {
-  .searchContainer,
-  .heroContent {
-    padding: 0 15px;
-  }
-
-  .filterButtons {
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .filterBtn {
-    padding: 6px 12px;
-    font-size: 13px;
-    height: 36px;
-  }
-
-  .heroSection {
-    padding: 20px;
-  }
-
-  .heroContent {
-    flex-direction: column;
-  }
-
-  .heroContent h1 {
-    font-size: 36px;
-  }
-
-  .heroContent p {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .projectsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .statsContainer {
-    grid-template-columns: 1fr;
-  }
-
-  .heroContent h1 {
-    font-size: 28px;
-  }
-
-  .heroContent p {
-    font-size: 16px;
-  }
-}
-
 .listingsSection {
-  padding: 40px 20px;
+  padding: 0;
 }
 
 .listingsContainer {
-  max-width: 1360px;
-  margin: 0 auto;
+ width: 100%;
 }
 
 .listingsHeader {
@@ -414,7 +278,6 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -451,8 +314,10 @@
   font-size: 12px;
   z-index: 1;
   width: 102px;
+  font-weight: 700;
   height: 35px;
   text-align: center;
+  font-family: 'Montserrat';
 }
 
 .propertyYear {
@@ -478,22 +343,26 @@
   color: #0A273B;
   font-weight: 600;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .location {
   color: #0A273B;
   font-size: 12px;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 .priceStart {
   color: #0A273B;
   font-size: 16px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 .price {
   color: #007AFF;
   font-size: 16px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 .priceContainer {
   display: flex;
@@ -527,6 +396,7 @@
   color: #0A273B;
   font-size: 14px;
   line-height: 1.5;
+  font-family: 'Montserrat';
 }
 
 .propertyActions {
@@ -553,6 +423,7 @@
   color: #1A1A1A;
   font-size: 14px;
   font-weight: 500;
+  font-family: 'Montserrat';
 }
 
 .actionButton:hover {
@@ -577,6 +448,7 @@
   color: #1A1A1A;
   font-size: 14px;
   font-weight: 500;
+  font-family: 'Montserrat';
 }
 
 .whatsappButton:hover {
@@ -587,28 +459,6 @@
   background: white;
   color: #666666;
   border: 1px solid #E5E5E5;
-}
-
-@media (max-width: 1200px) {
-  .propertyCard {
-    width: calc(50vw - 52px);
-  }
-}
-
-@media (max-width: 768px) {
-  .listingsHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  
-  .propertyCard {
-    width: calc(100vw - 80px);
-  }
-  
-  .sliderWrapper {
-    padding: 0 20px;
-  }
 }
 
 .sliderSection {
@@ -767,26 +617,6 @@
   font-weight: 500;
 }
 
-@media (max-width: 1024px) {
-  .sliderPreview, .sliderNext {
-    display: none;
-  }
-  
-  .sliderCard {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .sliderImage,
-  .sliderContent {
-    width: 100%;
-  }
-
-  .sliderContent {
-    padding: 24px;
-  }
-}
-
 .sliderArrow {
   position: absolute;
   top: 50%;
@@ -826,20 +656,9 @@
   width: 20px;
   height: 20px;
 }
-
-@media (max-width: 768px) {
-  .sliderWrapper {
-    padding: 0 20px;
-  }
-  
-  .sliderArrow {
-    display: none;
-  }
-}
-
 .resaleSection {
-  padding: 40px 20px;
-  background-color: #fff;
+  padding: 40px 0;
+  background-color: #fff; 
 }
 
 .resaleHeader {
@@ -849,25 +668,44 @@
 }
 
 .resaleTitle {
-  display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .resaleTitle h3 {
-  font-size: 16px;
-  color: #0A273B;
+  font-family: 'Montserrat';
   font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin-bottom: 12px;
 }
 
 .listingCount {
-  color: #7ACBC4;
-  font-size: 14px;
+  font-family: 'Montserrat';
   font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #7ACBC4;
 }
-.resaleCard {
-  flex: 0 0 1200px;
+
+.resaleSlider {
   display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%; /* Ensure it takes full width */
+  margin: 0 auto; /* Center the slider */
+}
+
+.resaleSlider .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.resaleCard {
+  display: flex !important;
   background: #FFFFFF;
   overflow: hidden;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
@@ -875,16 +713,19 @@
   border: 1px solid #E6EBED;
   cursor: pointer; /* Ensure the cursor changes to pointer */
   pointer-events: auto; /* Allow pointer events */
+  margin-right: 20px; /* Add margin to show part of the next slide */
+  width: 1252px !important; /* Adjust width to show partial slides */
+  height: 380px !important;
+  gap: 32px;
 }
 
 .resaleImage {
   position: relative;
-  width: 50%;
-  height: auto;
+  width: 610px;
+  height: 380px;
 }
 
 .resaleContent {
-  width: 50%;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -935,18 +776,6 @@
   gap: 8px;
   color: #666666;
   font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  .resaleCard {
-    flex: 0 0 100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .resaleCard {
-    flex: 0 0 100%;
-  }
 }
 
 .resaleFooter {
@@ -1014,13 +843,18 @@
 
 /* Main section container */
 .awardsSection {
-  padding: 44px 20px;
+  padding: 44px 0;
   background-color: #07151F;
+  width: 100vw; /* Expand to full screen width */
+  position: relative; /* Ensure it stays within the viewport */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 /* Content container with max width */
 .awardsContainer {
-  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -1034,49 +868,50 @@
 
 /* Slider container */
 .awardsSlider {
-  margin: 0 auto;
-  padding-bottom: 60px;
-  max-width: 1079px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%; /* Ensure it takes full width */
+  margin: 0 auto; /* Center the slider */
 }
 
 /* Add gap between slides */
-.awardsSlider :global(.slick-slide) {
-  padding: 0 12px;
-}
-
-.awardsSlider :global(.slick-list) {
-  margin: 0 -12px; /* Compensate for slide padding */
+.awardsSlider .slick-track {
+  display: flex;
+  align-items: center;
 }
 
 /* Individual award card */
 .awardCard {
-  width: 1079px;
-height: 360px;
-border-radius: 16px;
-border-width: 1px;
-gap: 24px;
-padding-top: 12px;
-padding-right: 16px;
-padding-bottom: 12px;
-padding-left: 16px;
-  background: #FFFFFF;
-  border-radius: 16px;
   display: flex !important;
-  position: relative;
+  background: #FFFFFF;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid #E6EBED;
+  cursor: pointer; /* Ensure the cursor changes to pointer */
+  pointer-events: auto; /* Allow pointer events */
+  margin-right: 20px; /* Add margin to show part of the next slide */
+  width: 1079px !important; /* Fixed width */
+  height: 360px !important;
+  gap: 32px;
 }
 
 /* Left section with team photo */
 .awardLeft {
-  flex: 0 0 400px;
-  position: relative;
+     /* flex: 0 0 484px; */
+     position: relative;
+     top: 15px;
+     left: 13px;
 }
 
 .awardTeamImage {
-  width: 400px;
-  height: 312px;
+  width: 484px;
+  height: 320px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  border-radius: 16px;
 }
 
 /* Right section with award details */
@@ -1099,6 +934,7 @@ padding-left: 16px;
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 32px;
+  margin-top: 36px;
 }
 
 /* Award subtitle styling */
@@ -1109,10 +945,13 @@ padding-left: 16px;
 
 /* Bottom section with year and button */
 .awardBottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
+  display: flex
+  ;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      margin-bottom: 26px;
+      margin-right: 22px;
 }
 
 /* Year text styling */
@@ -1137,10 +976,10 @@ padding-left: 16px;
 /* Award icon container */
 .awardIconWrapper {
   position: absolute;
-  top: 0;
+  top: 39px;
   right: 0;
   width: 156px;
-  height: 185px;
+  height: 108px;
   background: #FFFFFF;
   border: 1px solid #E6EBED;
   border-radius: 8px;
@@ -1172,9 +1011,9 @@ padding-left: 16px;
 
 /* Individual dot styling */
 .dot {
-  width: 32px;
-  height: 4px;
-  border-radius: 0;
+  width: 61px;
+  height: 6px;
+  border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -1183,4 +1022,4 @@ padding-left: 16px;
 /* Active dot styling */
 .slickDots li.slick-active .dot {
   background-color: #4DEFE1;
-} 
+}

@@ -44,6 +44,7 @@ const Contact = ({ initialData, id }) => {
   return (
     <div className="contact-page">
       <div className={styles.contactPage}>
+        <div className="container"></div>
         <div className={styles.contactInfo}>
           <div className={styles.infoSection}>
             <h2>{cardData.additional_fields?.subtitle}</h2>       
