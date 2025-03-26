@@ -8,4 +8,7 @@ export const RENTAL_RESALE = `${API_BASE_URL}/rental_resales`;
 export const SECTION_API = `${API_BASE_URL}/sections`;
 export const PARTNER_API = `${API_BASE_URL}/partners`;
 export const ABOUT_API = `${API_BASE_URL}/about`;
+export const CONTACT_API = `${API_BASE_URL}/contact`;
+export const CONTACT_SUBMISSION_API = `${API_BASE_URL}/contact-submissions`;
 // Add more routes as needed
+

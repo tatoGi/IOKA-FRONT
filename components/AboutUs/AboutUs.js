@@ -9,7 +9,7 @@ import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes"; // Import the r
 import { useRouter } from "next/router"; // Import useRouter
 import axios from "axios"; // Add axios import
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
-import TeamSection from "../TeamSection/TeamSection";
+
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || {});
    const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data

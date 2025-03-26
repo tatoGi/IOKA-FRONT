@@ -5,24 +5,20 @@ import styles from "./Map.module.css";
 import "leaflet/dist/leaflet.css";
 
 // Custom marker icon style
-const createCustomIcon = (price) => {
+const createCustomIcon = (label) => {
   return L.divIcon({
     className: styles.priceMarker,
-    html: `<div>$${price}</div>`,
+    html: `<div>${label}</div>`,
     iconSize: [60, 40],
-    iconAnchor: [30, 20]
+    iconAnchor: [30, 40]
   });
 };
 
-const Map = () => {
-  // Define locations with prices
-  const locations = [
-    { position: [51.5074, -0.1278], price: 89 }, // UK
-    { position: [48.8566, 2.3522], price: 55 }, // France
-    { position: [41.9028, 12.4964], price: 92 }, // Italy
-    { position: [40.4168, -3.7038], price: 61 }, // Spain
-    { position: [39.9334, 32.8597], price: 81 } // Turkey
-  ];
+const Map = ({ locations }) => {
+  const extractLatLng = (googleMapsLink) => {
+    const match = googleMapsLink.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    return match ? [parseFloat(match[1]), parseFloat(match[2])] : [0, 0];
+  };
 
   return (
     <div className={styles.mapWrapper}>
@@ -39,15 +35,18 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {locations.map((location, index) => (
-          <Marker
-            key={index}
-            position={location.position}
-            icon={createCustomIcon(location.price)}
-          >
-            <Popup>${location.price}</Popup>
-          </Marker>
-        ))}
+        {locations && locations.map((location, index) => {
+          const [latitude, longitude] = extractLatLng(location.google_maps_link);
+          return (
+            <Marker
+              key={index}
+              position={[latitude, longitude]}
+              icon={createCustomIcon(location.label)}
+            >
+              <Popup>{location.label}</Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );

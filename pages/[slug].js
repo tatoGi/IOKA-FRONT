@@ -35,10 +35,9 @@ const DynamicPage = ({ pageData }) => {
       case 1: // Home Page
         return <Home />;
       case 2: // About Page
-        console.log("Passing ID to About:", pageData.id);
         return <About id={pageData.id} />;
       case 3: // Contact Page
-        return <Contact />;
+        return <Contact id={pageData.id} />;
       case 4: // Off-Plan Page
         return <OffPlan />;
       case 5: // Rental/Resale Page
