@@ -14,22 +14,24 @@
   z-index: 2;
   padding: 0 2rem;
   margin-top: 80px;
+  gap: 2rem; /* Add gap between stat boxes */
 }
 
 
 .statBox {
   text-align: center;
   display: flex;
+  flex-direction: column; /* Ensure vertical alignment */
   align-items: center;
+  gap: 1rem; /* Add gap between circle and text */
 }
 
 .statCircle {
   width: 73px;
   height: 73px;
-  top: 34px;
-  left: 53px;  
   border-radius: 50%;
   background-color: #d6cece;
+  margin-bottom: 1rem; /* Add margin below the circle */
 }
 
 .statBox p {
@@ -781,4 +783,4 @@
 
 .submitButton:hover {
   background-color: #0A273B;
-} 
+}

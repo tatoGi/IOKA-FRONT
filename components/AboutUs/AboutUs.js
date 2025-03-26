@@ -2,19 +2,20 @@ import React, { useState, useEffect } from "react";
 import AboutBanner from "@/components/AboutBanner/Banner";
 import styles from "./AboutUs.module.css";
 import Image from "next/image";
-import TeamImage from "../../assets/img/team-1.png";
-import TestimonialImage from "../../assets/img/team-1.png";
 import ContactForm from "../contactForm/ContactForm";
 import PartnersSection from "../PartnersSection/PartnersSection";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-import { ABOUT_API } from "../../routes/apiRoutes"; // Import the route
+import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes"; // Import the routes
 import { useRouter } from "next/router"; // Import useRouter
 import axios from "axios"; // Add axios import
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import TeamSection from "../TeamSection/TeamSection";
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || {});
+   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const router = useRouter();
-
+  const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
+    
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
@@ -24,7 +25,9 @@ const AboutUs = ({ initialData, id }) => {
 
       try {
         const response = await axios.get(`${ABOUT_API}/${id}`);
-
+        const responseTeam = await axios.get(`${SECTION_API}`);
+        const sectionFive = responseTeam.data.sections.find(section => section.section_key === "section_five");
+        setSectionFiveData(sectionFive); // Set section_five data
         if (response.data && response.data.about) {
           setCardData(response.data.about);
         }
@@ -127,12 +130,10 @@ const AboutUs = ({ initialData, id }) => {
               </div>
               <div className={styles.testimonialBody}>
                 <p className={styles.testimonialText}>
-                  {testimonial.description ||
-                    "As a brokerage rooted in one of the world's most iconic cities..."}
+                <div dangerouslySetInnerHTML={{ __html: testimonial?.description }}></div>
                 </p>
                 <p className={styles.welcomeText}>
-                  {testimonial.quote ||
-                    "Welcome to IOKA, your trusted guide in Dubai's dynamic real estate market."}
+                <div dangerouslySetInnerHTML={{ __html: testimonial?.quote }}></div>
                 </p>
               </div>
             </div>
@@ -169,50 +170,29 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* Your Agency Section */}
         <div className={styles.agencySection}>
-          <h2>Your Agency</h2>
-          <p>
-            Welcome to IOKA, your trusted guide in Dubai's dynamic real estate
-            market.
-          </p>
+          <h2>{cardData.additional_fields?.your_agency}</h2>
+          <div dangerouslySetInnerHTML={{ __html: cardData.additional_fields?.your_agency_description }}></div>
         </div>
 
         {/* Team Section */}
         <div className={styles.teamGrid}>
-          <div className={styles.teamMember}>
-            <Image
-              src={TeamImage}
-              alt="John Doe"
-              width={200}
-              height={200}
-              className={styles.teamImage}
-            />
-            <h3>John Doe</h3>
-            <p>5+ Years Experience</p>
-          </div>
-
-          <div className={styles.teamMember}>
-            <Image
-              src={TeamImage}
-              alt="Max Musterman"
-              width={200}
-              height={200}
-              className={styles.teamImage}
-            />
-            <h3>Max Musterman</h3>
-            <p>5+ Years Experience</p>
-          </div>
-
-          <div className={styles.teamMember}>
-            <Image
-              src={TeamImage}
-              alt="John Lenon"
-              width={200}
-              height={200}
-              className={styles.teamImage}
-            />
-            <h3>John Lenon</h3>
-            <p>5+ Years Experience</p>
-          </div>
+          {TeamMembers.map((member, index) => (
+            <div key={index} className={styles.teamMember}>
+              <Image
+                src={
+                  member.image
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                    : baseimage
+                }
+                alt="Team Member"
+                width={200}
+                height={200}
+                className={styles.teamImage}
+              />
+              <h3>{member.title}</h3>
+              <p>{member.subtitle_2}</p>
+            </div>
+          ))}
         </div>
 
         <div className={styles.formContainer}>

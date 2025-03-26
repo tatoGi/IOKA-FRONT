@@ -26,16 +26,10 @@ const Contact = () => {
           <div className={styles.infoSection}>
             <h2>Need any help?</h2>
             <h1>Get in touch with us</h1>
-            <p>
-              There are many variations of passages of available but the
-              majority have suffered alteration in some form by injected humour
-              or randomised words which don't look even slightly believable.
-            </p>
-
             <div className={styles.contactDetails}>
               <div className={styles.contactItem}>
                 <span className={styles.iconWrapper}>
-                  <FaPhone className={styles.icon} />
+                  <FaPhone className={styles.icon_call} />
                 </span>
                 <div>
                   <h3>Have any question?</h3>

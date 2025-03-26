@@ -11,6 +11,7 @@ import PopularAreaSection from "../PopularAreaSection/PopularAreaSection";
 import LiveInvestSection from "../LiveInvestSection/LiveInvestSection";
 import NewProperties from "../NewProperties/NewProperties";
 import Clients from "../Clients/Clients";
+import AboutUs from "../AboutUs/AboutUs";
 
 import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
@@ -80,6 +81,7 @@ const Hombanner = ({ initialData }) => {
         <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
         <PartnersSection />
         <SubscribeSection />
+        
       </div>
     </div>
   );
