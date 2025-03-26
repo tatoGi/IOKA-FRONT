@@ -1,21 +1,10 @@
 /* Default Styles (Mobile First) */
-.propertyCard {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  width: 23.25rem; /* Full width of the column */
-  height: auto; /* Auto height for responsiveness */
-  min-height: 22.5rem; /* Minimum height */
-  border: 1px solid #E6EBED; /* Border width */
-  padding-bottom: 16px; /* Padding at the bottom */
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
 }
 
-.propertyCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
 .imageContainer {
   position: relative;
@@ -48,16 +37,20 @@
 }
 
 .propertyInfo {
-  padding: 1rem;
+  padding: 0 16px 0;
+  display: flex
+  ;
+          flex-direction: column;
 }
 
 .title {
-  font-size: 1.125rem; /* 18px */
+  font-size: 16px; /* 18px */
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 8px;
   margin-top: 12px;
   line-height: 1.4;
+  font-family: 'Montserrat';
 }
 
 .location {
@@ -65,7 +58,7 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
   font-family: 'Montserrat';
 }
 
@@ -143,11 +136,22 @@
 .container {
   background: #fff;
 }
-
+.propertyCard{
+  width: 100%;
+  height: 100%;
+}
 .propertyCardLink {
   text-decoration: none;
   color: inherit;
   display: block;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  width: 370px; /* Full width of the column */
+  height:360px; /* Minimum height */
+  border: 1px solid #E6EBED; /* Border width */
 }
 
 .propertyCardLink:hover .propertyCard {
@@ -158,9 +162,11 @@
 
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 20px;
   margin-bottom: 142px;
+  margin-top: 36px;
+  margin-left: 15%;
 }
 
 .pageButton {
@@ -170,6 +176,232 @@
   background-color: #fff;
   cursor: pointer;
   border-radius: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 4px;
+  left: 50px;
+}
+
+.pageButton:last-child {
+  width: 84px;
+  height: 44px;
+}
+
+.pageButton.active {
+  background-color: #0A273B;
+  color: white;
+  border-color: #0A273B;
+  width: 46px;
+  height: 46px;
+}
+
+.pageButton:hover {
+  background-color: #ddd;
+}
+
+.resultsCount {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  color: #0A273B;
+}
+@media screen and (max-width: 1600px) {
+
+  /* Default Styles (Mobile First) */
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.propertyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Fixed height for the image container */
+  background: #f5f5f5;
+}
+
+.propertyImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.exclusive {
+  width: 82px;
+  height: 31px;
+  position: absolute;
+  border-radius: 16px;
+  gap: 10px;
+  top: 8px;
+  left: 12px;
+  background-color: #007AFF;
+  color: white;
+  padding: 0.40rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+  letter-spacing: 0.01em;
+}
+
+.propertyInfo {
+  padding: 0 16px 0;
+  display: flex
+  ;
+          flex-direction: column;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+  margin-top: 12px;
+  line-height: 1.4;
+  font-family: 'Montserrat';
+}
+
+.location {
+  color: #07151F;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat';
+}
+
+.features {
+  display: flex
+  ;
+          gap: 18px;
+          color: #07151F;
+          margin-bottom: 10.5px;
+          border-bottom: 1px solid #E6EBED;
+          padding-bottom: 12px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #07151F;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.feature img {
+  width: 20px;
+  height: 14px;
+}
+
+.feature svg {
+  color: #6b7280;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 16px;
+}
+
+.price {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.actions {
+  display: flex;
+  margin-left: auto; /* Push actions to the right */
+}
+
+.actionButton {
+  padding: 0.375rem;
+  border-radius: 50%; /* Make it circular */
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  border: solid 1px #cbd5e1; /* Light gray border */
+  width: 36px; /* Set fixed width */
+  height: 36px; /* Set fixed height */
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background: #f1f5f9; /* Slightly darker on hover */
+}
+
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.container {
+  background: #fff;
+}
+
+.propertyCard{
+  width: 100%;
+  height: 100%;
+}
+.propertyCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  width: 312px; /* Full width of the column */
+  height:360px; /* Minimum height */
+  border: 1px solid #E6EBED; /* Border width */
+}
+
+.propertyCardLink:hover .propertyCard {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination {
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+  margin-bottom: 142px;
+  margin-top: 36px;
+  margin-left: 15%;
+}
+
+.pageButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 4px;
+  left: 50px;
+}
+
+.pageButton:last-child {
+  width: 84px;
+  height: 44px;
 }
 
 .pageButton.active {
@@ -191,149 +423,5 @@
   text-align: right;
   color: #0A273B;
 }
-
-/* Laptop Resolution (1440px) */
-@media (min-width: 1440px) {
-  .propertyCard {
-    width: 19.20rem; /* Fixed width for laptop */
-  }
-
-  .title {
-    font-size: 1rem; /* 20px */
-  }
-
-  .location {
-    font-size: 14px;
-  }
-
-  .features {
-    gap: 8px; /* Increase gap between features */
-  }
-
-  .feature {
-    font-size: 12px;
-  }
-
-  .price {
-    font-size: 12px;
-  }
-
-  .resultsCount {
-    font-size: 22px;
-  }
-}
-
-/* Desktop Resolution (1920px) */
-@media (min-width: 1920px) {
-  .propertyCard {
-    width: 23.25rem; /* Slightly larger width for desktop */
-  }
-
-  .title {
-    font-size: 1.5rem; /* 24px */
-  }
-
-  .location {
-    font-size: 16px;
-  }
-
-  .features {
-    gap: 24px; /* Increase gap between features */
-  }
-
-  .feature {
-    font-size: 12px;
-  }
-
-  .price {
-    font-size: 12px;
-  }
-
-  .resultsCount {
-    font-size: 24px;
-  }
-}
-
-/* Responsive Adjustments for Smaller Screens */
-@media (max-width: 1200px) {
-  .propertyCard {
-    width: 100%; /* Full width on smaller screens */
-  }
-
-  .features {
-    gap: 16px; /* Reduce gap between features */
-  }
-
-  .priceRow {
-    gap: 12px; /* Reduce gap in price row */
-  }
-}
-
-@media (max-width: 768px) {
-  .propertyCard {
-    height: auto; /* Auto height for smaller screens */
-  }
-
-  .imageContainer {
-    height: 150px; /* Reduce image container height */
-  }
-
-  .title {
-    font-size: 1rem; /* Reduce title font size */
-  }
-
-  .location {
-    font-size: 10px; /* Reduce location font size */
-  }
-
-  .features {
-    flex-wrap: wrap; /* Wrap features on smaller screens */
-    gap: 12px; /* Reduce gap between features */
-  }
-
-  .feature {
-    font-size: 10px; /* Reduce feature font size */
-  }
-
-  .price {
-    font-size: 10px; /* Reduce price font size */
-  }
-
-  .resultsCount {
-    font-size: 16px; /* Reduce results count font size */
-  }
-}
-
-@media (max-width: 480px) {
-  .propertyCard {
-    padding-bottom: 12px; /* Reduce padding */
-  }
-
-  .imageContainer {
-    height: 120px; /* Further reduce image container height */
-  }
-
-  .title {
-    font-size: 0.875rem; /* Further reduce title font size */
-  }
-
-  .location {
-    font-size: 8px; /* Further reduce location font size */
-  }
-
-  .features {
-    gap: 8px; /* Further reduce gap between features */
-  }
-
-  .feature {
-    font-size: 8px; /* Further reduce feature font size */
-  }
-
-  .price {
-    font-size: 8px; /* Further reduce price font size */
-  }
-
-  .resultsCount {
-    font-size: 14px; /* Further reduce results count font size */
-  }
+  
 }

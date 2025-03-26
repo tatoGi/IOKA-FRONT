@@ -5,10 +5,14 @@ import Area from "../../assets/img/n-1.png";
 import WhiteArrow from "../icons/WhiteArrow";
 
 const PopularAreaSection = (sectionFourData) => {
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
+
   const sectionData = sectionFourData.sectionDataFour;
   const title = sectionData?.additional_fields?.title || "Default Title";
   const popularArea = sectionData?.additional_fields?.Add_Popular_Areas || [];
-
+  console.log("sectionData:", popularArea);
   return (
     <div className="popular-area-section">
       <div className="container">
@@ -18,7 +22,18 @@ const PopularAreaSection = (sectionFourData) => {
         <div className="popular-area-box">
           {popularArea.map((area, index) => (
             <Link href={"#"} className="area-item" key={index}>
-              <Image src={Area} alt="popular area" />
+              <Image 
+                src={
+                                area.image
+                                  ? `${
+                                      process.env.NEXT_PUBLIC_API_URL
+                                    }/storage/${decodeImageUrl(area.image)}`
+                                  : area
+                                
+                              } 
+                              width={400}
+                              height={400}
+                              />
               <div className="off-relase-box">
                 <div className="topic">Off Plan</div>
                 <div className="topic">Resale</div>

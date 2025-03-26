@@ -249,7 +249,10 @@ color: #07151F;
   letter-spacing: 0%;
 
 }
-
+.amenitiesList li{
+ text-decoration: none;
+ list-style-type: none;
+}
 .amenityItem {
   position: relative;
   padding-left: 24px;
@@ -257,12 +260,6 @@ color: #07151F;
   line-height: 1.6;
 }
 
-.amenityItem::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #00B98E;
-}
 
 .locationSection {
   margin: 60px 0;
@@ -395,7 +392,9 @@ margin-bottom: 30px;
   .amenitiesList {
     grid-template-columns: 1fr;
   }
-
+  .amenitiesList::marker{
+    display: none;
+  }
   .nearbyGrid {
     grid-template-columns: repeat(2, 1fr);
   }

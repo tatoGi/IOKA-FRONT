@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import style from "./OffplaneShow.module.css";
 import Image from "next/image";
@@ -8,7 +8,9 @@ import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm 
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import success from "../../assets/img/succsess.png";
+import success from "../../assets/img/succsess.svg";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
@@ -21,8 +23,33 @@ const OffplanShow = ({ offplanData }) => {
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showExterior, setShowExterior] = useState(true);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryType, setGalleryType] = useState("");
+
+  useEffect(() => {
+    Fancybox.bind("[data-fancybox='gallery']", {
+      Thumbs: {
+        type: "classic", // Thumbnail slider
+      },
+      Toolbar: {
+        display: {
+          left: ["infobar"],
+          middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW"],
+          right: ["slideshow", "thumbs", "close"],
+        },
+      },
+      // Smooth animations
+      Animation: {
+        zoom: {
+          opacity: "auto",
+        },
+      },
+    });
+
+    // Cleanup
+    return () => {
+      Fancybox.destroy();
+    };
+  }, [showExterior]); // Re-init when gallery changes
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -32,21 +59,12 @@ const OffplanShow = ({ offplanData }) => {
     setIsModalOpen(false);
   };
 
-  const openGallery = (type) => {
-    setGalleryType(type);
-    setIsGalleryOpen(true);
-  };
-
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
-  };
-
   const position = offplanData.offplan.map_location; // Dubai coordinates
 
   const features = offplanData.offplan.features
     ? JSON.parse(offplanData.offplan.features)
     : [];
-    const amenities = offplanData.offplan.amenities
+  const amenities = offplanData.offplan.amenities
     ? JSON.parse(offplanData.offplan.amenities)
     : [];
   const nearbyPlaces = offplanData.offplan.near_by
@@ -269,7 +287,9 @@ const OffplanShow = ({ offplanData }) => {
                 <h3>Amenities</h3>
                 <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
-                    <li key={index}>{amenity}</li>
+                    <li key={index}>
+                      <Image src={success} alt="success" /> {amenity}
+                    </li>
                   ))}
                 </div>
               </div>
@@ -336,7 +356,10 @@ const OffplanShow = ({ offplanData }) => {
                         <div
                           key={index}
                           className="col-md-3 mb-3"
-                          onClick={() => openGallery("exterior")}
+                          data-fancybox="gallery"
+                          data-src={`${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(image)}`}
                         >
                           <Image
                             src={`${
@@ -363,7 +386,10 @@ const OffplanShow = ({ offplanData }) => {
                         <div
                           key={index}
                           className="col-md-3 mb-3"
-                          onClick={() => openGallery("interior")}
+                          data-fancybox="gallery"
+                          data-src={`${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(image)}`}
                         >
                           <Image
                             src={`${
@@ -382,37 +408,6 @@ const OffplanShow = ({ offplanData }) => {
           )}
         </div>
       </div>
-
-      {/* Gallery Modal */}
-      {isGalleryOpen && (
-        <div className={style.modalOverlay} onClick={closeGallery}>
-          <div className={style.modalContent}>
-            <button className={style.closeButton} onClick={closeGallery}>
-              &times; {/* Close icon (X) */}
-            </button>
-            <div className={`container ${style.galleryContainer}`}>
-              <div className={`row ${style.galleryRow}`}>
-                {(galleryType === "exterior"
-                  ? JSON.parse(offplanData.offplan.exterior_gallery)
-                  : JSON.parse(offplanData.offplan.interior_gallery)
-                ).map((image, index) => (
-                  <div key={index} className={`col-md-3 mb-3 ${style.galleryItem}`}>
-                    <Image
-                      src={`${
-                        process.env.NEXT_PUBLIC_API_URL
-                      }/storage/${decodeImageUrl(image)}`}
-                      alt={`${galleryType} Image`}
-                      width={300}
-                      height={200}
-                      className={style.galleryImage}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* other & properties Section */}
       <div className="container">
