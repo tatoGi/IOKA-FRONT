@@ -108,11 +108,11 @@ const Offplan = ({ initialData, initialPagination }) => {
                  </div>
 
                  <div className={styles.propertyInfo}>
-                   <h3 className={styles.title}>{property.title}</h3>
-                   <p className={styles.location}>{property.map_location}</p>
+                   <h3 className={`${styles.title} ${styles.textEllipsis}`}>{property.title}</h3>
+                   <p className={`${styles.location} ${styles.textEllipsis}`}>{property.map_location}</p>
 
                    <div className={styles.features}>
-                     <div className={styles.feature}>
+                     <div className={`${styles.feature} ${styles.textEllipsis}`}>
                        <Image
                          src={require("/assets/img/bad.svg")}
                          alt="Bed Icon"
@@ -121,7 +121,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                        />
                        <span>{property.bedroom} Br</span>
                      </div>
-                     <div className={styles.feature}>
+                     <div className={`${styles.feature} ${styles.textEllipsis}`}>
                        <Image
                          src={require("/assets/img/bath.svg")}
                          alt="Bath Icon"
@@ -130,7 +130,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                        />
                        <span>{property.bathroom} Ba</span>
                      </div>
-                     <div className={styles.feature}>
+                     <div className={`${styles.feature} ${styles.textEllipsis}`}>
                        <Image
                          src={require("/assets/img/place.svg")}
                          alt="Area Icon"
@@ -139,7 +139,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                        />
                        <span>{property.sq_ft} Sq.Ft</span>
                      </div>
-                     <div className={styles.feature}>
+                     <div className={`${styles.feature} ${styles.textEllipsis}`}>
                        <Image
                          src={require("/assets/img/garage.svg")}
                          alt="Car Icon"
@@ -150,10 +150,10 @@ const Offplan = ({ initialData, initialPagination }) => {
                      </div>
                    </div>
                    <div className={styles.priceRow}>
-                     <span className={styles.price}>
+                     <span className={`${styles.price} ${styles.textEllipsis}`}>
                        USD {property.amount.toLocaleString()}
                      </span>
-                     <span className={styles.price}>
+                     <span className={`${styles.price} ${styles.textEllipsis}`}>
                        AED {property.amount_dirhams.toLocaleString()}
                      </span>
                      {/* <div className={styles.actions}>

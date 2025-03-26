@@ -191,8 +191,6 @@
   background-color: #0A273B;
   color: white;
   border-color: #0A273B;
-  width: 46px;
-  height: 46px;
 }
 
 .pageButton:hover {
@@ -208,6 +206,13 @@
   text-align: right;
   color: #0A273B;
 }
+
+.textEllipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media screen and (max-width: 1600px) {
 
   /* Default Styles (Mobile First) */
@@ -422,6 +427,12 @@
   letter-spacing: 0%;
   text-align: right;
   color: #0A273B;
+}
+
+.textEllipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
   
 }

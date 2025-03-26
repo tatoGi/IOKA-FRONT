@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Rental_Resale.show.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
@@ -6,11 +6,39 @@ import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 import { StarIcon } from "../icons/PropertyIcons";
 import dynamic from "next/dynamic";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 Modal.setAppElement("#__next");
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const galleryImages = JSON.parse(RENTAL_RESALE_DATA.gallery_images || "[]");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    Fancybox.bind("[data-fancybox='gallery']", {
+      Thumbs: {
+        type: "classic", // Thumbnail slider
+      },
+      Toolbar: {
+        display: {
+          left: ["infobar"],
+          middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW"],
+          right: ["slideshow", "thumbs", "close"],
+        },
+      },
+      // Smooth animations
+      Animation: {
+        zoom: {
+          opacity: "auto",
+        },
+      },
+    });
+
+    // Cleanup
+    return () => {
+      Fancybox.destroy();
+    };
+  }, [galleryImages]);
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -606,7 +634,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         <SubscribeSection />
       </div>
 
-      {/* Modal - Shows all images */}
+      {/* Modal - Shows all images using Fancybox */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -620,16 +648,18 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           </button>
           <div className={styles.modalImages}>
             {galleryImages.map((image, index) => (
-              <img
+              <a
                 key={index}
-                src={
-                  image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`
-                    : "/default.jpg"
-                }
-                alt={`Gallery ${index + 1}`}
-                className={styles.modalImage}
-              />
+                href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
+                data-fancybox="gallery"
+                data-caption={`Gallery Image ${index + 1}`}
+              >
+                <img
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
+                  alt={`Gallery ${index + 1}`}
+                  className={styles.modalImage}
+                />
+              </a>
             ))}
           </div>
         </div>
