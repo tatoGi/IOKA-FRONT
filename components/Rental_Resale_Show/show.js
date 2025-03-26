@@ -42,7 +42,12 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-  const flattenedAddresses = RENTAL_RESALE_DATA.addresses.flat();
+  const flattenedAddresses = RENTAL_RESALE_DATA.addresses.flat().map(address => {
+    if (typeof address === 'object' && address !== null) {
+      return Object.values(address).join(', ');
+    }
+    return address;
+  });
   const normalizedAmenities = RENTAL_RESALE_DATA.amenities.map((item) => {
     if (Array.isArray(item)) {
       return item[0]; // Extract the first element if it's an array
