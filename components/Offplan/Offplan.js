@@ -52,6 +52,14 @@ const Offplan = ({ initialData, initialPagination }) => {
   const handlePageChange = (page) => {
     if (page !== currentPage) {
       setCurrentPage(page);
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, page }, // Update the page query parameter
+        },
+        undefined,
+        { shallow: true } // Prevent full page reload
+      );
       fetchData(page); // Fetch data for the new page
     }
   };

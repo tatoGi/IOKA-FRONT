@@ -50,9 +50,16 @@ const Developer = ({ initialData, initialPagination }) => {
     if (page !== currentPage) {
       setCurrentPage(page);
       fetchData(page);
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, page },
+        },
+        undefined,
+        { shallow: true }
+      );
     }
   };
-
 
   // Fetch data when the component mounts
   useEffect(() => {

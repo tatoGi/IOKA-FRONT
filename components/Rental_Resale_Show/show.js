@@ -658,7 +658,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
                 data-fancybox="gallery"
                 data-caption={`Gallery Image ${index + 1}`}
-              >
+              > 
                 <img
                   src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
                   alt={`Gallery ${index + 1}`}

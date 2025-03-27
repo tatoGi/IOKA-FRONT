@@ -168,6 +168,7 @@ const Rental_Resale = () => {
                         width={24}
                         height={24}
                       />
+                      
                       <span>{property.sq_ft} Sq.Ft</span>
                     </div>
                     <div className={Styles.feature}>
@@ -325,12 +326,22 @@ const Rental_Resale = () => {
                     <div className={Styles.statSeparator}>|</div>
                     <div className={Styles.statGroup}>
                       <Image
+                        src={require("/assets/img/place.svg")}
+                        alt="Bathrooms"
+                        width={16}
+                        height={16}
+                      />
+                      <span>{listing.sq_ft} Sq.Ft</span>
+                    </div>
+                    <div className={Styles.statSeparator}>|</div>
+                    <div className={Styles.statGroup}>
+                      <Image
                         src={require("/assets/img/garage.svg")}
                         alt="Area"
                         width={16}
                         height={16}
                       />
-                      <span>{listing.sq_ft} Sq.Ft</span>
+                      <span>{listing.sq_ft} Gr</span>
                     </div>
                   </div>
 
