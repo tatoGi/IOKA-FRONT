@@ -228,33 +228,27 @@ const Developer = ({ initialData, initialPagination }) => {
         </div>
 
         {/* Pagination */}
-        <div className={`d-flex justify-content-center ${styles.pagination}`}>
-          <button
-            className={`btn ${styles.prevButton}`}
-            disabled={currentPage === 1 || isLoading}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            <FaChevronLeft />
-          </button>
+        <div className={styles.pagination}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`btn ${styles.pageButton} ${currentPage === page ? styles.active : ""}`}
+              className={`${styles.pageButton} ${
+                currentPage === page ? styles.active : ""
+              }`}
               disabled={isLoading}
             >
               {page}
             </button>
           ))}
           <button
-            className={`btn ${styles.nextButton}`}
-            disabled={currentPage === totalPages || isLoading}
             onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className={styles.pageButton}
           >
-            <FaChevronRight />
+            Next
           </button>
         </div>
-
         <SubscribeSection />
       </div>
     </LoadingWrapper>

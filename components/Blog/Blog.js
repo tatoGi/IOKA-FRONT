@@ -7,8 +7,9 @@ import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import axios from "axios";
 import { BLOGS_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
-
+import { LoadingWrapper } from "../LoadingWrapper/index";
 const Blog = ({ initialData }) => {
+   const [isLoading, setIsLoading] = useState(false);
   const [cardData, setCardData] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -20,12 +21,15 @@ const Blog = ({ initialData }) => {
 
     // Fetch data from the API
     const fetchData = async (page) => {
+      setIsLoading(true);
       try {
         const response = await axios.get(`${BLOGS_API}?page=${page}`);
         setCardData(response.data.data);
         setTotalPages(response.data.last_page);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -64,6 +68,7 @@ const Blog = ({ initialData }) => {
       <div className={`${styles.title}`}>
         <h1>Articles</h1>
       </div>
+      <LoadingWrapper isLoading={isLoading}>
       <div className="row">
         {cardData.map((card, index) => (
            
@@ -111,19 +116,28 @@ const Blog = ({ initialData }) => {
           </div>
         ))}
       </div>
+      </LoadingWrapper>
       <div className={styles.pagination}>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`${styles.pageButton} ${
+                currentPage === page ? styles.active : ""
+              }`}
+              disabled={isLoading}
+            >
+              {page}
+            </button>
+          ))}
           <button
-            key={page}
-            onClick={() => handlePageChange(page)}
-            className={`${styles.pageButton} ${
-              currentPage === page ? styles.active : ""
-            }`}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className={styles.pageButton}
           >
-            {page}
+            Next
           </button>
-        ))}
-      </div>
+        </div>
       <SubscribeSection />
     </div>
   );

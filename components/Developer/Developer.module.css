@@ -554,63 +554,53 @@
 
   /* Pagination */
   .pagination {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-top: 38px;
+    margin-bottom: 142px;
   }
-
   .pageButton {
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
-    color: #0a273b;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #07151F;
     background-color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-    width: 48px;
-    height: 48px;
     border-radius: 4px;
-  }
+    width: 46px;
+    height: 46px;
+    border-radius: 4px;
+    left: 50px;
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
 
-  .pageButton:hover {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-  }
 
+  }
+  
+  .pageButton:last-child {
+    width: 84px;
+    height: 44px;
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+color:#0A273B;
+
+  }
+  
   .pageButton.active {
-    background-color: #0a273b;
-    color: #fff;
+    background-color: #0A273B;
+    color: white;
+    border-color: #0A273B;
+  }
+  
+  .pageButton:hover {
+    background-color: #ddd;
   }
 
-  .pageButton:disabled {
-    background-color: #f8f9fa;
-    color: #ccc;
-    border-color: #e0e0e0;
-    cursor: not-allowed;
-  }
-
-  .prevButton,
-  .nextButton {
-    padding: 8px 12px;
-    border-radius: 4px;
-    color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    cursor: pointer;
-    width: 48px;
-    height: 48px;
-    border-radius: 4px;
-  }
-
-  .prevButton:disabled,
-  .nextButton:disabled {
-    color: #ccc;
-    cursor: not-allowed;
-  }
+  
 
 }

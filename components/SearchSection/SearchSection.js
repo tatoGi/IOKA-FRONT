@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./SearchSection.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
-import filterVector from "../../assets/img/filtervector.png";
+import filterVector from "../../assets/img/filter.svg";
 
 const SearchSection = () => {
   return (

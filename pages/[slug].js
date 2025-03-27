@@ -12,7 +12,6 @@ import Blog from "@/pages/page-components/blog";
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
 
-  console.log("pageData:", pageData); // Add this debug log
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {

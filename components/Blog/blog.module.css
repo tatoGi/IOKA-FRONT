@@ -119,7 +119,50 @@
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 38px;
+    margin-bottom: 142px;
+}
+
+.pageButton {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #07151F;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 46px;
+    height: 46px;
+    border-radius: 4px;
+    left: 50px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+
+}
+
+.pageButton:last-child {
+    width: 84px;
+    height: 44px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+
+}
+
+.pageButton.active {
+    background-color: #0A273B;
+    color: white;
+    border-color: #0A273B;
+}
+
+.pageButton:hover {
+    background-color: #ddd;
 }
 
 .description {
@@ -138,6 +181,7 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .pageButton {
     margin: 0 5px;
     padding: 5px 10px;
@@ -149,20 +193,19 @@
     height: 46px;
     border-radius: 4px;
     left: 50px;
-  }
-  
-  .pageButton:last-child {
+}
+
+.pageButton:last-child {
     width: 84px;
     height: 44px;
-  }
-  
-  .pageButton.active {
+}
+
+.pageButton.active {
     background-color: #0A273B;
     color: white;
     border-color: #0A273B;
-  }
-  
-  .pageButton:hover {
+}
+
+.pageButton:hover {
     background-color: #ddd;
-  }
-  
+}
