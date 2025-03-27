@@ -11,8 +11,7 @@ import PopularAreaSection from "../PopularAreaSection/PopularAreaSection";
 import LiveInvestSection from "../LiveInvestSection/LiveInvestSection";
 import NewProperties from "../NewProperties/NewProperties";
 import Clients from "../Clients/Clients";
-import AboutUs from "../AboutUs/AboutUs";
-
+import { LoadingWrapper } from "../LoadingWrapper/index";
 import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
 
@@ -25,6 +24,7 @@ const Hombanner = ({ initialData }) => {
   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const [sectionSixData, setSectionSixData] = useState(null); // State for section_six data
   const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
+  const [isLoading, setIsLoading] = useState(true); // Loading state
   const router = useRouter(); // Initialize useRouter
 
   useEffect(() => {
@@ -61,11 +61,17 @@ const Hombanner = ({ initialData }) => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false); // Set loading to false after data is fetched
       }
     };
 
     fetchData();
   }, [initialData]);
+
+  if (isLoading) {
+    return <LoadingWrapper />; // Show loading wrapper while data is loading
+  }
   
   return (
     <div className="home-banner">
