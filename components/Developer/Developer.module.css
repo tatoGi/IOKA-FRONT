@@ -549,6 +549,7 @@
     justify-content: center;
     margin-top: 38px;
     margin-bottom: 142px;
+    gap: 6px;
   }
   .pageButton {
     margin: 0 5px;

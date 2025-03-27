@@ -5,7 +5,7 @@ import defaultImage from "../../assets/img/default.webp";
 import { StarIcon } from "../icons/PropertyIcons";
 import SearchSection from "../SearchSection/SearchSection";
 import { BsWhatsapp } from "react-icons/bs";
-import callVector from "../../assets/img/callvector.png";
+import callVector from "../../assets/img/call.svg";
 import agentifno from "../../assets/img/agentinfo.png";
 import { useRouter } from "next/router";
 import { RENTAL_RESALE } from "@/routes/apiRoutes";
@@ -305,7 +305,7 @@ const Rental_Resale = () => {
                   <div className={Styles.resaleStats}>
                     <div className={Styles.statGroup}>
                       <Image
-                        src={require("/assets/img/badicon.png")}
+                        src={require("/assets/img/bad.svg")}
                         alt="Bedrooms"
                         width={16}
                         height={16}
@@ -315,7 +315,7 @@ const Rental_Resale = () => {
                     <div className={Styles.statSeparator}>|</div>
                     <div className={Styles.statGroup}>
                       <Image
-                        src={require("/assets/img/bathicon.png")}
+                        src={require("/assets/img/bath.svg")}
                         alt="Bathrooms"
                         width={16}
                         height={16}
@@ -325,7 +325,7 @@ const Rental_Resale = () => {
                     <div className={Styles.statSeparator}>|</div>
                     <div className={Styles.statGroup}>
                       <Image
-                        src={require("/assets/img/areavector.png")}
+                        src={require("/assets/img/garage.svg")}
                         alt="Area"
                         width={16}
                         height={16}
