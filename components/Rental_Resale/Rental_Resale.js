@@ -226,7 +226,7 @@ const Rental_Resale = () => {
 
       <div className={Styles.resaleSection}>
         <div className={Styles.resaleHeader}>
-          <div className={Styles.resaleTitle}>
+          {/* <div className={Styles.resaleTitle}>
             <h3>Search Results</h3>
             <div className={Styles.sortDropdown}>
               <label htmlFor="sort">Sort:</label>
@@ -234,7 +234,7 @@ const Rental_Resale = () => {
                 <option value="newest">Newest First</option>
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className={Styles.resaleList}>
