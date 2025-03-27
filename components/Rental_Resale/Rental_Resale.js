@@ -232,9 +232,6 @@ const Rental_Resale = () => {
               <label htmlFor="sort">Sort:</label>
               <select id="sort" name="sort" onChange={(e) => handleSortChange(e.target.value)}>
                 <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="priceHigh">Price: High to Low</option>
-                <option value="priceLow">Price: Low to High</option>
               </select>
             </div>
           </div>

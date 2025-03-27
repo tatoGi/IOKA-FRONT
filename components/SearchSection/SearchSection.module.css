@@ -2,7 +2,7 @@
   width: 100%;
   background-color: #fff;
   margin-top: 38px;
-  gap: 13.4px;
+  gap: 16px;
 }
 .container{
   display: flex;
@@ -44,7 +44,7 @@
 
 .filterButtons {
   display: flex;
-  gap: 13.4px;
+  gap: 16px;
   align-items: center;
 }
 
