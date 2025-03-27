@@ -892,7 +892,6 @@ letter-spacing: 0%;
   .footerActions {
     display: flex;
     align-items: center;
-    gap: 12px;
     margin-right: 24px;
   }
   

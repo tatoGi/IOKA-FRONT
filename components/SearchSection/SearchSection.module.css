@@ -148,7 +148,7 @@ letter-spacing: 0%;
 
 @media (max-width: 1600px) {
   .searchSection {
-    width: 1300px;
+    width: 100%;
     height: 40px;
     top: 172px;
     left: 180px;
