@@ -142,7 +142,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
                 <div className={styles.feature}>
                   <Image
-                    src={require("/assets/img/areavector.png")}
+                    src={require("/assets/img/place.svg")}
                     alt="Area Icon"
                     width={24}
                     height={24}
@@ -151,7 +151,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
                 <div className={styles.feature}>
                   <Image
-                    src={require("/assets/img/warehousevector.png")}
+                    src={require("/assets/img/garage.svg")}
                     alt="Car Icon"
                     width={24}
                     height={24}
@@ -385,7 +385,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/garage.svg")}
+                        src={require("/assets/img/place.svg")}
                         alt="Area Icon"
                         width={24}
                         height={24}
@@ -394,7 +394,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/warehousevector.png")}
+                        src={require("/assets/img/garage.svg")}
                         alt="Car Icon"
                         width={24}
                         height={24}
@@ -441,7 +441,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.features}>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/badicon.png")}
+                        src={require("/assets/img/bad.svg")}
                         alt="Bed Icon"
                         width={24}
                         height={24}
@@ -450,7 +450,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/bathicon.png")}
+                        src={require("/assets/img/bath.svg")}
                         alt="Bath Icon"
                         width={24}
                         height={24}
@@ -459,7 +459,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/areavector.png")}
+                        src={require("/assets/img/place.svg")}
                         alt="Area Icon"
                         width={24}
                         height={24}
@@ -468,7 +468,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/warehousevector.png")}
+                        src={require("/assets/img/garage.svg")}
                         alt="Car Icon"
                         width={24}
                         height={24}
@@ -516,7 +516,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.features}>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/badicon.png")}
+                        src={require("/assets/img/bad.svg")}
                         alt="Bed Icon"
                         width={24}
                         height={24}
@@ -525,7 +525,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/bathicon.png")}
+                        src={require("/assets/img/bath.svg")}
                         alt="Bath Icon"
                         width={24}
                         height={24}
@@ -534,7 +534,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/areavector.png")}
+                        src={require("/assets/img/place.svg")}
                         alt="Area Icon"
                         width={24}
                         height={24}
@@ -543,7 +543,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/warehousevector.png")}
+                        src={require("/assets/img/garage.svg")}
                         alt="Car Icon"
                         width={24}
                         height={24}
@@ -590,7 +590,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.features}>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/badicon.png")}
+                        src={require("/assets/img/bad.svg")}
                         alt="Bed Icon"
                         width={24}
                         height={24}
@@ -599,7 +599,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/bathicon.png")}
+                        src={require("/assets/img/bath.svg")}
                         alt="Bath Icon"
                         width={24}
                         height={24}
@@ -608,7 +608,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/areavector.png")}
+                        src={require("/assets/img/place.svg")}
                         alt="Area Icon"
                         width={24}
                         height={24}
@@ -617,7 +617,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                     <div className={styles.feature}>
                       <Image
-                        src={require("/assets/img/warehousevector.png")}
+                        src={require("/assets/img/garage.svg")}
                         alt="Car Icon"
                         width={24}
                         height={24}
