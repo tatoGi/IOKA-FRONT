@@ -276,15 +276,6 @@
 .pageButton:hover {
   background-color: #ddd;
 }
-
-
-.pageButton:disabled {
-  background-color: #f8f9fa;
-  color: #ccc;
-  border-color: #e0e0e0;
-  cursor: not-allowed;
-}
-
 .prevButton,
 .nextButton {
   padding: 8px 12px;
