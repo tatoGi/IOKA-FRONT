@@ -515,7 +515,7 @@ letter-spacing: 0%;;
      font-family: 'Montserrat';
   }
   .details {
-    padding: 20px;
+    padding: 20px 40px;
     background-color: #E6EBED;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -591,6 +591,7 @@ letter-spacing: 0%;;
         font-weight: 600;
         color: #0A273B;
         margin-bottom: 16px;
+        font-family: 'Montserrat';
       }
       
       .amenitiesGrid {
