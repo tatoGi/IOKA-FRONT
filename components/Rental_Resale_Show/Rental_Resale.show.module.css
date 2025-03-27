@@ -85,7 +85,7 @@ padding-bottom: 16px;
 .moreOverlay {
   position: absolute;
   top: 50%;
-  left: 70%;
+  left: 65%;
   /* width: 70%; */
   height: 50%;
   /* background: rgba(0, 0, 0, 0.5); */
@@ -580,8 +580,7 @@ letter-spacing: 0%;;
     height: 44px;
     }
     .amenities_section {
-        margin-top: 20px;
-        padding: 20px;
+        margin-top: 36px;
         border-radius: 8px;
         width: 53rem;
       }
