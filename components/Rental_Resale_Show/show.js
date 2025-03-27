@@ -8,6 +8,7 @@ import { StarIcon } from "../icons/PropertyIcons";
 import dynamic from "next/dynamic";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import success from "../../assets/img/succsess.svg";
 Modal.setAppElement("#__next");
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
@@ -179,14 +180,14 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
           {/* Description Section */}
           <div className={styles.addresses}>
-            {flattenedAddresses.map((address, index) => (
-              <p key={index}>{address}</p>
-            ))}
+           
+              <p>{RENTAL_RESALE_DATA.subtitle}</p>
+         
           </div>
         </div>
         <div className={styles.line}></div>
         {/* description Div */}
-        <div className={`container ${styles.description}`}>
+        <div className={styles.description}>
           <h1>Description</h1>
           <div className="row">
             <div className="col-md-8">
@@ -328,7 +329,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <div className={styles.amenitiesGrid}>
             {normalizedAmenities.map((amenity, index) => (
               <div key={index} className={styles.amenityItem}>
-                {amenity}
+              <Image src={success} alt="success" />   
+              {amenity}
               </div>
             ))}
           </div>
