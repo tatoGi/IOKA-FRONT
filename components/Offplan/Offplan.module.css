@@ -381,13 +381,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease-in-out;
 }
-
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 38px;
   margin-bottom: 142px;
   gap: 6px;
+  height: 48px;
 }
 .pageButton {
   margin: 0 5px;
@@ -398,15 +398,13 @@
   border-radius: 4px;
   width: 46px;
   height: 46px;
-  border-radius: 4px;
-  left: 50px;
   font-family: 'Montserrat';
-font-weight: 500;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-
-
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-top: 2px;
 }
 
 .pageButton:last-child {
@@ -418,6 +416,7 @@ font-size: 20px;
 line-height: 100%;
 letter-spacing: 0%;
 color:#0A273B;
+margin-top: 2px;
 
 }
 
@@ -425,11 +424,14 @@ color:#0A273B;
   background-color: #0A273B;
   color: white;
   border-color: #0A273B;
+  width: 48px; /* Ensure same width */
+  height: 48px; /* Ensure same height */
 }
 
 .pageButton:hover {
   background-color: #ddd;
 }
+
 .resultsCount {
   font-family: 'Montserrat';
   font-weight: 400;
