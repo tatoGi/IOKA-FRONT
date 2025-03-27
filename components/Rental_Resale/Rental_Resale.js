@@ -79,9 +79,11 @@ const Rental_Resale = () => {
 
   return (
     <div className="container mt-3">
-      <div className={Styles.title_top}>
-        <span>Top Listings</span>
-      </div>
+      {topProperties.length > 0 && (
+        <div className={Styles.title_top}>
+          <span>Top Listings</span>
+        </div>
+      )}
 
       <div className={Styles.sliderWrapper}>
         <button
