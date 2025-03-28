@@ -134,6 +134,14 @@
         width: 28px;
         /* Adjusted size */
     }
+
+    .partners-slider-item img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        height: auto; /* Adjusted size for better appearance */
+        object-fit: cover; /* Ensures the image fits well within the circle */
+    }
     
 }
 
@@ -203,13 +211,21 @@
         width: 20px;
         /* Adjusted size */
     }
+
+    .partners-slider-item img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        height: auto; /* Smaller size for mobile */
+        object-fit: cover; /* Ensures the image fits well within the circle */
+    }
 }
 @media (max-width: 1800px) {
     .partners-slider-item img {
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        height: 160px;
+        height: auto;
         object-fit: cover; /* Ensures the image fits well within the circle */
     }
 }
@@ -220,7 +236,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        height: 200px; /* Slightly larger for higher resolution */
+        height: auto; /* Slightly larger for higher resolution */
         object-fit: cover; /* Ensures the image fits well within the circle */
     }
 }
