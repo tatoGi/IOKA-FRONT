@@ -129,11 +129,11 @@ const AboutUs = ({ initialData, id }) => {
                 </p>
               </div>
               <div className={styles.testimonialBody}>
-                <p className={styles.testimonialText}>
-                <div dangerouslySetInnerHTML={{ __html: testimonial?.description }}></div>
+                <p className={`${styles.testimonialText} ${styles.oneLine}`}>
+                  <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
                 </p>
                 <p className={styles.welcomeText}>
-                <div dangerouslySetInnerHTML={{ __html: testimonial?.quote }}></div>
+                  <span dangerouslySetInnerHTML={{ __html: testimonial?.quote }}></span>
                 </p>
               </div>
             </div>
@@ -144,7 +144,7 @@ const AboutUs = ({ initialData, id }) => {
       <AboutBanner
         title={cardData.title || "ABOUT US"}
         description={
-          <div dangerouslySetInnerHTML={{ __html: testimonial?.description }}></div>
+          <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
         }
       />
 

@@ -5,6 +5,7 @@
   text-align: center;
   margin-top: 40px;
   border-radius: 0.75rem;
+  height: 290px;
 }
 
 .container {
@@ -35,6 +36,10 @@
   color: #e0e0e0;
   max-width: 600px;
   margin: 0 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
