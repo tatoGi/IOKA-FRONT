@@ -854,7 +854,6 @@ padding-bottom: 16px;
     gap: 10px;
     /* Gap between images */
     position: relative;
-    height: 210px;
     /* For the "+ More" overlay */
 }
 
@@ -863,7 +862,7 @@ padding-bottom: 16px;
     overflow: hidden;
     /* Clip images to rounded corners */
     width: 100%;
-    height: 272px;
+    height: 210px;
     border-radius: 16px;
 
 }
