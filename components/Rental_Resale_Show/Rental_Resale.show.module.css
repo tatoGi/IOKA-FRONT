@@ -85,21 +85,20 @@ padding-bottom: 16px;
 .moreOverlay {
   position: absolute;
   top: 50%;
-  left: 65%;
-  /* width: 70%; */
-  height: 50%;
-  /* background: rgba(0, 0, 0, 0.5); */
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
   display: flex;
   font-family: 'Montserrat';
-font-weight: 600;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
+  text-decoration: none; /* Remove underline for anchor */
 }
 
 /* Adjustments for container */
@@ -335,6 +334,7 @@ letter-spacing: 0%;;
   width: 100px; /* Adjust as needed */
   height: 100px; /* Adjust as needed */
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .textContainer {
@@ -741,6 +741,7 @@ letter-spacing: 0%;;
   font-size: 12px;
   font-weight: 600;
   color: #1f2937;
+  font-family: 'Montserrat';
 }
 
 .actions {
@@ -853,21 +854,20 @@ padding-bottom: 16px;
 .moreOverlay {
   position: absolute;
   top: 50%;
-  left: 65%;
-  /* width: 70%; */
-  height: 50%;
-  /* background: rgba(0, 0, 0, 0.5); */
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
   display: flex;
   font-family: 'Montserrat';
-font-weight: 600;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
+  text-decoration: none; /* Remove underline for anchor */
 }
 
 /* Adjustments for container */
@@ -1103,6 +1103,7 @@ letter-spacing: 0%;;
   width: 100px; /* Adjust as needed */
   height: 100px; /* Adjust as needed */
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .textContainer {
@@ -1443,114 +1444,6 @@ letter-spacing: 0%;;
   background-color: #007AFF;
   color: white;
   padding: 10px 16px;
-  border-radius: 16px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  z-index: 10;
-  letter-spacing: 0.01em;
-}
-
-.propertyInfo {
-  padding: 1rem;
-}
-
-.title {
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 34px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #0A273B;  
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.location {
-  color: #07151F;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 100%;
-  margin-bottom: 1rem;
-   font-family: 'Montserrat';
-}
-
-.features {
-  display: flex;
-  gap: 9px;
-  color: #07151F;
-  margin-bottom: 1.25rem;
-  padding-bottom: 12px; /* 12px distance from content to border */
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: #07151F;
-  font-size: 15px;
-  font-weight: 500;
-}
-.feature img{
-  width: 20px;
-  height: 14px;
-}
-.feature svg {
-  color: #6b7280;
-}
-
-.priceRow {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 0.5rem;
-}
-
-.price {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.actions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.actionButton {
-  padding: 0.375rem;
-  border-radius: 50%; /* Make it circular */
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f9fafb;
-  border: solid 1px #cbd5e1; /* Light gray border */
-  width: 36px; /* Set fixed width */
-  height: 36px; /* Set fixed height */
-  cursor: pointer;
-}
-
-.actionButton:hover {
-  background: #f1f5f9; /* Slightly darker on hover */
-}
-  .propertyCardLink{
-    width: 309px;
-    height: 360px;
-    border-radius: 16px;
-    border-width: 1px;
-    gap: 12px;
-    padding-bottom: 16px;
-}
-.exclusive {
-  width: 82px;
-  height: 31px;
-  position: absolute;  border-radius: 16px;
-  gap: 10px;
-  top: 8px;
-  left: 12px;
-  background-color: #007AFF;
-  color: white;
-  padding: 7px 12px;
   border-radius: 16px;
   font-size: 0.75rem;
   font-weight: 500;

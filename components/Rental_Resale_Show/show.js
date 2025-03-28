@@ -41,8 +41,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     };
   }, [galleryImages]);
 
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
   const flattenedAddresses = RENTAL_RESALE_DATA.addresses.flat().map(address => {
     if (typeof address === 'object' && address !== null) {
       return Object.values(address).join(', ');
@@ -78,37 +76,63 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         <div className={styles.gallery}>
           {/* Main Image */}
           <div className={styles.mainImage}>
-            <img
-              src={
+            <a
+              href={
                 galleryImages[0]
                   ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${galleryImages[0]}`
                   : "/default.jpg"
               }
-              alt="Main"
-            />
+              data-fancybox="gallery"
+              data-caption="Main Image"
+            >
+              <img
+                src={
+                  galleryImages[0]
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${galleryImages[0]}`
+                    : "/default.jpg"
+                }
+                alt="Main"
+              />
+            </a>
           </div>
 
           {/* Small Images Grid */}
           <div className={styles.smallImagesGrid}>
             {galleryImages.slice(1, 4).map((image, index) => (
               <div key={index} className={styles.smallImage}>
-                <img
-                  src={
+                <a
+                  href={
                     image
                       ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`
                       : "/default.jpg"
                   }
-                  alt={`Gallery ${index + 1}`}
-                />
+                  data-fancybox="gallery"
+                  data-caption={`Gallery Image ${index + 2}`}
+                >
+                  <img
+                    src={
+                      image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`
+                        : "/default.jpg"
+                    }
+                    alt={`Gallery ${index + 2}`}
+                  />
+                </a>
               </div>
             ))}
-
-            {/* "+ More" Overlay - Shows when more than 4 images exist */}
+        <div className={styles.smallImage}>
+            {/* "+ More" Overlay - Opens Fancybox */}
             {galleryImages.length > 4 && (
-              <div className={styles.moreOverlay} onClick={openModal}>
+              <a
+                href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${galleryImages[4]}`}
+                data-fancybox="gallery"
+                data-caption={`Gallery Image 5`}
+                className={styles.moreOverlay}
+              >
                 +{galleryImages.length - 4} More
-              </div>
+              </a>
             )}
+            </div>
           </div>
         </div>
 
@@ -640,37 +664,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         </div>
         <SubscribeSection />
       </div>
-
-      {/* Modal - Shows all images using Fancybox */}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Gallery Modal"
-        className={styles.modal}
-        overlayClassName={styles.overlay}
-      >
-        <div className={styles.modalContent}>
-          <button onClick={closeModal} className={styles.closeButton}>
-            &times;
-          </button>
-          <div className={styles.modalImages}>
-            {galleryImages.map((image, index) => (
-              <a
-                key={index}
-                href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
-                data-fancybox="gallery"
-                data-caption={`Gallery Image ${index + 1}`}
-              > 
-                <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${image}`}
-                  alt={`Gallery ${index + 1}`}
-                  className={styles.modalImage}
-                />
-              </a>
-            ))}
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };
