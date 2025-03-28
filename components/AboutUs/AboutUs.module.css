@@ -1,10 +1,8 @@
 .aboutSection {
   width: 100%;
   background-color: #fff;
-  
+  font-family: 'Montserrat';
 }
-
-
 
 .statsContainer {
   display: grid;
@@ -16,7 +14,6 @@
   margin-top: 80px;
   gap: 2rem; /* Add gap between stat boxes */
 }
-
 
 .statBox {
   text-align: center;
@@ -53,7 +50,6 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #0A273B;
-  
 }
 
 .agencySection {
@@ -69,13 +65,19 @@
   font-size: 2rem;
   color: #333;
   margin-bottom: 1rem;
+  font-family: 'Montserrat';
 }
 
 .agencySection p {
-  color: #666;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+color: #0A273B;
+margin-top: 24px;
+
 }
 
 .teamGrid {
@@ -93,7 +95,7 @@
   border-radius: 8px;
   object-fit: cover;
   margin-bottom: 1rem;
-  width:23.75rem;
+  width: 23.75rem;
   height: 24.5rem;
 }
 
@@ -101,11 +103,13 @@
   font-size: 1.25rem;
   color: #333;
   margin: 0.5rem 0;
+  font-family: 'Montserrat';
 }
 
 .teamMember p {
   color: #666;
   font-size: 0.875rem;
+  font-family: 'Montserrat';
 }
 
 @media (max-width: 1200px) {
@@ -130,7 +134,7 @@
   .statsContainer {
     grid-template-columns: 1fr;
   }
-} 
+}
 
 .col4 {
   flex: 0 0 33.333333%;
@@ -150,6 +154,7 @@
     max-width: 100%;
   }
 }
+
 .testimonialSection {
   display: flex;
   justify-content: center;
@@ -187,21 +192,21 @@
 
 .testimonialImageContainer {
   position: absolute;
-    top: 9rem;
-    left: 0rem;
-    z-index: 2;
+  top: 9rem;
+  left: 0rem;
+  z-index: 2;
 }
 
 .testimonialImageWrapper {
   position: relative;
-    z-index: 2;
-    background: #fff;
-    width: 22.375rem;
-    height: 14rem;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  z-index: 2;
+  background: #fff;
+  width: 22.375rem;
+  height: 14rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .testimonialImage {
@@ -218,65 +223,6 @@
 
 .testimonialHeader {
   text-align: left;
-}
-
-.testimonialName {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #0A273B;
-  font-family: 'montserrat', sans-serif;
-}
-
-.testimonialRole {
-  font-size: 1rem;
-  color: #666;
-}
-
-.testimonialBody {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
-}
-
-.welcomeText {
-  font-weight: bold;
-  color: #0A273B;
-  margin-top: 16px;
-}
-.designElement {
-  position: absolute;
-  top: -30px;
-  right: -60px;
-  z-index: 3;
-}
-
-.curvedLine {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border: none;
-  border-right: 2px solid #8FE3DC;
-  border-radius: 0 100% 0 0;
-  transform: rotate(45deg);
-  margin-left: auto;
-}
-
-.borderText {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%) rotate(-45deg);
-  background: #fff;
-  padding: 5px 15px;
-  color: #8FE3DC;
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-
-
-.testimonialHeader {
   margin-bottom: 24px;
 }
 
@@ -287,17 +233,19 @@
   color: #0A273B;
   margin-left: 15.125rem;
   margin-bottom: 1rem;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
 }
 
 .testimonialRole {
   font-size: 20px;
   color: #0A273B;
   margin-left: 15.125rem;
+  font-family: 'Montserrat';
 }
 
 .testimonialBody {
   color: #07151F;
+  font-family: 'Montserrat';
 }
 
 .testimonialText {
@@ -309,20 +257,18 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-family: 'Montserrat';
 }
-
 
 .welcomeText {
   font-size: 24px;
   font-weight: 500;
   color: #0A273B;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin-top: 3.0625rem;
   margin-left: 15.125rem;
 }
 
-
-/* Responsive styles */
 @media (max-width: 968px) {
   .testimonialWrapper {
     flex-direction: column;
@@ -386,6 +332,7 @@
   color: #666;
   font-size: 16px;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .contactTitle {
@@ -393,6 +340,7 @@
   font-size: 32px;
   margin-bottom: 40px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .contactForm {
@@ -433,6 +381,7 @@
 .formInput::placeholder,
 .formTextarea::placeholder {
   color: #666;
+  font-family: 'Montserrat';
 }
 
 .formInput:focus,
@@ -452,13 +401,13 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Montserrat';
 }
 
 .submitButton:hover {
   background-color: #0d3251;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .contactSection {
     padding: 60px 0;
@@ -495,7 +444,6 @@
   }
 }
 
-/* Partners Section */
 .partnersSection {
   padding: 60px 0;
   background-color: #fff;
@@ -509,6 +457,7 @@
   padding: 0 20px;
   max-width: 1560px;
   margin: 0 auto 40px;
+  font-family: 'Montserrat';
 }
 
 .partnersSlider {
@@ -528,7 +477,6 @@
   object-fit: cover;
 }
 
-/* Subscribe Section */
 .subscribeSection {
   background-color: #F0F2F5;
   padding: 60px 0;
@@ -554,12 +502,14 @@
   font-size: 16px;
   color: #666;
   margin-bottom: 16px;
+  font-family: 'Montserrat';
 }
 
 .subscribeHeading {
   margin-bottom: 32px;
   font-size: 32px;
   line-height: 1.4;
+  font-family: 'Montserrat';
 }
 
 .highlightText {
@@ -615,7 +565,6 @@
   opacity: 0.2;
 }
 
-/* Responsive Styles */
 @media (max-width: 968px) {
   .partnersTitle {
     font-size: 28px;
@@ -667,6 +616,7 @@
 .currentVacancies h4 {
   font-size: 40px;
   margin-bottom: 15px;
+  font-family: 'Montserrat';
 }
 
 .currentVacancies p {
@@ -674,13 +624,13 @@
   max-width: 600px;
   margin: 10px auto;
   font-size: 20px;
+  font-family: 'Montserrat';
 }
 
 .currentVacancies span {
   font-size: 20px;
   color: #8FE3DC;
 }
-
 
 .jobListings {
   display: grid;
@@ -700,6 +650,7 @@
 .jobCard h5 {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  font-family: 'Montserrat';
 }
 
 .date {
@@ -713,6 +664,7 @@
   color: #ccc;
   font-size: 0.9rem;
   line-height: 1.6;
+  font-family: 'Montserrat';
 }
 
 .applyButton {
@@ -741,13 +693,13 @@
   .jobListings {
     grid-template-columns: 1fr;
   }
-  
+
   .careersSectionContent {
     padding: 0 15px;
   }
 }
- /* contact form  */
- .formContainer {
+
+.formContainer {
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
@@ -757,6 +709,7 @@
   font-size: 2rem;
   margin-bottom: 2rem;
   color: #1a1a1a;
+  font-family: 'Montserrat';
 }
 
 .form {
@@ -773,6 +726,7 @@
   background-color: #f5f6f7;
   font-size: 1rem;
   border-radius: 16px;
+  font-family: 'Montserrat';
 }
 
 .textarea {
@@ -782,14 +736,14 @@
 
 .submitButton {
   background-color: #0A273B;
-  color:#FFFFFF;
+  color: #FFFFFF;
   padding: 1rem;
   border: none;
   border-radius: 16px;
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  
+  font-family: 'Montserrat';
 }
 
 .submitButton:hover {

@@ -129,7 +129,7 @@ const AboutUs = ({ initialData, id }) => {
                 </p>
               </div>
               <div className={styles.testimonialBody}>
-                <p className={`${styles.testimonialText} ${styles.oneLine}`}>
+                <p className={`${styles.testimonialText}`}>
                   <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
                 </p>
                 <p className={styles.welcomeText}>
