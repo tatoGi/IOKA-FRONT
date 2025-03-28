@@ -805,6 +805,11 @@ margin-bottom: 12px;
     width: 100%;
     /* Ensure gallery takes full width of its container */
     margin-top: 12px;
+    display: flex;
+        gap: 10px;
+        width: 100%;
+        margin-top: 12px;
+        height: 420px;
 }
 
 /* Main Image */
@@ -849,6 +854,7 @@ padding-bottom: 16px;
     gap: 10px;
     /* Gap between images */
     position: relative;
+    height: 210px;
     /* For the "+ More" overlay */
 }
 
