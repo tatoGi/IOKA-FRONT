@@ -387,7 +387,7 @@ margin-top: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
   width: 312px; /* Full width of the column */
-  height:360px; /* Minimum height */
+  height:350px; /* Minimum height */
   border: 1px solid #E6EBED; /* Border width */
 }
 
