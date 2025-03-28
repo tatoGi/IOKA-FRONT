@@ -10,7 +10,6 @@
   margin: -2rem auto 4rem;
   position: relative;
   z-index: 2;
-  padding: 0 2rem;
   margin-top: 80px;
   gap: 2rem; /* Add gap between stat boxes */
 }
