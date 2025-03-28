@@ -77,6 +77,8 @@ border-radius: 16px;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-width: 966px;
+  border-radius: 32px;
 }
 
 .propertyInfo {
@@ -198,7 +200,13 @@ border-radius: 16px;
 }
 /* Media Query for 1600px */
 @media (max-width: 1600px) {
-
+  .propertyImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 815px;
+    border-radius: 32px;
+  }
 
   .propertyCardTitle {
     font-size: 36px; /* Reduced font size */
