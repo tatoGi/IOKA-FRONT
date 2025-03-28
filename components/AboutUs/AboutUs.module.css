@@ -701,9 +701,17 @@ margin-top: 24px;
 .formContainer {
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding-top: 64px;
 }
+.formContainer h5 {
+  font-family: 'Montserrat';
+font-weight: 400;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 24px;
 
+}
 .title {
   font-size: 2rem;
   margin-bottom: 2rem;

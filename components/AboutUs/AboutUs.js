@@ -97,8 +97,37 @@ const AboutUs = ({ initialData, id }) => {
 
   return (
     <div className="container">
-      {/* Testimonials Section */}
-      <div className={styles.testimonialSection}>
+     
+      <AboutBanner
+        title={cardData.title || "ABOUT US"}
+        description={
+          <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
+        }
+      />
+
+      {/* Statistics section */}
+      <div className={styles.container}>
+        <div className={styles.statsContainer}>
+          {cardData.additional_fields?.number_boxes?.map((box, index) => (
+            <div key={index} className={styles.statBox}>
+              <div className={styles.statCircle}></div>
+              <p>
+                {box.suffix}
+                {box.number}
+                <br />
+                {box.title}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Your Agency Section */}
+        <div className={styles.agencySection}>
+          <h2>{cardData.additional_fields?.your_agency}</h2>
+          <div dangerouslySetInnerHTML={{ __html: cardData.additional_fields?.your_agency_description }}></div>
+        </div>
+ {/* Testimonials Section */}
+ <div className={styles.testimonialSection}>
         <div className={styles.testimonialContainer}>
           <div className={styles.testimonialImageContainer}>
             <div className={styles.testimonialImageWrapper}>
@@ -141,35 +170,6 @@ const AboutUs = ({ initialData, id }) => {
         </div>
       </div>
 
-      <AboutBanner
-        title={cardData.title || "ABOUT US"}
-        description={
-          <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
-        }
-      />
-
-      {/* Statistics section */}
-      <div className={styles.container}>
-        <div className={styles.statsContainer}>
-          {cardData.additional_fields?.number_boxes?.map((box, index) => (
-            <div key={index} className={styles.statBox}>
-              <div className={styles.statCircle}></div>
-              <p>
-                {box.suffix}
-                {box.number}
-                <br />
-                {box.title}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Your Agency Section */}
-        <div className={styles.agencySection}>
-          <h2>{cardData.additional_fields?.your_agency}</h2>
-          <div dangerouslySetInnerHTML={{ __html: cardData.additional_fields?.your_agency_description }}></div>
-        </div>
-
         {/* Team Section */}
         <div className={styles.teamGrid}>
           {TeamMembers.map((member, index) => (
@@ -192,6 +192,7 @@ const AboutUs = ({ initialData, id }) => {
         </div>
 
         <div className={styles.formContainer}>
+          <h5>Send us Email</h5>
           <ContactForm />
         </div>
         <PartnersSection />
