@@ -266,4 +266,58 @@
     border: none; /* Remove border on focus */
     box-shadow: none; /* Remove box shadow on focus */
   }
-} 
+
+  .swiper-item-relative {
+    height: 70vh; /* Further reduce height for mobile */
+  }
+
+  .banner-content {
+    padding-top: 100px; /* Adjust padding */
+  }
+
+  .banner-content h1 {
+    font-size: 28px; /* Further reduce font size */
+  }
+
+  .text-b-i {
+    font-size: 12px; /* Adjust subtitle font size */
+  }
+}
+
+/* Adjust styles for tablets */
+@media (max-width: 1024px) {
+  .swiper-item-relative {
+    height: 80vh; /* Reduce height for tablets */
+  }
+
+  .banner-content {
+    padding-top: 120px; /* Adjust padding */
+  }
+
+  .banner-content h1 {
+    font-size: 40px; /* Reduce font size */
+  }
+
+  .text-b-i {
+    font-size: 14px; /* Adjust subtitle font size */
+  }
+}
+
+/* Adjust styles for very small devices */
+@media (max-width: 480px) {
+  .swiper-item-relative {
+    height: 60vh; /* Reduce height for very small devices */
+  }
+
+  .banner-content {
+    padding-top: 80px; /* Adjust padding */
+  }
+
+  .banner-content h1 {
+    font-size: 20px; /* Further reduce font size */
+  }
+
+  .text-b-i {
+    font-size: 10px; /* Adjust subtitle font size */
+  }
+}

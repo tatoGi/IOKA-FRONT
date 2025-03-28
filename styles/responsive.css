@@ -1,242 +1,267 @@
-/* Mobile Responsiveness */
+
+/* Adjustments for smaller screens */
 @media (max-width: 768px) {
-    .mobile-burger-menu {
-        display: block;
-        cursor: pointer;
-        z-index: 101;
-    }
+  .header-nav ul li a {
+    font-size: 16px;
+  }
 
-    .header-nav {
-        display: none; /* Hide by default */
-        position: absolute;
-        top: 104px;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-        border-bottom: 1px solid #07151f;
-    }
+  .mobile-burger-menu {
+    display: block;
+    cursor: pointer;
+    z-index: 101;
+  }
+  .mobile-burger-menu .burger-lines{
+    width: 21px;
+    height: 18px;
+    top: 3px;
 
-    .header-nav.active {
-        display: flex; /* Show when active */
-    }
+  }
+  .mobile-burger-menu .burger-lines span{
+    color: #ffffff;
+  }
+  .header-nav {
+    display: none; /* Hide by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #07151f;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+  }
 
-    .header-nav ul {
-        flex-direction: column;
-        gap: 20px;
-    }
+  .header-nav.active {
+    display: flex; /* Show when active */
+    transform: translateY(0);
+  }
 
-    .header-nav ul li a {
-        color: #0a273b;
-    }
+  .header-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
 
-    .right-search-contact {
-        gap: 16px;
-    }
+  .header-nav ul li {
+    margin: 20px 0;
+  }
 
-    .right-form:focus-within input {
-        width: 200px;
-    }
+  .header-nav ul li a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    .right-form:focus-within .searchbtn {
-        left: -152px;
-    }
+  .right-search-contact {
+    gap: 16px;
+  }
 
-    .contactBtn a {
-        font-size: 14px;
-        padding: 0 16px;
-    }
+  .right-form:focus-within input {
+    width: 200px;
+  }
 
-    .header-box {
-        padding: 0 16px;
-    }
+  .right-form:focus-within .searchbtn {
+    left: -152px;
+  }
 
-    .logo-img {
-        width: 100px;
-        height: 32px;
-    }
+  .contactBtn a {
+    font-size: 14px;
+    padding: 0 16px;
+  }
+
+  .header-box {
+    padding: 0 16px;
+  }
+
+  .logo-img {
+    width: 100px;
+    height: 32px;
+  }
 }
 
 @media (max-width: 480px) {
-    .header-cont {
-        height: 80px;
-    }
+  .header-cont {
+    height: 80px;
+  }
 
-    .header-box {
-        height: 80px;
-    }
+  .header-box {
+    height: 80px;
+  }
 
-    .header-nav {
-        top: 80px;
-    }
+  .header-nav {
+    top: 80px;
+  }
 
-    .right-form:focus-within input {
-        width: 150px;
-    }
+  .right-form:focus-within input {
+    width: 150px;
+  }
 
-    .right-form:focus-within .searchbtn {
-        left: -102px;
-    }
+  .right-form:focus-within .searchbtn {
+    left: -102px;
+  }
 
-    .contactBtn a {
-        font-size: 12px;
-        padding: 0 12px;
-    }
+  .contactBtn a {
+    font-size: 12px;
+    padding: 0 12px;
+  }
 
-    .logo-img {
-        width: 80px;
-        height: 24px;
-    }
+  .logo-img {
+    width: 80px;
+    height: 24px;
+  }
 }
-
 
 /* Responsive styles for 1600px */
 @media (max-width: 1600px) {
-    .popular-area-section {
-        padding: 60px 0;
-        /* Adjusted padding */
-    }
+  .popular-area-section {
+    padding: 60px 0;
+    /* Adjusted padding */
+  }
 
-    .popular-area-title {
-        font-size: 36px;
-        /* Adjusted font size */
-    }
+  .popular-area-title {
+    font-size: 36px;
+    /* Adjusted font size */
+  }
 
-    .popular-area-box {
-        gap: 20px;
-        /* Adjusted gap */
-    }
+  .popular-area-box {
+    gap: 20px;
+    /* Adjusted gap */
+  }
 
-    .area-item {
-        width: calc((100% / 3) - 14px);
-        /* Adjusted width for 3 items per row */
-        height: 220px;
-        /* Adjusted height */
-    }
+  .area-item {
+    width: calc((100% / 3) - 14px);
+    /* Adjusted width for 3 items per row */
+    height: 220px;
+    /* Adjusted height */
+  }
 
-    .area-title {
-        bottom: 24px;
-        /* Adjusted position */
-        padding: 0 20px;
-        /* Adjusted padding */
-    }
+  .area-title {
+    bottom: 24px;
+    /* Adjusted position */
+    padding: 0 20px;
+    /* Adjusted padding */
+  }
 
-    .ar-title {
-        font-size: 14px;
-        /* Adjusted font size */
-    }
+  .ar-title {
+    font-size: 14px;
+    /* Adjusted font size */
+  }
 
-    .arrow-box {
-        height: 28px;
-        /* Adjusted size */
-        width: 28px;
-        /* Adjusted size */
-    }
+  .arrow-box {
+    height: 28px;
+    /* Adjusted size */
+    width: 28px;
+    /* Adjusted size */
+  }
 
-    .partners-slider-item img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        height: auto; /* Adjusted size for better appearance */
-        object-fit: cover; /* Ensures the image fits well within the circle */
-    }
-    
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto; /* Adjusted size for better appearance */
+    object-fit: cover; /* Ensures the image fits well within the circle */
+  }
 }
 
 /* Responsive styles for 1024px */
 @media (max-width: 1024px) {
-    .area-item {
-        width: calc((100% / 2) - 12px);
-        /* Adjusted width for 2 items per row */
-        height: 200px;
-        /* Adjusted height */
-    }
+  .area-item {
+    width: calc((100% / 2) - 12px);
+    /* Adjusted width for 2 items per row */
+    height: 200px;
+    /* Adjusted height */
+  }
 
-    .popular-area-title {
-        font-size: 32px;
-        /* Adjusted font size */
-    }
+  .popular-area-title {
+    font-size: 32px;
+    /* Adjusted font size */
+  }
 
-    .area-title {
-        bottom: 20px;
-        /* Adjusted position */
-        padding: 0 16px;
-        /* Adjusted padding */
-    }
+  .area-title {
+    bottom: 20px;
+    /* Adjusted position */
+    padding: 0 16px;
+    /* Adjusted padding */
+  }
 
-    .ar-title {
-        font-size: 14px;
-        /* Adjusted font size */
-    }
+  .ar-title {
+    font-size: 14px;
+    /* Adjusted font size */
+  }
 
-    .arrow-box {
-        height: 24px;
-        /* Adjusted size */
-        width: 24px;
-        /* Adjusted size */
-    }
+  .arrow-box {
+    height: 24px;
+    /* Adjusted size */
+    width: 24px;
+    /* Adjusted size */
+  }
 }
 
 /* Responsive styles for 768px */
 @media (max-width: 768px) {
-    .area-item {
-        width: 100%;
-        /* Full width for mobile */
-        height: 180px;
-        /* Adjusted height */
-    }
+  .area-item {
+    width: 100%;
+    /* Full width for mobile */
+    height: 180px;
+    /* Adjusted height */
+  }
 
-    .popular-area-title {
-        font-size: 28px;
-        /* Adjusted font size */
-    }
+  .popular-area-title {
+    font-size: 28px;
+    /* Adjusted font size */
+  }
 
-    .area-title {
-        bottom: 16px;
-        /* Adjusted position */
-        padding: 0 12px;
-        /* Adjusted padding */
-    }
+  .area-title {
+    bottom: 16px;
+    /* Adjusted position */
+    padding: 0 12px;
+    /* Adjusted padding */
+  }
 
-    .ar-title {
-        font-size: 12px;
-        /* Adjusted font size */
-    }
+  .ar-title {
+    font-size: 12px;
+    /* Adjusted font size */
+  }
 
-    .arrow-box {
-        height: 20px;
-        /* Adjusted size */
-        width: 20px;
-        /* Adjusted size */
-    }
+  .arrow-box {
+    height: 20px;
+    /* Adjusted size */
+    width: 20px;
+    /* Adjusted size */
+  }
 
-    .partners-slider-item img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        height: auto; /* Smaller size for mobile */
-        object-fit: cover; /* Ensures the image fits well within the circle */
-    }
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto; /* Smaller size for mobile */
+    object-fit: cover; /* Ensures the image fits well within the circle */
+  }
 }
+
 @media (max-width: 1800px) {
-    .partners-slider-item img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        height: auto;
-        object-fit: cover; /* Ensures the image fits well within the circle */
-    }
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto;
+    object-fit: cover; /* Ensures the image fits well within the circle */
+  }
 }
 
 /* Styles for MacBook 16-inch resolution (3072px width) */
 @media (max-width: 3072px) {
-    .partners-slider-item img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        height: auto; /* Slightly larger for higher resolution */
-        object-fit: cover; /* Ensures the image fits well within the circle */
-    }
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto; /* Slightly larger for higher resolution */
+    object-fit: cover; /* Ensures the image fits well within the circle */
+  }
 }
