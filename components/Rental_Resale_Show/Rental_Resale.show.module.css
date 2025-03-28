@@ -685,7 +685,24 @@ padding-bottom: 16px;
 .propertyInfo {
   padding: 1rem;
 }
+.propertyInfo h3 {
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 8px;
 
+}
+.propertyInfo .location {
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 12px;
+
+}
 .title {
   font-family: 'Montserrat';
   font-weight: 600;
