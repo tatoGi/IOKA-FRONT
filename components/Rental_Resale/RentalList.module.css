@@ -11,7 +11,7 @@ margin-bottom: 24px;
 .sliderWrapper {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible; /* Ensure arrows are not cut off */
   max-width: 1560px;
 }
 
@@ -664,11 +664,11 @@ margin-top: 2px;
   }
   
   .prevArrow {
-    left: 0;
+    left: -18px; /* Increased to show content */
   }
   
   .nextArrow {
-    right: 0;
+    right: -18px; /* Increased to show content */
   }
   
   .sliderArrow:hover {
