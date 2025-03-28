@@ -734,7 +734,6 @@
   margin-right: 20px; /* Add margin to show part of the next slide */
   width: 1252px !important; /* Adjust width to show partial slides */
   height: 380px !important;
-  gap: 32px;
 }
 
 .resaleImage {
@@ -1023,6 +1022,7 @@ letter-spacing: 0%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 22px;
 }
 
 .trophyImage {

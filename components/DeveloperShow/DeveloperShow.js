@@ -464,7 +464,10 @@ const DeveloperShow = (developerData) => {
 
         </div>
       </div>
+      <div className="container">
       <SubscribeSection />
+      </div>
+      
     </div>
   );
 };
