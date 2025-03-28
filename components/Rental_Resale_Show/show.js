@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Rental_Resale.show.module.css";
+
 import Modal from "react-modal";
 import Image from "next/image";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";

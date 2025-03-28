@@ -201,6 +201,7 @@ padding-bottom: 16px;
   color: #07151F;
   align-items: center; /* Align features vertically */
   flex: 1; /* Allow features to take available space */
+  font-family: 'Montserrat';
 }
 
 .feature {
@@ -280,6 +281,7 @@ padding-bottom: 16px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     word-wrap: break-word; /* Ensure long words do not overflow */
     font-size: 16px;
+    font-family: 'Montserrat';
     color: #0A273B;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -347,6 +349,7 @@ padding-bottom: 16px;
   font-weight: 600;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .role {
@@ -354,6 +357,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .languages {
@@ -361,6 +365,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .email {
@@ -368,6 +373,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 16px;
+  font-family: 'Montserrat';
 }
 
 .contactButtons {
@@ -448,6 +454,7 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 12px;
+    font-family: 'Montserrat';
   }
   
  
@@ -474,6 +481,7 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 16px;
+    font-family: 'Montserrat';
   }
   
   .mapPlaceholder {
@@ -533,6 +541,7 @@ padding-bottom: 16px;
     color: #0A273B;
     margin-bottom: 1.5rem;
     margin-top: 2.5rem;
+    font-family: 'Montserrat';
   }
   
   .details_line {
@@ -562,12 +571,14 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 0.72rem;
+    font-family: 'Montserrat';
   }
   
   .detailValue {
     font-size: 18px;
     font-weight: 400;
     color: #0A273B;
+    font-family: 'Montserrat';
   }
   .contactButton{
     width: 456px;
@@ -582,6 +593,7 @@ padding-bottom: 16px;
     background-color: #07151F;
     font-size: 16px;
     height: 44px;
+    font-family: 'Montserrat';
     }
     .amenities_section {
         margin-top: 36px;
@@ -680,6 +692,7 @@ padding-bottom: 16px;
   font-weight: 500;
   z-index: 10;
   letter-spacing: 0.01em;
+  font-family: 'Montserrat';
 }
 
 .propertyInfo {
@@ -729,6 +742,7 @@ margin-bottom: 12px;
   color: #07151F;
   margin-bottom: 1.25rem;
   padding-bottom: 12px; /* 12px distance from content to border */
+  font-family: 'Montserrat';
 }
 
 .feature {
@@ -987,6 +1001,7 @@ padding-bottom: 16px;
   color: #07151F;
   align-items: center; /* Align features vertically */
   flex: 1; /* Allow features to take available space */
+  font-family: 'Montserrat';
 }
 
 .feature {
@@ -1066,6 +1081,7 @@ padding-bottom: 16px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     word-wrap: break-word; /* Ensure long words do not overflow */
     font-size: 16px;
+    font-family: 'Montserrat';
     color: #0A273B;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -1133,6 +1149,7 @@ padding-bottom: 16px;
   font-weight: 600;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .role {
@@ -1140,6 +1157,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .languages {
@@ -1147,6 +1165,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
 .email {
@@ -1154,6 +1173,7 @@ padding-bottom: 16px;
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 16px;
+  font-family: 'Montserrat';
 }
 
 .contactButtons {
@@ -1234,6 +1254,7 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 12px;
+    font-family: 'Montserrat';
   }
   
  
@@ -1260,6 +1281,7 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 16px;
+    font-family: 'Montserrat';
   }
   
   .mapPlaceholder {
@@ -1319,6 +1341,7 @@ padding-bottom: 16px;
     color: #0A273B;
     margin-bottom: 1.5rem;
     margin-top: 2.5rem;
+    font-family: 'Montserrat';
   }
   
   .details_line {
@@ -1348,12 +1371,14 @@ padding-bottom: 16px;
     font-weight: 600;
     color: #0A273B;
     margin-bottom: 0.72rem;
+    font-family: 'Montserrat';
   }
   
   .detailValue {
     font-size: 18px;
     font-weight: 400;
     color: #0A273B;
+    font-family: 'Montserrat';
   }
   .contactButton{
     width: 456px;
@@ -1368,6 +1393,7 @@ padding-bottom: 16px;
     background-color: #07151F;
     font-size: 16px;
     height: 44px;
+    font-family: 'Montserrat';
     }
     .amenities_section {
         margin-top: 36px;
@@ -1493,6 +1519,7 @@ margin-bottom: 12px;
   color: #07151F;
   font-size: 15px;
   font-weight: 500;
+  font-family: 'Montserrat';
 }
 .feature {
   font-family: 'Montserrat';
