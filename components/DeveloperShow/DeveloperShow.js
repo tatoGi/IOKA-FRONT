@@ -94,7 +94,7 @@ const DeveloperShow = (developerData) => {
           <div className={styles.heroContent}>
             <div className={styles.developerInfo}>
               <h2>{developerData.developerData.title} </h2>
-              <div
+              <div className={styles.developerDescription}
                 dangerouslySetInnerHTML={{
                   __html: developerData.developerData.paragraph
                 }}

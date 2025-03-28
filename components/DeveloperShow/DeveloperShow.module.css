@@ -84,6 +84,7 @@
   font-size: 24px;
   margin-bottom: 24px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .developerInfo p {
@@ -92,6 +93,7 @@
   line-height: 1.5;
   margin-bottom: 16px;
   font-weight: normal;
+  font-family: 'Montserrat';
 }
 
 .developerLogo {
@@ -115,6 +117,7 @@
   font-size: 48px;
   margin-bottom: 20px;
   color: #8FE3DC;
+  font-family: 'Montserrat';
 }
 
 .heroContent p {
@@ -123,6 +126,7 @@
   max-width: 800px;
   margin: 0 auto;
   color: #0A273B;
+  font-family: 'Montserrat';
 }
 
 .statsSection {
@@ -151,12 +155,14 @@
   font-size: 36px;
   color: #8FE3DC;
   margin-bottom: 10px;
+  font-family: 'Montserrat';
 }
 
 .statItem p {
   font-size: 16px;
   color: #666;
   text-transform: uppercase;
+  font-family: 'Montserrat';
 }
 
 .projectsSection {
@@ -168,6 +174,7 @@
   font-size: 36px;
   color: #001B2E;
   margin-bottom: 40px;
+  font-family: 'Montserrat';
 }
 
 .projectsGrid {
@@ -209,6 +216,7 @@
   font-size: 20px;
   color: #001B2E;
   margin-bottom: 5px;
+  font-family: 'Montserrat';
 }
 
 .projectInfo p {
@@ -220,6 +228,7 @@
   color: #8FE3DC;
   font-weight: 600;
   font-size: 18px;
+  font-family: 'Montserrat';
 }
 
 .listingsSection {
@@ -242,12 +251,14 @@
   color: #0A273B;
   margin-bottom: 8px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .listingCount {
   color: #7ACBC4;
   font-size: 16px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .sortDropdown {
@@ -259,6 +270,7 @@
 .sortDropdown span {
   color: #666666;
   font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .sortButton {
@@ -331,6 +343,7 @@
   font-size: 12px;
   z-index: 1;
   width: 60px;
+  font-family: 'Montserrat';
   height: 35px;
 }
 
@@ -384,6 +397,7 @@
   gap: 8px;
   color: #0A273B;
   font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .propertyDetails {
@@ -515,11 +529,13 @@
   margin-bottom: 8px;
   font-weight: 600;
   line-height: 1.3;
+  font-family: 'Montserrat';
 }
 
 .location {
   color: #0A273B;
   font-size: 14px;
+  font-family: 'Montserrat';
   margin-bottom: 16px;
 }
 
@@ -528,6 +544,7 @@
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 32px;
+  font-family: 'Montserrat';
 }
 
 .sliderStats {
@@ -589,6 +606,7 @@
   gap: 8px;
   border-radius: 4px;
   font-size: 14px;
+  font-family: 'Montserrat';
   font-weight: 500;
   cursor: pointer;
 }
@@ -737,17 +755,20 @@
   color: #0A273B;
   font-weight: 600;
   line-height: 1.2;
+  font-family: 'Montserrat';
 }
 
 .resaleLocation {
   color: #0A273B;
   font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .resalePrice {
   color: #0A273B;
   font-size: 14px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .resaleStats {
@@ -763,11 +784,13 @@
   gap: 8px;
   color: #0A273B;
   font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .statSeparator {
   color: #07151F;
   font-size: 30px;
+  font-family: 'Montserrat';
 }
 
 .resaleDetails {
@@ -776,6 +799,7 @@
   gap: 8px;
   color: #666666;
   font-size: 14px;
+  font-family: 'Montserrat';
 }
 
 .resaleFooter {
@@ -864,6 +888,7 @@
   font-size: 40px;
   font-weight: 600;
   margin-bottom: 32px;
+  font-family: 'Montserrat';
 }
 
 /* Slider container */
@@ -935,12 +960,14 @@
   font-weight: 600;
   margin-bottom: 32px;
   margin-top: 36px;
+  font-family: 'Montserrat';
 }
 
 /* Award subtitle styling */
 .awardSubtitle {
   color: #0A273B;
   font-size: 20px;
+  font-family: 'Montserrat';
 }
 
 /* Bottom section with year and button */
@@ -953,12 +980,20 @@
       margin-bottom: 26px;
       margin-right: 22px;
 }
+.developerDescription{
+  font-family: 'Montserrat';
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
 
+}
 /* Year text styling */
 .awardYear {
   color: #0A273B;
   font-size: 40px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 /* View Awards button styling */
@@ -971,6 +1006,7 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  font-family: 'Montserrat';
 }
 
 /* Award icon container */
