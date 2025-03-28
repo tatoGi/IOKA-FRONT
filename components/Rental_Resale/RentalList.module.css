@@ -33,10 +33,6 @@ margin-bottom: 24px;
   transition: all 0.2s ease;
 }
 
-.propertyCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
   
   .imageContainer {
     position: relative;
@@ -172,12 +168,7 @@ margin-bottom: 24px;
     display: block;
     
   }
-  
-  .propertyCardLink:hover .propertyCard {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease-in-out;
-  } 
+
   .pagination {
     display: flex;
     justify-content: center;
