@@ -86,7 +86,10 @@ const Hombanner = ({ initialData }) => {
         <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
         <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
         <PartnersSection />
+        <div className="container">
         <SubscribeSection />
+        </div>
+       
         
       </div>
     </div>

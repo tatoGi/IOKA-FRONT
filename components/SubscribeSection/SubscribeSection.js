@@ -6,7 +6,7 @@ import Image from 'next/image'
 const SubscribeSection = () => {
   return (
     <div className="subscribe-section">
-        <div className="container">
+        
            <div className="subscribe-box">
                 <div className="left-s-text">
                     <div className="s-t-0">
@@ -32,7 +32,7 @@ const SubscribeSection = () => {
                     </form>
                 </div>
            </div>
-        </div>
+       
     </div>
   )
 }

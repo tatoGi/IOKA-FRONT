@@ -208,11 +208,7 @@ const Rental_Resale = () => {
                       <span className={Styles.price}>
                       AED {property.amount.amount_dirhams?.toLocaleString() || "N/A"}
                       </span>
-                      <div className={Styles.actions}>
-                        <button className={Styles.actionButton}>
-                          <StarIcon />
-                        </button>
-                      </div>
+                    
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 .title_top{
-font-family: 'montserrat', sans-serif;
+font-family: 'Montserrat';
 font-weight: 400;
 font-size: 20px;
 line-height: 100%;
@@ -78,6 +78,7 @@ margin-bottom: 24px;
     margin-bottom: 8px;
     margin-top: 12px;
     line-height: 1.4;
+    font-family: 'Montserrat';
   }
   
   .location {
@@ -86,7 +87,7 @@ margin-bottom: 24px;
     font-weight: 400;
     line-height: 100%;
     margin-bottom: 1rem;
-    font-family: 'montserrat', sans-serif;
+    font-family: 'Montserrat';
   }
   
   .features {
@@ -96,6 +97,7 @@ margin-bottom: 24px;
     margin-bottom: 1.25rem;
     border-bottom: 1px solid #E6EBED;
     padding-bottom: 12px; /* 12px distance from content to border */
+    font-family: 'Montserrat';
   }
   
   .feature {
@@ -117,16 +119,16 @@ margin-bottom: 24px;
   
   .priceRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-top: 0.5rem;
+    gap: 20px;
   }
   
   .price {
     font-size: 12px;
     font-weight: 600;
     color: #1f2937;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
   }
   
   .actions {
@@ -275,7 +277,7 @@ margin-top: 2px;
   padding: 15px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  font-family: 'montserrat', sans-serif;
+  font-family: 'Montserrat'
 }
 
 .infoRow {
