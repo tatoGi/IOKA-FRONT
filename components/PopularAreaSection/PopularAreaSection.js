@@ -27,32 +27,52 @@ const PopularAreaSection = (sectionFourData) => {
   const title = sectionData?.additional_fields?.title || "Default Title";
   const popularArea = sectionData?.additional_fields?.Add_Popular_Areas || [];
 
-  // Slider settings for react-slick
+  // Enhanced slider settings for better mobile experience
   const sliderSettings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    centerMode: true,
+    centerPadding: "20px",
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          centerPadding: "10px"
+        }
+      }
+    ]
   };
 
   return (
     <div className="popular-area-section">
       <div className="container">
-        <div className="popular-area-title">{title}</div>
+        <h2 className="popular-area-title">{title}</h2>
         {isMobile ? (
           <Slider {...sliderSettings} className="popular-area-slider">
             {popularArea.map((area, index) => (
               <div className="area-item" key={index}>
-                <Image
-                  src={
-                    area.image
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.image)}`
-                      : area
-                  }
-                  width={400}
-                  height={400}
-                />
+                <div className="area-image-wrapper">
+                  <Image
+                    src={
+                      area.image
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(area.image)}`
+                        : area
+                    }
+                    width={400}
+                    height={400}
+                    alt={area.title || "Popular Area"}
+                    layout="responsive"
+                    objectFit="cover"
+                  />
+                </div>
                 <div className="off-relase-box">
                   <div className="topic">Off Plan</div>
                   <div className="topic">Resale</div>
@@ -70,15 +90,22 @@ const PopularAreaSection = (sectionFourData) => {
           <div className="popular-area-box">
             {popularArea.map((area, index) => (
               <Link href={"#"} className="area-item" key={index}>
-                <Image
-                  src={
-                    area.image
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.image)}`
-                      : area
-                  }
-                  width={400}
-                  height={400}
-                />
+                <div className="area-image-wrapper">
+                  <Image
+                    src={
+                      area.image
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(area.image)}`
+                        : area
+                    }
+                    width={400}
+                    height={400}
+                    alt={area.title || "Popular Area"}
+                    layout="responsive"
+                    objectFit="cover"
+                  />
+                </div>
                 <div className="off-relase-box">
                   <div className="topic">Off Plan</div>
                   <div className="topic">Resale</div>

@@ -1,4 +1,233 @@
 /* Adjustments for smaller screens */
+
+/* Add specific adjustments for extra small screens */
+@media (max-width: 320px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .area-item {
+    max-width: 240px;
+    height: 130px;
+  }
+
+  .news-item,
+  .news-slider-s .swiper-slide {
+    width: 240px !important;
+  }
+
+  .subscribe-form {
+    max-width: 240px;
+  }
+
+  .subscribe-form input {
+    width: 140px !important;
+  }
+
+  .subscribe-form button {
+    width: 80px !important;
+  }
+
+  .team-item img {
+    width: 220px;
+    height: 160px;
+  }
+
+  .team-section .get-in-touch-button {
+    width: 220px;
+  }
+
+  /* Further reduce text sizes */
+  .popular-area-title {
+    font-size: 11px !important;
+  }
+
+  .news-title {
+    font-size: 13px;
+  }
+
+  .news-text {
+    font-size: 11px;
+  }
+
+  .left-s-text .s-t-0,
+  .left-s-text .s-t-1 {
+    font-size: 13px !important;
+  }
+}
+/* Add specific adjustments for very small screens */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .area-item {
+    max-width: 260px;
+    height: 140px;
+  }
+
+  .news-item,
+  .news-slider-s .swiper-slide {
+    width: 260px !important;
+  }
+
+  .subscribe-form {
+    max-width: 280px;
+  }
+
+  .subscribe-form input {
+    width: 160px !important;
+  }
+
+  .subscribe-form button {
+    width: 90px !important;
+  }
+
+  .team-item img {
+    width: 260px;
+    height: 180px;
+  }
+
+  .team-section .get-in-touch-button {
+    width: 260px;
+  }
+}
+
+/* Add new breakpoint for 500px and lower resolutions */
+@media (max-width: 500px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .header-cont {
+    height: 65px;
+  }
+
+  .header-box {
+    height: 65px;
+    padding: 0 10px;
+  }
+
+  .logo-img {
+    width: 65px;
+    height: 20px;
+  }
+
+  .mobile-burger-menu {
+    right: 10px;
+    top: 22px;
+    width: 18px;
+    height: 16px;
+  }
+
+  .right-form {
+    right: 53px;
+    top: 10px;
+}
+
+  /* Adjust header navigation */
+  .header-nav.active {
+    top: 55px;
+  }
+
+  .header-nav ul li {
+    margin: 12px 0;
+    height: 42px;
+  }
+
+  .header-nav ul li a {
+    font-size: 10px;
+  }
+
+  /* Adjust content sections */
+  .popular-area-title {
+    font-size: 12px !important;
+    margin-bottom: 20px;
+  }
+
+  .area-item {
+    height: 140px;
+    max-width: 260px;
+  }
+
+  .news-item,
+  .news-slider-s .swiper-slide {
+    width: 260px !important;
+  }
+
+  /* Adjust subscribe section */
+  .subscribe-form {
+    max-width: 260px;
+  }
+
+  .subscribe-form input {
+    width: 150px !important;
+    height: 40px !important;
+  }
+
+  .subscribe-form button {
+    width: 85px !important;
+    height: 40px !important;
+    padding: 6px !important;
+    font-size: 12px !important;
+  }
+
+  /* Adjust team section */
+  .team-item {
+    max-width: 260px;
+  }
+
+  .team-item img {
+    width: 240px;
+    height: 170px;
+  }
+
+  .team-section .get-in-touch-button {
+    width: 240px;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  /* Adjust text sizes */
+  .news-title {
+    font-size: 14px;
+  }
+
+  .news-text {
+    font-size: 12px;
+  }
+
+  .left-s-text .s-t-0,
+  .left-s-text .s-t-1 {
+    font-size: 14px !important;
+  }
+
+  /* Improve form elements */
+  input, 
+  select, 
+  textarea {
+    font-size: 13px;
+    padding: 6px;
+    height: 40px;
+  }
+
+  /* Adjust spacing */
+  .section {
+    padding: 24px 0;
+  }
+
+  .popular-area-section {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  /* Adjust middle image in subscribe section */
+  .middle-image-sub {
+    max-width: 260px;
+  }
+}
+
+
 @media (max-width: 480px) {
   .header-cont {
     height: 80px;
@@ -116,6 +345,93 @@
     border-radius: 8px;
   }
 }
+@media (max-width: 600px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .header-cont {
+    height: 70px;
+  }
+
+  .header-box {
+    height: 70px;
+    padding: 0 12px;
+  }
+
+  .logo-img {
+    width: 70px;
+    height: 21px;
+  }
+
+  .mobile-burger-menu {
+    right: 12px;
+    top: 24px;
+  }
+
+  .right-form {
+    right: 54px;
+    top: 14px;
+  }
+
+  /* Adjust font sizes for better readability */
+  .popular-area-title {
+    font-size: 14px !important;
+    margin-bottom: 24px;
+  }
+
+  .area-item {
+    height: 222px;
+    max-width: 320px;
+}
+
+  .news-item,
+  .news-slider-s .swiper-slide {
+    width: 280px !important;
+  }
+
+  /* Adjust subscribe section for smaller screens */
+  .subscribe-form input {
+    width: 180px !important;
+  }
+
+  .subscribe-form button {
+    width: 100px !important;
+    padding: 8px !important;
+  }
+
+  /* Adjust team section */
+  .team-item img {
+    width: 280px;
+    height: 190px;
+  }
+
+  .team-section .get-in-touch-button {
+    width: 280px;
+  }
+
+  /* Improve form elements for very small screens */
+  input, 
+  select, 
+  textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* Adjust navigation menu */
+  .header-nav.active {
+    top: 60px;
+  }
+
+  .header-nav ul li {
+    margin: 15px 0;
+    height: 46px;
+  }
+
+  .header-nav ul li a {
+    font-size: 11px;
+  }
+}
 
 @media (max-width: 768px) {
 
@@ -148,7 +464,7 @@
     order: 2;
     width: 21px;
     height: 18px;
-    top: 20px;
+    top: 15px;
     position: absolute;
   }
 
@@ -236,6 +552,7 @@
     text-align: center;
     display: block;
     width: 100%;
+    gap: 20px;
   }
 
   .header-nav ul li {
@@ -703,7 +1020,44 @@ text-align: center;
     display: none;
   }
 }
-
+@media (max-width:1200px)
+{
+  .header-nav ul li a {
+    color: #FFFFFF;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+}
+.header-nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px !important;
+}
+}
+@media (max-width:1400px) {
+  .header-nav ul li a {
+    color: #FFFFFF;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+}
+.header-nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex
+;
+  align-items: center;
+  gap: 15px;
+}
+}
 @media (max-width: 1600px) {
   .popular-area-section {
     padding: 60px 0;
@@ -806,3 +1160,5 @@ text-align: center;
     opacity: 1;
   }
 }
+
+/* Add new breakpoint for 600px and lower resolutions */
