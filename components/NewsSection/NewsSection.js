@@ -21,12 +21,6 @@ const NewsSection = ({ sectionSevenData }) => {
       <div className="container">
         <div className="news-header">
           <div className="news-title">{sectionSevenData?.title}</div>
-          <Link
-            href={sectionSevenData?.redirect_link || "#"}
-            className="news-see-more"
-          >
-            SEE MORE
-          </Link>
         </div>
         <div className="news-text">
           {sectionSevenData?.additional_fields?.subtitle}
@@ -51,6 +45,10 @@ const NewsSection = ({ sectionSevenData }) => {
               640: {
                 slidesPerView: 2,
                 spaceBetween: 24
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 24 // Ensure only one `news-item` is visible
               },
               1024: {
                 slidesPerView: 3,
@@ -96,6 +94,12 @@ const NewsSection = ({ sectionSevenData }) => {
               )
             )}
           </Swiper>
+          <Link
+            href={sectionSevenData?.redirect_link || "#"}
+            className="news-see-more mobile-only"
+          >
+            SEE MORE
+          </Link>
         </div>
       </div>
     </div>

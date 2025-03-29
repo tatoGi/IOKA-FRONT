@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import styles from "./Clients.module.css";
 
 const Clients = ({ sectionSixData }) => {
@@ -21,10 +23,17 @@ const Clients = ({ sectionSixData }) => {
           </div>
         </div>
 
-        <div className={styles.testimonialGrid}>
+        <Swiper
+          spaceBetween={16}
+          slidesPerView="auto"
+          breakpoints={{
+            768: { slidesPerView: 4 },
+            576: { slidesPerView: 2 },
+            0: { slidesPerView: 1 },
+          }}
+        >
           {testimonials.map((testimonial) => (
-           
-            <div key={testimonial.id} className={styles.testimonialCard}>
+            <SwiperSlide key={testimonial.id} className={styles.testimonialCard}>
               <div className={styles.leftQuote}>
                 <svg
                   viewBox="0 0 66 58"
@@ -54,8 +63,8 @@ const Clients = ({ sectionSixData }) => {
                   <Image
                     src={
                       testimonial.photo
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
-                      : '/images/user.png'
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
+                        : '/images/user.png'
                     }
                     alt={testimonial.name}
                     width={50}
@@ -73,9 +82,9 @@ const Clients = ({ sectionSixData }) => {
                 </div>
                 <p className={styles.review}>{testimonial.body}</p>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );

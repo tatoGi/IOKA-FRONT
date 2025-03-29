@@ -309,7 +309,7 @@
   .price {
     font-family: 'Montserrat';
     font-weight: 600;
-    font-size: 20px;
+    font-size: 20px !important;
     line-height: 100%;
     letter-spacing: 0%;
     

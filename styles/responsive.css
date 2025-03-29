@@ -1,9 +1,87 @@
 /* Adjustments for smaller screens */
+@media (max-width: 480px) {
+  .header-cont {
+    height: 80px;
+  }
+
+  .header-box {
+    height: 80px;
+  }
+
+  .header-nav {
+    top: 80px;
+  }
+
+  .right-form:focus-within input {
+    width: 150px;
+  }
+
+  .right-form:focus-within .searchbtn {
+    left: -102px;
+  }
+
+  .contactBtn a {
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .logo-img {
+    width: 80px;
+    height: 24px;
+  }
+
+  .area-item {
+    width: 100%;
+    /* Full width for mobile */
+    height: 180px;
+    /* Adjusted height */
+  }
+
+  .popular-area-title {
+    font-size: 28px;
+    /* Adjusted font size */
+  }
+
+  .area-title {
+    bottom: 16px;
+    /* Adjusted position */
+    padding: 0 12px;
+    /* Adjusted padding */
+  }
+
+  .ar-title {
+    font-size: 12px;
+    /* Adjusted font size */
+  }
+
+  .arrow-box {
+    height: 20px;
+    /* Adjusted size */
+    width: 20px;
+    /* Adjusted size */
+  }
+
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto;
+    /* Smaller size for mobile */
+    object-fit: cover;
+    /* Ensures the image fits well within the circle */
+  }
+}
+
 @media (max-width: 768px) {
   .header-nav ul li a {
     font-size: 16px;
   }
-
+  .scroll-header .header-cont, .home-header {
+    background: #fff;
+    border-bottom: 1px solid #07151F;
+    /* height: 100%; */
+    overflow: hidden;
+}
   .mobile-burger-menu {
     right: 24px;
     display: block;
@@ -33,6 +111,10 @@
     height: 2px;
     background-color: #fff;
     margin-top: 5px;
+  }
+
+  .scroll-header .burger-line {
+    background-color: #000 !important; /* Change burger-line color to black */
   }
 
   .header-nav {
@@ -125,6 +207,14 @@
   .header-box {
     padding: 0 16px;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Ensure content wraps properly */
+    justify-content: space-between; /* Distribute content evenly */
+    align-items: center; /* Align items vertically */
+  }
+
+  .header-cont {
+    overflow-x: hidden; /* Prevent horizontal overflow */
   }
 
   .logo-img {
@@ -136,131 +226,71 @@
     padding: 0 !important;
     margin-top: 36px;
   }
+  .popular-area-title {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin:24px 32px;
+    text-align: center;
+    
+  }
   .popular-area-box {
     margin-top: 32px;
     display: flex;
     justify-content: center;
-    /* flex-wrap: wrap; */
-    /* gap: 24px; */
   }
+
   .area-item {
     width: 100%;
     height: 180px;
     max-width: 320px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    text-align: center; /* Center text */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .area-item img {
-    margin: 0 auto; /* Center the image */
-    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto;
+    display: block;
   }
 
   .off-relase-box {
-    margin-top: 10px; /* Add spacing between image and text */
+    margin-top: 10px;
   }
 
   .area-title {
     bottom: 16px;
-    /* Adjusted position */
     padding: 0 12px;
-    /* Adjusted padding */
-    margin-top: 10px; /* Add spacing between sections */
+    margin-top: 10px;
   }
 
-  /* Footer alignment fix for mobile view */
   .footer {
     text-align: left !important;
-    /* Align text to the left */
     margin: 0 !important;
-    /* Remove auto margins */
     padding: 10px !important;
-    /* Adjust padding as needed */
   }
 
   .footer .container {
     display: block !important;
-    /* Ensure block layout */
     justify-content: flex-start !important;
-    /* Align content to the start */
     align-items: flex-start !important;
-    /* Align items to the start */
   }
 
-  .popular-area-slider .slick-dots {
-    bottom: -20px; /* Adjust dots position */
-  }
-
+.popular-area-slider{
+  align-items: center;
+  text-align: center;
+}
   .popular-area-slider .slick-prev,
   .popular-area-slider .slick-next {
-    display: none; /* Hide arrows for mobile view */
+    display: none;
   }
 
   .area-item {
-    width: 100% !important; /* Ensure full width for slider items */
-  }
-
-  .popular-area-slider .slick-dots {
-    bottom: -20px; /* Adjust dots position */
-  }
-
-  .popular-area-slider .slick-prev,
-  .popular-area-slider .slick-next {
-    display: none; /* Hide arrows for mobile view */
-  }
-
-  .area-item {
-    width: 100% !important; /* Ensure full width for slider items */
-  }
-
-  .area-item {
-    width: 100%;
-    /* Full width for mobile */
-    height: 180px;
-    /* Adjusted height */
-  }
-
-  .popular-area-title {
-    font-family: 'Montserrat';
-font-weight: 600;
-font-size: 16px !important;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: center;
-margin: 24px 32px;
-
-  }
-
-  .area-title {
-    bottom: 16px;
-    /* Adjusted position */
-    padding: 0 12px;
-    /* Adjusted padding */
-  }
-
-  .ar-title {
-    font-size: 12px;
-    /* Adjusted font size */
-  }
-
-  .arrow-box {
-    height: 20px;
-    /* Adjusted size */
-    width: 20px;
-    /* Adjusted size */
-  }
-
-  .partners-slider-item img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    height: auto;
-    /* Smaller size for mobile */
-    object-fit: cover;
-    /* Ensures the image fits well within the circle */
+    width: 100% !important;
   }
 
   .team-box {
@@ -295,165 +325,227 @@ margin: 24px 32px;
     font-size: 14px;
     color: #666;
   }
+
+  .team-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #0A273B;
+  }
+
+  .team-box {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .team-item img {
+    width: 324px;
+    height: 328px;
+    border-radius: 16px;
+    object-fit: contain;
+    height: 222px;
 }
-
-@media (max-width: 480px) {
-  .header-cont {
-    height: 80px;
+  .team-item {
+    background-color: #0a273b;
+    padding: 16px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 320px;
+  }
+  .team-section .team-all-link-touch{
+    display: none;
+  }
+  .team-member-image {
+    border-radius: 8px;
+    margin-bottom: 12px;
   }
 
-  .header-box {
-    height: 80px;
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
   }
 
-  .header-nav {
-    top: 80px;
-  }
-
-  .right-form:focus-within input {
-    width: 150px;
-  }
-
-  .right-form:focus-within .searchbtn {
-    left: -102px;
-  }
-
-  .contactBtn a {
-    font-size: 12px;
-    padding: 0 12px;
-  }
-
-  .logo-img {
-    width: 80px;
-    height: 24px;
-  }
-   .area-item {
-    width: 100%;
-    /* Full width for mobile */
-    height: 180px;
-    /* Adjusted height */
-  }
-
-  .popular-area-title {
-    font-size: 28px;
-    /* Adjusted font size */
-  }
-
-  .area-title {
-    bottom: 16px;
-    /* Adjusted position */
-    padding: 0 12px;
-    /* Adjusted padding */
-  }
-
-  .ar-title {
-    font-size: 12px;
-    /* Adjusted font size */
-  }
-
-  .arrow-box {
-    height: 20px;
-    /* Adjusted size */
-    width: 20px;
-    /* Adjusted size */
-  }
-
-  .partners-slider-item img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    height: auto;
-    /* Smaller size for mobile */
-    object-fit: cover;
-    /* Ensures the image fits well within the circle */
-  }
-}
-
-/* Responsive styles for 1600px */
-@media (max-width: 1600px) {
-  .popular-area-section {
-    padding: 60px 0;
-    /* Adjusted padding */
-  }
-
-  .popular-area-title {
-    font-size: 36px;
-    /* Adjusted font size */
-  }
-
-  .popular-area-box {
-    gap: 20px;
-    /* Adjusted gap */
-  }
-
-  .area-item {
-    width: calc((100% / 3) - 14px);
-    /* Adjusted width for 3 items per row */
-    height: 220px;
-    /* Adjusted height */
-  }
-
-  .area-title {
-    bottom: 24px;
-    /* Adjusted position */
-    padding: 0 20px;
-    /* Adjusted padding */
-  }
-
-  .ar-title {
+  .experience {
     font-size: 14px;
-    /* Adjusted font size */
+    color: #ccc;
   }
 
-  .arrow-box {
-    height: 28px;
-    /* Adjusted size */
-    width: 28px;
-    /* Adjusted size */
+  .team-button {
+    margin-top: 24px;
   }
 
-  .partners-slider-item img {
+  .team-section .get-in-touch-button {
+    width: 354px;
+    height: 44px;
+    top: 998px;
+    left: 24px;
+    gap: 10px;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 36px;
+    padding-bottom: 12px;
+    padding-left: 36px;
+    border-width: 1px;
+    border: 1px #FFFFFF solid;
+    background-color: #0A273B;
+    color: #ffffff;
+  }
+
+  .get-in-touch-button:hover {
+    background-color: #0c3a5b;
+  }
+
+  .news-item {
+    width: 320px;
+    /* Ensure consistent width for Swiper slides */
+  }
+  .news-slider-s .swiper-slide{
+    width: 320px !important;
+  }
+  .news-title {
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+
+  }
+  .news-text {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: 'Montserrat';
+}
+
+  .news-header {
+    text-align: center;
+    /* Center the header text */
+    justify-content: none;
+    display: block;
+  }
+
+  .news-see-more {
+    display: block;
+    margin: 16px auto 0;
+    text-align: center;
+    /* Ensure the button is visible only in mobile view */
+  }
+
+  .subscribe-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .subscribe-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .left-s-text .s-t-0 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .left-s-text .s-t-1 {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .left-s-text .s-t-1 span {
+    font-weight: 600;
+    color: #007bff;
+  }
+
+  .middle-image-sub img {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    max-width: 200px;
     height: auto;
-    /* Adjusted size for better appearance */
-    object-fit: cover;
-    /* Ensures the image fits well within the circle */
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .subscribe-form input {
+    width: 226px;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .subscribe-form input::placeholder {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .subscribe-form button {
+    width: 120px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+
+  .subscribe-form button:hover {
+    background-color: #0056b3;
   }
 }
 
-/* Responsive styles for 1024px */
+@media (min-width: 769px) {
+  .news-see-more {
+    display: none;
+    /* Hide the button in larger views */
+  }
+}
+
 @media (max-width: 1024px) {
   .area-item {
     width: calc((100% / 2) - 12px);
-    /* Adjusted width for 2 items per row */
     height: 200px;
-    /* Adjusted height */
   }
 
   .popular-area-title {
     font-size: 32px;
-    /* Adjusted font size */
   }
 
   .area-title {
     bottom: 20px;
-    /* Adjusted position */
     padding: 0 16px;
-    /* Adjusted padding */
   }
 
   .ar-title {
     font-size: 14px;
-    /* Adjusted font size */
   }
 
   .arrow-box {
     height: 24px;
-    /* Adjusted size */
     width: 24px;
-    /* Adjusted size */
   }
 
   .contactBtn {
@@ -461,6 +553,46 @@ margin: 24px 32px;
   }
 }
 
+@media (max-width: 1600px) {
+  .popular-area-section {
+    padding: 60px 0;
+  }
+
+  .popular-area-title {
+    font-size: 36px;
+  }
+
+  .popular-area-box {
+    gap: 20px;
+  }
+
+  .area-item {
+    width: calc((100% / 3) - 14px);
+    height: 220px;
+  }
+
+  .area-title {
+    bottom: 24px;
+    padding: 0 20px;
+  }
+
+  .ar-title {
+    font-size: 14px;
+  }
+
+  .arrow-box {
+    height: 28px;
+    width: 28px;
+  }
+
+  .partners-slider-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    height: auto;
+    object-fit: cover;
+  }
+}
 
 @media (max-width: 1800px) {
   .partners-slider-item img {
@@ -469,19 +601,15 @@ margin: 24px 32px;
     border-radius: 50%;
     height: auto;
     object-fit: cover;
-    /* Ensures the image fits well within the circle */
   }
 }
 
-/* Styles for MacBook 16-inch resolution (3072px width) */
 @media (max-width: 3072px) {
   .partners-slider-item img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     height: auto;
-    /* Slightly larger for higher resolution */
     object-fit: cover;
-    /* Ensures the image fits well within the circle */
   }
 }

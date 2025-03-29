@@ -9,6 +9,7 @@ const TeamSection = ({ sectionDataFive }) => {
   const MainTitle = sectionDataFive?.additional_fields?.title || 'Default Title';
   const TeamMembers = sectionDataFive?.additional_fields?.team_members || [];
   const redirectLink = sectionDataFive?.additional_fields?.Redirect_Link || '#'; // Provide a default value
+
   return (
     <div className="team-section">
       <div className="container">
@@ -26,33 +27,21 @@ const TeamSection = ({ sectionDataFive }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
                     : homeBanner
                 }
-                alt='member'
+                alt="member"
                 width={200}
                 height={200}
+                className="team-member-image"
               />
               <div className="name">{member.title}</div>
               <div className="experience">{member.subtitle_2}</div>
             </div>
           ))}
         </div>
-      </div>
-      <div className="team-mobile-view">
-        {TeamMembers.map((member, index) => (
-          <div className="team-mobile-item" key={index}>
-            <Image
-              src={
-                member.image
-                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
-                  : homeBanner
-              }
-              alt='member'
-              width={100}
-              height={100}
-            />
-            <div className="mobile-name">{member.title}</div>
-            <div className="mobile-experience">{member.subtitle_2}</div>
-          </div>
-        ))}
+        <div className="team-button">
+          <Link href={redirectLink}>
+            <button className="get-in-touch-button">Get in Touch</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
