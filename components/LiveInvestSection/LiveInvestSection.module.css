@@ -384,6 +384,9 @@
   
   .content {
     margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .content h4 {
@@ -393,6 +396,7 @@
     line-height: 100%;
     color: #0a273b;
     font-family: "Montserrat";
+    text-align: center;
   }
   
   .content h2 {
@@ -404,11 +408,9 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     width: 224px;
-    /* padding: 10px; */
-    align-items: center;
     text-align: center;
-    left: 30%;
-    position: relative;
+    position: static;
+    margin: 0 auto;
   }
   
   .content p {
@@ -418,9 +420,10 @@
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
-    left: 18%;
-    position: relative;
+    position: static;
     color: #0A273B;
+    margin: 0 auto;
+    width: 326px;
   }
   
   .contactBtn {
@@ -434,8 +437,6 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* margin-top: 10%; */
-    /* margin-bottom: 8.6875rem; */
     width: 354px;
     height: 44px;
     border: 1px #07151F solid;
@@ -450,49 +451,43 @@
   
   .sliderContainer {
     position: relative;
-    height: 402px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    
+    height: 222px;
+    width: 100%;
+    padding: 0;
+    margin: 24px 0;
   }
   
-  .sliderWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .mobileSwiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Override Swiper default styles */
+  .mobileSwiper :global(.swiper-slide) {
+    width: 320px !important;
+    height: 222px !important;
+    border-radius: 16px;
     overflow: hidden;
-    width: 100%;
-    position: relative;
   }
-  
-  .slide {
-    position: relative;
-    width: 100%;
-    height: auto;
-    transform: translateX(0) scale(1);
-    opacity: 1;
-    z-index: 1;
-    transition: transform 0.6s ease, opacity 0.6s ease;
-  }
-  .slide img {
+
+  .mobileSwiper :global(.swiper-slide img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 16px;
-    max-width: 320px;
-    max-height: 222px;
   }
+
+  /* Hide desktop slider elements */
+  .sliderWrapper,
   .slide.left,
-  .slide.right {
+  .slide.right,
+  .slide.center,
+  .navButton,
+  .prevButton,
+  .nextButton {
     display: none;
   }
-  
-  .navButton {
-   display: none;
-  }
- 
+
   .stats {
     display: flex;
     align-items: center;
@@ -547,7 +542,7 @@
   
   
   .statItems {
-    justify-content: end;
+    justify-content: center;
     padding-right: 5%;
     margin-bottom: 5%;
     width: 100%;
@@ -561,7 +556,7 @@
   }
   
   .statItem h3 {
-    font-size: 48px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 0%;

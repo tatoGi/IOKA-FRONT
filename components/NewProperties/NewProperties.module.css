@@ -198,7 +198,6 @@
     display: block;
     font-family: 'Felix Titling';
     font-weight: 400;
-    font-size: 24px;
     line-height: 100%;
     margin-top: 36px;
     letter-spacing: 0%;
@@ -228,7 +227,7 @@
     padding: 0;
     font-size: 12px !important;
     font-weight: 600;
-    border-radius: 16px;
+    border-radius: 8px;
     background-color: #0A273B;
     color: #ffffff;
     border: 1px #FFFFFF solid;
@@ -247,11 +246,10 @@
     width: 96px;
     height: 31px;
     padding: 0;
+    border-radius: 8px;
   }
 
   .propertyContent {
-    flex-direction: column;
-    gap: 1rem; /* Reduced gap */
     padding: 0;
   }
 
@@ -265,19 +263,22 @@
   }
 
   .propertyImage {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    width: 322px;
+    height: 222px;
+    top: 79px;
+    left: 16px;
+    border-radius: 16px;
+    
   }
   .propertyInfo {
     display: none;
   }
   .leftContent {
     flex: none;
+    margin-top: 16px;
   }
   .propertyDetails {
     margin-top: 20%;
-    gap: 0.5rem;
     align-items: center;
     text-align: center; /* Center-align all text */
     padding: 0;
@@ -288,18 +289,19 @@
   .propertyName {
     font-family: 'Montserrat';
     font-weight: 600;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 100%;
     letter-spacing: 0%;
     color: #FFFFFF;
-    margin-top: 16px;
+    margin-top: 16px !important;
+    margin-bottom: 8px;
     
   }
 
   .propertyType {
     font-family: 'Montserrat';
     font-weight: 600;
-    font-size: 12px;
+    font-size: 12px !important;
     line-height: 100%;
     letter-spacing: 0%;
     
