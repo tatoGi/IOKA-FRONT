@@ -1,10 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import Area from "../../assets/img/n-1.png";
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick"; // Import react-slick
+import "slick-carousel/slick/slick.css"; // Import slick styles
+import "slick-carousel/slick/slick-theme.css"; // Import slick theme styles
 import WhiteArrow from "../icons/WhiteArrow";
 
 const PopularAreaSection = (sectionFourData) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Check if screen width is <= 768px
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize); // Add resize listener
+    return () => window.removeEventListener("resize", handleResize); // Cleanup listener
+  }, []);
+
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
@@ -12,41 +26,73 @@ const PopularAreaSection = (sectionFourData) => {
   const sectionData = sectionFourData.sectionDataFour;
   const title = sectionData?.additional_fields?.title || "Default Title";
   const popularArea = sectionData?.additional_fields?.Add_Popular_Areas || [];
-  console.log("sectionData:", popularArea);
+
+  // Slider settings for react-slick
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <div className="popular-area-section">
       <div className="container">
-        <div className="popular-area-title">
-          {title}
-        </div>
-        <div className="popular-area-box">
-          {popularArea.map((area, index) => (
-            <Link href={"#"} className="area-item" key={index}>
-              <Image 
-                src={
-                                area.image
-                                  ? `${
-                                      process.env.NEXT_PUBLIC_API_URL
-                                    }/storage/${decodeImageUrl(area.image)}`
-                                  : area
-                                
-                              } 
-                              width={400}
-                              height={400}
-                              />
-              <div className="off-relase-box">
-                <div className="topic">Off Plan</div>
-                <div className="topic">Resale</div>
-              </div>
-              <div className="area-title">
-                <div className="ar-title">{area.title}</div>
-                <div className="arrow-box">
-                  <WhiteArrow />
+        <div className="popular-area-title">{title}</div>
+        {isMobile ? (
+          <Slider {...sliderSettings} className="popular-area-slider">
+            {popularArea.map((area, index) => (
+              <div className="area-item" key={index}>
+                <Image
+                  src={
+                    area.image
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.image)}`
+                      : area
+                  }
+                  width={400}
+                  height={400}
+                />
+                <div className="off-relase-box">
+                  <div className="topic">Off Plan</div>
+                  <div className="topic">Resale</div>
+                </div>
+                <div className="area-title">
+                  <div className="ar-title">{area.title}</div>
+                  <div className="arrow-box">
+                    <WhiteArrow />
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </Slider>
+        ) : (
+          <div className="popular-area-box">
+            {popularArea.map((area, index) => (
+              <Link href={"#"} className="area-item" key={index}>
+                <Image
+                  src={
+                    area.image
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.image)}`
+                      : area
+                  }
+                  width={400}
+                  height={400}
+                />
+                <div className="off-relase-box">
+                  <div className="topic">Off Plan</div>
+                  <div className="topic">Resale</div>
+                </div>
+                <div className="area-title">
+                  <div className="ar-title">{area.title}</div>
+                  <div className="arrow-box">
+                    <WhiteArrow />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

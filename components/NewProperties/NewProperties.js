@@ -19,11 +19,40 @@ const NewProperties = ({ sectionDataThree }) => {
   };
 
   return (
-    <div className={styles.newProperties}>
+    <section className={styles.newProperties}>
       <div className={`container ${styles.container}`}>
+        {/* Mobile title */}
+        <div className={styles.mobileTitle}>
+          <h2>{sectionDataThree.title}</h2>
+        </div>
+        {/* Desktop title */}
         <div className={styles.propertyCard}>
+          {/* {Mobile Button} */}
+          <div className={styles.filterButtons_mobile}>
+              <div className={styles.buttonGroup}>
+                <button
+                  className={activeTab === "offplan" ? styles.active : ""}
+                  onClick={() => handleTabClick("offplan")}
+                >
+                  OFF PLAN
+                </button>
+                <button
+                  className={activeTab === "resale" ? styles.active : ""}
+                  onClick={() => handleTabClick("resale")}
+                >
+                  RESALE
+                </button>
+                <button
+                  className={activeTab === "rental" ? styles.active : ""}
+                  onClick={() => handleTabClick("rental")}
+                >
+                  RENTAL
+                </button>
+              </div>
+            </div>
+            {/* {end mobile button} */}
           <div className={styles.propertyCardTitle}>
-            {sectionDataThree.title}
+                {sectionDataThree.title}
             <div className={styles.filterButtons}>
               <div className={styles.buttonGroup}>
                 <button
@@ -96,7 +125,7 @@ const NewProperties = ({ sectionDataThree }) => {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

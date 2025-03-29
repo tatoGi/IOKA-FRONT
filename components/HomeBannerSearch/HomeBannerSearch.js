@@ -34,8 +34,12 @@ const HomeBannerSearch = () => {
       </div>
       <div className={styles["search-container"]}>
         <div className={styles["search-inputs"]}>
-          <input type="text" placeholder="Where" />
+          <div className={styles.where}> 
+            <input type="text" placeholder="Where" />
+          </div>
+          <div className={styles.size}>
           <input type="text" placeholder="Size" />
+          </div>      
           <div className={styles["price-input-container"]}>
             <input type="text" placeholder="Price" />
             <button className={styles["search-button"]}>

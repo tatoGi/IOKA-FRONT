@@ -95,9 +95,9 @@ const Header = ({ navigationData }) => {
               {/* Mobile Burger Menu */}
               <div className="mobile-burger-menu" onClick={toggleMobileMenu}>
                 <div className={`burger-lines ${isMobileMenuOpen ? "open" : ""}`}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                  <div className="burger-line"></div>
+                  <div className="burger-line" ></div>
+                  <div className="burger-line"></div>
                 </div>
               </div>
 

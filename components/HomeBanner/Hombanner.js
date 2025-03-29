@@ -74,24 +74,24 @@ const Hombanner = ({ initialData }) => {
   }
   
   return (
+    <div>
     <div className="home-banner">
       <div className="banner-slider">
         <HomeBannerSwiper sectionData={sectionOneData} /> {/* Pass section_one data */}
         <HomeBannerSearch />
-        <LiveInvestSection sectionDataTwo={sectionTwoData} /> {/* Pass section_two data */}
-        {/* Add components for sections three, four, five, and six */}
-        <NewProperties sectionDataThree={sectionThreeData} /> {/* Pass section_three data */}
-        <PopularAreaSection sectionDataFour={sectionFourData} /> {/* Pass section_four data */}
-        <TeamSection sectionDataFive={sectionFiveData} /> {/* Pass section_five data */}
-        <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
-        <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
-        <PartnersSection />
-        <div className="container">
-        <SubscribeSection />
-        </div>
-       
-        
       </div>
+    </div>
+     <LiveInvestSection sectionDataTwo={sectionTwoData} /> {/* Pass section_two data */}
+     {/* Add components for sections three, four, five, and six */}
+     <NewProperties sectionDataThree={sectionThreeData} /> {/* Pass section_three data */}
+     <PopularAreaSection sectionDataFour={sectionFourData} /> {/* Pass section_four data */}
+     <TeamSection sectionDataFive={sectionFiveData} /> {/* Pass section_five data */}
+     <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
+     <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
+     <PartnersSection />
+     <div className="container">
+     <SubscribeSection />
+     </div>
     </div>
   );
 };

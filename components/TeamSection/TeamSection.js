@@ -36,6 +36,24 @@ const TeamSection = ({ sectionDataFive }) => {
           ))}
         </div>
       </div>
+      <div className="team-mobile-view">
+        {TeamMembers.map((member, index) => (
+          <div className="team-mobile-item" key={index}>
+            <Image
+              src={
+                member.image
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                  : homeBanner
+              }
+              alt='member'
+              width={100}
+              height={100}
+            />
+            <div className="mobile-name">{member.title}</div>
+            <div className="mobile-experience">{member.subtitle_2}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

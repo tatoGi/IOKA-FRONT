@@ -1030,7 +1030,9 @@ border: 1px #E6EBED solid;
   margin-bottom: 15px;
   color: #333;
 }
-
+.team-mobile-view{
+  display: none;
+}
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
