@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Styles from "./RentalList.module.css";
 import Image from "next/image";
 import defaultImage from "../../assets/img/default.webp";
@@ -20,6 +20,10 @@ const Rental_Resale = () => {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isClient, setIsClient] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const slideRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true); // Ensures this runs only on the client
@@ -53,7 +57,7 @@ const Rental_Resale = () => {
       setCurrentPage(page);
       router.push({
         pathname: router.pathname,
-        query: { ...router.query, page: `page-${page}` },
+        query: { ...router.query, page: `page-${page}` }
       });
     }
   };
@@ -67,10 +71,14 @@ const Rental_Resale = () => {
     let sortedData = [...cardData];
     switch (sortOption) {
       case "newest":
-        sortedData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        sortedData.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
         break;
       case "oldest":
-        sortedData.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        sortedData.sort(
+          (a, b) => new Date(a.created_at) - new Date(b.created_at)
+        );
         break;
       case "priceHigh":
         sortedData.sort((a, b) => b.amount.amount - a.amount.amount);
@@ -85,6 +93,33 @@ const Rental_Resale = () => {
   };
 
   const topProperties = cardData.filter((property) => property.top === 1);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (images) => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentImageIndex < images.length - 1) {
+      setCurrentImageIndex((prev) => prev + 1);
+    }
+
+    if (isRightSwipe && currentImageIndex > 0) {
+      setCurrentImageIndex((prev) => prev - 1);
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   return (
     <div className="container mt-3">
@@ -152,7 +187,9 @@ const Rental_Resale = () => {
                     {property.exclusive && (
                       <span className={Styles.exclusive}>Exclusive</span>
                     )}
-                    {property.top && <span className={Styles.topBadge}>Top</span>}
+                    {property.top && (
+                      <span className={Styles.topBadge}>Top</span>
+                    )}
                   </div>
 
                   <div className={Styles.propertyInfo}>
@@ -185,7 +222,7 @@ const Rental_Resale = () => {
                           width={24}
                           height={24}
                         />
-                        
+
                         <span>{property.sq_ft} Sq.Ft</span>
                       </div>
                       <div className={Styles.feature}>
@@ -201,14 +238,13 @@ const Rental_Resale = () => {
 
                     <div className={Styles.priceRow}>
                       <span className={Styles.price}>
-                      USD{" "}
-                        {property.amount.amount?.toLocaleString() ||
-                          "N/A"}
+                        USD {property.amount.amount?.toLocaleString() || "N/A"}
                       </span>
                       <span className={Styles.price}>
-                      AED {property.amount.amount_dirhams?.toLocaleString() || "N/A"}
+                        AED{" "}
+                        {property.amount.amount_dirhams?.toLocaleString() ||
+                          "N/A"}
                       </span>
-                    
                     </div>
                   </div>
                 </div>
@@ -264,10 +300,7 @@ const Rental_Resale = () => {
                   }}
                   style={{ cursor: "pointer" }}
                 >
-                  <div
-                    className={Styles.largeImage}
-                   
-                  >
+                  <div className={Styles.largeImage}>
                     <Image
                       src={
                         galleryImages[0]
@@ -302,14 +335,60 @@ const Rental_Resale = () => {
                     ))}
                   </div>
 
+                  {/* Mobile view slider */}
+                  <div className={Styles.mobileImageSlider}>
+                    <div
+                      className={Styles.slideContainer}
+                      ref={slideRef}
+                      style={{
+                        transform: `translateX(-${currentImageIndex * 100}%)`
+                      }}
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={() => handleTouchEnd(galleryImages)}
+                    >
+                      {galleryImages.map((image, index) => (
+                        <div key={index} className={Styles.slide}>
+                          <Image
+                            src={
+                              image
+                                ? `${
+                                    process.env.NEXT_PUBLIC_API_URL
+                                  }/storage/${decodeImageUrl(image)}`
+                                : defaultImage
+                            }
+                            alt={`Property Image ${index + 1}`}
+                            fill
+                            style={{ objectFit: "cover" }}
+                            sizes="100vw"
+                            priority={index === 0}
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={Styles.slideIndicators}>
+                      {galleryImages.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`${Styles.indicator} ${
+                            index === currentImageIndex ? Styles.active : ""
+                          }`}
+                          onClick={() => setCurrentImageIndex(index)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
                   <div className={Styles.resaleContent}>
                     <h4>{listing.title}</h4>
-                   
+
                     <p className={Styles.resaleLocation}>{listing.location}</p>
                     <div className="d-flex">
                       <p className={Styles.resalePrice}>
-                          AED{" "}
-                          {listing.amount.amount_dirhams?.toLocaleString() || "N/A"}
+                        AED{" "}
+                        {listing.amount.amount_dirhams?.toLocaleString() ||
+                          "N/A"}
                       </p>
                       <p className={Styles.resalePrice}>
                         USD {listing.amount.amount?.toLocaleString() || "N/A"}

@@ -549,10 +549,10 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: center;
-    display: block;
-    width: 100%;
-    gap: 20px;
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+    gap: 20px !important;
   }
 
   .header-nav ul li {
@@ -567,10 +567,10 @@
   .header-nav ul li a {
     font-family: 'Montserrat';
     font-weight: 500;
-    font-size: 12px;
+    font-size: 12px !important;
     line-height: 100%;
     letter-spacing: 1%;
-    color: #0a273b;
+    color: #0a273b !important;
   }
 
   .header-nav ul .contact-menu-item {

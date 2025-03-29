@@ -17,7 +17,10 @@ const SearchSection = () => {
           />
         </div>
         <div className={styles.filterButtons}>
-          <button className={styles.filterBtn} style={{ width: '158px', height: '40px' }}>
+          <button
+            className={styles.filterBtn}
+            style={{ width: "158px", height: "40px" }}
+          >
             Property type
             <svg
               width="12"
@@ -35,7 +38,10 @@ const SearchSection = () => {
               />
             </svg>
           </button>
-          <button className={styles.filterBtn} style={{ width: '89px', height: '40px' }}>
+          <button
+            className={styles.filterBtn}
+            style={{ width: "89px", height: "40px" }}
+          >
             Price
             <svg
               width="12"
@@ -53,7 +59,10 @@ const SearchSection = () => {
               />
             </svg>
           </button>
-          <button className={styles.filterBtn} style={{ width: '132px', height: '40px' }}>
+          <button
+            className={styles.filterBtn}
+            style={{ width: "132px", height: "40px" }}
+          >
             Bedrooms
             <svg
               width="12"
@@ -71,7 +80,10 @@ const SearchSection = () => {
               />
             </svg>
           </button>
-          <button className={styles.filterBtn} style={{ width: '118px', height: '40px' }}>
+          <button
+            className={styles.filterBtn}
+            style={{ width: "118px", height: "40px" }}
+          >
             Listed as
             <svg
               width="12"
@@ -89,7 +101,10 @@ const SearchSection = () => {
               />
             </svg>
           </button>
-          <button className={styles.moreFiltersBtn} style={{ width: '143px', height: '40px' }}>
+          <button
+            className={styles.moreFiltersBtn}
+            style={{ width: "143px", height: "40px" }}
+          >
             More Filters
             <Image src={filterVector} alt="Filter" />
           </button>

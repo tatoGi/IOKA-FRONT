@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@react-hook/media-query": "^1.1.1",
     "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.24.4",
     "axios": "^1.7.9",
@@ -35,7 +36,7 @@
     "react-spinners": "^0.15.0",
     "sharp": "^0.33.5",
     "slick-carousel": "^1.8.1",
-    "swiper": "^11.2.3"
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "postcss": "^8",

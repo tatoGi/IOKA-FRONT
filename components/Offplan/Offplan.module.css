@@ -227,7 +227,18 @@ margin-top: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+@media (max-width:768px)
+{
+  .resultsHeader{
+    margin-top: 20%;
+  }
+  .resultsCount{
+    display: none;
+  }
+  .propertyCardLink{
+    width: 100% !important;
+  }
+}
 @media screen and (max-width: 1600px) {
 
   /* Default Styles (Mobile First) */

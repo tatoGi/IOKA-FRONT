@@ -121,11 +121,18 @@ margin-top: 24px;
 @media (max-width: 768px) {
   .statsContainer {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
+    margin: 2rem auto;
   }
 
   .teamGrid {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .statBox {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
   }
 }
 
@@ -269,50 +276,220 @@ margin-top: 24px;
 }
 
 @media (max-width: 968px) {
-  .testimonialWrapper {
-    flex-direction: column;
-    padding: 30px;
+  .container {
+    padding: 0;
   }
 
-  .testimonialWrapper::before {
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
+  /* Stats Section */
+  .statsContainer {
+    margin: 1rem auto;
+    padding: 0 20px;
+  }
+
+  .statsSwiper {
+    padding: 20px 0;
+  }
+
+  /* Agency Section */
+  .agencySection {
+    margin: 1rem 20px;
+    padding: 2rem;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .agencySection h2 {
+    font-size: 1.5rem;
+  }
+
+  .agencySection p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Testimonial Section */
+  .testimonialSection {
+    padding: 20px;
+  }
+
+  .testimonialContainer {
+    gap: 0;
+  }
+
+  .testimonialWrapper {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    height: auto;
   }
 
   .testimonialImageContainer {
-    flex: 0 0 auto;
+    position: relative;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  .designElement {
-    top: -20px;
-    right: -30px;
+  .testimonialImageWrapper {
+    width: 100%;
+    height: auto;
+    background: transparent;
+    border-radius: 20px;
+    box-shadow: none;
   }
 
-  .curvedLine {
-    width: 80px;
-    height: 80px;
+  .testimonialImage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+    border-radius: 20px;
+    object-fit: cover;
   }
 
-  .borderText {
-    font-size: 12px;
-    padding: 3px 10px;
+  .testimonialContent {
+    background: white;
+    border: 1px solid #0A273B;
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonialHeader {
+    text-align: center;
+    margin-bottom: 16px;
   }
 
   .testimonialName {
-    font-size: 24px;
+    font-size: 20px;
+    margin: 0 0 8px 0;
+    text-align: center;
   }
 
   .testimonialRole {
     font-size: 16px;
+    margin: 0;
+    text-align: center;
   }
 
   .testimonialText {
     font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    -webkit-line-clamp: 6;
+  }
+
+  .testimonialName,
+  .testimonialRole,
+  .testimonialText {
+    margin-left: 0;
+  }
+
+  .welcomeText {
+    display: none;
+  }
+
+  /* Team Section */
+  .teamGrid {
+    margin: 2rem 20px;
+    height: auto;
+    gap: 2rem;
+  }
+
+  .teamMember {
+    margin-bottom: 2rem;
+  }
+
+  .teamImage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin-bottom: 1rem;
+  }
+
+  /* Form Container */
+  .formContainer {
+    padding: 2rem 20px;
+  }
+
+  .formContainer h5 {
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+
+  /* Contact Form */
+  .contactForm {
+    gap: 1rem;
+  }
+
+  .formInput,
+  .formTextarea {
+    padding: 1rem;
+    font-size: 14px;
+  }
+
+  /* Partners Section */
+  .partnersSection {
+    padding: 2rem 20px;
+  }
+
+  .partnersTitle {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Subscribe Section */
+  .subscribeSection {
+    padding: 2rem 20px;
+  }
+
+  .subscribeContainer {
+    text-align: center;
+  }
+
+  .subscribeHeading {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  .subscribeForm {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .subscribeInput,
+  .subscribeButton {
+    width: 100%;
+    padding: 1rem;
+    font-size: 14px;
+  }
+}
+
+/* Additional mobile-specific styles for smaller screens */
+@media (max-width: 480px) {
+  .testimonialContent {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .testimonialText {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .teamImage {
+    height: 300px;
   }
 }
 
@@ -755,4 +932,9 @@ margin-bottom: 24px;
 
 .submitButton:hover {
   background-color: #0A273B;
+}
+
+.statsSwiper {
+  width: 100%;
+  padding: 20px 0;
 }

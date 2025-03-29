@@ -21,6 +21,9 @@ const Header = ({ navigationData }) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
 
+  // Add new state for mobile view
+  const [isMobileView, setIsMobileView] = useState(false);
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -67,8 +70,24 @@ const Header = ({ navigationData }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-  const filteredAndSortedPages = navigationData
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const desktopPages = navigationData
     .filter((page) => page.type_id !== 3 && page.active === 1)
+    .sort((a, b) => a.sort - b.sort);
+
+  const mobilePages = navigationData
+    .filter((page) => page.active === 1)
     .sort((a, b) => a.sort - b.sort);
 
   const currentPage = navigationData.find((page) =>
@@ -109,7 +128,7 @@ const Header = ({ navigationData }) => {
               {/* Navigation Menu */}
               <div className={`header-nav ${isMobileMenuOpen ? "active" : ""}`}>
                 <ul>
-                  {filteredAndSortedPages.map((page) => (
+                  {(isMobileView ? mobilePages : desktopPages).map((page) => (
                     <li
                       key={page.id}
                       className={

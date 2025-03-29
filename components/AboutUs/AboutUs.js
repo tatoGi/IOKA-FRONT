@@ -9,13 +9,20 @@ import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes"; // Import the r
 import { useRouter } from "next/router"; // Import useRouter
 import axios from "axios"; // Add axios import
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || {});
-   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
+  const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const router = useRouter();
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
-    
+
+  // Add this hook to detect mobile screens
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
@@ -26,7 +33,9 @@ const AboutUs = ({ initialData, id }) => {
       try {
         const response = await axios.get(`${ABOUT_API}/${id}`);
         const responseTeam = await axios.get(`${SECTION_API}`);
-        const sectionFive = responseTeam.data.sections.find(section => section.section_key === "section_five");
+        const sectionFive = responseTeam.data.sections.find(
+          (section) => section.section_key === "section_five"
+        );
         setSectionFiveData(sectionFive); // Set section_five data
         if (response.data && response.data.about) {
           setCardData(response.data.about);
@@ -97,78 +106,114 @@ const AboutUs = ({ initialData, id }) => {
 
   return (
     <div className="container">
-     
       <AboutBanner
         title={cardData.title || "ABOUT US"}
         description={
-          <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
+          <span
+            dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+          ></span>
         }
       />
 
       {/* Statistics section */}
       <div className={styles.container}>
-        <div className={styles.statsContainer}>
-          {cardData.additional_fields?.number_boxes?.map((box, index) => (
-            <div key={index} className={styles.statBox}>
-              <div className={styles.statCircle}></div>
-              <p>
-                {box.suffix}
-                {box.number}
-                <br />
-                {box.title}
-              </p>
-            </div>
-          ))}
-        </div>
+        {isMobile ? (
+          <div className={styles.statsContainer}>
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              className={styles.statsSwiper}
+            >
+              {cardData.additional_fields?.number_boxes?.map((box, index) => (
+                <SwiperSlide key={index}>
+                  <div className={styles.statBox}>
+                    <div className={styles.statCircle}></div>
+                    <p>
+                      {box.suffix}
+                      {box.number}
+                      <br />
+                      {box.title}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        ) : (
+          <div className={styles.statsContainer}>
+            {cardData.additional_fields?.number_boxes?.map((box, index) => (
+              <div key={index} className={styles.statBox}>
+                <div className={styles.statCircle}></div>
+                <p>
+                  {box.suffix}
+                  {box.number}
+                  <br />
+                  {box.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Your Agency Section */}
         <div className={styles.agencySection}>
           <h2>{cardData.additional_fields?.your_agency}</h2>
-          <div dangerouslySetInnerHTML={{ __html: cardData.additional_fields?.your_agency_description }}></div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: cardData.additional_fields?.your_agency_description
+            }}
+          ></div>
         </div>
- {/* Testimonials Section */}
- <div className={styles.testimonialSection}>
-        <div className={styles.testimonialContainer}>
-          <div className={styles.testimonialImageContainer}>
-            <div className={styles.testimonialImageWrapper}>
-              <Image
-                src={
-                  testimonial.image
-                    ? `${
-                        process.env.NEXT_PUBLIC_API_URL
-                      }/storage/${decodeImageUrl(testimonial.image)}`
-                    : baseimage
-                }
-                alt="CEO Portrait"
-                width={400}
-                height={400}
-                className={styles.testimonialImage}
-              />
-              <div className={styles.curvedConnector}></div>
-            </div>
-          </div>
-          <div className={styles.testimonialWrapper}>
-            <div className={styles.testimonialContent}>
-              <div className={styles.testimonialHeader}>
-                <h3 className={styles.testimonialName}>
-                  {testimonial.name || "Max Musterman"}
-                </h3>
-                <p className={styles.testimonialRole}>
-                  {testimonial.position || "CEO Chairman"}
-                </p>
-              </div>
-              <div className={styles.testimonialBody}>
-                <p className={`${styles.testimonialText}`}>
-                  <span dangerouslySetInnerHTML={{ __html: testimonial?.description }}></span>
-                </p>
-                <p className={styles.welcomeText}>
-                  <span dangerouslySetInnerHTML={{ __html: testimonial?.quote }}></span>
-                </p>
+        {/* Testimonials Section */}
+        <div className={styles.testimonialSection}>
+          <div className={styles.testimonialContainer}>
+            <div className={styles.testimonialImageContainer}>
+              <div className={styles.testimonialImageWrapper}>
+                <Image
+                  src={
+                    testimonial.image
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(testimonial.image)}`
+                      : baseimage
+                  }
+                  alt="CEO Portrait"
+                  width={400}
+                  height={400}
+                  className={styles.testimonialImage}
+                />
+                <div className={styles.curvedConnector}></div>
               </div>
             </div>
+            <div className={styles.testimonialWrapper}>
+              <div className={styles.testimonialContent}>
+                <div className={styles.testimonialHeader}>
+                  <h3 className={styles.testimonialName}>
+                    {testimonial.name || "Max Musterman"}
+                  </h3>
+                  <p className={styles.testimonialRole}>
+                    {testimonial.position || "CEO Chairman"}
+                  </p>
+                </div>
+                <div className={styles.testimonialBody}>
+                  <p className={`${styles.testimonialText}`}>
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: testimonial?.description
+                      }}
+                    ></span>
+                  </p>
+                  <p className={styles.welcomeText}>
+                    <span
+                      dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                    ></span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
         {/* Team Section */}
         <div className={styles.teamGrid}>
@@ -177,7 +222,9 @@ const AboutUs = ({ initialData, id }) => {
               <Image
                 src={
                   member.image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(member.image)}`
                     : baseimage
                 }
                 alt="Team Member"

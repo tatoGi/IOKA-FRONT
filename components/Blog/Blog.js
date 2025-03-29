@@ -70,8 +70,10 @@ const Blog = ({ initialData }) => {
       <LoadingWrapper isLoading={isLoading}>
         <div className="row">
           {cardData.map((card, index) => (
-            <div className="col-md-3" key={index}>
-              <div className={`card ${styles.card}`}>
+            <div className="col-12" key={index}>
+              {" "}
+              {/* Full width on mobile */}
+              <div className={`${styles.card}`}>
                 <Image
                   src={
                     card.image
@@ -80,43 +82,35 @@ const Blog = ({ initialData }) => {
                         }/storage/${decodeImageUrl(card.image)}`
                       : baseimage
                   }
-                  className={`card-img-top ${styles["card-img-top"]}`}
+                  className={styles["card-img-top"]}
                   alt={card.image_alt || card.title}
-                  width={372} // Provide width
-                  height={200} // Provide height
-                  priority={true} // Add priority property
+                  width={372}
+                  height={200}
+                  priority={index < 2}
                 />
-                <div className={`card-body ${styles["card-body"]}`}>
-                  <h5 className={`card-title ${styles["card-title"]}`}>
-                    {card.title}
-                  </h5>
-                  <div className={styles.contentWrapper}>
-                    {" "}
-                    {/* Add this wrapper */}
-                    <ul className={`list-unstyled ${styles["card-list"]}`}>
-                      <li className={`${styles.date}`}>
-                        <Image
-                          src={BlogIcon}
-                          alt={card.image_alt || card.title}
-                          width={16}
-                          height={16}
-                          style={{ marginRight: 8 }}
-                        />
-                        <span className={styles.formattedDate}>
-                          {formatDate(card.date)}
-                        </span>
-                      </li>
-                      <li className={styles.description}>
-                        {limitTextLength(card.body, 108)}
-                      </li>
-                    </ul>
-                    <button
-                      onClick={() => handleReadMore(card.slug)}
-                      className={`btn btn-primary ${styles["card-button"]}`}
-                    >
-                      Read more
-                    </button>
+                <div className={styles["card-body"]}>
+                  <h5 className={styles["card-title"]}>{card.title}</h5>
+                  <div className={styles.date}>
+                    <Image
+                      src={BlogIcon}
+                      alt="Calendar"
+                      width={16}
+                      height={16}
+                      style={{ marginRight: 8 }}
+                    />
+                    <span className={styles.formattedDate}>
+                      {formatDate(card.date)}
+                    </span>
                   </div>
+                  <p className={styles.description}>
+                    {limitTextLength(card.body, 108)}
+                  </p>
+                  <button
+                    onClick={() => handleReadMore(card.slug)}
+                    className={styles["card-button"]}
+                  >
+                    Read more
+                  </button>
                 </div>
               </div>
             </div>

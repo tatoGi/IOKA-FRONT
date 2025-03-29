@@ -595,3 +595,82 @@
   
 
 }
+
+/* Add this media query at the end of the file */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .cardRow {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 200px;
+  }
+
+  .cardImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .description {
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    margin-bottom: 16px;
+  }
+
+  .communitiesTitle {
+    font-size: 14px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .buttonsSection {
+    margin-top: 16px;
+  }
+
+  .call,
+  .whatsapp {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .readMore {
+    font-size: 12px;
+  }
+
+  .pagination {
+    margin-top: 24px;
+    margin-bottom: 48px;
+  }
+
+  .pageButton {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .pageButton:last-child {
+    width: 64px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
