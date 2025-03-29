@@ -13,7 +13,10 @@ const Header = ({ navigationData }) => {
   const pathname = usePathname();
 
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
-  const isHomePage = normalizedPathname === "/" || normalizedPathname === "/#" || normalizedPathname === "/home";
+  const isHomePage =
+    normalizedPathname === "/" ||
+    normalizedPathname === "/#" ||
+    normalizedPathname === "/home";
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -94,9 +97,11 @@ const Header = ({ navigationData }) => {
 
               {/* Mobile Burger Menu */}
               <div className="mobile-burger-menu" onClick={toggleMobileMenu}>
-                <div className={`burger-lines ${isMobileMenuOpen ? "open" : ""}`}>
+                <div
+                  className={`burger-lines ${isMobileMenuOpen ? "open" : ""}`}
+                >
                   <div className="burger-line"></div>
-                  <div className="burger-line" ></div>
+                  <div className="burger-line"></div>
                   <div className="burger-line"></div>
                 </div>
               </div>
@@ -108,7 +113,9 @@ const Header = ({ navigationData }) => {
                     <li
                       key={page.id}
                       className={
-                        normalizedPathname === `/${page.slug}` ? "active-link" : ""
+                        normalizedPathname === `/${page.slug}`
+                          ? "active-link"
+                          : ""
                       }
                     >
                       <Link href={`/${page.slug}`}>{page.title}</Link>
