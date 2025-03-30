@@ -29,7 +29,7 @@ const PopularAreaSection = (sectionFourData) => {
 
   // Enhanced slider settings for better mobile experience
   const sliderSettings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

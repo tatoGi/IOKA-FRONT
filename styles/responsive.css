@@ -793,7 +793,7 @@
   }
 
   .team-section .get-in-touch-button {
-    width: 354px;
+    width: 100%;
     height: 44px;
     top: 998px;
     left: 24px;
@@ -865,6 +865,7 @@ text-align: center;
     align-items: center;
     gap: 24px;
     max-width: 100%;
+    padding: 19px 28px;
   }
 
   .left-s-text {
@@ -913,6 +914,7 @@ text-align: center;
   .subscribe-form {
     width: 100%;
     max-width: 354px;
+    margin-top: 20px;
   }
 
   .subscribe-form form {
@@ -922,7 +924,7 @@ text-align: center;
   }
 
   .subscribe-form input {
-    width: 226px !important;
+    width: 100% !important;
     height: 44px !important;
     border-radius: 8px !important;
     border: 1px #07151F solid !important; 
@@ -936,7 +938,7 @@ text-align: center;
   }
 
   .subscribe-form button {
-    width: 120px !important;
+    width: 100% !important;
     height: 44px !important;
     gap: 10px;
     border-radius: 8px;
