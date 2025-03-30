@@ -4,12 +4,10 @@ import ContactForm from "../contactForm/ContactForm";
 import styles from "./contact.module.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import dynamic from "next/dynamic";
-import { CONTACT_API } from "../../routes/apiRoutes"; // Import the routes
-import axios from "axios"; // Add axios import
-// Import Leaflet CSS
+import { CONTACT_API } from "../../routes/apiRoutes";
+import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
-// Dynamic import of Map component with no SSR and suspense
 const MapComponent = dynamic(() => import("../Map/Map"), {
   ssr: false,
   loading: () => (
@@ -41,59 +39,65 @@ const Contact = ({ initialData, id }) => {
       fetchData();
     }
   }, [initialData, id]);
+
   return (
-    <div className="contact-page">
-      <div className={styles.contactPage}>
-        <div className="container"></div>
-        <div className={styles.contactInfo}>
-          <div className={styles.infoSection}>
-            <h2>{cardData.additional_fields?.subtitle}</h2>       
-            <h1>{cardData.additional_fields?.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: cardData.additional_fields?.description }}></div>
-            <div className={styles.contactDetails}>
-              {cardData.additional_fields?.phone_numbers && cardData.additional_fields?.phone_numbers.map((phone, index) => (
-                <div key={index} className={styles.contactItem}>
-                  <span className={styles.iconWrapper}>
-                    <FaPhone className={styles.icon_call} />
-                  </span>
-                  <div>
-                    <h3>Have any question?</h3>
-                    <p>{phone.phone}</p>
+    <div className={styles.contactPage}>
+      <div className={`container ${styles.containerWithMargin}`}>
+        <div className={`row align-items-stretch ${styles.rowWithBorder}`}>
+          <div className="col-md-6 d-flex flex-column">
+            <div className={styles.infoSection}>
+              <h2>{cardData.additional_fields?.subtitle}</h2>
+              <h1>{cardData.additional_fields?.title}</h1>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: cardData.additional_fields?.description,
+                }}
+              ></div>
+              <div className={styles.contactDetails}>
+                {cardData.additional_fields?.phone_numbers?.map((phone, index) => (
+                  <div key={index} className={styles.contactItem}>
+                    <span className={styles.iconWrapper}>
+                      <FaPhone className={styles.icon_call} />
+                    </span>
+                    <div>
+                      <h3>Have any question?</h3>
+                      <p>{phone.phone}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              {cardData.additional_fields?.email_addresses && cardData.additional_fields?.email_addresses.map((email, index) => (
-                <div key={index} className={styles.contactItem}>
-                  <span className={styles.iconWrapper}>
-                    <FaEnvelope className={styles.icon} />
-                  </span>
-                  <div>
-                    <h3>Write email</h3>
-                    <p>{email.email}</p>
+                ))}
+                {cardData.additional_fields?.email_addresses?.map((email, index) => (
+                  <div key={index} className={styles.contactItem}>
+                    <span className={styles.iconWrapper}>
+                      <FaEnvelope className={styles.icon} />
+                    </span>
+                    <div>
+                      <h3>Write email</h3>
+                      <p>{email.email}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              {cardData.additional_fields?.locations && cardData.additional_fields?.locations.map((location, index) => (
-                <div key={index} className={styles.contactItem}>
-                  <span className={styles.iconWrapper}>
-                    <FaMapMarkerAlt className={styles.icon} />
-                  </span>
-                  <div>
-                    <h3>Visit anytime</h3>
-                    <p>{location.address}</p>
+                ))}
+                {cardData.additional_fields?.locations?.map((location, index) => (
+                  <div key={index} className={styles.contactItem}>
+                    <span className={styles.iconWrapper}>
+                      <FaMapMarkerAlt className={styles.icon} />
+                    </span>
+                    <div>
+                      <h3>Visit anytime</h3>
+                      <p>{location.address}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-
-          <div className={styles.mapSection}>
-            <div className={styles.mapWrapper}>
-             
+          <div className="col-md-6">
+            <div className={styles.mapSection}>
               <MapComponent locations={cardData.additional_fields?.locations} />
             </div>
           </div>
         </div>
+      </div>
+      <div className={`container ${styles.containerWithMargin}`}>
         <ContactForm />
       </div>
     </div>

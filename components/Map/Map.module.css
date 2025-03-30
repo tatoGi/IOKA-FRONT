@@ -1,6 +1,9 @@
 .mapWrapper {
-  height: 100%;
+  height: 100%; /* Ensure the map fills the parent height */
   width: 100%;
+  border-radius: 12px; /* Match the rounded corners in the design */
+  overflow: hidden; /* Ensure no content spills out */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
 }
 
 .priceMarker {
@@ -15,9 +18,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  color: #333;
-  font-size: 14px;
+  font-weight: bold;
+  color: #0a273b; /* Match the color scheme */
+  font-size: 16px; /* Adjust font size for better visibility */
   background: white;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -26,8 +29,10 @@
 
 /* Override default Leaflet styles */
 .mapWrapper :global(.leaflet-container) {
-  background-color: #f8fafc !important;
-  border-radius: 16px !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 12px;  
+  z-index: 1;
 }
 
 /* Move controls from left to right */
@@ -75,4 +80,4 @@
   background: transparent !important;
   color: #333 !important;
   font-weight: 600 !important;
-} 
+}

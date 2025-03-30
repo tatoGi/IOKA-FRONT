@@ -26,7 +26,7 @@ const Map = ({ locations }) => {
         center={[48.8566, 2.3522]}
         zoom={4}
         scrollWheelZoom={false}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "400px", width: "100%", borderRadius: "8px" }}
         zoomControl={true}
         zoomControlPosition="topright"
       >
