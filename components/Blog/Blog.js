@@ -70,7 +70,7 @@ const Blog = ({ initialData }) => {
       <LoadingWrapper isLoading={isLoading}>
         <div className="row">
           {cardData.map((card, index) => (
-            <div className="col-12" key={index}>
+            <div className="col-md-3 col-12" key={index}>
               {" "}
               {/* Full width on mobile */}
               <div className={`${styles.card}`}>
