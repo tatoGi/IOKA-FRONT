@@ -1033,6 +1033,9 @@ border: 1px #E6EBED solid;
 .team-mobile-view{
   display: none;
 }
+.team-button{
+  display: none;
+}
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1121,94 +1124,6 @@ border: 1px #E6EBED solid;
   }
 }
 
-/* ...existing code... */
-
-.breadcrumb-nav {
-  margin-top: 30px;
-}
-
-.about-banner {
-  background-color: #07151F;
-  height: 290px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0 auto;
-  border-radius: 10px;
-}
-
-.bullet-section {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
-}
-
-.bullet-container {
-  text-align: center;
-}
-
-.bullet {
-  width: 73px;
-  height: 73px;
-  background-color: #07151F;
-  border-radius: 50%;
-  margin: 0 auto 10px;
-}
-
-.bullet-container p {
-  color: #0A273B;
-  margin-top: 10px;
-}
-
-.bullet-container button {
-  margin-top: 10px;
-}
-
-.vacanciesGrid {
-  margin-top: 20px;
-}
-
-.vacancyCard {
-  width: 504px;
-  height: 292px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.vacancyCard h4 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.vacancyCard p {
-  font-size: 16px;
-  color: #666;
-}
-
-.slick-slide {
-  display: flex;
-  justify-content: center;
-}
-
-.slick-dots {
-  bottom: -30px;
-}
-
-.slick-dots li button:before {
-  color: #7ACBC4;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #0A273B;
-}
-
-/* ...existing code... */
-
 /* Breadcrumb Styles */
 .breadcrumb-section {
   width: 100%;
@@ -1260,3 +1175,37 @@ border: 1px #E6EBED solid;
 .breadcrumb-list li a:hover {
   opacity: 0.8;
 }
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* search  */

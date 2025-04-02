@@ -6,11 +6,13 @@ import Image from "next/image";
 import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router"; // Import useRouter
 
 const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const pathname = usePathname();
+  const router = useRouter(); // Initialize router
 
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
   const isHomePage =
@@ -30,9 +32,12 @@ const Header = ({ navigationData }) => {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
     if (inputValue.trim() !== "") {
-      console.log("Searching for:", inputValue);
+      router.push({
+        pathname: "/search",
+        query: { query: inputValue.trim() }, // Use query object for consistency
+      });
     }
   };
 
@@ -145,17 +150,17 @@ const Header = ({ navigationData }) => {
 
               <div className="right-search-contact">
                 <div className="right-form">
-                  <form action="">
+                  <form onSubmit={handleSearch}>
                     <input
                       type="text"
-                      ref={inputRef}
+                      ref={inputRef} 
                       value={inputValue}
                       onChange={handleInputChange}
                     />
-                    <button className="searchbtn" onClick={handleSearch}>
+                    <button type="submit" className="searchbtn">
                       <SearchBtn />
                     </button>
-                    <button className="clearbtn" onClick={handleClear}>
+                    <button type="button" className="clearbtn" onClick={handleClear}>
                       <SearchCloseBtn />
                     </button>
                   </form>

@@ -3,6 +3,18 @@ import styles from "../HomeBanner/HomeBanner.module.css";
 
 const HomeBannerSearch = () => {
   const [activeTab, setActiveTab] = useState("OFFPLAN");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const openModal = (content) => {
+    setModalContent(content);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setModalContent("");
+  };
 
   return (
     <div className={styles["banner-search"]}>
@@ -34,14 +46,17 @@ const HomeBannerSearch = () => {
       </div>
       <div className={styles["search-container"]}>
         <div className={styles["search-inputs"]}>
-          <div className={styles.where}>
-            <input type="text" placeholder="Where" />
+          <div className={styles.where} onClick={() => openModal("Where")}>
+            <input type="text" placeholder="Where" readOnly />
           </div>
-          <div className={styles.size}>
-            <input type="text" placeholder="Size" />
+          <div className={styles.size} onClick={() => openModal("Size")}>
+            <input type="text" placeholder="Size" readOnly />
           </div>
-          <div className={styles["price-input-container"]}>
-            <input type="text" placeholder="Price" />
+          <div
+            className={styles["price-input-container"]}
+            onClick={() => openModal("Price")}
+          >
+            <input type="text" placeholder="Price" readOnly />
             <button className={styles["search-button"]}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,6 +76,18 @@ const HomeBannerSearch = () => {
           </div>
         </div>
       </div>
+      {modalVisible && (
+        <div className={styles.modal}>
+          <div className={styles["modal-content"]}>
+            <button className={styles["close-button"]} onClick={closeModal}>
+              &times;
+            </button>
+            <h2>{modalContent}</h2>
+            <p>Search options for {modalContent} in {activeTab}.</p>
+            {/* Add search options here */}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

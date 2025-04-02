@@ -360,7 +360,7 @@ letter-spacing: 0%;
 
 .nearbyColumn {
   display: flex;
-  width: calc(50% - 10px); /* Ensure two items fit side by side */
+  width: calc(30% - 10px); /* Ensure two items fit side by side */
   height: 24px;
   margin-bottom: 30px;
 }

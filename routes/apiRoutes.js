@@ -10,5 +10,6 @@ export const PARTNER_API = `${API_BASE_URL}/partners`;
 export const ABOUT_API = `${API_BASE_URL}/about`;
 export const CONTACT_API = `${API_BASE_URL}/contact`;
 export const CONTACT_SUBMISSION_API = `${API_BASE_URL}/contact/submissions`;
+export const SEARCH_API = `${API_BASE_URL}/search`;
 // Add more routes as needed
 
