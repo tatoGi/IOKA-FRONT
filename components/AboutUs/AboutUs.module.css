@@ -122,23 +122,177 @@ margin-top: 24px;
   .statsContainer {
     grid-template-columns: 1fr;
     gap: 1rem;
-    margin: 2rem auto;
+    margin: 1rem auto;
+    padding: 0 20px;
+  }
+
+  .agencySection {
+    margin: 2rem 20px;
+    padding: 2rem;
+    height: auto;
+    border-radius: 12px;
+    background-color: #E6EBED;
+  }
+
+  .agencySection h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .agencySection p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: left;
   }
 
   .teamGrid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .statBox {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .statsContainer {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 2rem 20px;
+    height: auto;
+  }
+
+  .teamMember {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .teamImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .teamMember h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  .teamMember p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .testimonialImageWrapper {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 16px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 258px !important;
+    max-height: 186px !important;
+  }
+
+
+  .testimonialImageContainer {
+    position: relative;
+    top: 0 !important;
+    left: 30% !important;
+    width: 100%;
+    max-width: 150px; /* Smaller width for the image */
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .testimonialImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-width: 258px;
+    max-height: 186px;
+  }
+
+  .testimonialWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: white !important;
+    border: 1px solid #0A273B !important;
+    padding: 24px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    max-width: 354px !important;
+    height: auto !important;
+  }
+
+  .testimonialContent {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .testimonialHeader {
+    margin-bottom: 16px !important;
+    margin-top: 50px;
+    text-align: center !important;
+  }
+
+  .testimonialName {
+    font-size: 20px !important;
+    margin: 0 0 8px 0 !important;
+  }
+
+  .testimonialRole {
+    font-size: 16px !important;
+    margin: 0 !important;
+  }
+
+  .testimonialText {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  .welcomeText {
+    font-size: 1rem !important;
+    margin-top: 1rem !important;
+    margin-left: 0 !important;
+  }
+
+  .testimonialSection {
+    flex-direction: column !important;
+    padding: 20px !important;
+    text-align: center !important;
+  }
+
+  .testimonialContainer {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .testimonialImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .testimonialName {
+    font-size: 18px !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  .testimonialRole {
+    font-size: 14px !important;
+    margin: 0 !important;
+  }
+
+  .testimonialText {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 1rem 0 !important;
+  }
+
+  .welcomeText {
+    font-size: 14px !important;
+    margin-top: 1rem !important;
   }
 }
 
@@ -154,12 +308,6 @@ margin-top: 24px;
   }
 }
 
-@media (max-width: 768px) {
-  .col4 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
 
 .testimonialSection {
   display: flex;
@@ -275,224 +423,6 @@ margin-top: 24px;
   margin-left: 15.125rem;
 }
 
-@media (max-width: 968px) {
-  .container {
-    padding: 0;
-  }
-
-  /* Stats Section */
-  .statsContainer {
-    margin: 1rem auto;
-    padding: 0 20px;
-  }
-
-  .statsSwiper {
-    padding: 20px 0;
-  }
-
-  /* Agency Section */
-  .agencySection {
-    margin: 1rem 20px;
-    padding: 2rem;
-    height: auto;
-    border-radius: 20px;
-  }
-
-  .agencySection h2 {
-    font-size: 1.5rem;
-  }
-
-  .agencySection p {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  /* Testimonial Section */
-  .testimonialSection {
-    padding: 20px;
-  }
-
-  .testimonialContainer {
-    gap: 0;
-  }
-
-  .testimonialWrapper {
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    background: transparent;
-    height: auto;
-  }
-
-  .testimonialImageContainer {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .testimonialImageWrapper {
-    width: 100%;
-    height: auto;
-    background: transparent;
-    border-radius: 20px;
-    box-shadow: none;
-  }
-
-  .testimonialImage {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/10;
-    border-radius: 20px;
-    object-fit: cover;
-  }
-
-  .testimonialContent {
-    background: white;
-    border: 1px solid #0A273B;
-    border-radius: 20px;
-    padding: 24px;
-    margin-top: -40px;
-    position: relative;
-    z-index: 2;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .testimonialHeader {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-
-  .testimonialName {
-    font-size: 20px;
-    margin: 0 0 8px 0;
-    text-align: center;
-  }
-
-  .testimonialRole {
-    font-size: 16px;
-    margin: 0;
-    text-align: center;
-  }
-
-  .testimonialText {
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0;
-    text-align: center;
-    -webkit-line-clamp: 6;
-  }
-
-  .testimonialName,
-  .testimonialRole,
-  .testimonialText {
-    margin-left: 0;
-  }
-
-  .welcomeText {
-    display: none;
-  }
-
-  /* Team Section */
-  .teamGrid {
-    margin: 2rem 20px;
-    height: auto;
-    gap: 2rem;
-  }
-
-  .teamMember {
-    margin-bottom: 2rem;
-  }
-
-  .teamImage {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-    margin-bottom: 1rem;
-  }
-
-  /* Form Container */
-  .formContainer {
-    padding: 2rem 20px;
-  }
-
-  .formContainer h5 {
-    font-size: 18px;
-    margin-bottom: 1rem;
-  }
-
-  /* Contact Form */
-  .contactForm {
-    gap: 1rem;
-  }
-
-  .formInput,
-  .formTextarea {
-    padding: 1rem;
-    font-size: 14px;
-  }
-
-  /* Partners Section */
-  .partnersSection {
-    padding: 2rem 20px;
-  }
-
-  .partnersTitle {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Subscribe Section */
-  .subscribeSection {
-    padding: 2rem 20px;
-  }
-
-  .subscribeContainer {
-    text-align: center;
-  }
-
-  .subscribeHeading {
-    font-size: 24px;
-    margin-bottom: 1.5rem;
-  }
-
-  .subscribeForm {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .subscribeInput,
-  .subscribeButton {
-    width: 100%;
-    padding: 1rem;
-    font-size: 14px;
-  }
-}
-
-/* Additional mobile-specific styles for smaller screens */
-@media (max-width: 480px) {
-  .testimonialContent {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .testimonialText {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .teamImage {
-    height: 300px;
-  }
-}
-
 .contactSection {
   padding: 80px 0;
   background-color: #fff;
@@ -584,23 +514,6 @@ margin-top: 24px;
   background-color: #0d3251;
 }
 
-@media (max-width: 768px) {
-  .contactSection {
-    padding: 60px 0;
-  }
-
-  .contactTitle {
-    font-size: 28px;
-    margin-bottom: 30px;
-  }
-
-  .formInput,
-  .formTextarea,
-  .submitButton {
-    padding: 14px;
-    font-size: 15px;
-  }
-}
 
 @media (max-width: 480px) {
   .contactSection {
@@ -865,15 +778,6 @@ margin-top: 24px;
   background-color: #0085b8;
 }
 
-@media (max-width: 768px) {
-  .jobListings {
-    grid-template-columns: 1fr;
-  }
-
-  .careersSectionContent {
-    padding: 0 15px;
-  }
-}
 
 .formContainer {
   max-width: 100%;
@@ -937,4 +841,33 @@ margin-bottom: 24px;
 .statsSwiper {
   width: 100%;
   padding: 20px 0;
+}
+
+
+.scrollButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #0A273B;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.scrollButton.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollButton:hover {
+  background-color: #0d3251;
 }

@@ -23,73 +23,15 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Footer Box */}
-          <div className="footer-box">
-            {/* Social Icons Section */}
-            <div className="soc-icons-b">
-              <div className="follow-text">Follow Us:</div>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="inst-box soc-box">
-                  <div className="icon-circle">
-                    <InstagramIcon />
-                  </div>
-                  <div className="soc-title">Instagram</div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="y-box soc-box">
-                  <div className="icon-circle">
-                    <YoutubeIcon />
-                  </div>
-                  <div className="soc-title">Youtube</div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="f-box soc-box">
-                  <div className="icon-circle">
-                    <FacebookIcon />
-                  </div>
-                  <div className="soc-title">Facebook</div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="x-box soc-box">
-                  <div className="icon-circle">
-                    <XIcon />
-                  </div>
-                  <div className="soc-title">Twitter</div>
-                </div>
-              </Link>
-            </div>
-
+          {/* Mobile-specific order */}
+          <div className="mobile-order">
             {/* Footer Contact Section */}
             <div className="footer-contant">
               <div className="contact-text">
                 Specializes in providing high-class tours for those in need,
                 Contact Us
               </div>
-              <div className="footer-contact-links">
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <LocationIcon />
-                  </div>
-                  <div className="f-text-0">
-                    101 E 129th St. East Fujairah IN 45721, UAE
-                  </div>
-                </Link>
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <PhoneIcon />
-                  </div>
-                  <div className="f-text-0">1-333-232-1231</div>
-                </Link>
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <MessageIcon />
-                  </div>
-                  <div className="f-text-0">example@gmail.com</div>
-                </Link>
-              </div>
+            
             </div>
 
             {/* Footer Categories */}
@@ -116,23 +58,178 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            {/* Footer Subscribe */}
-            <div className="footer-message">
-              <div className="mes-f-title">Newsletter</div>
-              <div className="mes-f-text">
-                Your Weekly/Monthly Dose of Knowledge and Inspiration
+            <div className="footer-contact-links">
+                <Link href={"#"} className="footer-contact-item">
+                  <div className="icon-00">
+                    <LocationIcon />
+                  </div>
+                  <div className="f-text-0">
+                    101 E 129th St. East Fujairah IN 45721, UAE
+                  </div>
+                </Link>
+                <Link href={"#"} className="footer-contact-item">
+                  <div className="icon-00">
+                    <PhoneIcon />
+                  </div>
+                  <div className="f-text-0">1-333-232-1231</div>
+                </Link>
+                <Link href={"#"} className="footer-contact-item">
+                  <div className="icon-00">
+                    <MessageIcon />
+                  </div>
+                  <div className="f-text-0">example@gmail.com</div>
+                </Link>
               </div>
-              <form action="#" method="POST">
-                <div className="message-icon-send">
-                  <MessageIcon />
+            {/* Social Icons Section */}
+            <div className="soc-icons-b">
+              <Link href={"#"} className="soc-icon-item">
+                <div className="inst-box soc-box">
+                  <div className="icon-circle">
+                    <InstagramIcon />
+                  </div>
+                  <div className="soc-title"></div>
                 </div>
-                <input type="text" placeholder="Your Email Address" />
-                <div className="plane-icon">
-                  <PlaneIcon />
+              </Link>
+              <Link href={"#"} className="soc-icon-item">
+                <div className="y-box soc-box">
+                  <div className="icon-circle">
+                    <YoutubeIcon />
+                  </div>
+                  <div className="soc-title"></div>
                 </div>
-                <button type="submit">Get in Touch</button>
-              </form>
+              </Link>
+              <Link href={"#"} className="soc-icon-item">
+                <div className="f-box soc-box">
+                  <div className="icon-circle">
+                    <FacebookIcon />
+                  </div>
+                  <div className="soc-title"></div>
+                </div>
+              </Link>
+              <Link href={"#"} className="soc-icon-item">
+                <div className="x-box soc-box">
+                  <div className="icon-circle">
+                    <XIcon />
+                  </div>
+                  <div className="soc-title"></div>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Desktop-specific order */}
+          <div className="desktop-order">
+            {/* Footer Box */}
+            <div className="footer-box">
+              {/* Social Icons Section */}
+              <div className="soc-icons-b">
+                <div className="follow-text">Follow Us:</div>
+                <Link href={"#"} className="soc-icon-item">
+                  <div className="inst-box soc-box">
+                    <div className="icon-circle">
+                      <InstagramIcon />
+                    </div>
+                    <div className="soc-title">Instagram</div>
+                  </div>
+                </Link>
+                <Link href={"#"} className="soc-icon-item">
+                  <div className="y-box soc-box">
+                    <div className="icon-circle">
+                      <YoutubeIcon />
+                    </div>
+                    <div className="soc-title">Youtube</div>
+                  </div>
+                </Link>
+                <Link href={"#"} className="soc-icon-item">
+                  <div className="f-box soc-box">
+                    <div className="icon-circle">
+                      <FacebookIcon />
+                    </div>
+                    <div className="soc-title">Facebook</div>
+                  </div>
+                </Link>
+                <Link href={"#"} className="soc-icon-item">
+                  <div className="x-box soc-box">
+                    <div className="icon-circle">
+                      <XIcon />
+                    </div>
+                    <div className="soc-title">Twitter</div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Footer Contact Section */}
+              <div className="footer-contant">
+                <div className="contact-text">
+                  Specializes in providing high-class tours for those in need,
+                  Contact Us
+                </div>
+                <div className="footer-contact-links">
+                  <Link href={"#"} className="footer-contact-item">
+                    <div className="icon-00">
+                      <LocationIcon />
+                    </div>
+                    <div className="f-text-0">
+                      101 E 129th St. East Fujairah IN 45721, UAE
+                    </div>
+                  </Link>
+                  <Link href={"#"} className="footer-contact-item">
+                    <div className="icon-00">
+                      <PhoneIcon />
+                    </div>
+                    <div className="f-text-0">1-333-232-1231</div>
+                  </Link>
+                  <Link href={"#"} className="footer-contact-item">
+                    <div className="icon-00">
+                      <MessageIcon />
+                    </div>
+                    <div className="f-text-0">example@gmail.com</div>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Footer Categories */}
+              <div className="footer-category">
+                <div className="f-category-title">Categories</div>
+                <ul>
+                  <li>
+                    <Link href={"#"}>Home</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Offplan</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Resale</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Developers</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Blog</Link>
+                  </li>
+                  <li>
+                    <Link href={"#"}>Contact Us</Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Footer Subscribe */}
+              <div className="footer-message">
+                <div className="mes-f-title">Newsletter</div>
+                <div className="mes-f-text">
+                  Your Weekly/Monthly Dose of Knowledge and Inspiration
+                </div>
+                <form action="#" method="POST">
+                  <div className="message-icon-send">
+                    <MessageIcon />
+                  </div>
+                  <input type="text" placeholder="Your Email Address" />
+                  <div className="plane-icon">
+                    <PlaneIcon />
+                  </div>
+                  <button type="submit">Get in Touch</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -11,12 +11,106 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import success from "../../assets/img/succsess.svg";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // Create a separate Map component to handle client-side rendering
 const Map = dynamic(
   () => import("./Map"), // Create a new Map.js component
   { ssr: false }
 );
+
+// Modify the dynamic imports to include the modules
+const SwiperComponent = dynamic(
+  () =>
+    import("swiper/react").then((mod) => {
+      // Import Swiper styles inside the dynamic import
+      import("swiper/css");
+      import("swiper/css/navigation");
+      import("swiper/css/pagination");
+      return { default: mod.Swiper };
+    }),
+  { ssr: false }
+);
+const decodeImageUrl = (url) => {
+  return decodeURIComponent(url);
+};
+const SwiperSlideComponent = dynamic(
+  () => import("swiper/react").then((mod) => ({ default: mod.SwiperSlide })),
+  { ssr: false }
+);
+
+// Create a new component for the mobile slider
+const MobileSlider = ({ images, type, decodeImageUrl }) => {
+  return (
+    <Swiper slidesPerView="auto" spaceBetween={12} className={style.swiper}>
+      {images &&
+        images.map((image, index) => (
+          <SwiperSlide key={index} className={style.swiperSlide}>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+                image
+              )}`}
+              alt={`${type} Image ${index + 1}`}
+              width={280}
+              height={200}
+              className={style.exteriorimage}
+            />
+          </SwiperSlide>
+        ))}
+    </Swiper>
+  );
+};
+
+// Add this new component
+const PropertySlider = ({ properties, decodeImageUrl }) => {
+  return (
+    <Swiper
+      slidesPerView="auto"
+      spaceBetween={12}
+      className={style.swiper}
+      style={{ overflow: "hidden" }}
+    >
+      {properties.map((property, index) => (
+        <SwiperSlide
+          key={property.id}
+          className={style.swiperSlide}
+          style={{ width: "280px" }}
+        >
+          <div className={style.propertyCard}>
+            <div className={style.imageContainer}>
+              <Image
+                src={
+                  property.main_photo
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(property.main_photo)}`
+                    : baseimage
+                }
+                alt={property.title}
+                width={280}
+                height={200}
+                className={style.sectionImage}
+              />
+              <div className={style.overlay}>
+                <div className={style.propertyName}>{property.title}</div>
+                <a
+                  href={`/offplan/${property.slug}`}
+                  className={style.arrowLink}
+                >
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
 
 const OffplanShow = ({ offplanData }) => {
   const router = useRouter();
@@ -28,21 +122,21 @@ const OffplanShow = ({ offplanData }) => {
   useEffect(() => {
     Fancybox.bind("[data-fancybox='gallery']", {
       Thumbs: {
-        type: "classic", // Thumbnail slider
+        type: "classic" // Thumbnail slider
       },
       Toolbar: {
         display: {
           left: ["infobar"],
           middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW"],
-          right: ["slideshow", "thumbs", "close"],
-        },
+          right: ["slideshow", "thumbs", "close"]
+        }
       },
       // Smooth animations
       Animation: {
         zoom: {
-          opacity: "auto",
-        },
-      },
+          opacity: "auto"
+        }
+      }
     });
 
     // Cleanup
@@ -207,8 +301,9 @@ const OffplanShow = ({ offplanData }) => {
                   height={180}
                   style={{ margin: "0 auto" }}
                 />
-                <div >
-                  <div className={style.qrText}
+                <div>
+                  <div
+                    className={style.qrText}
                     dangerouslySetInnerHTML={{
                       __html: offplanData.offplan.qr_text
                     }}
@@ -323,7 +418,7 @@ const OffplanShow = ({ offplanData }) => {
       {/* Exterior & Interior Section (Full Width) */}
       <div className={style.exteriorInteriorSection}>
         <div className={`container ${style.sectionHeader}`}>
-          <h3>{offplanData.offplan.map_location}</h3>
+          <h3>The Fifth Tower at JVC</h3>
           <div className={style.switcher}>
             <button
               className={`${style.switchButton} ${
@@ -348,10 +443,11 @@ const OffplanShow = ({ offplanData }) => {
           {showExterior ? (
             <div className={style.exteriorSection}>
               <div className="container">
-                <div className="row">
+                {/* Desktop view */}
+                <div className="row d-none d-md-flex">
                   {offplanData.offplan.exterior_gallery &&
                     JSON.parse(offplanData.offplan.exterior_gallery)
-                      .slice(0, 8) // Limit to 8 photos
+                      .slice(0, 8)
                       .map((image, index) => (
                         <div
                           key={index}
@@ -368,20 +464,31 @@ const OffplanShow = ({ offplanData }) => {
                             alt="Exterior Image"
                             width={300}
                             height={200}
-                            className={style.exteriorimage} // Apply border-radius via CSS
+                            className={style.exteriorimage}
                           />
                         </div>
                       ))}
+                </div>
+                {/* Mobile view */}
+                <div className="d-md-none">
+                  {offplanData.offplan.exterior_gallery && (
+                    <MobileSlider
+                      images={JSON.parse(offplanData.offplan.exterior_gallery)}
+                      type="Exterior"
+                      decodeImageUrl={decodeImageUrl}
+                    />
+                  )}
                 </div>
               </div>
             </div>
           ) : (
             <div className={style.interiorSection}>
               <div className="container">
-                <div className="row">
+                {/* Desktop view */}
+                <div className="row d-none d-md-flex">
                   {offplanData.offplan.interior_gallery &&
                     JSON.parse(offplanData.offplan.interior_gallery)
-                      .slice(0, 8) // Limit to 8 photos
+                      .slice(0, 8)
                       .map((image, index) => (
                         <div
                           key={index}
@@ -403,6 +510,16 @@ const OffplanShow = ({ offplanData }) => {
                         </div>
                       ))}
                 </div>
+                {/* Mobile view */}
+                <div className="d-md-none">
+                  {offplanData.offplan.interior_gallery && (
+                    <MobileSlider
+                      images={JSON.parse(offplanData.offplan.interior_gallery)}
+                      type="Interior"
+                      decodeImageUrl={decodeImageUrl}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -411,8 +528,9 @@ const OffplanShow = ({ offplanData }) => {
 
       {/* other & properties Section */}
       <div className="container">
-        <div className="row">
-          <span className={style.sectionTitle}>Other Properties</span>
+        <span className={style.sectionTitle}>Other Properties</span>
+        {/* Desktop view */}
+        <div className="row d-none d-md-flex">
           {offplanData.lastAddedOffplans.map((property, index) => (
             <div className="col-md-3" key={property.id}>
               <div className={style.propertyCard}>
@@ -436,13 +554,20 @@ const OffplanShow = ({ offplanData }) => {
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
                     >
-                      <FontAwesomeIcon icon={faAngleRight} /> {/* Use the FontAwesomeIcon component */}
+                      <FontAwesomeIcon icon={faAngleRight} />
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+        {/* Mobile view */}
+        <div className="d-md-none">
+          <PropertySlider
+            properties={offplanData.lastAddedOffplans}
+            decodeImageUrl={decodeImageUrl}
+          />
         </div>
       </div>
       <SubscribeSection />

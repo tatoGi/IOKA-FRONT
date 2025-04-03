@@ -27,20 +27,23 @@
   right: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* Align content to bottom */
   justify-content: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
   z-index: 1;
   border-radius: 12px;
+  padding: 24px 16px; /* Add padding at bottom */
+  text-align: left;
 }
 
 .bannerContent h1 {
   color: white;
-  font-size: 32px;
-  font-weight: 300;
-  text-align: center;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+  letter-spacing: normal;
+  text-transform: none;
+  margin-bottom: 8px;
   font-family: 'Montserrat';
 }
 
@@ -61,6 +64,11 @@
   gap: 16px;
   margin-bottom: 24px;
   font-family: 'Montserrat';
+}
+.priceWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 .aedPricestart{
   font-family: 'Montserrat';
@@ -353,16 +361,21 @@ letter-spacing: 0%;
 
 .nearbyGrid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0; /* Remove extra space between items */
+  flex-wrap: wrap; /* Stack items vertically */
+  gap: 16px; /* Add spacing between items */
 }
 
 .nearbyColumn {
   display: flex;
-  width: calc(30% - 10px); /* Ensure two items fit side by side */
-  height: 24px;
-  margin-bottom: 30px;
+  align-items: center; /* Align items vertically */
+  gap: 12px; /* Space between image and text */
+}
+
+.nearbyImage {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover;
 }
 
 .nearbyPlace {
@@ -374,15 +387,15 @@ letter-spacing: 0%;
 .placeName {
   color: #07151F;
   font-weight: 500;
-  font-size: 20px;
-  font-family: 'Montserrat'; /* Apply Montserrat font */
+  font-size: 16px; /* Adjust font size for mobile */
+  font-family: 'Montserrat';
 }
 
 .placeDistance {
   color: #007AFF;
   font-weight: 500;
-  font-size: 20px;
-  font-family: 'Montserrat'; /* Apply Montserrat font */
+  font-size: 16px; /* Adjust font size for mobile */
+  font-family: 'Montserrat';
 }
 
 .qrImageWrapper {
@@ -396,48 +409,7 @@ letter-spacing: 0%;
 
 
 /* Responsive styles */
-@media (max-width: 768px) {
-  .contentWrapper {
-    flex-direction: column;
-  }
 
-  .qrSection {
-    margin-top: 32px;
-  }
-
-  .buildingSection {
-    margin: 40px 0;
-  }
-
-  .amenitiesList {
-    grid-template-columns: 1fr;
-  }
-  .amenitiesList::marker{
-    display: none;
-  }
-  .nearbyGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .propertyDetails {
-    padding: 0 16px;
-  }
-
-  .pricing {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .bannerContent h1 {
-    font-size: 2rem;
-  }
-
-  .nearbyGrid {
-    grid-template-columns: 1fr;
-  }
-}
 .contactButton {
   margin-top: 20px;
   text-align: center;
@@ -797,4 +769,377 @@ border-radius: 16px;
 
 .galleryImage:hover {
   transform: scale(1.05);
+}
+
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  border-radius: 16px;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .offplanebanner{
+    position: relative;
+    width: 100%;
+    height: 200px !important; /* Increased height to match design */
+    margin-top: 12px !important;
+    border-radius: 0;
+    min-height: 200px !important;
+  }
+  .propertyDetails{
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
+    padding: 0 16px;
+  }
+  .propertyDetails h2 {
+    font-size: 20px;
+    color: #0A273B;
+    margin-bottom: 16px;
+    font-family: 'Montserrat';
+  }
+  .aedPricestart{
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
+  .pricing{
+    flex-direction: row;
+    gap: 5px;
+  }
+  .description{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0%;
+    margin: 0;
+
+  }
+  .aedPrice{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .usdPrice{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .bannerImage {
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 0px;
+  }
+  .contentWrapper {
+    flex-direction: column;
+  }
+
+  .qrSection {
+    margin-top: 32px;
+  }
+
+  .buildingSection {
+    margin: 20px 0;
+  }
+
+  .buildingImage {
+    width: 100%;
+    height: auto;
+    border-radius: 0px;
+  }
+
+  .amenitiesList {
+    grid-template-columns: 1fr;
+  }
+  .amenitiesList::marker{
+    display: none;
+  }
+  .nearbyGrid {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 12px; /* Add spacing between items */
+  }
+
+  .nearbyColumn {
+    display: flex;
+    justify-content: space-between; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 8px 0; /* Add padding for spacing */
+    border-bottom: 1px solid #E5E7EB; /* Add a divider between items */
+  }
+
+  .placeName {
+    font-size: 14px; /* Adjust font size for mobile */
+    font-weight: 500;
+    color: #07151F;
+  }
+
+  .placeDistance {
+    font-size: 14px; /* Adjust font size for mobile */
+    font-weight: 500;
+    color: #007AFF;
+  }
+
+  .qrCardmodern {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #07151F;
+    border-radius: 12px;
+    background: #fff;
+    text-align: center;
+  }
+  .line {
+    display: none;
+  }
+  .qrCardmodern h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .qrbody {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .qrbody img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .qrText {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .qrButtons {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .downloadBtn, .enquireBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  .featuresSection,
+.amenitiesSection {
+  margin-bottom: 40px;
+}
+
+.featuresSection h3,
+.amenitiesSection h3 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+}
+.featuresList img{
+  margin-right: 10px;
+}
+
+.featuresList li {
+  position: relative;
+  font-family:'Montserrat';
+font-weight: 400;
+font-size: 14px;
+line-height: 36px;
+letter-spacing: 0%;
+color: #07151F;
+}
+.amenitiesList{
+  font-size: 14px;
+}
+.locationSection{
+  margin: 0;
+}
+.locationSection h3{
+  font-family: 'Montserrat';
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+
+}
+.mapWrapper{
+  height: 220px;
+}
+
+  .exteriorInteriorSection {
+    margin-top: 0;
+    background-color: #0A2C3D;
+    padding: 24px 0;
+    position: relative;
+  }
+
+  .sectionHeader {
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+
+  .exteriorInteriorSection h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #FFFFFF;
+  }
+
+  .switcher {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .switchButton {
+    flex: 1;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    background: transparent;
+  }
+
+  .switchButton.active {
+    background-color: #FFFFFF;
+    color: #0A2C3D;
+  }
+
+  /* Slider styles */
+  .swiper {
+    width: 100%;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-right: -16px; /* Compensate for the padding */
+    overflow: hidden !important; /* Change from visible to hidden */
+  }
+
+  .swiperSlide {
+    width: 280px !important;
+    height: 200px !important;
+  }
+
+  .exteriorimage {
+    width: 280px;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  /* Hide desktop grid on mobile */
+  .row.d-none.d-md-flex {
+    display: none !important;
+  }
+
+  /* Show mobile content */
+  .d-md-none {
+    display: block !important;
+  }
+
+  .content {
+    padding: 0;
+    margin-top: 24px;
+    overflow: visible;
+  }
+
+  .exteriorSection, .interiorSection {
+    width: 100%;
+  }
+
+  .exteriorSection .container, .interiorSection .container {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+
+  .propertyCard {
+    width: 280px;
+    height: 200px;
+    margin-right: 0; /* Remove margin as spacing is handled by spaceBetween */
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sectionImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+  }
+
+  .overlay {
+    padding: 16px;
+  }
+
+  .propertyName {
+    font-size: 14px;
+  }
+
+  .arrowLink {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Property slider specific styles */
+  .swiper {
+    width: 100%;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-right: -16px; /* Compensate for the padding */
+    overflow: hidden !important; /* Change from visible to hidden */
+    margin-bottom: 40px;
+  }
+
+  .swiperSlide {
+    width: 280px !important;
+    height: 200px !important;
+  }
+
+  /* Container adjustments */
+  .container {
+    padding: 0;
+    overflow-x: hidden; /* Hide horizontal overflow */
+    width: 100%;
+  }
 }

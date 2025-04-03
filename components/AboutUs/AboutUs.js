@@ -22,6 +22,12 @@ const AboutUs = ({ initialData, id }) => {
 
   // Add this hook to detect mobile screens
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isClient, setIsClient] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Ensure client-side rendering
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +55,20 @@ const AboutUs = ({ initialData, id }) => {
       fetchData();
     }
   }, [initialData, id]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 200); // Show button after scrolling 200px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
@@ -117,7 +137,7 @@ const AboutUs = ({ initialData, id }) => {
 
       {/* Statistics section */}
       <div className={styles.container}>
-        {isMobile ? (
+        {isClient && isMobile ? ( // Ensure this logic only runs on the client
           <div className={styles.statsContainer}>
             <Swiper
               spaceBetween={20}
@@ -183,7 +203,6 @@ const AboutUs = ({ initialData, id }) => {
                   height={400}
                   className={styles.testimonialImage}
                 />
-                <div className={styles.curvedConnector}></div>
               </div>
             </div>
             <div className={styles.testimonialWrapper}>
@@ -245,6 +264,16 @@ const AboutUs = ({ initialData, id }) => {
         <PartnersSection />
         <SubscribeSection />
       </div>
+      {showScrollButton && (
+        <button
+          className={`${styles.scrollButton} ${
+            showScrollButton ? "" : "hidden"
+          }`}
+          onClick={scrollToTop}
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 };

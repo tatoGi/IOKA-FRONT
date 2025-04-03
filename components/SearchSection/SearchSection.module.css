@@ -111,8 +111,6 @@
     padding: 8px 10px;
     /* margin: 0 auto; */
     border: 1px #07151F solid;
-    left: -26px;
-    position: relative;
   }
 
   .filterButtons {
@@ -125,7 +123,12 @@
     scrollbar-width: thin !important;
     -ms-overflow-style: auto;
   }
-
+  .container{
+    display: flex;
+    align-items: normal;
+    gap: 13.4px;
+    width: 100%;
+}
   .filterButtons::-webkit-scrollbar {
     height: 4px !important; /* Adjust scrollbar height */
   }
@@ -207,66 +210,5 @@
   .moreFiltersBtn {
     padding: 9px 13px;
     font-size: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .searchSection {
-    margin-top: 16px;
-    padding: 0 12px;
-  }
-
-  .container {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .searchBar {
-    width: 298px;
-    /* Updated width */
-    height: 48px;
-    /* Updated height */
-    border-radius: 8px;
-    /* Updated border-radius */
-    border-width: 1px;
-    /* Updated border-width */
-    padding: 8px 10px;
-    margin: 0 auto;
-    /* Center the search bar */
-  }
-
-  .searchInput::placeholder {
-    font-size: 14px;
-  }
-
-  .filterButtons {
-    display: flex;
-    flex-wrap: nowrap;
-    /* Ensure horizontal scrolling */
-    gap: 6px;
-    padding: 4px 0 8px 0;
-    overflow-x: auto;
-    /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE and Edge */
-  }
-
-  .filterButtons::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari, Opera */
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 6px 10px;
-    font-size: 12px;
-    height: 36px;
-    white-space: nowrap;
-    /* Prevent text wrapping */
-    flex-shrink: 0;
-    /* Prevent shrinking */
   }
 }

@@ -41,6 +41,21 @@ const DeveloperShow = (developerData) => {
     });
   }, []);
 
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Check on initial render
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   /**
    * Configuration for the awards slider using react-slick
    * Includes responsive settings and custom navigation
@@ -64,7 +79,27 @@ const DeveloperShow = (developerData) => {
           slide.setAttribute('inert', 'true');
         }
       });
-    }
+    },
+    responsive: [
+      {
+        breakpoint: 768, // For screens <= 768px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false, // Disable center mode for smaller screens
+          variableWidth: false, // Ensure full-width cards
+        },
+      },
+      {
+        breakpoint: 480, // For screens <= 480px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          variableWidth: false,
+        },
+      },
+    ],
   };
 
   const resaleSliderSettings = {
@@ -85,41 +120,78 @@ const DeveloperShow = (developerData) => {
   };
   return (
     <div className={styles.developerShowSection}>
-      <div className="container">
+      {/* <div className="container">
         <SearchSection />
-      </div>
+      </div> */}
       <div className="container">
         {/* Hero Section */}
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
-            <div className={styles.developerInfo}>
-              <h2>{developerData.developerData.title} </h2>
-              <div className={styles.developerDescription}
-                dangerouslySetInnerHTML={{
-                  __html: developerData.developerData.paragraph
-                }}
-              />
-            </div>
-            <div className={styles.developerLogo}>
-              {developerData.developerData.logo && (
-                <Image
-                  src={
-                    developerData.developerData.logo
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(
-                          developerData.developerData.logo
-                        )}`
-                      : EmaarLogo
-                  }
-                  alt="developer logo"
-                  width={300}
-                  height={150}
-                  priority={true}
-                  quality={100}
-                />
-              )}
-            </div>
+            {isMobileView ? (
+              <>
+                <div className={styles.developerLogo}>
+                  {developerData.developerData.logo && (
+                    <Image
+                      src={
+                        developerData.developerData.logo
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(
+                              developerData.developerData.logo
+                            )}`
+                          : EmaarLogo
+                      }
+                      alt="developer logo"
+                      width={300}
+                      height={150}
+                      priority={true}
+                      quality={100}
+                    />
+                  )}
+                </div>
+                <div className={styles.developerInfo}>
+                  <h2>{developerData.developerData.title} </h2>
+                  <div
+                    className={styles.developerDescription}
+                    dangerouslySetInnerHTML={{
+                      __html: developerData.developerData.paragraph,
+                    }}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.developerInfo}>
+                  <h2>{developerData.developerData.title} </h2>
+                  <div
+                    className={styles.developerDescription}
+                    dangerouslySetInnerHTML={{
+                      __html: developerData.developerData.paragraph,
+                    }}
+                  />
+                </div>
+                <div className={styles.developerLogo}>
+                  {developerData.developerData.logo && (
+                    <Image
+                      src={
+                        developerData.developerData.logo
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(
+                              developerData.developerData.logo
+                            )}`
+                          : EmaarLogo
+                      }
+                      alt="developer logo"
+                      width={300}
+                      height={150}
+                      priority={true}
+                      quality={100}
+                    />
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -136,61 +208,36 @@ const DeveloperShow = (developerData) => {
                   {offplanListings.length} Listings
                 </span>
               </div>
-              <div className={styles.sortDropdown}>
-                <span>Sort:</span>
-                <button className={styles.sortButton}>
-                  Newest First
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4 6L8 10L12 6"
-                      stroke="#666666"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
+              {!isMobileView && (
+                <div className={styles.sortDropdown}>
+                  <span>Sort:</span>
+                  <button className={styles.sortButton}>
+                    Newest First
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="#666666"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
             </div>
 
-            <div className={styles.sliderWrapper}>
-              <button
-                className={`${styles.sliderArrow} ${styles.prevArrow}`}
-                onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
-                disabled={currentSlide === 0}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M15 18L9 12L15 6"
-                    stroke="#666666"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-
-              <div
-                className={styles.propertyGrid}
-                style={{
-                  transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`
-                }}
-              >
+            {isMobileView ? (
+              <div className={styles.listView}>
                 {offplanListings.map((listing) => (
-                  <div key={listing.id} className={styles.propertyCard}>
+                  <div key={listing.id} className={styles.listItem}>
                     <div className={styles.propertyImage}>
-                      <span className={styles.propertyType}>
-                        {listing.property_type}
-                      </span>
-                      <span className={styles.propertyYear}>
-                        {new Date(listing.created_at).getFullYear()}
-                      </span>
                       <Image
                         src={
                           listing.main_photo
@@ -203,21 +250,23 @@ const DeveloperShow = (developerData) => {
                         layout="fill"
                         objectFit="cover"
                       />
+                      <span className={styles.propertyType}>
+                        {listing.property_type}
+                      </span>
+                      <span className={styles.propertyYear}>
+                        {new Date(listing.created_at).getFullYear()}
+                      </span>
                     </div>
                     <div className={styles.propertyInfo}>
-                      <div>
-                        <h4>{listing.title}</h4>
-                        <p className={styles.location}>
-                          by {developerData.developerData.title}
-                        </p>
-                        <div className={styles.priceContainer}>
-                          <span className={styles.priceStart}>
-                            Starting Price
-                          </span>
-                          <span className={styles.price}>
-                            USD {listing.amount}
-                          </span>
-                        </div>
+                      <h4>{listing.title}</h4>
+                      <p className={styles.location}>
+                        by {developerData.developerData.title}
+                      </p>
+                      <div className={styles.priceContainer}>
+                        <span className={styles.priceStart}>Starting Price</span>
+                        <span className={styles.price}>
+                          USD {listing.amount}
+                        </span>
                       </div>
                       <div className={styles.propertyStats}>
                         <div className={styles.stat}>
@@ -250,7 +299,7 @@ const DeveloperShow = (developerData) => {
                         <div className={styles.stat}>
                           <Image
                             src={WarehouseIcon}
-                            alt="Area"
+                            alt="Garage"
                             width={20}
                             height={20}
                           />
@@ -278,35 +327,157 @@ const DeveloperShow = (developerData) => {
                   </div>
                 ))}
               </div>
+            ) : (
+              <div className={styles.sliderWrapper}>
+                <button
+                  className={`${styles.sliderArrow} ${styles.prevArrow}`}
+                  onClick={() =>
+                    setCurrentSlide((prev) => Math.max(prev - 1, 0))
+                  }
+                  disabled={currentSlide === 0}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="#666666"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
 
-              <button
-                className={`${styles.sliderArrow} ${styles.nextArrow}`}
-                onClick={() =>
-                  setCurrentSlide((prev) =>
-                    prev + 1 >= offplanListings.length - 2 ? prev : prev + 1
-                  )
-                }
-                disabled={currentSlide >= offplanListings.length - 2}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="#666666"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+                <div
+                  className={styles.propertyGrid}
+                  style={{
+                    transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`
+                  }}
+                >
+                  {offplanListings.map((listing) => (
+                    <div key={listing.id} className={styles.propertyCard}>
+                      <div className={styles.propertyImage}>
+                        <span className={styles.propertyType}>
+                          {listing.property_type}
+                        </span>
+                        <span className={styles.propertyYear}>
+                          {new Date(listing.created_at).getFullYear()}
+                        </span>
+                        <Image
+                          src={
+                            listing.main_photo
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(listing.main_photo)}`
+                              : baseimage
+                          }
+                          alt={listing.title}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                      <div className={styles.propertyInfo}>
+                        <div>
+                          <h4>{listing.title}</h4>
+                          <p className={styles.location}>
+                            by {developerData.developerData.title}
+                          </p>
+                          <div className={styles.priceContainer}>
+                            <span className={styles.priceStart}>
+                              Starting Price
+                            </span>
+                            <span className={styles.price}>
+                              USD {listing.amount}
+                            </span>
+                          </div>
+                        </div>
+                        <div className={styles.propertyStats}>
+                          <div className={styles.stat}>
+                            <Image
+                              src={BedroomIcon}
+                              alt="Bedrooms"
+                              width={20}
+                              height={20}
+                            />
+                            <span>{listing.bedroom} Br</span>
+                          </div>
+                          <div className={styles.stat}>
+                            <Image
+                              src={BathroomIcon}
+                              alt="Bathrooms"
+                              width={20}
+                              height={20}
+                            />
+                            <span>{listing.bathroom} Ba</span>
+                          </div>
+                          <div className={styles.stat}>
+                            <Image
+                              src={AreaVector}
+                              alt="Area"
+                              width={20}
+                              height={20}
+                            />
+                            <span>{listing.sq_ft} Sq.Ft</span>
+                          </div>
+                          <div className={styles.stat}>
+                            <Image
+                              src={WarehouseIcon}
+                              alt="Area"
+                              width={20}
+                              height={20}
+                            />
+                            <span>{listing.garage} Gr</span>
+                          </div>
+                        </div>
+                        <div className={styles.propertyDetails}>
+                          <p>{limitTextLength(listing.description, 150)}</p>
+                        </div>
+                        <div className={styles.propertyActions}>
+                          <button className={styles.actionButton}>
+                            <HiOutlineMail size={20} color="#1A1A1A" />
+                            <span>Email</span>
+                          </button>
+                          <button className={styles.actionButton}>
+                            <Image src={callVector} alt="Call" />
+                            <span>Call</span>
+                          </button>
+                          <button className={styles.actionButton}>
+                            <BsWhatsapp size={20} color="#34C759" />
+                            <span>WhatsApp</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  className={`${styles.sliderArrow} ${styles.nextArrow}`}
+                  onClick={() =>
+                    setCurrentSlide((prev) =>
+                      prev + 1 >= offplanListings.length - 2 ? prev : prev + 1
+                    )
+                  }
+                  disabled={currentSlide >= offplanListings.length - 2}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="#666666"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </div>
-
       </div>
 
-        {/* Update resale slider section */}
-        <div className={styles.resaleSection}>
-          <div className="container">
+      {/* Resale Section */}
+      <div className={styles.resaleSection}>
+        <div className="container">
           <div className={styles.resaleHeader}>
             <div className={styles.resaleTitle}>
               <h3>Resale</h3>
@@ -315,9 +486,96 @@ const DeveloperShow = (developerData) => {
               </span>
             </div>
           </div>
-          </div>
-         
+        </div>
 
+        {isMobileView ? (
+          <div className={styles.listView}>
+            {rentalListings.map((listing) => (
+              <div key={listing.id} className={styles.listItem}>
+                <div className={styles.propertyImage}>
+                  <Image
+                    src={
+                      listing.main_photo
+                        ? `${
+                            process.env.NEXT_PUBLIC_API_URL
+                          }/storage/${decodeImageUrl(listing.main_photo)}`
+                        : baseimage
+                    }
+                    alt={listing.title}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className={styles.propertyInfo}>
+                  <h4>{listing.title}</h4>
+                  <p className={styles.location}>{listing.location}</p>
+                  <div className={styles.priceContainer}>
+                    <span className={styles.price}>USD {listing.amount}</span>
+                    <span className={styles.price}>AED {listing.amount}</span>
+                  </div>
+                  <div className={styles.propertyStats}>
+                    <div className={styles.stat}>
+                      <Image
+                        src={BedroomIcon}
+                        alt="Bedrooms"
+                        width={20}
+                        height={20}
+                      />
+                      <span>{listing.bedroom} Br</span>
+                    </div>
+                    <div className={styles.stat}>
+                      <Image
+                        src={BathroomIcon}
+                        alt="Bathrooms"
+                        width={20}
+                        height={20}
+                      />
+                      <span>{listing.bathroom} Ba</span>
+                    </div>
+                    <div className={styles.stat}>
+                      <Image
+                        src={AreaVector}
+                        alt="Area"
+                        width={20}
+                        height={20}
+                      />
+                      <span>{listing.sq_ft} Sq.Ft</span>
+                    </div>
+                  </div>
+                  <div className={styles.propertyDetails}>
+                    <p>6,115 Sq. Ft. BUA</p>
+                    <p>10,111 Sq. Ft. PLOT</p>
+                    <p>Lime Tree Valley</p>
+                    <p>Trakheesi Permit: 6123123124512</p>
+                  </div>
+                  <div className={styles.resaleFooter}>
+                    <div className={styles.agentInfo}>
+                      <Image
+                        src={listing.agent_image || agentInfo}
+                        alt="Agent"
+                        width={40}
+                        height={40}
+                        className={styles.agentImage}
+                      />
+                      <span>{listing.agent_title || "Darren Murphy"}</span>
+                    </div>
+                    <div className={styles.footerActions}>
+                      <button className={styles.footerButton}>
+                        <BsWhatsapp size={20} color="#34C759" />
+                        
+                      </button>
+                      <div className={styles.footerSeparator}>|</div>
+                      <button className={styles.footerButton}>
+                        <Image src={callVector} alt="Call" />
+                       
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
           <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
             {rentalListings.map((listing) => (
               <div key={listing.id} className={styles.resaleCard}>
@@ -404,7 +662,9 @@ const DeveloperShow = (developerData) => {
               </div>
             ))}
           </Slider>
-        </div>
+        )}
+      </div>
+
       {/* Add Awards Section after resaleSection */}
       <div className={styles.awardsSection}>
         <div className={styles.awardsContainer}>
@@ -465,9 +725,8 @@ const DeveloperShow = (developerData) => {
         </div>
       </div>
       <div className="container">
-      <SubscribeSection />
+        <SubscribeSection />
       </div>
-      
     </div>
   );
 };

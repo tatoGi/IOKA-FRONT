@@ -208,7 +208,7 @@ margin-top: 2px;
     }
 
     .card-img-top {
-        width: 354px !important;
+        width: 100% !important;
     height: 200px !important;
     border-radius:0%;
 
