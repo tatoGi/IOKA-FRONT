@@ -753,6 +753,7 @@ margin-bottom: 24px;
   
     .resaleContent {
       padding: 16px;
+      width: 100% !important;
     }
   
     .resaleContent h4 {
@@ -809,8 +810,17 @@ margin-bottom: 24px;
     }
   
     .resaleFooter {
-      border-top: 1px solid #eee;
-      padding-top: 12px;
+      display: flex
+      ;
+          align-items: center !important;
+          justify-content: space-between !important;
+          margin-top: auto;
+          margin-left: -32px !important;
+          margin-right: -36px !important;
+          margin-bottom: -24px !important;
+          background-color: #E6EBED;
+          border-bottom-right-radius: 12px !important;
+          height: 60px;
     }
   
     .footerActions {
@@ -823,13 +833,13 @@ margin-bottom: 24px;
     .footerButton {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 4px !important;
       background: none;
       border: none;
       font-size: 14px;
       color: #333;
       cursor: pointer;
-      padding: 0;
+      padding: 0px 14px !important;
     }
   
     .footerSeparator {
