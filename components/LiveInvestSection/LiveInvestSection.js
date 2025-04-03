@@ -133,7 +133,7 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
       </div>
       <div className={styles.topWhiteDiv}></div>
       <div className={styles.bottomWhiteDiv}></div>
-      <div className={styles.statItems}>
+      <div className={`container ${ styles.statItems }`}>
         {additionalFields.rolling_numbers.map((item, index) => (
           <div
             key={index}

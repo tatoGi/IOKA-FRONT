@@ -256,7 +256,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 105px;
     height: 100%; 
   }
   .tab {
@@ -332,13 +331,12 @@
 
   .search-button {
     position: absolute;
-    right: -25px;
+    right: -22px;
     background: #7BCBC7;
     color: white;
     border-radius: 40px;
     width: 32px;
     border: 1px #E6EBED solid;
-    height: 32px;
     cursor: pointer;
     display: flex;
     align-items: center;

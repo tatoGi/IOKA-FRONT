@@ -14,6 +14,7 @@ import Clients from "../Clients/Clients";
 import { LoadingWrapper } from "../LoadingWrapper/index";
 import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
+import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
 
 const Hombanner = ({ initialData }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -26,6 +27,7 @@ const Hombanner = ({ initialData }) => {
   const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const router = useRouter(); // Initialize useRouter
+  const isMobile = useMediaQuery({ maxWidth: 768 }); // Check if the view is mobile
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,9 +91,13 @@ const Hombanner = ({ initialData }) => {
      <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
      <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
      <PartnersSection />
-     <div className="container">
-     <SubscribeSection />
-     </div>
+     {isMobile ? (
+       <SubscribeSection /> // Render without container for mobile
+     ) : (
+       <div className="container">
+         <SubscribeSection /> // Render with container for larger screens
+       </div>
+     )}
     </div>
   );
 };

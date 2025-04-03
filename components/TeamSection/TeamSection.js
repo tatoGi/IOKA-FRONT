@@ -12,7 +12,7 @@ const TeamSection = ({ sectionDataFive }) => {
 
   return (
     <div className="team-section">
-      <div className="container">
+      <div className="container-lg">
         <div className="team-all-link">
           <Link href={redirectLink} className="team-all-link-touch">
             {MainTitle}

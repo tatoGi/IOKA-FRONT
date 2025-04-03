@@ -13,7 +13,9 @@
   display: flex;
   float: right;
 }
-
+.filterButtons_mobile{
+  display: none !important;
+}
 .buttonGroup {
   display: flex;
   gap: 8px;
@@ -204,7 +206,6 @@
     color: #0A273B;
     text-align: center;
     margin-bottom: 24px;
-    margin-top: 24px;
   }
 
   .propertyCard {
@@ -347,9 +348,7 @@
   .propertyCardTitle {
     font-size: 36px; /* Reduced font size */
   }
-  .filterButtons_mobile{
-    display: none;
-  }
+  
   .propertyContent {
     gap: 1.5rem; /* Reduced gap */
   }

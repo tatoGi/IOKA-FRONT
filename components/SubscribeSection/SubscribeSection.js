@@ -10,15 +10,15 @@ const SubscribeSection = () => {
           <div className="s-t-0">GET FIRST UPDATE</div>
           <div className="s-t-1">
             Get the news in front line by{' '}
-            <span>subscribe</span> our latest updates
+            <span>subscribing</span> to our latest updates
           </div>
         </div>
         <div className="middle-image-sub">
-          <Image src={ConstrImage} alt="dubai image" />
+          <Image src={ConstrImage} alt="Dubai skyline" />
         </div>
         <div className="subscribe-form">
           <form action="">
-            <input type="text" placeholder="Your Email" />
+            <input type="email" placeholder="Your email" />
             <button type="submit">Subscribe</button>
           </form>
         </div>

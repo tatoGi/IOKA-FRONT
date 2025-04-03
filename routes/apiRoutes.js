@@ -11,5 +11,6 @@ export const ABOUT_API = `${API_BASE_URL}/about`;
 export const CONTACT_API = `${API_BASE_URL}/contact`;
 export const CONTACT_SUBMISSION_API = `${API_BASE_URL}/contact/submissions`;
 export const SEARCH_API = `${API_BASE_URL}/search`;
+export const FILTER_OFFPLAN_API = `${API_BASE_URL}/offplans/filter`;
 // Add more routes as needed
 

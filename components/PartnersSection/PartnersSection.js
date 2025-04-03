@@ -50,6 +50,12 @@ const PartnersSection = () => {
                 slidesPerView: 4,
                 spaceBetween: 20,
               },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+                slideHeight: 101, // Custom height for mobile
+                slideWidth: 91,   // Custom width for mobile
+              },
               1024: {
                 slidesPerView: 6,
                 spaceBetween: 30,
@@ -66,8 +72,9 @@ const PartnersSection = () => {
                   <Image 
                     src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : homeBanner} 
                     alt={partner.title} 
-                    width={200} 
-                    height={100} 
+                    width={80} 
+                    height={80} 
+                    style={{ borderRadius: '50%' }} // Ensure circular images
                   />
                   <div className="partner-title">{partner.title}</div>
                 </Link>

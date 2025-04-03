@@ -264,6 +264,8 @@
     /* Full width for mobile */
     height: 180px;
     /* Adjusted height */
+    margin-bottom: 16px; /* Add spacing between items */
+    margin: 0 auto; /* Center the items */
   }
 
   .popular-area-title {
@@ -344,6 +346,14 @@
     width: 100%;
     border-radius: 8px;
   }
+
+  .popular-area-slider .slick-slide {
+    padding: 0 8px; /* Add spacing between slider items */
+  }
+
+  .popular-area-slider {
+    height: 140px; /* Match area-item height */
+  }
 }
 @media (max-width: 600px) {
   .container {
@@ -385,10 +395,7 @@
     max-width: 320px;
 }
 
-  .news-item,
-  .news-slider-s .swiper-slide {
-    width: 280px !important;
-  }
+
 
   /* Adjust subscribe section for smaller screens */
   .subscribe-form input {
@@ -657,21 +664,24 @@
     display: flex;
     justify-content: center;
   }
-
+  .popular-area-slider{
+    height: 220px;
+  }
   .area-item {
-    width: 100%;
+    width: 320px !important;
     height: 180px;
-    max-width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-right: 16px;
   }
 
   .area-item img {
     margin: 0 auto;
     display: block;
+    border-radius: 16px;
   }
 
   .off-relase-box {
@@ -705,9 +715,6 @@
     display: none;
   }
 
-  .area-item {
-    width: 100% !important;
-  }
 
   .team-box {
     display: none;
@@ -744,7 +751,7 @@
 
   .team-section {
     text-align: center;
-    padding: 20px;
+    padding: 0px;
     background-color: #0A273B;
   }
 
@@ -755,18 +762,18 @@
     align-items: center;
   }
   .team-item img {
-    width: 324px;
-    height: 328px;
+    width: 100%;
     border-radius: 16px;
-    object-fit: contain;
+    object-fit: cover;
     height: 222px;
+    max-width: 354px;
 }
   .team-item {
     background-color: #0a273b;
     padding: 16px;
     border-radius: 8px;
-    width: 90%;
-    max-width: 320px;
+    width: 100%;
+    align-items: center;
   }
   .team-section .team-all-link-touch{
     display: none;
@@ -789,7 +796,8 @@
   }
 
   .team-button {
-    margin-top: 24px;
+    padding: 24px;
+    display: block;
   }
 
   .team-section .get-in-touch-button {
@@ -807,6 +815,7 @@
     border: 1px #FFFFFF solid;
     background-color: #0A273B;
     color: #ffffff;
+    display: block;
   }
 
   .get-in-touch-button:hover {
@@ -834,6 +843,7 @@ text-align: center;
     color: #ffffff;
     font-weight: 400;
     font-family: 'Montserrat';
+    text-align: center;
 }
 
   .news-header {
@@ -863,10 +873,94 @@ text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    max-width: 100%;
-    padding: 19px 28px;
+    gap: 16px;
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f9f9f9;
   }
+
+  .left-s-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .left-s-text .s-t-0 {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #07151f;
+  }
+
+  .left-s-text .s-t-1 {
+    font-size: 14px;
+    color: #07151f;
+  }
+
+  .left-s-text .s-t-1 span {
+    color: #00a6e8;
+    font-weight: bold;
+  }
+
+  .middle-image-sub {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .middle-image-sub img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .subscribe-form {
+    width: 100%;
+  }
+
+  .subscribe-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .subscribe-form input {
+    width: 100%;
+    height: 44px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .subscribe-form button {
+    height: 44px;
+    background-color: #00a6e8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .subscribe-form button:hover {
+    background-color: #008ac6;
+  }
+
+  .subscribe-box {
+    padding: 20px 0px;
+    border-radius: 16px;
+    /* background: #E6EBED; */
+    height: 220px;
+    display: flex
+;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
 
   .left-s-text {
     display: flex;
@@ -984,6 +1078,40 @@ text-align: center;
     margin: 20px auto;
     max-height: 90vh;
     overflow-y: auto;
+  }
+  .partners-section{
+    padding-top: 24px;
+    padding-bottom: 0;
+  }
+  .partners-section .container{
+    padding: 0;
+    margin: 0;
+  }
+  .partner-section .swiper-slide{
+    width: 91px !important;
+    height: 108px !important;
+  }
+  .partners-title {
+    font-size: 16px;
+    color: #0A273B;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    text-align: center;
+}
+  .partner-swiper-slide .swiper-slide {
+    width: 91px !important;
+    height: 101px !important;
+  }
+
+  .partners-slider-item img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50%; /* Ensure circular images */
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+  .subscribe-section{
+    margin: 0;
+    
   }
 }
 
