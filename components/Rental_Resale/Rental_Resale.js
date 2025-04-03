@@ -272,7 +272,7 @@ const Rental_Resale = () => {
           </button>
         </div>
 
-        <SearchSection />
+        {/* <SearchSection /> */}
 
         <div className={Styles.resaleSection}>
           <div className={Styles.resaleHeader}>

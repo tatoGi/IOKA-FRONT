@@ -90,3 +90,87 @@ margin-bottom: 16px;
     margin-bottom: 20px;
      font-family: 'Montserrat';
 }
+@media (max-width: 768px) {
+    .banner_image{
+        width: 100%;
+        height: 240px !important;
+        border-radius: 0%;
+    }
+    .title{
+        font-family: 'Montserrat';
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        margin-top: 16px;
+        
+    }
+    .date{
+        display: flex;
+        gap: 10px;
+        margin-top: 16px !important;
+        margin-bottom: 16px !important;
+         font-family: 'Montserrat';
+    }
+    
+    .formattedDate{
+        font-family: 'Montserrat';
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+color: #0A273B;
+
+    }
+    .description{
+        font-family: 'Montserrat';
+font-weight: 400;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+
+    }
+    .sidebar h3 {
+        font-family: 'Montserrat';
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+
+    }
+    .similarArticles {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .similarArticles .card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        box-shadow: none;
+        margin-top: 24px;
+    }
+    .similarArticles .card-img-top {
+        width: 120px; /* Corrected width */
+        height: 70px; /* Corrected height */
+        border-radius: 8px;
+        object-fit: cover; /* Ensures the image fits properly */
+    }
+    .similarArticles .card-body {
+        padding: 0;
+    }
+    .similarArticles .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .similarArticles .formattedDate {
+        font-size: 12px;
+        color: #555;
+    }
+    .similarArticles .card-button {
+        display: none;
+    }
+}

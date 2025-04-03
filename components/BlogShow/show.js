@@ -30,12 +30,24 @@ const handleReadMore = (slug) => {
 };
   return (
     <div>
-      <div className={`container ${styles.blogShow}`}>
+      <div className={`d-none d-md-block container ${styles.blogShow}`}>
+        {/* Container applied only for non-mobile resolutions */}
         <Image 
           src={blogData.blog.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.banner_image )}` : baseimage} 
           alt={blogData.blog.banner_image_alt} 
           width={800} 
           height={400} 
+          
+        />
+      </div>
+      <div className="d-block d-md-none">
+        {/* Direct image for mobile resolutions */}
+        <Image 
+          src={blogData.blog.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.banner_image )}` : baseimage} 
+          alt={blogData.blog.banner_image_alt} 
+          width={800} 
+          height={400} 
+          className={styles.banner_image}
         />
       </div>
       <div className="container">
@@ -52,7 +64,7 @@ const handleReadMore = (slug) => {
               <div dangerouslySetInnerHTML={{ __html: blogData.blog.body }} /> {/* Display the blog body */}
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 d-none d-md-block">
             <div className={styles.sidebar}>
               <h3>Similar Articles</h3>
               {blogData.related_blogs && blogData.related_blogs.map((card, index) => (
@@ -81,6 +93,26 @@ const handleReadMore = (slug) => {
                 </div>
               ))}
             </div>
+          </div>
+          <div className={`d-block d-md-none ${styles.similarArticles}`}>
+            <h3>Similar Articles</h3>
+            {blogData.related_blogs && blogData.related_blogs.map((card, index) => (
+              <div className={`card ${styles.card}`} key={index}>
+                <Image
+                  src={card.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}` : baseimage} 
+                  className={`card-img-top ${styles["card-img-top"]}`}
+                  alt={card.image_alt} 
+                  width={100}
+                  height={80}
+                />
+                <div className={`card-body ${styles["card-body"]}`}>
+                  <h5 className={`card-title ${styles["card-title"]}`}>
+                    {card.title}
+                  </h5>
+                  <p className={styles.formattedDate}>{formatDate(card.date)}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

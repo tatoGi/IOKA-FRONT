@@ -200,9 +200,11 @@ margin-top: 2px;
 /* Mobile specific styles */
 @media (max-width: 768px) {
     .card {
-        margin-bottom: 16px;
+        margin-top: 24px;
         border-radius: 12px;
         box-shadow: none;
+        height: auto !important;
+        margin-bottom: 0px !important;
     }
 
     .card-img-top {

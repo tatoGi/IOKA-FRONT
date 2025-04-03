@@ -354,6 +354,87 @@
   .popular-area-slider {
     height: 140px; /* Match area-item height */
   }
+
+  .footer {
+    text-align: center;
+    padding: 20px 10px;
+    background-color: #07151F;
+    color: #fff;
+  }
+
+  .footer-logo {
+    margin-bottom: 16px;
+  }
+
+  .footer .footer-contant {
+    margin-bottom: 16px;
+  }
+
+  .footer .footer-category {
+    margin-bottom: 16px;
+  }
+
+  .footer .footer-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer .footer-category ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer .footer-contact-links {
+    margin-bottom: 16px;
+  }
+
+  .footer .footer-contact-links .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .footer .footer-contact-links .footer-contact-item .icon-00 {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer .soc-icons-b {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .footer .soc-icons-b .soc-icon-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  .footer .copyright-0 {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+
+  .footer .copyright-0 .r-c ul {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+    margin: 8px 0 0;
+    list-style: none;
+  }
+
+  .footer .copyright-0 .r-c ul li {
+    font-size: 12px;
+    color: #fff;
+  }
 }
 @media (max-width: 600px) {
   .container {
@@ -869,97 +950,19 @@ text-align: center;
     background: #fff;
   }
 
-  .subscribe-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    max-width: 360px;
-    padding: 20px;
-    border-radius: 16px;
-    background: #f9f9f9;
-  }
-
-  .left-s-text {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .left-s-text .s-t-0 {
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #07151f;
-  }
-
-  .left-s-text .s-t-1 {
-    font-size: 14px;
-    color: #07151f;
-  }
-
-  .left-s-text .s-t-1 span {
-    color: #00a6e8;
-    font-weight: bold;
-  }
-
-  .middle-image-sub {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .middle-image-sub img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .subscribe-form {
-    width: 100%;
-  }
-
-  .subscribe-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .subscribe-form input {
-    width: 100%;
-    height: 44px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-
-  .subscribe-form button {
-    height: 44px;
-    background-color: #00a6e8;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .subscribe-form button:hover {
-    background-color: #008ac6;
-  }
-
-  .subscribe-box {
+.subscribe-box {
     padding: 20px 0px;
     border-radius: 16px;
     /* background: #E6EBED; */
-    height: 220px;
+    height: 100%;
     display: flex
 ;
     justify-content: space-between;
     align-items: center;
     position: relative;
     width: 100%;
+    background-color: #ffffff;
+    flex-wrap: wrap;
 }
 
   .left-s-text {
@@ -992,12 +995,16 @@ text-align: center;
     color: #00A6E8;
     text-decoration: none;
   }
-
   .middle-image-sub {
     width: 100%;
-    max-width: 320px;
-    margin: 16px 0;
-  }
+    max-width: 140px;
+    /* margin: 16px 0; */
+    height: 100%;
+    left: 80%;
+    /* align-items: end; */
+    justify-content: stretch;
+    top: 18%;
+}
 
   .middle-image-sub img {
     width: 100%;
@@ -1007,7 +1014,6 @@ text-align: center;
 
   .subscribe-form {
     width: 100%;
-    max-width: 354px;
     margin-top: 20px;
   }
 
@@ -1018,7 +1024,7 @@ text-align: center;
   }
 
   .subscribe-form input {
-    width: 100% !important;
+    width: 220px !important;
     height: 44px !important;
     border-radius: 8px !important;
     border: 1px #07151F solid !important; 
@@ -1032,7 +1038,7 @@ text-align: center;
   }
 
   .subscribe-form button {
-    width: 100% !important;
+    width: 120px !important;
     height: 44px !important;
     gap: 10px;
     border-radius: 8px;
@@ -1113,6 +1119,14 @@ text-align: center;
     margin: 0;
     
   }
+  .footer-logo {
+    display: block;
+    width: 100%;
+    /* align-items: center; */
+    justify-content: center;
+    text-align: center;
+    margin-top: 24px;
+}
 }
 
 @media (min-width: 769px) {
