@@ -53,7 +53,7 @@
 }
 
 .propertyDetails h2 {
-  font-size: 32px;
+  font-size: 30px;
   color: #0A273B;
   margin-bottom: 16px;
   font-family: 'Montserrat';
@@ -73,21 +73,21 @@
 .aedPricestart{
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
   
 }
 .aedPrice {
   color: #007AFF;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   font-family: 'Montserrat';
 }
 
 .usdPrice {
   color: #007AFF;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   font-family: 'Montserrat';
 }
@@ -101,9 +101,6 @@
   margin-bottom: 30px;
   margin-right: 133px;
   font-family: 'Montserrat';
-font-weight: 500;
-font-size: 20px;
-line-height: 1.3;
 letter-spacing: 0%;
 
 }
@@ -113,8 +110,9 @@ letter-spacing: 0%;
   line-height: 1.6;
   margin-bottom: 16px;
   font-family: 'Montserrat';
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
+
 }
 
 .readMore {
