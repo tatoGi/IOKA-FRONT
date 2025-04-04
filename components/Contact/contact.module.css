@@ -179,7 +179,8 @@
   }
 
   .infoSection {
-    padding: 2rem;
+    padding: 0;
+    text-align: center; /* Center text on smaller screens */
   }
 }
 

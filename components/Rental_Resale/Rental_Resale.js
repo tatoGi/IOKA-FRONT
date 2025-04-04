@@ -337,6 +337,23 @@ const Rental_Resale = () => {
 
                   {/* Mobile view slider */}
                   <div className={Styles.mobileImageSlider}>
+                    <button
+                      className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
+                      onClick={() =>
+                        setCurrentImageIndex((prev) => Math.max(prev - 1, 0))
+                      }
+                      disabled={currentImageIndex === 0}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M15 18L9 12L15 6"
+                          stroke="#FFFFFF"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
                     <div
                       className={Styles.slideContainer}
                       ref={slideRef}
@@ -366,7 +383,25 @@ const Rental_Resale = () => {
                         </div>
                       ))}
                     </div>
-
+                    <button
+                      className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
+                      onClick={() =>
+                        setCurrentImageIndex((prev) =>
+                          prev + 1 < galleryImages.length ? prev + 1 : prev
+                        )
+                      }
+                      disabled={currentImageIndex === galleryImages.length - 1}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M9 18L15 12L9 6"
+                          stroke="#FFFFFF"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
                     <div className={Styles.slideIndicators}>
                       {galleryImages.map((_, index) => (
                         <div

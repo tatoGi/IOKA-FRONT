@@ -19,7 +19,9 @@ a {
 main {
   display: block !important;
 }
-
+.right-search-contact-mobile{
+  display: none;
+}
 /* Header */
   .mobile-burger-menu{
     display: none;

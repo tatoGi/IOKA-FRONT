@@ -489,8 +489,6 @@ margin-bottom: 24px;
     padding-top: 16px;
   }
   
-  
-  
   .whatsappButton {
     display: flex;
     align-items: center;
@@ -916,7 +914,6 @@ text-align: right;
     cursor: pointer;
     height: 380px;
   }
-  
   
   .resaleImage {
     position: relative;
@@ -1400,16 +1397,38 @@ letter-spacing: 0%;
   overflow: hidden;
 }
 
-.slideContainer {
+.sliderArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  transition: transform 0.3s ease-in-out;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
 }
 
-.slide {
-  flex: 0 0 100%;
-  position: relative;
-  height: 100%;
+.prevArrow {
+  left: 8px;
+}
+
+.nextArrow {
+  right: 8px;
+}
+
+.sliderArrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sliderArrow svg {
+  width: 16px;
+  height: 16px;
 }
 
 .slideIndicators {

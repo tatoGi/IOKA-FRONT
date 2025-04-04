@@ -1060,6 +1060,9 @@ letter-spacing: 0%;
   background-color: #4DEFE1;
 }
 @media (max-width: 768px) {
+  .heroSection{
+    padding: 0;
+  }
   .heroContent {
     flex-direction: column;
     gap: 24px;
@@ -1069,6 +1072,7 @@ letter-spacing: 0%;
     margin-bottom: 16px;
     max-width: 100%;
     max-height: 236px;
+    margin-top: 24px;
   }
   .developerInfo h2{
     font-family: 'Montserrat';
@@ -1111,7 +1115,6 @@ letter-spacing: 0%;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 24px;
   }
 
   .listItem {
@@ -1132,62 +1135,80 @@ letter-spacing: 0%;
 
   .listItem .propertyType {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    background: #007AFF;
-    color: white;
+    top: 74%;
+    left: 10px;
+    background: #FFFFFF;
+    color: #07151F;
     padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 11px;
+    font-size: 14px;
     font-weight: 600;
     z-index: 1;
+    /* bottom: 5px; */
+    width: 123px;
+    height: 32px;
   }
 
   .listItem .propertyYear {
     position: absolute;
-    top: 16px;
+    top: 74%;
     right: 16px;
     background: #07151F;
     color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 10px 0px;
+    border-radius: 14px;
     font-size: 12px;
     font-weight: 600;
     z-index: 1;
+    text-align: center;
+    align-items: center;
   }
 
   .listItem .propertyInfo {
     padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+        display: flex
+;
+        flex-direction: column;
   }
+  
 
   .listItem .propertyInfo h4 {
     font-size: 16px;
     color: #0A273B;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    font-family: 'Montserrat';
+    margin-top: 16px;
   }
 
   .listItem .propertyInfo .location {
-    font-size: 14px;
-    color: #7ACBC4;
-    margin-bottom: 8px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-bottom: 4px;
+    
   }
 
   .listItem .priceContainer {
-    display: flex;
-    gap: 8px;
+    font-family: 'Montserrat';
+    font-weight: 500;
     font-size: 16px;
-    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0%;
     color: #0A273B;
+    margin: 0;
+    
   }
 
   .listItem .propertyStats {
     display: flex;
-    gap: 16px;
-    margin-top: 8px;
+    gap: 24px;
+    margin-top: 13px;
+    padding: 0;
+    margin-bottom: 8px;
   }
 
   .listItem .stat {
@@ -1196,16 +1217,16 @@ letter-spacing: 0%;
     gap: 4px;
     font-size: 12px;
     color: #07151F;
-    width: 100%;
   }
   .listItem .stat img{
     max-width: 20px;
-    max-height: 15px;
+    max-height: 14px;
   }
   .listItem .propertyDetails {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #666666;
+    font-size: 12px !important;
+        color: #0A273B;
+        gap: 4px;
+        margin-bottom: 12px;
   }
 
   .listItem .propertyActions {
@@ -1220,19 +1241,42 @@ letter-spacing: 0%;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 8px 0px;
     border: 1px solid #E5E5E5;
     border-radius: 4px;
     background: #F5F6F7;
-    font-size: 14px;
-    font-weight: 500;
+   
     cursor: pointer;
+  }
+  .listItem .actionButton span {
+    color: #1A1A1A;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Montserrat';
   }
 
   .listItem .actionButton:hover {
     background: #E8E9EA;
   }
-
+  .show_more_button{
+    width: 354px;
+height: 44px;
+top: 2918px;
+left: 24px;
+border-radius: 8px;
+padding-top: 12px;
+padding-right: 36px;
+padding-bottom: 12px;
+padding-left: 36px;
+gap: 10px;
+    background-color: #0A273B;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .resaleSection{
+    padding: 40px 24px;
+    background-color: #fff;
+  }
   .resaleFooter {
     display: flex;
     align-items: center;

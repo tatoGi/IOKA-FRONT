@@ -19,6 +19,18 @@ const MapComponent = dynamic(() => import("../Map/Map"), {
 
 const Contact = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || {});
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Check on initial render
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
@@ -46,48 +58,50 @@ const Contact = ({ initialData, id }) => {
         <div className={`row align-items-stretch ${styles.rowWithBorder}`}>
           <div className="col-md-6 d-flex flex-column">
             <div className={styles.infoSection}>
-              <h2>{cardData.additional_fields?.subtitle}</h2>
+              {!isMobile && <h2>{cardData.additional_fields?.subtitle}</h2>}
               <h1>{cardData.additional_fields?.title}</h1>
               <div
                 dangerouslySetInnerHTML={{
                   __html: cardData.additional_fields?.description,
                 }}
               ></div>
-              <div className={styles.contactDetails}>
-                {cardData.additional_fields?.phone_numbers?.map((phone, index) => (
-                  <div key={index} className={styles.contactItem}>
-                    <span className={styles.iconWrapper}>
-                      <FaPhone className={styles.icon_call} />
-                    </span>
-                    <div>
-                      <h3>Have any question?</h3>
-                      <p>{phone.phone}</p>
+              {!isMobile && (
+                <div className={styles.contactDetails}>
+                  {cardData.additional_fields?.phone_numbers?.map((phone, index) => (
+                    <div key={index} className={styles.contactItem}>
+                      <span className={styles.iconWrapper}>
+                        <FaPhone className={styles.icon_call} />
+                      </span>
+                      <div>
+                        <h3>Have any question?</h3>
+                        <p>{phone.phone}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                {cardData.additional_fields?.email_addresses?.map((email, index) => (
-                  <div key={index} className={styles.contactItem}>
-                    <span className={styles.iconWrapper}>
-                      <FaEnvelope className={styles.icon} />
-                    </span>
-                    <div>
-                      <h3>Write email</h3>
-                      <p>{email.email}</p>
+                  ))}
+                  {cardData.additional_fields?.email_addresses?.map((email, index) => (
+                    <div key={index} className={styles.contactItem}>
+                      <span className={styles.iconWrapper}>
+                        <FaEnvelope className={styles.icon} />
+                      </span>
+                      <div>
+                        <h3>Write email</h3>
+                        <p>{email.email}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                {cardData.additional_fields?.locations?.map((location, index) => (
-                  <div key={index} className={styles.contactItem}>
-                    <span className={styles.iconWrapper}>
-                      <FaMapMarkerAlt className={styles.icon} />
-                    </span>
-                    <div>
-                      <h3>Visit anytime</h3>
-                      <p>{location.address}</p>
+                  ))}
+                  {cardData.additional_fields?.locations?.map((location, index) => (
+                    <div key={index} className={styles.contactItem}>
+                      <span className={styles.iconWrapper}>
+                        <FaMapMarkerAlt className={styles.icon} />
+                      </span>
+                      <div>
+                        <h3>Visit anytime</h3>
+                        <p>{location.address}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <div className="col-md-6">
@@ -96,6 +110,43 @@ const Contact = ({ initialData, id }) => {
             </div>
           </div>
         </div>
+        {isMobile && (
+          <div className={styles.contactDetails}>
+            {cardData.additional_fields?.phone_numbers?.map((phone, index) => (
+              <div key={index} className={styles.contactItem}>
+                <span className={styles.iconWrapper}>
+                  <FaPhone className={styles.icon_call} />
+                </span>
+                <div>
+                  <h3>Have any question?</h3>
+                  <p>{phone.phone}</p>
+                </div>
+              </div>
+            ))}
+            {cardData.additional_fields?.email_addresses?.map((email, index) => (
+              <div key={index} className={styles.contactItem}>
+                <span className={styles.iconWrapper}>
+                  <FaEnvelope className={styles.icon} />
+                </span>
+                <div>
+                  <h3>Write email</h3>
+                  <p>{email.email}</p>
+                </div>
+              </div>
+            ))}
+            {cardData.additional_fields?.locations?.map((location, index) => (
+              <div key={index} className={styles.contactItem}>
+                <span className={styles.iconWrapper}>
+                  <FaMapMarkerAlt className={styles.icon} />
+                </span>
+                <div>
+                  <h3>Visit anytime</h3>
+                  <p>{location.address}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className={`container ${styles.containerWithMargin}`}>
         <ContactForm />

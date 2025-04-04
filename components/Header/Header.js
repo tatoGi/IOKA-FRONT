@@ -120,7 +120,11 @@ const Header = ({ navigationData }) => {
               </div>
 
               {/* Mobile Burger Menu */}
-              <div className="mobile-burger-menu" onClick={toggleMobileMenu}>
+              <div
+                className="mobile-burger-menu"
+                style={{ height: "42px", alignSelf: "center" }} // Adjust height and alignment
+                onClick={toggleMobileMenu}
+              >
                 <div
                   className={`burger-lines ${isMobileMenuOpen ? "open" : ""}`}
                 >
@@ -148,19 +152,23 @@ const Header = ({ navigationData }) => {
                 </ul>
               </div>
 
-              <div className="right-search-contact">
+              <div className="right-search-contact" style={{ height: "42px" }}> {/* Adjust height */}
                 <div className="right-form">
                   <form onSubmit={handleSearch}>
                     <input
                       type="text"
-                      ref={inputRef} 
+                      ref={inputRef}
                       value={inputValue}
                       onChange={handleInputChange}
                     />
                     <button type="submit" className="searchbtn">
                       <SearchBtn />
                     </button>
-                    <button type="button" className="clearbtn" onClick={handleClear}>
+                    <button
+                      type="button"
+                      className="clearbtn"
+                      onClick={handleClear}
+                    >
                       <SearchCloseBtn />
                     </button>
                   </form>

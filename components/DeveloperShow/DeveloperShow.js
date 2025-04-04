@@ -325,7 +325,9 @@ const DeveloperShow = (developerData) => {
                       </div>
                     </div>
                   </div>
+                 
                 ))}
+                 <div className={styles.show_more_button}>Show more properties</div>
               </div>
             ) : (
               <div className={styles.sliderWrapper}>
