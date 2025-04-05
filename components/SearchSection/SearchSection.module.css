@@ -153,45 +153,6 @@
     /* Prevent shrinking */
   }
 }
-
-@media (max-width: 1024px) {
-  .searchBar {
-    width: 100%;
-  }
-}
-
-@media (max-width: 1300px) {
-  .searchBar {
-    width: 100%;
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 7px 11px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .searchSection {
-    width: 100%;
-  }
-
-  .searchBar {
-    width: 100%;
-  }
-
-  .filterButtons {
-    flex-wrap: wrap;
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-}
-
 @media (max-width: 1600px) {
   .searchSection {
     width: 100%;
@@ -212,3 +173,52 @@
     font-size: 15px;
   }
 }
+
+@media (max-width: 1400px) {
+  .searchSection {
+    width: 100%;
+  }
+  .container{
+    display: flex;
+    align-items: center;
+    gap: 13.4px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+  .searchBar {
+    width: 100%;
+  }
+
+  .filterButtons {
+    flex-wrap: wrap;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 1300px) {
+  .searchBar {
+    width: 100%;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 7px 11px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 1024px) {
+  .searchBar {
+    width: 100%;
+  }
+}
+
+
+
+
+

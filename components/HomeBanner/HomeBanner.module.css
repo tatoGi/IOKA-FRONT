@@ -233,7 +233,7 @@
   }
   .banner-content h1
   {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .banner-search {
     position: absolute;
@@ -347,5 +347,17 @@
   .search-button svg {
     width: 14px;
     height: 14px;
+  }
+}
+@media (max-width:1200px)
+{
+  .banner-content h1{
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 1067px;
+    margin: 0 auto;
+    font-family: "Felix Titling";
+    letter-spacing: 1px;
   }
 }

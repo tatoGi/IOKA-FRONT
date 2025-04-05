@@ -450,7 +450,7 @@
   .communitiesList {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 3px;
   }
 
   .badge {

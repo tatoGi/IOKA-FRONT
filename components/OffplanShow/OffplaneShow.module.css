@@ -137,6 +137,7 @@ letter-spacing: 0%;
   font-family: 'Montserrat'; /* Apply Montserrat font */
   margin-left: auto;
   margin-right: auto;
+  max-width: 538px;
 }
 
 .qrCardmodern {
@@ -145,6 +146,11 @@ letter-spacing: 0%;
   border-radius: 12px;
   padding: 24px;
   background: #fff;
+  text-align: center;
+  font-family: 'Montserrat';
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 538px;
 }
 
 .qrCardmodern h3 {
@@ -160,6 +166,10 @@ letter-spacing: 0%;
   display: flex;
   gap: 16px; /* Space between QR code and text */
   align-items: center; /* Align items vertically */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  margin: 0 auto; /* Center the content */
+  padding: 0 15px; /* Add padding for better spacing */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 .qrbody img{
   width: 149px;
@@ -1139,5 +1149,56 @@ letter-spacing: 0%;
     padding: 0;
     overflow-x: hidden; /* Hide horizontal overflow */
     width: 100%;
+  }
+}
+@media (max-width: 1400px) {
+  .qrbody{
+    text-align: center !important;
+    display: block !important;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+}
+@media (max-width: 1200px) {
+  .qrbody{
+    text-align: center !important;
+    display: block !important;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+}
+@media (max-width: 992px) {
+  .qrbody{
+    text-align: center !important;
+        /* display: block !important; */
+        /* text-align: center !important; */
+        align-items: center;
+        display: block;
+        justify-content: center;
+        display: flex !important
+;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+  .qrButtons{
+    display: block;
   }
 }

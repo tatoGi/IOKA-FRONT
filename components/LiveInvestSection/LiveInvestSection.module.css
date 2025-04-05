@@ -68,7 +68,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  
+
 }
 
 .sliderWrapper {
@@ -120,8 +120,10 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 2.5vw; /* Responsive width */
-  height: 2.5vw; /* Responsive height */
+  width: 2.5vw;
+  /* Responsive width */
+  height: 2.5vw;
+  /* Responsive height */
   border-radius: 50%;
   background: white;
   border: none;
@@ -132,16 +134,19 @@
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  font-size: 1.5vw; /* Responsive font size */
+  font-size: 1.5vw;
+  /* Responsive font size */
   color: #8FE3DC;
 }
 
 .prevButton {
-  left: 1.5vw; /* Responsive positioning */
+  left: 1.5vw;
+  /* Responsive positioning */
 }
 
 .nextButton {
-  right: 3vw; /* Responsive positioning */
+  right: 3vw;
+  /* Responsive positioning */
 }
 
 .navButton:hover {
@@ -220,6 +225,9 @@
   margin-bottom: 5%;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  left: 55rem;
 }
 
 .statItem {
@@ -247,7 +255,79 @@
   font-family: "Tenor Sans", sans-serif;
   font-weight: 300;
 }
+
 /* Media Queries for Laptop Screens */
+@media (max-width:1700px) {
+  .liveInvestSection {
+    background-color: #98e5d7;
+    position: relative;
+    overflow: hidden;
+    height: 800px;
+  }
+
+  .content h4 {
+    font-size: 1.5rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+  }
+
+  .content h2 {
+    font-size: 2.5rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .statItems {
+    padding-right: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 10rem;
+  }
+
+  .contactBtn {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+
+  .slide {
+    width: 300px;
+    height: 300px;
+  }
+
+  .statItems {
+    padding-right: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 55rem;
+  }
+
+  .stat_text span {
+    font-size: 2.5rem;
+  }
+
+  .statItem h3 {
+    font-size: 2.5rem;
+  }
+
+  .statItem p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width:1640px) {
+  .statItems {
+    left: 45rem;
+  }
+}
+
 @media (max-width: 1600px) {
   .liveInvestSection {
     background-color: #98e5d7;
@@ -255,7 +335,7 @@
     overflow: hidden;
     height: 770px;
   }
-  
+
   .content h4 {
     font-size: 1.25rem;
     font-family: "Montserrat";
@@ -284,6 +364,16 @@
     font-size: 2rem;
   }
 
+  .statItems {
+    padding-right: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 45rem;
+  }
+
   .statItem h3 {
     font-size: 2rem;
   }
@@ -291,7 +381,8 @@
   .statItem p {
     font-size: 0.875rem;
   }
-  .topWhiteDiv{
+
+  .topWhiteDiv {
     position: absolute;
     width: 565px;
     height: 160px;
@@ -302,7 +393,8 @@
     z-index: 2;
 
   }
-  .bottomWhiteDiv{
+
+  .bottomWhiteDiv {
     position: absolute;
     width: 800px;
     height: 179px;
@@ -313,29 +405,161 @@
     z-index: 1;
 
   }
-  .sliderContainer{
+
+  .sliderContainer {
     position: relative;
     height: 506px;
-    display: flex
-;
+    display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
-  .slide.center{
+
+  .slide.center {
     transform: translateX(0) translateY(110px) scale(1);
     z-index: 3;
     opacity: 1;
   }
-  .prevButton{
+
+  .prevButton {
     left: 1vw;
   }
-  .nextButton{
+
+  .nextButton {
     right: 2.5vw;
   }
 }
-@media (max-width:1200px){
-  .topWhiteDiv{
+
+@media (max-width:1400px) {
+  .liveInvestSection {
+    background-color: #98e5d7;
+    position: relative;
+    overflow: hidden;
+    height: 700px;
+  }
+
+  .content h4 {
+    font-size: 1.25rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+  }
+
+  .content h2 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 0.875rem;
+  }
+
+  .contactBtn {
+    font-size: 0.875rem;
+    padding: 10px 20px;
+  }
+
+  .slide {
+    width: 260px;
+    height: 260px;
+  }
+
+  .statItems {
+    left: 38rem;
+  }
+
+  .stat_text span {
+    font-size: 2rem;
+  }
+
+  .statItem h3 {
+    font-size: 2rem;
+  }
+
+  .statItem p {
+    font-size: 0.875rem;
+  }
+
+  .topWhiteDiv {
+    position: absolute;
+    width: 480px;
+    height: 160px;
+    top: 504px;
+    left: 116px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    z-index: 2;
+
+  }
+
+  .bottomWhiteDiv {
+    position: absolute;
+    width: 710px;
+    height: 179px;
+    top: 592px;
+    left: 0px;
+    background-color: #ffffff;
+    border-top-right-radius: 100px;
+    z-index: 1;
+
+  }
+
+  .sliderContainer {
+    position: relative;
+    height: 506px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden.
+  }
+
+  .slide.center {
+    transform: translateX(0) translateY(110px) scale(1);
+    z-index: 3;
+    opacity: 1;
+  }
+
+  .prevButton {
+    left: 1vw;
+  }
+
+  .nextButton {
+    right: 2.5vw;
+  }
+}
+
+@media (max-width:1200px) {
+  .liveInvestSection {
+    background-color: #98e5d7;
+    position: relative;
+    overflow: hidden;
+    height: 700px;
+  }
+
+  .prevButton {
+    left: 0;
+  }
+
+  .nextButton {
+    right: 0;
+  }
+
+  .statItems {
+
+    margin-bottom: 5%;
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    position: relative;
+    left: 33rem;
+  }
+
+  .statItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1vw;
+  }
+
+  .topWhiteDiv {
     position: absolute;
     width: 463px;
     height: 120px;
@@ -345,17 +569,19 @@
     border-radius: 16px;
     z-index: 2;
   }
-  .bottomWhiteDiv{
+
+  .bottomWhiteDiv {
     position: absolute;
-        width: 620px;
-        height: 160px;
-        top: 611px;
-        left: 0px;
-        background-color: #ffffff;
-        border-top-right-radius: 100px;
-        z-index: 1;
+    width: 620px;
+    height: 160px;
+    top: 611px;
+    left: 0px;
+    background-color: #ffffff;
+    border-top-right-radius: 100px;
+    z-index: 1;
   }
 }
+
 @media (max-width: 1024px) {
   .content h4 {
     font-size: 1rem;
@@ -391,6 +617,91 @@
     font-size: 0.75rem;
   }
 }
+
+@media (max-width:992px) {
+  .liveInvestSection {
+    background-color: #98e5d7;
+    position: relative;
+    overflow: hidden;
+    height: 700px;
+  }
+
+  .prevButton {
+    left: 0;
+  }
+
+  .nextButton {
+    right: 0;
+  }
+
+  .statItems {
+
+    margin-bottom: 5%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 24rem;
+  }
+
+  .statItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1vw;
+  }
+
+  .topWhiteDiv {
+    position: absolute;
+    width: 365px;
+    height: 93px;
+    top: 529px;
+    left: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    z-index: 2;
+  }
+
+  .bottomWhiteDiv {
+    position: absolute;
+    width: 539px;
+    height: 90px;
+    top: 611px;
+    left: 0px;
+    background-color: #ffffff;
+    border-top-right-radius: 100px;
+    z-index: 1;
+  }
+
+  .sliderContainer {
+    position: relative;
+    height: 506px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .slide.center {
+    transform: translateX(0) translateY(110px) scale(1);
+    z-index: 3;
+    opacity: 1;
+  }
+
+  .sliderWrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .slide.left,
+  .slide.right {
+    transform: translateX(0) translateY(50px) scale(0.8);
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+}
+
 @media (max-width: 768px) {
   .liveInvestSection {
     background-color: #E6EBED;
@@ -401,15 +712,15 @@
     height: 616px;
     width: 100%;
   }
-  
-  
+
+
   .content {
     margin-top: 36px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .content h4 {
     font-size: 16px;
     font-weight: 600;
@@ -419,7 +730,7 @@
     font-family: "Montserrat";
     text-align: center;
   }
-  
+
   .content h2 {
     font-size: 16px;
     font-weight: 400;
@@ -433,7 +744,7 @@
     position: static;
     margin: 0 auto;
   }
-  
+
   .content p {
     font-family: 'Montserrat';
     font-weight: 400;
@@ -446,7 +757,7 @@
     margin: 0 auto;
     width: 326px;
   }
-  
+
   .contactBtn {
     background-color: #E6EBED;
     border: none;
@@ -463,13 +774,13 @@
     border: 1px #07151F solid;
     margin: 0;
   }
-  
+
   .contactBtn:hover {
     background-color: #f5f5f5;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
-  
+
   .sliderContainer {
     position: relative;
     height: 222px;
@@ -477,7 +788,7 @@
     padding: 0;
     margin: 24px 0;
   }
-  
+
   .mobileSwiper {
     width: 100%;
     height: 100%;
@@ -517,7 +828,7 @@
     padding-left: 2%;
     font-family: "Felix Titling", sans-serif;
   }
-  
+
   .statImage {
     position: absolute;
     width: 624px;
@@ -528,7 +839,7 @@
     background-color: #ffffff;
     z-index: 6;
   }
-  
+
   .stat_text {
     position: absolute;
     bottom: 0;
@@ -542,7 +853,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .stat_text span {
     font-size: 48px;
     font-weight: 400;
@@ -551,30 +862,35 @@
     color: #000;
     font-family: "Felix Titling", sans-serif;
   }
-  
+
   .topWhiteDiv {
-  display: none;
-  }
-  
-  .bottomWhiteDiv {
-  
     display: none;
   }
-  
-  
+
+  .bottomWhiteDiv {
+
+    display: none;
+  }
+
+
   .statItems {
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 16px;
     width: 100%;
     display: flex;
+    /* flex-wrap: wrap; */
+    left: 0px;
+    width: 100%;
+    padding: 0;
+    gap: 25px;
   }
-  
+
   .statItem {
     display: flex;
     align-items: flex-start;
     gap: 1vw;
   }
-  
+
   .statItem h3 {
     font-size: 24px;
     font-weight: 400;
@@ -583,7 +899,7 @@
     color: #000;
     font-family: "Felix Titling";
   }
-  
+
   .statItem p {
     font-size: 12px;
     color: #000;
@@ -594,12 +910,13 @@
     font-family: "Felix Titling";
     font-weight: 300;
   }
-  .slide.center{
+
+  .slide.center {
     transform: translateX(0) translateY(24px) scale(1);
     z-index: 3;
     opacity: 1;
     width: 100%;
     height: 100%;
-   box-shadow: none;
+    box-shadow: none;
   }
 }

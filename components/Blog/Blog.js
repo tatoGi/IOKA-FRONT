@@ -44,7 +44,7 @@ const Blog = ({ initialData }) => {
 
   const limitTextLength = (text, maxLength) => {
     const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
-    return strippedText.length > maxLength
+    return strippedText.length > maxLength || strippedText.length <= 3
       ? strippedText.substring(0, maxLength) + "..."
       : strippedText;
   };
@@ -84,12 +84,14 @@ const Blog = ({ initialData }) => {
                   }
                   className={styles["card-img-top"]}
                   alt={card.image_alt || card.title}
-                  width={372}
-                  height={200}
+                  width={372} /* Ensure consistent width */
+                  height={200} /* Ensure consistent height */
                   priority={index < 2}
                 />
                 <div className={styles["card-body"]}>
-                  <h5 className={styles["card-title"]}>{card.title}</h5>
+                  <h5 className={styles["card-title"]}>
+                    {limitTextLength(card.title, 40)} {/* Limit title length to 50 characters */}
+                  </h5>
                   <div className={styles.date}>
                     <Image
                       src={BlogIcon}

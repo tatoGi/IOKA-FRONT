@@ -200,7 +200,7 @@ const OffplanShow = ({ offplanData }) => {
       {/* Main Content Inside Container */}
       <div className="container">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-7">
             <div className={style.propertyDetails}>
               <h2>{offplanData.offplan.title}</h2>
               <div className={style.pricing}>
@@ -227,7 +227,7 @@ const OffplanShow = ({ offplanData }) => {
             </div>
           </div>
 
-          <div className="col-md-4 p-0">
+          <div className="col-md-5 p-0">
             <div className={style.qrCard}>
               <div className={style.personalInfo}>
                 <Image

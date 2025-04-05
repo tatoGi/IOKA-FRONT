@@ -95,7 +95,7 @@ const Hombanner = ({ initialData }) => {
        <SubscribeSection /> // Render without container for mobile
      ) : (
        <div className="container">
-         <SubscribeSection /> // Render with container for larger screens
+         <SubscribeSection />
        </div>
      )}
     </div>
