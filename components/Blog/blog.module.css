@@ -201,16 +201,8 @@ margin-top: 2px;
 /* Mobile specific styles */
 @media (max-width:1600px)
 {
-    .title h1 {
-        font-size: 24px;
-        line-height: 100%;
-        margin-bottom: 16px;
-        color: #0A273B;
-        font-weight: 600;
-        font-family: 'Montserrat';
-        margin-top: 44px;
-    }
-    
+   
+   
     .card {
         margin-bottom: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -261,6 +253,7 @@ margin-top: 2px;
         font-weight: 500;
         color: #0A273B;
         font-family: 'Montserrat';
+        height: 25px;
     }
     
     .card-list {
