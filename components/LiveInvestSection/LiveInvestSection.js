@@ -138,7 +138,10 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
           <div
             key={index}
             className={styles.statItem}
-            style={{ marginRight: index === 0 ? "106px" : "0" }}
+            style={{
+              marginRight:
+                index === 0 && !isMobile ? "106px" : "0"
+            }}
           >
             <h3>
               {item.number}

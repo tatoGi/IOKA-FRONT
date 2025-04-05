@@ -1161,7 +1161,7 @@ background-color: #FFFFFF;
   .copyright-0 .r-c ul li {
     font-size: 12px;
   }
-
+  
   .statItems .statItem:first-child {
     margin-right: 2.5rem; /* Changed from 40px to 2.5rem for scalability */
     left: 1rem; /* Added left property for consistent spacing */

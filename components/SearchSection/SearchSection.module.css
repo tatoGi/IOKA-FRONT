@@ -96,11 +96,14 @@
 @media (max-width: 768px) {
   .searchSection {
     margin-top: 16px;
+    
   }
 
   .container {
     flex-direction: column;
     gap: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .searchBar {
