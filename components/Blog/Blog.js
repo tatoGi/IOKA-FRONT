@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import styles from "./blog.module.css"; // Corrected the CSS module import
-import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import styles from "./blog.module.css";
+import baseimage from "../../assets/img/blogimage.png";
 import Image from "next/image";
-import BlogIcon from "../../assets/img/calendaricon.png"; // Ensure this path is correct
+import BlogIcon from "../../assets/img/calendaricon.png";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import axios from "axios";
-import { BLOGS_API } from "../../routes/apiRoutes"; // Import the route
-import { useRouter } from "next/router"; // Import useRouter
+import { BLOGS_API } from "../../routes/apiRoutes";
+import { useRouter } from "next/router";
 import { LoadingWrapper } from "../LoadingWrapper/index";
+import { useMediaQuery } from "react-responsive";
+
 const Blog = ({ initialData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardData, setCardData] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  const router = useRouter(); // Initialize useRouter
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const router = useRouter();
 
   useEffect(() => {
-    // Log the environment variable to ensure it's correctly set
-
-    // Fetch data from the API
     const fetchData = async (page) => {
       setIsLoading(true);
       try {
@@ -43,7 +42,7 @@ const Blog = ({ initialData }) => {
   };
 
   const limitTextLength = (text, maxLength) => {
-    const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
+    const strippedText = text.replace(/(<([^>]+)>)/gi, "");
     return strippedText.length > maxLength || strippedText.length <= 3
       ? strippedText.substring(0, maxLength) + "..."
       : strippedText;
@@ -71,8 +70,6 @@ const Blog = ({ initialData }) => {
         <div className="row">
           {cardData.map((card, index) => (
             <div className="col-md-3 col-12" key={index}>
-              {" "}
-              {/* Full width on mobile */}
               <div className={`${styles.card}`}>
                 <Image
                   src={
@@ -84,13 +81,13 @@ const Blog = ({ initialData }) => {
                   }
                   className={styles["card-img-top"]}
                   alt={card.image_alt || card.title}
-                  width={372} /* Ensure consistent width */
-                  height={200} /* Ensure consistent height */
+                  width={372}
+                  height={200}
                   priority={index < 2}
                 />
                 <div className={styles["card-body"]}>
                   <h5 className={styles["card-title"]}>
-                    {limitTextLength(card.title, 40)} {/* Limit title length to 50 characters */}
+                    {limitTextLength(card.title, 40)}
                   </h5>
                   <div className={styles.date}>
                     <Image
@@ -140,8 +137,15 @@ const Blog = ({ initialData }) => {
           Next
         </button>
       </div>
-      <SubscribeSection />
-    </div>
+      {/* SubscribeSection moved here */}
+      {isMobile ? (
+        <SubscribeSection />
+      ) : (
+        <div className="container">
+          <SubscribeSection />
+        </div>
+      )}
+    </div> 
   );
 };
 

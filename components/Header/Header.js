@@ -87,6 +87,18 @@ const Header = ({ navigationData }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    // Close the mobile menu when the route changes
+    const handleRouteChange = () => {
+      setIsMobileMenuOpen(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router.events]);
+
   const desktopPages = navigationData
     .filter((page) => page.type_id !== 3 && page.active === 1)
     .sort((a, b) => a.sort - b.sort);

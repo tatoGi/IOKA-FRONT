@@ -506,6 +506,7 @@
     transform: translateY(0);
     top: 70px;
     background-color: #ffffff;
+    justify-content: start;
   }
 
   .header-nav ul {
@@ -522,7 +523,7 @@
     margin: 20px 0;
     border-bottom: 1px solid;
     height: 56px;
-    text-align: center;
+    text-align: start;
     align-items: center;
     justify-content: center;
   }
@@ -534,6 +535,7 @@
     line-height: 100%;
     letter-spacing: 1%;
     color: #0a273b !important;
+    margin-left: 25px;
   }
 
   .header-nav ul .contact-menu-item {
@@ -868,6 +870,7 @@
     line-height: 120%;
     color: #07151F;
     text-transform: uppercase;
+    text-align: start;
   }
 
   .left-s-text .s-t-1 {
@@ -877,6 +880,7 @@
     line-height: 100%;
     letter-spacing: 0%;
     color: #07151F;
+    text-align: start;
 
   }
 
@@ -1014,6 +1018,11 @@
     /* Maintain aspect ratio */
   }
 
+  .searchSection {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .subscribe-section {
     margin: 0;
 
@@ -1127,8 +1136,15 @@
     justify-content: space-between;
     border-top: 1px solid #fff;
     margin-top: 33px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+.footer-line{
+  width: 1px;
+height: 20px;
+background-color: #FFFFFF;
 
+}
   .copyright-0 .l-c,
   .copyright-0 .r-c {
     margin-bottom: 10px;

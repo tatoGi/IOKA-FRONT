@@ -27,7 +27,20 @@ const Developer = ({ initialData, initialPagination }) => {
   const [imageIndexes, setImageIndexes] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(max-width: 768px)");
+      setIsMobile(mediaQuery.matches);
+
+      const handleResize = () => setIsMobile(mediaQuery.matches);
+      mediaQuery.addEventListener("change", handleResize);
+
+      return () => mediaQuery.removeEventListener("change", handleResize);
+    }
+  }, []);
 
   // Fetch data for the selected page
   const fetchData = async (page) => {
@@ -137,127 +150,134 @@ const Developer = ({ initialData, initialPagination }) => {
 
   return (
     <LoadingWrapper isLoading={isLoading}>
-      <div className="container py-4">
-        {/* Search Section */}
-        <div className={`mb-4 position-relative ${styles.searchContainer}`}>
-          <input
-            type="text"
-            placeholder="City, Building or community"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className={`form-control ${styles.searchInput}`}
-          />
-          <FaSearch className={`position-absolute ${styles.searchIcon}`} />
-        </div>
+      <>
+        <div className="container py-4">
+          {/* Search Section */}
+          <div className={`mb-4 position-relative ${styles.searchContainer}`}>
+            <input
+              type="text"
+              placeholder="City, Building or community"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={`form-control ${styles.searchInput}`}
+            />
+            <FaSearch className={`position-absolute ${styles.searchIcon}`} />
+          </div>
 
-        {/* Developer Cards */}
-        <div className={styles.cardsContainer}>
-          {filteredData.map((card) => (
-            <div key={card.id} className={styles.cardWrapper}>
-              <div className={styles.card}>
-                <div className={styles.cardRow}>
-                  {/* Image Section */}
-                  <div className={styles.imageContainer}>
-                    <Image
-                      src={getImageUrl(card.photo, card.id)}
-                      alt={card.title}
-                      width={400}
-                      height={300}
-                      className={styles.cardImage}
-                      style={{ objectFit: "cover" }}
-                    />
-                    {JSON.parse(card.photo)?.length > 1 && (
-                      <div className={styles.imageNav}>
-                        <button
-                          onClick={() => handlePrevImage(card.id, card.photo)}
-                          className={styles.prevButtonimage}
-                        >
-                          <FaChevronLeft />
-                        </button>
-                        <button
-                          onClick={() => handleNextImage(card.id, card.photo)}
-                          className={styles.nextButtonimage}
-                        >
-                          <FaChevronRight />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content Section */}
-                  <div className={styles.cardContent}>
-                    <h2 className={styles.title}>{card.title}</h2>
-                    <div className={styles.description}>
-                    <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
-                      
-                    </div>
-                    <div className={styles.communitiesSection}>
-                      <h3 className={styles.communitiesTitle}>Top Communities</h3>
-                      <div className={styles.communitiesList}>
-                        {JSON.parse(card.tags).map((tag, index) => (
-                          <span key={index} className={styles.badge}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+          {/* Developer Cards */}
+          <div className={styles.cardsContainer}>
+            {filteredData.map((card) => (
+              <div key={card.id} className={styles.cardWrapper}>
+                <div className={styles.card}>
+                  <div className={styles.cardRow}>
+                    {/* Image Section */}
+                    <div className={styles.imageContainer}>
+                      <Image
+                        src={getImageUrl(card.photo, card.id)}
+                        alt={card.title}
+                        width={400}
+                        height={300}
+                        className={styles.cardImage}
+                        style={{ objectFit: "cover" }}
+                      />
+                      {JSON.parse(card.photo)?.length > 1 && (
+                        <div className={styles.imageNav}>
+                          <button
+                            onClick={() => handlePrevImage(card.id, card.photo)}
+                            className={styles.prevButtonimage}
+                          >
+                            <FaChevronLeft />
+                          </button>
+                          <button
+                            onClick={() => handleNextImage(card.id, card.photo)}
+                            className={styles.nextButtonimage}
+                          >
+                            <FaChevronRight />
+                          </button>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Buttons Section */}
-                    <div className={styles.buttonsSection}>
-                      {/* Left Side: Call and WhatsApp Buttons */}
-                      <div className={styles.contactButtons}>
-                        <button
-                          className={styles.call}
-                          onClick={() => (window.location.href = `tel:${card.phone}`)}
-                        >
-                          <FaPhone />
-                          <span>Call</span>
-                        </button>
-                        <button
-                          className={styles.whatsapp}
-                          onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
-                        >
-                          <FaWhatsapp />
-                          <span>WhatsApp</span>
-                        </button>
+                    {/* Content Section */}
+                    <div className={styles.cardContent}>
+                      <h2 className={styles.title}>{card.title}</h2>
+                      <div className={styles.description}>
+                        <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+                      </div>
+                      <div className={styles.communitiesSection}>
+                        <h3 className={styles.communitiesTitle}>Top Communities</h3>
+                        <div className={styles.communitiesList}>
+                          {JSON.parse(card.tags).map((tag, index) => (
+                            <span key={index} className={styles.badge}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
 
-                      {/* Right Side: See More Button */}
-                      <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
-                        See More
-                      </button>
+                      {/* Buttons Section */}
+                      <div className={styles.buttonsSection}>
+                        {/* Left Side: Call and WhatsApp Buttons */}
+                        <div className={styles.contactButtons}>
+                          <button
+                            className={styles.call}
+                            onClick={() => (window.location.href = `tel:${card.phone}`)}
+                          >
+                            <FaPhone />
+                            <span>Call</span>
+                          </button>
+                          <button
+                            className={styles.whatsapp}
+                            onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
+                          >
+                            <FaWhatsapp />
+                            <span>WhatsApp</span>
+                          </button>
+                        </div>
+
+                        {/* Right Side: See More Button */}
+                        <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
+                          See More
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Pagination */}
-        <div className={styles.pagination}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {/* Pagination */}
+          <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${styles.pageButton} ${
+                  currentPage === page ? styles.active : ""
+                }`}
+                disabled={isLoading}
+              >
+                {page}
+              </button>
+            ))}
             <button
-              key={page}
-              onClick={() => handlePageChange(page)}
-              className={`${styles.pageButton} ${
-                currentPage === page ? styles.active : ""
-              }`}
-              disabled={isLoading}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages || isLoading}
+              className={styles.pageButton}
             >
-              {page}
+              Next
             </button>
-          ))}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages || isLoading}
-            className={styles.pageButton}
-          >
-            Next
-          </button>
+          </div>
         </div>
-        <SubscribeSection />
-      </div>
+        {isMobile ? (
+          <SubscribeSection />
+        ) : (
+          <div className="container">
+            <SubscribeSection />
+          </div>
+        )}
+      </>
     </LoadingWrapper>
   );
 };

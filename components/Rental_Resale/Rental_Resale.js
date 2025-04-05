@@ -24,9 +24,21 @@ const Rental_Resale = () => {
   const [touchEnd, setTouchEnd] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const slideRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setIsClient(true); // Ensures this runs only on the client
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchData = async (page) => {
@@ -122,6 +134,7 @@ const Rental_Resale = () => {
   };
 
   return (
+    <>
     <div className="container mt-3">
       {/* Sidebar elements moved out of the row */}
       <div className={Styles.sidebarWrapper}>
@@ -131,146 +144,148 @@ const Rental_Resale = () => {
       </div>
 
       <div className="row">
-        {topProperties.length > 0 && (
+        {!isMobile && topProperties.length > 0 && (
           <div className={Styles.title_top}>
             <span>Top Listings</span>
           </div>
         )}
 
-        <div className={Styles.sliderWrapper}>
-          <button
-            className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
-            onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
-            disabled={currentSlide === 0}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="#666666"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <div
-            className={Styles.propertyGrid}
-            style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
-          >
-            {topProperties.map((property) => (
-              <div
-                key={property.id}
-                className={Styles.propertyCardLink}
-                onClick={() => handleReadMore(property.slug)}
-                style={{ cursor: "pointer" }}
-              >
-                <div className={Styles.propertyCard}>
-                  <div className={Styles.imageContainer}>
-                    <Image
-                      src={
-                        property.gallery_images &&
-                        JSON.parse(property.gallery_images)[0]
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(
-                              JSON.parse(property.gallery_images)[0]
-                            )}`
-                          : defaultImage
-                      }
-                      alt={property.title || "Default Property Image"}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={Styles.propertyImage}
-                      priority
-                      unoptimized
-                    />
-                    {property.exclusive && (
-                      <span className={Styles.exclusive}>Exclusive</span>
-                    )}
-                    {property.top && (
-                      <span className={Styles.topBadge}>Top</span>
-                    )}
-                  </div>
-
-                  <div className={Styles.propertyInfo}>
-                    <h3 className={Styles.title}>{property.title}</h3>
-                    <p className={Styles.location}>{property.location_link}</p>
-
-                    <div className={Styles.features}>
-                      <div className={Styles.feature}>
-                        <Image
-                          src={require("/assets/img/bad.svg")}
-                          alt="Bed Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property.bedroom} Br</span>
-                      </div>
-                      <div className={Styles.feature}>
-                        <Image
-                          src={require("/assets/img/bath.svg")}
-                          alt="Bath Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property.bathroom} Ba</span>
-                      </div>
-                      <div className={Styles.feature}>
-                        <Image
-                          src={require("/assets/img/place.svg")}
-                          alt="Area Icon"
-                          width={24}
-                          height={24}
-                        />
-
-                        <span>{property.sq_ft} Sq.Ft</span>
-                      </div>
-                      <div className={Styles.feature}>
-                        <Image
-                          src={require("/assets/img/garage.svg")}
-                          alt="Car Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property.garage} Gr</span>
-                      </div>
+        {!isMobile && (
+          <div className={Styles.sliderWrapper}>
+            <button
+              className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
+              onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
+              disabled={currentSlide === 0}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="#666666"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div
+              className={Styles.propertyGrid}
+              style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
+            >
+              {topProperties.map((property) => (
+                <div
+                  key={property.id}
+                  className={Styles.propertyCardLink}
+                  onClick={() => handleReadMore(property.slug)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className={Styles.propertyCard}>
+                    <div className={Styles.imageContainer}>
+                      <Image
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
+                        alt={property.title || "Default Property Image"}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={Styles.propertyImage}
+                        priority
+                        unoptimized
+                      />
+                      {property.exclusive && (
+                        <span className={Styles.exclusive}>Exclusive</span>
+                      )}
+                      {property.top && (
+                        <span className={Styles.topBadge}>Top</span>
+                      )}
                     </div>
 
-                    <div className={Styles.priceRow}>
-                      <span className={Styles.price}>
-                        USD {property.amount.amount?.toLocaleString() || "N/A"}
-                      </span>
-                      <span className={Styles.price}>
-                        AED{" "}
-                        {property.amount.amount_dirhams?.toLocaleString() ||
-                          "N/A"}
-                      </span>
+                    <div className={Styles.propertyInfo}>
+                      <h3 className={Styles.title}>{property.title}</h3>
+                      <p className={Styles.location}>{property.location_link}</p>
+
+                      <div className={Styles.features}>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/bad.svg")}
+                            alt="Bed Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.bedroom} Br</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/bath.svg")}
+                            alt="Bath Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.bathroom} Ba</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/place.svg")}
+                            alt="Area Icon"
+                            width={24}
+                            height={24}
+                          />
+
+                          <span>{property.sq_ft} Sq.Ft</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/garage.svg")}
+                            alt="Car Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.garage} Gr</span>
+                        </div>
+                      </div>
+
+                      <div className={Styles.priceRow}>
+                        <span className={Styles.price}>
+                          USD {property.amount.amount?.toLocaleString() || "N/A"}
+                        </span>
+                        <span className={Styles.price}>
+                          AED{" "}
+                          {property.amount.amount_dirhams?.toLocaleString() ||
+                            "N/A"}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <button
+              className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
+              onClick={() =>
+                setCurrentSlide((prev) =>
+                  prev + 1 >= topProperties.length - 2 ? prev : prev + 1
+                )
+              }
+              disabled={currentSlide >= topProperties.length - 2}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="#666666"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
-          <button
-            className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
-            onClick={() =>
-              setCurrentSlide((prev) =>
-                prev + 1 >= topProperties.length - 2 ? prev : prev + 1
-              )
-            }
-            disabled={currentSlide >= topProperties.length - 2}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="#666666"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+        )}
 
         {/* <SearchSection /> */}
 
@@ -527,10 +542,18 @@ const Rental_Resale = () => {
               Next
             </button>
           </div>
-          <SubscribeSection />
+         
         </div>
       </div>
     </div>
+    {isMobile ? (
+      <SubscribeSection />
+    ) : (
+      <div className="container">
+        <SubscribeSection />
+      </div>
+    )}
+</>
   );
 };
 

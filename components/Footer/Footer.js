@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
 import Logo from "../../assets/img/ioka-logo-white.png";
 import InstagramIcon from "../icons/InstagramIcon";
@@ -11,7 +11,23 @@ import FacebookIcon from "../icons/FacebookIcon";
 import XIcon from "../icons/XIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 
+const isMobile = () => {
+  if (typeof window !== "undefined") {
+    return window.innerWidth <= 768;
+  }
+  return false;
+};
+
 const Footer = () => {
+  const [mobileView, setMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setMobileView(isMobile());
+    handleResize(); // Check on initial render
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="footer">
       <div className="container">
@@ -31,7 +47,6 @@ const Footer = () => {
                 Specializes in providing high-class tours for those in need,
                 Contact Us
               </div>
-            
             </div>
 
             {/* Footer Categories */}
@@ -59,27 +74,27 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-contact-links">
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <LocationIcon />
-                  </div>
-                  <div className="f-text-0">
-                    101 E 129th St. East Fujairah IN 45721, UAE
-                  </div>
-                </Link>
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <PhoneIcon />
-                  </div>
-                  <div className="f-text-0">1-333-232-1231</div>
-                </Link>
-                <Link href={"#"} className="footer-contact-item">
-                  <div className="icon-00">
-                    <MessageIcon />
-                  </div>
-                  <div className="f-text-0">example@gmail.com</div>
-                </Link>
-              </div>
+              <Link href={"#"} className="footer-contact-item">
+                <div className="icon-00">
+                  <LocationIcon />
+                </div>
+                <div className="f-text-0">
+                  101 E 129th St. East Fujairah IN 45721, UAE
+                </div>
+              </Link>
+              <Link href={"#"} className="footer-contact-item">
+                <div className="icon-00">
+                  <PhoneIcon />
+                </div>
+                <div className="f-text-0">1-333-232-1231</div>
+              </Link>
+              <Link href={"#"} className="footer-contact-item">
+                <div className="icon-00">
+                  <MessageIcon />
+                </div>
+                <div className="f-text-0">example@gmail.com</div>
+              </Link>
+            </div>
             {/* Social Icons Section */}
             <div className="soc-icons-b">
               <Link href={"#"} className="soc-icon-item">
@@ -234,16 +249,34 @@ const Footer = () => {
           </div>
         </div>
         <div className="copyright-0">
-          <div className="l-c">
-            ©2024 Copytight Protected All Rights Reserved.
-          </div>
-          <div className="r-c">
-            <ul>
-              <li>Terms Of Service</li>
-              <li>Privacy Policy</li>
-              <li>Cookie Policy</li>
-            </ul>
-          </div>
+          {mobileView ? (
+            <>
+              <div className="r-c">
+                <ul>
+                  <li>Terms & Conditions</li>
+                  <div className="footer-line"></div>
+                  <li>Privacy & Cookies</li>
+                </ul>
+              </div>
+              
+              <div className="l-c">
+                ©2024 Copytight Protected All Rights Reserved.
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="l-c">
+                ©2024 Copytight Protected All Rights Reserved.
+              </div>
+              <div className="r-c">
+                <ul>
+                  <li>Terms Of Service</li>
+                  <li>Privacy Policy</li>
+                  <li>Cookie Policy</li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
