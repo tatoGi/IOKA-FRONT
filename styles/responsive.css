@@ -526,9 +526,10 @@
     text-align: start;
     align-items: center;
     justify-content: center;
+    
   }
 
-  .header-nav ul li a {
+  .header-nav ul li span {
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 12px !important;
@@ -634,7 +635,7 @@
   }
 
   .area-item {
-    width: 320px !important;
+    width: 300px !important;
     height: 180px;
     display: flex;
     flex-direction: column;

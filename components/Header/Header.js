@@ -149,18 +149,32 @@ const Header = ({ navigationData }) => {
               {/* Navigation Menu */}
               <div className={`header-nav ${isMobileMenuOpen ? "active" : ""}`}>
                 <ul>
-                  {(isMobileView ? mobilePages : desktopPages).map((page) => (
-                    <li
-                      key={page.id}
-                      className={
-                        normalizedPathname === `/${page.slug}`
-                          ? "active-link"
-                          : ""
-                      }
-                    >
-                      <Link href={`/${page.slug}`}>{page.title}</Link>
-                    </li>
-                  ))}
+                  {isMobileView
+                    ? mobilePages.map((page) => (
+                        <Link href={`/${page.slug}`} key={page.id}>
+                          <li
+                            className={
+                              normalizedPathname === `/${page.slug}`
+                                ? "active-link"
+                                : ""
+                            }
+                          >
+                           <span>{page.title}</span> 
+                          </li>
+                        </Link>
+                      ))
+                    : desktopPages.map((page) => (
+                        <li
+                          key={page.id}
+                          className={
+                            normalizedPathname === `/${page.slug}`
+                              ? "active-link"
+                              : ""
+                          }
+                        >
+                          <Link href={`/${page.slug}`}>{page.title}</Link>
+                        </li>
+                      ))}
                 </ul>
               </div>
 

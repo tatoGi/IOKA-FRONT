@@ -800,6 +800,7 @@
     height: 222px !important;
     border-radius: 16px;
     overflow: hidden;
+    margin: 0 !important;
   }
 
   .mobileSwiper :global(.swiper-slide img) {
@@ -891,7 +892,7 @@
   }
 
   .statItem h3 {
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 0%;
@@ -900,7 +901,7 @@
   }
 
   .statItem p {
-    font-size: 12px;
+    font-size: 10px;
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;

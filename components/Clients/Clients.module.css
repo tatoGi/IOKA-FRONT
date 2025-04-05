@@ -214,7 +214,7 @@
 
     .testimonialCard {
         flex: 0 0 auto;
-        width: 320px !important;
+        width: 314px !important;
         /* Adjust width for Swiper */
         height: 384px !important;
         border-radius: 16px;
