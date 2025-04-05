@@ -125,15 +125,16 @@ const AboutUs = ({ initialData, id }) => {
   };
 
   return (
-    <div className="container">
-      <AboutBanner
-        title={cardData.title || "ABOUT US"}
-        description={
-          <span
-            dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-          ></span>
-        }
-      />
+    <>
+      <div className="container">
+        <AboutBanner
+          title={cardData.title || "ABOUT US"}
+          description={
+            <span
+              dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+            ></span>
+          }
+        />
 
       {/* Statistics section */}
       <div className={styles.container}>
