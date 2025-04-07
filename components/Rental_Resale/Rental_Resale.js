@@ -10,6 +10,7 @@ import agentifno from "../../assets/img/agentinfo.png";
 import { useRouter } from "next/router";
 import { RENTAL_RESALE } from "@/routes/apiRoutes";
 import axios from "axios";
+import { HiOutlineMail } from "react-icons/hi";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const Rental_Resale = () => {
@@ -291,15 +292,25 @@ const Rental_Resale = () => {
 
         <div className={Styles.resaleSection}>
           <div className={Styles.resaleHeader}>
-            {/* <div className={Styles.resaleTitle}>
-              <h3>Search Results</h3>
-              <div className={Styles.sortDropdown}>
-                <label htmlFor="sort">Sort:</label>
-                <select id="sort" name="sort" onChange={(e) => handleSortChange(e.target.value)}>
-                  <option value="newest">Newest First</option>
-                </select>
+            {isMobile && (
+              <div className={Styles.search_result}>
+                <div className="d-flex justify-content-between align-items-center">
+                  <span className={Styles.search_result_text}>Search Results</span>
+                  <div className={Styles.search_result_sort}>
+                    <span>Sort:</span>
+                    <select
+                      className={Styles.sort_dropdown}
+                      onChange={(e) => handleSortChange(e.target.value)}
+                    >
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                      <option value="priceHigh">Price: High to Low</option>
+                      <option value="priceLow">Price: Low to High</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-            </div> */}
+            )}
           </div>
 
           <div className={Styles.resaleList}>
@@ -352,13 +363,14 @@ const Rental_Resale = () => {
 
                   {/* Mobile view slider */}
                   <div className={Styles.mobileImageSlider}>
-                    <button
-                      className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
-                      onClick={() =>
-                        setCurrentImageIndex((prev) => Math.max(prev - 1, 0))
-                      }
-                      disabled={currentImageIndex === 0}
-                    >
+                  <button
+                    className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Add this line
+                      setCurrentImageIndex((prev) => Math.max(prev - 1, 0));
+                    }}
+                    disabled={currentImageIndex === 0}
+                  >
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path
                           d="M15 18L9 12L15 6"
@@ -400,11 +412,12 @@ const Rental_Resale = () => {
                     </div>
                     <button
                       className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation(); // Add this line
                         setCurrentImageIndex((prev) =>
                           prev + 1 < galleryImages.length ? prev + 1 : prev
-                        )
-                      }
+                        );
+                      }}
                       disabled={currentImageIndex === galleryImages.length - 1}
                     >
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -433,16 +446,20 @@ const Rental_Resale = () => {
                   <div className={Styles.resaleContent}>
                     <h4>{listing.title}</h4>
 
-                    <p className={Styles.resaleLocation}>{listing.location}</p>
-                    <div className="d-flex">
+                    <p className={Styles.resaleLocation}>{listing.subtitle}</p>
+                    <div className="d-flex gap-2.5">
+                      <div className={Styles.starting_price}>
+                        <span>Starting Price</span>
+                        </div>
+                        <p className={Styles.resalePrice}>
+                        USD {listing.amount.amount?.toLocaleString() || "N/A"}K
+                      </p>
                       <p className={Styles.resalePrice}>
                         AED{" "}
                         {listing.amount.amount_dirhams?.toLocaleString() ||
-                          "N/A"}
+                          "N/A"}K
                       </p>
-                      <p className={Styles.resalePrice}>
-                        USD {listing.amount.amount?.toLocaleString() || "N/A"}
-                      </p>
+                      
                     </div>
 
                     <div className={Styles.resaleStats}>
@@ -486,12 +503,14 @@ const Rental_Resale = () => {
                         <span>{listing.sq_ft} Gr</span>
                       </div>
                     </div>
-
+                    {!isMobile && (
                     <div className={Styles.resaleDetails}>
                       {listing.details.map((detail, index) => (
                         <p key={index}>{detail.info}</p>
                       ))}
                     </div>
+                    )}
+                    {!isMobile && (
                     <div className={Styles.resaleFooter}>
                       <div className={Styles.agentInfo}>
                         <Image
@@ -515,6 +534,23 @@ const Rental_Resale = () => {
                         </button>
                       </div>
                     </div>
+                  )}
+                     {isMobile && (
+                    <div className={Styles.propertyActions}>
+                    <button className={Styles.actionButton_email}>
+                      <HiOutlineMail size={20} color="#1A1A1A" />
+                      <span>Email</span>
+                    </button>
+                    <button className={Styles.actionButton_call}>
+                      <Image src={callVector} alt="Call" />
+                      <span>Call</span>
+                    </button>
+                    <button className={Styles.actionButton_whatsapp}>
+                      <BsWhatsapp size={20} color="#34C759" />
+                      <span>WhatsApp</span>
+                    </button>
+                  </div>
+                  )}
                   </div>
                 </div>
               );
@@ -545,6 +581,148 @@ const Rental_Resale = () => {
          
         </div>
       </div>
+      {isMobile && topProperties.length > 0 && (
+          <div className={Styles.title_top}>
+            <span>Recommended for You</span>
+          </div>
+      )}
+      {isMobile && (
+          <div className={Styles.sliderWrapper}>
+            <button
+              className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
+              onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
+              disabled={currentSlide === 0}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="#666666"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div
+              className={Styles.propertyGrid}
+              style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
+            >
+              {topProperties.map((property) => (
+                <div
+                  key={property.id}
+                  className={Styles.propertyCardLink}
+                  onClick={() => handleReadMore(property.slug)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className={Styles.propertyCard}>
+                    <div className={Styles.imageContainer}>
+                      <Image
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
+                        alt={property.title || "Default Property Image"}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={Styles.propertyImage}
+                        priority
+                        unoptimized
+                      />
+                      {property.exclusive && (
+                        <span className={Styles.exclusive}>Exclusive</span>
+                      )}
+                      {property.top && (
+                        <span className={Styles.topBadge}>Top</span>
+                      )}
+                    </div>
+
+                    <div className={Styles.propertyInfo}>
+                      <h3 className={Styles.title}>{property.title}</h3>
+                      <p className={Styles.location}>{property.location_link}</p>
+
+                      <div className={Styles.features}>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/bad.svg")}
+                            alt="Bed Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.bedroom} Br</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/bath.svg")}
+                            alt="Bath Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.bathroom} Ba</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/place.svg")}
+                            alt="Area Icon"
+                            width={24}
+                            height={24}
+                          />
+
+                          <span>{property.sq_ft} Sq.Ft</span>
+                        </div>
+                        <div className={Styles.feature}>
+                          <Image
+                            src={require("/assets/img/garage.svg")}
+                            alt="Car Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property.garage} Gr</span>
+                        </div>
+                      </div>
+
+                      <div className={Styles.priceRow}>
+                        <span className={Styles.price}>
+                          USD {property.amount.amount?.toLocaleString() || "N/A"}
+                        </span>
+                        <span className={Styles.price}>
+                          AED{" "}
+                          {property.amount.amount_dirhams?.toLocaleString() ||
+                            "N/A"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
+              onClick={() =>
+                setCurrentSlide((prev) =>
+                  prev + 1 >= topProperties.length - 2 ? prev : prev + 1
+                )
+              }
+              disabled={currentSlide >= topProperties.length - 2}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="#666666"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+
     </div>
     {isMobile ? (
       <SubscribeSection />

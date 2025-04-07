@@ -96,6 +96,16 @@ const ContactForm = () => {
           required
           style={placeholderStyle}
         />
+        <input
+          type="tel"
+          name="country"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder="Country"
+          className={styles.input}
+          required
+          style={placeholderStyle}
+        />
         <textarea
           name="message"
           value={formData.message}

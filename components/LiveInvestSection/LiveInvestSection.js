@@ -37,7 +37,7 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
 
   return (
     <section className={styles.liveInvestSection}>
-      <div className={styles.topWhiteDiv}></div>
+      {/* <div className={styles.topWhiteDiv}></div> */}
       <div className="container">
         <div className="row">
           <div className={`${styles.content} col-md-6`}>
@@ -131,8 +131,8 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
           </div>
         </div>
       </div>
-      <div className={styles.topWhiteDiv}></div>
-      <div className={styles.bottomWhiteDiv}></div>
+      {/* <div className={styles.topWhiteDiv}></div> */}
+      {/* <div className={styles.bottomWhiteDiv}></div> */}
       <div className={`container ${ styles.statItems }`}>
         {additionalFields.rolling_numbers.map((item, index) => (
           <div

@@ -33,15 +33,15 @@
 }
 
 .submitButton {
-  background-color: #0f2454;
-  color: white;
-  padding: 1rem;
-  border: none;
-  border-radius: 16px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Montserrat';
+  background-color: #0f2454 !important;
+  color: white !important;
+  padding: 1rem !important;
+  border: none !important;
+  border-radius: 16px !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+  font-family: 'Montserrat' !important;
 }
 
 .submitButton:hover {

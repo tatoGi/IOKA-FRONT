@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Rental_Resale.show.module.css";
-
-import Modal from "react-modal";
 import Image from "next/image";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
-import { StarIcon } from "../icons/PropertyIcons";
+import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import dynamic from "next/dynamic";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import success from "../../assets/img/succsess.svg";
-Modal.setAppElement("#__next");
-
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const galleryImages = JSON.parse(RENTAL_RESALE_DATA.gallery_images || "[]");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     Fancybox.bind("[data-fancybox='gallery']", {
       Thumbs: {
@@ -344,8 +346,22 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
               </div>
               <div className={styles.contactButton}>
-                <button> Contact Us</button>
-              </div>
+              <button className={styles.contactBtn} onClick={openModal}>
+                Contact Us
+              </button>
+              {/* Modal */}
+              {isModalOpen && (
+                <div className={styles.modalOverlay}>
+                  <div className={styles.modalContent}>
+                    <button className={styles.closeButton} onClick={closeModal}>
+                      &times; {/* Close icon (X) */}
+                    </button>
+                    <ContactForm />{" "}
+                    {/* Render the ContactForm inside the modal */}
+                  </div>
+                </div>
+              )}
+            </div>
             </div>
           </div>
         </div>
