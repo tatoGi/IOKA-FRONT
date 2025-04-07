@@ -86,14 +86,20 @@
 .card-button {
     background-color: #0A273B;
     border: none;
-    padding: 8px 16px;
+    padding: 8px;
     font-size: 12px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 14px;
     border-radius: 8px;
     color: white;
-    width: 100%;
-    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-family: 'Montserrat';
+    width: 99px;
+    height: 32px;
+    margin-top: auto;
+    /* This pushes button to bottom */
 }
 
 .card-button:hover {
