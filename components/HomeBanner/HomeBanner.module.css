@@ -231,8 +231,12 @@
   .text-b-i{
     font-size: 20px;
   }
+  .banner-content{
+    padding: 10px;
+  }
   .banner-content h1
   {
+    
     font-size: 18px !important;
   }
   .banner-search {
