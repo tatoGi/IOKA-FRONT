@@ -261,6 +261,18 @@
   border-radius: 4px;
   left: 50px;
 }
+.pageButton:last-child {
+  width: 84px;
+  height: 46px;
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+color:#0A273B;
+margin-top: 2px;
+
+}
 .pageButton.active {
   background-color: #0A273B;
   color: white;
@@ -569,12 +581,12 @@
     width: 84px;
     height: 46px;
     font-family: 'Montserrat';
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      color:#0A273B;
-      margin-top: 2px;
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+color:#0A273B;
+margin-top: 2px;
 
   }
   

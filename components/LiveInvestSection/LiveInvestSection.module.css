@@ -227,7 +227,7 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  left: 55rem;
+  left: 10rem;
 }
 
 .statItem {
@@ -324,7 +324,7 @@
 
 @media (max-width:1640px) {
   .statItems {
-    left: 45rem;
+    left: 5rem;
   }
 }
 
@@ -463,7 +463,7 @@
   }
 
   .statItems {
-    left: 38rem;
+    left: 3rem;
   }
 
   .stat_text span {
@@ -550,7 +550,7 @@
     /* flex-direction: column; */
     flex-wrap: wrap;
     position: relative;
-    left: 33rem;
+    left: 3rem;
   }
 
   .statItem {
@@ -641,7 +641,7 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    left: 24rem;
+    left: 7rem;
   }
 
   .statItem {
