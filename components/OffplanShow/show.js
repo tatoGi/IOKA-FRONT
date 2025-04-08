@@ -338,7 +338,7 @@ const OffplanShow = ({ offplanData }) => {
                     <button className={style.closeButton} onClick={closeModal}>
                       &times; {/* Close icon (X) */}
                     </button>
-                    <ContactForm />{" "}
+                    <ContactForm />
                     {/* Render the ContactForm inside the modal */}
                   </div>
                 </div>

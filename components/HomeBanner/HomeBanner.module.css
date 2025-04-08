@@ -103,12 +103,13 @@
 
 .search-container {
   background: #fff;
-  border-radius: 100px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 60px;
+  width: 451PX;
+  height: 72PX;
+  justify-content: space-between;
+  top: 483px;
+  left: 735px;
+  border-radius: 60px;
+
 }
 
 .search-inputs {
@@ -117,30 +118,24 @@
   align-items: center;
   gap: 0;
   height: 100%;
+  width: 100%;
   position: relative;
 }
 
+.size {
+  width: 131px;
+  padding: 30px
+}
+
+.where {
+  width: 150px;
+  padding: 30px;
+}
+
 /* Add vertical lines */
-.search-inputs::after,
-.search-inputs::before {
-  content: '';
-  position: absolute;
-  width: 1px;
-  height: 24px; /* Adjust height of the line */
-  background-color: #E5E5E5;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
-/* Line after Where input */
-.search-inputs::before {
-  left: 158px;
-}
 
-/* Line after Size input */
-.search-inputs::after {
-  left: 316px;
-}
+
 
 .search-inputs input {
   width: 158px;
@@ -153,17 +148,29 @@
   height: 100%;
 }
 
+.line::before {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 48px;
+  /* Adjust height of the line */
+  background-color: #E6EBED;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* Add styles for the price input container */
 .price-input-container {
   position: relative;
   display: flex;
   align-items: center;
-  width: 158px;
+  width: 100%;
   height: 100%;
 }
 
 .price-input-container input {
-  padding-right: 60px; /* Make room for the search button */
+  padding-right: 60px;
+  /* Make room for the search button */
 }
 
 .search-inputs input::placeholder {
@@ -174,13 +181,13 @@
 
 .search-button {
   position: absolute;
-  right: 36px;
+  right: 4px;
   background: #7BCBC7;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 65px;
+  height: 65px;
   min-width: 45px;
   cursor: pointer;
   display: flex;
@@ -206,14 +213,19 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
   z-index: 1;
 }
+
 .search-inputs input:focus {
-  outline: none; /* Remove outline on focus */
-  border: none; /* Remove border on focus */
-  box-shadow: none; /* Remove box shadow on focus */
+  outline: none;
+  /* Remove outline on focus */
+  border: none;
+  /* Remove border on focus */
+  box-shadow: none;
+  /* Remove box shadow on focus */
 }
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .swiper-container {
@@ -228,17 +240,20 @@
     height: 100% !important;
     width: 100% !important;
   }
-  .text-b-i{
+
+  .text-b-i {
     font-size: 20px;
   }
-  .banner-content{
+
+  .banner-content {
     padding: 10px;
   }
-  .banner-content h1
-  {
-    
+
+  .banner-content h1 {
+
     font-size: 18px !important;
   }
+
   .banner-search {
     position: absolute;
     top: 205px;
@@ -249,19 +264,21 @@
     z-index: 10;
     text-align: center;
   }
-  
+
   .search-tabs {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-bottom: 10px;
   }
-  .price-input-container{
+
+  .price-input-container {
     position: relative;
     display: flex;
     align-items: center;
-    height: 100%; 
+    height: 100%;
   }
+
   .tab {
     padding: 8px 0;
     border: none;
@@ -273,7 +290,7 @@
     transition: all 0.3s ease;
     text-transform: uppercase;
   }
-  
+
   .tab.active {
     color: #fff;
     border-bottom: 2px solid #fff;
@@ -305,13 +322,14 @@
     width: 50%;
     padding: 0;
   }
-  
+
   .search-inputs input::placeholder {
     color: #0A273B;
     font-size: 12px;
     font-weight: 500;
     opacity: 60%;
   }
+
   .search-inputs input:focus {
     outline: none;
   }
@@ -328,7 +346,7 @@
   .search-inputs::before {
     left: 33%;
   }
-  
+
   .search-inputs::after {
     left: 66%;
   }
@@ -353,9 +371,9 @@
     height: 14px;
   }
 }
-@media (max-width:1200px)
-{
-  .banner-content h1{
+
+@media (max-width:1200px) {
+  .banner-content h1 {
     font-size: 45px;
     font-weight: 400;
     line-height: 1.2;
@@ -364,4 +382,329 @@
     font-family: "Felix Titling";
     letter-spacing: 1px;
   }
+}
+
+.modal_overlay {
+  position: fixed;
+  top: calc(100% + 8px); /* 8px distance from the search container */
+  left: 80px;
+  right: 0;
+  width: 512px;
+  margin: 0 auto; /* Center the modal */
+  z-index: 1000;
+  background: transparent;
+}
+
+.modal_content {
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  height: auto;
+  gap: 12px;
+  padding: 24px;
+
+}
+
+/* Active state for input containers */
+.where.active,
+.size.active,
+.price-input-container.active {
+  border-width: 1px;
+  border-radius: 60px;
+  width: 100%;
+  height: 100%;
+  box-shadow:
+    4px 4px 4px 0px #0000001a,
+    -4px 4px 8px 0px #0000001a;
+  width: 150px;
+}
+
+/* Modal content styling */
+.location_search h3,
+.size-search h3,
+.price-search h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.location_search input,
+.size-search input,
+.price-search input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.range-inputs input {
+  flex: 1;
+}
+
+.range-inputs select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.location_search h3 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #0D1B39;
+  text-align: start;
+  border-bottom: 1px solid rgba(230, 235, 237, 1);
+  padding-bottom: 12px;
+}
+
+
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  background: #F7FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0px 12px;
+  margin-bottom: 15px;
+  position: relative;
+  height: 36px;
+}
+
+.input_wrapper input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  color: rgba(168, 168, 168, 1);
+  margin: 0;
+  font-family: 'Montserrat';
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+}
+
+.search_icon {
+  width: 18px;
+  height: 18px;
+}
+
+.clear_button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #A0AEC0;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.grid_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.district_card {
+  background: #FFFFFF;
+  border: 1px solid #EDF2F7;
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #1A202C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 104px;
+  height: 88px;
+}
+
+.district_card:hover {
+  background: #EDF2F7;
+}
+
+.pin_icon {
+  width: 20px;
+  height: 20px;
+}
+
+.search-container.active {
+  width: 674px;
+}
+
+.search-container.active .where,
+.search-container.active .size,
+.search-container.active .price-input-container {
+  width: 368px;
+}
+
+/* Update the vertical line positions when active */
+.search-container.active .search-inputs::before {
+  left: 280px;
+}
+
+.search-container.active .search-inputs::after {
+  left: 560px;
+}
+
+/* Make sure the lines transition smoothly */
+.search-inputs::before,
+.search-inputs::after {
+  transition: left 0.3s ease;
+}
+
+.district_location {
+  border-bottom: 1px solid rgba(230, 235, 237, 1);
+  width: 100%;
+  padding-bottom: 19px;
+}
+
+.district_location svg {
+  width: 20px;
+  height: 27px;
+}
+
+.card {
+  width: 100%;
+}
+
+.heading {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin-bottom: 16px;
+  text-align: start;
+  
+}
+
+.slider {
+  width: 100%;
+  appearance: none;
+  height: 4px;
+  background: #7ACBC4;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 1rem;
+  max-width: 463px;
+  padding: 0 !important;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #4ea69e;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+  }
+}
+
+.label {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: start;
+  width: 100%;
+  margin-bottom: 5px;
+  
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid rgba(230, 235, 237, 1);
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: 'Montserrat';
+  background: white;
+  color: rgba(10, 39, 59, 1);
+  height: 36px;
+}
+.price_card {
+  width: 100%;
+}
+
+.price_heading {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin: 24px 0 24px 0;
+  text-align: start;
+  
+}
+
+.price_slider {
+  width: 100%;
+  appearance: none;
+  height: 4px;
+  background: #7ACBC4;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 29px !important;
+  max-width: 463px;
+  padding: 0 !important;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #4ea69e;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+  }
+}
+
+.price_inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid rgba(230, 235, 237, 1);
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: 'Montserrat';
+  background: white;
+  color: rgba(10, 39, 59, 1);
+  height: 36px;
 }

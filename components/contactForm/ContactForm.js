@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import axios from "axios"; // Add axios import
+import axios from "axios";
 import styles from "./contactForm.module.css";
-import { CONTACT_SUBMISSION_API } from "../../routes/apiRoutes"; // Import the routes
-
+import { CONTACT_SUBMISSION_API, CSRF_TOKEN_API } from "../../routes/apiRoutes";
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    country: "",
     message: ""
   });
-  const [error, setError] = useState(null); // Add error state
-  const [isSubmitting, setIsSubmitting] = useState(false); // Add isSubmitting state
-  const [status, setStatus] = useState(null); // Add status state
+  const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null);
 
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -25,31 +26,58 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setError(null);
     try {
-      const response = await fetch(`${CONTACT_SUBMISSION_API}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(formData)
+      // 1. Get CSRF cookie from Sanctum
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/sanctum/csrf-cookie`, {
+        withCredentials: true,
       });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        setStatus({ success: true, message: data.message });
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      } else {
-        setStatus({ success: false, message: data.errors || 'Submission failed' });
-      }
+      const tokenResponse = await axios.get(CSRF_TOKEN_API, {
+        withCredentials: true,
+      });
+  
+      const csrfToken = tokenResponse.data.csrf_token;
+      console.log("CSRF Token:", csrfToken); // Log the CSRF token for debugging
+     // Log the CSRF token for debugging
+      // 2. Submit the form data
+      const response = await axios.post(CONTACT_SUBMISSION_API, formData, {
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'csrf_token': csrfToken, // Send CSRF token manually
+        },
+      });
+  
+      setStatus({
+        success: true,
+        message: response.data.message || 'Form submitted successfully!',
+      });
+  
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        country: '',
+        message: '',
+      });
+  
     } catch (error) {
-      setStatus({ success: false, message: 'Network error. Please try again.' });
+      setStatus({
+        success: false,
+        message: error.response?.data?.message || error.message || 'Network error. Please try again.',
+      });
+      console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
+  
+  
+  
+  // Helper function to get cookies
+ 
 
   const placeholderStyle = {
     fontFamily: 'Montserrat',
@@ -63,8 +91,12 @@ const ContactForm = () => {
   return (
     <div className={styles.formContainer}>
       <h2 className={styles.title}>Feel free to write</h2>
-      {error && <p className={styles.error}>{error}</p>} {/* Display error message */}
-      {status && <p className={status.success ? styles.success : styles.error}>{status.message}</p>} {/* Display status message */}
+      {error && <p className={styles.error}>{error}</p>}
+      {status && (
+        <p className={status.success ? styles.success : styles.error}>
+          {status.message}
+        </p>
+      )}
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -97,9 +129,9 @@ const ContactForm = () => {
           style={placeholderStyle}
         />
         <input
-          type="tel"
+          type="text"  // Changed from "tel" to "text" for country input
           name="country"
-          value={formData.phone}
+          value={formData.country}
           onChange={handleChange}
           placeholder="Country"
           className={styles.input}
@@ -115,7 +147,11 @@ const ContactForm = () => {
           required
           style={placeholderStyle}
         />
-        <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+        <button 
+          type="submit" 
+          className={styles.submitButton} 
+          disabled={isSubmitting}
+        >
           {isSubmitting ? 'Sending...' : 'Send a Message'}
         </button>
       </form>

@@ -25,13 +25,24 @@ function App({ Component, pageProps }) {
     // Fetch navigation data from the API
     const fetchNavigationData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        });
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
         const data = await res.json();
         setNavigationData(data.pages);
       } catch (error) {
         console.error("Error fetching navigation data:", error);
+        // Optionally set some error state here
       }
-    };
+    };  
 
     fetchNavigationData();
   }, []);
