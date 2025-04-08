@@ -28,32 +28,14 @@ const ContactForm = () => {
     setIsSubmitting(true);
     setError(null);
     try {
-      // 1. Get CSRF cookie from Sanctum
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/sanctum/csrf-cookie`, {
-        withCredentials: true,
-      });
-      const tokenResponse = await axios.get(CSRF_TOKEN_API, {
-        withCredentials: true,
-      });
-  
-      const csrfToken = tokenResponse.data.csrf_token;
-      console.log("CSRF Token:", csrfToken); // Log the CSRF token for debugging
-     // Log the CSRF token for debugging
       // 2. Submit the form data
       const response = await axios.post(CONTACT_SUBMISSION_API, formData, {
         withCredentials: true,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'csrf_token': csrfToken, // Send CSRF token manually
-        },
       });
-  
       setStatus({
         success: true,
         message: response.data.message || 'Form submitted successfully!',
       });
-  
       // Reset form
       setFormData({
         name: '',
