@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "../HomeBanner/HomeBanner.module.css";
+import { LOCATIONS_API } from "../../routes/apiRoutes";
+import ReactSlider from "react-slider";
+import { useRouter } from "next/router"; // Add this import
+import axios from "axios";
 
 const HomeBannerSearch = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("OFFPLAN");
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -12,28 +17,56 @@ const HomeBannerSearch = () => {
     sizeMax: "",
     priceMin: "",
     priceMax: "",
-    priceCurrency: "AED"
+    priceCurrency: "AED",
+    bathMin: "",
+    bathMax: ""
   });
-
+  const [locations, setLocations] = useState([]); // State for storing locations
+  const [loadingLocations, setLoadingLocations] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedLocations, setSelectedLocations] = useState([]);
   const modalRef = useRef();
-  const districts = [
-    "Al Safa",
-    "Al Barari",
-    "Al Barsha",
-    "Al Furjan",
-    "Al Ghadeer",
-    "Al Jaddaf",
-    "Alreeman",
-    "Central Park",
-    "Al Safa",
-    "Al Barari",
-    "Al Barsha",
-    "Al Furjan",
-    "Al Ghadeer",
-    "Al Jaddaf",
-    "Alreeman",
-    "Central Park"
-  ];
+  useEffect(() => {
+    const fetchLocations = async () => {
+      if (modalContent === "Where" && locations.length === 0) {
+        try {
+          setLoadingLocations(true);
+          setError(null);
+          const response = await axios.get(LOCATIONS_API);
+
+          setLocations(response.data); // Adjust based on your API response structure
+        } catch (err) {
+          setError("Failed to fetch locations");
+          console.error("Error fetching locations:", err);
+        } finally {
+          setLoadingLocations(false);
+        }
+      }
+    };
+
+    fetchLocations();
+  }, [modalContent]);
+  const handleLocationSelect = (location) => {
+    setSelectedLocations((prev) => {
+      const isSelected = prev.some((loc) => loc.id === location.id);
+      const updatedLocations = isSelected
+        ? prev.filter((loc) => loc.id !== location.id)
+        : [...prev, location];
+
+      // Update searchValues.where immediately
+      const locationNames = updatedLocations.map((loc) => loc.title).join(", ");
+      setSearchValues((prev) => ({
+        ...prev,
+        where: locationNames
+      }));
+
+      return updatedLocations;
+    });
+  };
+  const clearSelectedLocations = () => {
+    setSearchValues((prev) => ({ ...prev, where: "" }));
+    setSelectedLocations([]);
+  };
   // Close modal when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,7 +84,21 @@ const HomeBannerSearch = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [modalVisible]);
+  const handleSizeChange = (values) => {
+    setSearchValues((prev) => ({
+      ...prev,
+      sizeMin: values[0],
+      sizeMax: values[1]
+    }));
+  };
 
+  const handleRoomChange = (values) => {
+    setSearchValues((prev) => ({
+      ...prev,
+      bathMin: values[0],
+      bathMax: values[1]
+    }));
+  };
   const openModal = (content) => {
     setModalContent(content);
     setModalVisible(true);
@@ -72,14 +119,35 @@ const HomeBannerSearch = () => {
     }));
   };
 
-  const handleSearch = () => {
-    console.log("Searching with:", {
-      tab: activeTab,
-      ...searchValues
-    });
-    closeModal();
-  };
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
+    // Prepare query parameters
+    const queryParams = {
+      type: activeTab.toLowerCase(),
+      ...(searchValues.where && { location: searchValues.where }),
+      ...(searchValues.sizeMin && { sizeMin: searchValues.sizeMin }),
+      ...(searchValues.sizeMax && { sizeMax: searchValues.sizeMax }),
+      ...(searchValues.priceMin && { priceMin: searchValues.priceMin }),
+      ...(searchValues.priceMax && { priceMax: searchValues.priceMax }),
+      ...(searchValues.bathMin && { bathMin: searchValues.bathMin }),
+      ...(searchValues.bathMax && { bathMax: searchValues.bathMax }),
+      currency: searchValues.priceCurrency
+    };
+
+    // Remove empty parameters
+    Object.keys(queryParams).forEach((key) => {
+      if (queryParams[key] === "" || queryParams[key] === undefined) {
+        delete queryParams[key];
+      }
+    });
+
+    // Navigate to search page with query parameters
+    router.push({
+      pathname: "/homesearch",
+      query: queryParams
+    });
+  };
   const renderModalContent = () => {
     switch (modalContent) {
       case "Where":
@@ -102,7 +170,7 @@ const HomeBannerSearch = () => {
               </svg>
               <input
                 type="text"
-                placeholder="Search district"
+                placeholder="Search location"
                 value={searchValues.where}
                 onChange={handleInputChange}
                 name="where"
@@ -110,37 +178,59 @@ const HomeBannerSearch = () => {
               {searchValues.where && (
                 <button
                   className={styles.clear_button}
-                  onClick={() =>
-                    setSearchValues((prev) => ({ ...prev, where: "" }))
-                  }
+                  onClick={() => {
+                    setSearchValues((prev) => ({ ...prev, where: "" }));
+                    setSelectedLocations([]);
+                  }}
                 >
                   ×
                 </button>
               )}
             </div>
 
-            <div className={styles.grid_wrapper}>
-              {districts.map((district, index) => (
-                <div className={styles.district_card} key={`${district}-${index}`}>
-                  <div className={styles.district_location}>
-                    <svg
-                      className={styles.pin_icon}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke="#A0AEC0"
-                        strokeWidth="2"
-                        d="M12 21s6-5.686 6-10.5A6 6 0 0012 4a6 6 0 00-6 6.5C6 15.314 12 21 12 21z"
-                      />
-                      <circle cx="12" cy="10" r="2" fill="#A0AEC0" />
-                    </svg>
-                  </div>
-                  <div className={styles.district_name}>{district}</div>
+            {loadingLocations ? (
+              <div className={styles.loading}>Loading locations...</div>
+            ) : error ? (
+              <div className={styles.error}>{error}</div>
+            ) : (
+              <>
+                <div className={styles.grid_wrapper}>
+                  {locations.map((location) => {
+                    const isSelected = selectedLocations.some(
+                      (loc) => loc.id === location.id
+                    );
+                    return (
+                      <div
+                        className={`${styles.district_card} ${
+                          isSelected ? styles.selected : ""
+                        }`}
+                        key={location.id}
+                        onClick={() => handleLocationSelect(location)}
+                      >
+                        <div className={styles.district_location}>
+                          <svg
+                            className={styles.pin_icon}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="#A0AEC0"
+                              strokeWidth="2"
+                              d="M12 21s6-5.686 6-10.5A6 6 0 0012 4a6 6 0 00-6 6.5C6 15.314 12 21 12 21z"
+                            />
+                            <circle cx="12" cy="10" r="2" fill="#A0AEC0" />
+                          </svg>
+                        </div>
+                        <div className={styles.district_name}>
+                          <span>{location.title}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
         );
       case "Size":
@@ -150,57 +240,120 @@ const HomeBannerSearch = () => {
               <h2 className={styles.heading}>
                 What should be the area of the apartment?
               </h2>
-              <input
-                type="range"
-                min={0}
-                max={1000}
-                className={styles.slider}
-                // You'll need to bind value and onChange as needed
+
+              {/* Dual-thumb slider for size */}
+              <ReactSlider
+                className={styles.dualSlider}
+                thumbClassName={styles.dualThumb}
+                trackClassName={styles.dualTrack}
+                min={35}
+                max={550}
+                value={[
+                  searchValues.sizeMin || 35,
+                  searchValues.sizeMax || 550
+                ]}
+                onChange={handleSizeChange}
+                pearling
+                minDistance={35}
               />
 
-              <label className={styles.label}>Meter square</label>
               <div className={styles.inputs} style={{ marginBottom: "24px" }}>
                 <input
                   type="number"
-                  value={searchValues.sizeMin}
-                  onChange={handleInputChange}
+                  value={searchValues.sizeMin || ""}
+                  onChange={(e) => {
+                    const value = Math.max(
+                      0,
+                      Math.min(
+                        parseInt(e.target.value) || 0,
+                        searchValues.sizeMax || 550
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      sizeMin: value
+                    }));
+                  }}
                   name="sizeMin"
-                  placeholder=" 35m²"
+                  placeholder="35m²"
                   className={styles.input}
                 />
                 <input
                   type="number"
-                  value={searchValues.sizeMax}
-                  onChange={handleInputChange}
+                  value={searchValues.sizeMax || ""}
+                  onChange={(e) => {
+                    const value = Math.min(
+                      550,
+                      Math.max(
+                        parseInt(e.target.value) || 550,
+                        searchValues.sizeMin || 35
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      sizeMax: value
+                    }));
+                  }}
                   name="sizeMax"
                   placeholder="550m²"
                   className={styles.input}
                 />
               </div>
+
               <h3 className={styles.heading}>
                 What should be the number of rooms?
               </h3>
-              <input
-                type="range"
+
+              {/* Dual-thumb slider for bedrooms */}
+              <ReactSlider
+                className={styles.dualSlider}
+                thumbClassName={styles.dualThumb}
+                trackClassName={styles.dualTrack}
                 min={0}
-                max={1000}
-                className={styles.slider}
-                // You'll need to bind value and onChange as needed
+                max={12}
+                value={[searchValues.bathMin || 1, searchValues.bathMax || 12]}
+                onChange={handleRoomChange}
+                pearling
+                minDistance={1}
               />
-               <label className={styles.label}>Bedrooms</label>
+
               <div className={styles.inputs}>
                 <input
                   type="number"
-                  value={searchValues.bathMin}
-                  onChange={handleInputChange}
+                  value={searchValues.bathMin || ""}
+                  onChange={(e) => {
+                    const value = Math.max(
+                      0,
+                      Math.min(
+                        parseInt(e.target.value) || 1,
+                        searchValues.bathMax || 12
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      bathMin: value
+                    }));
+                  }}
                   name="bathMin"
-                  placeholder=" 1"
+                  placeholder="1"
                   className={styles.input}
                 />
                 <input
                   type="number"
-                  value={searchValues.bathMax}
-                  onChange={handleInputChange}
+                  value={searchValues.bathMax || ""}
+                  onChange={(e) => {
+                    const value = Math.min(
+                      12,
+                      Math.max(
+                        parseInt(e.target.value) || 12,
+                        searchValues.bathMin || 1
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      bathMax: value
+                    }));
+                  }}
                   name="bathMax"
                   placeholder="12"
                   className={styles.input}
@@ -212,38 +365,76 @@ const HomeBannerSearch = () => {
       case "Price":
         return (
           <div className={styles["price-search"]}>
-           <div className={styles.price_card}>
+            <div className={styles.price_card}>
               <h2 className={styles.price_heading}>
-              What should the price of the apartment be?
+                What should the price of the apartment be?
               </h2>
-              <input
-                type="range"
+
+              {/* Dual-thumb price slider */}
+              <ReactSlider
+                className={styles.dualSlider}
+                thumbClassName={styles.dualThumb}
+                trackClassName={styles.dualTrack}
                 min={0}
-                max={1000}
-                className={styles.price_slider}
-                // You'll need to bind value and onChange as needed
+                max={10000000} // Adjust max price as needed
+                value={[
+                  searchValues.priceMin || 190000,
+                  searchValues.priceMax || 500640000
+                ]}
+                onChange={(values) => {
+                  setSearchValues((prev) => ({
+                    ...prev,
+                    priceMin: values[0],
+                    priceMax: values[1]
+                  }));
+                }}
+                pearling
+                minDistance={100000} // Minimum price gap
               />
 
               <div className={styles.price_inputs}>
                 <input
                   type="number"
-                  value={searchValues.priceMin}
-                  onChange={handleInputChange}
+                  value={searchValues.priceMin || ""}
+                  onChange={(e) => {
+                    const value = Math.max(
+                      0,
+                      Math.min(
+                        parseInt(e.target.value.replace(/\D/g, "")) || 190000,
+                        searchValues.priceMax || 500640000
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      priceMin: value
+                    }));
+                  }}
                   name="priceMin"
-                  placeholder="190 000 $"
+                  placeholder="190,000 $"
                   className={styles.input}
                 />
                 <input
                   type="number"
-                  value={searchValues.priceMax}
-                  onChange={handleInputChange}
+                  value={searchValues.priceMax || ""}
+                  onChange={(e) => {
+                    const value = Math.min(
+                      10000000,
+                      Math.max(
+                        parseInt(e.target.value.replace(/\D/g, "")) ||
+                          500640000,
+                        searchValues.priceMin || 190000
+                      )
+                    );
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      priceMax: value
+                    }));
+                  }}
                   name="priceMax"
-                  placeholder="500 640 000 $"
+                  placeholder="500,640,000 $"
                   className={styles.input}
                 />
               </div>
-              
-             
             </div>
           </div>
         );
@@ -280,6 +471,7 @@ const HomeBannerSearch = () => {
           RENTAL
         </button>
       </div>
+      <form onSubmit={handleSearch}>
       <div
         className={`${styles["search-container"]} ${
           activeInput ? styles.active : ""
@@ -298,6 +490,17 @@ const HomeBannerSearch = () => {
               value={searchValues.where || ""}
               readOnly
             />
+            {searchValues.where && (
+              <button
+                className={styles.clear_button}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clearSelectedLocations();
+                }}
+              >
+                ×
+              </button>
+            )}
           </div>
           <div className={styles.line}></div>
           <div
@@ -338,13 +541,10 @@ const HomeBannerSearch = () => {
               }
               readOnly
             />
-            <button
-              className={styles["search-button"]}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleSearch();
-              }}
-            >
+             <button
+            type="submit" // Change to type="submit"
+            className={styles["search-button"]}
+          >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -363,18 +563,18 @@ const HomeBannerSearch = () => {
           </div>
         </div>
         {modalVisible && (
-        <div className={styles.modal_overlay} onClick={closeModal}>
-          <div
-            ref={modalRef}
-            className={styles.modal_content}
-            onClick={(e) => e.stopPropagation()} // This prevents modal clicks from closing it
-          >
-            {renderModalContent()}
+          <div className={styles.modal_overlay} onClick={closeModal}>
+            <div
+              ref={modalRef}
+              className={styles.modal_content}
+              onClick={(e) => e.stopPropagation()} // This prevents modal clicks from closing it
+            >
+              {renderModalContent()}
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
-   
+      </form>
     </div>
   );
 };

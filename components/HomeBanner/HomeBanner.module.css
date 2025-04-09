@@ -537,6 +537,8 @@
   transition: all 0.2s ease;
   width: 104px;
   height: 88px;
+  overflow: hidden;
+  
 }
 
 .district_card:hover {
@@ -577,8 +579,29 @@
   border-bottom: 1px solid rgba(230, 235, 237, 1);
   width: 100%;
   padding-bottom: 19px;
+  height: 100%;
 }
+.selected {
+  background-color: #e0f2fe; /* 💡 light blue background */
+  border-color: #38bdf8;     /* blue border */
+}
+.district_name {
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
 
+}
+.district_name span {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .district_location svg {
   width: 20px;
   height: 27px;
@@ -599,8 +622,7 @@
   text-align: start;
   
 }
-
-.slider {
+.dualSlider {
   width: 100%;
   appearance: none;
   height: 4px;
@@ -610,16 +632,51 @@
   margin-bottom: 1rem;
   max-width: 463px;
   padding: 0 !important;
+}
 
-  &::-webkit-slider-thumb {
-    appearance: none;
-    height: 20px;
-    width: 20px;
-    background: #4ea69e;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 3px solid white;
-  }
+.dualTrack {
+  top: 0;
+  bottom: 0;
+  background: #7ACBC4;
+  border-radius: 999px;
+}
+
+.dualTrack-1 {
+  background: #007AFF;
+}
+
+.dualThumb {
+  width: 20px;
+  height: 20px;
+  background: #7ACBC4;
+  border: 2px solid #7ACBC4;
+  border-radius: 50%;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  outline: none;
+}
+
+.dualThumb:hover {
+  box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
+}
+
+/* Input Styles */
+.inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.input {
+  width: 100px;
+  padding: 8px 12px;
+  border: 1px solid #E6EBED;
+  border-radius: 4px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007AFF;
 }
 
 .label {

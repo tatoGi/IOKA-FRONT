@@ -356,7 +356,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <button className={styles.closeButton} onClick={closeModal}>
                       &times; {/* Close icon (X) */}
                     </button>
-                    <ContactForm />{" "}
+                    <ContactForm  pageTitle="Rental & Resale Page"/>{" "}
                     {/* Render the ContactForm inside the modal */}
                   </div>
                 </div>

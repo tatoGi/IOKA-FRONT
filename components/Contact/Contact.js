@@ -18,9 +18,10 @@ const MapComponent = dynamic(() => import("../Map/Map"), {
 });
 
 const Contact = ({ initialData, id }) => {
+  
   const [cardData, setCardData] = useState(initialData || {});
   const [isMobile, setIsMobile] = useState(false);
-
+  console.log("Contact", cardData);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -149,7 +150,7 @@ const Contact = ({ initialData, id }) => {
         )}
       </div>
       <div className={`container ${styles.containerWithMargin}`}>
-        <ContactForm />
+        <ContactForm  pageTitle="Contact Page"/>
       </div>
     </div>
   );

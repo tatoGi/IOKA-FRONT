@@ -261,7 +261,7 @@ const AboutUs = ({ initialData, id }) => {
 
           <div className={styles.formContainer}>
             <h5>Send us Email</h5>
-            <ContactForm />
+            <ContactForm  pageTitle="About Page"/>
           </div>
           <PartnersSection />
         </div>

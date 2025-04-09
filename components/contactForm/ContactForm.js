@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./contactForm.module.css";
-import { CONTACT_SUBMISSION_API, CSRF_TOKEN_API } from "../../routes/apiRoutes";
-const ContactForm = () => {
+import { CONTACT_SUBMISSION_API } from "../../routes/apiRoutes";
+
+const ContactForm = ({ pageTitle = "" }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +15,16 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
 
- 
+  // Auto-hide status after 2 seconds
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => {
+        setStatus(null);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -22,21 +32,21 @@ const ContactForm = () => {
       [name]: value
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
     try {
-      // 2. Submit the form data
-      const response = await axios.post(CONTACT_SUBMISSION_API, formData, {
+      const response = await axios.post(CONTACT_SUBMISSION_API, {
+        ...formData,
+        page_title: pageTitle // Add page title to submission data
+      }, {
         withCredentials: true,
       });
       setStatus({
         success: true,
         message: response.data.message || 'Form submitted successfully!',
       });
-      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -44,7 +54,6 @@ const ContactForm = () => {
         country: '',
         message: '',
       });
-  
     } catch (error) {
       setStatus({
         success: false,
@@ -55,11 +64,6 @@ const ContactForm = () => {
       setIsSubmitting(false);
     }
   };
-  
-  
-  
-  // Helper function to get cookies
- 
 
   const placeholderStyle = {
     fontFamily: 'Montserrat',
@@ -73,12 +77,16 @@ const ContactForm = () => {
   return (
     <div className={styles.formContainer}>
       <h2 className={styles.title}>Feel free to write</h2>
-      {error && <p className={styles.error}>{error}</p>}
+      
+      {/* Modal-style status message */}
       {status && (
-        <p className={status.success ? styles.success : styles.error}>
-          {status.message}
-        </p>
+        <div className={`${styles.statusModal} ${status.success ? styles.success : styles.error}`}>
+          <div className={styles.modalContent}>
+            <p>{status.message}</p>
+          </div>
+        </div>
       )}
+      
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -111,7 +119,7 @@ const ContactForm = () => {
           style={placeholderStyle}
         />
         <input
-          type="text"  // Changed from "tel" to "text" for country input
+          type="text"
           name="country"
           value={formData.country}
           onChange={handleChange}
