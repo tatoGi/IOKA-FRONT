@@ -49,7 +49,13 @@ const SearchHomeResult = ({ searchParams }) => {
         setLoading(true);
         // Convert searchParams to query string
         const queryString = new URLSearchParams(searchParams).toString();
+
         const response = await axios.get(`${PROPERTIES_API}?${queryString}`);
+
+        console.log("Search params:", searchParams);
+        console.log("Query string:", queryString);
+        console.log("API response:", response.data);
+
         // Get all available property types
         const offplanData = response.data?.data?.OFFPLAN || [];
         const rentalData = response.data?.data?.RENTAL || [];

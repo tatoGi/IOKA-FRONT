@@ -26,6 +26,8 @@ const HomeBannerSearch = () => {
   const [error, setError] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const modalRef = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const fetchLocations = async () => {
       if (modalContent === "Where" && locations.length === 0) {
@@ -46,6 +48,16 @@ const HomeBannerSearch = () => {
 
     fetchLocations();
   }, [modalContent]);
+
+  useEffect(() => {
+    if (isModalOpen && (searchValues.size || searchValues.price)) {
+      const resultsSection = document.getElementById("search-results");
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [isModalOpen, searchValues.size, searchValues.price]);
+
   const handleLocationSelect = (location) => {
     setSelectedLocations((prev) => {
       const isSelected = prev.some((loc) => loc.id === location.id);
@@ -166,7 +178,6 @@ const HomeBannerSearch = () => {
         }
       });
 
-      console.log("Search params:", queryParams); // Add this for debugging
 
       router.push(
         {
@@ -631,7 +642,9 @@ const HomeBannerSearch = () => {
                   ×
                 </button>
               )}
-              <button
+            
+            </div>
+            <button
                 type="submit"
                 className={styles["search-button"]}
                 onClick={(e) => {
@@ -654,7 +667,6 @@ const HomeBannerSearch = () => {
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </button>
-            </div>
           </div>
           {modalVisible && (
             <div className={styles.modal_overlay} onClick={closeModal}>
@@ -664,6 +676,7 @@ const HomeBannerSearch = () => {
                 onClick={(e) => e.stopPropagation()} // This prevents modal clicks from closing it
               >
                 {renderModalContent()}
+                <div id="search-results">{/* Your results content here */}</div>
               </div>
             </div>
           )}
