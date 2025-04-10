@@ -17,4 +17,5 @@ export const LOCATIONS_API = `${API_BASE_URL}/locations`;
 export const PROPERTIES_API = `${API_BASE_URL}/properties/Search`;
 export const SUBSCRIBE_API  = `${API_BASE_URL}/subscribe`;
 export const SETTINGS_API   = `${API_BASE_URL}/settings`;
+export const DEVELOPER_SEARCH_API = `${API_BASE_URL}/developers_search`;
 // Add more routes as needed

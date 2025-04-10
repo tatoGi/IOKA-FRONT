@@ -14,6 +14,7 @@ import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
 import { LoadingWrapper } from "../LoadingWrapper/index";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
+import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
 
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -83,15 +84,72 @@ const Developer = ({ initialData, initialPagination }) => {
 
   // Filter data based on search query
   useEffect(() => {
-    if (searchQuery) {
-      const filtered = cardData.filter((card) =>
-        card.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredData(filtered);
-    } else {
+    if (!searchQuery) {
       setFilteredData(cardData);
+      setTotalPages(initialPagination?.last_page || 1);
+      setCurrentPage(initialPagination?.current_page || 1);
     }
-  }, [searchQuery, cardData]);
+  }, [searchQuery, cardData, initialPagination]);
+
+  const handleSearch = async (e) => {
+    if (e.key === 'Enter' && searchQuery.length >= 3) {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
+          params: {
+            search: searchQuery,
+            per_page: 10
+          }
+        });
+        const { data, meta } = response.data;
+        setFilteredData(Array.isArray(data) ? data : [data]);
+        setTotalPages(meta.last_page);
+        setCurrentPage(meta.current_page);
+      } catch (error) {
+        console.error("Error searching developers:", error);
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.error("Error response:", error.response.data);
+          console.error("Error status:", error.response.status);
+          console.error("Error headers:", error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error("Error request:", error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error message:", error.message);
+        }
+        setFilteredData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  // Handle page change for search results
+  const handlePageChangeForSearch = async (page) => {
+    if (page !== currentPage) {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
+          params: {
+            search: searchQuery,
+            per_page: 10,
+            page: page
+          }
+        });
+        const { data, meta } = response.data;
+        setFilteredData(Array.isArray(data) ? data : [data]);
+        setTotalPages(meta.last_page);
+        setCurrentPage(meta.current_page);
+      } catch (error) {
+        console.error("Error fetching page:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
   // Handle "Read More" button click
   const handleReadMore = (slug) => {
@@ -101,11 +159,11 @@ const Developer = ({ initialData, initialPagination }) => {
   // Get image URL for a card
   const getImageUrl = (photoJson, cardId) => {
     try {
-      const parsed = JSON.parse(photoJson);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
+      if (Array.isArray(photos) && photos.length > 0) {
         const currentIndex = imageIndexes[cardId] || 0;
         return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(
-          parsed[currentIndex].file
+          photos[currentIndex].file
         )}`;
       }
       return defaultImage;
@@ -117,11 +175,11 @@ const Developer = ({ initialData, initialPagination }) => {
   // Handle next image button click
   const handleNextImage = (cardId, photoJson) => {
     try {
-      const parsed = JSON.parse(photoJson);
-      if (Array.isArray(parsed)) {
+      const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
+      if (Array.isArray(photos)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) + 1) % parsed.length,
+          [cardId]: ((prev[cardId] || 0) + 1) % photos.length,
         }));
       }
     } catch (e) {
@@ -132,11 +190,11 @@ const Developer = ({ initialData, initialPagination }) => {
   // Handle previous image button click
   const handlePrevImage = (cardId, photoJson) => {
     try {
-      const parsed = JSON.parse(photoJson);
-      if (Array.isArray(parsed)) {
+      const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
+      if (Array.isArray(photos)) {
         setImageIndexes((prev) => ({
           ...prev,
-          [cardId]: ((prev[cardId] || 0) - 1 + parsed.length) % parsed.length,
+          [cardId]: ((prev[cardId] || 0) - 1 + photos.length) % photos.length,
         }));
       }
     } catch (e) {
@@ -159,6 +217,7 @@ const Developer = ({ initialData, initialPagination }) => {
               placeholder="City, Building or community"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
               className={`form-control ${styles.searchInput}`}
             />
             <FaSearch className={`position-absolute ${styles.searchIcon}`} />
@@ -180,7 +239,7 @@ const Developer = ({ initialData, initialPagination }) => {
                         className={styles.cardImage}
                         style={{ objectFit: "cover" }}
                       />
-                      {JSON.parse(card.photo)?.length > 1 && (
+                      {Array.isArray(card.photo) && card.photo.length > 1 && (
                         <div className={styles.imageNav}>
                           <button
                             onClick={() => handlePrevImage(card.id, card.photo)}
@@ -207,7 +266,11 @@ const Developer = ({ initialData, initialPagination }) => {
                       <div className={styles.communitiesSection}>
                         <h3 className={styles.communitiesTitle}>Top Communities</h3>
                         <div className={styles.communitiesList}>
-                          {JSON.parse(card.tags).map((tag, index) => (
+                          {Array.isArray(card.tags) ? card.tags.map((tag, index) => (
+                            <span key={index} className={styles.badge}>
+                              {tag}
+                            </span>
+                          )) : JSON.parse(card.tags || '[]').map((tag, index) => (
                             <span key={index} className={styles.badge}>
                               {tag}
                             </span>
@@ -252,7 +315,7 @@ const Developer = ({ initialData, initialPagination }) => {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
-                onClick={() => handlePageChange(page)}
+                onClick={() => handlePageChangeForSearch(page)}
                 className={`${styles.pageButton} ${
                   currentPage === page ? styles.active : ""
                 }`}
@@ -262,7 +325,7 @@ const Developer = ({ initialData, initialPagination }) => {
               </button>
             ))}
             <button
-              onClick={() => handlePageChange(currentPage + 1)}
+              onClick={() => handlePageChangeForSearch(currentPage + 1)}
               disabled={currentPage === totalPages || isLoading}
               className={styles.pageButton}
             >
