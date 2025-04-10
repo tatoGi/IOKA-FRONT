@@ -50,46 +50,11 @@ const Offplan = ({ initialData, initialPagination }) => {
 
   const handleFilterChange = (filters) => {
     setCurrentPage(1); // Reset to first page when filters change
-    
-    // Update URL with filters, using the current pathname
-    const currentPath = router.asPath.split('?')[0]; // Get path without query params
-    router.push(
-      {
-        pathname: currentPath,
-        query: { ...filters, page: 1 },
-      },
-      undefined,
-      { shallow: true }
-    );
-    
-    fetchData(1, filters);
-  };
-
-  const handlePageChange = (page) => {
-    if (page !== currentPage) {
-      setCurrentPage(page);
-      
-      // Get current filters from URL
-      const currentFilters = {
-        location: router.query.location,
-        property_type: router.query.property_type,
-        price_min: router.query.price_min,
-        price_max: router.query.price_max,
-        bedrooms: router.query.bedrooms,
-      };
-      
-      // Update URL with new page and current filters
-      const currentPath = router.asPath.split('?')[0]; // Get path without query params
-      router.push(
-        {
-          pathname: currentPath,
-          query: { ...currentFilters, page },
-        },
-        undefined,
-        { shallow: true }
-      );
-      
-      fetchData(page, currentFilters);
+    if (filters === null) {
+      // If filters are null, fetch all properties
+      fetchData(1);
+    } else {
+      fetchData(1, filters);
     }
   };
 
@@ -120,21 +85,13 @@ const Offplan = ({ initialData, initialPagination }) => {
       }
 
       const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
-      const data = response.data;
-      
-      // Handle different response structures
-      if (Array.isArray(data)) {
-        setCardData(data);
-      } else if (data.data) {
-        setCardData(Array.isArray(data.data) ? data.data : [data.data]);
-        setCurrentPage(data.current_page || 1);
-        setTotalPages(data.last_page || 1);
-      } else {
-        setCardData([]);
-      }
+      const data = response.data.data;
+      setCardData(Array.isArray(data) ? data : [data]);
+      setCurrentPage(response.data.current_page);
+      setTotalPages(response.data.last_page);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setCardData([]);
+      setCardData([]); // Clear data on error
     } finally {
       setIsLoading(false);
     }
@@ -163,29 +120,28 @@ const Offplan = ({ initialData, initialPagination }) => {
     }
   };
 
-  // Initialize filters from URL on component mount
-  useEffect(() => {
-    if (router.isReady) {
-      const { page, location, property_type, price_min, price_max, bedrooms } = router.query;
-      
-      // Only initialize if we're not on a property detail page
-      if (!router.query.slug) {
-        if (page) {
-          setCurrentPage(Number(page));
-        }
-        
-        const filters = {
-          location: location || null,
-          property_type: property_type || null,
-          price_min: price_min || null,
-          price_max: price_max || null,
-          bedrooms: bedrooms || null,
-        };
-        
-        fetchData(Number(page) || 1, filters);
-      }
+  // Handle page change
+  const handlePageChange = (page) => {
+    if (page !== currentPage) {
+      setCurrentPage(page);
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, page },
+        },
+        undefined,
+        { shallow: true }
+      );
+      fetchData(page);
     }
-  }, [router.isReady, router.query]);
+  };
+
+  // Fetch data when the component mounts (if no initialData is provided)
+  useEffect(() => {
+    if (!initialData.length && !isLoading) {
+      fetchData(currentPage);
+    }
+  }, []);
 
   useEffect(() => {
     fetchFilterOptions();

@@ -31,8 +31,6 @@
   border: none;
   outline: none;
   width: 100%;
-
-
 }
 
 .searchInput::placeholder {
@@ -42,6 +40,21 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #07151F;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.clearButton:hover {
+  color: #333;
 }
 
 .filterButtons {

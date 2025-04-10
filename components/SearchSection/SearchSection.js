@@ -33,8 +33,8 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
       const backendFilters = {
         property_type: updatedFilters.propertyType || null,
-        price_min: updatedFilters.price.split("-")[0] || null,
-        price_max: updatedFilters.price.split("-")[1] || null,
+        price_min: updatedFilters.price ? updatedFilters.price.split("-")[0] : null,
+        price_max: updatedFilters.price ? updatedFilters.price.split("-")[1] : null,
         bedrooms: updatedFilters.bedrooms || null,
         location: field === 'searchQuery' ? value : null,
       };
@@ -46,11 +46,17 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         )
       );
 
-      // Notify parent component with the updated filters
-      onFilterChange(filteredParams);
+      // If all filters are cleared, send null to indicate we should use OFFPLAN_APi
+      onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
     }, 500),
     [filters, onFilterChange]
   );
+
+  // Add a function to clear individual filters
+  const clearFilter = (field) => {
+    setFilters(prev => ({ ...prev, [field]: "" }));
+    handleFilterChange(field, "");
+  };
 
   return (
     <div className={styles.searchSection}>
@@ -69,6 +75,14 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               }
             }}
           />
+          {filters.searchQuery && (
+            <button
+              className={styles.clearButton}
+              onClick={() => clearFilter("searchQuery")}
+            >
+              ×
+            </button>
+          )}
         </div>
         <div className={styles.filterButtons}>
           <select
@@ -77,14 +91,11 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             onChange={(e) => handleFilterChange("propertyType", e.target.value)}
           >
             <option value="">All Property Types</option>
-            <option value="Apartment">Apartment</option>
-            <option value="Villa">Villa</option>
-            <option value="Townhouse">Townhouse</option>
-            <option value="Penthouse">Penthouse</option>
-            <option value="Studio">Studio</option>
-            <option value="Duplex">Duplex</option>
-            <option value="Plot">Plot</option>
-            <option value="Commercial">Commercial</option>
+            {filterOptions.propertyTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
           </select>
           <select
             className={styles.filterBtn}
