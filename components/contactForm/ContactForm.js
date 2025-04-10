@@ -37,12 +37,22 @@ const ContactForm = ({ pageTitle = "" }) => {
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await axios.post(CONTACT_SUBMISSION_API, {
+      const currentPageUrl = typeof window !== 'undefined' ? window.location.href : '';
+      
+      const formSubmissionData = {
         ...formData,
-        page_title: pageTitle // Add page title to submission data
-      }, {
+        page_title: pageTitle,
+        page_url: currentPageUrl
+      };
+     
+      
+      const response = await axios.post(CONTACT_SUBMISSION_API, formSubmissionData, {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
+      
       setStatus({
         success: true,
         message: response.data.message || 'Form submitted successfully!',

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./SearchSection.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 
 const SearchSection = ({ onFilterChange, filterOptions }) => {
-  console.log(filterOptions);
   const [filters, setFilters] = useState({
     propertyType: "",
     price: "",
@@ -14,28 +13,44 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
     searchQuery: "",
   });
 
-  const handleFilterChange = async (field, value) => {
-    const updatedFilters = { ...filters, [field]: value };
-    setFilters(updatedFilters);
-
-    const backendFilters = {
-      property_type: updatedFilters.propertyType,
-      price_min: updatedFilters.price.split("-")[0] || null,
-      price_max: updatedFilters.price.split("-")[1] || null,
-      bedrooms: updatedFilters.bedrooms,
-      location: updatedFilters.searchQuery,
+  // Debounce function
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
     };
-
-    // Remove null or empty values from the query parameters
-    const filteredParams = Object.fromEntries(
-      Object.entries(backendFilters).filter(
-        ([_, v]) => v !== null && v !== ""
-      )
-    );
-
-    // Notify parent component with the updated filters
-    onFilterChange(filteredParams);
   };
+
+  const handleFilterChange = useCallback(
+    debounce(async (field, value) => {
+      const updatedFilters = { ...filters, [field]: value };
+      setFilters(updatedFilters);
+
+      const backendFilters = {
+        property_type: updatedFilters.propertyType || null,
+        price_min: updatedFilters.price.split("-")[0] || null,
+        price_max: updatedFilters.price.split("-")[1] || null,
+        bedrooms: updatedFilters.bedrooms || null,
+        location: field === 'searchQuery' ? value : null,
+      };
+
+      // Remove null or empty values from the query parameters
+      const filteredParams = Object.fromEntries(
+        Object.entries(backendFilters).filter(
+          ([_, v]) => v !== null && v !== ""
+        )
+      );
+
+      // Notify parent component with the updated filters
+      onFilterChange(filteredParams);
+    }, 500),
+    [filters, onFilterChange]
+  );
 
   return (
     <div className={styles.searchSection}>
@@ -44,10 +59,15 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
           <FiSearch className={styles.searchIcon} />
           <input
             type="text"
-            placeholder="City, Building or community"
+            placeholder="Search by location"
             className={styles.searchInput}
             value={filters.searchQuery}
-            onChange={(e) => handleFilterChange("searchQuery", e.target.value)}
+            onChange={(e) => setFilters(prev => ({ ...prev, searchQuery: e.target.value }))}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleFilterChange("searchQuery", e.target.value);
+              }
+            }}
           />
         </div>
         <div className={styles.filterButtons}>
@@ -56,12 +76,15 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             value={filters.propertyType}
             onChange={(e) => handleFilterChange("propertyType", e.target.value)}
           >
-            <option value="">Property type</option>
-            {filterOptions.propertyTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
+            <option value="">All Property Types</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Penthouse">Penthouse</option>
+            <option value="Studio">Studio</option>
+            <option value="Duplex">Duplex</option>
+            <option value="Plot">Plot</option>
+            <option value="Commercial">Commercial</option>
           </select>
           <select
             className={styles.filterBtn}

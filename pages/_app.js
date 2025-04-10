@@ -15,9 +15,11 @@ config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatic
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { LoadingWrapper } from "@/components/LoadingWrapper/index"; // Import LoadingWrapper
+import { SETTINGS_API } from "@/routes/apiRoutes";
 
 function App({ Component, pageProps }) {
   const [navigationData, setNavigationData] = useState([]);
+  const [settings, setSettings] = useState({});
   const [isRedirecting, setIsRedirecting] = useState(false); // State to track redirection
   const router = useRouter();
 
@@ -33,7 +35,19 @@ function App({ Component, pageProps }) {
       }
     };
 
+    // Fetch settings data from the API
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch(SETTINGS_API);
+        const data = await res.json();
+        setSettings(data);
+      } catch (error) {
+        console.error("Error fetching settings data:", error);
+      }
+    };
+
     fetchNavigationData();
+    fetchSettings();
   }, []);
 
   // Redirect to /home if statusCode is 404
@@ -58,7 +72,7 @@ function App({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <Footer />
+      <Footer navigationData={navigationData} settings={settings} />
     </>
   );
 }

@@ -28,10 +28,19 @@ const Offplan = ({ initialData, initialPagination }) => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [filterOptions, setFilterOptions] = useState({
-    propertyTypes: [],
-    priceRanges: [],
-    bedrooms: [],
-    listedAs: [],
+    propertyTypes: [
+      "Apartment",
+      "Villa",
+      "Townhouse",
+      "Penthouse",
+      "Studio",
+      "Duplex",
+      "Plot",
+      "Commercial"
+    ],
+    priceRanges: ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000", "5000001+"],
+    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8], // Default bedroom options
+    listedAs: ["Available", "Sold", "Reserved", "Under Construction"],
   });
   const router = useRouter();
 
@@ -40,21 +49,92 @@ const Offplan = ({ initialData, initialPagination }) => {
   };
 
   const handleFilterChange = (filters) => {
-    fetchData(1, filters); // Fetch filtered data starting from page 1
+    setCurrentPage(1); // Reset to first page when filters change
+    
+    // Update URL with filters, using the current pathname
+    const currentPath = router.asPath.split('?')[0]; // Get path without query params
+    router.push(
+      {
+        pathname: currentPath,
+        query: { ...filters, page: 1 },
+      },
+      undefined,
+      { shallow: true }
+    );
+    
+    fetchData(1, filters);
+  };
+
+  const handlePageChange = (page) => {
+    if (page !== currentPage) {
+      setCurrentPage(page);
+      
+      // Get current filters from URL
+      const currentFilters = {
+        location: router.query.location,
+        property_type: router.query.property_type,
+        price_min: router.query.price_min,
+        price_max: router.query.price_max,
+        bedrooms: router.query.bedrooms,
+      };
+      
+      // Update URL with new page and current filters
+      const currentPath = router.asPath.split('?')[0]; // Get path without query params
+      router.push(
+        {
+          pathname: currentPath,
+          query: { ...currentFilters, page },
+        },
+        undefined,
+        { shallow: true }
+      );
+      
+      fetchData(page, currentFilters);
+    }
   };
 
   const fetchData = async (page, filters = {}) => {
     setIsLoading(true);
     try {
-      const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi; // Use FILTER_OFFPLAN_API if filters are applied
-      const queryParams = new URLSearchParams({ page, ...filters }).toString();
-      const response = await axios.get(`${apiUrl}?${queryParams}`);
-      const data = response.data.data;
-      setCardData(Array.isArray(data) ? data : [data]);
-      setCurrentPage(response.data.current_page);
-      setTotalPages(response.data.last_page);
+      const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
+      
+      // Prepare query parameters
+      const queryParams = new URLSearchParams();
+      queryParams.append('page', page);
+      
+      // Add filters if they exist
+      if (filters.location) {
+        queryParams.append('location', filters.location);
+      }
+      if (filters.property_type) {
+        queryParams.append('property_type', filters.property_type);
+      }
+      if (filters.price_min) {
+        queryParams.append('price_min', filters.price_min);
+      }
+      if (filters.price_max) {
+        queryParams.append('price_max', filters.price_max);
+      }
+      if (filters.bedrooms) {
+        queryParams.append('bedrooms', filters.bedrooms);
+      }
+
+      const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
+      const data = response.data;
+      
+      // Handle different response structures
+      if (Array.isArray(data)) {
+        setCardData(data);
+      } else if (data.data) {
+        setCardData(Array.isArray(data.data) ? data.data : [data.data]);
+        setCurrentPage(data.current_page || 1);
+        setTotalPages(data.last_page || 1);
+      } else {
+        setCardData([]);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
+      setCardData([]);
     } finally {
       setIsLoading(false);
     }
@@ -62,48 +142,50 @@ const Offplan = ({ initialData, initialPagination }) => {
 
   const fetchFilterOptions = async () => {
     try {
-      const response = await axios.get(OFFPLAN_APi); // Fetch filter options
+      const response = await axios.get(FILTER_OFFPLAN_API);
       const options = response.data;
 
-      // Extract fields for SearchSection filters
-      const propertyTypes = [...new Set(options.data.map((item) => item.property_type))];
-      const priceRanges = ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000"]; // Example ranges
-      const bedrooms = [...new Set(options.data.map((item) => item.bedroom))];
-      const listedAs = ["Available", "Sold", "Reserved"]; // Example statuses
+      // Extract unique values for filters
+      const bedrooms = [...new Set(options.data.map((item) => item.bedroom))]
+        .filter(Boolean)
+        .sort((a, b) => a - b);
 
-      setFilterOptions({
-        propertyTypes,
-        priceRanges,
-        bedrooms,
-        listedAs,
-      });
+      // Only update bedrooms if we got valid options from the API
+      if (bedrooms.length > 0) {
+        setFilterOptions(prev => ({
+          ...prev,
+          bedrooms,
+        }));
+      }
     } catch (error) {
       console.error("Error fetching filter options:", error);
+      // Keep the default bedroom options if API call fails
     }
   };
 
-  // Handle page change
-  const handlePageChange = (page) => {
-    if (page !== currentPage) {
-      setCurrentPage(page);
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, page }, // Update the page query parameter
-        },
-        undefined,
-        { shallow: true } // Prevent full page reload
-      );
-      fetchData(page); // Fetch data for the new page
-    }
-  };
-
-  // Fetch data when the component mounts (if no initialData is provided)
+  // Initialize filters from URL on component mount
   useEffect(() => {
-    if (!initialData.length && !isLoading) {
-      fetchData(currentPage);
+    if (router.isReady) {
+      const { page, location, property_type, price_min, price_max, bedrooms } = router.query;
+      
+      // Only initialize if we're not on a property detail page
+      if (!router.query.slug) {
+        if (page) {
+          setCurrentPage(Number(page));
+        }
+        
+        const filters = {
+          location: location || null,
+          property_type: property_type || null,
+          price_min: price_min || null,
+          price_max: price_max || null,
+          bedrooms: bedrooms || null,
+        };
+        
+        fetchData(Number(page) || 1, filters);
+      }
     }
-  }, []);
+  }, [router.isReady, router.query]);
 
   useEffect(() => {
     fetchFilterOptions();
@@ -118,7 +200,7 @@ const Offplan = ({ initialData, initialPagination }) => {
       <div className={styles.listSection}>
         <SearchSection
           onFilterChange={handleFilterChange}
-          filterOptions={filterOptions} // Pass filter options to SearchSection
+          filterOptions={filterOptions}
         />
         <div className={styles.resultsHeader}>
           <h2 className={styles.title}>New Developments for sale in Dubai</h2>
@@ -127,105 +209,77 @@ const Offplan = ({ initialData, initialPagination }) => {
 
         <LoadingWrapper isLoading={isLoading}>
           <div className={styles.cardContainer}>
-            {cardData.map((property) => (
+            {cardData?.filter(property => property?.id).map((property) => (
               <div
-                key={property.id} // Add a unique key prop (assuming `id` is unique for each property)
+                key={property?.id || Math.random()}
                 className={styles.propertyCardLink}
-                onClick={() => handleReadMore(property.slug)}
+                onClick={() => property?.slug && handleReadMore(property.slug)}
                 style={{ cursor: "pointer" }}
               >
                 <div className={styles.propertyCard}>
                   <div className={styles.imageContainer}>
                     <Image
                       src={
-                        property.main_photo
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(property.main_photo)}`
+                        property?.main_photo
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
                           : defaultImage
                       }
-                      alt={property.title || "Default Property Image"}
+                      alt={property?.title || "Default Property Image"}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={styles.propertyImage}
                       priority
                       unoptimized
                     />
-                    {property.exclusive && (
+                    {property?.exclusive && (
                       <span className={styles.exclusive}>Exclusive</span>
                     )}
                   </div>
 
                   <div className={styles.propertyInfo}>
                     <h3 className={`${styles.title} ${styles.textEllipsis}`}>
-                      {property.title}
+                      {property?.title || 'Untitled Property'}
                     </h3>
                     <p className={`${styles.location} ${styles.textEllipsis}`}>
-                      {property.map_location}
+                      {property?.map_location || 'Location not specified'}
                     </p>
 
                     <div className={styles.features}>
-                      <div
-                        className={`${styles.feature} ${styles.textEllipsis}`}
-                      >
+                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image
                           src={require("/assets/img/bad.svg")}
                           alt="Bed Icon"
                           width={24}
                           height={24}
                         />
-                        <span>{property.bedroom} Br</span>
+                        <span>{property?.bedroom || 0} Br</span>
                       </div>
-                      <div
-                        className={`${styles.feature} ${styles.textEllipsis}`}
-                      >
+                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image
                           src={require("/assets/img/bath.svg")}
                           alt="Bath Icon"
                           width={24}
                           height={24}
                         />
-                        <span>{property.bathroom} Ba</span>
+                        <span>{property?.bathroom || 0} Ba</span>
                       </div>
-                      <div
-                        className={`${styles.feature} ${styles.textEllipsis}`}
-                      >
+                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image
                           src={require("/assets/img/place.svg")}
                           alt="Area Icon"
                           width={24}
                           height={24}
                         />
-                        <span>{property.sq_ft} Sq.Ft</span>
-                      </div>
-                      <div
-                        className={`${styles.feature} ${styles.textEllipsis}`}
-                      >
-                        <Image
-                          src={require("/assets/img/garage.svg")}
-                          alt="Car Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property.garage} Gr</span>
+                        <span>{property?.sq_ft || 0} Sq.Ft</span>
                       </div>
                     </div>
                     <div className={styles.priceRow}>
-                      <span
-                        className={`${styles.price} ${styles.textEllipsis}`}
-                      >
-                        USD {property.amount.toLocaleString()}
+                      <span className={`${styles.price} ${styles.textEllipsis}`}>
+                        USD {property?.amount?.toLocaleString() || '0'}
                       </span>
-                      <span
-                        className={`${styles.price} ${styles.textEllipsis}`}
-                      >
-                        AED {property.amount_dirhams.toLocaleString()}
+                      <span className={`${styles.price} ${styles.textEllipsis}`}>
+                        AED {property?.amount_dirhams?.toLocaleString() || '0'}
                       </span>
-                      {/* <div className={styles.actions}>
-                       <button className={styles.actionButton}>
-                         <StarIcon />
-                       </button>
-                     </div> */}
                     </div>
                   </div>
                 </div>

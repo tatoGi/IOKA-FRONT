@@ -11,8 +11,10 @@ export const ABOUT_API = `${API_BASE_URL}/about`;
 export const CONTACT_API = `${API_BASE_URL}/contact`;
 export const CONTACT_SUBMISSION_API = `${API_BASE_URL}/contact/submissions`;
 export const SEARCH_API = `${API_BASE_URL}/search`;
-export const FILTER_OFFPLAN_API = `${API_BASE_URL}/offplans/filter`;
+export const FILTER_OFFPLAN_API = `${API_BASE_URL}/offplans_filter`;
 export const CSRF_TOKEN_API = `${API_BASE_URL}/get-csrf-token`;
 export const LOCATIONS_API = `${API_BASE_URL}/locations`;
 export const PROPERTIES_API = `${API_BASE_URL}/properties/Search`;
+export const SUBSCRIBE_API  = `${API_BASE_URL}/subscribe`;
+export const SETTINGS_API   = `${API_BASE_URL}/settings`;
 // Add more routes as needed

@@ -18,7 +18,7 @@ const isMobile = () => {
   return false;
 };
 
-const Footer = () => {
+const Footer = ({ navigationData, settings }) => {
   const [mobileView, setMobileView] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,20 @@ const Footer = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Filter and sort pages for footer categories
+  const footerPages = navigationData
+    ?.filter((page) => page.active === 1)
+    .sort((a, b) => a.sort - b.sort);
+
+  // Get footer settings
+  const footerSettings = settings?.footer || [];
+  const socialSettings = settings?.social || [];
+
+  // Helper function to get setting value by key
+  const getSettingValue = (key) => {
+    return footerSettings.find(setting => setting.key === key)?.value || '';
+  };
 
   return (
     <div className="footer">
@@ -44,8 +58,7 @@ const Footer = () => {
             {/* Footer Contact Section */}
             <div className="footer-contant">
               <div className="contact-text">
-                Specializes in providing high-class tours for those in need,
-                Contact Us
+                {getSettingValue('description')}
               </div>
             </div>
 
@@ -53,24 +66,11 @@ const Footer = () => {
             <div className="footer-category">
               <div className="f-category-title">Categories</div>
               <ul>
-                <li>
-                  <Link href={"#"}>Home</Link>
-                </li>
-                <li>
-                  <Link href={"#"}>Offplan</Link>
-                </li>
-                <li>
-                  <Link href={"#"}>Resale</Link>
-                </li>
-                <li>
-                  <Link href={"#"}>Developers</Link>
-                </li>
-                <li>
-                  <Link href={"#"}>Blog</Link>
-                </li>
-                <li>
-                  <Link href={"#"}>Contact Us</Link>
-                </li>
+                {footerPages?.map((page) => (
+                  <li key={page.id}>
+                    <Link href={`/${page.slug}`}>{page.title}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="footer-contact-links">
@@ -79,56 +79,37 @@ const Footer = () => {
                   <LocationIcon />
                 </div>
                 <div className="f-text-0">
-                  101 E 129th St. East Fujairah IN 45721, UAE
+                  {getSettingValue('contact.address')}
                 </div>
               </Link>
               <Link href={"#"} className="footer-contact-item">
                 <div className="icon-00">
                   <PhoneIcon />
                 </div>
-                <div className="f-text-0">1-333-232-1231</div>
+                <div className="f-text-0">{getSettingValue('contact.phone')}</div>
               </Link>
               <Link href={"#"} className="footer-contact-item">
                 <div className="icon-00">
                   <MessageIcon />
                 </div>
-                <div className="f-text-0">example@gmail.com</div>
+                <div className="f-text-0">{getSettingValue('contact.email')}</div>
               </Link>
             </div>
             {/* Social Icons Section */}
             <div className="soc-icons-b">
-              <Link href={"#"} className="soc-icon-item">
-                <div className="inst-box soc-box">
-                  <div className="icon-circle">
-                    <InstagramIcon />
+              {socialSettings.map((social) => (
+                <Link key={social.id} href={social.value} className="soc-icon-item">
+                  <div className={`${social.key}-box soc-box`}>
+                    <div className="icon-circle">
+                      {social.key === 'facebook' && <FacebookIcon />}
+                      {social.key === 'twitter' && <XIcon />}
+                      {social.key === 'instagram' && <InstagramIcon />}
+                      {social.key === 'youtube' && <YoutubeIcon />}
+                    </div>
+                    <div className="soc-title"></div>
                   </div>
-                  <div className="soc-title"></div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="y-box soc-box">
-                  <div className="icon-circle">
-                    <YoutubeIcon />
-                  </div>
-                  <div className="soc-title"></div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="f-box soc-box">
-                  <div className="icon-circle">
-                    <FacebookIcon />
-                  </div>
-                  <div className="soc-title"></div>
-                </div>
-              </Link>
-              <Link href={"#"} className="soc-icon-item">
-                <div className="x-box soc-box">
-                  <div className="icon-circle">
-                    <XIcon />
-                  </div>
-                  <div className="soc-title"></div>
-                </div>
-              </Link>
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -139,45 +120,25 @@ const Footer = () => {
               {/* Social Icons Section */}
               <div className="soc-icons-b">
                 <div className="follow-text">Follow Us:</div>
-                <Link href={"#"} className="soc-icon-item">
-                  <div className="inst-box soc-box">
-                    <div className="icon-circle">
-                      <InstagramIcon />
+                {socialSettings.map((social) => (
+                  <Link key={social.id} href={social.value} className="soc-icon-item">
+                    <div className={`${social.key}-box soc-box`}>
+                      <div className="icon-circle">
+                        {social.key === 'facebook' && <FacebookIcon />}
+                        {social.key === 'twitter' && <XIcon />}
+                        {social.key === 'instagram' && <InstagramIcon />}
+                        {social.key === 'youtube' && <YoutubeIcon />}
+                      </div>
+                      <div className="soc-title">{social.key.charAt(0).toUpperCase() + social.key.slice(1)}</div>
                     </div>
-                    <div className="soc-title">Instagram</div>
-                  </div>
-                </Link>
-                <Link href={"#"} className="soc-icon-item">
-                  <div className="y-box soc-box">
-                    <div className="icon-circle">
-                      <YoutubeIcon />
-                    </div>
-                    <div className="soc-title">Youtube</div>
-                  </div>
-                </Link>
-                <Link href={"#"} className="soc-icon-item">
-                  <div className="f-box soc-box">
-                    <div className="icon-circle">
-                      <FacebookIcon />
-                    </div>
-                    <div className="soc-title">Facebook</div>
-                  </div>
-                </Link>
-                <Link href={"#"} className="soc-icon-item">
-                  <div className="x-box soc-box">
-                    <div className="icon-circle">
-                      <XIcon />
-                    </div>
-                    <div className="soc-title">Twitter</div>
-                  </div>
-                </Link>
+                  </Link>
+                ))}
               </div>
 
               {/* Footer Contact Section */}
               <div className="footer-contant">
                 <div className="contact-text">
-                  Specializes in providing high-class tours for those in need,
-                  Contact Us
+                  {getSettingValue('description')}
                 </div>
                 <div className="footer-contact-links">
                   <Link href={"#"} className="footer-contact-item">
@@ -185,20 +146,20 @@ const Footer = () => {
                       <LocationIcon />
                     </div>
                     <div className="f-text-0">
-                      101 E 129th St. East Fujairah IN 45721, UAE
+                      {getSettingValue('contact.address')}
                     </div>
                   </Link>
                   <Link href={"#"} className="footer-contact-item">
                     <div className="icon-00">
                       <PhoneIcon />
                     </div>
-                    <div className="f-text-0">1-333-232-1231</div>
+                    <div className="f-text-0">{getSettingValue('contact.phone')}</div>
                   </Link>
                   <Link href={"#"} className="footer-contact-item">
                     <div className="icon-00">
                       <MessageIcon />
                     </div>
-                    <div className="f-text-0">example@gmail.com</div>
+                    <div className="f-text-0">{getSettingValue('contact.email')}</div>
                   </Link>
                 </div>
               </div>
@@ -207,42 +168,29 @@ const Footer = () => {
               <div className="footer-category">
                 <div className="f-category-title">Categories</div>
                 <ul>
-                  <li>
-                    <Link href={"#"}>Home</Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>Offplan</Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>Resale</Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>Developers</Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>Blog</Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>Contact Us</Link>
-                  </li>
+                  {footerPages?.map((page) => (
+                    <li key={page.id}>
+                      <Link href={`/${page.slug}`}>{page.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
               {/* Footer Subscribe */}
               <div className="footer-message">
-                <div className="mes-f-title">Newsletter</div>
+                <div className="mes-f-title">{getSettingValue('newsletter.title')}</div>
                 <div className="mes-f-text">
-                  Your Weekly/Monthly Dose of Knowledge and Inspiration
+                  {getSettingValue('newsletter.description')}
                 </div>
                 <form action="#" method="POST">
                   <div className="message-icon-send">
                     <MessageIcon />
                   </div>
-                  <input type="text" placeholder="Your Email Address" />
+                  <input type="text" placeholder={getSettingValue('newsletter.placeholder')} />
                   <div className="plane-icon">
                     <PlaneIcon />
                   </div>
-                  <button type="submit">Get in Touch</button>
+                  <button type="submit">{getSettingValue('newsletter.button_text')}</button>
                 </form>
               </div>
             </div>
@@ -260,13 +208,13 @@ const Footer = () => {
               </div>
               
               <div className="l-c">
-                ©2024 Copytight Protected All Rights Reserved.
+                {getSettingValue('copyright')}
               </div>
             </>
           ) : (
             <>
               <div className="l-c">
-                ©2024 Copytight Protected All Rights Reserved.
+                {getSettingValue('copyright')}
               </div>
               <div className="r-c">
                 <ul>
