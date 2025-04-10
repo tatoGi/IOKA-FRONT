@@ -81,7 +81,7 @@
 }
 
 .tab {
-  padding: 8px 0;
+  padding: 8px 16px;
   border: none;
   background: none;
   cursor: pointer;
@@ -94,11 +94,35 @@
   font-family: 'Montserrat';
   font-weight: 400;
   line-height: 100%;
+  position: relative;
+}
+
+.tab:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
 }
 
 .tab.active {
   color: #fff;
-  border-bottom: 2px solid #fff;
+}
+
+.tab.active:after {
+  width: 100%;
+}
+
+.tab:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tab:hover:not(.active):after {
+  width: 50%;
 }
 
 .search-container {
@@ -122,9 +146,17 @@
   position: relative;
 }
 
+.size,
+.where,
+.price-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .size {
   width: 131px;
-  padding: 30px
+  padding: 30px;
 }
 
 .where {
@@ -132,20 +164,21 @@
   padding: 30px;
 }
 
-/* Add vertical lines */
-
-
-
-
 .search-inputs input {
   width: 158px;
-  padding: 0 20px;
+  padding: 0 35px 0 20px;
   border: none;
   font-size: 16px;
   font-family: 'Montserrat';
   background: transparent;
   color: #333;
   height: 100%;
+}
+
+.truncate_input {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .line::before {
@@ -159,7 +192,31 @@
   transform: translateY(-50%);
 }
 
-/* Add styles for the price input container */
+.clear_button {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #E2E8F0;
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4A5568;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.clear_button:hover {
+  background: #CBD5E0;
+  color: #2D3748;
+}
+
 .price-input-container {
   position: relative;
   display: flex;
@@ -169,8 +226,14 @@
 }
 
 .price-input-container input {
-  padding-right: 60px;
-  /* Make room for the search button */
+  padding-right: 90px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.price-input-container .clear_button {
+  right: 70px;
 }
 
 .search-inputs input::placeholder {
@@ -387,7 +450,7 @@
 .modal_overlay {
   position: fixed;
   top: calc(100% + 8px); /* 8px distance from the search container */
-  left: 80px;
+  left: 0;
   right: 0;
   width: 512px;
   margin: 0 auto; /* Center the modal */
@@ -503,15 +566,6 @@
   height: 18px;
 }
 
-.clear_button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #A0AEC0;
-  cursor: pointer;
-  padding: 0 4px;
-}
-
 .grid_wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -550,24 +604,7 @@
   height: 20px;
 }
 
-.search-container.active {
-  width: 674px;
-}
 
-.search-container.active .where,
-.search-container.active .size,
-.search-container.active .price-input-container {
-  width: 368px;
-}
-
-/* Update the vertical line positions when active */
-.search-container.active .search-inputs::before {
-  left: 280px;
-}
-
-.search-container.active .search-inputs::after {
-  left: 560px;
-}
 
 /* Make sure the lines transition smoothly */
 .search-inputs::before,

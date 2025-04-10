@@ -1,9 +1,8 @@
-import SearchHomeResult from '@/components/Searchhome/Searchhome'
-import React from 'react';
+// components/content/searchhome/list.js
+import SearchHomeResult from '@/components/Searchhome/Searchhome';
 
-const List = () => {
-  return <SearchHomeResult />
-
+const List = ({ searchParams }) => {
+  return <SearchHomeResult searchParams={searchParams} />;
 };
 
 export default List;

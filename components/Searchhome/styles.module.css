@@ -176,54 +176,42 @@
     .pagination {
       display: flex;
       justify-content: center;
-      margin-top: 38px;
-      margin-bottom: 142px;
-      gap: 6px;
-      height: 48px;
+      align-items: center;
+      margin: 20px 0;
+      gap: 10px;
     }
-    .pageButton {
-      margin: 0 5px;
-      padding: 5px 10px;
-      border: 1px solid #07151F;
-      background-color: #fff;
-      cursor: pointer;
+    .paginationButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #e2e8f0;
       border-radius: 4px;
-      width: 46px;
-      height: 46px;
-      font-family: 'Montserrat';
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      text-align: center;
-      margin-top: 2px;
-      color: #0A273B;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
     
-    .pageButton:last-child {
-      width: 84px;
-      height: 46px;
-      font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color:#0A273B;
-    margin-top: 2px;
-    
+    .paginationButton:hover:not(:disabled) {
+      background: #f7fafc;
+      border-color: #cbd5e0;
     }
     
-    .pageButton.active {
-      background-color: #0A273B;
-      color: white;
-      border-color: #0A273B;
-      width: 48px; /* Ensure same width */
-      height: 48px; /* Ensure same height */
-      margin: 0;
+    .paginationButton:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
-    
-    .pageButton:hover {
-      background-color: #ddd;
+    .resale_section{
+      margin-top: 40px;
+    }
+    .rental_section{
+      margin-top: 40px;
+    }
+    .pageInfo {
+      font-size: 14px;
+      color: #4a5568;
+      margin: 0 10px;
     }
     
     .resultsCount {
@@ -244,6 +232,7 @@
     .header{
       display: flex;
       justify-content: space-between;
+      
     }
     .result{
       gap: 5px;
@@ -285,4 +274,65 @@
     .developer_section{
       margin-top: 40px;
       margin-bottom: 175px;
+    }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      font-size: 18px;
+      color: #666;
+    }
+
+    .error {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      color: #dc3545;
+      font-size: 18px;
+    }
+
+    .noResults {
+      text-align: center;
+      padding: 40px 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 200px auto;
+      max-width: 600px;
+    }
+
+    .noResults h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .noResults p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .developerInfo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      padding: 4px 8px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    .developerLogo {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .developerName {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
     }

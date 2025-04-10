@@ -7,7 +7,7 @@ import axios from "axios";
 
 const HomeBannerSearch = () => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("OFFPLAN");
+  const [selectedTypes, setSelectedTypes] = useState(["OFFPLAN"]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [activeInput, setActiveInput] = useState(null);
@@ -119,35 +119,73 @@ const HomeBannerSearch = () => {
     }));
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
-    // Prepare query parameters
-    const queryParams = {
-      type: activeTab.toLowerCase(),
-      ...(searchValues.where && { location: searchValues.where }),
-      ...(searchValues.sizeMin && { sizeMin: searchValues.sizeMin }),
-      ...(searchValues.sizeMax && { sizeMax: searchValues.sizeMax }),
-      ...(searchValues.priceMin && { priceMin: searchValues.priceMin }),
-      ...(searchValues.priceMax && { priceMax: searchValues.priceMax }),
-      ...(searchValues.bathMin && { bathMin: searchValues.bathMin }),
-      ...(searchValues.bathMax && { bathMax: searchValues.bathMax }),
-      currency: searchValues.priceCurrency
-    };
-
-    // Remove empty parameters
-    Object.keys(queryParams).forEach((key) => {
-      if (queryParams[key] === "" || queryParams[key] === undefined) {
-        delete queryParams[key];
+  const handleTypeToggle = (type) => {
+    setSelectedTypes((prev) => {
+      if (prev.includes(type)) {
+        // Remove type if already selected
+        return prev.filter((t) => t !== type);
+      } else {
+        // Add type if not selected
+        return [...prev, type];
       }
     });
-
-    // Navigate to search page with query parameters
-    router.push({
-      pathname: "/homesearch",
-      query: queryParams
-    });
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    try {
+      // Ensure we have at least one type selected
+      if (selectedTypes.length === 0) {
+        console.warn("No property types selected");
+        return;
+      }
+
+      // Prepare query parameters
+      const queryParams = {
+        type: selectedTypes.map((type) => type.toLowerCase()).join(","), // Convert to lowercase and join with commas
+        ...(selectedLocations.length > 0 && {
+          locations: selectedLocations.map((loc) => loc.id)
+        }),
+        ...(searchValues.sizeMin && { sizeMin: searchValues.sizeMin }),
+        ...(searchValues.sizeMax && { sizeMax: searchValues.sizeMax }),
+        ...(searchValues.priceMin && { priceMin: searchValues.priceMin }),
+        ...(searchValues.priceMax && { priceMax: searchValues.priceMax }),
+        ...(searchValues.bathMin && { bathMin: searchValues.bathMin }),
+        ...(searchValues.bathMax && { bathMax: searchValues.bathMax }),
+        currency: searchValues.priceCurrency
+      };
+
+      // Remove empty parameters
+      Object.keys(queryParams).forEach((key) => {
+        if (
+          queryParams[key] === "" ||
+          queryParams[key] === undefined ||
+          (Array.isArray(queryParams[key]) && queryParams[key].length === 0)
+        ) {
+          delete queryParams[key];
+        }
+      });
+
+      console.log("Search params:", queryParams); // Add this for debugging
+
+      router.push(
+        {
+          pathname: "/homesearch",
+          query: queryParams
+        },
+        undefined,
+        { shallow: true }
+      );
+    } catch (error) {
+      console.error("Search error:", error);
+    }
+  };
+
+  // Add this for debugging selected types
+  useEffect(() => {
+    console.log("Selected types:", selectedTypes);
+  }, [selectedTypes]);
+
   const renderModalContent = () => {
     switch (modalContent) {
       case "Where":
@@ -448,132 +486,188 @@ const HomeBannerSearch = () => {
       <div className={styles["search-tabs"]}>
         <button
           className={`${styles.tab} ${
-            activeTab === "OFFPLAN" ? styles.active : ""
+            selectedTypes.includes("OFFPLAN") ? styles.active : ""
           }`}
-          onClick={() => setActiveTab("OFFPLAN")}
+          onClick={() => handleTypeToggle("OFFPLAN")}
         >
           OFFPLAN
         </button>
         <button
           className={`${styles.tab} ${
-            activeTab === "RESALE" ? styles.active : ""
+            selectedTypes.includes("RESALE") ? styles.active : ""
           }`}
-          onClick={() => setActiveTab("RESALE")}
+          onClick={() => handleTypeToggle("RESALE")}
         >
           RESALE
         </button>
         <button
           className={`${styles.tab} ${
-            activeTab === "RENTAL" ? styles.active : ""
+            selectedTypes.includes("RENTAL") ? styles.active : ""
           }`}
-          onClick={() => setActiveTab("RENTAL")}
+          onClick={() => handleTypeToggle("RENTAL")}
         >
           RENTAL
         </button>
       </div>
       <form onSubmit={handleSearch}>
-      <div
-        className={`${styles["search-container"]} ${
-          activeInput ? styles.active : ""
-        }`}
-      >
-        <div className={styles["search-inputs"]}>
-          <div
-            className={`${styles.where} ${
-              activeInput === "where" ? styles.active : ""
-            }`}
-            onClick={() => openModal("Where")}
-          >
-            <input
-              type="text"
-              placeholder="Where"
-              value={searchValues.where || ""}
-              readOnly
-            />
-            {searchValues.where && (
+        <div
+          className={`${styles["search-container"]} ${
+            activeInput ? styles.active : ""
+          }`}
+        >
+          <div className={styles["search-inputs"]}>
+            <div
+              className={`${styles.where} ${
+                activeInput === "where" ? styles.active : ""
+              }`}
+              onClick={() => openModal("Where")}
+            >
+              <input
+                type="text"
+                placeholder="Where"
+                value={
+                  selectedLocations.length > 0
+                    ? selectedLocations.map((loc) => loc.title).join(", ")
+                    : ""
+                }
+                readOnly
+                className={styles.truncate_input}
+              />
+              {selectedLocations.length > 0 && (
+                <button
+                  className={styles.clear_button}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearSelectedLocations();
+                  }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+            <div className={styles.line}></div>
+            <div
+              className={`${styles.size} ${
+                activeInput === "size" ? styles.active : ""
+              }`}
+              onClick={() => openModal("Size")}
+            >
+              <input
+                type="text"
+                placeholder="Size"
+                value={
+                  searchValues.sizeMin || searchValues.sizeMax
+                    ? `${searchValues.sizeMin || "0"} - ${
+                        searchValues.sizeMax || "∞"
+                      }m²${
+                        searchValues.bathMin
+                          ? ` • ${searchValues.bathMin}-${searchValues.bathMax} rooms`
+                          : ""
+                      }`
+                    : ""
+                }
+                readOnly
+                className={styles.truncate_input}
+              />
+              {(searchValues.sizeMin ||
+                searchValues.sizeMax ||
+                searchValues.bathMin ||
+                searchValues.bathMax) && (
+                <button
+                  className={styles.clear_button}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      sizeMin: "",
+                      sizeMax: "",
+                      bathMin: "",
+                      bathMax: ""
+                    }));
+                  }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+            <div className={styles.line}></div>
+            <div
+              className={`${styles["price-input-container"]} ${
+                activeInput === "price" ? styles.active : ""
+              }`}
+              onClick={() => openModal("Price")}
+            >
+              <input
+                type="text"
+                placeholder="Price"
+                value={
+                  searchValues.priceMin || searchValues.priceMax
+                    ? `${
+                        searchValues.priceMin
+                          ? Number(searchValues.priceMin).toLocaleString()
+                          : "0"
+                      } - ${
+                        searchValues.priceMax
+                          ? Number(searchValues.priceMax).toLocaleString()
+                          : "∞"
+                      } ${searchValues.priceCurrency}`
+                    : ""
+                }
+                readOnly
+                className={styles.truncate_input}
+              />
+              {(searchValues.priceMin || searchValues.priceMax) && (
+                <button
+                  className={styles.clear_button}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSearchValues((prev) => ({
+                      ...prev,
+                      priceMin: "",
+                      priceMax: ""
+                    }));
+                  }}
+                >
+                  ×
+                </button>
+              )}
               <button
-                className={styles.clear_button}
+                type="submit"
+                className={styles["search-button"]}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  clearSelectedLocations();
+                  e.preventDefault();
+                  handleSearch(e);
                 }}
               >
-                ×
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
               </button>
-            )}
-          </div>
-          <div className={styles.line}></div>
-          <div
-            className={`${styles.size} ${
-              activeInput === "size" ? styles.active : ""
-            }`}
-            onClick={() => openModal("Size")}
-          >
-            <input
-              type="text"
-              placeholder="Size"
-              value={
-                searchValues.sizeMin || searchValues.sizeMax
-                  ? `${searchValues.sizeMin || "0"} - ${
-                      searchValues.sizeMax || "∞"
-                    } m²`
-                  : ""
-              }
-              readOnly
-            />
-          </div>
-          <div className={styles.line}></div>
-          <div
-            className={`${styles["price-input-container"]} ${
-              activeInput === "price" ? styles.active : ""
-            }`}
-            onClick={() => openModal("Price")}
-          >
-            <input
-              type="text"
-              placeholder="Price"
-              value={
-                searchValues.priceMin || searchValues.priceMax
-                  ? `${searchValues.priceMin || "0"} - ${
-                      searchValues.priceMax || "∞"
-                    } ${searchValues.priceCurrency}`
-                  : ""
-              }
-              readOnly
-            />
-             <button
-            type="submit" // Change to type="submit"
-            className={styles["search-button"]}
-          >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </button>
-          </div>
-        </div>
-        {modalVisible && (
-          <div className={styles.modal_overlay} onClick={closeModal}>
-            <div
-              ref={modalRef}
-              className={styles.modal_content}
-              onClick={(e) => e.stopPropagation()} // This prevents modal clicks from closing it
-            >
-              {renderModalContent()}
             </div>
           </div>
-        )}
-      </div>
+          {modalVisible && (
+            <div className={styles.modal_overlay} onClick={closeModal}>
+              <div
+                ref={modalRef}
+                className={styles.modal_content}
+                onClick={(e) => e.stopPropagation()} // This prevents modal clicks from closing it
+              >
+                {renderModalContent()}
+              </div>
+            </div>
+          )}
+        </div>
       </form>
     </div>
   );

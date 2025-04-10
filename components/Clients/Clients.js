@@ -7,9 +7,9 @@ import styles from "./Clients.module.css";
 const Clients = ({ sectionSixData }) => {
   const googleReviews = sectionSixData?.additional_fields?.google_reviews;
   const testimonials = sectionSixData?.additional_fields?.testimonials || [];
-  const title = sectionSixData?.title || 'Default Title'; // Ensure title is defined
-  const subtitle = sectionSixData?.additional_fields?.subtitle || ''; // Ensure subtitle is defined
-  const ratedText = sectionSixData?.additional_fields?.rated_text || ''; // Ensure rated_text is defined
+  const title = sectionSixData?.title || "Default Title"; // Ensure title is defined
+  const subtitle = sectionSixData?.additional_fields?.subtitle || ""; // Ensure subtitle is defined
+  const ratedText = sectionSixData?.additional_fields?.rated_text || ""; // Ensure rated_text is defined
 
   return (
     <section className={styles.clientsSection}>
@@ -18,7 +18,10 @@ const Clients = ({ sectionSixData }) => {
           <h2>{title}</h2>
           <p>{subtitle}</p>
           <div className={styles.googleReviews}>
-            <span>{googleReviews?.value || ''}{googleReviews?.prefix || ''} {googleReviews?.title || ''}</span>
+            <span>
+              {googleReviews?.value || ""}
+              {googleReviews?.prefix || ""} {googleReviews?.title || ""}
+            </span>
             <span className={styles.rating}>{ratedText}</span>
           </div>
         </div>
@@ -29,11 +32,14 @@ const Clients = ({ sectionSixData }) => {
           breakpoints={{
             768: { slidesPerView: 4 },
             576: { slidesPerView: 2 },
-            0: { slidesPerView: 1 },
+            0: { slidesPerView: 1 }
           }}
         >
-          {testimonials.map((testimonial) => (
-            <SwiperSlide key={testimonial.id} className={styles.testimonialCard}>
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide
+              key={testimonial.id || `testimonial-${index}`}
+              className={styles.testimonialCard}
+            >
               <div className={styles.leftQuote}>
                 <svg
                   viewBox="0 0 66 58"
@@ -64,7 +70,7 @@ const Clients = ({ sectionSixData }) => {
                     src={
                       testimonial.photo
                         ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
-                        : '/images/user.png'
+                        : "/images/user.png"
                     }
                     alt={testimonial.name}
                     width={50}
