@@ -8,10 +8,10 @@ import OffPlan from "@/pages/page-components/offplan";
 import Rental_Resale from "@/pages/page-components/rentalResale";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import Blog from "@/pages/page-components/blog";
+import Meta from "@/components/Meta/Meta";
 
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
-
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {
@@ -27,6 +27,9 @@ const DynamicPage = ({ pageData }) => {
   const breadcrumbData = [
     { title: pageData.title, path: `/pages/${pageData.slug}` }
   ];
+
+  // Get the current URL for meta tags
+  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`;
 
   // Render the appropriate component based on the page's type_id
   const renderPage = () => {
@@ -57,6 +60,14 @@ const DynamicPage = ({ pageData }) => {
 
   return (
     <div>
+      <Meta
+        title={pageData.title}
+        description={pageData.desc || "IOKA - Your trusted real estate partner in Dubai"}
+        keywords={pageData.keywords || "Dubai real estate, properties in Dubai, buy property Dubai"}
+        url={currentUrl}
+        image={`${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`}
+        site="IOKA"
+      />
       {/* Render Breadcrumb only if type_id is not 1 */}
       {pageData.type_id !== 1 && (
         <Breadcrumb
@@ -68,6 +79,7 @@ const DynamicPage = ({ pageData }) => {
     </div>
   );
 };
+
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
   const data = await res.json();
@@ -94,6 +106,7 @@ export async function getStaticPaths() {
     fallback: true
   };
 }
+
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
@@ -139,4 +152,5 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 }
+
 export default DynamicPage;
