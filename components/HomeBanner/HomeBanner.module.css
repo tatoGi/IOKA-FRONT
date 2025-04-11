@@ -289,6 +289,7 @@
 
   .text-b-i {
     font-size: 20px;
+    margin-top: 56px;
   }
 
   .banner-content {
@@ -304,9 +305,11 @@
     top: 169px;
     bottom: 10%;
     transform: translateX(-50%);
-    width:322px;
+    width: 322px;
     max-width: none;
     margin-top: 0;
+    height: 100%;
+    max-height: 190px;
   }
 
   .search-tabs {

@@ -619,10 +619,23 @@
   }
 
   .logo-img {
-    width: 100px;
-    height: 32px;
+    width: 112px;
+    height: 34px;
   }
-
+  .white-logo{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  .scroll-header .header-cont .dark-logo, .home-header .dark-logo{
+    width: 112px;
+    height: 34px;
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+  }
   .popular-area-section {
     padding: 0 !important;
     margin-top: 36px;
@@ -855,7 +868,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 24px 16px;
+    padding: 24px 24px 24px 24px;
     text-align: center;
     background: #fff;
   }
@@ -888,6 +901,7 @@
     color: #07151F;
     text-transform: uppercase;
     text-align: start;
+    margin: 0;
   }
 
   .left-s-text .s-t-1 {
@@ -898,6 +912,8 @@
     letter-spacing: 0%;
     color: #07151F;
     text-align: start;
+    width: 235px;
+    margin: 0;
 
   }
 
@@ -909,13 +925,13 @@
 
   .middle-image-sub {
     width: 100%;
-    max-width: 140px;
+    max-width: 100px;
     /* margin: 16px 0; */
     height: 100%;
-    left: 80%;
+    left: 77%;
     /* align-items: end; */
     justify-content: stretch;
-    top: 18%;
+    top: 29%;
   }
 
   .middle-image-sub img {
@@ -936,7 +952,7 @@
   }
 
   .subscribe-form input {
-    width: 220px !important;
+    width: 226px !important;
     height: 44px !important;
     border-radius: 8px !important;
     border: 1px #07151F solid !important;
@@ -955,6 +971,7 @@
     gap: 10px;
     border-radius: 8px;
     padding: 13px !important;
+    border-radius: 8px !important;
   }
 
   .subscribe-form button:hover {
@@ -1166,6 +1183,9 @@ background-color: #FFFFFF;
   .copyright-0 .r-c {
     margin-bottom: 10px;
   }
+  .copyright-0 .l-c, .copyright-0 .l-c {
+    font-size: 13px;
+}
 
   .copyright-0 .r-c ul {
     list-style: none;
@@ -1193,30 +1213,5 @@ background-color: #FFFFFF;
   }
 }
 
-/* Improve loading and performance */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Add better touch handling for mobile devices */
-@media (hover: none) and (pointer: coarse) {
-
-  /* Increase touch targets */
-  a, button, .clickable {
-    padding: 12px;
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Remove hover effects */
-  a:hover, button:hover {
-    opacity: 1;
-  }
-}
 
 /* Add new breakpoint for 600px and lower resolutions */

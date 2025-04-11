@@ -3,6 +3,7 @@
   height: 100%;
   background-color: #ffffff;
   padding: 2rem 0;
+  position: relative;
 }
 
 .container {
@@ -45,11 +46,11 @@
 }
 
 .propertyCard {
-  background-color: white;
-  border-radius: 2rem;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   background-color: #0A273B;
+  border-radius: 2rem;
+  overflow: visible;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .propertyCardTitle {
@@ -179,7 +180,122 @@
   display: none; /* Hidden by default */
 }
 
+/* 4K and Larger Screens (> 1920px) */
+@media (min-width: 1921px) {
+  .container {
+    max-width: 2000px;
+    margin: 0 auto;
+  }
+
+  .propertyCardTitle {
+    font-size: 42px;
+  }
+
+  .imageContainer {
+    height: 450px;
+  }
+
+  .buttonGroup button {
+    width: 180px;
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .features li {
+    font-size: 22px;
+  }
+
+  .propertyName {
+    font-size: 28px;
+  }
+
+  .price {
+    font-size: 2.5rem;
+  }
+
+  .seeMore {
+    padding: 1rem 2rem;
+    font-size: 18px;
+  }
+}
+@media (max-width: 1600px) {
+  .propertyCardTitle {
+    font-size: 36px; /* Reduced font size */
+  }
+  
+  .propertyContent {
+    gap: 1.5rem; /* Reduced gap */
+  }
+
+  .imageContainer {
+    height: 350px; /* Adjusted height */
+  }
+
+  .features li {
+    font-size: 18px; /* Reduced font size */
+  }
+
+  .propertyName {
+    font-size: 22px; /* Reduced font size */
+  }
+
+  .propertyType {
+    font-size: 14px; /* Reduced font size */
+  }
+
+  .price {
+    font-size: 2rem; /* Reduced font size */
+  }
+
+  .seeMore {
+    padding: 0.5rem 1.25rem; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
+  }
+
+  .buttonGroup button {
+    width: 150px; /* Adjusted button width */
+    height: 42px; /* Adjusted button height */
+    font-size: 18px; /* Reduced font size */
+  }
+}
+/* Large Laptops and Desktops (1367px - 1920px) */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .propertyCardTitle {
+    font-size: 38px;
+  }
+
+  .imageContainer {
+    height: 380px;
+  }
+
+  .features li {
+    font-size: 19px;
+  }
+}
+/* Small Laptops (1024px - 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .propertyCardTitle {
+    font-size: 34px;
+  }
+
+  .imageContainer {
+    height: 320px;
+  }
+
+  .buttonGroup button {
+    width: 145px;
+    height: 44px;
+    font-size: 17px;
+  }
+}
 @media (max-width: 768px) {
+  .container{
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: grid;
+  }
   .newProperties {
     margin-top: 0;
     height: 100%;
@@ -215,7 +331,9 @@
     background-color: #0A273B;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
-    overflow: hidden; /* Ensure content stays within the card */
+    overflow: hidden;
+    width: 354px;
+    height: 471px;
   }
 
 
@@ -238,17 +356,7 @@
     height: 31px !important;
   }
 
-  .buttonGroup button.active {
-    background-color: #ffffff;
-    color: #0A273B;
-    border: 1px solid #ffffff;
-    font-size: 12px;
-    font-family: 'Montserrat';
-    width: 96px;
-    height: 31px;
-    padding: 0;
-    border-radius: 8px;
-  }
+
 
   .propertyContent {
     padding: 0;
@@ -277,6 +385,7 @@
   .leftContent {
     flex: none;
     margin-top: 16px;
+    text-align: start;
   }
   .propertyDetails {
     margin-top: 20%;
@@ -344,87 +453,6 @@
   
 }
 /* Media Query for 1600px */
-@media (max-width: 1600px) {
-  .propertyCardTitle {
-    font-size: 36px; /* Reduced font size */
-  }
-  
-  .propertyContent {
-    gap: 1.5rem; /* Reduced gap */
-  }
-
-  .imageContainer {
-    height: 350px; /* Adjusted height */
-  }
-
-  .features li {
-    font-size: 18px; /* Reduced font size */
-  }
-
-  .propertyName {
-    font-size: 22px; /* Reduced font size */
-  }
-
-  .propertyType {
-    font-size: 14px; /* Reduced font size */
-  }
-
-  .price {
-    font-size: 2rem; /* Reduced font size */
-  }
-
-  .seeMore {
-    padding: 0.5rem 1.25rem; /* Adjusted padding */
-    font-size: 14px; /* Reduced font size */
-  }
-
-  .buttonGroup button {
-    width: 150px; /* Adjusted button width */
-    height: 42px; /* Adjusted button height */
-    font-size: 18px; /* Reduced font size */
-  }
-}
-
-/* Small Mobile Devices (320px - 480px) */
-@media (max-width: 480px) {
-  .newProperties {
-    margin-top: 0;
-    padding: 0;
-  }
-
-  .propertyCard {
-    margin-top: 1rem;
-    padding: 12px;
-    border-radius: 12px;
-  }
-
-  .buttonGroup button {
-    font-size: 11px !important;
-    width: 80px !important;
-    height: 28px !important;
-  }
-
-  .imageContainer {
-    height: 180px !important;
-  }
-
-  .propertyImage {
-    width: 100%;
-    height: 180px;
-  }
-
-  .propertyName {
-    font-size: 14px !important;
-  }
-
-  .propertyType {
-    font-size: 11px !important;
-  }
-
-  .price {
-    font-size: 18px !important;
-  }
-}
 
 /* Tablets (768px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -461,73 +489,84 @@
   }
 }
 
-/* Small Laptops (1024px - 1366px) */
-@media (min-width: 1025px) and (max-width: 1366px) {
-  .propertyCardTitle {
-    font-size: 34px;
-  }
-
-  .imageContainer {
-    height: 320px;
-  }
-
-  .buttonGroup button {
-    width: 145px;
-    height: 44px;
-    font-size: 17px;
-  }
+.propertyInfo_mobile {
+  margin: 24px 0;
+  background-color: #ffffff;
+  border-radius: 16px;
+  text-align: center;
+  height: 32px;
+  position: relative;
+  z-index: 100;
 }
 
-/* Large Laptops and Desktops (1367px - 1920px) */
-@media (min-width: 1367px) and (max-width: 1920px) {
-  .propertyCardTitle {
-    font-size: 38px;
-  }
-
-  .imageContainer {
-    height: 380px;
-  }
-
-  .features li {
-    font-size: 19px;
-  }
+.propertyInfo_mobile details {
+  height: 100%;
+  position: relative;
 }
 
-/* 4K and Larger Screens (> 1920px) */
-@media (min-width: 1921px) {
-  .container {
-    max-width: 2000px;
-    margin: 0 auto;
-  }
-
-  .propertyCardTitle {
-    font-size: 42px;
-  }
-
-  .imageContainer {
-    height: 450px;
-  }
-
-  .buttonGroup button {
-    width: 180px;
-    height: 52px;
-    font-size: 22px;
-  }
-
-  .features li {
-    font-size: 22px;
-  }
-
-  .propertyName {
-    font-size: 28px;
-  }
-
-  .price {
-    font-size: 2.5rem;
-  }
-
-  .seeMore {
-    padding: 1rem 2rem;
-    font-size: 18px;
-  }
+.propertyInfo_mobile details[open] {
+  height: auto;
+  position: absolute;
+  width: 100%;
 }
+
+.propertyInfo_mobile details[open] .features_mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.propertyInfo_mobile summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #0A273B;
+  padding: 0 16px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  height: 32px;
+  list-style: none;
+  position: relative;
+  z-index: 15;
+}
+
+.propertyInfo_mobile summary::-webkit-details-marker {
+  display: none;
+}
+
+.propertyInfo_mobile summary::after {
+  content: '▼';
+  color: #8FE3DC;
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.propertyInfo_mobile details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.features_mobile {
+  list-style: none;
+  padding: 16px;
+  margin: 0;
+  background-color: #ffffff;
+  border-radius: 0 0 16px 16px;
+  width: 100%;
+}
+
+.features_mobile li {
+  font-size: 14px;
+  color: #0A273B;
+  padding: 8px 0;
+  text-align: left;
+}
+
+
+

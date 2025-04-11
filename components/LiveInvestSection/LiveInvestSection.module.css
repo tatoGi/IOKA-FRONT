@@ -709,7 +709,7 @@
     overflow: hidden;
     align-items: center;
     text-align: center;
-    height: 616px;
+    height: 100%;
     width: 100%;
   }
 
@@ -739,10 +739,10 @@
     font-family: "Felix Titling";
     text-transform: uppercase;
     letter-spacing: 1px;
-    width: 224px;
     text-align: center;
     position: static;
-    margin: 0 auto;
+    margin: 0 0 12px 0;
+
   }
 
   .content p {
@@ -755,7 +755,8 @@
     position: static;
     color: #0A273B;
     margin: 0 auto;
-    width: 326px;
+    height: 100%;
+    margin: 0 0 12px 0;
   }
 
   .contactBtn {
@@ -875,13 +876,15 @@
 
 
   .statItems {
-    justify-content: space-between;
-    display: flex;
-    /* flex-wrap: wrap; */
+    justify-content: space-around;
     left: 0px;
     width: 100%;
     padding: 0;
-    gap: 6px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    margin: 32px 0 36px 0;
   }
 
   .statItem {
@@ -892,7 +895,7 @@
   }
 
   .statItem h3 {
-    font-size: 15px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 0%;
@@ -909,6 +912,7 @@
     max-width: 100%;
     font-family: "Felix Titling";
     font-weight: 300;
+    width: 70px;
   }
 
   .slide.center {
