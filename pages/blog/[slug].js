@@ -1,6 +1,6 @@
 import { generateMetaData } from '@/utils/metaData';
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
-import BlogShow from "@/components/BlogShow/BlogShow";
+import BlogShow from '../../components/BlogShow/show';
 
 const BlogShowPage = ({ blogData }) => {
     const breadcrumbData = [
@@ -9,7 +9,7 @@ const BlogShowPage = ({ blogData }) => {
         { title: blogData.blog.title, path: `/blog/${blogData.slug}` }
     ];
 
-   
+    // Generate meta data for the blog page
     const metaData = generateMetaData(blogData.blog, 'blog');
 
     return (
