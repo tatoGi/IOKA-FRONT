@@ -8,10 +8,10 @@ import OffPlan from "@/pages/page-components/offplan";
 import Rental_Resale from "@/pages/page-components/rentalResale";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import Blog from "@/pages/page-components/blog";
-import Meta from "@/components/Meta/Meta";
 
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
+
 
   // If the page is not yet generated, show a loading state
   if (router.isFallback) {
@@ -27,9 +27,6 @@ const DynamicPage = ({ pageData }) => {
   const breadcrumbData = [
     { title: pageData.title, path: `/pages/${pageData.slug}` }
   ];
-
-  // Get the current URL for meta tags
-  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`;
 
   // Render the appropriate component based on the page's type_id
   const renderPage = () => {
@@ -60,14 +57,6 @@ const DynamicPage = ({ pageData }) => {
 
   return (
     <div>
-      <Meta
-        title={pageData.title}
-        description={pageData.desc || "IOKA - Your trusted real estate partner in Dubai"}
-        keywords={pageData.keywords || "Dubai real estate, properties in Dubai, buy property Dubai"}
-        url={currentUrl}
-        image={`${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`}
-        site="IOKA"
-      />
       {/* Render Breadcrumb only if type_id is not 1 */}
       {pageData.type_id !== 1 && (
         <Breadcrumb
@@ -79,26 +68,24 @@ const DynamicPage = ({ pageData }) => {
     </div>
   );
 };
-
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
   const data = await res.json();
   const pages = data.pages;
 
-  // Filter out duplicate slugs and ensure we have valid slugs
+  // Filter out duplicate slugs
   const uniquePages = pages.filter(
-    (page, index, self) => 
-      index === self.findIndex((p) => p.slug === page.slug) &&
-      page.slug && 
-      page.slug.trim() !== ""
+    (page, index, self) => index === self.findIndex((p) => p.slug === page.slug)
   );
 
   // Generate paths for each unique slug
-  const paths = uniquePages.map((page) => ({
-    params: { slug: page.slug }
-  }));
+  const paths = uniquePages
+    .filter((page) => page.slug !== "" && page.slug !== "/") // Ensure slug is not empty and not root
+    .map((page) => ({
+      params: { slug: page.slug }
+    }));
 
-  // Always include the root path for the home page
+  // Add the root path explicitly for the home page
   paths.push({ params: { slug: "/" } });
 
   return {
@@ -106,13 +93,15 @@ export async function getStaticPaths() {
     fallback: true
   };
 }
-
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
+
+    // Handle the root path (`/`)
     const isRootPath = slug === "/";
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+
     if (!res.ok) {
       throw new Error(`Failed to fetch, status: ${res.status}`);
     }
@@ -120,14 +109,13 @@ export async function getStaticProps({ params }) {
     const data = await res.json();
     let pageData;
 
+    // If the slug is the root path (`/`), find the home page
     if (isRootPath) {
-      // For root path, find the home page (type_id === 1)
-      pageData = data.pages.find((page) => page.type_id === 1);
-      
+      pageData = data.pages.find((page) => page.type_id === 1); // Home page type_id
       if (!pageData) {
-        // If no home page found in API, create a default one
+        // If no home page found, create a default one
         pageData = {
-          id: 1,
+          id: 0,
           title: "Home",
           slug: "/",
           type_id: 1,
@@ -135,7 +123,7 @@ export async function getStaticProps({ params }) {
         };
       }
     } else {
-      // For other paths, find by slug
+      // Otherwise, find the page by slug
       pageData = data.pages.find((page) => page.slug === slug);
     }
 
@@ -145,12 +133,11 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { pageData },
-      revalidate: 10
+      revalidate: 10 // Revalidate the page every 10 seconds
     };
   } catch (error) {
     console.error("Error fetching page data:", error);
     return { notFound: true };
   }
 }
-
 export default DynamicPage;

@@ -58,9 +58,12 @@ function App({ Component, pageProps }) {
     return <LoadingWrapper />; // Show loading state while redirecting
   }
 
+  // Get meta data from pageProps
+  const metaData = pageProps.meta || {};
+
   return (
     <>
-      <Meta />
+      <Meta {...metaData} />
       <Header navigationData={navigationData} />
       <Layout>
         <Component {...pageProps} />

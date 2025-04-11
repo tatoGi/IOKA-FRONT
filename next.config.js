@@ -1,7 +1,9 @@
+/** @type {import('next').NextConfig} */
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae';
 const API_HOSTNAME = new URL(API_BASE_URL).hostname;
 
 const nextConfig = {
+  reactStrictMode: true,
   async headers() {
     return [
       {
@@ -37,9 +39,20 @@ const nextConfig = {
         pathname: '/**',
       }
     ],
-    domains: [API_HOSTNAME, 'test.ioka.ae'],
+    domains: [
+      API_HOSTNAME,
+      'test.ioka.ae',
+      'localhost',
+      '127.0.0.1',
+      'your-api-domain.com',
+      'https://ioka-front.vercel.app/',
+    ],
   },
   transpilePackages: ['@ant-design/icons'],
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  },
 };
 
 module.exports = nextConfig;
