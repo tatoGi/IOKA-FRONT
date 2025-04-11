@@ -1,6 +1,7 @@
 import React from "react";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
+import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
 
 const PrivacyPolicy = () => {
   const breadcrumbData = [
