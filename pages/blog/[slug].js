@@ -1,17 +1,32 @@
-import { generateMetaData } from '@/utils/metaData';
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import BlogShow from '../../components/BlogShow/show';
+import axios from 'axios';
+import { BLOGS_API } from '../../routes/apiRoutes'; // Import the route
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
+
+export const getServerSideProps = async (context) => {
+    const { slug } = context.params || {}; // Get the blog slug from the URL path
+    if (!slug) {
+        return { notFound: true };
+    }
+    try {
+        const response = await axios.get(`${BLOGS_API}/${slug}`);
+        
+        if (!response.data) {
+            return { notFound: true };
+        }
+        return { props: { blogData: response.data } };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { notFound: true };
+    }
+};
 
 const BlogShowPage = ({ blogData }) => {
     const breadcrumbData = [
         { title: 'Home', path: '/' },
         { title: 'Blog', path: '/blog' },
-        { title: blogData.blog.title, path: `/blog/${blogData.slug}` }
+        { title: blogData.title, path: `/blog/${blogData.slug}` }
     ];
-
-    // Generate meta data for the blog page
-    const metaData = generateMetaData(blogData.blog, 'blog');
-
     return (
         <div>
             <Breadcrumb breadcrumbData={breadcrumbData} />
@@ -19,50 +34,5 @@ const BlogShowPage = ({ blogData }) => {
         </div>
     );
 };
-
-export async function getStaticProps({ params }) {
-    try {
-        const { slug } = params;
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`);
-        const blogData = await res.json();
-
-        if (!blogData) {
-            return { notFound: true };
-        }
-
-        return {
-            props: { 
-                blogData,
-                meta: generateMetaData(blogData.blog, 'blog')
-            },
-            revalidate: 10
-        };
-    } catch (error) {
-        console.error("Error fetching blog data:", error);
-        return { notFound: true };
-    }
-}
-
-export async function getStaticPaths() {
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-        const blogs = await res.json();
-
-        const paths = blogs.map((blog) => ({
-            params: { slug: blog.slug },
-        }));
-
-        return {
-            paths,
-            fallback: true,
-        };
-    } catch (error) {
-        console.error("Error fetching blog paths:", error);
-        return {
-            paths: [],
-            fallback: true,
-        };
-    }
-}
 
 export default BlogShowPage;
