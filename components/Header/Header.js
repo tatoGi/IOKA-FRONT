@@ -16,7 +16,6 @@ const Header = ({ navigationData }) => {
 
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
   const isHomePage =
-    normalizedPathname === "" ||
     normalizedPathname === "/" ||
     normalizedPathname === "/#" ||
     normalizedPathname === "/home";
@@ -117,7 +116,7 @@ const Header = ({ navigationData }) => {
 
   return (
     <>
-      <header className={!isHomePage && activeScroll ? "scroll-header" : ""}>
+      <header className={activeScroll ? "scroll-header" : ""}>
         <div className="header-cont">
           <div className="container">
             <div className="header-box">

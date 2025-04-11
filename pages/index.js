@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { LoadingWrapper } from "@/components/LoadingWrapper/index";
 import Home from "@/pages/page-components/home";
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
+import { useRouter } from 'next/router';
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchHomePage = async () => {
@@ -17,7 +19,8 @@ export default function Index() {
         const homePage = data.pages.find(page => page.type_id === 1);
         
         if (homePage) {
-          setPageData(homePage);
+          // Redirect to the home page slug
+          router.push(`/${homePage.slug}`);
         }
       } catch (error) {
         console.error("Error fetching home page:", error);
@@ -27,13 +30,13 @@ export default function Index() {
     };
 
     fetchHomePage();
-  }, []);
+  }, [router]);
 
   if (isLoading) {
     return <LoadingWrapper />;
   }
 
-  return <Home />;
+  return null;
 }
 
 export async function getStaticProps() {
