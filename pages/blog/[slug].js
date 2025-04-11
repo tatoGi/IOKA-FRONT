@@ -9,7 +9,7 @@ const BlogShowPage = ({ blogData }) => {
         { title: blogData.blog.title, path: `/blog/${blogData.slug}` }
     ];
 
-    // Generate meta data for the blog page
+   
     const metaData = generateMetaData(blogData.blog, 'blog');
 
     return (
