@@ -295,25 +295,41 @@
     }
 
     .noResults {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60vh;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    .noResultsContent {
       text-align: center;
-      padding: 40px 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 200px auto;
-      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .noResults h2 {
+    .searchIcon {
+      margin-bottom: 1.5rem;
+      background-color: #E6EBED;
+      border-radius: 50%;
+      padding: 1rem;
+    }
+
+    .noResultsContent h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
       color: #333;
-      font-size: 24px;
-      margin-bottom: 16px;
+      margin-bottom: 0.5rem;
     }
 
-    .noResults p {
+    .noResultsContent p {
       color: #666;
-      font-size: 16px;
-      margin-bottom: 8px;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .developerInfo {

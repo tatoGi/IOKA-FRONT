@@ -108,21 +108,15 @@ const Developer = ({ initialData, initialPagination }) => {
         const processedData = Array.isArray(data) ? data : [data];
         console.log('Processed Data:', processedData); // Debug log
         
+        // Update both filteredData and cardData
+        setCardData(processedData);
         setFilteredData(processedData);
         setTotalPages(meta.last_page);
         setCurrentPage(meta.current_page);
       } catch (error) {
         console.error("Error searching developers:", error);
-        if (error.response) {
-          console.error("Error response:", error.response.data);
-          console.error("Error status:", error.response.status);
-          console.error("Error headers:", error.response.headers);
-        } else if (error.request) {
-          console.error("Error request:", error.request);
-        } else {
-          console.error("Error message:", error.message);
-        }
         setFilteredData([]);
+        setCardData([]);
       } finally {
         setIsLoading(false);
       }

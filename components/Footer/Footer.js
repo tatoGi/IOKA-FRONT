@@ -201,9 +201,9 @@ const Footer = ({ navigationData, settings }) => {
             <>
               <div className="r-c">
                 <ul>
-                  <li>Terms & Conditions</li>
+                  <li><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
                   <div className="footer-line"></div>
-                  <li>Privacy & Cookies</li>
+                  <li><Link href="/privacy-policy">Privacy & Cookies</Link></li>
                 </ul>
               </div>
               
@@ -218,9 +218,9 @@ const Footer = ({ navigationData, settings }) => {
               </div>
               <div className="r-c">
                 <ul>
-                  <li>Terms Of Service</li>
-                  <li>Privacy Policy</li>
-                  <li>Cookie Policy</li>
+                  <li><Link href="/terms-and-conditions">Terms Of Service</Link></li>
+                  <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                  <li><Link href="/faq">FAQ</Link></li>
                 </ul>
               </div>
             </>

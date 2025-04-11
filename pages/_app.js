@@ -5,6 +5,7 @@ import "../styles/bootstrap.css";
 import "../styles/globals.css";
 import "../styles/fonts.css";
 import "../styles/responsive.css";
+import '../styles/404.css';
 import Footer from "@/components/Footer/Footer";
 import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
@@ -50,15 +51,7 @@ function App({ Component, pageProps }) {
     fetchSettings();
   }, []);
 
-  // Redirect to /home if statusCode is 404
-  useEffect(() => {
-    if (pageProps.statusCode === 404 && typeof window !== "undefined") {
-      setIsRedirecting(true); // Set redirecting state to true
-      router.push('/home').then(() => {
-        setIsRedirecting(false); // Reset redirecting state after redirection
-      });
-    }
-  }, [pageProps.statusCode, router]);
+ 
 
   // If redirecting, show LoadingWrapper
   if (isRedirecting) {

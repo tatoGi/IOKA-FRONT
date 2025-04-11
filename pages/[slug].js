@@ -73,19 +73,20 @@ export async function getStaticPaths() {
   const data = await res.json();
   const pages = data.pages;
 
-  // Filter out duplicate slugs
+  // Filter out duplicate slugs and ensure we have valid slugs
   const uniquePages = pages.filter(
-    (page, index, self) => index === self.findIndex((p) => p.slug === page.slug)
+    (page, index, self) => 
+      index === self.findIndex((p) => p.slug === page.slug) &&
+      page.slug && 
+      page.slug.trim() !== ""
   );
 
   // Generate paths for each unique slug
-  const paths = uniquePages
-    .filter((page) => page.slug !== "") // Ensure slug is not empty
-    .map((page) => ({
-      params: { slug: page.slug }
-    }));
+  const paths = uniquePages.map((page) => ({
+    params: { slug: page.slug }
+  }));
 
-  // Add the root path explicitly for the home page
+  // Always include the root path for the home page
   paths.push({ params: { slug: "/" } });
 
   return {
@@ -96,12 +97,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
-
-    // Handle the root path (`/`)
     const isRootPath = slug === "/";
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-
     if (!res.ok) {
       throw new Error(`Failed to fetch, status: ${res.status}`);
     }
@@ -109,11 +107,22 @@ export async function getStaticProps({ params }) {
     const data = await res.json();
     let pageData;
 
-    // If the slug is the root path (`/`), find the home page
     if (isRootPath) {
-      pageData = data.pages.find((page) => page.type_id === 1); // Home page type_id
+      // For root path, find the home page (type_id === 1)
+      pageData = data.pages.find((page) => page.type_id === 1);
+      
+      if (!pageData) {
+        // If no home page found in API, create a default one
+        pageData = {
+          id: 1,
+          title: "Home",
+          slug: "/",
+          type_id: 1,
+          desc: ""
+        };
+      }
     } else {
-      // Otherwise, find the page by slug
+      // For other paths, find by slug
       pageData = data.pages.find((page) => page.slug === slug);
     }
 
@@ -123,7 +132,7 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { pageData },
-      revalidate: 10 // Revalidate the page every 10 seconds
+      revalidate: 10
     };
   } catch (error) {
     console.error("Error fetching page data:", error);

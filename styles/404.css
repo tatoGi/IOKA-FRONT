@@ -1,0 +1,123 @@
+.error-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8fafc;
+}
+
+.error-main {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.error-content {
+  position: relative;
+  z-index: 2;
+}
+
+.error-code {
+  font-size: 12rem;
+  font-weight: bold;
+  color: #1a2234;
+  margin: 0;
+  line-height: 1;
+  position: relative;
+}
+
+.error-code::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background-color: #e6f4f1;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.error-oh-no {
+  color: #4fd1c5;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.error-title {
+  font-size: 2.5rem;
+  color: #1a2234;
+  margin: 0.5rem 0;
+}
+
+.error-description {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error-button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.error-button {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.home-button {
+  background-color: #1a2234;
+  color: white;
+}
+
+.home-button:hover {
+  background-color: #2d3748;
+}
+
+.back-button {
+  background-color: white;
+  color: #1a2234;
+  border: 1px solid #e2e8f0;
+}
+
+.back-button:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+@media (max-width: 640px) {
+  .error-code {
+    font-size: 8rem;
+  }
+  
+  .error-title {
+    font-size: 2rem;
+  }
+  
+  .error-description {
+    font-size: 1rem;
+  }
+  
+  .error-button-container {
+    flex-direction: column;
+  }
+  
+  .error-button {
+    width: 100%;
+  }
+} 

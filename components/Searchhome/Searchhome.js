@@ -129,9 +129,19 @@ const SearchHomeResult = ({ searchParams }) => {
   if (properties.length === 0) {
     return (
       <div className={stylesearch.noResults}>
-        <h2>No Properties Found</h2>
-        <p>We couldn't find any properties matching your search criteria.</p>
-        <p>Try adjusting your filters or search parameters.</p>
+        <div className={stylesearch.noResultsContent}>
+          <div className={stylesearch.searchIcon}>
+            <Image 
+              src={require("/assets/img/no-results.svg")}
+              alt="No results"
+              width={120}
+              height={120}
+            />
+          </div>
+          <h2>No results found</h2>
+          <p>Sorry, we couldn't find any results for this search.</p>
+          <p>Please try searching with another term</p>
+        </div>
       </div>
     );
   }

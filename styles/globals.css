@@ -1255,3 +1255,346 @@ border: 1px #E6EBED solid;
     opacity: 1;
   }
 }
+
+.privacy-policy-content h1{
+  font-family: Felix Titling;
+font-weight: 400;
+font-size: 36px;
+line-height: 100%;
+letter-spacing: 0%;
+color: #0A273B;
+margin-top: 44px;
+}
+.privacy-policy-content h2{
+  font-family: Montserrat;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
+color:#7ACBC4;
+margin: 64px 0 24px 0;
+}
+
+.privacy-policy-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.privacy-policy-content .content-section {
+  margin-bottom: 64px;
+}
+
+.privacy-policy-content h2 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  color: #7ACBC4;
+  margin-bottom: 24px;
+}
+
+.privacy-policy-content h3 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 120%;
+  color: #0A273B;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.privacy-policy-content p {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0A273B;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.privacy-policy-content br {
+  display: block;
+  content: "";
+  margin: 16px 0;
+}
+
+.privacy-policy-content a {
+  color: #7ACBC4;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.privacy-policy-content a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.privacy-policy-content .privacy-list {
+  margin-top: 24px;
+  padding-left: 20px;
+  list-style-type: decimal;
+}
+
+.privacy-policy-content .privacy-list li {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0A273B;
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+
+.privacy-policy-content .privacy-list li:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-policy-content .bullet-list {
+  list-style: none;
+  padding-left: 20px;
+  margin: 16px 0;
+}
+
+.privacy-policy-content .bullet-list li {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #0A273B;
+  opacity: 0.8;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.privacy-policy-content .bullet-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #7ACBC4;
+}
+
+.privacy-policy-content .bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+.terms-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.terms-content h1 {
+  font-family: 'Montserrat';
+  font-size: 36px;
+  font-weight: 600;
+  color: #0A273B;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.terms-content .content-section {
+  margin-bottom: 32px;
+}
+
+.terms-content h2 {
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-weight: 600;
+  color: #7ACBC4;
+  margin-bottom: 16px;
+}
+
+.terms-content p {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  line-height: 1.6;
+  color: #0A273B;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.terms-content .content-section:last-child p {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* FAQ Styles */
+.faq-content {
+  padding: 40px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.faq-container{
+  margin-top: 104px;
+}
+.faq-left {
+  padding-right: 40px;
+}
+
+.faq-left h1 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 54px;
+}  
+
+
+
+.question-text {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin-bottom: 16px;
+}
+
+.contact-text {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  opacity: 0.8;
+  margin-bottom: 72px;
+}
+
+.enquire-btn {
+  width: 305px;
+  height: 48px;
+  border-radius: Corner/Medium;
+  padding: 10px;
+  gap: 10px;
+  background: #7ACBC4;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  color:#FFFFFF;
+  border-radius: 12px;
+  border: none;
+  margin-bottom: 32px;
+  
+}
+
+.contact-buttons-faq {
+  display: flex;
+  gap: 16px;
+}
+
+.call-btn, .whatsapp-btn {
+  width: 146px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  background: #F5F5F5;
+  border: none;
+  color: #0A273B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  border: 1px solid #E6EBED;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 56px;
+}
+
+.faq-question {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+}
+
+.faq-question h3 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  color: #0A273B;
+  margin: 0;
+  padding-right: 24px;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.arrow.active {
+  transform: rotate(180deg);
+}
+
+.arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background: white;
+}
+
+.faq-answer.active {
+  max-height: 500px;
+}
+
+.faq-answer p {
+  padding: 0 24px 24px;
+  margin: 0;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #0A273B;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .faq-content {
+    padding: 24px 16px;
+  }
+
+  .faq-left {
+    padding-right: 0;
+    margin-bottom: 32px;
+  }
+
+  .faq-left h1 {
+    font-size: 32px;
+  }
+
+  .contact-buttons-faq {
+    flex-direction: column;
+  }
+
+  .call-btn, .whatsapp-btn {
+    width: 100%;
+  }
+}
