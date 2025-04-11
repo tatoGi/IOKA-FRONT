@@ -1,5 +1,7 @@
-import React from "react";
-import { useRouter } from 'next/router'; // Import useRouter from next/router
+'use client';
+
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
 import styles from "./blogShow.module.css";
 import blogbanner from "../../assets/img/blogbanner.png"; // Ensure this path is correct
 import Image from "next/image";
@@ -17,6 +19,7 @@ const BlogShow = ({ blogData }) => {
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
 };
+const [isMobile, setIsMobile] = useState(false);
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: 'long', year: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -25,6 +28,17 @@ const BlogShow = ({ blogData }) => {
     const strippedText = text.replace(/(<([^>]+)>)/gi, ""); // Remove HTML tags
     return strippedText.length > maxLength ? strippedText.substring(0, maxLength) + "..." : strippedText;
 };
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }
+}, []);
 const handleReadMore = (slug) => {
   router.push(`/blog/${slug}`);
 };
@@ -116,7 +130,13 @@ const handleReadMore = (slug) => {
           </div>
         </div>
       </div>
-      <SubscribeSection />
+      {isMobile ? (
+          <SubscribeSection />
+        ) : (
+          <div className="container">
+            <SubscribeSection />
+          </div>
+        )}
     </div>
   );
 };

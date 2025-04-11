@@ -101,23 +101,25 @@ const Developer = ({ initialData, initialPagination }) => {
             per_page: 10
           }
         });
+        console.log('Search Response:', response.data); // Debug log
         const { data, meta } = response.data;
-        setFilteredData(Array.isArray(data) ? data : [data]);
+        
+        // Ensure data is properly structured
+        const processedData = Array.isArray(data) ? data : [data];
+        console.log('Processed Data:', processedData); // Debug log
+        
+        setFilteredData(processedData);
         setTotalPages(meta.last_page);
         setCurrentPage(meta.current_page);
       } catch (error) {
         console.error("Error searching developers:", error);
         if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
           console.error("Error response:", error.response.data);
           console.error("Error status:", error.response.status);
           console.error("Error headers:", error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
           console.error("Error request:", error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.error("Error message:", error.message);
         }
         setFilteredData([]);
