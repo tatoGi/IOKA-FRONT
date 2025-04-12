@@ -104,6 +104,22 @@ const OffplanShow = ({ offplanData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showExterior, setShowExterior] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   function safeParse(json) {
     if (Array.isArray(json)) return json;
@@ -262,17 +278,26 @@ const OffplanShow = ({ offplanData }) => {
                     className={style.qrText}
                     dangerouslySetInnerHTML={{ __html: offplanData.offplan.qr_text }}
                   />
-                  <div className={style.qrButtons}>
-                    <button
-                      className={style.downloadBtn}
+                  {!isMobile && (
+                    <div className={style.qrButtons}>
+                      <button
+                        className={style.downloadBtn}
                       onClick={() => window.open(offplanData.offplan.download_brochure, "_blank")}
                     >
                       Download Brochure
                     </button>
                     <button className={style.enquireBtn}>Enquire now</button>
                   </div>
+                  )}
                 </div>
+                
               </div>
+              {isMobile && (
+                  <div className={style.qrButtons}>
+                    <button className={style.downloadBtn}>Download Brochure</button>
+                    <button className={style.enquireBtn}>Enquire now</button>
+                  </div>
+                )}
             </div>
 
             {/* Contact Modal */}

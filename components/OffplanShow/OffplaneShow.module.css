@@ -797,6 +797,59 @@ border-radius: 16px;
   border-radius: 16px;
   object-fit: cover;
 }
+@media (max-width: 1400px) {
+  .qrbody{
+    text-align: center !important;
+    display: block !important;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .qrbody{
+    text-align: center !important;
+    display: block !important;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .qrbody{
+    text-align: center !important;
+        /* display: block !important; */
+        /* text-align: center !important; */
+        align-items: center;
+        display: block;
+        justify-content: center;
+        display: flex !important
+;
+  }
+  .qrbody img{
+    width: 149px !important;
+    height: 148px !important;
+
+  }
+  .buildingImage{
+    width: 100% !important;
+  }
+  .qrButtons{
+    display: block;
+  }
+}
 @media (max-width: 768px) {
   .offplanebanner{
     position: relative;
@@ -890,6 +943,7 @@ letter-spacing: 0%;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     gap: 12px; /* Add spacing between items */
+    margin-bottom: 40px;
   }
 
   .nearbyColumn {
@@ -913,54 +967,90 @@ letter-spacing: 0%;
   }
 
   .qrCardmodern {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
+    margin: 16px;
     border: 1px solid #07151F;
     border-radius: 12px;
+    padding: 24px;
     background: #fff;
-    text-align: center;
   }
-  .line {
-    display: none;
-  }
+
   .qrCardmodern h3 {
-    font-size: 16px;
-    margin-bottom: 12px;
-    text-align: center;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 24px;
+    font-family: 'Montserrat';
+    text-align: left;
   }
 
   .qrbody {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0;
   }
+  .locationMapBtn{
+    width: 306px !important;
+height: 40px !important;
+border-radius: 8px !important;
+border-width: 1px !important;
 
+  }
   .qrbody img {
-    width: 120px;
-    height: 120px;
+    width: 149px !important;
+    height: 148px !important;
+    flex-shrink: 0;
   }
 
   .qrText {
-    font-size: 12px;
-    text-align: center;
-    margin-top: 8px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0%;
+    text-align: left;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
 
   .qrButtons {
+    display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 20px;
     width: 100%;
   }
 
   .downloadBtn, .enquireBtn {
     width: 100%;
-    padding: 10px;
+    padding: 12px 20px;
+    border-radius: 32px;
+    font-weight: 500;
+    cursor: pointer;
     font-size: 14px;
+    white-space: nowrap;
+    font-family: 'Montserrat';
+  }
+
+  .downloadBtn {
+    background-color: #0A2C3D;
+    border: 1px solid #0A2C3D;
+    color: white;
+    order: 1;
     border-radius: 8px;
   }
+
+  .enquireBtn {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    color: #333;
+    order: 2;
+    border-radius: 8px;
+  }
+
   .featuresSection,
 .amenitiesSection {
   margin-bottom: 40px;
@@ -1023,6 +1113,7 @@ letter-spacing: 0%;
   .sectionHeader {
     margin-bottom: 24px;
     padding: 0 16px;
+    display: block;
   }
 
   .exteriorInteriorSection h3 {
@@ -1047,11 +1138,29 @@ letter-spacing: 0%;
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
     background: transparent;
+    width: 95px !important;
+height: 32px !important;
+gap: 10px;
+border-radius: 8px;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+max-width: 95px !important;
   }
 
   .switchButton.active {
     background-color: #FFFFFF;
     color: #0A2C3D;
+    width: 95px !important;
+height: 32px !important;
+gap: 10px;
+border-radius: 8px;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+max-width: 95px !important;
   }
 
   /* Slider styles */
@@ -1150,6 +1259,7 @@ letter-spacing: 0%;
   .swiperSlide {
     width: 280px !important;
     height: 200px !important;
+    margin-right: 16px;
   }
 
   /* Container adjustments */
@@ -1157,56 +1267,5 @@ letter-spacing: 0%;
     padding: 0;
     overflow-x: hidden; /* Hide horizontal overflow */
     width: 100%;
-  }
-}
-@media (max-width: 1400px) {
-  .qrbody{
-    text-align: center !important;
-    display: block !important;
-  }
-  .qrbody img{
-    width: 149px !important;
-    height: 148px !important;
-
-  }
-  .buildingImage{
-    width: 100% !important;
-  }
-}
-@media (max-width: 1200px) {
-  .qrbody{
-    text-align: center !important;
-    display: block !important;
-  }
-  .qrbody img{
-    width: 149px !important;
-    height: 148px !important;
-
-  }
-  .buildingImage{
-    width: 100% !important;
-  }
-}
-@media (max-width: 992px) {
-  .qrbody{
-    text-align: center !important;
-        /* display: block !important; */
-        /* text-align: center !important; */
-        align-items: center;
-        display: block;
-        justify-content: center;
-        display: flex !important
-;
-  }
-  .qrbody img{
-    width: 149px !important;
-    height: 148px !important;
-
-  }
-  .buildingImage{
-    width: 100% !important;
-  }
-  .qrButtons{
-    display: block;
   }
 }

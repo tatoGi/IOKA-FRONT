@@ -801,7 +801,7 @@
     height: 222px !important;
     border-radius: 16px;
     overflow: hidden;
-    margin: 0 !important;
+    margin: 0 16px 0 0 !important;
   }
 
   .mobileSwiper :global(.swiper-slide img) {
