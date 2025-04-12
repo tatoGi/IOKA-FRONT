@@ -75,7 +75,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   );
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <div className={styles.gallery}>
           {/* Main Image */}
           <div className={styles.mainImage}>
