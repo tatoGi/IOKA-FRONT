@@ -469,10 +469,13 @@ const Rental_Resale = () => {
                       <p className={Styles.resaleLocation}>
                         {listing.subtitle}
                       </p>
-                      <div className="d-flex gap-2.5">
+                      <div className={Styles.priceContainer}>
+                      {isMobile && (
                         <div className={Styles.starting_price}>
+
                           <span>Starting Price</span>
                         </div>
+                      )}
                         <p className={Styles.resalePrice}>
                           USD {listing.amount.amount?.toLocaleString() || "N/A"}
                           K
@@ -484,7 +487,7 @@ const Rental_Resale = () => {
                           K
                         </p>
                       </div>
-
+                     
                       <div className={Styles.resaleStats}>
                         <div className={Styles.statGroup}>
                           <Image
@@ -526,9 +529,14 @@ const Rental_Resale = () => {
                           <span>{listing.sq_ft} Gr</span>
                         </div>
                       </div>
+                      {isMobile && (
+                        <div className={Styles.description}>
+                          <p dangerouslySetInnerHTML={{ __html: listing.description }} />
+                        </div>
+                      )}
                       {!isMobile && (
                         <div className={Styles.resaleDetails}>
-                          {listing.details.map((detail, index) => (
+                          {listing.details.slice(0, 4).map((detail, index) => (
                             <p key={index}>{detail.info}</p>
                           ))}
                         </div>

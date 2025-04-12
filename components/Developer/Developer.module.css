@@ -615,7 +615,34 @@ margin-top: 2px;
     height: auto;
     max-width: 100%;
   }
-
+  .searchContainer{
+    position: relative;
+        width: 100%;
+        max-width: 354px;
+        justify-content: center;
+        position: relative;
+        /* display: flex
+; */
+        margin-left: 10px;
+  }
+.searchInput{
+  width: 100%;
+  padding-left: 40px;
+  border: 1px solid #07151F;
+  border-radius: 8px;
+  height: 48px;
+}
+.cardsContainer{
+  margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+.cardWrapper{
+  max-width: 354px;
+}
+.communitiesList{
+  gap: 8px;
+}
   .cardRow {
     flex-direction: column;
   }
@@ -636,8 +663,7 @@ margin-top: 2px;
   }
 
   .title {
-    font-size: 16px;
-    margin-bottom: 8px;
+    display: none;
   }
 
   .description {
@@ -652,21 +678,35 @@ margin-top: 2px;
 
   .badge {
     font-size: 12px;
-    padding: 4px 8px;
+    padding: 6px 12px;
   }
 
   .buttonsSection {
     margin-top: 16px;
   }
 
-  .call,
+  .call{
+    
+    width: 74px;
+height: 40px;
+border-radius: 8px;
+  }
   .whatsapp {
-    padding: 8px 12px;
+    width: 112px;
+    height: 40px;
+    border-radius: 8px;
     font-size: 12px;
+
   }
 
   .readMore {
-    font-size: 12px;
+    font-family: Montserrat;
+font-weight: 400;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: right;
+
   }
 
   .pagination {
@@ -685,4 +725,25 @@ margin-top: 2px;
     height: 36px;
     font-size: 16px;
   }
+}
+
+.mobileTitleOverlay {
+  position: absolute;
+  /* top: 74%; */
+  left: 0;
+  right: 0;
+  padding: 15px;
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent); */
+  z-index: 1;
+  bottom: 0;
+}
+.mobileTitleOverlay h2{
+  font-family: 'Montserrat';
+  color: white;
+  font-size: 15px;
+  margin: 0;
+}
+
+.imageContainer {
+  position: relative;
 }

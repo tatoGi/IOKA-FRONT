@@ -46,7 +46,8 @@
 
 @media (max-width: 768px) {
   .banner {
-    padding: 3rem 0;
+           /* padding: 3rem 0; */
+           margin: 97px 20px 0;
   }
 
   .title {

@@ -275,7 +275,7 @@
 /* Small Laptops (1024px - 1366px) */
 @media (min-width: 1025px) and (max-width: 1366px) {
   .propertyCardTitle {
-    font-size: 34px;
+    font-size: 30px;
   }
 
   .imageContainer {

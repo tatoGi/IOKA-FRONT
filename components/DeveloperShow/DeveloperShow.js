@@ -199,6 +199,7 @@ const DeveloperShow = (developerData) => {
         <div className={styles.listingsSection}>
           <div className={styles.listingsContainer}>
             <div className={styles.listingsHeader}>
+            {!isMobileView && (
               <div className={styles.listingInfo}>
                 <h3>
                   Off Plan properties for sale in Dubai developed by Emaar
@@ -208,6 +209,17 @@ const DeveloperShow = (developerData) => {
                   {offplanListings.length} Listings
                 </span>
               </div>
+              )}
+               {isMobileView && (
+                <div className={styles.listingInfo_mobile}>
+                <h3>
+                Emaar Properties
+                </h3>
+                <span className={styles.listingCount}>
+                  {offplanListings.length} Listings
+                </span>
+              </div>
+               )}
               {!isMobileView && (
                 <div className={styles.sortDropdown}>
                   <span>Sort:</span>
@@ -310,15 +322,15 @@ const DeveloperShow = (developerData) => {
                         <p>{limitTextLength(listing.description, 150)}</p>
                       </div>
                       <div className={styles.propertyActions}>
-                        <button className={styles.actionButton}>
+                        <button className={`${styles.actionButton} ${styles.email}`}>
                           <HiOutlineMail size={20} color="#1A1A1A" />
                           <span>Email</span>
                         </button>
-                        <button className={styles.actionButton}>
+                        <button className={`${styles.actionButton} ${styles.phone}`}>
                           <Image src={callVector} alt="Call" />
                           <span>Call</span>
                         </button>
-                        <button className={styles.actionButton}>
+                        <button className={`${styles.actionButton} ${styles.whatsapp}`}>
                           <BsWhatsapp size={20} color="#34C759" />
                           <span>WhatsApp</span>
                         </button>
@@ -434,15 +446,15 @@ const DeveloperShow = (developerData) => {
                           <p>{limitTextLength(listing.description, 150)}</p>
                         </div>
                         <div className={styles.propertyActions}>
-                          <button className={styles.actionButton}>
+                          <button className={`${styles.actionButton} ${styles.email}`}>
                             <HiOutlineMail size={20} color="#1A1A1A" />
                             <span>Email</span>
                           </button>
-                          <button className={styles.actionButton}>
+                          <button className={`${styles.actionButton} ${styles.phone}`}>
                             <Image src={callVector} alt="Call" />
                             <span>Call</span>
                           </button>
-                          <button className={styles.actionButton}>
+                          <button className={`${styles.actionButton} ${styles.whatsapp}`}>
                             <BsWhatsapp size={20} color="#34C759" />
                             <span>WhatsApp</span>
                           </button>

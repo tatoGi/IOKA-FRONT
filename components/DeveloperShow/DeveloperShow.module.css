@@ -1063,6 +1063,13 @@ letter-spacing: 0%;
   .heroSection{
     padding: 0;
   }
+  .listingInfo_mobile{
+    display: flex
+    ;
+        justify-content: space-between;
+        align-items: center;
+        gap: 120px;
+  }
   .heroContent {
     flex-direction: column;
     gap: 24px;
@@ -1112,11 +1119,39 @@ letter-spacing: 0%;
   }
 
   .listView {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: flex
+    ;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 354px;
+            justify-content: center;
+            margin-left: 10px;
   }
+  .phone{
+    width: 74px;
+height: 40px;
+border-radius: 8px;
+max-width: 74px;
+padding: 12px 0px !important;
+  
 
+  }
+  .email{
+    width: 102px;
+height: 40px;
+border-radius: 8px;
+max-width: 102px;
+padding: 12px 0px !important;
+  
+
+  }
+  .whatsapp{
+    width: 112px;
+height: 40px;
+border-radius: 8px;
+max-width: 112px;
+padding: 12px 0px !important;
+  }
   .listItem {
     display: flex;
     flex-direction: column;
@@ -1188,7 +1223,7 @@ letter-spacing: 0%;
     line-height: 100%;
     letter-spacing: 0%;
     color: #0A273B;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     
   }
 
@@ -1208,7 +1243,7 @@ letter-spacing: 0%;
     gap: 24px;
     margin-top: 13px;
     padding: 0;
-    margin-bottom: 8px;
+    margin-bottom: 24px;
   }
 
   .listItem .stat {
@@ -1231,23 +1266,11 @@ letter-spacing: 0%;
 
   .listItem .propertyActions {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     margin-top: 16px;
   }
 
-  .listItem .actionButton {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 0px;
-    border: 1px solid #E5E5E5;
-    border-radius: 4px;
-    background: #F5F6F7;
-   
-    cursor: pointer;
-  }
+  
   .listItem .actionButton span {
     color: #1A1A1A;
     font-size: 12px;

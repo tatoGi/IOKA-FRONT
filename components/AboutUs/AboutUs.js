@@ -127,54 +127,122 @@ const AboutUs = ({ initialData, id }) => {
   return (
     <>
       <div className="container">
-        <AboutBanner
-          title={cardData.title || "ABOUT US"}
-          description={
-            <span
-              dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-            ></span>
-          }
-        />
+        {isClient && isMobile ? (
+          <>
+            {/* Testimonials Section - Moved to top for mobile */}
+            <div className={styles.testimonialSection}>
+              <div className={styles.testimonialContainer}>
+                <div className={styles.testimonialImageContainer}>
+                  <div className={styles.testimonialImageWrapper}>
+                    <Image
+                      src={
+                        testimonial.image
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(testimonial.image)}`
+                          : baseimage
+                      }
+                      alt="CEO Portrait"
+                      width={400}
+                      height={400}
+                      className={styles.testimonialImage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.testimonialWrapper}>
+                  <div className={styles.testimonialContent}>
+                    <div className={styles.testimonialHeader}>
+                      <h3 className={styles.testimonialName}>
+                        {testimonial.name || "Max Musterman"}
+                      </h3>
+                      <p className={styles.testimonialRole}>
+                        {testimonial.position || "CEO Chairman"}
+                      </p>
+                    </div>
+                    <div className={styles.testimonialBody}>
+                      <p className={`${styles.testimonialText}`}>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: testimonial?.description
+                          }}
+                        ></span>
+                      </p>
+                      <p className={styles.welcomeText}>
+                        <span
+                          dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                        ></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <AboutBanner
+              title={cardData.title || "ABOUT US"}
+              description={
+                <span
+                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+                ></span>
+              }
+            />
+          </>
+        ) : (
+          <>
+            <AboutBanner
+              title={cardData.title || "ABOUT US"}
+              description={
+                <span
+                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+                ></span>
+              }
+            />
+          </>
+        )}
 
         {/* Statistics section */}
         <div className={styles.container}>
           {isClient && isMobile ? (
-            <div className={styles.statsContainer}>
-              <Swiper
-                spaceBetween={20}
-                slidesPerView={1}
-                pagination={{ clickable: true }}
-                className={styles.statsSwiper}
-              >
-                {cardData.additional_fields?.number_boxes?.map((box, index) => (
-                  <SwiperSlide key={index}>
-                    <div className={styles.statBox}>
-                      <div className={styles.statCircle}></div>
-                      <p>
-                        {box.suffix}
-                        {box.number}
-                        <br />
-                        {box.title}
-                      </p>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            <>
+              <div className={styles.statsContainer}>
+                <Swiper
+                  spaceBetween={20} 
+                  slidesPerView={4}
+                  pagination={{ clickable: true }}
+                  className={styles.statsSwiper}
+                >
+                  {cardData.additional_fields?.number_boxes?.map((box, index) => (
+                    <SwiperSlide key={index}>
+                      <div className={styles.statBox}>
+                        <div className={styles.statCircle}></div>
+                        <p>
+                          {box.suffix}
+                          {box.number}
+                          <br />
+                          {box.title}
+                        </p>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </>
           ) : (
-            <div className={styles.statsContainer}>
-              {cardData.additional_fields?.number_boxes?.map((box, index) => (
-                <div key={index} className={styles.statBox}>
-                  <div className={styles.statCircle}></div>
-                  <p>
-                    {box.suffix}
-                    {box.number}
-                    <br />
-                    {box.title}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className={styles.statsContainer}>
+                {cardData.additional_fields?.number_boxes?.map((box, index) => (
+                  <div key={index} className={styles.statBox}>
+                    <div className={styles.statCircle}></div>
+                    <p>
+                      {box.suffix}
+                      {box.number}
+                      <br />
+                      {box.title}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
 
           {/* Your Agency Section */}
@@ -185,55 +253,6 @@ const AboutUs = ({ initialData, id }) => {
                 __html: cardData.additional_fields?.your_agency_description
               }}
             ></div>
-          </div>
-
-          {/* Testimonials Section */}
-          <div className={styles.testimonialSection}>
-            <div className={styles.testimonialContainer}>
-              <div className={styles.testimonialImageContainer}>
-                <div className={styles.testimonialImageWrapper}>
-                  <Image
-                    src={
-                      testimonial.image
-                        ? `${
-                            process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(testimonial.image)}`
-                        : baseimage
-                    }
-                    alt="CEO Portrait"
-                    width={400}
-                    height={400}
-                    className={styles.testimonialImage}
-                  />
-                </div>
-              </div>
-              <div className={styles.testimonialWrapper}>
-                <div className={styles.testimonialContent}>
-                  <div className={styles.testimonialHeader}>
-                    <h3 className={styles.testimonialName}>
-                      {testimonial.name || "Max Musterman"}
-                    </h3>
-                    <p className={styles.testimonialRole}>
-                      {testimonial.position || "CEO Chairman"}
-                    </p>
-                  </div>
-                  <div className={styles.testimonialBody}>
-                    <p className={`${styles.testimonialText}`}>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: testimonial?.description
-                        }}
-                      ></span>
-                    </p>
-                    <p className={styles.welcomeText}>
-                      <span
-                        dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                      ></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Team Section */}
