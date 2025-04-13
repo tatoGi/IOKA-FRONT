@@ -58,31 +58,30 @@
 }
 
 .agencySection {
-  text-align      : center;
+  text-align: center;
   background-color: #E6EBED;
-  padding         : 3rem;
-  margin          : 2rem auto;
-  border-radius   : 12px;
-  height          : 25rem;
+  padding: 3rem;
+  margin: 2rem auto;
+  border-radius: 12px;
+  height: auto;
 }
 
 .agencySection h2 {
-  font-size    : 2rem;
-  color        : #333;
-  margin-bottom: 1rem;
-  font-family  : 'Montserrat';
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 120%;
+  color: #0A273B;
+  margin-bottom: 24px;
 }
 
-.agencySection p {
-  font-family   : 'Montserrat';
-  font-weight   : 500;
-  font-size     : 24px;
-  line-height   : 100%;
-  letter-spacing: 0%;
-  text-align    : center;
-  color         : #0A273B;
-  margin-top    : 24px;
-
+.agencySection div {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #07151F;
 }
 
 .teamGrid {
@@ -127,35 +126,41 @@
 @media (max-width: 768px) {
   .statsContainer {
     grid-template-columns: 1fr;
-    gap                  : 1rem;
-    margin               : 1rem auto;
-    padding              : 0 20px;
+    gap                  : 16px;
+    margin               : 0 0 32px;
   }
 
   .agencySection {
-    margin          : 2rem 20px;
-    padding         : 2rem;
-    height          : auto;
-    border-radius   : 12px;
     background-color: #E6EBED;
+    padding: 24px;
+    margin: 0;
+    border-radius: 16px;
+    height: auto;
   }
 
   .agencySection h2 {
-    font-size    : 1.5rem;
-    margin-bottom: 1rem;
-    text-align   : left;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+    color: #0A273B;
+    margin-bottom: 16px;
   }
 
-  .agencySection p {
-    font-size  : 16px;
-    line-height: 1.6;
-    text-align : left;
+  .agencySection div {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #07151F;
   }
 
   .teamGrid {
     grid-template-columns: 1fr;
     gap                  : 2rem;
-    margin               : 2rem 20px;
+   margin-bottom: 56px;
     height               : auto;
   }
 
@@ -197,15 +202,15 @@
 
 
   .testimonialImageContainer {
-    position       : relative;
-    top            : 0 !important;
-    left           : 15% !important;
-    width          : 100%;
-    max-width      : 258px;
-    /* Smaller width for the image */
-    margin         : 0 auto;
-    padding        : 0;
-    display        : flex;
+    position: relative;
+    top: 24px !important;
+    left: 8% !important;
+    width: 100%;
+    max-width: 258px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex
+;
     justify-content: center;
   }
   .swiper-wrapper{
@@ -270,12 +275,12 @@
     margin        : 0 auto !important;
     max-width     : 354px !important;
     height        : auto !important;
-    top           : 85px;
   }
 
   .testimonialContent {
     text-align: center !important;
     width     : 100% !important;
+   
   }
 
   .testimonialHeader {
@@ -309,14 +314,15 @@
 
   .testimonialSection {
     flex-direction: column !important;
-    padding       : 20px !important;
     text-align    : center !important;
     margin-top    : 24px;
+    padding: 0 !important;
   }
 
   .testimonialContainer {
     flex-direction: column !important;
     gap           : 1rem !important;
+    margin-top: 120px;
   }
 
   .testimonialImage {
@@ -833,16 +839,15 @@
 .formContainer {
   max-width  : 100%;
   margin     : 0 auto;
-  padding-top: 64px;
 }
 
 .formContainer h5 {
-  font-family   : 'Montserrat';
-  font-weight   : 400;
-  font-size     : 20px;
-  line-height   : 100%;
-  letter-spacing: 0%;
-  margin-bottom : 24px;
+  font-family: Montserrat;
+font-weight: 400;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 10px;
 
 }
 

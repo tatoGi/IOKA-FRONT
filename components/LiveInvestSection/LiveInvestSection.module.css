@@ -924,3 +924,8 @@
     box-shadow: none;
   }
 }
+@media (max-width: 480px) { 
+  .contactBtn{
+    width: 325px;
+  }
+}

@@ -487,7 +487,12 @@
     font-size: 1.75rem;
   }
 }
-
+@media (max-width: 480px) {
+  .propertyCard{
+    width: 325px;
+    height: 471px;
+  }
+}
 .propertyInfo_mobile {
   margin: 24px 0;
   background-color: #ffffff;

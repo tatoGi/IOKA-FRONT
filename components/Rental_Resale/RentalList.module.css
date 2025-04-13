@@ -1162,23 +1162,7 @@ letter-spacing: 0%;
     height: 100%; /* Fixed height for large screens */
   }
 }
-@media (max-width: 480px) {
-  .projectsGrid {
-    grid-template-columns: 1fr;
-  }
 
-  .statsContainer {
-    grid-template-columns: 1fr;
-  }
-
-  .heroContent h1 {
-    font-size: 28px;
-  }
-
-  .heroContent p {
-    font-size: 16px;
-  }
-}
 @media (max-width: 768px) {
   .listingsHeader {
     flex-direction: column;
@@ -1497,4 +1481,141 @@ letter-spacing: 0%;
     width: 354px;
   }
 }
+@media (max-width: 480px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
 
+  .statsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .heroContent h1 {
+    font-size: 28px;
+  }
+
+  .heroContent p {
+    font-size: 16px;
+  }
+
+  .resaleCard {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .mobileImageSlider {
+    height: 240px;
+  }
+
+  .resaleContent {
+    padding: 12px;
+  }
+
+  .resaleContent h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .resaleLocation p {
+    font-size: 11px;
+  }
+
+  .starting_price {
+    font-size: 11px;
+  }
+
+  .resalePrice {
+    font-size: 11px;
+  }
+
+  .statGroup {
+    font-size: 11px;
+  }
+
+  .resaleDetails {
+    font-size: 12px;
+    margin: 16px 0;
+  }
+  .description{
+    font-size: 14px;
+    margin: 16px 0 0 0;
+  }
+  .propertyActions{
+    margin-top: 20px;
+    gap: 6px;
+  }
+  .actionButton_email,
+  .actionButton_call,
+  .actionButton_whatsapp {
+    width: auto;
+    padding: 0px 7px 0 7px;
+    font-size: 11px;
+  }
+  .actionButton svg{
+    width: 16px;
+    height: 16px;
+  }
+
+  .footerButton {
+    padding: 0 8px !important;
+    font-size: 12px;
+  }
+
+  .agentInfo {
+    gap: 8px;
+  }
+
+  .agentImage {
+    width: 32px;
+    height: 32px;
+  }
+
+  .agentInfo span {
+    font-size: 11px;
+  }
+
+  .sliderArrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sliderArrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicator.active {
+    width: 20px;
+  }
+
+  .resaleFooter {
+    height: 48px;
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+  }
+
+  .footerActions {
+    gap: 8px;
+  }
+  .title_top{
+    padding: 0 20px;
+  }
+  .propertyGrid{
+    margin-bottom: 24px;
+  }
+  .propertyInfo h3{ 
+    font-size: 12px;
+   }
+   .propertyInfo{
+    padding: 12px;
+   }
+   .feature{
+    margin:0;
+   }
+  
+}

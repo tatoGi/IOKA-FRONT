@@ -1069,6 +1069,15 @@ letter-spacing: 0%;
         justify-content: space-between;
         align-items: center;
         gap: 120px;
+        margin-left: 15px;
+  }
+  .listingInfo_mobile h3{
+    font-family: Montserrat;
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
   }
   .heroContent {
     flex-direction: column;
@@ -1447,4 +1456,70 @@ letter-spacing: 0%;
     align-items: start;
     gap: 8px;
   }
+}
+@media (max-width: 480px) {
+  .listingInfo_mobile{
+    display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 75px;
+  }
+  .priceStart{
+    font-size: 14px;
+  }
+  .price{
+    font-size: 14px;
+  }
+  .propertyStats{
+    gap: 10px !important;
+  }
+  .whatsapp{
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    max-width: 112px;
+    padding: 12px 6px !important;
+  }
+  .show_more_button{
+    width: 300px;
+        height: 44px;
+        top: 2918px;
+        left: 24px;
+        border-radius: 8px;
+        padding-top: 12px;
+        padding-right: 36px;
+        padding-bottom: 12px;
+        padding-left: 36px;
+        gap: 10px;
+        background-color: #0A273B;
+        color: #FFFFFF;
+        text-align: center;
+  }
+  .agentImage{
+    display: none;
+  }
+  .agentInfo{
+    margin-left: 10px;
+  }
+  .agentInfo span{
+    font-size: 12px;
+  }
+  .footerActions{
+    gap: 10px;
+    margin-right: 0px;
+  }
+  .awardTitle{
+    font-size: 12px !important;
+  }
+  .awardCard{
+    width: 300px !important;
+    height: 450px !important;
+  }
+  .awardYear{
+    font-size: 16px !important;
+  }
+  .awardCard{
+    gap: 0;
+  }
+  
 }

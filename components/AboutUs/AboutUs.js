@@ -19,6 +19,7 @@ const AboutUs = ({ initialData, id }) => {
   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const router = useRouter();
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
+  const [mounted, setMounted] = useState(false);
 
   // Add this hook to detect mobile screens
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -26,7 +27,8 @@ const AboutUs = ({ initialData, id }) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Ensure client-side rendering
+    setIsClient(true);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -124,6 +126,50 @@ const AboutUs = ({ initialData, id }) => {
     }));
   };
 
+  const renderStats = () => {
+    if (!mounted) return null;
+
+    if (isMobile) {
+      return (
+        <Swiper
+          spaceBetween={60}
+          slidesPerView={4}
+          className={styles.statsSwiper}
+        >
+          {cardData.additional_fields?.number_boxes?.map((box, index) => (
+            <SwiperSlide key={index} className={styles.statSlide}>
+              <div className={styles.statBox}>
+                <div className={styles.statCircle}></div>
+                <p>
+                  {box.suffix}
+                  {box.number}
+                  <br />
+                  {box.title}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      );
+    }
+
+    return (
+      <div className={styles.statsContainer}>
+        {cardData.additional_fields?.number_boxes?.map((box, index) => (
+          <div key={index} className={styles.statBox}>
+            <div className={styles.statCircle}></div>
+            <p>
+              {box.suffix}
+              {box.number}
+              <br />
+              {box.title}
+            </p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="container">
@@ -202,48 +248,7 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* Statistics section */}
         <div className={styles.container}>
-          {isClient && isMobile ? (
-            <>
-              <div className={styles.statsContainer}>
-                <Swiper
-                  spaceBetween={20} 
-                  slidesPerView={4}
-                  pagination={{ clickable: true }}
-                  className={styles.statsSwiper}
-                >
-                  {cardData.additional_fields?.number_boxes?.map((box, index) => (
-                    <SwiperSlide key={index}>
-                      <div className={styles.statBox}>
-                        <div className={styles.statCircle}></div>
-                        <p>
-                          {box.suffix}
-                          {box.number}
-                          <br />
-                          {box.title}
-                        </p>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={styles.statsContainer}>
-                {cardData.additional_fields?.number_boxes?.map((box, index) => (
-                  <div key={index} className={styles.statBox}>
-                    <div className={styles.statCircle}></div>
-                    <p>
-                      {box.suffix}
-                      {box.number}
-                      <br />
-                      {box.title}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+          {renderStats()}
 
           {/* Your Agency Section */}
           <div className={styles.agencySection}>

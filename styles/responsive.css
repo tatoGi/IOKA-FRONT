@@ -1241,6 +1241,20 @@ background-color: #FFFFFF;
     /* Hide the button in larger views */
   }
 }
+@media (max-width: 480px) {
+  .subscribe-section{
+    padding: 0;
+  }
+  .subscribe-section {
+    padding: 0 0 0 20px;
+}
+.subscribe-form input {
+  width: 200px !important;
+  height: 44px !important;
+  border-radius: 8px !important;
+  border: 1px #07151F solid !important;
+}
+}
 
 
 /* Add new breakpoint for 600px and lower resolutions */
