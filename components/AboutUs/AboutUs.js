@@ -235,6 +235,53 @@ const AboutUs = ({ initialData, id }) => {
           </>
         ) : (
           <>
+          <div className={styles.testimonialSection}>
+              <div className={styles.testimonialContainer}>
+                <div className={styles.testimonialImageContainer}>
+                  <div className={styles.testimonialImageWrapper}>
+                    <Image
+                      src={
+                        testimonial.image
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(testimonial.image)}`
+                          : baseimage
+                      }
+                      alt="CEO Portrait"
+                      width={400}
+                      height={400}
+                      className={styles.testimonialImage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.testimonialWrapper}>
+                  <div className={styles.testimonialContent}>
+                    <div className={styles.testimonialHeader}>
+                      <h3 className={styles.testimonialName}>
+                        {testimonial.name || "Max Musterman"}
+                      </h3>
+                      <p className={styles.testimonialRole}>
+                        {testimonial.position || "CEO Chairman"}
+                      </p>
+                    </div>
+                    <div className={styles.testimonialBody}>
+                      <p className={`${styles.testimonialText}`}>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: testimonial?.description
+                          }}
+                        ></span>
+                      </p>
+                      <p className={styles.welcomeText}>
+                        <span
+                          dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                        ></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <AboutBanner
               title={cardData.title || "ABOUT US"}
               description={

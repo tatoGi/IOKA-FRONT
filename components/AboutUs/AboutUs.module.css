@@ -478,6 +478,10 @@
   font-family: 'Montserrat';
   margin-top : 3.0625rem;
   margin-left: 15.125rem;
+  display           : -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow          : hidden;
 }
 
 .contactSection {

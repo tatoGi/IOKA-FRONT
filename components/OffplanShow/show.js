@@ -513,8 +513,13 @@ const OffplanShow = ({ offplanData }) => {
           />
         </div>
       </div>
-
-      <SubscribeSection />
+      {isMobile ? (
+        <SubscribeSection />
+      ) : (
+        <div className="container">
+          <SubscribeSection />
+        </div>
+      )}
     </>
   );
 };
