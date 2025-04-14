@@ -158,8 +158,7 @@ letter-spacing: 0%;
   color: #333;
   margin-bottom: 24px;
   font-family: 'Montserrat'; /* Apply Montserrat font */
-  text-align: left;
-  margin-right: 15px;
+  width: 10rem;
 }
 
 .qrbody {
