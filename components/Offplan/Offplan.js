@@ -228,6 +228,15 @@ const Offplan = ({ initialData, initialPagination }) => {
                         />
                         <span>{property?.sq_ft || 0} Sq.Ft</span>
                       </div>
+                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
+                        <Image
+                          src={require("/assets/img/garage.svg")}
+                          alt="Area Icon"
+                          width={24}
+                          height={24}
+                        />
+                        <span>{property?.garage || 0} Gr</span>
+                      </div>
                     </div>
                     <div className={styles.priceRow}>
                       <span className={`${styles.price} ${styles.textEllipsis}`}>
