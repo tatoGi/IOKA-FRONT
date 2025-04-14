@@ -188,6 +188,44 @@ const OffplanShow = ({ offplanData }) => {
           <div className="col-md-7">
             <div className={style.propertyDetails}>
               <h2>{offplanData.offplan.title}</h2>
+              <div className={style.features}>
+                      <div className={`${style.feature} ${style.textEllipsis}`}>
+                        <Image
+                          src={require("/assets/img/bad.svg")}
+                          alt="Bed Icon"
+                          width={24}
+                          height={24}
+                        />
+                        <span>{offplanData.offplan?.bedroom || 0} Br</span>
+                      </div>
+                      <div className={`${style.feature} ${style.textEllipsis}`}>
+                        <Image
+                          src={require("/assets/img/bath.svg")}
+                          alt="Bath Icon"
+                          width={24}
+                          height={24}
+                        />
+                        <span>{offplanData.offplan?.bathroom || 0} Ba</span>
+                      </div>
+                      <div className={`${style.feature} ${style.textEllipsis}`}>
+                        <Image
+                          src={require("/assets/img/place.svg")}
+                          alt="Area Icon"
+                          width={24}
+                          height={24}
+                        />
+                        <span>{offplanData.offplan?.sq_ft || 0} Sq.Ft</span>
+                      </div>
+                      <div className={`${style.feature} ${style.textEllipsis}`}>
+                        <Image
+                          src={require("/assets/img/garage.svg")}
+                          alt="Area Icon"
+                          width={24}
+                          height={24}
+                        />
+                        <span>{offplanData.offplan?.garage || 0} Gr</span>
+                      </div>
+                    </div>
               <div className={style.pricing}>
                 <span className={style.aedPricestart}>Starting Price:</span>
                 <span className={style.aedPrice}>

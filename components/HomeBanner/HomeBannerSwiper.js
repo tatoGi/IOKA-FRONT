@@ -29,6 +29,7 @@ const HomeBannerSwiper = ({ sectionData }) => {
       {sectionData && sectionData.additional_fields.slider_images.map((image, index) => (
         <SwiperSlide key={index} className={styles["swiper-item-relative"]}>
           <Link href={"#"} className={styles["in-sw-item"]}>
+          <div className={styles["image-overlay"]}></div>
             <div className={styles["banner-content"]}>
               <div className={styles["text-b-i"]}>{sectionData.additional_fields.subtitle}</div>
               <h1>{sectionData.additional_fields.title}</h1>

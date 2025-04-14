@@ -235,7 +235,16 @@ const AboutUs = ({ initialData, id }) => {
           </>
         ) : (
           <>
-          <div className={styles.testimonialSection}>
+      
+            <AboutBanner
+              title={cardData.title || "ABOUT US"}
+              description={
+                <span
+                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+                ></span>
+              }
+            />
+                <div className={styles.testimonialSection}>
               <div className={styles.testimonialContainer}>
                 <div className={styles.testimonialImageContainer}>
                   <div className={styles.testimonialImageWrapper}>
@@ -282,14 +291,6 @@ const AboutUs = ({ initialData, id }) => {
                 </div>
               </div>
             </div>
-            <AboutBanner
-              title={cardData.title || "ABOUT US"}
-              description={
-                <span
-                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-                ></span>
-              }
-            />
           </>
         )}
 
