@@ -27,7 +27,6 @@ const PopularAreaSection = (sectionFourData) => {
   const title = sectionData?.additional_fields?.title || "Default Title";
   const popularArea = sectionData?.additional_fields?.Add_Popular_Areas || [];
 
-  // Enhanced slider settings for better mobile experience
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -77,8 +76,11 @@ const PopularAreaSection = (sectionFourData) => {
                   />
                 </div>
                 <div className="off-relase-box">
-                  <div className="topic">Off Plan</div>
-                  <div className="topic">Resale</div>
+                  {area.property_types?.map((type, typeIndex) => (
+                    <div key={typeIndex} className="topic">
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </div>
+                  ))}
                 </div>
                 <div className="area-title">
                   <div className="ar-title">{area.title}</div>
@@ -110,8 +112,11 @@ const PopularAreaSection = (sectionFourData) => {
                   />
                 </div>
                 <div className="off-relase-box">
-                  <div className="topic">Off Plan</div>
-                  <div className="topic">Resale</div>
+                  {area.property_types?.map((type, typeIndex) => (
+                    <div key={typeIndex} className="topic">
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </div>
+                  ))}
                 </div>
                 <div className="area-title">
                   <div className="ar-title">{area.title}</div>

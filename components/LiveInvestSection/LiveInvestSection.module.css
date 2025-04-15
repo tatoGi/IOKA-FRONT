@@ -118,7 +118,7 @@
 
 .navButton {
   position: absolute;
-  top: 50%;
+  top: 330px;
   transform: translateY(-50%);
   width: 2.5vw;
   /* Responsive width */
@@ -422,11 +422,11 @@
   }
 
   .prevButton {
-    left: 1vw;
+    left: 22px;
   }
 
   .nextButton {
-    right: 2.5vw;
+    right: 45px;
   }
 }
 

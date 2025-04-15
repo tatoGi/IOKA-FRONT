@@ -155,29 +155,33 @@ const HomeBannerSearch = () => {
       // Prepare query parameters
       const queryParams = {
         type: selectedTypes.map((type) => type.toLowerCase()).join(","), // Convert to lowercase and join with commas
-        ...(selectedLocations.length > 0 && {
-          locations: selectedLocations.map((loc) => loc.id)
-        }),
+        // Send locations as comma-separated string
+        location: selectedLocations.length > 0 ? selectedLocations.map((loc) => loc.id).join(",") : "",
+        // Include size parameters if they exist
         ...(searchValues.sizeMin && { sizeMin: searchValues.sizeMin }),
         ...(searchValues.sizeMax && { sizeMax: searchValues.sizeMax }),
+        // Include price parameters if they exist
         ...(searchValues.priceMin && { priceMin: searchValues.priceMin }),
         ...(searchValues.priceMax && { priceMax: searchValues.priceMax }),
+        // Include bathroom parameters if they exist
         ...(searchValues.bathMin && { bathMin: searchValues.bathMin }),
         ...(searchValues.bathMax && { bathMax: searchValues.bathMax }),
-        currency: searchValues.priceCurrency
+        currency: searchValues.priceCurrency,
+        // Add flag to indicate OR search for filters
+        matchAnyFilter: true
       };
 
-      // Remove empty parameters
+      // Remove empty parameters except for location
       Object.keys(queryParams).forEach((key) => {
         if (
-          queryParams[key] === "" ||
+          key !== 'location' && // Don't remove location parameter
+          (queryParams[key] === "" ||
           queryParams[key] === undefined ||
-          (Array.isArray(queryParams[key]) && queryParams[key].length === 0)
+          (Array.isArray(queryParams[key]) && queryParams[key].length === 0))
         ) {
           delete queryParams[key];
         }
       });
-
 
       router.push(
         {

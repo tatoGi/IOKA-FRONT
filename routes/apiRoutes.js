@@ -18,4 +18,5 @@ export const SUBSCRIBE_API  = `${API_BASE_URL}/subscribe`;
 export const SETTINGS_API   = `${API_BASE_URL}/settings`;
 export const DEVELOPER_SEARCH_API = `${API_BASE_URL}/developers_search`;
 export const RENTAL_RESALE_RELATED_API = `${API_BASE_URL}/rental/related`;
+export const PAGE_API = `${API_BASE_URL}/pages`;
 // Add more routes as needed

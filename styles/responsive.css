@@ -1236,7 +1236,7 @@ background-color: #FFFFFF;
 }
 
 @media (min-width: 769px) {
-  .news-see-more {
+  .news-see-more_mobile-only{
     display: none;
     /* Hide the button in larger views */
   }

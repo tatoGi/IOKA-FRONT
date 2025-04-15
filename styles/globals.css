@@ -603,6 +603,21 @@ margin-top: 24px;
   align-items: center;
   margin-bottom: 1.5rem;
 }
+.news-header .news-see-more{
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  transition: color 0.3s ease;
+  margin-right: 40px;
+  border: 1px solid #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  width: 169px;
+  height: 48px;
+  text-align: center;
+}
 .news-title{
   font-size: 40px;
   color: #E6EBED;
