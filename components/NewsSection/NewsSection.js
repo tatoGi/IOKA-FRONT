@@ -25,8 +25,9 @@ const NewsSection = () => {
           axios.get(BLOGS_API),
           axios.get(PAGE_API)
         ]);
-        
-        const filteredBlogs = blogsResponse.data.data.filter(blog => blog.show_on_main_page === 1);
+       
+        const filteredBlogs = blogsResponse.data.data.filter(blog => blog.show_on_main_page === true);
+       
         const blogPages = pagesResponse.data.pages.filter(page => page.type_id === 6);
         
         setBlogs(filteredBlogs);
