@@ -11,11 +11,16 @@
   width: 100%;
   height: 200px; /* Fixed height for the image container */
   background: #f5f5f5;
+  overflow: hidden;
 }
 
 .propertyImage {
   object-fit: cover;
   object-position: center;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 
 .exclusive {
@@ -154,11 +159,13 @@
   border: 1px solid #E6EBED; /* Border width */
 }
 
-.propertyCardLink:hover .propertyCard {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease-in-out;
-}
+.propertyCardLink:hover{
+  border: 1px solid #3598db;
+  }
+  .propertyImage:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
 .pagination {
   display: flex;
   justify-content: center;
@@ -245,6 +252,7 @@ margin-top: 2px;
   width: 100%;
   height: 200px; /* Fixed height for the image container */
   background: #f5f5f5;
+  overflow: hidden;
 }
 
 .propertyImage {
@@ -390,11 +398,7 @@ margin-top: 2px;
   border: 1px solid #E6EBED; /* Border width */
 }
 
-.propertyCardLink:hover .propertyCard {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease-in-out;
-}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -469,7 +473,13 @@ margin-top: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-  
+.propertyCardLink:hover{
+  border: 1px solid #3598db;
+  }
+  .propertyImage:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
 }
 @media (max-width:1400px){
   .resultsHeader{
@@ -488,11 +498,25 @@ margin-top: 2px;
   gap: 15px;
   justify-content: center;
 }
+.propertyCardLink:hover{
+  border: 1px solid #3598db;
+  }
+  .propertyImage:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
 }
 @media (max-width:992px){
   .resultsHeader{
     margin-top: 81px;
   }
+  .propertyCardLink:hover{
+    border: 1px solid #3598db;
+    }
+    .propertyImage:hover{
+      transform: scale(1.1);
+      transition: 0.3s;
+    }
 }
 @media (max-width:768px)
 {
@@ -505,6 +529,13 @@ margin-top: 2px;
   .propertyCardLink{
     width: 100% !important;
   }
+  .propertyCardLink:hover{
+    border: 1px solid #3598db;
+    }
+    .propertyImage:hover{
+      transform: scale(1.1);
+      transition: 0.3s;
+    }   
 
 }
 

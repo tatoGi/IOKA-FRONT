@@ -38,11 +38,22 @@ margin-bottom: 24px;
     width: 100%;
     height: 220px;
     background: #f5f5f5;
+    overflow: hidden;
   }
   
   .propertyImage {
     object-fit: cover;
     object-position: center;
+    transition: transform 0.3s ease;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+  }
+  
+  .propertyImage:hover {
+    -webkit-transform: scale(1.1);
+	transform: scale(1.1);
   }
   
   .exclusive {
@@ -296,6 +307,11 @@ margin-bottom: 24px;
   width: 40px;
   height: 40px;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.agentImage:hover {
+  transform: scale(1.1);
 }
 
 .contactButtons {
@@ -892,6 +908,11 @@ letter-spacing: 0%;
     position: relative;
     border-radius: 8px;
     overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .awardTeamImage:hover {
+    transform: scale(1.1);
   }
   
   /* Right section with award details */
@@ -969,6 +990,11 @@ letter-spacing: 0%;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  
+  .trophyImage:hover {
+    transform: scale(1.1);
   }
   
   /* Custom navigation dots container */
@@ -1012,15 +1038,102 @@ letter-spacing: 0%;
   height: 100%; /* Height adjusts automatically */
   aspect-ratio: 580 / 378; /* Maintain aspect ratio */
   margin-right: 2px;
+  overflow: hidden;
 }
+
 .largeImage img{
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
+  transition: transform 0.3s ease;
 }
+
+.largeImage img:hover {
+  transform: scale(1.1);
+}
+
+.resaleButton {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: #FFFFFF;
+  border-radius: 100px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #0A273B;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.resaleButton:hover {
+  background: #F5F6F7;
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resaleButton img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.resaleButton span {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 14px;
+  color: #0A273B;
+  margin-left: 4px;
+}
+
+.iconGroup {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: flex
+;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconGroup img:nth-child(1) {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 6px;
+}
+
+.iconGroup img:nth-child(2) {
+  position: relative;
+  z-index: 2;
+  width: 8px;
+  height: 7px;
+}
+
+.iconGroup img:nth-child(3) {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+    height: 6px;
+}
+
 .smallImagesGrid {
   display: flex;
   flex-direction: column; /* Stack small images vertically */
   gap: 2px; /* Adjust the gap between the small images */
+  overflow: hidden;
 }
 
 .smallImage {
@@ -1028,14 +1141,23 @@ letter-spacing: 0%;
   width: 100%; /* Full width on all screens */
   height: 100%; /* Height adjusts automatically */
   aspect-ratio: 334 / 189; /* Maintain aspect ratio */
+  transition: transform 0.3s ease;
+}
+
+.smallImage:hover {
+  transform: scale(1.1);
 }
 
 .resaleImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
+.resaleImage img:hover {
+  transform: scale(1.1);
+}
 
 /* Add these new styles for mobile image slider */
 .mobileImageSlider {
@@ -1106,6 +1228,7 @@ letter-spacing: 0%;
   height: 6px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 

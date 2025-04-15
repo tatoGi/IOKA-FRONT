@@ -12,6 +12,7 @@ const Header = ({ navigationData }) => {
   
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter(); // Initialize router
   
@@ -35,11 +36,12 @@ const Header = ({ navigationData }) => {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     if (inputValue.trim() !== "") {
+      setIsSearchOpen(true);
       router.push({
         pathname: "/search",
-        query: { query: inputValue.trim() }, // Use query object for consistency
+        query: { query: inputValue.trim() },
       });
     }
   };
@@ -49,6 +51,15 @@ const Header = ({ navigationData }) => {
     setInputValue("");
     if (inputRef.current) {
       inputRef.current.focus();
+    }
+  };
+
+  const handleSearchToggle = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      inputRef.current?.focus();
+    } else {
+      setInputValue("");
     }
   };
 
@@ -153,7 +164,7 @@ const Header = ({ navigationData }) => {
               </div>
 
               {/* Navigation Menu */}
-              <div className={`header-nav ${isMobileMenuOpen ? "active" : ""}`}>
+              <div className={`header-nav ${isMobileMenuOpen || isSearchOpen ? "active" : ""}`}>
                 <ul>
                   {isMobileView
                     ? mobilePages.map((page) => (
@@ -192,17 +203,24 @@ const Header = ({ navigationData }) => {
                       ref={inputRef}
                       value={inputValue}
                       onChange={handleInputChange}
+                      onFocus={() => setIsSearchOpen(true)}
                     />
-                    <button type="submit" className="searchbtn">
+                    <button 
+                      type="button" 
+                      className="searchbtn"
+                      onClick={handleSearchToggle}
+                    >
                       <SearchBtn />
                     </button>
-                    <button
-                      type="button"
-                      className="clearbtn"
-                      onClick={handleClear}
-                    >
-                      <SearchCloseBtn />
-                    </button>
+                    {isSearchOpen && (
+                      <button
+                        type="button"
+                        className="clearbtn"
+                        onClick={handleSearchToggle}
+                      >
+                        <SearchCloseBtn />
+                      </button>
+                    )}
                   </form>
                 </div>
 

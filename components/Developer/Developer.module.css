@@ -59,7 +59,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.card:hover{
+  border: 1px solid #0A273B;
+}
 .cardRow {
   display: flex;
   flex-direction: row;
@@ -72,6 +74,7 @@
   height: 340px;
   position: relative;
   height: auto;
+  overflow: hidden;
 }
 
 .cardImage {
@@ -79,7 +82,10 @@
   height: 100%;
   object-fit: cover;
 }
-
+.cardImage:hover{
+  transform: scale(1.1);
+  transition: 0.3s;
+}
 /* Image Navigation */
 .imageNav {
   top: 50%;
@@ -379,6 +385,7 @@ margin-top: 2px;
     height: 340px;
     position: relative;
     height: auto;
+    overflow: hidden;
   }
 
   .cardImage {
@@ -650,6 +657,7 @@ margin-top: 2px;
   .imageContainer {
     width: 100%;
     height: 200px;
+    overflow: hidden;
   }
 
   .cardImage {
@@ -746,4 +754,5 @@ text-align: right;
 
 .imageContainer {
   position: relative;
+  overflow: hidden;
 }

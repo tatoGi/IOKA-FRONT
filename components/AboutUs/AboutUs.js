@@ -312,6 +312,7 @@ const AboutUs = ({ initialData, id }) => {
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (
               <div key={index} className={styles.teamMember}>
+                <div className={styles.imageContainer}>
                 <Image
                   src={
                     member.image
@@ -325,6 +326,7 @@ const AboutUs = ({ initialData, id }) => {
                   height={200}
                   className={styles.teamImage}
                 />
+                </div>
                 <h3>{member.title}</h3>
                 <p>{member.subtitle_2}</p>
               </div>

@@ -5,6 +5,7 @@
   width     : 100%;
   /* Ensure gallery takes full width of its container */
   margin-top: 12px;
+  max-height: 568px;
 }
 
 /* Main Image */
@@ -16,7 +17,60 @@
   max-width    : 768px;
   -height      : 568px;
   border-radius: 16px;
+}
 
+.resaleButton {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.resaleButton span {
+  color: #0A273B;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.iconGroup {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconGroup img:nth-child(1) {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 6px;
+}
+
+.iconGroup img:nth-child(2) {
+  position: relative;
+  z-index: 2;
+  width: 8px;
+  height: 7px;
+}
+
+.iconGroup img:nth-child(3) {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 6px;
 }
 
 .propertyCardLink {

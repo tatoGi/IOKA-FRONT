@@ -71,6 +71,7 @@ const Blog = ({ initialData }) => {
           {cardData.map((card, index) => (
             <div className="col-md-3 col-12" key={index}>
               <div className={`${styles.card}`}>
+                <div className={styles.imageContainer}>
                 <Image
                   src={
                     card.image
@@ -85,6 +86,7 @@ const Blog = ({ initialData }) => {
                   height={200}
                   priority={index < 2}
                 />
+                </div>
                 <div className={styles["card-body"]}>
                   <h5 className={styles["card-title"]}>
                     {limitTextLength(card.title, 40)}

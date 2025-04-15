@@ -10,6 +10,9 @@ import { RENTAL_RESALE } from "@/routes/apiRoutes";
 import axios from "axios";
 import { HiOutlineMail } from "react-icons/hi";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
+import leftArrow from "../../assets/img/resale_left_arrow.svg";
+import rightArrow from "../../assets/img/resale_rigth_arrow.svg";
+import homeIcon from "../../assets/img/resale_home.svg";
 
 const Rental_Resale = () => {
   const [cardData, setCardData] = useState([]);
@@ -321,6 +324,7 @@ const Rental_Resale = () => {
 
             <div className={Styles.resaleList}>
               {cardData.map((listing) => {
+                console.log(listing);
                 const galleryImages = JSON.parse(
                   listing.gallery_images || "[]"
                 );
@@ -348,6 +352,14 @@ const Rental_Resale = () => {
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
                       />
+                      <div className={Styles.resaleButton}>
+                        <div className={Styles.iconGroup}>
+                          <Image src={leftArrow} alt="Left Arrow" width={18} height={18} />
+                          <Image src={homeIcon} alt="Home" width={14} height={14} />
+                          <Image src={rightArrow} alt="Right Arrow" width={18} height={18} />
+                        </div>
+                        <span>{listing.tags === 6 ? 'Rental' : 'Resale'}</span>
+                      </div>
                     </div>
                     <div className={Styles.smallImagesGrid}>
                       {galleryImages.slice(1, 3).map((image, index) => (

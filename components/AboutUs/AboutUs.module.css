@@ -101,6 +101,19 @@
   margin-bottom: 1rem;
   width        : 23.75rem;
   height       : 24.5rem;
+  transform: scale(1);
+  transition: .3s ease-in-out;
+}
+
+.imageContainer {
+  overflow: hidden;
+  width: 23.75rem;
+  height: 24.5rem;
+}
+
+.teamImage:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .teamMember h3 {
@@ -932,4 +945,25 @@ margin-bottom: 10px;
 
 .scrollButton:hover {
   background-color: #0d3251;
+}
+@media(max-width:1600px){
+  .teamImage {
+    border-radius: 8px;
+    object-fit   : cover;
+    margin-bottom: 1rem;
+    width        : 23.75rem;
+    height       : 24.5rem;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  
+  }
+  .imageContainer{
+    overflow: hidden;
+  }
+  .teamImage:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
 }
