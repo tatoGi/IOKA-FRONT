@@ -10,14 +10,25 @@ const decodeImageUrl = (url) => {
 };
 
 const SearchResult = ({ results = {}, query }) => {
-   
+   console.log(results);
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [isClient, setIsClient] = useState(false);
   const totalResults = Object.values(results).flat().length;
 
   // Get the frontend URL based on environment
-  const frontendUrl = process.env.NEXT_FRONTEND_URL || 'http://localhost:3000';
+
+  // Function to transform category names
+  const transformCategoryName = (category) => {
+    const categoryMap = {
+      'blogs': 'blog',
+      'developers': 'developer',
+      'offplans': 'offplan',
+      'rental_resales': 'rental',
+      'pages': 'page'
+    };
+    return categoryMap[category] || category;
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -92,14 +103,15 @@ const SearchResult = ({ results = {}, query }) => {
                     
                     if (!item) return null;
                     const uniqueKey = `${category}-${item.id || index}-${index}`;
+                    const transformedCategory = transformCategoryName(category);
                     return (
                       <div key={uniqueKey} className={styles.resultCard}>
                         <div className={styles.breadcrumbs}>
                           <span>
-                            <Link href="/">Home</Link>  &gt; <Link href={`${frontendUrl}/${category}/${item.slug}`} style={{color: '#7ACBC4'}}>{item.slug}</Link>
+                            <Link href="/">Home</Link>  &gt; <Link href={`${transformedCategory}/${item.slug}`} style={{color: '#7ACBC4'}}>{item.slug}</Link>
                           </span>
                         </div>
-                        <Link href={`${frontendUrl}/${category}/${item.slug}`} className={styles.resultLink}>
+                        <Link href={`${transformedCategory}/${item.slug}`} className={styles.resultLink}>
                           <div className={styles.resultDetails}>
                             <h4>{item.title}</h4>
                             {item.subtitle && <p className={styles.subtitle}>{item.subtitle}</p>}

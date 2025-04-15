@@ -203,6 +203,72 @@
   background-color: #f9fafb;
 }
 
+
+@media (max-width: 1600px) {
+  .searchSection {
+    width: 100%;
+    height: 40px;
+    top: 172px;
+    left: 180px;
+    justify-content: space-between;
+
+  }
+
+  .searchBar {
+    width:400px !important;
+  }
+  .filterButtons{
+    gap: 5px;
+  }
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 9px 13px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .searchSection {
+    width: 100%;
+  }
+  .container{
+    display: flex;
+    gap: 13.4px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+  .searchBar {
+    width: 100%;
+  }
+
+  .filterButtons {
+    flex-wrap: wrap;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 1300px) {
+  .searchBar {
+    width: 100%;
+  }
+
+  .filterBtn,
+  .moreFiltersBtn {
+    padding: 7px 11px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 1024px) {
+  .searchBar {
+    width: 100%;
+  }
+}
 @media (max-width: 768px) {
   .searchSection {
     margin-top: 16px;
@@ -267,70 +333,6 @@
     /* Prevent shrinking */
   }
 }
-@media (max-width: 1600px) {
-  .searchSection {
-    width: 100%;
-    height: 40px;
-    top: 172px;
-    left: 180px;
-    justify-content: space-between;
-
-  }
-
-  .searchBar {
-    width: 100%;
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 9px 13px;
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .searchSection {
-    width: 100%;
-  }
-  .container{
-    display: flex;
-    gap: 13.4px;
-    width: 100%;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-}
-
-  .searchBar {
-    width: 100%;
-  }
-
-  .filterButtons {
-    flex-wrap: wrap;
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-}
-@media (max-width: 1300px) {
-  .searchBar {
-    width: 100%;
-  }
-
-  .filterBtn,
-  .moreFiltersBtn {
-    padding: 7px 11px;
-    font-size: 13px;
-  }
-}
-@media (max-width: 1024px) {
-  .searchBar {
-    width: 100%;
-  }
-}
-
 .popupContainer {
   position: absolute;
   top: 15px;
