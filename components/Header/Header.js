@@ -9,16 +9,17 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router"; // Import useRouter
 
 const Header = ({ navigationData }) => {
+  console.log(navigationData);
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const pathname = usePathname();
   const router = useRouter(); // Initialize router
-
+  
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
-  const isHomePage =
-    normalizedPathname === "/" ||
-    normalizedPathname === "/#" ||
-    normalizedPathname === "/home";
+  const homePage = navigationData.find((page) => page.type_id === 1);
+  const isHomePage = normalizedPathname === "/" || 
+                    normalizedPathname === "/#" || 
+                    (homePage && normalizedPathname === `/${homePage.slug}`);
   
   const isSearchPage = normalizedPathname === "/search";
 
@@ -58,15 +59,11 @@ const Header = ({ navigationData }) => {
   useEffect(() => {
     function handleScroll() {
       // Search page: never have scroll-header
-      if (!isSearchPage) {
-        setActiveScroll(true);
-        return;
-      }
       if (isSearchPage) {
-        const currentScrollY = window.pageYOffset;
-        setActiveScroll(currentScrollY >= 20);
+        setActiveScroll(false);
         return;
       }
+      
       // Home page: add scroll-header only when scrolling
       if (isHomePage) {
         const currentScrollY = window.pageYOffset;
@@ -121,7 +118,6 @@ const Header = ({ navigationData }) => {
     normalizedPathname.startsWith(`/${page.slug}`)
   );
 
-  const homePage = navigationData.find((page) => page.type_id === 1);
   const logoLink = homePage ? `/${homePage.slug}` : "/";
 
   return (
