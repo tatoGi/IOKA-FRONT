@@ -1,69 +1,122 @@
-import React from "react";
-import './search.module.css';
+import React, { useState, useEffect } from "react";
+import styles from './search.module.css';
+import Image from "next/image";
+import Link from "next/link";
+import defaultImage from "../../assets/img/blogimage.png";
+import { useRouter } from 'next/router';
 
 const decodeImageUrl = (url) => {
   return decodeURIComponent(url);
 };
 
 const SearchResult = ({ results = {}, query }) => {
-  console.log("Search Results in Component:", results); // Log results
-  console.log("Search Query in Component:", query); // Log query
-
+   
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState(query || '');
+  const [isClient, setIsClient] = useState(false);
   const totalResults = Object.values(results).flat().length;
 
-  return (
-    <div className="container">
-      <div className="search-header">
-        <h1>Search Results for "{query}"</h1>
-        <p>{totalResults} Results</p>
-      </div>
-      {totalResults === 0 ? (
-        <p>No results found for your search.</p>
-      ) : (
-        Object.keys(results).map((category) => {
-          const items = results[category];
-          if (!items || items.length === 0) return null;
+  // Get the frontend URL based on environment
+  const frontendUrl = process.env.NEXT_FRONTEND_URL || 'http://localhost:3000';
 
-          return (
-            <div key={category} className="search-category">
-              <div className="category-header">
-                <h2>
-                  {category} ({items.length})
-                </h2>
-                <a href={`/${category}`}>See All</a>
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push({
+        pathname: '/search',
+        query: { query: searchQuery.trim() }
+      });
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(e);
+    }
+  };
+
+
+  return (
+    <>
+      <div className={styles.searchBanner}>
+        <div className={styles.bannerOverlay}></div>
+        <div className={styles.bannerContent}>
+          <h2>IOKA Development</h2>
+          <h1>INSPIRED BY BUGATTI HYPERCARS, THIS ARCHITECTURAL MASTERPIECE</h1>
+        </div>
+      </div>
+      
+      <div className={styles.searchBox}>
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
+          className={styles.searchInput}
+        />
+        <button 
+          className={styles.searchButton}
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
+    
+      
+
+      <div className="container">
+        <div className={styles.searchResults}>
+          <div className={styles.searchHeader}>
+            <h2>Search Results for "{query}"</h2>
+            <p>{totalResults} Results Found</p>
+          </div>
+
+          {isClient && (
+            totalResults === 0 ? (
+              <div className={styles.noResults}>
+                <div className={styles.noResultsContent}>
+                  <h3>No results found</h3>
+                  <p>Sorry, we couldn't find any results for this search.</p>
+                  <p>Please try searching with another term</p>
+                </div>
               </div>
-              <div className="results-grid">
-                {items.map((item) => {
-                  if (!item) return null;
-                  return (
-                    <div key={item.id} className="result-card">
-                      <a href={`/${category}/${item.slug}`}>
-                        <img
-                          src={
-                            item.image
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(item.image)}`
-                              : defaultImage
-                          }
-                          alt={item.image_alt || item.title || "Image"}
-                          className="result-image"
-                        />
-                      </a>
-                      <div className="result-details">
-                        <h3>{item.title || "Untitled"}</h3>
-                        <p>{item.subtitle || "No subtitle available"}</p>
-                        <p>{item.date || "No date available"}</p>
+            ) : (
+              <div className={styles.resultsGrid}>
+                {Object.entries(results).map(([category, items]) => 
+                  items.map((item, index) => {
+                    
+                    if (!item) return null;
+                    const uniqueKey = `${category}-${item.id || index}-${index}`;
+                    return (
+                      <div key={uniqueKey} className={styles.resultCard}>
+                        <div className={styles.breadcrumbs}>
+                          <span>
+                            <Link href="/">Home</Link>  &gt; <Link href={`${frontendUrl}/${category}/${item.slug}`} style={{color: '#7ACBC4'}}>{item.slug}</Link>
+                          </span>
+                        </div>
+                        <Link href={`${frontendUrl}/${category}/${item.slug}`} className={styles.resultLink}>
+                          <div className={styles.resultDetails}>
+                            <h4>{item.title}</h4>
+                            {item.subtitle && <p className={styles.subtitle}>{item.subtitle}</p>}
+                            {item.amount && <p className={styles.price}>AED {item.amount}</p>}
+                            {item.paragraph && <p className={styles.excerpt}>{item.paragraph.replace(/<[^>]*>/g, '').substring(0, 150)}...</p>}
+                          </div>
+                        </Link>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                ).flat()}
               </div>
-            </div>
-          );
-        })
-      )}
-    </div>
+            )
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

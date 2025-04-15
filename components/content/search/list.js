@@ -3,9 +3,9 @@ import React from 'react';
 
 const List = ({ results, query }) => {
   return (
-    <div>
+   
   <Search results={results} query={query} />
-    </div>
+    
     
   );
 };

@@ -1,133 +1,450 @@
-
-.searchHeader { /* Ensure this class name matches */
-  margin-bottom: 20px;
+.searchBanner {
+  position: relative;
+  width: 100%;
+  height: 492px;
+  min-height: 400px;
+  background-image: url('../../assets/img/homeBanner.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
 }
 
-.searchHeader h1 {
-  font-size: 24px;
-  font-weight: bold;
+.bannerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 39, 59, 0.8);
+  z-index: 1;
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  color: white;
+  width: 100%;
+}
+
+.bannerContent h1 {
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.2;
+  max-width: 1067px;
+  margin: 0 auto 40px;
+  font-family: "Felix Titling";
+  letter-spacing: 1px;
+}
+.bannerContent h2 {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #E6EBED;
+  margin: 111px 0 16px 0;  
+}
+.searchBox {
+  max-width: 1560px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  bottom: 25rem;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 40px);
+  z-index: 10;
+  height: 100px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  padding-right: 180px;
+  border: none;
+  font-size: 18px;
+  font-family: 'Montserrat';
+  color: #07151F;
+}
+
+.searchInput::placeholder {
+  color: #666;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 16px 8px 16px;
+  height: 60px;
+  background: #7ACBC4;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 160px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  justify-content: center;
+}
+
+.searchButton:hover {
+  background: #5a9e9a;
+}
+
+.searchButton svg {
+  margin-top: 1px;
+}
+
+.searchResults {
+  padding: 80px 0 40px;
+  margin: 0 auto;
+}
+
+.searchHeader {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.searchHeader h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-family: 'Montserrat';
+  color: #07151F;
 }
 
 .searchHeader p {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
+  font-family: 'Montserrat';
 }
 
-.search-header {
-  margin-bottom: 20px;
-}
-
-.search-header h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.search-header p {
-  font-size: 16px;
-  color: #666;
-}
-
-.search-category {
+.searchCategory {
   margin-bottom: 40px;
 }
 
-.category-header {
+.categoryHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.category-header h2 {
-  font-size: 20px;
-  font-weight: bold;
+.categoryHeader h3 {
+  font-size: 24px;
+  color: #07151F;
+  font-family: 'Montserrat';
 }
 
-.see-all-link {
+.seeAll {
+  color: #69B3AF;
+  text-decoration: none;
+  font-family: 'Montserrat';
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat';
   font-size: 14px;
-  color: #007bff;
+  color: #07151F;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E6EBED;
+}
+
+.breadcrumbs a {
+  color: #07151F;
   text-decoration: none;
 }
 
-.results-grid {
+.resultsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, ( 1fr));
+  gap: 16px;
+  margin: 0 auto;
 }
 
-.result-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
-  transition: box-shadow 0.3s;
-}
-
-.result-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-link {
+.resultCard {
+  height: 204px;
+  background: white;
+  border: 1px solid #E6EBED;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   text-decoration: none;
   color: inherit;
 }
 
-.image-wrapper {
-  position: relative;
-}
-
-.result-image {
-  width: 100%;
-  height: 180px;
+.resultImage {
+  width: 264px;
+  height: 156px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
-.exclusive-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: gold;
-  color: #fff;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 4px;
-}
-
-.result-details {
-  padding: 15px;
-}
-
-.result-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.result-location {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.result-meta {
+.resultDetails {
   display: flex;
-  gap: 10px;
-  font-size: 12px;
-  color: #666;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resultDetails h4 {
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #07151F;
+  margin: 0;
+}
+
+.resultDetails p {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #07151F;
+  margin: 0;
+}
+
+.noResults {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.noResultsContent {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.searchIcon {
+  margin-bottom: 20px;
+}
+
+.noResultsContent h3 {
+  font-size: 24px;
   margin-bottom: 10px;
+  color: #07151F;
+  font-family: 'Montserrat';
 }
 
-.result-prices {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  font-weight: bold;
+.noResultsContent p {
+  color: #666;
+  margin-bottom: 8px;
+  font-family: 'Montserrat';
 }
 
-.price-usd {
-  color: #333;
+
+.searchContent {
+  margin: 0 auto 40px;
+  padding: 0 20px;
 }
 
-.price-aed {
-  color: #007bff;
+.searchContent p {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  line-height: 1.6;
+  color: #07151F;
+  margin: 0;
+}
+
+@media screen and (max-width: 1700px) {
+  .searchBox {
+    max-width: 1580px;
+    height: 90px;
+  }
+  .searchInput {
+    font-size: 18px;
+    padding-right: 170px;
+  }
+  .searchButton {
+    width: 150px;
+    height: 55px;
+    font-size: 19px;
+  }
+}
+
+@media screen and (max-width: 1640px) {
+  .searchBox {
+    max-width: 1320px;
+    height: 85px;
+  }
+  .searchInput {
+    font-size: 17px;
+    padding-right: 160px;
+  }
+  .searchButton {
+    width: 145px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .searchBox {
+    max-width: 1320px;
+    height: 85px;
+  }
+  .searchInput {
+    font-size: 17px;
+    padding-right: 160px;
+  }
+  .searchButton {
+    width: 145px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .searchBox {
+    max-width: 1140px;
+    height: 80px;
+  }
+  .searchInput {
+    font-size: 16px;
+    padding-right: 150px;
+  }
+  .searchButton {
+    width: 140px;
+    height: 50px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .searchBox {
+    max-width: 960px;
+    height: 75px;
+  }
+  .searchInput {
+    font-size: 15px;
+    padding-right: 140px;
+  }
+  .searchButton {
+    width: 130px;
+    height: 48px;
+    font-size: 16px;
+  }
+  .bannerContent h1 {
+    font-size: 32px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  .bannerContent h2 { 
+    font-size: 14px;
+  }
+  .searchResults {
+    padding: 50px 0 25px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .searchBox {
+    max-width: 720px;
+    height: 70px;
+  }
+  .searchInput {
+    font-size: 14px;
+    padding-right: 130px;
+  }
+  .searchButton {
+    width: 120px;
+    height: 45px;
+    font-size: 15px;
+  }
+  .bannerContent h1 {
+    font-size: 32px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  .bannerContent h2 { 
+    font-size: 14px;
+  }
+  .searchResults {
+    padding: 50px 0 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .searchBox {
+    max-width: 540px;
+    width: calc(100% - 40px);
+    height: 65px;
+  }
+  .searchInput {
+    font-size: 14px;
+    padding-right: 120px;
+  }
+  .searchButton {
+    width: 110px;
+    height: 42px;
+    font-size: 14px;
+  }
+  .bannerContent h1 {
+    font-size: 32px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+  }
+  .bannerContent h2 { 
+    font-size: 14px;  
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .searchBox {
+    max-width: 100%;
+    width: calc(100% - 30px);
+    height: 60px;
+    padding: 0 15px;
+  }
+  .searchInput {
+    font-size: 13px;
+    padding-right: 100px;
+  }
+  .searchButton {
+    width: 95px;
+    height: 40px;
+    font-size: 13px;
+    right: 5px;
+  }
+  .bannerContent h1 {
+    font-size: 32px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+  }
+  .bannerContent h2 { 
+    font-size: 14px;
+    margin: 60px 0 16px 0;
+  } 
+  .searchResults {
+    padding: 50px 0 25px;
+  }
 }

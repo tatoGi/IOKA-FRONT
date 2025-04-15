@@ -3,11 +3,7 @@ import SearchPage, { getServerSideProps } from "@/pages/page-components/search";
 export { getServerSideProps }; // Re-export getServerSideProps
 
 const Searching = (props) => {
-  return ( // Ensure JSX is returned
-    <div>
-      <SearchPage {...props} />
-    </div>
-  );
+  return ( <SearchPage {...props} /> );
 };
 
 export default Searching;

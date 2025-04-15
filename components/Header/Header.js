@@ -19,6 +19,8 @@ const Header = ({ navigationData }) => {
     normalizedPathname === "/" ||
     normalizedPathname === "/#" ||
     normalizedPathname === "/home";
+  
+  const isSearchPage = normalizedPathname === "/search";
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -55,25 +57,33 @@ const Header = ({ navigationData }) => {
 
   useEffect(() => {
     function handleScroll() {
-      if (!isHomePage) {
+      // Search page: never have scroll-header
+      if (!isSearchPage) {
         setActiveScroll(true);
         return;
       }
-
-      const currentScrollY = window.pageYOffset;
-      if (currentScrollY >= 20) {
-        setActiveScroll(true);
-      } else {
-        setActiveScroll(false);
+      if (isSearchPage) {
+        const currentScrollY = window.pageYOffset;
+        setActiveScroll(currentScrollY >= 20);
+        return;
       }
+      // Home page: add scroll-header only when scrolling
+      if (isHomePage) {
+        const currentScrollY = window.pageYOffset;
+        setActiveScroll(currentScrollY >= 20);
+        return;
+      }
+
+      // Other pages: always have scroll-header
+      setActiveScroll(true);
     }
 
-    // Initial check to set the correct state based on the current scroll position
+    // Initial check
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, [isHomePage, isSearchPage]);
 
   useEffect(() => {
     const handleResize = () => {
