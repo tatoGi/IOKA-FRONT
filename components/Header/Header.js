@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router"; // Import useRouter
 
 const Header = ({ navigationData }) => {
-  console.log(navigationData);
+  
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const pathname = usePathname();

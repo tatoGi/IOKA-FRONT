@@ -122,7 +122,7 @@ const NewsSection = () => {
                     <div className="n-text">{article.title}</div>
                   </div>
                   <Link
-                    href={getBlogUrl(article.slug)}
+                    href={`/blog/${article.slug}`}
                     className="news-read-more"
                   >
                     Read More

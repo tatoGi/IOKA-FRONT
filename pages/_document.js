@@ -10,6 +10,11 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        {/* Add IcoMoon Free font */}
+        <link
+          href="https://cdn.jsdelivr.net/npm/icomoon-free@1.0.0/fonts/icomoon-free.css"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

@@ -140,12 +140,12 @@
 }
 
 .prevButton {
-  left: 1.5vw;
+  left:40px;
   /* Responsive positioning */
 }
 
 .nextButton {
-  right: 3vw;
+  right: 65px;
   /* Responsive positioning */
 }
 
@@ -320,11 +320,29 @@
   .statItem p {
     font-size: 1rem;
   }
+  .prevButton {
+    left:65px;
+    /* Responsive positioning */
+  }
+  
+  .nextButton {
+    right: 90px;
+    /* Responsive positioning */
+  }
 }
 
 @media (max-width:1640px) {
   .statItems {
     left: 5rem;
+  }
+  .prevButton {
+    left:0px;
+    /* Responsive positioning */
+  }
+  
+  .nextButton {
+    right: 23px;
+    /* Responsive positioning */
   }
 }
 

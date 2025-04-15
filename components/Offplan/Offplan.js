@@ -39,7 +39,9 @@ const Offplan = ({ initialData, initialPagination }) => {
       "Commercial"
     ],
     priceRanges: ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000", "5000001+"],
-    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8], // Default bedroom options
+    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
+    bathrooms: [1, 2, 3, 4, 5, 6, 7, 8],
+    sqFtRanges: ["0-1000", "1001-2000", "2001-3000", "3001-4000", "4001-5000", "5001+"],
     listedAs: ["Available", "Sold", "Reserved", "Under Construction"],
   });
   const router = useRouter();
@@ -100,6 +102,7 @@ const Offplan = ({ initialData, initialPagination }) => {
   const fetchFilterOptions = async () => {
     try {
       const response = await axios.get(FILTER_OFFPLAN_API);
+      console.log(response.data);
       const options = response.data;
 
       // Extract unique values for filters
@@ -226,7 +229,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                           width={24}
                           height={24}
                         />
-                        <span>{property?.sq_ft || 0} Sq.Ft</span>
+                        <span>{property?.sq_ft || 0} Sq.m</span>
                       </div>
                       <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image

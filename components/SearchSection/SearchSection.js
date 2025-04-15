@@ -3,15 +3,21 @@ import styles from "./SearchSection.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
+import RangeInputPopup from "./RangeInputPopup";
 
 const SearchSection = ({ onFilterChange, filterOptions }) => {
+ 
   const [filters, setFilters] = useState({
     propertyType: "",
     price: "",
     bedrooms: "",
-    listedAs: "",
+    bathrooms: "",
+    sqFt: "",
     searchQuery: "",
   });
+
+  const [showPricePopup, setShowPricePopup] = useState(false);
+  const [showSqFtPopup, setShowSqFtPopup] = useState(false);
 
   // Debounce function
   const debounce = (func, wait) => {
@@ -36,8 +42,19 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         price_min: updatedFilters.price ? updatedFilters.price.split("-")[0] : null,
         price_max: updatedFilters.price ? updatedFilters.price.split("-")[1] : null,
         bedrooms: updatedFilters.bedrooms || null,
+        bathrooms: updatedFilters.bathrooms || null,
+        sq_ft_min: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[0] : null,
+        sq_ft_max: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[1] : null,
         location: field === 'searchQuery' ? value : null,
       };
+
+      // Debug logging
+      console.log('Sending filters to backend:', {
+        field,
+        value,
+        backendFilters,
+        bathrooms: backendFilters.bathrooms
+      });
 
       // Remove null or empty values from the query parameters
       const filteredParams = Object.fromEntries(
@@ -45,6 +62,8 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
           ([_, v]) => v !== null && v !== ""
         )
       );
+
+      console.log('Filtered params being sent:', filteredParams);
 
       // If all filters are cleared, send null to indicate we should use OFFPLAN_APi
       onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
@@ -56,6 +75,41 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
   const clearFilter = (field) => {
     setFilters(prev => ({ ...prev, [field]: "" }));
     handleFilterChange(field, "");
+  };
+
+  const handleRangeApply = (field, value) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+    handleFilterChange(field, value);
+  };
+
+  const formatNumber = (num) => {
+    if (!num) return '';
+    return new Intl.NumberFormat('en-US').format(num);
+  };
+
+  const formatRangeDisplay = (value, isPrice = false) => {
+    if (!value) return "Any";
+    const [min, max] = value.split("-");
+    
+    if (min && max) {
+      if (isPrice) {
+        return `${formatNumber(min)} - ${formatNumber(max)}`;
+      }
+      return `${formatNumber(min)} - ${formatNumber(max)}`;
+    }
+    if (min) {
+      if (isPrice) {
+        return `From $${formatNumber(min)}`;
+      }
+      return `From ${formatNumber(min)}`;
+    }
+    if (max) {
+      if (isPrice) {
+        return `Up to $${formatNumber(max)}`;
+      }
+      return `Up to ${formatNumber(max)}`;
+    }
+    return "Any";
   };
 
   return (
@@ -97,18 +151,36 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </option>
             ))}
           </select>
-          <select
-            className={styles.filterBtn}
-            value={filters.price}
-            onChange={(e) => handleFilterChange("price", e.target.value)}
-          >
-            <option value="">Price</option>
-            {filterOptions.priceRanges.map((range) => (
-              <option key={range} value={range}>
-                {range}
-              </option>
-            ))}
-          </select>
+          
+          <div className={styles.filterButtonWrapper}>
+            <button
+              className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
+              onClick={() => setShowPricePopup(true)}
+            >
+              <span>Price</span>
+              <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+            </button>
+            {filters.price && (
+              <button
+                className={styles.clearFilterButton}
+                onClick={() => clearFilter("price")}
+              >
+                ×
+              </button>
+            )}
+            {showPricePopup && (
+              <div className={styles.popupContainer}>
+                <RangeInputPopup
+                  isOpen={showPricePopup}
+                  onClose={() => setShowPricePopup(false)}
+                  onApply={(value) => handleRangeApply("price", value)}
+                  title="Price Range"
+                  unit="USD"
+                />
+              </div>
+            )}
+          </div>
+
           <select
             className={styles.filterBtn}
             value={filters.bedrooms}
@@ -121,25 +193,48 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </option>
             ))}
           </select>
+
           <select
             className={styles.filterBtn}
-            value={filters.listedAs}
-            onChange={(e) => handleFilterChange("listedAs", e.target.value)}
+            value={filters.bathrooms}
+            onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
           >
-            <option value="">Listed as</option>
-            {filterOptions.listedAs.map((option) => (
-              <option key={option} value={option}>
-                {option}
+            <option value="">Bathrooms</option>
+            {filterOptions.bathrooms.map((bathroom) => (
+              <option key={bathroom} value={bathroom}>
+                {bathroom} Bathroom{bathroom > 1 ? "s" : ""}
               </option>
             ))}
           </select>
-          <button
-            className={styles.moreFiltersBtn}
-            style={{ width: "143px", height: "40px" }}
-          >
-            More Filters
-            <Image src={filterVector} alt="Filter" />
-          </button>
+
+          <div className={styles.filterButtonWrapper}>
+            <button
+              className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
+              onClick={() => setShowSqFtPopup(true)}
+            >
+              <span>Area</span>
+              <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}Square Meters</span>
+            </button>
+            {filters.sqFt && (
+              <button
+                className={styles.clearFilterButton}
+                onClick={() => clearFilter("sqFt")}
+              >
+                ×
+              </button>
+            )}
+            {showSqFtPopup && (
+              <div className={styles.popupContainer}>
+                <RangeInputPopup
+                  isOpen={showSqFtPopup}
+                  onClose={() => setShowSqFtPopup(false)}
+                  onApply={(value) => handleRangeApply("sqFt", value)}
+                  title="Area Range"
+                  unit="Sq.Ft"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -244,7 +244,24 @@ const AboutUs = ({ initialData, id }) => {
                 ></span>
               }
             />
-                <div className={styles.testimonialSection}>
+              
+          </>
+        )}
+
+        {/* Statistics section */}
+        <div className={styles.container}>
+          {renderStats()}
+
+          {/* Your Agency Section */}
+          <div className={styles.agencySection}>
+            <h2>{cardData.additional_fields?.your_agency}</h2>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: cardData.additional_fields?.your_agency_description
+              }}
+            ></div>
+          </div>
+          <div className={styles.testimonialSection}>
               <div className={styles.testimonialContainer}>
                 <div className={styles.testimonialImageContainer}>
                   <div className={styles.testimonialImageWrapper}>
@@ -291,23 +308,6 @@ const AboutUs = ({ initialData, id }) => {
                 </div>
               </div>
             </div>
-          </>
-        )}
-
-        {/* Statistics section */}
-        <div className={styles.container}>
-          {renderStats()}
-
-          {/* Your Agency Section */}
-          <div className={styles.agencySection}>
-            <h2>{cardData.additional_fields?.your_agency}</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: cardData.additional_fields?.your_agency_description
-              }}
-            ></div>
-          </div>
-
           {/* Team Section */}
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (

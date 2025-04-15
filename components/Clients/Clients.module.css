@@ -59,34 +59,30 @@
 
 .testimonialCard {
     flex: 0 0 auto;
-    width: auto;
-    /* Adjust width for Swiper */
+    width: 372px !important;
+    height: 384px !important;
     border-radius: 16px;
     padding: 24px 16px 10px 16px;
     border: 1px solid #7ACBC4;
-    width: 372px !important;
-    height: 384px !important;
-    padding-top: 24px !important;
-    padding-right: 16px !important;
-    padding-bottom: 10px !important;
-    padding-left: 16px !important;
-    gap: 10px !important;
-
-}
-
-.leftQuote, .rightQuote {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    z-index: 1;
+    position: relative;
+    background: #fff;
 }
 
 .leftQuote {
-    top: 5px;
-    left: 0;
+    position: absolute;
+    width: 82.30343675213167px;
+    height: 56.52708849003239px;
+    left: -20px;
+    top: 0px;
+    z-index: 1;
+    opacity: 0.5;
 }
 
 .rightQuote {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    z-index: 1;
     bottom: 4px;
     right: 10px;
 }
