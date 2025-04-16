@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './SearchSection.module.css';
+import styles from './SearchRental.module.css';
 
 const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
   const [min, setMin] = useState('');
