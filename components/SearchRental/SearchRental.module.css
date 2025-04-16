@@ -60,7 +60,7 @@
   
   .filterButtons {
     display: flex;
-    gap: 25px;
+    gap: 23px;
     align-items: center;
     flex-wrap: wrap;
   }
