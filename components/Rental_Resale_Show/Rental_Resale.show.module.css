@@ -48,30 +48,15 @@
   justify-content: center;
 }
 
-.iconGroup img:nth-child(1) {
+.iconGroup img {
   position: absolute;
-  bottom: -4px;
+  bottom: 2px;
   left: 50%;
   transform: translateX(-50%);
-  width: 17px;
-  height: 6px;
+  width: 20px;
+  height: 14px;
 }
 
-.iconGroup img:nth-child(2) {
-  position: relative;
-  z-index: 2;
-  width: 8px;
-  height: 7px;
-}
-
-.iconGroup img:nth-child(3) {
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 17px;
-  height: 6px;
-}
 
 .propertyCardLink {
   width         : 372px;
@@ -924,7 +909,18 @@
     letter-spacing: 0%;
     color         : #0A273B;
   }
+  .iconGroup {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+  }
+  
 
+  
   .amount {
     font-family   : 'Montserrat';
     font-weight   : 600;

@@ -311,7 +311,7 @@ const OffplanShow = ({ offplanData }) => {
                   height={180}
                   style={{ margin: "0 auto" }}
                 />
-                <div>
+                <div className={style.qrbodyContent}>
                   <div
                     className={style.qrText}
                     dangerouslySetInnerHTML={{ __html: offplanData.offplan.qr_text }}

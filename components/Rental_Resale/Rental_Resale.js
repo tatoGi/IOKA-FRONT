@@ -10,9 +10,8 @@ import { RENTAL_RESALE } from "@/routes/apiRoutes";
 import axios from "axios";
 import { HiOutlineMail } from "react-icons/hi";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-import leftArrow from "../../assets/img/resale_left_arrow.svg";
-import rightArrow from "../../assets/img/resale_rigth_arrow.svg";
-import homeIcon from "../../assets/img/resale_home.svg";
+import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
+import SearchRental from "../SearchRental/SearchRental";
 
 const Rental_Resale = () => {
   const [cardData, setCardData] = useState([]);
@@ -27,6 +26,14 @@ const Rental_Resale = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const slideRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [filters, setFilters] = useState(null);
+
+  // Filter options for SearchRental component
+  const filterOptions = {
+    propertyTypes: ['Apartment', 'Villa', 'Townhouse', 'Penthouse', 'Land'],
+    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
+    bathrooms: [1, 2, 3, 4, 5, 6, 7, 8]
+  };
 
   useEffect(() => {
     setIsClient(true); // Ensures this runs only on the client
@@ -43,10 +50,23 @@ const Rental_Resale = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fetchData = async (page) => {
+  const fetchData = async (page, filterParams = null) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${RENTAL_RESALE}?page=${page}`);
+      let url = `${RENTAL_RESALE}?page=${page}`;
+      
+      // Add filter parameters to the URL if they exist
+      if (filterParams) {
+        const queryParams = new URLSearchParams();
+        Object.entries(filterParams).forEach(([key, value]) => {
+          if (value !== null && value !== '') {
+            queryParams.append(key, value);
+          }
+        });
+        url += `&${queryParams.toString()}`;
+      }
+
+      const response = await axios.get(url);
       const data = response.data.data;
       setCardData(Array.isArray(data) ? data : [data]);
       setCurrentPage(response.data.current_page);
@@ -59,8 +79,8 @@ const Rental_Resale = () => {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+    fetchData(currentPage, filters);
+  }, [currentPage, filters]);
 
   const handleReadMore = (slug) => {
     router.push(`/rental/${slug}`);
@@ -133,6 +153,11 @@ const Rental_Resale = () => {
 
     setTouchStart(0);
     setTouchEnd(0);
+  };
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   return (
@@ -295,7 +320,10 @@ const Rental_Resale = () => {
             </div>
           )}
 
-          {/* <SearchSection /> */}
+          <SearchRental 
+            onFilterChange={handleFilterChange} 
+            filterOptions={filterOptions}
+          />
 
           <div className={Styles.resaleSection}>
             <div className={Styles.resaleHeader}>
@@ -354,9 +382,7 @@ const Rental_Resale = () => {
                       />
                       <div className={Styles.resaleButton}>
                         <div className={Styles.iconGroup}>
-                          <Image src={leftArrow} alt="Left Arrow" width={18} height={18} />
-                          <Image src={homeIcon} alt="Home" width={14} height={14} />
-                          <Image src={rightArrow} alt="Right Arrow" width={18} height={18} />
+                          <Image src={homeIcon} alt="Home" width={18} height={18} />
                         </div>
                         <span>{listing.tags === 6 ? 'Rental' : 'Resale'}</span>
                       </div>

@@ -38,13 +38,13 @@
 
 .bannerContent h1 {
   color: white;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   text-align: left;
   letter-spacing: normal;
   text-transform: none;
   margin-bottom: 8px;
-  font-family: 'Montserrat';
+  font-family: "Felix Titling";
 }
 
 .propertyDetails {
@@ -64,6 +64,7 @@
   gap: 16px;
   margin-bottom: 24px;
   font-family: 'Montserrat';
+  margin-top: 30px;
 }
 .priceWrapper {
   display: flex;
@@ -173,6 +174,13 @@ letter-spacing: 0%;
 .qrbody img{
   width: 149px;
   height: 148px;
+  border-radius: 8px;
+}
+.qrbodyContent{
+  height: 148px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .qrbody p {
   color: #666;
@@ -186,8 +194,8 @@ letter-spacing: 0%;
 .qrButtons {
   display: flex;
   gap: 12px;
-  margin-top: 20px;
-  font-family: 'Montserrat'; /* Apply Montserrat font */
+  margin-top: auto;
+  font-family: 'Montserrat';
 }
 
 .downloadBtn, .enquireBtn {
@@ -268,6 +276,7 @@ color: #07151F;
 font-weight: 500;
 font-size: 14px;
 letter-spacing: 0%;
+text-align: start;
 
 }
 .amenitiesList {
@@ -319,6 +328,7 @@ letter-spacing: 0%;
   margin-bottom: 24px;
   border-radius: 12px;
   overflow: hidden;
+  max-height: 340px;
 }
 
 .mapContainer {
@@ -548,6 +558,10 @@ letter-spacing: 0%;
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
+}
+.personalInfo img{
+  object-fit: cover;
+  border-radius: 8px;
 }
 .modalOverlay {
   position: fixed;

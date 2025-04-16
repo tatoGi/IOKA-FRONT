@@ -10,9 +10,8 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import galleryIcon from "../../assets/img/gallery-icon.svg";
 import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
-import leftArrow from "../../assets/img/resale_left_arrow.svg";
-import homeIcon from "../../assets/img/resale_home.svg";
-import rightArrow from "../../assets/img/resale_rigth_arrow.svg";
+import leftArrow from "../../assets/img/resale_left_arrow.svg"
+import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   console.log(RENTAL_RESALE_DATA);
   const galleryImages = JSON.parse(RENTAL_RESALE_DATA.gallery_images || "[]");
@@ -242,9 +241,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               </a>
               <div className={styles.resaleButton}>
                 <div className={styles.iconGroup}>
-                  <Image src={leftArrow} alt="Left Arrow" width={18} height={18} />
-                  <Image src={homeIcon} alt="Home" width={14} height={14} />
-                  <Image src={rightArrow} alt="Right Arrow" width={18} height={18} />
+                <Image src={homeIcon} className={styles.iconGroupImg} alt="Home" width={18} height={18} />
                 </div>
                 <span>{RENTAL_RESALE_DATA.tags === 6 ? 'Resale' : 'Rental'}</span>
               </div>

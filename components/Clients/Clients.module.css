@@ -70,9 +70,9 @@
 
 .leftQuote {
     position: absolute;
-    width: 82.30343675213167px;
-    height: 56.52708849003239px;
-    left: -20px;
+    width: 82.30px;
+    height: 56.53px;
+    left: -15px;
     top: 0px;
     z-index: 1;
     opacity: 0.5;
@@ -219,16 +219,14 @@
         border: 1px solid #7ACBC4;
     }
 
-    .leftQuote, .rightQuote {
+    .leftQuote {
         position: absolute;
         width: 30px;
         height: 30px;
         z-index: 1;
-    }
-
-    .leftQuote {
-        top: 5px;
-        left: 0;
+        left: -10px;
+        top: -10px;
+        opacity: 0.5;
     }
 
     .rightQuote {

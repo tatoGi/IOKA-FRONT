@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import styles from "./SearchSection.module.css";
+import styles from "./SearchRental.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 import RangeInputPopup from "./RangeInputPopup";
 
-const SearchSection = ({ onFilterChange, filterOptions }) => {
- 
+const SearchRental = ({ onFilterChange, filterOptions }) => {
   const [filters, setFilters] = useState({
     propertyType: "",
     price: "",
@@ -53,14 +52,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         location: field === 'searchQuery' ? value : null,
       };
 
-      // Debug logging
-      console.log('Sending filters to backend:', {
-        field,
-        value,
-        backendFilters,
-        bathrooms: backendFilters.bathrooms
-      });
-
       // Remove null or empty values from the query parameters
       const filteredParams = Object.fromEntries(
         Object.entries(backendFilters).filter(
@@ -68,9 +59,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         )
       );
 
-      console.log('Filtered params being sent:', filteredParams);
-
-      // If all filters are cleared, send null to indicate we should use OFFPLAN_APi
+      // Call parent component's onFilterChange with the filtered parameters
       onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
     }, 500),
     [filters, onFilterChange]
@@ -239,7 +228,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               onClick={() => setShowSqFtPopup(true)}
             >
               <span>Area</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}Square Meters</span>
+              <span className={styles.value}>{formatRangeDisplay(filters.sqFt)} Square Meters</span>
             </button>
             {filters.sqFt && (
               <button
@@ -267,4 +256,4 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
   );
 };
 
-export default SearchSection;
+export default SearchRental;

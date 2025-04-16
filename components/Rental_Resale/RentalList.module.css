@@ -1098,36 +1098,13 @@ letter-spacing: 0%;
   position: relative;
   width: 18px;
   height: 18px;
-  display: flex
-;
+  display: flex;
   align-items: center;
   justify-content: center;
+  top: 0;
 }
 
-.iconGroup img:nth-child(1) {
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 17px;
-  height: 6px;
-}
 
-.iconGroup img:nth-child(2) {
-  position: relative;
-  z-index: 2;
-  width: 8px;
-  height: 7px;
-}
-
-.iconGroup img:nth-child(3) {
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 17px;
-    height: 6px;
-}
 
 .smallImagesGrid {
   display: flex;
