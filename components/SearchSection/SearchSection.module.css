@@ -283,13 +283,14 @@
   }
 
   .searchBar {
-    width: 298px !important;
-    height: 48px !important;
+    width: 100% !important;
+    height: 36px !important;
     border-radius: 8px;
     border-width: 1px;
     padding: 8px 10px;
     /* margin: 0 auto; */
-    border: 1px #07151F solid;
+    border: 1px #D1D5DB solid;
+    margin-top: 16px;
   }
 
   .filterButtons {

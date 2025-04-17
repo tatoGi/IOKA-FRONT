@@ -1309,3 +1309,40 @@ max-width: 95px !important;
     width: 100%;
   }
 }
+@media (max-width: 480px) {
+  .features{
+    gap: 20px;
+  }
+  .feature{
+    font-size: 12px;
+  }
+  .pricing{
+   gap: 19px;
+  }
+ .aedPricestart{
+  font-size: 12px;
+ }
+ .aedPrice{
+  font-size: 12px;
+ }
+ .usdPrice{
+  font-size: 12px;
+ }
+ .description p{
+  font-size: 14px;
+ }
+ .readMore{
+  font-size: 12px;
+ }
+ .contactBtnperson{
+  font-size: 14px;
+ }
+ .whatsappperson{
+  font-size: 14px;
+ }
+ .sharelist{
+  font-size: 14px;
+ }
+  
+  
+}

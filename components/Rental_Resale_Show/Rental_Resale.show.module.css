@@ -2079,7 +2079,7 @@ font-weight: 600;
 }
 @media (max-width: 480px) {
   .sharediv{
-    width: 310px;
+    width: 100%;
   }
   .contactBtnperson{
     width: 100%;
@@ -2094,20 +2094,20 @@ font-weight: 600;
         max-width: 120px;
   }
   .sidevabarlocation{
-    width: 310px;
+    width: 100%;
   }
   .sidebarqr{
-    width: 310px;
+    width: 100%;
   }
   .contactButton{
-    width: 310px;
+    width: 100%;
   }
   .sameArea_poperies{
-    width: 310px;
+    width: 100%;
     padding: 0;
   }
   .line{
-    width: 310px;
+    width: 100%;
   }
   .description{
     margin-right: 0;

@@ -261,6 +261,7 @@ const AboutUs = ({ initialData, id }) => {
               }}
             ></div>
           </div>
+          {!isMobile && (
           <div className={styles.testimonialSection}>
               <div className={styles.testimonialContainer}>
                 <div className={styles.testimonialImageContainer}>
@@ -308,6 +309,7 @@ const AboutUs = ({ initialData, id }) => {
                 </div>
               </div>
             </div>
+          )}
           {/* Team Section */}
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (

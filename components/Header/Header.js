@@ -9,12 +9,11 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router"; // Import useRouter
 
 const Header = ({ navigationData }) => {
-  
   const [activeScroll, setActiveScroll] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
   
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
   const homePage = navigationData.find((page) => page.type_id === 1);
@@ -26,8 +25,6 @@ const Header = ({ navigationData }) => {
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
-
-  // Add new state for mobile view
   const [isMobileView, setIsMobileView] = useState(false);
 
   const handleInputChange = (e) => {
@@ -38,7 +35,6 @@ const Header = ({ navigationData }) => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== "") {
-      setIsSearchOpen(true);
       router.push({
         pathname: "/search",
         query: { query: inputValue.trim() },
@@ -54,25 +50,22 @@ const Header = ({ navigationData }) => {
     }
   };
 
-  const handleSearchToggle = () => {
-    setIsSearchOpen(!isSearchOpen);
+  const handleSearchToggle = (e) => {
+    e.stopPropagation();
+    setIsSearchOpen(prev => !prev);
+    setIsMobileMenuOpen(false); // Ensure mobile menu is closed when search is opened
     if (!isSearchOpen) {
-      inputRef.current?.focus();
+      setTimeout(() => inputRef.current?.focus(), 50);
     } else {
       setInputValue("");
     }
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => {
-      const newState = !prev;
-      if (newState) {
-        setIsSearchOpen(false); // Close search when opening mobile menu
-      }
-      return newState;
-    });
+  const toggleMobileMenu = (e) => {
+    e.stopPropagation();
+    setIsMobileMenuOpen(prev => !prev);
+    setIsSearchOpen(false); // Ensure search is closed when mobile menu is opened
   };
-
   useEffect(() => {
     function handleScroll() {
       // For mobile view on search page, add scroll-header when scrolling down
@@ -177,39 +170,47 @@ const Header = ({ navigationData }) => {
               </div>
 
               {/* Navigation Menu */}
-              <div className={`header-nav ${isMobileMenuOpen  ? "active" : ""}`}>
-                <ul>
-                  {isMobileView
-                    ? mobilePages.map((page) => (
-                        <Link href={`/${page.slug}`} key={page.id}>
-                          <li
-                            className={
-                              normalizedPathname === `/${page.slug}`
-                                ? "active-link"
-                                : ""
-                            }
-                          >
-                           <span>{page.title}</span> 
-                          </li>
-                        </Link>
-                      ))
-                    : desktopPages.map((page) => (
-                        <li
-                          key={page.id}
-                          className={
-                            normalizedPathname === `/${page.slug}`
-                              ? "active-link"
-                              : ""
-                          }
-                        >
-                          <Link href={`/${page.slug}`}>{page.title}</Link>
-                        </li>
-                      ))}
-                </ul>
-              </div>
+              <div className={`header-nav ${
+  isMobileView 
+    ? (isMobileMenuOpen ? "active" : "") 
+    : (isSearchOpen ? "shift-left" : "")
+}`}>
+  <ul>
+    {isMobileView ? (
+      // Mobile view menu items
+      mobilePages.map((page) => (
+        <Link href={`/${page.slug}`} key={page.id}>
+          <li
+            className={
+              normalizedPathname === `/${page.slug}`
+                ? "active-link"
+                : ""
+            }
+          >
+            <span>{page.title}</span>
+          </li>
+        </Link>
+      ))
+    ) : (
+      // Desktop view menu items
+      desktopPages.map((page) => (
+        <li
+          key={page.id}
+          className={
+            normalizedPathname === `/${page.slug}`
+              ? "active-link"
+              : ""
+          }
+        >
+          <Link href={`/${page.slug}`}>{page.title}</Link>
+        </li>
+      ))
+    )}
+  </ul>
+</div>
 
               <div className="right-search-contact" style={{ height: "42px" }}> {/* Adjust height */}
-                <div className="right-form">
+              <div className={`right-form ${isSearchOpen ? "active" : ""}`}>
                   <form onSubmit={handleSearch}>
                     <input
                       type="text"

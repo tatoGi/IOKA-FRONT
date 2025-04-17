@@ -283,178 +283,7 @@
   /* Remove box shadow on focus */
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .search_title{
-    display: block;
-    position: absolute;
-    z-index: 10;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    margin-top: 4px;
-    margin-bottom: 4px;
 
-  }
-  .swiper-container {
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    z-index: 1;
-    display: block;
-    height: 100% !important;
-    width: 100% !important;
-  }
-
-  .text-b-i {
-    font-size: 20px;
-    margin-top: 56px;
-  }
-
-  .banner-content {
-    padding: 10px;
-    margin-top: 64px;
-  }
-
-  .banner-content h1 {
-    font-size: 18px !important;
-  }
-
-  .banner-search {
-    top: 169px;
-    bottom: 10%;
-    transform: translateX(-50%);
-    width: 322px;
-    max-width: none;
-    margin-top: 0;
-    height: 100%;
-    max-height: 190px;
-  }
-
-  .search-tabs {
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  .tab {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .search-container {
-    border-radius: 26px;
-        padding: 0 5px 0 0px;
-        justify-content: normal;
-        width: 100%;
-        height: 40px;
-  }
-
-  .search-inputs {
-    gap: 5px;
-    overflow: hidden;
-  }
-
-  .where,
-  .size,
-  .price-input-container {
-    flex: 1;
-    padding: 0 0 0 40px;
-    min-width: 0;
-    margin-top: 12px;
-  }
-
-  .where::after,
-  .size::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 56%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 48px;
-    background-color: #E6EBED;
-    height: 7px;
-  }
-
-  .search-inputs input {
-    font-size: 10px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-top: 4px;
-  }
-
-  .search-inputs input::placeholder {
-    font-size: 10px;
-    position: absolute;
-    color: #0A273B;
-    opacity: 0.6;
-  }
-
-  .search-button {
-    position: relative;
-    right: 0;
-    top: 0;
-    transform: none;
-    width: 32px !important;
-    height: 32px;
-    margin: 0 0px 0 0px;
-    border-radius: 40px;
-    padding: 2px;
-    border: 2px #E6EBED solid;
-    max-width: 100%;
-    max-height: 100%;
-    min-width: 32px;
-  }
-  
-  .search-button svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .clear_button {
-    right: 5px;
-    width: 16px;
-    height: 16px;
-    font-size: 12px;
-  }
-
-  .modal_overlay {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 380px !important;
-    z-index: 1000;
-    background: transparent;
-  }
-
-  .modal_content {
-    max-height: 70vh;
-  }
-}
-
-@media (max-width:1200px) {
-  .banner-content h1 {
-    font-size: 45px;
-    font-weight: 400;
-    line-height: 1.2;
-    max-width: 1067px;
-    margin: 0 auto;
-    font-family: "Felix Titling";
-    letter-spacing: 1px;
-  }
-}
 
 .modal_overlay {
   position: absolute; /* Position relative to the banner-search container */
@@ -797,3 +626,199 @@
   color: rgba(10, 39, 59, 1);
   height: 36px;
 }
+/* Responsive styles */
+
+@media (max-width:1200px) {
+  .banner-content h1 {
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 1067px;
+    margin: 0 auto;
+    font-family: "Felix Titling";
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 768px) {
+  .search_title{
+    display: block;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+  }
+  .swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .text-b-i {
+    font-size: 20px;
+    margin-top: 56px;
+  }
+
+  .banner-content {
+    padding: 10px;
+    margin-top: 64px;
+  }
+
+  .banner-content h1 {
+    font-size: 18px !important;
+  }
+
+  .banner-search {
+    top: 200px;
+    bottom: 10%;
+    transform: translateX(-50%);
+    width: 322px;
+    max-width: none;
+    margin-top: 0;
+    height: 100%;
+    max-height: 190px;
+  }
+
+  .search-tabs {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .tab {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .search-container {
+    border-radius: 26px;
+        padding: 0 5px 0 0px;
+        justify-content: normal;
+        width: 100%;
+        height: 40px;
+  }
+
+  .search-inputs {
+    gap: 5px;
+    overflow: hidden;
+  }
+
+  .where,
+  .size,
+  .price-input-container {
+    flex: 1;
+    padding: 0 0 0 40px;
+    min-width: 0;
+    margin-top: 12px;
+  }
+
+  .where::after,
+  .size::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 56%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 48px;
+    background-color: #E6EBED;
+    height: 7px;
+  }
+
+  .search-inputs input {
+    font-size: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .search-inputs input::placeholder {
+    font-size: 10px;
+    position: absolute;
+    color: #0A273B;
+    opacity: 0.6;
+  }
+
+  .search-button {
+    position: relative;
+    right: 0;
+    top: 0;
+    transform: none;
+    width: 32px !important;
+    height: 32px;
+    margin: 0 0px 0 0px;
+    border-radius: 40px;
+    padding: 2px;
+    border: 2px #E6EBED solid;
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 32px;
+  }
+  
+  .search-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .clear_button {
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+  }
+
+  .modal_overlay {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px !important;
+    z-index: 1000;
+    background: transparent;
+  }
+
+  .modal_content {
+    max-height: 70vh;
+  }
+}
+@media (max-width: 480px) {
+  .modal_overlay {
+    width: 350px !important;
+  }
+  .grid_wrapper {
+    display: grid
+    ;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 4px;
+        max-height: 250px;
+        overflow-y: auto;
+  }
+  .district_card {
+    width: 100px;
+  }
+  .district_name {
+    font-size: 10px;
+  }
+  .modal_content{
+    padding: 20px;
+  }
+}
+
+

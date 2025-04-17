@@ -1481,7 +1481,7 @@ letter-spacing: 0%;
     padding: 12px 6px !important;
   }
   .show_more_button{
-    width: 300px;
+    width: 100%;
         height: 44px;
         top: 2918px;
         left: 24px;
