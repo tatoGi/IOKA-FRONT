@@ -55,37 +55,37 @@ const Header = ({ navigationData }) => {
   };
 
   const handleSearchToggle = () => {
+    // Don't open search if mobile menu is open
+    if (isMobileMenuOpen) {
+      return;
+    }
     setIsSearchOpen(!isSearchOpen);
     if (!isSearchOpen) {
       inputRef.current?.focus();
     } else {
       setInputValue("");
     }
-    // Close mobile menu when search is toggled
-    if (isMobileView) {
-      setIsMobileMenuOpen(false);
-    }
   };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Remove the automatic search closing in mobile view
+    // Close search when opening burger menu
+    if (!isMobileMenuOpen) {
+      setIsSearchOpen(false);
+      setInputValue("");
+    }
   };
 
   // Add new useEffect to handle state coordination
   useEffect(() => {
     if (isMobileView) {
-      // If search is opened, close mobile menu
-      if (isSearchOpen) {
-        setIsMobileMenuOpen(false);
-      }
       // If mobile menu is opened, close search
       if (isMobileMenuOpen) {
         setIsSearchOpen(false);
         setInputValue("");
       }
     }
-  }, [isMobileView, isSearchOpen, isMobileMenuOpen]);
+  }, [isMobileView, isMobileMenuOpen]);
 
   useEffect(() => {
     function handleScroll() {
