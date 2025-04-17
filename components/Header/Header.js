@@ -145,14 +145,14 @@ const Header = ({ navigationData }) => {
           <div className="container">
             <div className="header-box">
               <div className="left-cont-image">
-                <div className="logo-img">
-                  <Link href={logoLink} className="white-logo">
+                <Link href={logoLink} className="logo-img">
+                  <div className="white-logo">
                     <Image src={Logo} alt="logo" width={138} height={42} />
-                  </Link>
-                  <Link href={logoLink} className="dark-logo">
+                  </div>
+                  <div className="dark-logo">
                     <Image src={LogoDark} alt="logo" width={138} height={42} />
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </div>
 
               {/* Mobile Burger Menu */}

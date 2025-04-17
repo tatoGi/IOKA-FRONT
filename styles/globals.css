@@ -73,8 +73,17 @@ main {
   .logo-img{
     width: 138px;
     height: 42px;
+    position: relative;
+    display: block;
   }
-  .logo-img a img{
+  .white-logo, .dark-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .white-logo img, .dark-logo img {
     width: 100%;
     height: 100%;
   }
