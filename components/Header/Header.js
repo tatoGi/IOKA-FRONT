@@ -55,10 +55,6 @@ const Header = ({ navigationData }) => {
   };
 
   const handleSearchToggle = () => {
-    // Don't open search if mobile menu is open
-    if (isMobileMenuOpen) {
-      return;
-    }
     setIsSearchOpen(!isSearchOpen);
     if (!isSearchOpen) {
       inputRef.current?.focus();
@@ -68,28 +64,19 @@ const Header = ({ navigationData }) => {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Close search when opening burger menu
-    if (!isMobileMenuOpen) {
-      setIsSearchOpen(false);
-      setInputValue("");
-    }
+    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
   };
-
-  // Add new useEffect to handle state coordination
-  useEffect(() => {
-    if (isMobileView) {
-      // If mobile menu is opened, close search
-      if (isMobileMenuOpen) {
-        setIsSearchOpen(false);
-        setInputValue("");
-      }
-    }
-  }, [isMobileView, isMobileMenuOpen]);
 
   useEffect(() => {
     function handleScroll() {
-      // Search page: never have scroll-header
+      // For mobile view on search page, add scroll-header when scrolling down
+      if (isMobileView && isSearchPage) {
+        const currentScrollY = window.pageYOffset;
+        setActiveScroll(currentScrollY >= 20);
+        return;
+      }
+      
+      // Search page on desktop: never have scroll-header
       if (isSearchPage) {
         setActiveScroll(false);
         return;
@@ -111,7 +98,7 @@ const Header = ({ navigationData }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage, isSearchPage]);
+  }, [isHomePage, isSearchPage, isMobileView]);
 
   useEffect(() => {
     const handleResize = () => {
