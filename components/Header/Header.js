@@ -61,11 +61,31 @@ const Header = ({ navigationData }) => {
     } else {
       setInputValue("");
     }
+    // Close mobile menu when search is toggled
+    if (isMobileView) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Remove the automatic search closing in mobile view
   };
+
+  // Add new useEffect to handle state coordination
+  useEffect(() => {
+    if (isMobileView) {
+      // If search is opened, close mobile menu
+      if (isSearchOpen) {
+        setIsMobileMenuOpen(false);
+      }
+      // If mobile menu is opened, close search
+      if (isMobileMenuOpen) {
+        setIsSearchOpen(false);
+        setInputValue("");
+      }
+    }
+  }, [isMobileView, isSearchOpen, isMobileMenuOpen]);
 
   useEffect(() => {
     function handleScroll() {

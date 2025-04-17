@@ -69,29 +69,40 @@ const DynamicPage = ({ pageData }) => {
   );
 };
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-  const data = await res.json();
-  const pages = data.pages;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+    
+    // Check if the response is successful
+    if (!res.ok) {
+      throw new Error(`API request failed with status ${res.status}`);
+    }
 
-  // Filter out duplicate slugs
-  const uniquePages = pages.filter(
-    (page, index, self) => index === self.findIndex((p) => p.slug === page.slug)
-  );
+    // Check if the response is JSON
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('API did not return JSON');
+    }
 
-  // Generate paths for each unique slug
-  const paths = uniquePages
-    .filter((page) => page.slug !== "" && page.slug !== "/") // Ensure slug is not empty and not root
-    .map((page) => ({
-      params: { slug: page.slug }
+    const data = await res.json();
+    const pages = data.pages;
+
+    // Generate paths from the pages data
+    const paths = pages.map((page) => ({
+      params: { slug: page.slug },
     }));
 
-  // Add the root path explicitly for the home page
-  paths.push({ params: { slug: "/" } });
-
-  return {
-    paths,
-    fallback: true
-  };
+    return {
+      paths,
+      fallback: false, // or 'blocking' if you want to enable fallback
+    };
+  } catch (error) {
+    console.error('Error in getStaticPaths:', error);
+    // Return an empty paths array in case of error
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 }
 export async function getStaticProps({ params }) {
   try {

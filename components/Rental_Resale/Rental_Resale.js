@@ -6,7 +6,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import callVector from "../../assets/img/call.svg";
 import agentifno from "../../assets/img/agentinfo.png";
 import { useRouter } from "next/router";
-import { RENTAL_RESALE } from "@/routes/apiRoutes";
+import { RENTAL_RESALE, FILTER_RENTAL_RESALE_API } from "@/routes/apiRoutes";
 import axios from "axios";
 import { HiOutlineMail } from "react-icons/hi";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
@@ -53,26 +53,30 @@ const Rental_Resale = () => {
   const fetchData = async (page, filterParams = null) => {
     setIsLoading(true);
     try {
-      let url = `${RENTAL_RESALE}?page=${page}`;
+      // Use FILTER_RENTAL_RESALE_API when filters are present
+      const apiUrl = filterParams ? FILTER_RENTAL_RESALE_API : RENTAL_RESALE;
       
-      // Add filter parameters to the URL if they exist
+      // Prepare query parameters
+      const queryParams = new URLSearchParams();
+      queryParams.append('page', page);
+      
+      // Add filters if they exist
       if (filterParams) {
-        const queryParams = new URLSearchParams();
         Object.entries(filterParams).forEach(([key, value]) => {
           if (value !== null && value !== '') {
             queryParams.append(key, value);
           }
         });
-        url += `&${queryParams.toString()}`;
       }
 
-      const response = await axios.get(url);
+      const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
       const data = response.data.data;
       setCardData(Array.isArray(data) ? data : [data]);
       setCurrentPage(response.data.current_page);
       setTotalPages(response.data.last_page);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setCardData([]); // Clear data on error
     } finally {
       setIsLoading(false);
     }
@@ -285,12 +289,11 @@ const Rental_Resale = () => {
                         <div className={Styles.priceRow}>
                           <span className={Styles.price}>
                             USD{" "}
-                            {property.amount.amount?.toLocaleString() || "N/A"}
+                            {property.amount?.amount?.toLocaleString() || "N/A"}
                           </span>
                           <span className={Styles.price}>
                             AED{" "}
-                            {property.amount.amount_dirhams?.toLocaleString() ||
-                              "N/A"}
+                            {property.amount?.amount_dirhams?.toLocaleString() || "N/A"}
                           </span>
                         </div>
                       </div>
@@ -352,7 +355,6 @@ const Rental_Resale = () => {
 
             <div className={Styles.resaleList}>
               {cardData.map((listing) => {
-                console.log(listing);
                 const galleryImages = JSON.parse(
                   listing.gallery_images || "[]"
                 );
@@ -566,6 +568,7 @@ const Rental_Resale = () => {
                           />
                           <span>{listing.sq_ft} Gr</span>
                         </div>
+
                       </div>
                       {isMobile && (
                         <div className={Styles.description}>
@@ -761,12 +764,11 @@ const Rental_Resale = () => {
                       <div className={Styles.priceRow}>
                         <span className={Styles.price}>
                           USD{" "}
-                          {property.amount.amount?.toLocaleString() || "N/A"}
+                          {property.amount?.amount?.toLocaleString() || "N/A"}
                         </span>
                         <span className={Styles.price}>
                           AED{" "}
-                          {property.amount.amount_dirhams?.toLocaleString() ||
-                            "N/A"}
+                          {property.amount?.amount_dirhams?.toLocaleString() || "N/A"}
                         </span>
                       </div>
                     </div>

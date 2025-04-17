@@ -25,6 +25,7 @@ const Breadcrumb = ({ breadcrumbData, customTitle }) => {
 
   // Truncate long breadcrumb items on mobile
   const truncateText = (text) => {
+    if (!text) return '';
     if (isMobile && text.length > 15) {
       return text.substring(0, 12) + '...';
     }
