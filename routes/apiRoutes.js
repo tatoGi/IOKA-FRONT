@@ -20,4 +20,6 @@ export const SETTINGS_API   = `${API_BASE_URL}/settings`;
 export const DEVELOPER_SEARCH_API = `${API_BASE_URL}/developers_search`;
 export const RENTAL_RESALE_RELATED_API = `${API_BASE_URL}/rental/related`;
 export const PAGE_API = `${API_BASE_URL}/pages`;
+export const POLICY_API = `${API_BASE_URL}/policies`;
+export const FAQ_API = `${API_BASE_URL}/faqs`;
 // Add more routes as needed

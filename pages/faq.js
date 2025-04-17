@@ -1,66 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
 import callVector from "../assets/img/call.svg";
 import whatsappVector from "../assets/img/whatsapp.svg";
 import Image from "next/image";
 import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
+import axios from "axios";
+import { FAQ_API } from "@/routes/apiRoutes";
+
 const FAQ = ({ pageData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [faqs, setFaqs] = useState([]);
+
   const breadcrumbData = [
     { title: "Home", path: "/" },
     { title: "FAQ", path: "/faq" }
-  ];
-
-  const faqs = [
-    {
-      question: "What are the pros & cons of buying off-plan vs ready properties?",
-      answer: "Off-plan properties often offer lower prices and payment plans, but come with completion risks. Ready properties provide immediate possession but usually cost more upfront."
-    },
-    {
-      question: "What are the steps to buy an off-plan property?",
-      answer: "The process includes selecting a property, signing a sale agreement, making the initial payment, and following the payment plan until completion."
-    },
-    {
-      question: "What are the steps to buy a ready property?",
-      answer: "Steps include property viewing, negotiation, signing the MOU, making payments, and transferring ownership at the land department."
-    },
-    {
-      question: "How can I ensure that I find the property that suits my investment or lifestyle needs?",
-      answer: "Work with reputable agents, research the market thoroughly, consider your long-term goals, and inspect properties carefully before making a decision."
-    },
-    {
-      question: "Is Life Insurance mandatory for taking a mortgage in the UAE?",
-      answer: "Yes, life insurance is typically mandatory when taking out a mortgage in the UAE to protect the lender's interests."
-    },
-    {
-      question: "What are the recurring fees that homeowners pay in Dubai?",
-      answer: "Homeowners in Dubai typically pay service charges, DEWA bills, chiller fees, and annual property maintenance costs."
-    },
-    {
-      question: "Is there any mortgage available for off-plan property in Dubai?",
-      answer: "Yes, some banks offer mortgages for off-plan properties, but terms and conditions vary based on the development stage and developer."
-    },
-    {
-      question: "Is Dubai a good place to live?",
-      answer: "Dubai offers a high quality of life with excellent infrastructure, safety, tax benefits, and multicultural environment, making it attractive for many expats."
-    }
   ];
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await axios.get(FAQ_API);
+        setFaqs(response.data.faqs || []); // Set the faqs data to state
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setFaqs([]); // Set empty array if error occurs
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+
   return (
     <>
-     <Breadcrumb breadcrumbData={breadcrumbData} />
-     <div className="container faq-container">
+      <Breadcrumb breadcrumbData={breadcrumbData} />
+      <div className="container faq-container">
         <div className="row">
           <div className="col-md-6">
             <div className="faq-left">
               <h1>Frequently Asked Questions</h1>
               <div className="title-line"></div>
-              <p className="question-text">Do you have any questions ?</p>
+              <p className="question-text">Do you have any questions?</p>
               <p className="contact-text">If you have any questions, just contact and ask us, we'll be glad to assist you.</p>
               <button className="enquire-btn">Enquire Now</button>
               <div className="contact-buttons-faq">
@@ -75,10 +59,12 @@ const FAQ = ({ pageData }) => {
               </div>
             </div>
           </div>
+
           <div className="col-md-6">
             <div className="faq-right">
-              <div className="faq-list">
+            <div className="faq-list">
                 {faqs.map((faq, index) => (
+                  
                   <div key={index} className={`faq-item ${activeIndex === index ? 'active' : ''}`}>
                     <div 
                       className="faq-question" 
@@ -91,8 +77,9 @@ const FAQ = ({ pageData }) => {
                         </svg>
                       </span>
                     </div>
+                   
                     <div className={`faq-answer ${activeIndex === index ? 'active' : ''}`}>
-                      <p>{faq.answer}</p>
+                      <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
                     </div>
                   </div>
                 ))}
@@ -101,9 +88,8 @@ const FAQ = ({ pageData }) => {
           </div>
         </div>
         <SubscribeSection />
-    </div>
+      </div>
     </>
-    
   );
 };
 
@@ -111,7 +97,7 @@ export async function getStaticProps() {
   try {
     const res = await fetch(NAVIGATION_MENU);
     const data = await res.json();
-    
+
     return {
       props: {
         pageData: data
@@ -128,4 +114,4 @@ export async function getStaticProps() {
   }
 }
 
-export default FAQ; 
+export default FAQ;
