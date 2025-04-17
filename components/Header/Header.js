@@ -64,7 +64,13 @@ const Header = ({ navigationData }) => {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+    setIsMobileMenuOpen((prev) => {
+      const newState = !prev;
+      if (newState) {
+        setIsSearchOpen(false); // Close search when opening mobile menu
+      }
+      return newState;
+    });
   };
 
   useEffect(() => {
@@ -171,7 +177,7 @@ const Header = ({ navigationData }) => {
               </div>
 
               {/* Navigation Menu */}
-              <div className={`header-nav ${isMobileMenuOpen || isSearchOpen ? "active" : ""}`}>
+              <div className={`header-nav ${isMobileMenuOpen  ? "active" : ""}`}>
                 <ul>
                   {isMobileView
                     ? mobilePages.map((page) => (

@@ -525,11 +525,15 @@ const HomeBannerSearch = () => {
         </button>
       </div>
       <form onSubmit={handleSearch}>
+        <span className={styles.search_title}>Search type of apartment</span>
+     
+    
         <div
           className={`${styles["search-container"]} ${
             activeInput ? styles.active : ""
           }`}
         >
+          
           <div className={styles["search-inputs"]}>
             <div
               className={`${styles.where} ${
