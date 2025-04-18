@@ -122,10 +122,16 @@ const HomeBannerSearch = () => {
 
   // Modal handlers
   const openModal = (content) => {
-    setModalContent(content);
-    setModalVisible(true);
-    setActiveInput(content.toLowerCase());
-    setIsModalOpen(true);
+    if (isMobile) {
+      setModalContent(""); // Clear specific content to show all inputs
+      setModalVisible(true);
+      setIsModalOpen(true);
+    } else {
+      setModalContent(content);
+      setModalVisible(true);
+      setActiveInput(content.toLowerCase());
+      setIsModalOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -201,60 +207,59 @@ const HomeBannerSearch = () => {
     switch (modalContent) {
       case "Where":
         return (
-          <div className={styles.location_search}>
-            <h3>by location</h3>
-            <div className={styles.input_wrapper}>
-              <svg className={styles.search_icon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <path stroke="#A0AEC0" strokeWidth="2" d="M21 21l-4.35-4.35m1.17-5.17a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
-              </svg>
+          <div className={styles.location_section}>
+            <h3 className={styles.location_title}>by location</h3>
+            <div className={styles.search_input_wrapper}>
+              <div className={styles.search_icon_wrapper}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <input
                 type="text"
-                placeholder="Search location"
+                placeholder="Search district"
                 value={searchValues.where}
                 onChange={handleInputChange}
                 name="where"
+                className={styles.search_input}
               />
               {searchValues.where && (
                 <button
-                  className={styles.clear_button}
-                  onClick={() => {
+                  className={styles.clear_input_button}
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setSearchValues((prev) => ({ ...prev, where: "" }));
-                    setSelectedLocations([]);
                   }}
                 >
-                  ×
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </button>
               )}
             </div>
-
-            {loadingLocations ? (
-              <div className={styles.loading}>Loading locations...</div>
-            ) : error ? (
-              <div className={styles.error}>{error}</div>
-            ) : (
-              <div className={styles.grid_wrapper}>
-                {locations.map((location) => {
-                  const isSelected = selectedLocations.some((loc) => loc.id === location.id);
-                  return (
-                    <div
-                      className={`${styles.district_card} ${isSelected ? styles.selected : ""}`}
-                      key={location.id}
-                      onClick={() => handleLocationSelect(location)}
-                    >
-                      <div className={styles.district_location}>
-                        <svg className={styles.pin_icon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <path stroke="#A0AEC0" strokeWidth="2" d="M12 21s6-5.686 6-10.5A6 6 0 0012 4a6 6 0 00-6 6.5C6 15.314 12 21 12 21z" />
-                          <circle cx="12" cy="10" r="2" fill="#A0AEC0" />
-                        </svg>
-                      </div>
-                      <div className={styles.district_name}>
-                        <span>{location.title}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            
+            <div className={styles.location_cards}>
+              {locations.map((location) => (
+                <div
+                  key={location.id}
+                  className={`${styles.location_card} ${
+                    selectedLocations.some((loc) => loc.id === location.id) ? styles.selected : ""
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLocationSelect(location);
+                  }}
+                >
+                  <div className={styles.location_icon}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className={styles.location_name}>{location.title}</span>
+                </div>
+              ))}
+            </div>
           </div>
         );
 
@@ -400,6 +405,10 @@ const HomeBannerSearch = () => {
       setModalVisible(false);
     };
 
+    const handleInputClick = (inputType) => {
+      setModalContent(inputType);
+    };
+
     return (
       <div className={styles.modal_container}>
         <div className={styles.modal_content_wrapper}>
@@ -412,58 +421,247 @@ const HomeBannerSearch = () => {
           </button>
 
           <div className={styles.mobile_search_inputs}>
+            {/* Where Input */}
             <div 
-              className={`${styles.mobile_input_field} ${modalContent === "Where" ? styles.active : ""}`}
-              onClick={() => setModalContent("Where")}
+              className={`${styles.mobile_input_field} ${modalContent === "Where" ? styles.expanded : ""}`}
+              onClick={() => handleInputClick("Where")}
             >
-              <input
-                type="text"
-                placeholder="Where"
-                value={searchValues.where}
-                readOnly
-                className={styles.mobile_input}
-              />
+              {modalContent === "Where" ? (
+                <div className={styles.location_section}>
+                  <h3 className={styles.location_title}>by location</h3>
+                  <div className={styles.search_input_wrapper}>
+                    <div className={styles.search_icon_wrapper}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Search district"
+                      value={searchValues.where}
+                      onChange={handleInputChange}
+                      name="where"
+                      className={styles.search_input}
+                    />
+                    {searchValues.where && (
+                      <button
+                        className={styles.clear_input_button}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSearchValues((prev) => ({ ...prev, where: "" }));
+                        }}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  
+                  <div className={styles.location_cards}>
+                    {locations.map((location) => (
+                      <div
+                        key={location.id}
+                        className={`${styles.location_card} ${
+                          selectedLocations.some((loc) => loc.id === location.id) ? styles.selected : ""
+                        }`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleLocationSelect(location);
+                        }}
+                      >
+                        <div className={styles.location_icon}>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <span className={styles.location_name}>{location.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span className={styles.label}>Where</span>
+                  <span className={styles.value}>
+                    {selectedLocations.length > 0 
+                      ? selectedLocations.map(loc => loc.title).join(", ")
+                      : "All island"}
+                  </span>
+                </>
+              )}
             </div>
 
+            {/* Price Input */}
             <div 
-              className={`${styles.mobile_input_field} ${modalContent === "Price" ? styles.active : ""}`}
-              onClick={() => setModalContent("Price")}
+              className={`${styles.mobile_input_field} ${modalContent === "Price" ? styles.expanded : ""}`}
+              onClick={() => handleInputClick("Price")}
             >
-              <input
-                type="text"
-                placeholder="Price"
-                value={
-                  searchValues.priceMin && searchValues.priceMax
-                    ? `${searchValues.priceMin.toLocaleString()}-${searchValues.priceMax.toLocaleString()}`
-                    : ""
-                }
-                readOnly
-                className={styles.mobile_input}
-              />
+              {modalContent === "Price" ? (
+                <div className={styles.price_section}>
+                  <h2 className={styles.price_heading}>What should the price of the apartment be?</h2>
+                  <ReactSlider
+                    className={styles.dualSlider}
+                    thumbClassName={styles.dualThumb}
+                    trackClassName={styles.dualTrack}
+                    min={0}
+                    max={10000000}
+                    value={[searchValues.priceMin || 190000, searchValues.priceMax || 500640000]}
+                    onChange={(values) => {
+                      setSearchValues((prev) => ({
+                        ...prev,
+                        priceMin: values[0],
+                        priceMax: values[1]
+                      }));
+                    }}
+                    pearling
+                    minDistance={100000}
+                  />
+                  <div className={styles.price_inputs}>
+                    <input
+                      type="number"
+                      value={searchValues.priceMin || ""}
+                      onChange={(e) => {
+                        const value = Math.max(0, Math.min(parseInt(e.target.value.replace(/\D/g, "")) || 190000, searchValues.priceMax || 500640000));
+                        setSearchValues((prev) => ({ ...prev, priceMin: value }));
+                      }}
+                      name="priceMin"
+                      placeholder="190,000 $"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <input
+                      type="number"
+                      value={searchValues.priceMax || ""}
+                      onChange={(e) => {
+                        const value = Math.min(10000000, Math.max(parseInt(e.target.value.replace(/\D/g, "")) || 500640000, searchValues.priceMin || 190000));
+                        setSearchValues((prev) => ({ ...prev, priceMax: value }));
+                      }}
+                      name="priceMax"
+                      placeholder="500,640,000 $"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span className={styles.label}>Price</span>
+                  <span className={styles.value}>
+                    {searchValues.priceMin && searchValues.priceMax
+                      ? `${searchValues.priceMin.toLocaleString()}-${searchValues.priceMax.toLocaleString()}`
+                      : "50000-120000"}
+                  </span>
+                </>
+              )}
             </div>
 
+            {/* Size Input */}
             <div 
-              className={`${styles.mobile_input_field} ${modalContent === "Size" ? styles.active : ""}`}
-              onClick={() => setModalContent("Size")}
+              className={`${styles.mobile_input_field} ${modalContent === "Size" ? styles.expanded : ""}`}
+              onClick={() => handleInputClick("Size")}
             >
-              <input
-                type="text"
-                placeholder="Size"
-                value={
-                  searchValues.sizeMin && searchValues.sizeMax
-                    ? `${searchValues.sizeMin}-${searchValues.sizeMax} m2, ${searchValues.bathMin || 1}-${searchValues.bathMax || 12}`
-                    : ""
-                }
-                readOnly
-                className={styles.mobile_input}
-              />
+              {modalContent === "Size" ? (
+                <div className={styles.size_section}>
+                  <h2 className={styles.heading}>What should be the area of the apartment?</h2>
+                  <ReactSlider
+                    className={styles.dualSlider}
+                    thumbClassName={styles.dualThumb}
+                    trackClassName={styles.dualTrack}
+                    min={35}
+                    max={550}
+                    value={[searchValues.sizeMin || 35, searchValues.sizeMax || 550]}
+                    onChange={handleSizeChange}
+                    pearling
+                    minDistance={35}
+                  />
+                  <div className={styles.inputs}>
+                    <input
+                      type="number"
+                      value={searchValues.sizeMin || ""}
+                      onChange={(e) => {
+                        const value = Math.max(0, Math.min(parseInt(e.target.value) || 0, searchValues.sizeMax || 550));
+                        setSearchValues((prev) => ({ ...prev, sizeMin: value }));
+                      }}
+                      name="sizeMin"
+                      placeholder="35m²"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <input
+                      type="number"
+                      value={searchValues.sizeMax || ""}
+                      onChange={(e) => {
+                        const value = Math.min(550, Math.max(parseInt(e.target.value) || 550, searchValues.sizeMin || 35));
+                        setSearchValues((prev) => ({ ...prev, sizeMax: value }));
+                      }}
+                      name="sizeMax"
+                      placeholder="550m²"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  </div>
+
+                  <h3 className={styles.heading}>What should be the number of rooms?</h3>
+                  <ReactSlider
+                    className={styles.dualSlider}
+                    thumbClassName={styles.dualThumb}
+                    trackClassName={styles.dualTrack}
+                    min={0}
+                    max={12}
+                    value={[searchValues.bathMin || 1, searchValues.bathMax || 12]}
+                    onChange={handleRoomChange}
+                    pearling
+                    minDistance={1}
+                  />
+                  <div className={styles.inputs}>
+                    <input
+                      type="number"
+                      value={searchValues.bathMin || ""}
+                      onChange={(e) => {
+                        const value = Math.max(0, Math.min(parseInt(e.target.value) || 1, searchValues.bathMax || 12));
+                        setSearchValues((prev) => ({ ...prev, bathMin: value }));
+                      }}
+                      name="bathMin"
+                      placeholder="1"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <input
+                      type="number"
+                      value={searchValues.bathMax || ""}
+                      onChange={(e) => {
+                        const value = Math.min(12, Math.max(parseInt(e.target.value) || 12, searchValues.bathMin || 1));
+                        setSearchValues((prev) => ({ ...prev, bathMax: value }));
+                      }}
+                      name="bathMax"
+                      placeholder="12"
+                      className={styles.input}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span className={styles.label}>Size</span>
+                  <span className={styles.value}>
+                    {searchValues.sizeMin && searchValues.sizeMax
+                      ? `${searchValues.sizeMin}-${searchValues.sizeMax} m², ${searchValues.bathMin || 1}-${searchValues.bathMax || 12}`
+                      : "35-550 m2, 1-12"}
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
           <div className={styles.mobile_actions}>
             <button 
               className={styles.clear_all_button}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                // Clear all search values
                 setSearchValues({
                   where: "",
                   sizeMin: "",
@@ -474,19 +672,27 @@ const HomeBannerSearch = () => {
                   bathMin: "",
                   bathMax: ""
                 });
+                // Clear selected locations
                 setSelectedLocations([]);
+                // Close expanded input
+                setModalContent("");
               }}
             >
               Clear All
             </button>
             <button 
+              type="button"
               className={styles.search_button}
-              onClick={handleSearch}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleSearch(e);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
