@@ -8,7 +8,7 @@
 .home-banner {
   position: relative;
   height: 100vh;
-  min-height: 600px;
+  min-height: 600px; /* Keep a min-height for very short viewports */
 }
 
 .banner-slider {
@@ -40,8 +40,10 @@
   background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
+/* Hide search title on desktop, it's shown on mobile */
 .search_title{
   display: none;
+  /* Mobile styles are in the media query */
 }
 .swiper-item-img img {
   width: 100%;
@@ -55,7 +57,7 @@
   z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 185px;
+  padding-top: 185px; /* Adjust as needed for desktop */
   color: white;
   text-align: center;
 }
@@ -81,18 +83,20 @@
   letter-spacing: 1px;
 }
 
+/* --- Search Section --- */
 .banner-search {
   position: absolute;
-  top: 50%;
+  top: 50%; /* Center vertically */
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 451px;
+  width: 90%; /* Use percentage for better responsiveness */
+  max-width: 451px; /* Max width for desktop */
   z-index: 10;
-  margin-top: 100px;
+  margin-top: 100px; /* Push down from vertical center */
   text-align: center;
+  /* Mobile adjustments are in the media query */
 }
 
 .search-tabs {
@@ -103,8 +107,8 @@
       -ms-flex-pack: center;
           justify-content: center;
   gap: 14px;
-  margin-bottom: 25px;
-  margin-top: 5rem;
+  margin-bottom: 25px; /* Space below tabs */
+  /* Removed margin-top: 5rem; let banner-search positioning handle it */
 }
 
 .tab {
@@ -158,9 +162,11 @@
   width: 50%;
 }
 
+/* The white search bar */
 .search-container {
   background: #fff;
-  width: 451px;
+  /* width: 451px; /* Let banner-search control width */
+  width: 100%; /* Take full width of parent (.banner-search) */
   height: 72px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -175,6 +181,7 @@
   position: relative;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Mobile adjustments in media query */
 }
 
 .search-inputs {
@@ -185,14 +192,14 @@
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
-  width: 100%;
-  position: relative;
+  width: 100%; /* Fill the container */
+  position: relative; /* For absolute positioning of button/clear */
 }
 
 .where,
 .size,
 .price-input-container {
-  position: relative;
+  position: relative; /* For pseudo-elements (lines) */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -200,9 +207,11 @@
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 20px; /* Horizontal padding */
+  cursor: pointer; /* Indicate clickable */
 }
 
+/* Flex distribution for desktop */
 .where {
   -webkit-box-flex: 1.2;
       -ms-flex: 1.2;
@@ -215,6 +224,14 @@
           flex: 0.9;
 }
 
+.price-input-container {
+  -webkit-box-flex: 0.9;
+      -ms-flex: 0.9;
+          flex: 0.9;
+  /* padding-right: 60px; /* Removed, handled by search button positioning */
+}
+
+/* Separator Lines */
 .where::after,
 .size::after {
   content: '';
@@ -225,21 +242,9 @@
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
   width: 1px;
-  height: 48px;
+  height: 48px; /* Desktop height */
   background-color: #E6EBED;
-}
-
-.price-input-container {
-  -webkit-box-flex: 0.9;
-      -ms-flex: 0.9;
-          flex: 0.9;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding-right: 60px; /* Space for search button */
+  /* Mobile adjustments in media query */
 }
 
 .search-inputs input {
@@ -251,36 +256,47 @@
   font-family: 'Montserrat';
   background: transparent;
   color: #1A202C;
+  cursor: pointer; /* Match parent cursor */
+  pointer-events: none; /* Make input non-interactive directly */
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis; /* Add ellipsis for overflow */
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .search-inputs input::-webkit-input-placeholder {
   color: #1A202C;
   font-weight: 500;
+  opacity: 0.6; /* Slightly dim placeholder */
 }
 
 .search-inputs input::-moz-placeholder {
   color: #1A202C;
   font-weight: 500;
+  opacity: 0.6;
 }
 
 .search-inputs input:-ms-input-placeholder {
   color: #1A202C;
   font-weight: 500;
+  opacity: 0.6;
 }
 
 .search-inputs input::-ms-input-placeholder {
   color: #1A202C;
   font-weight: 500;
+  opacity: 0.6;
 }
 
 .search-inputs input::placeholder {
   color: #1A202C;
   font-weight: 500;
+  opacity: 0.6;
 }
 
 .search-button {
   position: absolute;
-  right: 4px;
+  right: 4px; /* Position inside the container */
   top: 50%;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
@@ -289,9 +305,9 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 65px;
+  width: 65px; /* Desktop size */
   height: 65px;
-  min-width: 48px;
+  min-width: 48px; /* Ensure minimum size */
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -305,6 +321,7 @@
   -webkit-transition: background 0.3s ease;
   -o-transition: background 0.3s ease;
   transition: background 0.3s ease;
+  z-index: 2; /* Above input fields */
 }
 
 .search-button:hover {
@@ -316,9 +333,10 @@
   height: 20px;
 }
 
+/* Clear Button ('x') */
 .clear_button {
   position: absolute;
-  right: 15px;
+  right: 15px; /* Adjust based on padding of parent */
   top: 50%;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
@@ -340,7 +358,7 @@
   color: #4A5568;
   font-size: 14px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 2; /* Above input */
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -351,31 +369,29 @@
   color: #2D3748;
 }
 
-.price-input-container input {
-  padding-right: 90px;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  position: absolute;
+/* Adjust clear button position within price input */
+.price-input-container .clear_button {
+  /* Adjust based on search button size and spacing */
+  right: calc(65px + 10px); /* Approx: search button width + desired gap */
+}
+/* Adjust clear button position within size input */
+.size .clear_button {
+  right: 10px; /* Closer to the edge before the line */
+}
+/* Adjust clear button position within where input */
+.where .clear_button {
+  right: 10px; /* Closer to the edge before the line */
 }
 
-.price-input-container .clear_button {
-  right: 70px;
-}
 
 .search-inputs input:focus {
   outline: none;
-  /* Remove outline on focus */
   border: none;
-  /* Remove border on focus */
   -webkit-box-shadow: none;
           box-shadow: none;
-  /* Remove box shadow on focus */
 }
 
-
-
+/* --- Modal Styles --- */
 .modal_overlay {
   position: absolute; /* Position relative to the banner-search container */
   top: calc(100% + 8px); /* 8px below the search container */
@@ -383,10 +399,10 @@
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 512px;
+  width: 512px; /* Desktop modal width */
+  max-width: 95vw; /* Prevent overflow on narrow screens */
   z-index: 1000;
-  /* Ensure it's not transparent if it was set before */
-  background: transparent; /* Or remove if not needed */
+  background: transparent; /* Overlay doesn't need a background */
 }
 
 .modal_content {
@@ -396,68 +412,23 @@
   width: 100%;
   -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: 70vh; /* Limit modal height */
+  overflow-y: auto; /* Allow scrolling within modal */
 }
 
-/* Active state for input containers */
+/* Active state for input containers (when modal is open) */
+/* Optional: Add visual indication if needed */
+/*
 .where.active,
 .size.active,
 .price-input-container.active {
-  border-width: 1px;
-  border-radius: 60px;
-  width: 100%;
-  height: 100%;
-  -webkit-box-shadow:
-    4px 4px 4px 0px #0000001a,
-    -4px 4px 8px 0px #0000001a;
-          box-shadow:
-    4px 4px 4px 0px #0000001a,
-    -4px 4px 8px 0px #0000001a;
-  width: 150px;
-}
+  background-color: #f0f0f0; /* Example subtle highlight */
+/* } */
 
-/* Modal content styling */
-.location_search h3,
-.size-search h3,
-.price-search h3 {
-  margin-bottom: 15px;
-  color: #333;
-}
 
-.location_search input,
-.size-search input,
-.price-search input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+/* --- Modal Content Specific Styles --- */
 
-.range-inputs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.range-inputs input {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.range-inputs select {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+/* Location Search Modal */
 .location_search h3 {
   font-family: 'Montserrat';
   font-weight: 600;
@@ -492,27 +463,60 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  color: rgba(168, 168, 168, 1);
+  color: #333; /* Darker color for typed text */
   margin: 0;
   font-family: 'Montserrat';
-  font-weight: 300;
+  font-weight: 400; /* Regular weight */
   font-size: 14px;
   line-height: 100%;
   letter-spacing: 0%;
+  padding-left: 5px; /* Space after icon */
+  pointer-events: auto; /* Allow typing in modal input */
+  cursor: text;
 }
+.input_wrapper input::-webkit-input-placeholder {
+ color: rgba(168, 168, 168, 1); /* Placeholder color */
+ font-weight: 300;
+}
+.input_wrapper input::-moz-placeholder {
+ color: rgba(168, 168, 168, 1);
+ font-weight: 300;
+}
+.input_wrapper input:-ms-input-placeholder {
+ color: rgba(168, 168, 168, 1);
+ font-weight: 300;
+}
+.input_wrapper input::-ms-input-placeholder {
+ color: rgba(168, 168, 168, 1);
+ font-weight: 300;
+}
+.input_wrapper input::placeholder {
+ color: rgba(168, 168, 168, 1);
+ font-weight: 300;
+}
+
 
 .search_icon {
   width: 18px;
   height: 18px;
+  margin-right: 8px; /* Space between icon and input */
+}
+.input_wrapper .clear_button { /* Style clear button inside this wrapper */
+  right: 10px; /* Position inside the input wrapper */
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
 }
 
 .grid_wrapper {
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 8px;
-  max-height: 250px;
+  /* Adjust minmax for better fit */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px; /* Slightly larger gap */
+  max-height: 300px; /* Increase max height */
   overflow-y: auto;
+  padding-right: 5px; /* Space for scrollbar */
 }
 
 .district_card {
@@ -533,72 +537,88 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 4px;
+  gap: 8px; /* Increased gap */
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  width: 104px;
-  height: 88px;
-  overflow: hidden;
+  /* Removed fixed width/height, let grid handle it */
+  overflow: hidden; /* Prevent content spill */
 }
 
 .district_card:hover {
-  background: #EDF2F7;
+  background: #F7FAFC; /* Lighter hover */
+  border-color: #E2E8F0;
 }
 
-.pin_icon {
-  width: 20px;
-  height: 20px;
+.district_card.selected {
+  background-color: #EBF8FF; /* Lighter selected blue */
+  border-color: #90CDF4;     /* Softer blue border */
+  -webkit-box-shadow: 0 0 0 1px #90CDF4;
+          box-shadow: 0 0 0 1px #90CDF4; /* Add subtle ring */
+}
+.district_card.selected:hover {
+  background-color: #EBF8FF; /* Keep selected color on hover */
 }
 
-/* Make sure the lines transition smoothly */
-.search-inputs::before,
-.search-inputs::after {
-  -webkit-transition: left 0.3s ease;
-  -o-transition: left 0.3s ease;
-  transition: left 0.3s ease;
-}
 
 .district_location {
-  border-bottom: 1px solid rgba(230, 235, 237, 1);
+  /* Removed border-bottom, adjust layout with gap */
   width: 100%;
-  padding-bottom: 19px;
-  height: 100%;
+  padding-bottom: 0; /* Remove padding */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 4px; /* Space below icon */
 }
-.selected {
-  background-color: #e0f2fe; /* 💡 light blue background */
-  border-color: #38bdf8;     /* blue border */
+.pin_icon { /* Style the pin icon directly */
+  width: 24px; /* Slightly larger icon */
+  height: 24px;
 }
+.district_card.selected .pin_icon path {
+  stroke: #4299E1; /* Change icon color when selected */
+}
+.district_card.selected .pin_icon circle {
+  fill: #4299E1; /* Change icon color when selected */
+}
+
+
 .district_name {
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: 12px;
-  line-height: 100%;
+  line-height: 1.3; /* Allow slightly more line height */
   letter-spacing: 0%;
   text-align: center;
-  vertical-align: middle;
+  width: 100%; /* Ensure it takes full width */
 }
 .district_name span {
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
-}
-.district_location svg {
-  width: 20px;
-  height: 27px;
+  word-break: break-word; /* Allow breaking long words */
 }
 
-.card {
+
+/* Size & Price Modal Styles */
+.size-search .card, /* Target card within size search */
+.price-search .price_card { /* Target card within price search */
   width: 100%;
 }
 
-.heading {
+.heading,
+.price_heading {
   font-family: 'Montserrat';
   font-weight: 600;
   font-size: 14px;
@@ -608,145 +628,57 @@
   margin-bottom: 16px;
   text-align: start;
 }
+.price_heading {
+  margin-top: 24px; /* Add top margin only for price heading */
+}
+
+/* React Slider Styles */
 .dualSlider {
   width: 100%;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
   height: 4px;
-  background: #7ACBC4;
+  background: #E2E8F0; /* Lighter track background */
   border-radius: 5px;
-  outline: none;
-  margin-bottom: 1rem;
-  max-width: 463px;
+  margin-bottom: 24px; /* Increased margin */
   padding: 0 !important;
 }
 
 .dualTrack {
   top: 0;
   bottom: 0;
-  background: #7ACBC4;
+  background: #7ACBC4; /* Active track color */
   border-radius: 999px;
+  height: 4px;
 }
 
-.dualTrack-1 {
-  background: #007AFF;
-}
+/* This specific track style might not be needed depending on react-slider version */
+/* .dualTrack-1 { background: #007AFF; } */
 
 .dualThumb {
   width: 20px;
   height: 20px;
-  background: #7ACBC4;
-  border: 2px solid #7ACBC4;
+  background: #FFF; /* White thumb */
+  border: 2px solid #7ACBC4; /* Border color matches track */
   border-radius: 50%;
-  cursor: pointer;
+  cursor: grab; /* Indicate draggable */
   top: 50%;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
   outline: none;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Add subtle shadow */
+}
+.dualThumb:active {
+  cursor: grabbing;
 }
 
 .dualThumb:hover {
-  -webkit-box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
-          box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
+  -webkit-box-shadow: 0 0 0 4px rgba(122, 203, 196, 0.2);
+          box-shadow: 0 0 0 4px rgba(122, 203, 196, 0.2); /* Subtle hover ring */
 }
 
-/* Input Styles */
-.inputs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 15px;
-}
-
-.input {
-  width: 100px;
-  padding: 8px 12px;
-  border: 1px solid #E6EBED;
-  border-radius: 4px;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #007AFF;
-}
-
-.label {
-  font-family: 'Montserrat';
-  font-weight: 400;
-  font-size: 8px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: start;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.inputs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.input {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 0.75rem;
-  border: 1px solid rgba(230, 235, 237, 1);
-  border-radius: 10px;
-  font-size: 12px;
-  font-family: 'Montserrat';
-  background: white;
-  color: rgba(10, 39, 59, 1);
-  height: 36px;
-}
-.price_card {
-  width: 100%;
-}
-
-.price_heading {
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #0A273B;
-  margin: 24px 0 24px 0;
-  text-align: start;
-}
-
-.price_slider {
-  width: 100%;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  height: 4px;
-  background: #7ACBC4;
-  border-radius: 5px;
-  outline: none;
-  margin-bottom: 29px !important;
-  max-width: 463px;
-  padding: 0 !important;
-
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-            appearance: none;
-    height: 20px;
-    width: 20px;
-    background: #4ea69e;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 3px solid white;
-  }
-}
-
+/* Input Row Styles */
+.inputs,
 .price_inputs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -755,119 +687,148 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* Space below input row */
 }
 
-.input {
+.input { /* General style for min/max inputs in modal */
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   padding: 0.75rem;
-  border: 1px solid rgba(230, 235, 237, 1);
+  border: 1px solid #E6EBED;
   border-radius: 10px;
   font-size: 12px;
   font-family: 'Montserrat';
   background: white;
-  color: rgba(10, 39, 59, 1);
+  color: #0A273B;
   height: 36px;
+  text-align: center; /* Center text in inputs */
+  -moz-appearance: textfield; /* Hide number spinners Firefox */
 }
-/* Responsive styles */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Hide number spinners Chrome/Safari */
+  margin: 0;
+}
 
-@media (max-width:1200px) {
+.input:focus {
+  outline: none;
+  border-color: #7ACBC4; /* Highlight border on focus */
+  -webkit-box-shadow: 0 0 0 1px #7ACBC4;
+          box-shadow: 0 0 0 1px #7ACBC4;
+}
+
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 1200px) {
   .banner-content h1 {
-    font-size: 45px;
-    font-weight: 400;
-    line-height: 1.2;
-    max-width: 1067px;
-    margin: 0 auto;
-    font-family: "Felix Titling";
-    letter-spacing: 1px;
+    font-size: 45px; /* Adjust font size for medium screens */
   }
 }
+
+/* --- MOBILE STYLES --- */
 @media (max-width: 768px) {
-  .search_title{
-    display: block;
-    position: absolute;
-    z-index: 10;
-    left: 50%;
+
+  .home-banner {
+    min-height: 500px; /* Adjust min height for mobile */
+  }
+  .swiper-item-relative {
+    min-height: 500px;
+  }
+
+  .banner-content {
+    padding: 10px;
+    margin-top: 80px; /* Adjust top margin */
+    padding-top: 0; /* Remove fixed padding */
+  }
+
+  .text-b-i {
+    font-size: 14px; /* Smaller text */
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 10px;
+  }
+
+  .banner-content h1 {
+    font-size: 28px !important; /* Smaller heading */
+    max-width: 90%;
+  }
+
+  /* --- Mobile Search Positioning & Layout --- */
+  .banner-search {
+    top: auto; /* Remove fixed top */
+    bottom: 5%; /* Position from bottom */
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* Only horizontal centering */
+    width: 90%; /* Responsive width */
+    max-width: 450px; /* Limit max width */
+    margin-top: 0; /* Remove desktop margin */
+    height: auto; /* Let content define height */
+    /* Removed max-height */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; /* Use flex for vertical stacking */
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; /* Center items horizontally */
+  }
+
+  .search-tabs {
+    gap: 10px;
+    margin-bottom: 10px; /* Reduced space */
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1; /* Tabs below search bar */
+  }
+
+  .tab {
+    font-size: 12px; /* Smaller tabs */
+    padding: 6px 10px;
+  }
+
+  /* Mobile Search Title */
+  .search_title {
+    display: block; /* Show title */
+    position: relative; /* Position naturally in flex flow */
+    /* Removed absolute positioning */
     width: 100%;
     text-align: center;
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    margin-top: 4px;
-    margin-bottom: 4px;
-
-  }
-  .swiper-container {
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    z-index: 1;
-    display: block;
-    height: 100% !important;
-    width: 100% !important;
+    line-height: 1.2; /* Adjust line height */
+    color: #FFF; /* White color */
+    margin-bottom: 8px; /* Space below title */
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2; /* Title below tabs */
+    z-index: 1; /* Ensure it's above potential background elements */
   }
 
-  .text-b-i {
-    font-size: 20px;
-    margin-top: 56px;
-  }
-
-  .banner-content {
-    padding: 10px;
-    margin-top: 64px;
-  }
-
-  .banner-content h1 {
-    font-size: 18px !important;
-  }
-
-  .banner-search {
-    top: 200px;
-    bottom: 10%;
-    -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-            transform: translateX(-50%);
-    width: 322px;
-    max-width: none;
-    margin-top: 0;
-    height: 100%;
-    max-height: 190px;
-  }
-
-  .search-tabs {
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  .tab {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
+  /* Mobile Search Container */
   .search-container {
-    border-radius: 26px;
-        padding: 0 5px 0 0px;
-        -webkit-box-pack: normal;
-            -ms-flex-pack: normal;
-                justify-content: normal;
-        width: 100%;
-        height: 40px;
+    border-radius: 10px; /* Less rounded corners */
+    padding: 0; /* Remove padding, handled by children */
+    -webkit-box-pack: normal;
+        -ms-flex-pack: normal;
+            justify-content: normal; /* Let flex children handle spacing */
+    width: 100%; /* Full width of .banner-search */
+    height: 48px; /* Adjusted height */
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3; /* Search bar below title */
+    margin-bottom: 10px; /* Space below search bar */
   }
 
   .search-inputs {
-    gap: 5px;
-    overflow: hidden;
+    gap: 0; /* Remove gap, use padding/margins */
+    overflow: hidden; /* Prevent internal overflow */
+    padding-right: 42px; /* Space for search button (width + gap) */
   }
 
   .where,
@@ -875,168 +836,159 @@
   .price-input-container {
     -webkit-box-flex: 1;
         -ms-flex: 1;
-            flex: 1;
-    padding: 0 0 0 40px;
-    min-width: 0;
-    margin-top: 12px;
+            flex: 1; /* Distribute space evenly */
+    padding: 0 10px; /* Reduced padding */
+    min-width: 0; /* Allow shrinking */
+    /* Removed margin-top */
   }
 
+  /* Mobile Separator Lines */
   .where::after,
   .size::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 56%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-    width: 1px;
-    height: 48px;
-    background-color: #E6EBED;
-    height: 7px;
+    height: 24px; /* Shorter lines */
+    /* Adjust top position if needed based on container height */
+    top: 50%;
   }
 
   .search-inputs input {
-    font-size: 10px;
-    -o-text-overflow: ellipsis;
-       text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-top: 4px;
+    font-size: 11px; /* Smaller font */
+    /* Removed margin-top */
+    padding-right: 20px; /* Space for clear button */
   }
 
   .search-inputs input::-webkit-input-placeholder {
-    font-size: 10px;
-    position: absolute;
+    font-size: 11px;
+    /* Removed position: absolute */
     color: #0A273B;
     opacity: 0.6;
   }
+  .search-inputs input::-moz-placeholder { font-size: 11px; color: #0A273B; opacity: 0.6; }
+  .search-inputs input:-ms-input-placeholder { font-size: 11px; color: #0A273B; opacity: 0.6; }
+  .search-inputs input::-ms-input-placeholder { font-size: 11px; color: #0A273B; opacity: 0.6; }
+  .search-inputs input::placeholder { font-size: 11px; color: #0A273B; opacity: 0.6; }
 
-  .search-inputs input::-moz-placeholder {
-    font-size: 10px;
-    position: absolute;
-    color: #0A273B;
-    opacity: 0.6;
-  }
 
-  .search-inputs input:-ms-input-placeholder {
-    font-size: 10px;
-    position: absolute;
-    color: #0A273B;
-    opacity: 0.6;
-  }
-
-  .search-inputs input::-ms-input-placeholder {
-    font-size: 10px;
-    position: absolute;
-    color: #0A273B;
-    opacity: 0.6;
-  }
-
-  .search-inputs input::placeholder {
-    font-size: 10px;
-    position: absolute;
-    color: #0A273B;
-    opacity: 0.6;
-  }
-
+  /* Mobile Search Button */
   .search-button {
-    position: relative;
-    right: 0;
-    top: 0;
-    -webkit-transform: none;
-        -ms-transform: none;
-            transform: none;
-    width: 32px !important;
-    height: 32px;
-    margin: 0 0px 0 0px;
-    border-radius: 40px;
-    padding: 2px;
-    border: 2px #E6EBED solid;
-    max-width: 100%;
-    max-height: 100%;
-    min-width: 32px;
+    position: absolute; /* Keep absolute within .search-inputs */
+    right: 5px; /* Position from right edge */
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); /* Center vertically */
+    width: 38px !important; /* Adjusted size */
+    height: 38px;
+    min-width: 38px;
+    /* Removed margin */
+    border-radius: 8px; /* Match container radius */
+    /* Removed border */
+    padding: 0; /* Remove padding */
   }
-  
+
   .search-button svg {
     width: 18px;
     height: 18px;
   }
 
+  /* Mobile Clear Button */
   .clear_button {
-    right: 5px;
+    right: 5px; /* Position from right edge of its container */
     width: 16px;
     height: 16px;
     font-size: 12px;
   }
+  /* Adjust clear button position relative to search button */
+   .price-input-container .clear_button {
+     right: 10px; /* Space from the edge */
+   }
+   .size .clear_button {
+     right: 10px;
+   }
+   .where .clear_button {
+     right: 10px;
+   }
 
+
+  /* Mobile Modal */
   .modal_overlay {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-            transform: translateX(-50%);
-    width: 380px !important;
+    position: fixed; /* Position fixed relative to viewport */
+    top: auto; /* Remove top positioning */
+    bottom: 0; /* Stick to bottom */
+    left: 0;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none; /* Remove transform */
+    width: 100% !important; /* Full width */
+    max-width: 100%;
     z-index: 1000;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.3); /* Add overlay background */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; /* Use flex to center content */
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; /* Align content to bottom */
   }
 
   .modal_content {
-    max-height: 70vh;
+    max-height: 75vh; /* Limit height */
+    border-radius: 16px 16px 0 0; /* Round top corners only */
+    padding: 16px; /* Adjust padding */
+    -webkit-box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); /* Shadow on top */
+  }
+
+  .grid_wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust grid for mobile */
+    max-height: 250px; /* Adjust max height */
   }
 }
+
+/* Further adjustments for very small screens */
 @media screen and (max-width: 430px) {
-  .search_title {
-    font-size: 11px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
-
-  .text-b-i {
-    font-size: 18px;
-    margin-top: 50px;
-  }
-
-  .banner-content {
-    padding: 8px;
-    margin-top: 56px;
-  }
-
   .banner-content h1 {
-    font-size: 16px !important;
+    font-size: 22px !important; /* Even smaller heading */
   }
 
   .banner-search {
-    top: 180px;
-    width: 300px;
-    max-height: 180px;
+     width: 92%; /* Slightly more width */
+     bottom: 3%; /* Adjust bottom position */
   }
 
-  .search-tabs {
-    gap: 8px;
-    margin-bottom: 12px;
+  .search_title {
+    font-size: 11px;
+    margin-bottom: 6px;
   }
 
   .tab {
-    font-size: 13px;
+    font-size: 11px;
     padding: 5px 8px;
   }
 
   .search-container {
-    height: 36px;
-    padding: 0 4px;
+    height: 44px; /* Slightly smaller */
   }
 
   .search-inputs input {
-    font-size: 9px;
-    margin-top: 3px;
+    font-size: 10px;
+    padding-right: 18px; /* Adjust for clear button */
   }
+  .search-inputs input::-webkit-input-placeholder { font-size: 10px; }
+  .search-inputs input::-moz-placeholder { font-size: 10px; }
+  .search-inputs input:-ms-input-placeholder { font-size: 10px; }
+  .search-inputs input::-ms-input-placeholder { font-size: 10px; }
+  .search-inputs input::placeholder { font-size: 10px; }
+
 
   .search-button {
-    width: 30px !important;
-    height: 30px;
-    padding: 2px;
+    width: 34px !important;
+    height: 34px;
+    min-width: 34px;
+    right: 4px;
   }
 
   .search-button svg {
@@ -1045,20 +997,28 @@
   }
 
   .clear_button {
-    right: 5px;
     width: 14px;
     height: 14px;
     font-size: 11px;
   }
-
-  .modal_overlay {
-    width: 320px !important;
-    top: calc(100% + 6px);
-  }
+   .price-input-container .clear_button,
+   .size .clear_button,
+   .where .clear_button {
+     right: 8px;
+   }
 
   .modal_content {
-    max-height: 60vh;
+    max-height: 70vh; /* Adjust max height */
+    padding: 12px;
+  }
+
+  .grid_wrapper {
+    gap: 8px;
+  }
+  .district_card {
+    font-size: 11px;
+  }
+  .district_name {
+    font-size: 11px;
   }
 }
-
-
