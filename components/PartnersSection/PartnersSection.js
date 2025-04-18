@@ -34,7 +34,7 @@ const PartnersSection = () => {
             slidesPerView={3}
             spaceBetween={22}
             freeMode={true}
-            grabCursor={true} // Enables drag scrolling
+            grabCursor={true}
             modules={[FreeMode, Pagination]}
             className="mySwiper partners-swp"
             breakpoints={{
@@ -53,8 +53,6 @@ const PartnersSection = () => {
               768: {
                 slidesPerView: 3,
                 spaceBetween: 10,
-                slideHeight: 101, // Custom height for mobile
-                slideWidth: 91,   // Custom width for mobile
               },
               1024: {
                 slidesPerView: 6,
@@ -72,11 +70,10 @@ const PartnersSection = () => {
                   <Image 
                     src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : homeBanner} 
                     alt={partner.title} 
-                    width={80} 
-                    height={80} 
-                    style={{ borderRadius: '50%' }} // Ensure circular images
+                    width={120} 
+                    height={120} 
+                    style={{ borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  <div className="partner-title">{partner.title}</div>
                 </Link>
               </SwiperSlide>
             ))}

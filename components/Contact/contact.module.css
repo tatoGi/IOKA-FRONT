@@ -215,11 +215,89 @@
 
   .mapSection {
     min-height: 400px;
+    margin: 0 -15px;
+    border-radius: 0;
   }
 
   .infoSection {
-    padding: 0;
-    text-align: center; /* Center text on smaller screens */
+    padding: 24px 15px;
+    text-align: left;
+  }
+
+  .infoSection h1 {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .contactDetails {
+    background: #fff;
+    padding: 24px 15px;
+    margin: 0 -15px;
+    gap: 24px;
+  }
+
+  .contactItem {
+    gap: 16px;
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  .iconWrapper svg {
+    font-size: 20px;
+  }
+
+  .contactItem h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .contactItem p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .rowWithBorder {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .containerWithMargin {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .infoSection h1 {
+    font-size: 24px;
+  }
+
+  .mapSection {
+    min-height: 300px;
+  }
+
+  .contactDetails {
+    gap: 20px;
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconWrapper svg {
+    font-size: 18px;
+  }
+
+  .contactItem h3 {
+    font-size: 14px;
+  }
+
+  .contactItem p {
+    font-size: 13px;
   }
 }
 

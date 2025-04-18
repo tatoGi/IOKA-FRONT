@@ -448,16 +448,15 @@
 }
 .popupContainer {
   position: absolute;
-  top: 15px;
-  left: -40px;
+  top: 100%;
+  left: 0;
   right: 0;
   background-color: white;
   z-index: 1000;
   margin-top: 8px;
   border-radius: 8px;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .popupContent {
@@ -554,6 +553,19 @@
 
 .applyButton:hover {
   background-color: #1F2937;
+}
+
+@media (max-width: 768px) {
+  .popupContainer {
+    position: fixed;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    margin: 0;
+    z-index: 1100;
+  }
 }
 
 

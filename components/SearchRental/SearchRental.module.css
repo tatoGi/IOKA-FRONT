@@ -444,7 +444,30 @@
         flex-shrink: 0;
     /* Prevent shrinking */
   }
+
+  .popupContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 350px;
+    z-index: 1000;
+  }
+
+  .rentalResaleSection {
+    position: relative;
+    z-index: 1;
+  }
 }
+
+@media (max-width: 480px) {
+  .popupContainer {
+    width: 95%;
+    max-width: 320px;
+  }
+}
+
 .popupContainer {
   position: absolute;
   top: 15px;

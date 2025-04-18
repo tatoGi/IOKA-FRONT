@@ -225,11 +225,19 @@
   }
 
   .teamImage {
-    width: 100%;
-    height: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
-    border-radius: 8px;
+    width: 354px;
+    height: 222px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-left: 13px;
+  }
+
+  .imageContainer {
+    width: 354px;
+    height: 222px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto;
   }
 
   .teamMember h3 {
@@ -242,6 +250,18 @@
     color: #666;
   }
 
+  .testimonialImageContainer {
+    position: relative;
+    top: 24px !important;
+    left: 0 !important;
+    width: 100%;
+    max-width: 258px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
   .testimonialImageWrapper {
     position: relative;
     z-index: 2;
@@ -249,104 +269,21 @@
     width: 100% !important;
     height: 100% !important;
     border-radius: 16px !important;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: center;
+    align-items: center;
     max-width: 258px !important;
     max-height: 186px !important;
-  }
-
-
-  .testimonialImageContainer {
-    position: relative;
-    top: 24px !important;
-    left: 57px !important;
-    width: 100%;
-    max-width: 258px;
     margin: 0 auto;
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-
-  .swiper-wrapper {
-    gap: 16px;
-  }
-
-  .statBox {
-    text-align: center;
-    /* display     : flex
-; */
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    /* gap         : 1rem; */
-    width: 78px;
-    text-align: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    position: relative;
-    display: -ms-grid;
-    display: grid;
-    gap: 0;
-  }
-
-  .statCircle {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background-color: #d6cece;
-    margin-bottom: 0rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
-
-  .statBox p {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
   }
 
   .testimonialImage {
     width: 100% !important;
     height: 100% !important;
-    -o-object-fit: cover !important;
-       object-fit: cover !important;
+    object-fit: cover !important;
     max-width: 258px;
     max-height: 186px;
+    margin: 0 auto;
   }
 
   .testimonialWrapper {
@@ -450,6 +387,53 @@
   .welcomeText {
     font-size: 14px !important;
     margin-top: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .teamImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-left: 13px;
+  }
+
+  .imageContainer {
+    width: 354px;
+    height: 222px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .teamMember {
+    max-width: 354px;
+    margin: 0 auto;
+  }
+
+  .contactSection {
+    padding: 40px 0;
+  }
+  .testimonialImageContainer{
+    left: 11.5% !important;
+  }
+  .imageContainer{
+    width: 100%;
+  }
+  .teamMember{
+    max-width: 314px !important;
+  }
+  .contactTitle {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .formInput,
+  .formTextarea,
+  .submitButton {
+    padding: 12px;
+    font-size: 14px;
   }
 }
 
@@ -741,33 +725,6 @@
 
 .submitButton:hover {
   background-color: #0d3251;
-}
-
-
-@media (max-width: 480px) {
-  .contactSection {
-    padding: 40px 0;
-  }
-  .testimonialImageContainer{
-    left: 11.5% !important;
-  }
-  .imageContainer{
-    width: 100%;
-  }
-  .teamMember{
-    max-width: 314px !important;
-  }
-  .contactTitle {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-
-  .formInput,
-  .formTextarea,
-  .submitButton {
-    padding: 12px;
-    font-size: 14px;
-  }
 }
 
 .partnersSection {

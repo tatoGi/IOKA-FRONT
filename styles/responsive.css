@@ -1164,42 +1164,6 @@
     /* Ensure the button is visible only in mobile view */
   }
 
-  .subscribe-section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding: 24px 24px 24px 24px;
-    text-align: center;
-    background: #fff;
-  }
-
-  .subscribe-box {
-    padding: 20px 0px;
-    border-radius: 16px;
-    /* background: #E6EBED; */
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    position: relative;
-    width: 100%;
-    background-color: #ffffff;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
 
   .left-s-text {
     display: -webkit-box;
@@ -1240,6 +1204,7 @@
     font-weight: 600;
     color: #7ACBC4;
     text-decoration: none;
+    margin: 0 2px 0 0;
   }
 
   .middle-image-sub {
@@ -1260,6 +1225,42 @@
     height: auto;
     -o-object-fit: contain;
        object-fit: contain;
+  }
+  .subscribe-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 24px 24px 24px 24px;
+    text-align: center;
+    background: #fff;
+  }
+
+  .subscribe-box {
+    padding: 20px 0px;
+    border-radius: 16px;
+    /* background: #E6EBED; */
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 
   .subscribe-form {
@@ -1381,31 +1382,32 @@
   }
 
   .partner-section .swiper-slide {
-    width: 91px !important;
-    height: 108px !important;
-  }
-
-  .partners-title {
-    font-size: 16px;
-    color: #0A273B;
-    font-weight: 700;
-    font-family: 'Montserrat';
-    text-align: center;
+    width: 120px !important;
+    height: 120px !important;
   }
 
   .partner-swiper-slide .swiper-slide {
-    width: 91px !important;
-    height: 101px !important;
+    width: 120px !important;
+    height: 120px !important;
   }
 
   .partners-slider-item img {
-    width: 80px !important;
-    height: 80px !important;
+    width: 100% !important;
+    height: 100% !important;
     border-radius: 50%;
-    /* Ensure circular images */
-    -o-object-fit: cover;
-       object-fit: cover;
-    /* Maintain aspect ratio */
+    object-fit: cover;
+  }
+
+  .partners-slider-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-title {
+    display: none;
   }
 
   .searchSection {
@@ -1622,5 +1624,42 @@ background-color: #FFFFFF;
 }
 }
 
+@media (max-width: 768px) {
+  .testimonialImageContainer {
+    position: relative;
+    top: 24px;
+    left: 0;
+    width: 100%;
+    max-width: 258px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .testimonialImageWrapper {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 258px;
+    max-height: 186px;
+    margin: 0 auto;
+  }
+
+  .testimonialImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 258px;
+    max-height: 186px;
+    margin: 0 auto;
+  }
+}
 
 /* Add new breakpoint for 600px and lower resolutions */

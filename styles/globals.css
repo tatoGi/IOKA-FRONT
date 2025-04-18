@@ -1942,7 +1942,7 @@ margin: 64px 0 24px 0;
 }
 
 .faq-left h1 {
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-weight: 700;
   font-size: 32px;
   line-height: 100%;
@@ -1953,7 +1953,7 @@ margin: 64px 0 24px 0;
 
 
 .question-text {
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 24px;
   line-height: 100%;
@@ -1963,13 +1963,12 @@ margin: 64px 0 24px 0;
 }
 
 .contact-text {
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-weight: 500;
-  font-size: 24px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0%;
-  color: #0A273B;
-  opacity: 0.8;
+  color: #ffffff;
   margin-bottom: 72px;
 }
 

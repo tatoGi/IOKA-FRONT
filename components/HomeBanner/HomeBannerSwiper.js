@@ -1,7 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -25,7 +24,7 @@ const HomeBannerSwiper = ({ sectionData }) => {
         disableOnInteraction: false,
       }}
       className={`mySwiper ${styles['swiper-container']}`}
-      style={{ height: '100%' }} // Add inline style to Swiper
+      style={{ height: '100%' }}
     >
       {sectionData &&
         sectionData.additional_fields.slider_images.map((image, index) => (
@@ -50,8 +49,8 @@ const HomeBannerSwiper = ({ sectionData }) => {
                   alt="homeBanner"
                   priority
                   quality={100}
-                  width={1920} // Add width
-                  height={1080} // Add height
+                  width={1920}
+                  height={1080}
                 />
               </div>
             </Link>

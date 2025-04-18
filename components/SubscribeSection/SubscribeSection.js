@@ -57,7 +57,8 @@ const SubscribeSection = () => {
         <div className="left-s-text">
           <div className="s-t-0">GET FIRST UPDATE</div>
           <div className="s-t-1">
-            Get the news in front line by 
+            <p> Get the news in front line by </p>
+           
             <span>subscribe</span> our latest
             updates
           </div>

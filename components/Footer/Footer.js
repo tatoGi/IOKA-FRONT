@@ -36,10 +36,17 @@ const Footer = ({ navigationData, settings }) => {
   // Get footer settings
   const footerSettings = settings?.footer || [];
   const socialSettings = settings?.social || [];
+  
+  console.log('Full settings:', settings);
+  console.log('Footer settings:', footerSettings);
+  console.log('Description setting:', footerSettings.find(setting => setting.key === 'description'));
+  console.log('Description value:', footerSettings.find(setting => setting.key === 'description')?.value);
 
   // Helper function to get setting value by key
   const getSettingValue = (key) => {
-    return footerSettings.find(setting => setting.key === key)?.value || '';
+    const setting = footerSettings.find(setting => setting.key === key);
+    console.log(`Getting ${key}:`, setting?.value);
+    return setting?.value || '';
   };
 
   return (
@@ -57,7 +64,7 @@ const Footer = ({ navigationData, settings }) => {
           <div className="mobile-order">
             {/* Footer Contact Section */}
             <div className="footer-contant">
-              <div className="contact-text">
+              <div className="contact-text" style={{ color: 'white' }}>
                 {getSettingValue('description')}
               </div>
             </div>

@@ -784,6 +784,10 @@ margin-top: 2px;
 
 /* Add this media query at the end of the file */
 @media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .card {
     width: 100%;
     height: auto;
