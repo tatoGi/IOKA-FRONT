@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .title h1 {
     font-size: 24px;
     line-height: 100%;
@@ -31,19 +38,31 @@
 .card-img-top {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: -webkit-transform 0.3s ease-in-out;
+    -o-transition: transform 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
 
 .card-img-top:hover {
-    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
 }
 
 .card-body {
     padding: 16px;
     height: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     gap: 8px;
 }
 
@@ -60,7 +79,9 @@
     margin-bottom: 1rem;
     color: #555;
     font-size: 12px;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     /* Allow text content to expand */
 }
 
@@ -74,8 +95,12 @@
     line-height: 1.2;
     font-weight: 500;
     font-family: 'Montserrat';
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-bottom: 8px;
 }
 
@@ -116,8 +141,12 @@
 }
 
 .pagination {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     margin-top: 38px;
     margin-bottom: 142px;
     gap: 6px;
@@ -179,10 +208,19 @@ margin-top: 2px;
 
 /* Create a content wrapper for text elements */
 .contentWrapper {
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 
 .pageButton {
@@ -220,7 +258,8 @@ margin-top: 2px;
    
     .card {
         margin-bottom: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border: none;
         border-radius: 1rem;
         height: 100%;
@@ -244,22 +283,36 @@ margin-top: 2px;
         height: auto;
         border-top-left-radius: calc(1rem - 1px);
         border-top-right-radius: calc(1rem - 1px);
-        object-fit: cover;
+        -o-object-fit: cover;
+           object-fit: cover;
         height: 100%;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        -o-transition: transform 0.3s ease-in-out;
         transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     }
     
     .card-img-top:hover {
-        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+                transform: scale(1.1);
     }
     
     .card-body {
         padding: 15px;
         height: 12.5rem;
         /* Keep fixed height */
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         /* This will push button to bottom */
     }
     
@@ -276,7 +329,9 @@ margin-top: 2px;
         margin-bottom: 1rem;
         color: #555;
         font-size: 12px;
-        flex-grow: 1;
+        -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
         /* Allow text content to expand */
     }
     
@@ -328,8 +383,12 @@ margin-top: 2px;
     
     
     .pagination {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         margin-top: 38px;
         margin-bottom: 142px;
         gap: 6px;
@@ -391,10 +450,19 @@ margin-top: 2px;
     
     /* Create a content wrapper for text elements */
     .contentWrapper {
-        flex: 1;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     
     .pageButton {
@@ -434,13 +502,20 @@ margin-top: 2px;
         height: auto;
         border-top-left-radius: calc(1rem - 1px);
         border-top-right-radius: calc(1rem - 1px);
-        object-fit: cover;
+        -o-object-fit: cover;
+           object-fit: cover;
         height: 100%;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        -o-transition: transform 0.3s ease-in-out;
         transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     }
     
     .card-img-top:hover {
-        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+                transform: scale(1.1);
     }
     
     .title h1 {
@@ -455,15 +530,22 @@ margin-top: 2px;
     
     .card {
         margin-bottom: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border: none;
         border-radius: 1rem;
         height: 100%;
     }
     
     .card:hover {
-        transform: translateY(-5px);
+        -webkit-transform: translateY(-5px);
+            -ms-transform: translateY(-5px);
+                transform: translateY(-5px);
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: -webkit-transform 0.3s ease;
+        -o-transition: transform 0.3s ease;
         transition: transform 0.3s ease;
+        transition: transform 0.3s ease, -webkit-transform 0.3s ease;
     }
     
     .description {
@@ -489,7 +571,8 @@ margin-top: 2px;
     
     .card {
         margin-bottom: 65px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border: none;
         border-radius: 1rem;
         height: 100%;
@@ -498,8 +581,14 @@ margin-top: 2px;
     }
     
     .card:hover {
-        transform: translateY(-5px);
+        -webkit-transform: translateY(-5px);
+            -ms-transform: translateY(-5px);
+                transform: translateY(-5px);
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: -webkit-transform 0.3s ease;
+        -o-transition: transform 0.3s ease;
         transition: transform 0.3s ease;
+        transition: transform 0.3s ease, -webkit-transform 0.3s ease;
     }
     
     .description {
@@ -518,21 +607,35 @@ margin-top: 2px;
         height: 100%;
         border-top-left-radius: calc(1rem - 1px);
         border-top-right-radius: calc(1rem - 1px);
-        object-fit: cover;
+        -o-object-fit: cover;
+           object-fit: cover;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        -o-transition: transform 0.3s ease-in-out;
         transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     }
     
     .card-img-top:hover {
-        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+                transform: scale(1.1);
     }
     
     .card-body {
         padding: 15px;
         height: 12.5rem;
         /* Keep fixed height */
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         /* This will push button to bottom */
     }
     
@@ -548,7 +651,9 @@ margin-top: 2px;
         margin-bottom: 1rem;
         color: #555;
         font-size: 12px;
-        flex-grow: 1;
+        -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
         /* Allow text content to expand */
     }
     
@@ -602,8 +707,12 @@ margin-top: 2px;
     }
     
     .pagination {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         margin-top: 38px;
         margin-bottom: 142px;
         gap: 6px;
@@ -665,10 +774,19 @@ margin-top: 2px;
     
     /* Create a content wrapper for text elements */
     .contentWrapper {
-        flex: 1;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     
     .pageButton {
@@ -708,13 +826,20 @@ margin-top: 2px;
         height: auto;
         border-top-left-radius: calc(1rem - 1px);
         border-top-right-radius: calc(1rem - 1px);
-        object-fit: cover;
+        -o-object-fit: cover;
+           object-fit: cover;
         height: 100%;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        -o-transition: transform 0.3s ease-in-out;
         transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     }
     
     .card-img-top:hover {
-        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+                transform: scale(1.1);
     }
 
 
@@ -727,9 +852,11 @@ margin-top: 2px;
     .card {
         margin-top: 24px;
         border-radius: 12px;
-        box-shadow: none;
+        -webkit-box-shadow: none;
+                box-shadow: none;
         height: auto !important;
         margin-bottom: 0px !important;
+        border: 1px #E6EBED solid;
     }
     
     .card-img-top {
@@ -738,22 +865,30 @@ margin-top: 2px;
         border-radius: 0%;
         max-width: 100%;
         max-height: 100%;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        -o-transition: transform 0.3s ease-in-out;
         transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
         -webkit-transform: scale(1);
-	transform: scale(1);
+	-ms-transform: scale(1);
+	    transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
+	-o-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 
     }
     
     .card-img-top:hover {
-        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+                transform: scale(1.1);
     }
     .card-body{
         height: auto !important;
     }
     .card-body {
-        padding: 12px 0;
+        padding: 16px;
         background: transparent;
     }
 
@@ -802,5 +937,4 @@ margin-top: 2px;
     }
 
 }
-
 

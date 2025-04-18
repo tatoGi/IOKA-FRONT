@@ -1,10 +1,19 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .contactPage {
   margin: 0 auto;
   padding: 2rem 0;
 }
 
 .contactInfo {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 2rem 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 4rem;
@@ -16,9 +25,16 @@
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   height: 100%; /* Ensure it stretches to match the map section */
 }
 
@@ -47,14 +63,23 @@
 }
 
 .contactDetails {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 1.5rem;
 }
 
 .contactItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 1rem;
 }
 
@@ -63,9 +88,15 @@
   height: 64px;
   background-color: #0a273b;
   border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .iconWrapper svg {
@@ -80,12 +111,16 @@
 .icon {
   font-size: 24px;
   color: #007bff;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .icon_call {
   font-size: 24px;
-  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
   color: #007bff;
 }
 
@@ -139,7 +174,9 @@
 }
 
 .teamGrid {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 2rem 1fr 2rem 1fr;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
@@ -152,7 +189,8 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-bottom: 1rem;
 }
 
@@ -167,6 +205,7 @@
 
 @media (max-width: 768px) {
   .contactInfo {
+    -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
   }
 

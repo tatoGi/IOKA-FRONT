@@ -1,10 +1,18 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .blogShow img {
     width: 100%;
     height: auto;
     margin-top: 40px;
     margin-bottom: 36px;
     max-height: 400px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 .title{
     font-size: 32px;
@@ -13,6 +21,8 @@
      font-family: 'Montserrat';
 }
 .date {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 10px;
     margin-top: 24px;
@@ -31,7 +41,8 @@
 }
 .card {
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: none;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -58,7 +69,8 @@
     height: auto;
     border-top-left-radius: calc(1rem - 1px);
     border-top-right-radius: calc(1rem - 1px);
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 
 .card-body {
@@ -111,6 +123,8 @@ margin-bottom: 16px;
         
     }
     .date{
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         gap: 10px;
         margin-top: 16px !important;
@@ -144,24 +158,38 @@ letter-spacing: 0%;
 
     }
     .similarArticles {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         gap: 16px;
     }
     .similarArticles .card {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         gap: 12px;
         margin-bottom: 16px;
-        box-shadow: none;
+        -webkit-box-shadow: none;
+                box-shadow: none;
         margin-top: 24px;
     }
     .similarArticles .card-img-top {
         width: 120px; /* Corrected width */
         height: 70px; /* Corrected height */
         border-radius: 8px;
-        object-fit: cover; /* Ensures the image fits properly */
+        -o-object-fit: cover;
+           object-fit: cover; /* Ensures the image fits properly */
     }
     .similarArticles .card-body {
         padding: 0;

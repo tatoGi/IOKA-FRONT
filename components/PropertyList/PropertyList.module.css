@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .propertyListSection {
   padding: 24px 0;
   background-color: #f8f9fa;
@@ -9,9 +16,15 @@
 }
 
 .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 24px;
 }
 
@@ -27,7 +40,9 @@
 }
 
 .propertyGrid {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 24px 1fr;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
@@ -36,7 +51,8 @@
   background: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .imageContainer {
@@ -75,6 +91,8 @@
 }
 
 .features {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
@@ -83,15 +101,25 @@
 }
 
 .features span {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 4px;
 }
 
 .priceRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .price {
@@ -101,6 +129,8 @@
 }
 
 .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 8px;
 }
@@ -113,6 +143,8 @@
   padding: 6px 10px;
   cursor: pointer;
   color: #666;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
   transition: all 0.2s;
 }
 
@@ -123,6 +155,7 @@
 
 @media (max-width: 1024px) {
   .propertyGrid {
+    -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
   }
 }
@@ -133,8 +166,13 @@
   }
   
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     gap: 8px;
   }
   

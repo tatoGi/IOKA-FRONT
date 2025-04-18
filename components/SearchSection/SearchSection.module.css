@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .searchSection {
   width: 100%;
   background-color: #fff;
@@ -6,15 +13,23 @@
 }
 
 .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 25px;
   width: 100%;
 }
 
 .searchBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 1px solid #E5E7EB;
   border-radius: 8px;
   padding: 10px 12px;
@@ -34,6 +49,42 @@
   width: 100%;
 }
 
+.searchInput::-webkit-input-placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #07151F;
+}
+
+.searchInput::-moz-placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #07151F;
+}
+
+.searchInput:-ms-input-placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #07151F;
+}
+
+.searchInput::-ms-input-placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #07151F;
+}
+
 .searchInput::placeholder {
   font-family: 'Montserrat';
   font-weight: 400;
@@ -50,8 +101,12 @@
   cursor: pointer;
   font-size: 20px;
   padding: 0 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .clearButton:hover {
@@ -59,15 +114,24 @@
 }
 
 .filterButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 25px;
-  align-items: center;
-  flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .filterBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 8px;
   padding: 10px 16px;
   border: 1px solid #E5E7EB;
@@ -79,12 +143,17 @@
   font-size: 14px;
   line-height: 1.25;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   min-width: 120px;
   height: 40px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   position: relative;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .filterBtn select {
@@ -108,9 +177,15 @@
 
 .filterButtonWrapper {
  
+  display: -webkit-box;
+ 
+  display: -ms-flexbox;
+ 
   display: flex
 ;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 8px;
  
   /* border: 1px solid #E5E7EB; */
@@ -122,9 +197,13 @@
   font-size: 14px;
   line-height: 1.25;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   min-width: 120px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   position: relative;
 }
 
@@ -132,19 +211,29 @@
   position: absolute;
   right: 8px;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   background: none;
   border: none;
   color: #6B7280;
   font-size: 16px;
   cursor: pointer;
   padding: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -184,8 +273,12 @@
 }
 
 .moreFiltersBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 4px;
   padding: 8px 12px;
   border: 1px solid #07151F;
@@ -194,6 +287,8 @@
   color: #666;
   font-size: 16px;
   cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
   transition: all 0.2s;
   color: #07151F;
   font-family: 'Montserrat';
@@ -210,7 +305,9 @@
     height: 40px;
     top: 172px;
     left: 180px;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 
   }
 
@@ -232,10 +329,13 @@
     width: 100%;
   }
   .container{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 13.4px;
     width: 100%;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     margin-bottom: 10px;
 }
 
@@ -244,7 +344,8 @@
   }
 
   .filterButtons {
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 
   .filterBtn,
@@ -276,7 +377,10 @@
   }
 
   .container {
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     gap: 12px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -294,8 +398,11 @@
   }
 
   .filterButtons {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: nowrap !important;
+    -ms-flex-wrap: nowrap !important;
+        flex-wrap: nowrap !important;
     gap: 6px;
     padding: 4px 0 8px 0;
     overflow-x: auto !important; /* Enable horizontal scrolling */
@@ -304,8 +411,12 @@
     -ms-overflow-style: auto;
   }
   .container{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: normal;
+    -webkit-box-align: normal;
+        -ms-flex-align: normal;
+            align-items: normal;
     gap: 13.4px;
     width: 100%;
 }
@@ -330,7 +441,8 @@
     white-space: nowrap;
     border-radius: 8px;
     /* Prevent text wrapping */
-    flex-shrink: 0;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
     /* Prevent shrinking */
   }
 }
@@ -343,7 +455,8 @@
   z-index: 1000;
   margin-top: 8px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 400px;
 }
 
@@ -365,13 +478,19 @@
 }
 
 .inputGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 8px;
 }
 
 .rangeInput {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 8px 12px;
   border: 1px solid #E5E7EB;
   border-radius: 6px;
@@ -393,8 +512,12 @@
 }
 
 .popupButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   gap: 8px;
   margin-top: 12px;
 }
@@ -407,6 +530,8 @@
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -422,13 +547,14 @@
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
 .applyButton:hover {
   background-color: #1F2937;
 }
-
 
 
 

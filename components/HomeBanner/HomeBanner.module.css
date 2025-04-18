@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .home-banner {
   position: relative;
   height: 100vh;
@@ -29,6 +36,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7)));
+  background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
 .search_title{
@@ -37,7 +46,8 @@
 .swiper-item-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .banner-content {
@@ -75,7 +85,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   width: 90%;
   max-width: 451px;
   z-index: 10;
@@ -84,8 +96,12 @@
 }
 
 .search-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 14px;
   margin-bottom: 25px;
   margin-top: 5rem;
@@ -100,6 +116,8 @@
   color: rgba(255, 255, 255, 0.7);
   font-size: 16px;
   letter-spacing: 0.5px;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   text-transform: uppercase;
   font-family: 'Montserrat';
@@ -113,10 +131,14 @@
   position: absolute;
   bottom: -2px;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 0;
   height: 2px;
   background-color: #fff;
+  -webkit-transition: width 0.3s ease;
+  -o-transition: width 0.3s ease;
   transition: width 0.3s ease;
 }
 
@@ -140,17 +162,28 @@
   background: #fff;
   width: 451px;
   height: 72px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border-radius: 60px;
   position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .search-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   width: 100%;
   position: relative;
@@ -160,18 +193,26 @@
 .size,
 .price-input-container {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   padding: 0 20px;
 }
 
 .where {
-  flex: 1.2;
+  -webkit-box-flex: 1.2;
+      -ms-flex: 1.2;
+          flex: 1.2;
 }
 
 .size {
-  flex: 0.9;
+  -webkit-box-flex: 0.9;
+      -ms-flex: 0.9;
+          flex: 0.9;
 }
 
 .where::after,
@@ -180,16 +221,24 @@
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   width: 1px;
   height: 48px;
   background-color: #E6EBED;
 }
 
 .price-input-container {
-  flex: 0.9;
+  -webkit-box-flex: 0.9;
+      -ms-flex: 0.9;
+          flex: 0.9;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-right: 60px; /* Space for search button */
 }
 
@@ -204,6 +253,26 @@
   color: #1A202C;
 }
 
+.search-inputs input::-webkit-input-placeholder {
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.search-inputs input::-moz-placeholder {
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.search-inputs input:-ms-input-placeholder {
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.search-inputs input::-ms-input-placeholder {
+  color: #1A202C;
+  font-weight: 500;
+}
+
 .search-inputs input::placeholder {
   color: #1A202C;
   font-weight: 500;
@@ -213,7 +282,9 @@
   position: absolute;
   right: 4px;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   background: #7BCBC7;
   color: white;
   border: none;
@@ -222,9 +293,17 @@
   height: 65px;
   min-width: 48px;
   cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
   transition: background 0.3s ease;
 }
 
@@ -241,19 +320,29 @@
   position: absolute;
   right: 15px;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   background: #E2E8F0;
   border: none;
   width: 18px;
   height: 18px;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #4A5568;
   font-size: 14px;
   cursor: pointer;
   z-index: 2;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -264,7 +353,8 @@
 
 .price-input-container input {
   padding-right: 90px;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   position: absolute;
@@ -279,7 +369,8 @@
   /* Remove outline on focus */
   border: none;
   /* Remove border on focus */
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   /* Remove box shadow on focus */
 }
 
@@ -289,7 +380,9 @@
   position: absolute; /* Position relative to the banner-search container */
   top: calc(100% + 8px); /* 8px below the search container */
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 512px;
   z-index: 1000;
   /* Ensure it's not transparent if it was set before */
@@ -301,7 +394,8 @@
   padding: 24px;
   border-radius: 12px;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-height: 80vh;
   overflow-y: auto;
 }
@@ -314,7 +408,10 @@
   border-radius: 60px;
   width: 100%;
   height: 100%;
-  box-shadow:
+  -webkit-box-shadow:
+    4px 4px 4px 0px #0000001a,
+    -4px 4px 8px 0px #0000001a;
+          box-shadow:
     4px 4px 4px 0px #0000001a,
     -4px 4px 8px 0px #0000001a;
   width: 150px;
@@ -339,14 +436,20 @@
 }
 
 .range-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 10px;
   margin-bottom: 15px;
 }
 
 .range-inputs input {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .range-inputs select {
@@ -367,8 +470,12 @@
 }
 
 .input_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: #F7FAFC;
   border: 1px solid #E2E8F0;
   border-radius: 12px;
@@ -382,7 +489,9 @@
   border: none;
   outline: none;
   background: transparent;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   color: rgba(168, 168, 168, 1);
   margin: 0;
   font-family: 'Montserrat';
@@ -398,6 +507,7 @@
 }
 
 .grid_wrapper {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 8px;
@@ -413,12 +523,22 @@
   text-align: center;
   font-size: 12px;
   color: #1A202C;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   width: 104px;
   height: 88px;
@@ -437,6 +557,8 @@
 /* Make sure the lines transition smoothly */
 .search-inputs::before,
 .search-inputs::after {
+  -webkit-transition: left 0.3s ease;
+  -o-transition: left 0.3s ease;
   transition: left 0.3s ease;
 }
 
@@ -464,7 +586,8 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 .district_location svg {
   width: 20px;
@@ -487,7 +610,9 @@
 }
 .dualSlider {
   width: 100%;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   height: 4px;
   background: #7ACBC4;
   border-radius: 5px;
@@ -516,16 +641,21 @@
   border-radius: 50%;
   cursor: pointer;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   outline: none;
 }
 
 .dualThumb:hover {
-  box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
+  -webkit-box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
+          box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.1);
 }
 
 /* Input Styles */
 .inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 15px;
 }
@@ -554,14 +684,20 @@
 }
 
 .inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .input {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 0.75rem;
   border: 1px solid rgba(230, 235, 237, 1);
   border-radius: 10px;
@@ -588,7 +724,9 @@
 
 .price_slider {
   width: 100%;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   height: 4px;
   background: #7ACBC4;
   border-radius: 5px;
@@ -598,7 +736,8 @@
   padding: 0 !important;
 
   &::-webkit-slider-thumb {
-    appearance: none;
+    -webkit-appearance: none;
+            appearance: none;
     height: 20px;
     width: 20px;
     background: #4ea69e;
@@ -609,14 +748,20 @@
 }
 
 .price_inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .input {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 0.75rem;
   border: 1px solid rgba(230, 235, 237, 1);
   border-radius: 10px;
@@ -645,7 +790,9 @@
     position: absolute;
     z-index: 10;
     left: 50%;
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
     width: 100%;
     text-align: center;
     font-family: 'Montserrat';
@@ -688,7 +835,9 @@
   .banner-search {
     top: 200px;
     bottom: 10%;
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
     width: 322px;
     max-width: none;
     margin-top: 0;
@@ -709,7 +858,9 @@
   .search-container {
     border-radius: 26px;
         padding: 0 5px 0 0px;
-        justify-content: normal;
+        -webkit-box-pack: normal;
+            -ms-flex-pack: normal;
+                justify-content: normal;
         width: 100%;
         height: 40px;
   }
@@ -722,7 +873,9 @@
   .where,
   .size,
   .price-input-container {
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     padding: 0 0 0 40px;
     min-width: 0;
     margin-top: 12px;
@@ -734,7 +887,9 @@
     position: absolute;
     right: 0;
     top: 56%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
     width: 1px;
     height: 48px;
     background-color: #E6EBED;
@@ -743,10 +898,39 @@
 
   .search-inputs input {
     font-size: 10px;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     margin-top: 4px;
+  }
+
+  .search-inputs input::-webkit-input-placeholder {
+    font-size: 10px;
+    position: absolute;
+    color: #0A273B;
+    opacity: 0.6;
+  }
+
+  .search-inputs input::-moz-placeholder {
+    font-size: 10px;
+    position: absolute;
+    color: #0A273B;
+    opacity: 0.6;
+  }
+
+  .search-inputs input:-ms-input-placeholder {
+    font-size: 10px;
+    position: absolute;
+    color: #0A273B;
+    opacity: 0.6;
+  }
+
+  .search-inputs input::-ms-input-placeholder {
+    font-size: 10px;
+    position: absolute;
+    color: #0A273B;
+    opacity: 0.6;
   }
 
   .search-inputs input::placeholder {
@@ -760,7 +944,9 @@
     position: relative;
     right: 0;
     top: 0;
-    transform: none;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
     width: 32px !important;
     height: 32px;
     margin: 0 0px 0 0px;
@@ -788,7 +974,9 @@
     position: absolute;
     top: calc(100% + 8px);
     left: 50%;
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
     width: 380px !important;
     z-index: 1000;
     background: transparent;
@@ -803,6 +991,8 @@
     width: 350px !important;
   }
   .grid_wrapper {
+    display: -ms-grid
+    ;
     display: grid
     ;
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -820,5 +1010,4 @@
     padding: 20px;
   }
 }
-
 

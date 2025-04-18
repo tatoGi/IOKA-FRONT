@@ -1,7 +1,17 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 /* Default Styles (Mobile First) */
 .cardContainer{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 25px;
 }
 
@@ -15,11 +25,15 @@
 }
 
 .propertyImage {
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   -webkit-transform: scale(1);
-	transform: scale(1);
+	-ms-transform: scale(1);
+	    transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
+	-o-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
 
@@ -43,9 +57,14 @@
 
 .propertyInfo {
   padding: 0 16px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex
   ;
-          flex-direction: column;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
 }
 
 .title {
@@ -68,6 +87,8 @@
 }
 
 .features {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 24px; /* 24px gap between features */
   color: #07151F;
@@ -77,8 +98,12 @@
 }
 
 .feature {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 0.375rem;
   color: #07151F;
   font-size: 12px;
@@ -95,8 +120,12 @@
 }
 
 .priceRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 0.5rem;
   gap: 16px;
 }
@@ -108,6 +137,8 @@
 }
 
 .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-left: auto; /* Push actions to the right */
 }
@@ -115,10 +146,18 @@
 .actionButton {
   padding: 0.375rem;
   border-radius: 50%; /* Make it circular */
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: #f9fafb;
   border: solid 1px #cbd5e1; /* Light gray border */
   width: 36px; /* Set fixed width */
@@ -131,9 +170,15 @@
 }
 
 .resultsHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 24px;
   padding-bottom: 24px;
 }
@@ -152,7 +197,10 @@
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   width: 370px; /* Full width of the column */
   height:360px; /* Minimum height */
@@ -163,12 +211,20 @@
   border: 1px solid #3598db;
   }
   .propertyImage:hover{
-    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
   }
 .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 38px;
   margin-bottom: 142px;
   gap: 6px;
@@ -232,19 +288,26 @@ margin-top: 2px;
 .textEllipsis {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 @media (max-width: 1600px) {
 
   /* Default Styles (Mobile First) */
 .cardContainer{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 15px;
 }
 .propertyCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateY(-2px);
+      -ms-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .imageContainer {
@@ -256,8 +319,10 @@ margin-top: 2px;
 }
 
 .propertyImage {
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .exclusive {
@@ -280,9 +345,14 @@ margin-top: 2px;
 
 .propertyInfo {
   padding: 0 16px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex
   ;
-          flex-direction: column;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
 }
 
 .title {
@@ -305,6 +375,8 @@ margin-top: 2px;
 }
 
 .features {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex
   ;
           gap: 18px;
@@ -315,8 +387,12 @@ margin-top: 2px;
 }
 
 .feature {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 0.375rem;
   color: #07151F;
   font-size: 10px;
@@ -333,8 +409,12 @@ margin-top: 2px;
 }
 
 .priceRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 0.5rem;
   gap: 16px;
 }
@@ -346,6 +426,8 @@ margin-top: 2px;
 }
 
 .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-left: auto; /* Push actions to the right */
 }
@@ -353,10 +435,18 @@ margin-top: 2px;
 .actionButton {
   padding: 0.375rem;
   border-radius: 50%; /* Make it circular */
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: #f9fafb;
   border: solid 1px #cbd5e1; /* Light gray border */
   width: 36px; /* Set fixed width */
@@ -369,9 +459,15 @@ margin-top: 2px;
 }
 
 .resultsHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 24px;
   padding-bottom: 24px;
 }
@@ -391,7 +487,10 @@ margin-top: 2px;
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   width: 312px; /* Full width of the column */
   height:350px; /* Minimum height */
@@ -400,16 +499,24 @@ margin-top: 2px;
 
 
 .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 38px;
   margin-bottom: 142px;
   gap: 6px;
   height: 48px;
 }
 .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 38px;
   margin-bottom: 142px;
   gap: 6px;
@@ -471,38 +578,58 @@ margin-top: 2px;
 .textEllipsis {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 .propertyCardLink:hover{
   border: 1px solid #3598db;
   }
   .propertyImage:hover{
-    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
   }
 }
 @media (max-width:1400px){
   .resultsHeader{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex
 ;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding-top: 24px;
     padding-bottom: 24px;
     margin-top: 24px;
 }
 .cardContainer{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex
 ;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 15px;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .propertyCardLink:hover{
   border: 1px solid #3598db;
   }
   .propertyImage:hover{
-    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
   }
 }
@@ -514,7 +641,11 @@ margin-top: 2px;
     border: 1px solid #3598db;
     }
     .propertyImage:hover{
-      transform: scale(1.1);
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1);
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
       transition: 0.3s;
     }
 }
@@ -533,9 +664,12 @@ margin-top: 2px;
     border: 1px solid #3598db;
     }
     .propertyImage:hover{
-      transform: scale(1.1);
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1);
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
       transition: 0.3s;
     }   
 
 }
-

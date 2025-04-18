@@ -1,632 +1,1502 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .title_top{
-font-family: 'Montserrat';
-font-weight: 400;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-color: #0A273B;
-margin-bottom: 24px;
-
-}
-.sliderWrapper {
-  position: relative;
-  width: 100%;
-  overflow: visible; /* Ensure arrows are not cut off */
-  max-width: 1560px;
-}
-
-.propertyGrid {
-  display: flex;
-  gap: 24px;
-  transition: transform 0.5s ease;
-  width: max-content;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin-bottom: 24px;
   
-  flex: 0 0 calc(25% - 18px); /* 25% width for each card, minus the gap */
-}
-
-.propertyCard {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-  
-  .imageContainer {
+  }
+  .sliderWrapper {
     position: relative;
     width: 100%;
-    height: 220px;
-    background: #f5f5f5;
-    overflow: hidden;
+    overflow: visible; /* Ensure arrows are not cut off */
+    max-width: 1560px;
   }
   
-  .propertyImage {
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-    -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-  }
-  
-  .propertyImage:hover {
-    -webkit-transform: scale(1.1);
-	transform: scale(1.1);
-  }
-  
-  .exclusive {
-    width: 82px;
-    height: 31px;
-    position: absolute;  border-radius: 16px;
-    gap: 10px;
-    top: 8px;
-    left: 12px;
-    background-color: #007AFF;
-    color: white;
-     padding: 0.40rem 0.75rem;
-    border-radius: 16px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    z-index: 10;
-    letter-spacing: 0.01em;
-  }
-  
-  .propertyInfo {
-    padding: 1rem;
-  }
-  
-  .title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 8px;
-    margin-top: 12px;
-    line-height: 1.4;
-    font-family: 'Montserrat';
-  }
-  
-  .location {
-    color: #07151F;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 100%;
-    margin-bottom: 1rem;
-    font-family: 'Montserrat';
-  }
-  
-  .features {
-    display: flex;
-    gap: 9px;
-    color: #07151F;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid #E6EBED;
-    padding-bottom: 12px; /* 12px distance from content to border */
-    font-family: 'Montserrat';
-  }
-  
-  .feature {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    color: #07151F;
-    font-size: 12px;
-    font-weight: 500;
-    margin-right: 1.5rem;
-  }
-  .feature img{
-    width: 20px;
-    height: 14px;
-  }
-  .feature svg {
-    color: #6b7280;
-  }
-  
-  .priceRow {
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-    gap: 20px;
-  }
-  
-  .price {
-    font-size: 12px;
-    font-weight: 600;
-    color: #1f2937;
-    font-family: 'Montserrat';
-  }
-  
-  .actions {
-    display: flex;
-    gap: 0.75rem;
-  }
-  
-  .actionButton {
-    padding: 0.375rem;
-    border-radius: 50%; /* Make it circular */
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f9fafb;
-    border: solid 1px #cbd5e1; /* Light gray border */
-    width: 36px; /* Set fixed width */
-    height: 36px; /* Set fixed height */
-    cursor: pointer;
-  }
-  
-  .actionButton:hover {
-    background: #f1f5f9; /* Slightly darker on hover */
-  }
-  
-  .resultsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-  .container {
-    background: #fff;
-  }
-  
-  
-  .propertyCardLink {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 38px;
-    margin-bottom: 142px;
-    gap: 6px;
-    height: 48px;
-  }
-  .pageButton {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: 1px solid #07151F;
-    background-color: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 46px;
-    height: 46px;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    margin-top: 2px;
-    color:#0A273B ;
-  }
-  
-  .pageButton:last-child {
-    width: 84px;
-    height: 46px;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color:#0A273B;
-    margin-top: 2px;
-
-  }
-  
-  .pageButton.active {
-    background-color: #0A273B;
-    color: white;
-    border-color: #0A273B;
-    width: 48px; /* Ensure same width */
-    height: 48px; /* Ensure same height */
-    margin: 0;
-  }
-  
-  .pageButton:hover {
-    background-color: #ddd;
-  }
-  
-  .additionalInfo {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-.infoRow {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.contactInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.contactButtons {
-  display: flex;
-  gap: 10px;
-}
-
-.whatsappButton, .callButton {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.whatsappButton {
-  background-color: #25D366;
-  color: white;
-}
-
-.callButton {
-  background-color: #007BFF;
-  color: white;
-}
-.additionalInfo {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  font-family: 'Montserrat'
-}
-
-.infoRow {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 12px;
-  color: #07151F;
-}
-
-.contactInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.agentInfo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.agentImage {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.agentImage:hover {
-  transform: scale(1.1);
-}
-
-.contactButtons {
-  display: flex;
-  gap: 10px;
-}
-
-.whatsappButton, .callButton {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.whatsappButton {
-  background-color: #25D366;
-  color: white;
-}
-
-.callButton {
-  background-color: #007BFF;
-  color: white;
-}
-  
-  
-  .listingsSection {
-    padding: 40px 20px;
-  }
-  
-  .listingsContainer {
-    max-width: 1360px;
-    margin: 0 auto;
-  }
-  
-  .listingsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  
-  .listingInfo h3 {
-    font-size: 26px;
-    color: #0A273B;
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-  
-  .listingCount {
-    color: #7ACBC4;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  
-  .sortDropdown {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .sortDropdown span {
-    color: #666666;
-    font-size: 14px;
-  }
-  
-  .sortDropdown select {
-    padding: 4px 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-  }
-
-  .propertyImage {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
-  
-  .propertyType {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: #007AFF;
-    color: white;
-    padding: 10px 0px;
-    border-radius: 4px;
-    font-size: 12px;
-    z-index: 1;
-    width: 102px;
-    height: 35px;
-    text-align: center;
-  }
-  
-  .propertyYear {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: #07151F;
-    color: white;
-    padding: 10px 17px;
-    border-radius: 8px;
-    font-size: 12px;
-    z-index: 1;
-    width: 60px;
-    height: 35px;
-  }
-  
-  .propertyInfo {
-    padding: 16px;
-  }
-  
-  .propertyInfo h4 {
-    font-size: 16px;
-    color: #0A273B;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  .location {
-    color: #0A273B;
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  .priceStart {
-    color: #0A273B;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .priceContainer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 12px;
-  }
-  
-  .propertyStats {
+  .propertyGrid {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 24px;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    
+    -webkit-box-flex: 0;
+    
+        -ms-flex: 0 0 calc(25% - 18px);
+    
+            flex: 0 0 calc(25% - 18px); /* 25% width for each card, minus the gap */
   }
   
-  .stat {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #0A273B;
-    font-size: 14px;
-  }
-  
-  .propertyDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .propertyDetails p {
-    color: #0A273B;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  .propertyActions {
-    display: flex;
-    gap: 12px;
-    padding-top: 16px;
-  }
-  
-  .whatsappButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: none;
-    background-color: #F5F6F7;
-    width: 100%;
-    cursor: pointer;
+  .propertyCard {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
   
-  .whatsappButton span {
-    color: #1A1A1A;
-    font-size: 14px;
-    font-weight: 500;
+    
+    .imageContainer {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #f5f5f5;
+      overflow: hidden;
+    }
+    
+    .propertyImage {
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: center;
+         object-position: center;
+      -webkit-transition: -webkit-transform 0.3s ease;
+      transition: -webkit-transform 0.3s ease;
+      -o-transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+      -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+        transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    }
+    
+    .propertyImage:hover {
+      -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    
+    .exclusive {
+      width: 82px;
+      height: 31px;
+      position: absolute;  border-radius: 16px;
+      gap: 10px;
+      top: 8px;
+      left: 12px;
+      background-color: #007AFF;
+      color: white;
+       padding: 0.40rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      z-index: 10;
+      letter-spacing: 0.01em;
+    }
+    
+    .propertyInfo {
+      padding: 1rem;
+    }
+    
+    .title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 8px;
+      margin-top: 12px;
+      line-height: 1.4;
+      font-family: 'Montserrat';
+    }
+    
+    .location {
+      color: #07151F;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 100%;
+      margin-bottom: 1rem;
+      font-family: 'Montserrat';
+    }
+    
+    .features {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 9px;
+      color: #07151F;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid #E6EBED;
+      padding-bottom: 12px; /* 12px distance from content to border */
+      font-family: 'Montserrat';
+    }
+    
+    .feature {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 0.375rem;
+      color: #07151F;
+      font-size: 12px;
+      font-weight: 500;
+      margin-right: 1.5rem;
+    }
+    .feature img{
+      width: 20px;
+      height: 14px;
+    }
+    .feature svg {
+      color: #6b7280;
+    }
+    
+    .priceRow {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-top: 0.5rem;
+      gap: 20px;
+    }
+    
+    .price {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1f2937;
+      font-family: 'Montserrat';
+    }
+    
+    .actions {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .actionButton {
+      padding: 0.375rem;
+      border-radius: 50%; /* Make it circular */
+      -webkit-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      background: #f9fafb;
+      border: solid 1px #cbd5e1; /* Light gray border */
+      width: 36px; /* Set fixed width */
+      height: 36px; /* Set fixed height */
+      cursor: pointer;
+    }
+    
+    .actionButton:hover {
+      background: #f1f5f9; /* Slightly darker on hover */
+    }
+    
+    .resultsHeader {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+    .container {
+      background: #fff;
+    }
+    
+    
+    .propertyCardLink {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      
+    }
+  
+    .pagination {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      margin-top: 38px;
+      margin-bottom: 142px;
+      gap: 6px;
+      height: 48px;
+    }
+    .pageButton {
+      margin: 0 5px;
+      padding: 5px 10px;
+      border: 1px solid #07151F;
+      background-color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 46px;
+      height: 46px;
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      text-align: center;
+      margin-top: 2px;
+      color:#0A273B ;
+    }
+    
+    .pageButton:last-child {
+      width: 84px;
+      height: 46px;
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      color:#0A273B;
+      margin-top: 2px;
+  
+    }
+    
+    .pageButton.active {
+      background-color: #0A273B;
+      color: white;
+      border-color: #0A273B;
+      width: 48px; /* Ensure same width */
+      height: 48px; /* Ensure same height */
+      margin: 0;
+    }
+    
+    .pageButton:hover {
+      background-color: #ddd;
+    }
+    
+    .additionalInfo {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
   }
   
-  .whatsappButton:hover {
-    background-color: #E8E9EA;
-  }
-  
-  .callBtn {
-    background: white;
-    color: #666666;
-    border: 1px solid #E5E5E5;
-  }
-  .location {
-    color: #0A273B;
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-  .statItem {
+  .infoRow {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #666666;
-    font-size: 14px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 10px;
   }
   
-  .propertyDetails {
+  .contactInfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  
-  .agent {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    margin-left: 24px;
-  }
-  
-  .agentImage {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #F5F5F5;
-  }
-  
-  .agent span {
-    color: #0A273B;
-    font-size: 14px;
-    font-weight: 500;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 15px;
   }
   
   .contactButtons {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    gap: 12px;
+    gap: 10px;
   }
   
-  .whatsappBtn, .callBtn {
-    flex: 1;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  .whatsappButton, .callButton {
+    padding: 8px 16px;
+    border: none;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
   }
   
-  .whatsappBtn {
-    background: #25D366;
+  .whatsappButton {
+    background-color: #25D366;
     color: white;
+  }
+  
+  .callButton {
+    background-color: #007BFF;
+    color: white;
+  }
+  .additionalInfo {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    font-family: 'Montserrat'
+  }
+  
+  .infoRow {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #07151F;
+  }
+  
+  .contactInfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 15px;
+  }
+  
+  .agentInfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 10px;
+  }
+  
+  .agentImage {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  }
+  
+  .agentImage:hover {
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  
+  .contactButtons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .whatsappButton, .callButton {
+    padding: 8px 16px;
     border: none;
-  }
-  
-  .callBtn {
-    background: white;
-    color: #666666;
-    border: 1px solid #E5E5E5;
-  }
-  
-  .sliderTag {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: rgba(7, 21, 31, 0.8);
-    color: white;
-    padding: 6px 12px;
     border-radius: 4px;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 8px;
     font-size: 12px;
     font-weight: 500;
   }
+  
+  .whatsappButton {
+    background-color: #25D366;
+    color: white;
+  }
+  
+  .callButton {
+    background-color: #007BFF;
+    color: white;
+  }
+    
+    
+    .listingsSection {
+      padding: 40px 20px;
+    }
+    
+    .listingsContainer {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    
+    .listingsHeader {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .listingInfo h3 {
+      font-size: 26px;
+      color: #0A273B;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .listingCount {
+      color: #7ACBC4;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    
+    .sortDropdown {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 8px;
+    }
+    
+    .sortDropdown span {
+      color: #666666;
+      font-size: 14px;
+    }
+    
+    .sortDropdown select {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+    }
+  
+    .propertyImage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+    
+    .propertyType {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: #007AFF;
+      color: white;
+      padding: 10px 0px;
+      border-radius: 4px;
+      font-size: 12px;
+      z-index: 1;
+      width: 102px;
+      height: 35px;
+      text-align: center;
+    }
+    
+    .propertyYear {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #07151F;
+      color: white;
+      padding: 10px 17px;
+      border-radius: 8px;
+      font-size: 12px;
+      z-index: 1;
+      width: 60px;
+      height: 35px;
+    }
+    
+    .propertyInfo {
+      padding: 16px;
+    }
+    
+    .propertyInfo h4 {
+      font-size: 16px;
+      color: #0A273B;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .location {
+      color: #0A273B;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .priceStart {
+      color: #0A273B;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  
+    .priceContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    
+    .propertyStats {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 24px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .stat {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 8px;
+      color: #0A273B;
+      font-size: 14px;
+    }
+    
+    .propertyDetails {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      gap: 8px;
+    }
+    
+    .propertyDetails p {
+      color: #0A273B;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .propertyActions {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+    }
+    
+    .whatsappButton {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      background-color: #F5F6F7;
+      width: 100%;
+      cursor: pointer;
+      -webkit-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+    
+    .whatsappButton span {
+      color: #1A1A1A;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .whatsappButton:hover {
+      background-color: #E8E9EA;
+    }
+    
+    .callBtn {
+      background: white;
+      color: #666666;
+      border: 1px solid #E5E5E5;
+    }
+    .location {
+      color: #0A273B;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .statItem {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 8px;
+      color: #666666;
+      font-size: 14px;
+    }
+    
+    .propertyDetails {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    
+    .agent {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      margin-left: 24px;
+    }
+    
+    .agentImage {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #F5F5F5;
+    }
+    
+    .agent span {
+      color: #0A273B;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .contactButtons {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .whatsappBtn, .callBtn {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      height: 44px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    
+    .whatsappBtn {
+      background: #25D366;
+      color: white;
+      border: none;
+    }
+    
+    .callBtn {
+      background: white;
+      color: #666666;
+      border: 1px solid #E5E5E5;
+    }
+    
+    .sliderTag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(7, 21, 31, 0.8);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .sliderArrow {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 42px;
+      background: #E6EBED;
+      border: 1px solid #E5E5E5;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      -webkit-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+    
+    .prevArrow {
+      left: -18px; /* Increased to show content */
+    }
+    
+    .nextArrow {
+      right: -18px; /* Increased to show content */
+    }
+    
+    .sliderArrow:hover {
+      background: #F8F8F8;
+      border-color: #D1D1D1;
+    }
+    
+    .sliderArrow:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .sliderArrow svg {
+      width: 20px;
+      height: 20px;
+    }
+  
+    
+    .resaleSection {
+      margin-top: 40px;
+      background-color: #fff;
+     
+    }
+    
+    .resaleHeader {
+      margin: 0 auto;
+      margin-bottom: 24px;
+    }
+    .sortDropdown select{
+      border: none;
+      font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  
+    }
+    .sortDropdown label{
+      font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  
+    }
+    .resaleTitle {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 8px;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+    }
+    
+    .resaleTitle h3 {
+      font-family: 'Montserrat';
+      font-weight: 400 !important;
+      font-size: 20px !important;
+      line-height: 100%;
+      letter-spacing: 0%;
+      color: #0A273B;
+      
+    }
+    
+    .listingCount {
+      color: #7ACBC4;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .resaleCards {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 24px;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      width: 100%;
+    }
+    
+    .resaleCard {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      background: #FFFFFF;
+      -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+              box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+      border: 1px solid #E6EBED;
+      margin-top: 24px;
+      cursor: pointer;
+      height: 380px;
+    }
+    
+    .resaleImage {
+      position: relative;
+      width: 50%;
+      height: auto;
+    }
+    
+    .resaleContent {
+      width: 50%;
+      padding: 24px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      gap: 16px;
+    }
+    
+    .resaleContent h4 {
+      font-size: 20px;
+      color: #0A273B;
+      font-weight: 600;
+      line-height: 1.2;
+      font-family: 'Montserrat';
+    }
+    
+    .resaleLocation {
+      color: #0A273B;
+      font-size: 14px;
+    }
+    
+    .resalePrice {
+      color: #0A273B;
+     margin-right: 15px;
+      font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  
+    }
+    
+    .resaleStats {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 12px;
+      padding-bottom: 16px;
+    }
+    
+    .statGroup {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 8px;
+      color: #0A273B;
+      font-size: 14px;
+      font-family: 'Montserrat';
+    }
+    
+    .statSeparator {
+      color: #07151F;
+      font-size: 30px;
+    }
+    
+    .resaleDetails {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      gap: 8px;
+      color: #0A273B;
+      font-size: 14px;
+      font-family: 'Montserrat';
+      font-weight: 400;
+    }
+  
+  
+    .resaleFooter {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      margin-top: auto;
+      margin-left: -24px;
+      margin-right: -24px;
+      margin-bottom: -24px;
+      background-color: #E6EBED;
+      border-bottom-right-radius: 12px;
+      height: 60px;
+    }
+    
+    .agentInfo {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 12px;
+      margin-left: 24px;
+    }
+    
+    .agentImage {
+      border-radius: 50%;
+    }
+    
+    .agentInfo span {
+      font-family: 'Montserrat';
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      
+    }
+    
+    .footerActions {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-right: 24px;
+    }
+    
+    .footerButton {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .footerButton span {
+      font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  
+    }
+    
+    .footerSeparator {
+      color: #07151F;
+      opacity: 1;
+      font-size: 36px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+    
+    /* Main section container */
+    .awardsSection {
+      padding: 44px 20px;
+      background-color: #07151F;
+    }
+    
+    /* Content container with max width */
+    .awardsContainer {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    
+    /* Section title styling */
+    .awardsTitle {
+      color: #E6EBED;
+      font-size: 40px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+    
+    /* Slider container */
+    .awardsSlider {
+      margin: 0 auto;
+      padding-bottom: 60px;
+      max-width: 1079px;
+    }
+    
+    /* Add gap between slides */
+    .awardsSlider :global(.slick-slide) {
+      padding: 0 12px;
+    }
+    
+    .awardsSlider :global(.slick-list) {
+      margin: 0 -12px; /* Compensate for slide padding */
+    }
+    
+    /* Individual award card */
+    .awardCard {
+      width: 1079px !important;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 32px;
+      min-height: 320px;
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+      gap: 32px;
+      position: relative;
+    }
+    
+    /* Left section with team photo */
+    .awardLeft {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 400px;
+              flex: 0 0 400px;
+      position: relative;
+    }
+    
+    .awardTeamImage {
+      width: 400px;
+      height: 312px;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      -webkit-transition: -webkit-transform 0.3s ease;
+      transition: -webkit-transform 0.3s ease;
+      -o-transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    }
+    
+    .awardTeamImage:hover {
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1);
+    }
+    
+    /* Right section with award details */
+    .awardRight {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      position: relative;
+      padding-left: 32px;
+    }
+    
+    /* Award content container */
+    .awardContent {
+      margin-bottom: 80px;
+    }
+    
+    /* Award title styling */
+    .awardTitle {
+      color: #0A273B;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+    
+    /* Award subtitle styling */
+    .awardSubtitle {
+      color: #0A273B;
+      font-size: 20px;
+    }
+    
+    /* Bottom section with year and button */
+    .awardBottom {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-top: auto;
+    }
+    
+    /* Year text styling */
+    .awardYear {
+      color: #0A273B;
+      font-size: 40px;
+      font-weight: 600;
+    }
+    
+    /* View Awards button styling */
+    .viewAwardBtn {
+      padding: 12px 24px;
+      background: #07151F;
+      border: none;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    
+    /* Award icon container */
+    .awardIconWrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 156px;
+      height: 185px;
+      background: #FFFFFF;
+      border: 1px solid #E6EBED;
+      border-radius: 8px;
+      padding: 24px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+    
+    .trophyImage {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: contain;
+         object-fit: contain;
+      -webkit-transition: -webkit-transform 0.3s ease;
+      transition: -webkit-transform 0.3s ease;
+      -o-transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    }
+    
+    .trophyImage:hover {
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1);
+    }
+    
+    /* Custom navigation dots container */
+    .slickDots {
+      position: absolute;
+      bottom: -40px;
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    
+    /* Individual dot styling */
+    .dot {
+      width: 32px;
+      height: 4px;
+      border-radius: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      -webkit-transition: background-color 0.2s ease;
+      -o-transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease;
+    }
+    
+    /* Active dot styling */
+    .slickDots li.slick-active .dot {
+      background-color: #4DEFE1;
+    } 
+   .resaleImageContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; /* Stack vertically on small screens */
+   
+  }
+  
+  .largeImage {
+    display: block;
+    position: relative;
+    width: 100%; /* Full width on all screens */
+    height: 100%; /* Height adjusts automatically */
+    aspect-ratio: 580 / 378; /* Maintain aspect ratio */
+    margin-right: 2px;
+    overflow: hidden;
+  }
+  
+  .largeImage img{
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  }
+  
+  .largeImage img:hover {
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  
+  .resaleButton {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: #FFFFFF;
+    border-radius: 100px;
+    padding: 12px 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 12px;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #0A273B;
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    min-width: 140px;
+  }
+  
+  .resaleButton:hover {
+    background: #F5F6F7;
+    -webkit-transform: translateY(-1px);
+        -ms-transform: translateY(-1px);
+            transform: translateY(-1px);
+    -webkit-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resaleButton img {
+    width: 20px;
+    height: 20px;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  
+  .resaleButton span {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    color: #0A273B;
+    margin-left: 4px;
+  }
+  
+  .iconGroup {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    top: 0;
+  }
+  
+  
+  
+  .smallImagesGrid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; /* Stack small images vertically */
+    gap: 2px; /* Adjust the gap between the small images */
+    overflow: hidden;
+  }
+  
+  .smallImage {
+    position: relative;
+    width: 100%; /* Full width on all screens */
+    height: 100%; /* Height adjusts automatically */
+    aspect-ratio: 334 / 189; /* Maintain aspect ratio */
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  }
+  
+  .smallImage:hover {
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  
+  .resaleImage img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  }
+  
+  .resaleImage img:hover {
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  
+  /* Add these new styles for mobile image slider */
+  .mobileImageSlider {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+  }
+  
   .sliderArrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 64px;
-    height: 64px;
-    border-radius: 42px;
-    background: #E6EBED;
-    border: 1px solid #E5E5E5;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgb(230 230 230 / 50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
+    z-index: 2;
+    border: none;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
   
   .prevArrow {
-    left: -18px; /* Increased to show content */
+    left: 16px;
   }
   
   .nextArrow {
-    right: -18px; /* Increased to show content */
+    right: 16px;
   }
   
   .sliderArrow:hover {
-    background: #F8F8F8;
-    border-color: #D1D1D1;
+    background: rgb(255 255 255 / 70%);
   }
   
   .sliderArrow:disabled {
@@ -635,1090 +1505,630 @@ margin-bottom: 24px;
   }
   
   .sliderArrow svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  
-  .resaleSection {
-    margin-top: 40px;
-    background-color: #fff;
-   
+    width: 24px;
+    height: 24px;
   }
   
-  .resaleHeader {
-    margin: 0 auto;
-    margin-bottom: 24px;
-  }
-  .sortDropdown select{
-    border: none;
-    font-family: 'Montserrat';
-font-weight: 500;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: right;
-
-  }
-  .sortDropdown label{
-    font-family: 'Montserrat';
-font-weight: 400;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: right;
-
-  }
-  .resaleTitle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: space-between;
+  .sliderArrow svg path {
+    stroke: black;
+    stroke-width: 2;
   }
   
-  .resaleTitle h3 {
-    font-family: 'Montserrat';
-    font-weight: 400 !important;
-    font-size: 20px !important;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
-    
-  }
-  
-  .listingCount {
-    color: #7ACBC4;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .resaleCards {
-    display: flex;
-    gap: 24px;
-    user-select: none;
-    width: 100%;
-  }
-  
-  .resaleCard {
-    display: flex;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-    border-radius: 16px;
-    border: 1px solid #E6EBED;
-    margin-top: 24px;
-    cursor: pointer;
-    height: 380px;
-  }
-  
-  .resaleImage {
-    position: relative;
-    width: 50%;
-    height: auto;
-  }
-  
-  .resaleContent {
-    width: 50%;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .resaleContent h4 {
-    font-size: 20px;
-    color: #0A273B;
-    font-weight: 600;
-    line-height: 1.2;
-    font-family: 'Montserrat';
-  }
-  
-  .resaleLocation {
-    color: #0A273B;
-    font-size: 14px;
-  }
-  
-  .resalePrice {
-    color: #0A273B;
-   margin-right: 15px;
-    font-family: 'Montserrat';
-font-weight: 400;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: 0%;
-
-  }
-  
-  .resaleStats {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 16px;
-  }
-  
-  .statGroup {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #0A273B;
-    font-size: 14px;
-    font-family: 'Montserrat';
-  }
-  
-  .statSeparator {
-    color: #07151F;
-    font-size: 30px;
-  }
-  
-  .resaleDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    color: #0A273B;
-    font-size: 14px;
-    font-family: 'Montserrat';
-    font-weight: 400;
-  }
-
-
-  .resaleFooter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    margin-left: -24px;
-    margin-right: -24px;
-    margin-bottom: -24px;
-    background-color: #E6EBED;
-    border-bottom-right-radius: 12px;
-    height: 60px;
-  }
-  
-  .agentInfo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-left: 24px;
-  }
-  
-  .agentImage {
-    border-radius: 50%;
-  }
-  
-  .agentInfo span {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    
-  }
-  
-  .footerActions {
-    display: flex;
-    align-items: center;
-    margin-right: 24px;
-  }
-  
-  .footerButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .footerButton span {
-    font-family: 'Montserrat';
-font-weight: 600;
-font-size: 12px;
-line-height: 100%;
-letter-spacing: 0%;
-
-  }
-  
-  .footerSeparator {
-    color: #07151F;
-    opacity: 1;
-    font-size: 36px;
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Main section container */
-  .awardsSection {
-    padding: 44px 20px;
-    background-color: #07151F;
-  }
-  
-  /* Content container with max width */
-  .awardsContainer {
-    max-width: 1360px;
-    margin: 0 auto;
-  }
-  
-  /* Section title styling */
-  .awardsTitle {
-    color: #E6EBED;
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 32px;
-  }
-  
-  /* Slider container */
-  .awardsSlider {
-    margin: 0 auto;
-    padding-bottom: 60px;
-    max-width: 1079px;
-  }
-  
-  /* Add gap between slides */
-  .awardsSlider :global(.slick-slide) {
-    padding: 0 12px;
-  }
-  
-  .awardsSlider :global(.slick-list) {
-    margin: 0 -12px; /* Compensate for slide padding */
-  }
-  
-  /* Individual award card */
-  .awardCard {
-    width: 1079px !important;
-    background: #FFFFFF;
-    border-radius: 16px;
-    padding: 32px;
-    min-height: 320px;
-    display: flex !important;
-    gap: 32px;
-    position: relative;
-  }
-  
-  /* Left section with team photo */
-  .awardLeft {
-    flex: 0 0 400px;
-    position: relative;
-  }
-  
-  .awardTeamImage {
-    width: 400px;
-    height: 312px;
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .awardTeamImage:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Right section with award details */
-  .awardRight {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding-left: 32px;
-  }
-  
-  /* Award content container */
-  .awardContent {
-    margin-bottom: 80px;
-  }
-  
-  /* Award title styling */
-  .awardTitle {
-    color: #0A273B;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 32px;
-  }
-  
-  /* Award subtitle styling */
-  .awardSubtitle {
-    color: #0A273B;
-    font-size: 20px;
-  }
-  
-  /* Bottom section with year and button */
-  .awardBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-  }
-  
-  /* Year text styling */
-  .awardYear {
-    color: #0A273B;
-    font-size: 40px;
-    font-weight: 600;
-  }
-  
-  /* View Awards button styling */
-  .viewAwardBtn {
-    padding: 12px 24px;
-    background: #07151F;
-    border: none;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  /* Award icon container */
-  .awardIconWrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 156px;
-    height: 185px;
-    background: #FFFFFF;
-    border: 1px solid #E6EBED;
-    border-radius: 8px;
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .trophyImage {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-  
-  .trophyImage:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Custom navigation dots container */
-  .slickDots {
-    position: absolute;
-    bottom: -40px;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  /* Individual dot styling */
-  .dot {
-    width: 32px;
-    height: 4px;
-    border-radius: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  /* Active dot styling */
-  .slickDots li.slick-active .dot {
-    background-color: #4DEFE1;
-  } 
- .resaleImageContainer {
-  display: flex;
-  flex-direction: column; /* Stack vertically on small screens */
- 
-}
-
-.largeImage {
-  display: block;
-  position: relative;
-  width: 100%; /* Full width on all screens */
-  height: 100%; /* Height adjusts automatically */
-  aspect-ratio: 580 / 378; /* Maintain aspect ratio */
-  margin-right: 2px;
-  overflow: hidden;
-}
-
-.largeImage img{
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-  transition: transform 0.3s ease;
-}
-
-.largeImage img:hover {
-  transform: scale(1.1);
-}
-
-.resaleButton {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: #FFFFFF;
-  border-radius: 100px;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: none;
-  cursor: pointer;
-  z-index: 2;
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 100%;
-  color: #0A273B;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  min-width: 140px;
-}
-
-.resaleButton:hover {
-  background: #F5F6F7;
-  transform: translateY(-1px);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.resaleButton img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.resaleButton span {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 14px;
-  color: #0A273B;
-  margin-left: 4px;
-}
-
-.iconGroup {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-}
-
-
-
-.smallImagesGrid {
-  display: flex;
-  flex-direction: column; /* Stack small images vertically */
-  gap: 2px; /* Adjust the gap between the small images */
-  overflow: hidden;
-}
-
-.smallImage {
-  position: relative;
-  width: 100%; /* Full width on all screens */
-  height: 100%; /* Height adjusts automatically */
-  aspect-ratio: 334 / 189; /* Maintain aspect ratio */
-  transition: transform 0.3s ease;
-}
-
-.smallImage:hover {
-  transform: scale(1.1);
-}
-
-.resaleImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.resaleImage img:hover {
-  transform: scale(1.1);
-}
-
-/* Add these new styles for mobile image slider */
-.mobileImageSlider {
-  display: none;
-  position: relative;
-  width: 100%;
-  height: 280px;
-  border-radius: 16px 16px 0 0;
-  overflow: hidden;
-}
-
-.sliderArrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgb(230 230 230 / 50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.prevArrow {
-  left: 16px;
-}
-
-.nextArrow {
-  right: 16px;
-}
-
-.sliderArrow:hover {
-  background: rgb(255 255 255 / 70%);
-}
-
-.sliderArrow:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.sliderArrow svg {
-  width: 24px;
-  height: 24px;
-}
-
-.sliderArrow svg path {
-  stroke: black;
-  stroke-width: 2;
-}
-
-.slideIndicators {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 2;
-}
-
-.indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.indicator.active {
-  background: #FFFFFF;
-  width: 24px;
-  border-radius: 3px;
-}
-
-/* Media Queries for Responsive Layout */
-
-/* For desktops and larger screens */
-
-@media (max-width: 1200px) {
-  .title_top {
-    font-size: 18px;
-  }
-  .propertyCard {
-    width: calc(50vw - 52px);
-  }
-  .propertyInfo h3 {
-    font-size: 1rem;
-  }
-  .location, .price, .feature span {
-    font-size: 11px;
-  }
-  .propertyImage {
-    height: 180px;
-  }
-  .resaleContent h4 {
-    font-size: 18px;
-  }
-  .resaleLocation, .resalePrice, .statGroup span {
-    font-size: 12px;
-  }
-}
-  
-@media (min-width: 1024px) {
- 
-
-  .largeImage {
-    width: 500px; /* Fixed width for large screens */
-    height: 100%; /* Fixed height for large screens */
-    margin-right: 2px;
-  }
-
-  .smallImagesGrid {
-    width: 334px; /* Fixed width for large screens */
-    gap: 2px; /* Adjust the gap between the small images */
-  }
-
-  .smallImage {
-    width: 334px; /* Fixed width for large screens */
-    height: 100%; /* Fixed height for large screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .resaleSection{
-    margin-top: 80px;
-  }
-  .listingsHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  
-  .propertyCard {
-    width: calc(100vw - 80px);
-  }
-  
-  .sliderWrapper {
-    padding: 0 20px;
-  }
-  .resaleList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 0 16px;
-  }
-  .largeImage{
-    display: none !important; 
-  }
-  .smallImage{
-    display: none !important;
-  }
-  .resaleCard {
-    display: flex;
-    flex-direction: column;
-    background: #FFFFFF;
-    border-radius: 16px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    margin-top: 24px;
-    cursor: pointer;
-  }
-
-  .mobileImageSlider {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 288px;
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
-  }
-  .resaleHeader{
-    padding: 0 16px;
-    margin:0;
-  }
-  .description{
-    font-family: Montserrat;
-font-weight: 400;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: 0%;
-margin: 24px 0 24px 0;
-color: #07151F;
-opacity: 0.8;
-
-  }
-  .resaleHeader select{
-    border: none;
-    width: 125px;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
-  }
-  .search_result_text{
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-
-  }
-  .search_result_sort span{
-    font-family: 'Montserrat';
-font-weight: 400;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: right;
-
-  }
-  .resaleHeader select option{
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: right;
-
-  }
-  .slideContainer {
-    display: flex;
-    height: 100%;
-    transition: transform 0.3s ease;
-    width: 100%;
-  }
-
-  .slide {
-    flex: 0 0 100%;
-    position: relative;
-  }
-
   .slideIndicators {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
     position: absolute;
-    bottom: 10px;
+    bottom: 16px;
     left: 50%;
-    right: 0;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-  }
-
-  .indicator.active {
-    background: #fff;
-  }
-
-  .resaleContent {
-    padding: 16px;
-    width: 100% !important;
-    gap: 0;
-  }
-
-  .resaleContent h4 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    color: #333;
-  }
-
-  .resaleLocation {
-    margin: 8px 0 8px 0;
-  }
-  .resaleLocation p{
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #E6EBED;
-  }
-  .starting_price{
-    font-family: 'Montserrat';
-font-weight: 600;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
-color: #0A273B;
-  }
-  .resalePrice{
-    font-family: 'Montserrat';
-font-weight: 500;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
-color: #007AFF;
-margin: 0;
-
-  }
-  .priceContainer {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .resaleStats {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 0;
-    margin-top: 13px;
-  }
-
-  .statGroup {
-    font-family: 'Montserrat';
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    gap: 4px;
-    font-size: 12px;
-    color: #07151F;
-  }
-
-  .statSeparator {
-    display: none; /* Hide separators on mobile */
-  }
-  .actionButton_email {
-    flex: 1;
-    display: flex
-;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 0px;
-    border: 1px solid #E6EBED;
-    border-radius: 10px;
-    background: #E6EBED;
-    width: 102px;
-    cursor: pointer;
-  }
-  .actionButton_call {
-    flex: 1;
-    display: flex
-;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 0px;
-    border: 1px solid #E6EBED;
-    border-radius: 10px;
-    background: #E6EBED;
-    width: 74px;
-    cursor: pointer;
-  }
-  .actionButton_whatsapp{
-    width: 112px;
-height: 40px;
-border-radius: 8px;
-background: #E6EBED;
-border: 1px solid #E6EBED;
-font-family: Montserrat;
-font-weight: 600;
-font-size: 12px;
-line-height: 100%;
-letter-spacing: 0%;
-
-
-  }
-  .actionButton span {
-    color: #1A1A1A;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: 'Montserrat';
-  }
-  .actionButton:hover {
-    background: #E8E9EA;
-  }
-  .resaleDetails {
-    margin: 24px 0 24px 0;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;    
-  }
-
-  .resaleFooter {
-    display: flex
-    ;
-        align-items: center !important;
-        justify-content: space-between !important;
-        margin-top: auto;
-        margin-left: -32px !important;
-        margin-right: -36px !important;
-        margin-bottom: -24px !important;
-        background-color: #ffffff;
-        border-bottom-right-radius: 12px !important;
-        height: 60px;
-  }
-
-  .footerActions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .propertyActions {
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 8px;
-    margin-top: 24px;
-    padding: 0;
+    z-index: 2;
   }
-  .footerButton {
-    display: flex;
-    align-items: center;
-    gap: 4px !important;
-    background: none;
-    border: none;
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-    padding: 0px 14px !important;
-  }
-
-  .footerSeparator {
-    color: #ddd;
-  }
-  .largeImage,
-  .smallImagesGrid {
-    display: none;
-  }
-
-  .mobileImageSlider {
-    display: block;
-  }
-
-  .resaleCard {
-    flex-direction: column;
-    height: auto;
-    width: 354px;
-  }
-}
-@media (max-width: 480px) {
-  .projectsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .statsContainer {
-    grid-template-columns: 1fr;
-  }
-
-  .heroContent h1 {
-    font-size: 28px;
-  }
-
-  .heroContent p {
-    font-size: 16px;
-  }
-
-  .resaleCard {
-    width: 100%;
-    margin: 16px 0;
-  }
-
-  .mobileImageSlider {
-    height: 240px;
-  }
-
-  .resaleContent {
-    padding: 12px;
-  }
-
-  .resaleContent h4 {
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-
-  .resaleLocation p {
-    font-size: 11px;
-  }
-
-  .starting_price {
-    font-size: 11px;
-  }
-
-  .resalePrice {
-    font-size: 11px;
-  }
-
-  .statGroup {
-    font-size: 11px;
-  }
-
-  .resaleDetails {
-    font-size: 12px;
-    margin: 16px 0;
-  }
-  .description{
-    font-size: 14px;
-    margin: 16px 0 0 0;
-  }
-  .propertyActions{
-    margin-top: 20px;
-    gap: 6px;
-  }
-  .actionButton_email,
-  .actionButton_call,
-  .actionButton_whatsapp {
-    width: auto;
-    padding: 0px 7px 0 7px;
-    font-size: 11px;
-  }
-  .actionButton svg{
-    width: 16px;
-    height: 16px;
-  }
-
-  .footerButton {
-    padding: 0 8px !important;
-    font-size: 12px;
-  }
-
-  .agentInfo {
-    gap: 8px;
-  }
-
-  .agentImage {
-    width: 32px;
-    height: 32px;
-  }
-
-  .agentInfo span {
-    font-size: 11px;
-  }
-
-  .sliderArrow {
-    width: 32px;
-    height: 32px;
-  }
-
-  .sliderArrow svg {
-    width: 16px;
-    height: 16px;
-  }
-
+  
   .indicator {
     width: 6px;
     height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
-
-  .indicator.active {
-    width: 20px;
-  }
-
-  .resaleFooter {
-    height: 48px;
-    margin-left: -12px !important;
-    margin-right: -12px !important;
-  }
-
-  .footerActions {
-    gap: 8px;
-  }
-  .title_top{
-    padding: 0 20px;
-  }
-  .propertyGrid{
-    margin-bottom: 24px;
-  }
-  .propertyInfo h3{ 
-    font-size: 12px;
-   }
-   .propertyInfo{
-    padding: 12px;
-   }
-   .feature{
-    margin:0;
-   }
   
-}
+  .indicator.active {
+    background: #FFFFFF;
+    width: 24px;
+    border-radius: 3px;
+  }
+  
+  /* Media Queries for Responsive Layout */
+  
+  /* For desktops and larger screens */
+  
+  @media (max-width: 1200px) {
+    .title_top {
+      font-size: 18px;
+    }
+    .propertyCard {
+      width: calc(50vw - 52px);
+    }
+    .propertyInfo h3 {
+      font-size: 1rem;
+    }
+    .location, .price, .feature span {
+      font-size: 11px;
+    }
+    .propertyImage {
+      height: 180px;
+    }
+    .resaleContent h4 {
+      font-size: 18px;
+    }
+    .resaleLocation, .resalePrice, .statGroup span {
+      font-size: 12px;
+    }
+  }
+    
+  @media (min-width: 1024px) {
+   
+  
+    .largeImage {
+      width: 500px; /* Fixed width for large screens */
+      height: 100%; /* Fixed height for large screens */
+      margin-right: 2px;
+    }
+  
+    .smallImagesGrid {
+      width: 334px; /* Fixed width for large screens */
+      gap: 2px; /* Adjust the gap between the small images */
+    }
+  
+    .smallImage {
+      width: 334px; /* Fixed width for large screens */
+      height: 100%; /* Fixed height for large screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .resaleSection{
+      margin-top: 80px;
+    }
+    .listingsHeader {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .propertyCard {
+      width: calc(100vw - 80px);
+    }
+    
+    .sliderWrapper {
+      padding: 0 20px;
+    }
+    .resaleList {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      gap: 20px;
+      padding: 0 16px;
+    }
+    .largeImage{
+      display: none !important; 
+    }
+    .smallImage{
+      display: none !important;
+    }
+    .resaleCard {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      background: #FFFFFF;
+      border-radius: 16px;
+      -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+              box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      margin-top: 24px;
+      cursor: pointer;
+    }
+  
+    .mobileImageSlider {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 288px;
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+    }
+    .resaleHeader{
+      padding: 0 16px;
+      margin:0;
+    }
+    .description{
+      font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin: 24px 0 24px 0;
+  color: #07151F;
+  opacity: 0.8;
+  
+    }
+    .resaleHeader select{
+      border: none;
+      width: 125px;
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      color: #0A273B;
+    }
+    .search_result_text{
+      font-family: 'Montserrat';
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 100%;
+      letter-spacing: 0%;
+  
+    }
+    .search_result_sort span{
+      font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  
+    }
+    .resaleHeader select option{
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      text-align: right;
+  
+    }
+    .slideContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 100%;
+      -webkit-transition: -webkit-transform 0.3s ease;
+      transition: -webkit-transform 0.3s ease;
+      -o-transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+      width: 100%;
+    }
+  
+    .slide {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 100%;
+              flex: 0 0 100%;
+      position: relative;
+    }
+  
+    .slideIndicators {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      right: 0;
+    }
+  
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+  
+    .indicator.active {
+      background: #fff;
+    }
+  
+    .resaleContent {
+      padding: 16px;
+      width: 100% !important;
+      gap: 0;
+    }
+  
+    .resaleContent h4 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: #333;
+    }
+  
+    .resaleLocation {
+      margin: 8px 0 8px 0;
+    }
+    .resaleLocation p{
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      color: #E6EBED;
+    }
+    .starting_price{
+      font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+    }
+    .resalePrice{
+      font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #007AFF;
+  margin: 0;
+  
+    }
+    .priceContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+  
+    .resaleStats {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      margin-bottom: 0;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      margin-top: 13px;
+    }
+  
+    .statGroup {
+      font-family: 'Montserrat';
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      font-weight: 500;
+      gap: 4px;
+      font-size: 12px;
+      color: #07151F;
+    }
+  
+    .statSeparator {
+      display: none; /* Hide separators on mobile */
+    }
+    .actionButton_email {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex
+  ;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      padding: 8px 0px;
+      border: 1px solid #E6EBED;
+      border-radius: 10px;
+      background: #E6EBED;
+      width: 102px;
+      cursor: pointer;
+    }
+    .actionButton_call {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex
+  ;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      gap: 8px;
+      padding: 8px 0px;
+      border: 1px solid #E6EBED;
+      border-radius: 10px;
+      background: #E6EBED;
+      width: 74px;
+      cursor: pointer;
+    }
+    .actionButton_whatsapp{
+      width: 112px;
+  height: 40px;
+  border-radius: 8px;
+  background: #E6EBED;
+  border: 1px solid #E6EBED;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  
+  
+    }
+    .actionButton span {
+      color: #1A1A1A;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: 'Montserrat';
+    }
+    .actionButton:hover {
+      background: #E8E9EA;
+    }
+    .resaleDetails {
+      margin: 24px 0 24px 0;
+      font-family: 'Montserrat';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;    
+    }
+  
+    .resaleFooter {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex
+      ;
+          -webkit-box-align: center !important;
+              -ms-flex-align: center !important;
+                  align-items: center !important;
+          -webkit-box-pack: justify !important;
+              -ms-flex-pack: justify !important;
+                  justify-content: space-between !important;
+          margin-top: auto;
+          margin-left: -32px !important;
+          margin-right: -36px !important;
+          margin-bottom: -24px !important;
+          background-color: #ffffff;
+          border-bottom-right-radius: 12px !important;
+          height: 60px;
+    }
+  
+    .footerActions {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      gap: 12px;
+    }
+    .propertyActions {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 0;
+    }
+    .footerButton {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 4px !important;
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      padding: 0px 14px !important;
+    }
+  
+    .footerSeparator {
+      color: #ddd;
+    }
+    .largeImage,
+    .smallImagesGrid {
+      display: none;
+    }
+  
+    .mobileImageSlider {
+      display: block;
+    }
+  
+    .resaleCard {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      height: auto;
+      width: 354px;
+    }
+  }
+  @media (max-width: 480px) {
+    .projectsGrid {
+      -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+    }
+  
+    .statsContainer {
+      -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+    }
+  
+    .heroContent h1 {
+      font-size: 28px;
+    }
+  
+    .heroContent p {
+      font-size: 16px;
+    }
+  
+    .resaleCard {
+      width: 100%;
+      margin: 16px 0;
+    }
+  
+    .mobileImageSlider {
+      height: 240px;
+    }
+  
+    .resaleContent {
+      padding: 12px;
+    }
+  
+    .resaleContent h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+  
+    .resaleLocation p {
+      font-size: 11px;
+    }
+  
+    .starting_price {
+      font-size: 11px;
+    }
+  
+    .resalePrice {
+      font-size: 11px;
+    }
+  
+    .statGroup {
+      font-size: 11px;
+    }
+  
+    .resaleDetails {
+      font-size: 12px;
+      margin: 16px 0;
+    }
+    .description{
+      font-size: 14px;
+      margin: 16px 0 0 0;
+    }
+    .propertyActions{
+      margin-top: 20px;
+      gap: 6px;
+    }
+    .actionButton_email,
+    .actionButton_call,
+    .actionButton_whatsapp {
+      width: auto;
+      padding: 0px 7px 0 7px;
+      font-size: 11px;
+    }
+    .actionButton svg{
+      width: 16px;
+      height: 16px;
+    }
+  
+    .footerButton {
+      padding: 0 8px !important;
+      font-size: 12px;
+    }
+  
+    .agentInfo {
+      gap: 8px;
+    }
+  
+    .agentImage {
+      width: 32px;
+      height: 32px;
+    }
+  
+    .agentInfo span {
+      font-size: 11px;
+    }
+  
+    .sliderArrow {
+      width: 32px;
+      height: 32px;
+    }
+  
+    .sliderArrow svg {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .indicator {
+      width: 6px;
+      height: 6px;
+    }
+  
+    .indicator.active {
+      width: 20px;
+    }
+  
+    .resaleFooter {
+      height: 48px;
+      margin-left: -12px !important;
+      margin-right: -12px !important;
+    }
+  
+    .footerActions {
+      gap: 8px;
+    }
+    .title_top{
+      padding: 0 20px;
+    }
+    .propertyGrid{
+      margin-bottom: 24px;
+    }
+    .propertyInfo h3{ 
+      font-size: 12px;
+     }
+     .propertyInfo{
+      padding: 12px;
+     }
+     .feature{
+      margin:0;
+     }
+    
+  }
