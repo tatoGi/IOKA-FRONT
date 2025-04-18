@@ -1238,7 +1238,7 @@
 
   .left-s-text .s-t-1 span {
     font-weight: 600;
-    color: #00A6E8;
+    color: #7ACBC4;
     text-decoration: none;
   }
 
@@ -1247,7 +1247,7 @@
     max-width: 100px;
     /* margin: 16px 0; */
     height: 100%;
-    left: 77%;
+    left: 270px;
     /* align-items: end; */
     -webkit-box-pack: stretch;
         -ms-flex-pack: stretch;
