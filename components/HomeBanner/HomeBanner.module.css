@@ -520,32 +520,21 @@
 }
 
 .district_card {
-  background: #FFFFFF;
-  border: 1px solid #EDF2F7;
+  background: #ffffff;
+  border: 1px solid #edf2f7;
   border-radius: 12px;
   padding: 12px 8px;
   text-align: center;
   font-size: 12px;
-  color: #1A202C;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  color: #1a202c;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 8px; /* Increased gap */
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  /* Removed fixed width/height, let grid handle it */
-  overflow: hidden; /* Prevent content spill */
+  overflow: hidden;
 }
 
 .district_card:hover {
@@ -731,12 +720,14 @@
 @media (max-width: 768px) {
 
   .home-banner {
-    min-height: 500px; /* Adjust min height for mobile */
+    max-height: 489px; /* Adjust min height for mobile */
   }
   .swiper-item-relative {
     min-height: 500px;
   }
-
+  .swiper-horizontal{
+    height: 100%;
+  }
   .banner-content {
     padding: 10px;
     margin-top: 80px; /* Adjust top margin */
@@ -745,24 +736,25 @@
 
   .text-b-i {
     font-size: 14px; /* Smaller text */
-    margin-top: 0; /* Remove top margin */
+    height: 24px;
+    margin-top: 126px;
     margin-bottom: 10px;
   }
 
   .banner-content h1 {
-    font-size: 28px !important; /* Smaller heading */
+    font-size: 18px !important; /* Smaller heading */
     max-width: 90%;
   }
 
   /* --- Mobile Search Positioning & Layout --- */
   .banner-search {
-    top: auto; /* Remove fixed top */
+    top: 275px; /* Remove fixed top */
     bottom: 5%; /* Position from bottom */
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%); /* Only horizontal centering */
     width: 90%; /* Responsive width */
-    max-width: 450px; /* Limit max width */
+    max-width: 322px; /* Limit max width */
     margin-top: 0; /* Remove desktop margin */
     height: auto; /* Let content define height */
     /* Removed max-height */
@@ -784,6 +776,7 @@
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1; /* Tabs below search bar */
+            position: absolute;
   }
 
   .tab {
@@ -802,17 +795,18 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.2; /* Adjust line height */
-    color: #FFF; /* White color */
+    color: #0A273B; /* White color */
     margin-bottom: 8px; /* Space below title */
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2; /* Title below tabs */
     z-index: 1; /* Ensure it's above potential background elements */
+    top: 20px;
   }
 
   /* Mobile Search Container */
   .search-container {
-    border-radius: 10px; /* Less rounded corners */
+    border-radius: 26px; /* Less rounded corners */
     padding: 0; /* Remove padding, handled by children */
     -webkit-box-pack: normal;
         -ms-flex-pack: normal;
@@ -822,7 +816,7 @@
     -webkit-box-ordinal-group: 4;
         -ms-flex-order: 3;
             order: 3; /* Search bar below title */
-    margin-bottom: 10px; /* Space below search bar */
+    margin-top: 10.5px; /* Space below search bar */
   }
 
   .search-inputs {
@@ -837,7 +831,7 @@
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1; /* Distribute space evenly */
-    padding: 0 10px; /* Reduced padding */
+            padding: 14px 0px 0px 40px;
     min-width: 0; /* Allow shrinking */
     /* Removed margin-top */
   }
@@ -845,9 +839,10 @@
   /* Mobile Separator Lines */
   .where::after,
   .size::after {
-    height: 24px; /* Shorter lines */
+    height: 7px; /* Shorter lines */
     /* Adjust top position if needed based on container height */
-    top: 50%;
+    top: 66%;
+    color: #E6EBED;
   }
 
   .search-inputs input {
@@ -913,13 +908,12 @@
   .modal_overlay {
     position: fixed; /* Position fixed relative to viewport */
     top: auto; /* Remove top positioning */
-    bottom: 0; /* Stick to bottom */
-    left: 0;
+    bottom: 100px; /* Stick to bottom */
+    left: -15px;
     -webkit-transform: none;
         -ms-transform: none;
             transform: none; /* Remove transform */
     width: 100% !important; /* Full width */
-    max-width: 100%;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.3); /* Add overlay background */
     display: -webkit-box;
@@ -932,6 +926,7 @@
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: flex-end; /* Align content to bottom */
+            width: 354px !important;
   }
 
   .modal_content {
@@ -943,15 +938,21 @@
   }
 
   .grid_wrapper {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust grid for mobile */
-    max-height: 250px; /* Adjust max height */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(104px, 1fr));
+    /* Creates 3 columns */
+    gap: 10px;
+    /* Adjust gap as needed */
+    max-height: 250px;
+    overflow-y: auto;
   }
 }
 
 /* Further adjustments for very small screens */
 @media screen and (max-width: 430px) {
   .banner-content h1 {
-    font-size: 22px !important; /* Even smaller heading */
+    font-size: 18px !important; /* Smaller heading */
+    max-width: 90%;
   }
 
   .banner-search {
@@ -960,13 +961,22 @@
   }
 
   .search_title {
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 6px;
+    top: 30px;
   }
 
   .tab {
     font-size: 11px;
     padding: 5px 8px;
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+color: #FFFFFF;
+
   }
 
   .search-container {
@@ -985,10 +995,15 @@
 
 
   .search-button {
-    width: 34px !important;
-    height: 34px;
-    min-width: 34px;
-    right: 4px;
+    width: 32px;
+    height: 32px;
+    gap: 10px;
+    border-radius: 40px;
+    border-width: 1px;
+    padding: 2px;
+    background-color: #7ACBC4;
+    border: 1px #E6EBED solid;
+    
   }
 
   .search-button svg {
