@@ -5,30 +5,37 @@ import Image from "next/image";
 import ContactForm from "../contactForm/ContactForm";
 import PartnersSection from "../PartnersSection/PartnersSection";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
-import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes"; // Import the routes
-import { useRouter } from "next/router"; // Import useRouter
-import axios from "axios"; // Add axios import
-import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes";
+import { useRouter } from "next/router";
+import axios from "axios";
+import baseimage from "../../assets/img/blogimage.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { useMediaQuery } from "@react-hook/media-query";
 
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || {});
-  const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
+  const [sectionFiveData, setSectionFiveData] = useState(null);
   const router = useRouter();
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
-  const [mounted, setMounted] = useState(false);
-
-  // Add this hook to detect mobile screens
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
 
   useEffect(() => {
-    setIsClient(true);
-    setMounted(true);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set initial mobile state after component mounts
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -44,7 +51,7 @@ const AboutUs = ({ initialData, id }) => {
         const sectionFive = responseTeam.data.sections.find(
           (section) => section.section_key === "section_five"
         );
-        setSectionFiveData(sectionFive); // Set section_five data
+        setSectionFiveData(sectionFive);
         if (response.data && response.data.about) {
           setCardData(response.data.about);
         }
@@ -60,7 +67,7 @@ const AboutUs = ({ initialData, id }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollButton(window.scrollY > 200); // Show button after scrolling 200px
+      setShowScrollButton(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -75,60 +82,9 @@ const AboutUs = ({ initialData, id }) => {
     return decodeURIComponent(url);
   };
 
-  // Update the testimonial section to use the fetched data
   const testimonial = cardData.additional_fields?.testimonials?.[0] || {};
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Here you can add your form submission logic
-    console.log("Form submitted:", formData);
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
-  };
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   const renderStats = () => {
-    if (!mounted) return null;
-
     if (isMobile) {
       return (
         <Swiper
@@ -170,86 +126,139 @@ const AboutUs = ({ initialData, id }) => {
     );
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: ""
+    });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
     <>
       <div className="container">
-        {isClient && isMobile ? (
-          <>
-            {/* Testimonials Section - Moved to top for mobile */}
-            <div className={styles.testimonialSection}>
-              <div className={styles.testimonialContainer}>
-                <div className={styles.testimonialImageContainer}>
-                  <div className={styles.testimonialImageWrapper}>
-                    <Image
-                      src={
-                        testimonial.image
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(testimonial.image)}`
-                          : baseimage
-                      }
-                      alt="CEO Portrait"
-                      width={400}
-                      height={400}
-                      className={styles.testimonialImage}
-                    />
-                  </div>
+        {/* Mobile View - Testimonial First */}
+        {isMobile && (
+          <div className={styles.testimonialSection}>
+            <div className={styles.testimonialContainer}>
+              <div className={styles.testimonialImageContainer}>
+                <div className={styles.testimonialImageWrapper}>
+                  <Image
+                    src={
+                      testimonial.image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
+                        : baseimage
+                    }
+                    alt="CEO Portrait"
+                    width={400}
+                    height={400}
+                    className={styles.testimonialImage}
+                  />
                 </div>
-                <div className={styles.testimonialWrapper}>
-                  <div className={styles.testimonialContent}>
-                    <div className={styles.testimonialHeader}>
-                      <h3 className={styles.testimonialName}>
-                        {testimonial.name || "Max Musterman"}
-                      </h3>
-                      <p className={styles.testimonialRole}>
-                        {testimonial.position || "CEO Chairman"}
-                      </p>
-                    </div>
-                    <div className={styles.testimonialBody}>
-                      <p className={`${styles.testimonialText}`}>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: testimonial?.description
-                          }}
-                        ></span>
-                      </p>
-                      <p className={styles.welcomeText}>
-                        <span
-                          dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                        ></span>
-                      </p>
-                    </div>
+              </div>
+              <div className={styles.testimonialWrapper}>
+                <div className={styles.testimonialContent}>
+                  <div className={styles.testimonialHeader}>
+                    <h3 className={styles.testimonialName}>
+                      {testimonial.name || "Max Musterman"}
+                    </h3>
+                    <p className={styles.testimonialRole}>
+                      {testimonial.position || "CEO Chairman"}
+                    </p>
+                  </div>
+                  <div className={styles.testimonialBody}>
+                    <p className={`${styles.testimonialText}`}>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: testimonial?.description
+                        }}
+                      ></span>
+                    </p>
+                    <p className={styles.welcomeText}>
+                      <span
+                        dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                      ></span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <AboutBanner
-              title={cardData.title || "ABOUT US"}
-              description={
-                <span
-                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-                ></span>
-              }
-            />
-          </>
-        ) : (
-          <>
-      
-            <AboutBanner
-              title={cardData.title || "ABOUT US"}
-              description={
-                <span
-                  dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-                ></span>
-              }
-            />
-              
-          </>
+          </div>
         )}
 
-        {/* Statistics section */}
+        {/* About Banner */}
+        <AboutBanner
+          title={cardData.title || "ABOUT US"}
+          description={
+            <span
+              dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+            ></span>
+          }
+        />
+
+        {/* Desktop View - Testimonial After Banner */}
+        {!isMobile && (
+          <div className={styles.testimonialSection}>
+            <div className={styles.testimonialContainer}>
+              <div className={styles.testimonialImageContainer}>
+                <div className={styles.testimonialImageWrapper}>
+                  <Image
+                    src={
+                      testimonial.image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
+                        : baseimage
+                    }
+                    alt="CEO Portrait"
+                    width={400}
+                    height={400}
+                    className={styles.testimonialImage}
+                  />
+                </div>
+              </div>
+              <div className={styles.testimonialWrapper}>
+                <div className={styles.testimonialContent}>
+                  <div className={styles.testimonialHeader}>
+                    <h3 className={styles.testimonialName}>
+                      {testimonial.name || "Max Musterman"}
+                    </h3>
+                    <p className={styles.testimonialRole}>
+                      {testimonial.position || "CEO Chairman"}
+                    </p>
+                  </div>
+                  <div className={styles.testimonialBody}>
+                    <p className={`${styles.testimonialText}`}>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: testimonial?.description
+                        }}
+                      ></span>
+                    </p>
+                    <p className={styles.welcomeText}>
+                      <span
+                        dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                      ></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Main Content Container */}
         <div className={styles.container}>
+          {/* Statistics section */}
           {renderStats()}
 
           {/* Your Agency Section */}
@@ -261,73 +270,23 @@ const AboutUs = ({ initialData, id }) => {
               }}
             ></div>
           </div>
-          {!isMobile && (
-          <div className={styles.testimonialSection}>
-              <div className={styles.testimonialContainer}>
-                <div className={styles.testimonialImageContainer}>
-                  <div className={styles.testimonialImageWrapper}>
-                    <Image
-                      src={
-                        testimonial.image
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(testimonial.image)}`
-                          : baseimage
-                      }
-                      alt="CEO Portrait"
-                      width={400}
-                      height={400}
-                      className={styles.testimonialImage}
-                    />
-                  </div>
-                </div>
-                <div className={styles.testimonialWrapper}>
-                  <div className={styles.testimonialContent}>
-                    <div className={styles.testimonialHeader}>
-                      <h3 className={styles.testimonialName}>
-                        {testimonial.name || "Max Musterman"}
-                      </h3>
-                      <p className={styles.testimonialRole}>
-                        {testimonial.position || "CEO Chairman"}
-                      </p>
-                    </div>
-                    <div className={styles.testimonialBody}>
-                      <p className={`${styles.testimonialText}`}>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: testimonial?.description
-                          }}
-                        ></span>
-                      </p>
-                      <p className={styles.welcomeText}>
-                        <span
-                          dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                        ></span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+
           {/* Team Section */}
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (
               <div key={index} className={styles.teamMember}>
                 <div className={styles.imageContainer}>
-                <Image
-                  src={
-                    member.image
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(member.image)}`
-                      : baseimage
-                  }
-                  alt="Team Member"
-                  width={200}
-                  height={200}
-                  className={styles.teamImage}
-                />
+                  <Image
+                    src={
+                      member.image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                        : baseimage
+                    }
+                    alt="Team Member"
+                    width={200}
+                    height={200}
+                    className={styles.teamImage}
+                  />
                 </div>
                 <h3>{member.title}</h3>
                 <p>{member.subtitle_2}</p>
@@ -335,22 +294,22 @@ const AboutUs = ({ initialData, id }) => {
             ))}
           </div>
 
+          {/* Contact Form Section */}
           <div className={styles.formContainer}>
             <h5>Send us Email</h5>
-            <ContactForm  pageTitle="About Page"/>
+            <ContactForm pageTitle="About Page" />
           </div>
+
+          {/* Partners Section */}
           <PartnersSection />
         </div>
       </div>
-      
-      {/* SubscribeSection moved outside the container */}
-      {isMobile ? (
+
+      {/* Subscribe Section */}
+      <div className={isMobile ? "" : "container"}>
         <SubscribeSection />
-      ) : (
-        <div className="container">
-          <SubscribeSection />
-        </div>
-      )}
+      </div>
+
     </>
   );
 };
