@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./blog.module.css";
 import baseimage from "../../assets/img/blogimage.png";
 import Image from "next/image";
-import BlogIcon from "../../assets/img/calendaricon.png";
+import BlogIcon from "../../assets/img/calendaricon.svg";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import axios from "axios";
 import { BLOGS_API } from "../../routes/apiRoutes";
