@@ -216,7 +216,7 @@ main {
     -o-transition: 0.2s;
     transition: 0.2s;
   }
-  .right-form input{
+  .right-form input {
     width: 40px;
     height: 40px;
     border-radius: 28px;
@@ -231,24 +231,32 @@ main {
     color: #000;
     font-weight: 400; 
     -webkit-appearance: none; 
-       -moz-appearance: none; 
-            appearance: none;
+    -moz-appearance: none; 
+    appearance: none;
     outline: none;
     -webkit-transition: 0.2s;
     -o-transition: 0.2s;
     transition: 0.2s;
   }
-  .searchbtn{
+  .right-form input::placeholder {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .right-form:focus-within input::placeholder,
+  .right-form.active input::placeholder {
+    opacity: 1;
+  }
+  .searchbtn {
     position: absolute;
     top: 50%;
     left: 0;
     background: transparent;
     -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     outline: none;
     border: none;
     -webkit-transition: 0.2s;

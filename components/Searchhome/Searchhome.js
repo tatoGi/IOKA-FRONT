@@ -8,9 +8,10 @@ import callVector from "../../assets/img/call.svg";
 import agentifno from "../../assets/img/agentinfo.png";
 import stylesdeveloper from "../Developer/Developer.module.css";
 import stylesrental from "../Rental_Resale/RentalList.module.css";
+import searchResultimg from "../../assets/img/search_svgrepo.com.png";
 import { HiOutlineMail } from "react-icons/hi";
 import {
-  FaChevronLeft,
+  FaChevronLeft,  
   FaChevronRight,
   FaPhone,
   FaWhatsapp,
@@ -47,14 +48,24 @@ const SearchHomeResult = ({ searchParams }) => {
     const fetchProperties = async () => {
       try {
         setLoading(true);
+        setError(null);
+        
+        // If it's an empty search, don't make the API call
+        if (searchParams.empty) {
+          setProperties([]);
+          setDevelopers([]);
+          setLoading(false);
+          return;
+        }
+
         // Convert searchParams to query string
         const queryString = new URLSearchParams(searchParams).toString();
 
         const response = await axios.get(`${PROPERTIES_API}?${queryString}`);
 
-        console.log("Search params:", searchParams);
-        console.log("Query string:", queryString);
-        console.log("API response:", response.data);
+        if (!response.data) {
+          throw new Error('No data received from server');
+        }
 
         // Get all available property types
         const offplanData = response.data?.data?.OFFPLAN || [];
@@ -103,11 +114,11 @@ const SearchHomeResult = ({ searchParams }) => {
         ];
 
         setProperties(allProperties);
-        setError(null);
       } catch (err) {
         console.error("Error fetching properties:", err);
         setError("Failed to fetch properties");
-        setProperties([]); // Ensure properties is an empty array on error
+        setProperties([]);
+        setDevelopers([]);
       } finally {
         setLoading(false);
       }
@@ -124,8 +135,25 @@ const SearchHomeResult = ({ searchParams }) => {
   }
 
   if (error) {
-    return <div className={stylesearch.error}>Error: {error}</div>;
+    return (
+      <div className={stylesearch.noResults}>
+        <div className={stylesearch.noResultsContent}>
+          <div className={stylesearch.searchIcon}>
+            <Image 
+              src={searchResultimg}
+              alt="No results"
+              width={120}
+              height={120}
+            />
+          </div>
+          <h2>No results found</h2>
+          <p>Sorry, we couldn't find any results for this search.</p>
+          <p>Please try searching with another term</p>
+        </div>
+      </div>
+    );
   }
+
   if (properties.length === 0) {
     return (
       <div className={stylesearch.noResults}>

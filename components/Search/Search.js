@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from './search.module.css';
 import Image from "next/image";
 import Link from "next/link";
-import defaultImage from "../../assets/img/blogimage.png";
+import searchResultimg from "../../assets/img/search_svgrepo.com.png";
 import { useRouter } from 'next/router';
 
 const decodeImageUrl = (url) => {
@@ -91,6 +91,14 @@ const SearchResult = ({ results = {}, query }) => {
             totalResults === 0 ? (
               <div className={styles.noResults}>
                 <div className={styles.noResultsContent}>
+                  <div className={styles.noResultsIcon}>
+                    <Image
+                      src={searchResultimg}
+                      alt="No results"
+                      width={48}
+                      height={48}
+                    />
+                  </div>
                   <h3>No results found</h3>
                   <p>Sorry, we couldn't find any results for this search.</p>
                   <p>Please try searching with another term</p>

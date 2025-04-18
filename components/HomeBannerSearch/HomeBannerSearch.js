@@ -185,13 +185,23 @@ const HomeBannerSearch = () => {
 
       // Clean empty params
       Object.keys(queryParams).forEach((key) => {
-        if (key !== 'location' && 
+        if (key !== 'location' && key !== 'type' && 
             (queryParams[key] === "" || 
              queryParams[key] === undefined || 
              (Array.isArray(queryParams[key]) && queryParams[key].length === 0))) {
           delete queryParams[key];
         }
       });
+
+      // Add empty flag if no search criteria are provided
+      const hasSearchCriteria = selectedLocations.length > 0 || 
+        searchValues.sizeMin || searchValues.sizeMax || 
+        searchValues.priceMin || searchValues.priceMax || 
+        searchValues.bathMin || searchValues.bathMax;
+
+      if (!hasSearchCriteria) {
+        queryParams.empty = true;
+      }
 
       router.push({
         pathname: "/homesearch",

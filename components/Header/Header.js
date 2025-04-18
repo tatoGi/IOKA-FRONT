@@ -68,28 +68,17 @@ const Header = ({ navigationData }) => {
   };
   useEffect(() => {
     function handleScroll() {
-      // For mobile view on search page, add scroll-header when scrolling down
-      if (isMobileView && isSearchPage) {
-        const currentScrollY = window.pageYOffset;
-        setActiveScroll(currentScrollY >= 20);
-        return;
-      }
+      const currentScrollY = window.pageYOffset;
       
-      // Search page on desktop: never have scroll-header
-      if (isSearchPage) {
-        setActiveScroll(false);
-        return;
+      // Always add scroll-header when scrolling down on any page
+      if (currentScrollY >= 20) {
+        setActiveScroll(true);
+      } else {
+        // Only remove scroll-header when at top if not on a regular page
+        if (!(!isHomePage && !isSearchPage)) {
+          setActiveScroll(false);
+        }
       }
-      
-      // Home page: add scroll-header only when scrolling
-      if (isHomePage) {
-        const currentScrollY = window.pageYOffset;
-        setActiveScroll(currentScrollY >= 20);
-        return;
-      }
-
-      // Other pages: always have scroll-header
-      setActiveScroll(true);
     }
 
     // Initial check
@@ -97,7 +86,7 @@ const Header = ({ navigationData }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage, isSearchPage, isMobileView]);
+  }, [isHomePage, isSearchPage]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -218,11 +207,11 @@ const Header = ({ navigationData }) => {
                       value={inputValue}
                       onChange={handleInputChange}
                       onFocus={() => setIsSearchOpen(true)}
+                      placeholder={isSearchOpen ? "Search..." : ""}
                     />
                     <button 
-                      type="button" 
+                      type="submit" 
                       className="searchbtn"
-                      onClick={handleSearchToggle}
                     >
                       <SearchBtn />
                     </button>

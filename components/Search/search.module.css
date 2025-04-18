@@ -237,30 +237,57 @@
 .noResults {
   text-align: center;
   padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }
 
 .noResultsContent {
   max-width: 400px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.noResultsContent h3 {
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-weight: 600;
+  color: #07151F;
+  margin: 24px 0 8px;
+}
+
+.noResultsContent p {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.noResultsIcon {
+  width: 120px;
+  height: 120px;
+  background: #F5F7F8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.noResultsIcon img {
+  width: 48px;
+  height: 48px;
+  opacity: 0.6;
 }
 
 .searchIcon {
   margin-bottom: 20px;
 }
-
-.noResultsContent h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #07151F;
-  font-family: 'Montserrat';
-}
-
-.noResultsContent p {
-  color: #666;
-  margin-bottom: 8px;
-  font-family: 'Montserrat';
-}
-
 
 .searchContent {
   margin: 0 auto 40px;

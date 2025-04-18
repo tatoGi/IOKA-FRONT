@@ -1158,9 +1158,7 @@
   }
 
   .news-see-more {
-    display: block;
-    margin: 16px auto 0;
-    text-align: center;
+    display: none;
     /* Ensure the button is visible only in mobile view */
   }
 
@@ -1595,36 +1593,25 @@ background-color: #FFFFFF;
     margin-right: 2.5rem; /* Changed from 40px to 2.5rem for scalability */
     left: 1rem; /* Added left property for consistent spacing */
   }
-
-}
-
-@media (min-width: 769px) {
   .news-see-more_mobile-only{
-    display: none;
+    display: block;
+    width: 354px;
+    height: 44px;
+    top: 511px;
+    left: 24px;
+    border-radius: 8px;
+    border-width: 1px;
+    padding-top: 12px;
+padding-right: 36px;
+padding-bottom: 12px;
+padding-left: 36px;
+gap: 10px;
+color: #FFFFFF;
+border:1px solid #FFFFFF;
+text-align: center;
+margin-top: 24px;
     /* Hide the button in larger views */
   }
-  .header-nav.shift-left {
-    -webkit-transform: translateX(-62%);
-        -ms-transform: translateX(-62%);
-            transform: translateX(-62%);
-  }
-}
-@media (max-width: 480px) {
-  .subscribe-section{
-    padding: 0;
-  }
-  .subscribe-section {
-    padding: 0 0 0 20px;
-}
-.subscribe-form input {
-  width: 200px !important;
-  height: 44px !important;
-  border-radius: 8px !important;
-  border: 1px #07151F solid !important;
-}
-}
-
-@media (max-width: 768px) {
   .testimonialImageContainer {
     position: relative;
     top: 24px;
@@ -1660,6 +1647,61 @@ background-color: #FFFFFF;
     max-height: 186px;
     margin: 0 auto;
   }
+  .partners-title{
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+
+  }
 }
+
+@media (min-width: 769px) {
+  .news-see-more_mobile-only{
+    display: none;
+    /* Hide the button in larger views */
+  }
+  .header-nav.shift-left {
+    -webkit-transform: translateX(-62%);
+        -ms-transform: translateX(-62%);
+            transform: translateX(-62%);
+  }
+}
+@media (max-width: 480px) {
+  .subscribe-section{
+    padding: 0;
+  }
+  .subscribe-section {
+    padding: 0 0 0 20px;
+}
+.subscribe-form input {
+  width: 200px !important;
+  height: 44px !important;
+  border-radius: 8px !important;
+  border: 1px #07151F solid !important;
+}
+.news-see-more_mobile-only{
+  display: block;
+  width: 354px;
+  height: 44px;
+  top: 511px;
+  left: 24px;
+  border-radius: 8px;
+  border-width: 1px;
+  padding-top: 12px;
+padding-right: 36px;
+padding-bottom: 12px;
+padding-left: 36px;
+gap: 10px;
+color: #FFFFFF;
+border:1px solid #FFFFFF;
+text-align: center;
+margin-top: 24px;
+  /* Hide the button in larger views */
+}
+}
+
 
 /* Add new breakpoint for 600px and lower resolutions */
