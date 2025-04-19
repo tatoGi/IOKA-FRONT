@@ -1202,34 +1202,17 @@ letter-spacing: 0%;
     font-family: 'Montserrat';
     text-align: left;
   }
-
-  .qrbody {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    gap: 16px;
-    padding: 0;
+  .qrbody{
     justify-content: start;
-  }
-  .locationMapBtn{
-    width: 306px !important;
-height: 40px !important;
-border-radius: 8px !important;
-border-width: 1px !important;
-
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    max-height: 90px;
   }
   .qrbody img {
     width: 92px !important;
     height: 90px !important;
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   .qrText {
@@ -1238,13 +1221,15 @@ border-width: 1px !important;
     font-size: 14px;
     letter-spacing: 0%;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
-    -o-text-overflow: ellipsis;
-       text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    height: 90px;
+    display: flex;
+    align-items: center;
   }
   .mapWrapper h4{
     font-family: 'Montserrat';

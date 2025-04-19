@@ -93,7 +93,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
   };
 
   const formatRangeDisplay = (value, isPrice = false) => {
-    if (!value) return "Any";
+    if (!value) return "";
     const [min, max] = value.split("-");
     
     if (min && max) {
@@ -114,7 +114,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
       }
       return `Up to ${formatNumber(max)}`;
     }
-    return "Any";
+    return "";
   };
 
   return (
@@ -145,7 +145,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         </div>
         <div className={styles.filterButtons}>
           <select
-            className={styles.filterBtn}
+            className={styles.filterBtn + " " + styles.propertyTypeSelect}
             value={filters.propertyType}
             onClick={() => {
               setShowPricePopup(false);
@@ -156,7 +156,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               handleFilterChange("propertyType", e.target.value);
             }}
           >
-            <option value="">All Property Types</option>
+            <option value="">Property Types</option>
             {filterOptions.propertyTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
@@ -170,7 +170,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               onClick={() => setShowPricePopup(true)}
             >
               <span>Price</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+              {filters.price && <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>}
             </button>
             {filters.price && (
               <button
@@ -239,7 +239,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               onClick={() => setShowSqFtPopup(true)}
             >
               <span>Area</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}Square Meters</span>
+              {filters.sqFt && <span className={styles.value}>{formatRangeDisplay(filters.sqFt)} Square Meters</span>}
             </button>
             {filters.sqFt && (
               <button

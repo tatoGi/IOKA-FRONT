@@ -309,7 +309,6 @@ const OffplanShow = ({ offplanData }) => {
                   alt="QR Code"
                   width={180}
                   height={180}
-                  style={{ margin: "0 auto" }}
                 />
                 <div className={style.qrbodyContent}>
                   <div
