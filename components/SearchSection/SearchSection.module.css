@@ -499,60 +499,61 @@ select.filterBtn {
     justify-content: center;
     z-index: 1100;
     -webkit-overflow-scrolling: touch;
+    min-height: -webkit-fill-available;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 
   .popupContent {
     width: 90%;
     max-width: 350px;
     padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     max-height: 80vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    background: white;
+    border-radius: 8px;
+    margin: auto;
+    position: relative;
   }
 
   .rangeInput {
     padding: 10px;
     font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .popupButtons {
     margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
   }
 
   .cancelButton,
   .applyButton {
     padding: 8px 16px;
     font-size: 14px;
+    flex: 1;
   }
 }
 
 @media (max-width: 480px) {
-  .popupContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1100;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .popupContent {
     width: 95%;
     max-width: 320px;
     padding: 12px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     max-height: 85vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   .rangeInput {
     padding: 8px;
-    font-size: 14px;
   }
 
   .popupButtons {
@@ -562,133 +563,6 @@ select.filterBtn {
   .cancelButton,
   .applyButton {
     padding: 6px 12px;
-    font-size: 14px;
-  }
-  .propertyTypeSelect::after {
-    right: 10px !important;
-    border-top: 4px solid #07151F;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-  }
- 
-}
-
-.customSelectWrapper {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-.customInputs {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  margin-top: 4px;
-}
-
-.customInputs input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px; /* Prevents iOS zoom on focus */
-  -webkit-appearance: none; /* Removes iOS styling */
-  appearance: none;
-}
-
-.customInputs input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.customInputs .inputGroup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.customInputs .inputGroup span {
-  color: #666;
-  font-size: 16px;
-}
-
-.customInputs button {
-  width: 100%;
-  padding: 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.customInputs button:hover {
-  background: #0056b3;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  .customInputs {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    margin-top: 4px;
-  }
-
-  .customInputs input {
-    font-size: 16px;
-    height: 48px;
-  }
-
-  .customInputs button {
-    height: 48px;
-  }
-
-  .filterBtn {
-    height: 48px;
-    padding: 0 16px;
-    font-size: 16px;
-  }
-}
-
-/* iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-  .customInputs input {
-    font-size: 16px;
-  }
-  
-  .customInputs {
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-/* Android specific fixes */
-@supports (-webkit-appearance:none) {
-  .customInputs input {
-    min-height: 48px;
   }
 }
 

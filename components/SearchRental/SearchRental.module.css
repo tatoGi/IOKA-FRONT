@@ -499,60 +499,61 @@ select.filterBtn {
     justify-content: center;
     z-index: 1100;
     -webkit-overflow-scrolling: touch;
+    min-height: -webkit-fill-available;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 
   .popupContent {
     width: 90%;
     max-width: 350px;
     padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     max-height: 80vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    background: white;
+    border-radius: 8px;
+    margin: auto;
+    position: relative;
   }
 
   .rangeInput {
     padding: 10px;
     font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .popupButtons {
     margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
   }
 
   .cancelButton,
   .applyButton {
     padding: 8px 16px;
     font-size: 14px;
+    flex: 1;
   }
 }
 
 @media (max-width: 480px) {
-  .popupContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1100;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .popupContent {
     width: 95%;
     max-width: 320px;
     padding: 12px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     max-height: 85vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   .rangeInput {
     padding: 8px;
-    font-size: 14px;
   }
 
   .popupButtons {
@@ -562,15 +563,7 @@ select.filterBtn {
   .cancelButton,
   .applyButton {
     padding: 6px 12px;
-    font-size: 14px;
   }
-  .propertyTypeSelect::after {
-    right: 10px !important;
-    border-top: 4px solid #07151F;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-  }
- 
 }
 
 

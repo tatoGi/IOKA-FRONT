@@ -6,7 +6,13 @@ import filterVector from "../../assets/img/filter.svg";
 import RangeInputPopup from "./RangeInputPopup";
 
 const SearchSection = ({ onFilterChange, filterOptions }) => {
- 
+  useEffect(() => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      document.body.classList.add('ios-device');
+    }
+  }, []);
+
   const [filters, setFilters] = useState({
     propertyType: "",
     price: "",
