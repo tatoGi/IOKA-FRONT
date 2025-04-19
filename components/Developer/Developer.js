@@ -334,13 +334,11 @@ const Developer = ({ initialData, initialPagination }) => {
             </button>
           </div>
         </div>
-        {isMobile ? (
-          <SubscribeSection />
-        ) : (
+        
           <div className="container">
             <SubscribeSection />
           </div>
-        )}
+      
       </>
     </LoadingWrapper>
   );
