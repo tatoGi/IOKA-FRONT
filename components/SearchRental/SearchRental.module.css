@@ -10,18 +10,17 @@
   background-color: #fff;
   margin-top: 38px;
   gap: 16px;
-  position: static;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   gap: 25px;
   width: 100%;
+  position: relative;
 }
 
 .searchBar {
@@ -135,7 +134,7 @@
           align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #07151F;
   border-radius: 8px;
   background: white;
   color: #374151;
@@ -178,28 +177,7 @@
 
 .filterButtonWrapper {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 8px;
-  border-radius: 8px;
-  background: white;
-  color: #374151;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.25;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  min-width: 120px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  z-index: 1;
 }
 
 .clearFilterButton {
@@ -293,6 +271,115 @@
   background-color: #f9fafb;
 }
 
+.popupContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 350px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+@media (min-width: 769px) {
+  .popupContainer {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    transform: none;
+    width: 400px;
+    z-index: 1000;
+  }
+
+  .popupContainer::before {
+    display: none;
+  }
+}
+
+.popupContent {
+  padding: 20px;
+}
+
+.popupContent h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 18px;
+}
+
+.rangeInputs {
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rangeInput {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background-color: #F9FAFB;
+}
+
+.rangeInput:focus {
+  outline: none;
+  border-color: #2563EB;
+  background-color: white;
+}
+
+.rangeSeparator {
+  display: none;
+}
+
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.cancelButton,
+.applyButton {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.cancelButton {
+  background-color: #F3F4F6;
+  color: #374151;
+  border: none;
+}
+
+.cancelButton:hover {
+  background-color: #E5E7EB;
+}
+
+.applyButton {
+  background-color: #374151;
+  color: white;
+  border: none;
+}
+
+.applyButton:hover {
+  background-color: #1F2937;
+}
+
 @media (max-width: 1600px) {
   .searchSection {
     width: 100%;
@@ -366,50 +453,42 @@
 @media (max-width: 768px) {
   .searchSection {
     margin-top: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+    padding: 8px 0;
   }
 
   .container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: row;
     gap: 12px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
   }
 
   .searchBar {
-    width: 100% !important;
+    width: 200px !important;
     height: 48px !important;
     border-radius: 8px;
     border-width: 1px;
     padding: 8px 10px;
     border: 1px #07151F solid;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 10;
   }
 
   .filterButtons {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: nowrap !important;
-        flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
     gap: 6px;
     padding: 4px 0 8px 0;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin !important;
     -ms-overflow-style: auto;
-  }
-
-  .container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: normal;
-        -ms-flex-align: normal;
-            align-items: normal;
-    gap: 13.4px;
-    width: 100%;
+    margin-left: 12px;
   }
 
   .filterButtons::-webkit-scrollbar {
@@ -432,141 +511,87 @@
     height: 36px;
     white-space: nowrap;
     border-radius: 8px;
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   .popupContainer {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 33%;
+    transform: none;
     width: 90%;
     max-width: 350px;
-    z-index: 99999;
+    z-index: 9999;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .popupContent {
+    padding: 20px;
+  }
+
+  .rangeInputs {
+    margin-bottom: 20px;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rangeInput {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .rangeSeparator {
+    display: none;
+  }
+
+  .popupButtons {
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+
+  .cancelButton,
+  .applyButton {
+    padding: 12px 24px;
+    font-size: 16px;
+    flex: 1;
   }
 }
 
 @media (max-width: 480px) {
+  .searchBar {
+    width: 100% !important;
+    max-width: 298px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    border: 1px #07151F solid;
+  }
+
   .popupContainer {
     width: 95%;
     max-width: 320px;
+    top: 29%;
+    left: 10%;
+  }
+
+  .popupContent {
+    padding: 16px;
+  }
+
+  .rangeInput {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .cancelButton,
+  .applyButton {
+    padding: 10px 20px;
+    font-size: 14px;
   }
 }
-
-.popupContainer {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  background-color: white;
-  z-index: 1000;
-  margin-top: 8px;
-  border-radius: 8px;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 400px;
-}
-
-.popupContent {
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #E5E7EB;
-  width: 100%;
-}
-
-.popupContent h3 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 18px;
-}
-
-.rangeInputs {
-  margin-bottom: 16px;
-}
-
-.inputGroup {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 8px;
-}
-
-.rangeInput {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #E5E7EB;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 120px;
-  background-color: #F9FAFB;
-}
-
-.rangeInput:focus {
-  outline: none;
-  border-color: #2563EB;
-  background-color: white;
-}
-
-.rangeSeparator {
-  color: #6B7280;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.popupButtons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.cancelButton {
-  padding: 6px 12px;
-  background-color: #F3F4F6;
-  color: #374151;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-.cancelButton:hover {
-  background-color: #E5E7EB;
-}
-
-.applyButton {
-  padding: 6px 12px;
-  background-color: #374151;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-.applyButton:hover {
-  background-color: #1F2937;
-}
-
-
-
-
-
