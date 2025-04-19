@@ -12,9 +12,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { PARTNER_API } from "../../routes/apiRoutes";
+
 const decodeImageUrl = (url) => {
   return decodeURIComponent(url);
 };
+
 const PartnersSection = () => {
   const [partners, setPartners] = useState([]);
 
@@ -40,27 +42,27 @@ const PartnersSection = () => {
             breakpoints={{
               320: {
                 slidesPerView: 2,
-                spaceBetween: 10, 
+                spaceBetween: 22, 
               },
               575: {
                 slidesPerView: 3,
-                spaceBetween: 10, 
+                spaceBetween: 22, 
               },
               640: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 22,
               },
               768: {
                 slidesPerView: 3,
-                spaceBetween: 10,
+                spaceBetween: 22,
               },
               1024: {
                 slidesPerView: 6,
-                spaceBetween: 30,
+                spaceBetween: 22,
               },
               1560: {
                 slidesPerView: 8,
-                spaceBetween: 40,
+                spaceBetween: 22,
               },
             }}
           >
@@ -68,13 +70,17 @@ const PartnersSection = () => {
               <SwiperSlide key={index}>
                 <Link href={partner.url} className="partners-slider-item">
                   <Image 
-                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : homeBanner} 
+                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
                     alt={partner.title} 
-                    width={120} 
-                    height={120} 
+                    width={80} 
+                    height={80} 
                     style={{ borderRadius: '50%', objectFit: 'cover' }}
                   />
+                  <div className="partner-title">
+                    {partner.title}
+                    </div>
                 </Link>
+               
               </SwiperSlide>
             ))}
           </Swiper>

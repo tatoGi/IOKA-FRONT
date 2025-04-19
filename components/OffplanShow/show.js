@@ -161,6 +161,7 @@ const OffplanShow = ({ offplanData }) => {
 
   return (
     <>
+    
       {/* Banner Section */}
       <div className={`container ${style.offplanebanner}`}>
         <Image
@@ -434,13 +435,13 @@ const OffplanShow = ({ offplanData }) => {
               className={`${style.switchButton} ${showExterior ? style.active : ""}`}
               onClick={() => setShowExterior(true)}
             >
-              Exterior
+              EXTERIOR
             </button>
             <button
               className={`${style.switchButton} ${!showExterior ? style.active : ""}`}
               onClick={() => setShowExterior(false)}
             >
-              Interior
+              INTERIOR
             </button>
           </div>
         </div>
@@ -470,7 +471,7 @@ const OffplanShow = ({ offplanData }) => {
                 <div className="d-md-none">
                   <MobileSlider
                     images={exteriorGallery}
-                    type="Exterior"
+                    type="EXTERIOR"
                     decodeImageUrl={decodeImageUrl}
                   />
                 </div>
@@ -500,7 +501,7 @@ const OffplanShow = ({ offplanData }) => {
                 <div className="d-md-none">
                   <MobileSlider
                     images={interiorGallery}
-                    type="Interior"
+                    type="INTERIOR"
                     decodeImageUrl={decodeImageUrl}
                   />
                 </div>
@@ -550,13 +551,11 @@ const OffplanShow = ({ offplanData }) => {
           />
         </div>
       </div>
-      {isMobile ? (
-        <SubscribeSection />
-      ) : (
+    
         <div className="container">
           <SubscribeSection />
         </div>
-      )}
+  
     </>
   );
 };

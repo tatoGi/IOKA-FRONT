@@ -58,9 +58,10 @@ const SubscribeSection = () => {
           <div className="s-t-0">GET FIRST UPDATE</div>
           <div className="s-t-1">
             <p> Get the news in front line by </p>
-           
-            <span>subscribe</span> our latest
-            updates
+            <div className="s-t-2 d-flex">
+              <span>subscribe</span>
+              <p>our latest updates</p> 
+            </div>
           </div>
         </div>
         <div className="middle-image-sub">

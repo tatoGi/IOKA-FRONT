@@ -1057,7 +1057,7 @@ border-radius: 16px;
   .offplanebanner{
     position: relative;
         width: 100%;
-        height: 200px !important;
+        height: 230px !important;
         border-radius: 0;
         min-height: 200px !important;
         margin: 0;
@@ -1070,7 +1070,6 @@ border-radius: 16px;
   .propertyDetails{
     margin-top: 24px !important;
     margin-bottom: 24px !important;
-    padding: 0 16px;
   }
   .propertyDetails h2 {
     font-size: 20px;
@@ -1081,9 +1080,63 @@ border-radius: 16px;
   .aedPricestart{
     font-family: 'Montserrat';
 font-weight: 500;
-font-size: 14px;
+font-size: 16px;
 line-height: 100%;
 letter-spacing: 0%;
+
+  }
+  .personalInfo{
+    height: 80px;
+    max-width: 100%;
+  }
+  .contactBtnperson{
+    width: 149px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 70px;
+    padding-bottom: 12px;
+padding-left: 70px;
+
+  }
+  .whatsappperson{
+    width: 149px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 50px;
+    padding-bottom: 12px;
+    padding-left: 30px;
+
+  }
+  .sharelist{
+    width: 306px;
+    height: 40px;
+    top: 176px;
+    left: 24px;
+    border-radius: 8px;
+    border-width: 1px;
+
+  }
+  .contactBtn{
+    width: 354px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    border-width: 2px;
+    padding-top: 8px;
+    padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+
+  }
+  .locationMapBtn{
+    width: 306px;
+    height: 40px;
+border-radius: 8px;
+border-width: 1px;  
 
   }
   .pricing{
@@ -1097,22 +1150,21 @@ letter-spacing: 0%;
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 14px;
-    line-height: 1.5;
-    letter-spacing: 0%;
+    line-height: 24px;
     margin: 0;
 
   }
   .aedPrice{
     font-family: 'Montserrat';
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
   }
   .usdPrice{
     font-family: 'Montserrat';
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
   }
@@ -1121,6 +1173,7 @@ letter-spacing: 0%;
        object-fit: cover;
     z-index: 0;
     border-radius: 0px;
+    opacity: 80%;
   }
   .contentWrapper {
     -webkit-box-orient: vertical;
@@ -1128,7 +1181,14 @@ letter-spacing: 0%;
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .bannerContent h1{
+    font-family:' Felix Titling';
+font-weight: 400;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
 
+  }
   .qrSection {
     margin-top: 32px;
   }
@@ -1187,12 +1247,17 @@ letter-spacing: 0%;
     font-weight: 500;
     color: #007AFF;
   }
-
+  .qrCard{
+    margin-top: 16px;
+    max-width: 354px;
+    max-height: 240px;
+  }
   .qrCardmodern {
     border: 1px solid #07151F;
     border-radius: 12px;
     padding: 24px;
     background: #fff;
+    max-width: 354px;
   }
 
   .qrCardmodern h3 {
@@ -1385,7 +1450,7 @@ letter-spacing: 0%;
     width: 95px !important;
     height: 32px !important;
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 8px 10px;
     max-width: 95px !important;
   }
 
@@ -1395,7 +1460,7 @@ letter-spacing: 0%;
     width: 95px !important;
     height: 32px !important;
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 8px 10px;
     max-width: 95px !important;
   }
 
@@ -1432,7 +1497,6 @@ letter-spacing: 0%;
     font-size: 20px;
     margin-top: 40px;
     margin-bottom: 24px;
-    padding: 0 16px;
   }
 
   .propertyCard {
@@ -1485,65 +1549,4 @@ letter-spacing: 0%;
     overflow-x: hidden; /* Hide horizontal overflow */
     width: 100%;
   }
-}
-@media (max-width: 480px) {
-  .personalInfo img{
-    -o-object-fit: cover;
-       object-fit: cover;
-    border-radius: 8px;
-    width: 80px;
-    height: 80px;
-  }
-  .features{
-    gap: 20px;
-  }
-  .feature{
-    font-size: 10px;
-  }
-  .pricing{
-   gap: 8px;
-  }
- .aedPricestart{
-  font-size: 12px;
- }
- .aedPrice{
-  font-size: 12px;
- }
- .usdPrice{
-  font-size: 12px;
- }
- .description p{
-  font-size: 14px;
- }
- .readMore{
-  font-size: 12px;
- }
- .contactBtnperson{
-  width: 149px;
-height: 40px;
-border-radius: 8px;
-padding-top: 12px;
-padding-right: 70px;
-padding-bottom: 12px;
-padding-left: 70px;
-gap: 10px;
-
- }
- .whatsappperson{
-  width: 149px;
-  height: 40px;
-  border-radius: 8px;
-  padding-top: 12px;
-  padding-right: 50px;
-  padding-bottom: 12px;
-  padding-left: 35px;
-  gap: 10px;
-  
-  
- }
- .sharelist{
-  font-size: 14px;
- }
-  
-  
 }

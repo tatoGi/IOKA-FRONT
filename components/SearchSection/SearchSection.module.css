@@ -302,7 +302,7 @@ select.filterBtn {
 }
 @media (max-width: 768px) {
   .searchSection {
-    margin-top: 20px;
+    margin-top: 36px;
     width: 100%;
   }
 

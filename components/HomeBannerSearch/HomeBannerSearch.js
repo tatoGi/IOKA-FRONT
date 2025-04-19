@@ -70,7 +70,9 @@ const HomeBannerSearch = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [modalVisible]);
 
   // Scroll to results when filters are applied
@@ -847,7 +849,22 @@ const HomeBannerSearch = () => {
                 </button>
               )}
             </div>
-            <button
+           
+          </div>
+          
+          {modalVisible && (
+            <div className={styles.modal_overlay} onClick={closeModal}>
+              <div
+                ref={modalRef}
+                className={styles.modal_content}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {isMobile ? renderModalContentMobile() : renderModalContent()}
+                <div id="search-results"></div>
+              </div>
+            </div>
+          )}
+           <button
               type="submit"
               className={styles["search-button"]}
               onClick={(e) => {
@@ -870,20 +887,6 @@ const HomeBannerSearch = () => {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
-          </div>
-          
-          {modalVisible && (
-            <div className={styles.modal_overlay} onClick={closeModal}>
-              <div
-                ref={modalRef}
-                className={styles.modal_content}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {isMobile ? renderModalContentMobile() : renderModalContent()}
-                <div id="search-results"></div>
-              </div>
-            </div>
-          )}
         </div>
       </form>
     </div>

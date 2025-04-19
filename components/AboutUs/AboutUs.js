@@ -88,7 +88,7 @@ const AboutUs = ({ initialData, id }) => {
     if (isMobile) {
       return (
         <Swiper
-          spaceBetween={60}
+          spaceBetween={12}
           slidesPerView={4}
           className={styles.statsSwiper}
         >
@@ -145,57 +145,59 @@ const AboutUs = ({ initialData, id }) => {
     }));
   };
 
-  return (
-    <>
-      <div className="container">
-        {/* Mobile View - Testimonial First */}
-        {isMobile && (
-          <div className={styles.testimonialSection}>
-            <div className={styles.testimonialContainer}>
-              <div className={styles.testimonialImageContainer}>
-                <div className={styles.testimonialImageWrapper}>
-                  <Image
-                    src={
-                      testimonial.image
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
-                        : baseimage
-                    }
-                    alt="CEO Portrait"
-                    width={400}
-                    height={400}
-                    className={styles.testimonialImage}
-                  />
-                </div>
-              </div>
-              <div className={styles.testimonialWrapper}>
-                <div className={styles.testimonialContent}>
-                  <div className={styles.testimonialHeader}>
-                    <h3 className={styles.testimonialName}>
-                      {testimonial.name || "Max Musterman"}
-                    </h3>
-                    <p className={styles.testimonialRole}>
-                      {testimonial.position || "CEO Chairman"}
-                    </p>
-                  </div>
-                  <div className={styles.testimonialBody}>
-                    <p className={`${styles.testimonialText}`}>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: testimonial?.description
-                        }}
-                      ></span>
-                    </p>
-                    <p className={styles.welcomeText}>
-                      <span
-                        dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                      ></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+  const TestimonialSection = () => (
+    <div className={styles.testimonialSection}>
+      <div className={styles.testimonialContainer}>
+        <div className={styles.testimonialImageContainer}>
+          <div className={styles.testimonialImageWrapper}>
+            <Image
+              src={
+                testimonial.image
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
+                  : baseimage
+              }
+              alt="CEO Portrait"
+              width={400}
+              height={400}
+              className={styles.testimonialImage}
+            />
+          </div>
+        </div>
+        <div className={styles.testimonialWrapper}>
+          <div className={styles.testimonialContent}>
+            <div className={styles.testimonialHeader}>
+              <h3 className={styles.testimonialName}>
+                {testimonial.name || "Max Musterman"}
+              </h3>
+              <p className={styles.testimonialRole}>
+                {testimonial.position || "CEO Chairman"}
+              </p>
+            </div>
+            <div className={styles.testimonialBody}>
+              <p className={styles.testimonialText}>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: testimonial?.description
+                  }}
+                ></span>
+              </p>
+              <p className={styles.welcomeText}>
+                <span
+                  dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                ></span>
+              </p>
             </div>
           </div>
-        )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={styles.aboutSection}>
+      <div className={`${styles.mainContainer} ${isMobile ? styles.mobileContainer : ''}`}>
+        {/* Mobile: Show Testimonial first */}
+        {isMobile && <TestimonialSection />}
 
         {/* About Banner */}
         <AboutBanner
@@ -207,71 +209,26 @@ const AboutUs = ({ initialData, id }) => {
           }
         />
 
-        {/* Desktop View - Testimonial After Banner */}
-        {!isMobile && (
-          <div className={styles.testimonialSection}>
-            <div className={styles.testimonialContainer}>
-              <div className={styles.testimonialImageContainer}>
-                <div className={styles.testimonialImageWrapper}>
-                  <Image
-                    src={
-                      testimonial.image
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
-                        : baseimage
-                    }
-                    alt="CEO Portrait"
-                    width={400}
-                    height={400}
-                    className={styles.testimonialImage}
-                  />
-                </div>
-              </div>
-              <div className={styles.testimonialWrapper}>
-                <div className={styles.testimonialContent}>
-                  <div className={styles.testimonialHeader}>
-                    <h3 className={styles.testimonialName}>
-                      {testimonial.name || "Max Musterman"}
-                    </h3>
-                    <p className={styles.testimonialRole}>
-                      {testimonial.position || "CEO Chairman"}
-                    </p>
-                  </div>
-                  <div className={styles.testimonialBody}>
-                    <p className={`${styles.testimonialText}`}>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: testimonial?.description
-                        }}
-                      ></span>
-                    </p>
-                    <p className={styles.welcomeText}>
-                      <span
-                        dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                      ></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Desktop: Show Testimonial after banner */}
+        {!isMobile && <TestimonialSection />}
 
-        {/* Main Content Container */}
-        <div className={styles.container}>
-          {/* Statistics section */}
+        {/* Statistics section */}
+        <div className={styles.statsSection}>
           {renderStats()}
+        </div>
 
-          {/* Your Agency Section */}
-          <div className={styles.agencySection}>
-            <h2>{cardData.additional_fields?.your_agency}</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: cardData.additional_fields?.your_agency_description
-              }}
-            ></div>
-          </div>
+        {/* Agency Section */}
+        <div className={styles.agencySection}>
+          <h2>{cardData.additional_fields?.your_agency}</h2>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: cardData.additional_fields?.your_agency_description
+            }}
+          ></div>
+        </div>
 
-          {/* Team Section */}
+        {/* Team Section */}
+        <div className={styles.teamSection}>
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (
               <div key={index} className={styles.teamMember}>
@@ -293,24 +250,25 @@ const AboutUs = ({ initialData, id }) => {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Contact Form Section */}
+        {/* Contact Form Section */}
+        <div className={styles.formSection}>
           <div className={styles.formContainer}>
             <h5>Send us Email</h5>
             <ContactForm pageTitle="About Page" />
           </div>
-
-          {/* Partners Section */}
-          <PartnersSection />
         </div>
+
+        {/* Partners Section */}
+        <PartnersSection />
       </div>
 
       {/* Subscribe Section */}
-      <div className={isMobile ? "" : "container"}>
+      <div className="container">
         <SubscribeSection />
       </div>
-
-    </>
+    </div>
   );
 };
 

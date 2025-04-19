@@ -175,13 +175,11 @@ const BlogShow = ({ blogData }) => {
           </div>
         </div>
       </div>
-      {isMobile ? (
-        <SubscribeSection />
-      ) : (
+     
         <div className="container">
           <SubscribeSection />
         </div>
-      )}
+     
     </div>
   );
 };

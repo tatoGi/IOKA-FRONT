@@ -91,13 +91,11 @@ const Hombanner = ({ initialData }) => {
      <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
      <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
      <PartnersSection />
-     {isMobile ? (
-       <SubscribeSection /> // Render without container for mobile
-     ) : (
+    
        <div className="container">
          <SubscribeSection />
        </div>
-     )}
+    
     </div>
   );
 };

@@ -730,6 +730,281 @@
 }
 
 
+
+/* Mobile Modal Styles */
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 39, 59, 0.8);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.modal_content_wrapper {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.close_modal_button {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.mobile_search_inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 0 24px;
+  margin-top: 80px;
+  align-items: center;
+}
+
+.mobile_input_field {
+  background: #FFFFFF;
+  border-radius: 12px;
+  height: 36px;
+  width: 354px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile_input_field.expanded {
+  height: auto;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.mobile_input_field.expanded .location_section,
+.mobile_input_field.expanded .price_section,
+.mobile_input_field.expanded .size_section {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+}
+
+.mobile_input_field .label {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.mobile_input_field .value {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  color: #1A202C;
+  opacity: 0.6;
+  text-align: right;
+}
+
+.mobile_input_field.expanded .label,
+.mobile_input_field.expanded .value {
+  display: none;
+}
+
+.location_section,
+.price_section,
+.size_section {
+  width: 100%;
+}
+
+.location_title,
+.price_heading,
+.size_heading {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #1A202C;
+}
+
+.search_location_wrapper {
+  margin-top: 16px;
+}
+
+.locations_slider {
+  margin-top: 16px;
+}
+
+.locations_wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 4px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.locations_wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.dualSlider {
+  margin: 24px 0;
+}
+
+.inputs {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.price_inputs {
+  margin-top: 16px;
+}
+
+.mobile_actions {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1001;
+}
+
+.clear_all_button {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Montserrat';
+}
+
+.search_button {
+  padding: 0 24px;
+  border: none;
+  border-radius: 40px;
+  background: #7BCBC7;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Montserrat';
+  height: 36px;
+  width: 120px;
+}
+
+.search_button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.location_search_slider {
+  margin-top: 16px;
+  padding: 0 16px;
+}
+
+.location_search_slider h3 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  color: #6B7280;
+  margin-bottom: 16px;
+}
+
+.locations_wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 4px 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.locations_wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.location_card {
+  flex: 0 0 auto;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  min-width: 104px;
+  height: 72px;
+}
+
+.location_card.selected {
+  background: #EBF8FF;
+  border: 1px solid #90CDF4;
+}
+
+.location_content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pin_icon {
+  width: 24px;
+  height: 24px;
+}
+
+.location_content span {
+  font-family: 'Montserrat';
+  font-size: 12px;
+  color: #1A202C;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.loading, .error {
+  color: #FFFFFF;
+  text-align: center;
+  padding: 16px;
+}
+
+.mobile_input_field.expanded .location_section {
+  margin-top: 0;
+  border-radius: 12px;
+}
+
 /* --- Responsive Styles --- */
 /* --- Responsive Styles --- */
 
@@ -852,7 +1127,7 @@
     /* Title below tabs */
     z-index: 1;
     /* Ensure it's above potential background elements */
-    top: 20px;
+    top: 36px
   }
 
   /* Mobile Search Container */
@@ -873,17 +1148,19 @@
     -ms-flex-order: 3;
     order: 3;
     /* Search bar below title */
-    margin-top: 10.5px;
+    margin-top: 16.5px;
     /* Space below search bar */
+    width: 322px;
+    justify-content: center;
   }
 
   .search-inputs {
     gap: 0;
     /* Remove gap, use padding/margins */
     overflow: hidden;
-    /* Prevent internal overflow */
-    padding-right: 42px;
     /* Space for search button (width + gap) */
+    height: 40px;
+    max-width: 242px;
   }
 
   .where,
@@ -893,7 +1170,7 @@
     -ms-flex: 1;
     flex: 1;
     /* Distribute space evenly */
-    padding: 14px 0px 0px 40px;
+    padding: 4px 0px 0px 22px;
     min-width: 0;
     /* Allow shrinking */
     /* Removed margin-top */
@@ -960,12 +1237,12 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     /* Center vertically */
-    width: 38px !important;
+    width: 32px !important;
     /* Adjusted size */
-    height: 38px;
-    min-width: 38px;
+    height: 32px;
+    min-width: 32px;
     /* Removed margin */
-    border-radius: 8px;
+    border-radius: 40px;
     /* Match container radius */
     /* Removed border */
     padding: 0;
@@ -1376,7 +1653,7 @@
 }
 
 /* Further adjustments for very small screens */
-@media screen and (max-width: 430px) {
+@media screen and (min-width: 320px) and (max-width: 768px) {
   .mobile_input_field{
     max-width: 310px;
   }
@@ -1891,7 +2168,7 @@ left: 61px;
   .search_title {
     font-size: 12px;
     margin-bottom: 6px;
-    top: 30px;
+    top: 33px;
   }
 
   .tab {
@@ -1980,278 +2257,4 @@ left: 61px;
   .district_name {
     font-size: 11px;
   }
-}
-
-/* Mobile Modal Styles */
-.modal_container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(10, 39, 59, 0.8);
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.modal_content_wrapper {
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-}
-
-.close_modal_button {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
-}
-
-.mobile_search_inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  padding: 0 24px;
-  margin-top: 80px;
-  align-items: center;
-}
-
-.mobile_input_field {
-  background: #FFFFFF;
-  border-radius: 12px;
-  height: 36px;
-  width: 354px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.mobile_input_field.expanded {
-  height: auto;
-  background: transparent;
-  padding: 0;
-  margin-bottom: 24px;
-}
-
-.mobile_input_field.expanded .location_section,
-.mobile_input_field.expanded .price_section,
-.mobile_input_field.expanded .size_section {
-  background: #FFFFFF;
-  border-radius: 12px;
-  padding: 16px;
-  width: 100%;
-}
-
-.mobile_input_field .label {
-  font-family: 'Montserrat';
-  font-size: 14px;
-  color: #1A202C;
-  font-weight: 500;
-}
-
-.mobile_input_field .value {
-  font-family: 'Montserrat';
-  font-size: 14px;
-  color: #1A202C;
-  opacity: 0.6;
-  text-align: right;
-}
-
-.mobile_input_field.expanded .label,
-.mobile_input_field.expanded .value {
-  display: none;
-}
-
-.location_section,
-.price_section,
-.size_section {
-  width: 100%;
-}
-
-.location_title,
-.price_heading,
-.size_heading {
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  color: #1A202C;
-}
-
-.search_location_wrapper {
-  margin-top: 16px;
-}
-
-.locations_slider {
-  margin-top: 16px;
-}
-
-.locations_wrapper {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding: 4px 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.locations_wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.dualSlider {
-  margin: 24px 0;
-}
-
-.inputs {
-  margin-top: 16px;
-  margin-bottom: 24px;
-}
-
-.price_inputs {
-  margin-top: 16px;
-}
-
-.mobile_actions {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1001;
-}
-
-.clear_all_button {
-  padding: 8px 16px;
-  border: none;
-  background: transparent;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Montserrat';
-}
-
-.search_button {
-  padding: 0 24px;
-  border: none;
-  border-radius: 40px;
-  background: #7BCBC7;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Montserrat';
-  height: 36px;
-  width: 120px;
-}
-
-.search_button svg {
-  width: 16px;
-  height: 16px;
-}
-
-.location_search_slider {
-  margin-top: 16px;
-  padding: 0 16px;
-}
-
-.location_search_slider h3 {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
-  color: #6B7280;
-  margin-bottom: 16px;
-}
-
-.locations_wrapper {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding: 4px 12px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.locations_wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.location_card {
-  flex: 0 0 auto;
-  background: #FFFFFF;
-  border-radius: 12px;
-  padding: 8px 16px;
-  cursor: pointer;
-  min-width: 104px;
-  height: 72px;
-}
-
-.location_card.selected {
-  background: #EBF8FF;
-  border: 1px solid #90CDF4;
-}
-
-.location_content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.pin_icon {
-  width: 24px;
-  height: 24px;
-}
-
-.location_content span {
-  font-family: 'Montserrat';
-  font-size: 12px;
-  color: #1A202C;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-
-.loading, .error {
-  color: #FFFFFF;
-  text-align: center;
-  padding: 16px;
-}
-
-.mobile_input_field.expanded .location_section {
-  margin-top: 0;
-  border-radius: 12px;
 }
