@@ -2026,7 +2026,17 @@
     .mobileImageSlider {
       display: block;
     }
-  
+    .priceContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+          -ms-flex-align: center;
+              align-items: center;
+      gap: 5px;
+      margin-bottom: 12px;
+      flex-direction: row;
+    }
     .resaleCard {
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
@@ -2046,7 +2056,17 @@
       -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
     }
-  
+    .priceContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+          -ms-flex-align: center;
+              align-items: start;
+      gap: 5px;
+      margin-bottom: 12px;
+      flex-direction: row;
+    }
     .heroContent h1 {
       font-size: 28px;
     }
@@ -2107,6 +2127,7 @@
       width: auto;
       padding: 0px 7px 0 7px;
       font-size: 11px;
+      margin-left: 7px;
     }
     .actionButton svg{
       width: 16px;
