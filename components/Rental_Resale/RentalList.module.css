@@ -1617,7 +1617,9 @@
       align-items: center;
       justify-content: center;
     }
-
+    .whatsapp span{
+      margin-left: 10px;
+    }
     .modalContent {
       position: relative;
       background: white;
@@ -2051,7 +2053,7 @@
       -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
     }
-  
+ 
     .statsContainer {
       -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
@@ -2127,13 +2129,14 @@
       width: auto;
       padding: 0px 7px 0 7px;
       font-size: 11px;
-      margin-left: 7px;
     }
     .actionButton svg{
       width: 16px;
       height: 16px;
     }
-  
+    .actionButton_whatsapp span{
+      margin-left: 7px !important;
+    }
     .footerButton {
       padding: 0 8px !important;
       font-size: 12px;

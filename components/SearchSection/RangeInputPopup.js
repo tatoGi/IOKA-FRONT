@@ -20,25 +20,33 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
     onClose();
   };
 
+  const formatInput = (value) => {
+    if (!value) return '';
+    return value.replace(/\D/g, '');
+  };
+
   return (
     <div className={styles.popupContainer}>
       <div className={styles.popupContent}>
+        <h3>{title}</h3>
         <div className={styles.rangeInputs}>
           <div className={styles.inputGroup}>
             <input
-              type="number"
+              type="text"
               value={min}
-              onChange={(e) => setMin(e.target.value)}
-              placeholder={`Min`}
+              onChange={(e) => setMin(formatInput(e.target.value))}
+              placeholder={`Min ${unit}`}
               className={styles.rangeInput}
+              inputMode="numeric"
             />
             <span className={styles.rangeSeparator}>-</span>
             <input
-              type="number"
+              type="text"
               value={max}
-              onChange={(e) => setMax(e.target.value)}
-              placeholder={`Max `}
+              onChange={(e) => setMax(formatInput(e.target.value))}
+              placeholder={`Max ${unit}`}
               className={styles.rangeInput}
+              inputMode="numeric"
             />
           </div>
         </div>

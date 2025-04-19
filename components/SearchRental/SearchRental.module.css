@@ -450,20 +450,18 @@
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
   background-color: white;
   z-index: 1000;
   margin-top: 8px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 400px;
 }
 
 .popupContent {
-  padding: 16px;
+  padding: 20px;
   border-radius: 8px;
   border: 1px solid #E5E7EB;
-  width: 100%;
 }
 
 .popupContent h3 {
@@ -473,28 +471,21 @@
 }
 
 .rangeInputs {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .inputGroup {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .rangeInput {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 8px 12px;
+  width: 100%;
+  padding: 12px;
   border: 1px solid #E5E7EB;
   border-radius: 6px;
-  font-size: 14px;
-  width: 120px;
+  font-size: 16px;
   background-color: #F9FAFB;
 }
 
@@ -505,33 +496,29 @@
 }
 
 .rangeSeparator {
-  color: #6B7280;
-  font-weight: 500;
-  font-size: 14px;
+  display: none;
 }
 
 .popupButtons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  gap: 8px;
-  margin-top: 12px;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cancelButton,
+.applyButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .cancelButton {
-  padding: 6px 12px;
   background-color: #F3F4F6;
   color: #374151;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
 }
 
 .cancelButton:hover {
@@ -539,16 +526,9 @@
 }
 
 .applyButton {
-  padding: 6px 12px;
   background-color: #374151;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
 }
 
 .applyButton:hover {
@@ -558,13 +538,58 @@
 @media (max-width: 768px) {
   .popupContainer {
     position: fixed;
-    top: 33%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 400px;
+    max-width: 350px;
     margin: 0;
     z-index: 1100;
+  }
+
+  .popupContent {
+    padding: 16px;
+  }
+
+  .rangeInput {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .popupButtons {
+    margin-top: 16px;
+  }
+
+  .cancelButton,
+  .applyButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popupContainer {
+    width: 95%;
+    max-width: 320px;
+  }
+
+  .popupContent {
+    padding: 12px;
+  }
+
+  .rangeInput {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .popupButtons {
+    margin-top: 12px;
+  }
+
+  .cancelButton,
+  .applyButton {
+    padding: 6px 12px;
+    font-size: 14px;
   }
 }
 
