@@ -1681,7 +1681,6 @@
           -ms-flex-direction: column;
               flex-direction: column;
       gap: 20px;
-      padding: 0 16px;
       margin-top: 20px; /* Added margin from top */
     }
     .largeImage{
