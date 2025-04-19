@@ -2238,7 +2238,21 @@ letter-spacing: 0%;
      }
     
   }
-
-@supports (-webkit-touch-callout: none) {
-  /* iOS-ის სპეციფიკური სტილები */
+@media (max-width: 375px) {
+  .resaleCard{
+    width: 320px;
+  }
+  .starting_price{
+    font-size: 12px;  
+  }
+  .resalePrice{
+    font-size: 12px;
+  }
+  .resaleLocation{
+    font-size: 12px;
+  }
+  .resaleContent h4{
+    font-size: 12px;
+  }
+ 
 }
