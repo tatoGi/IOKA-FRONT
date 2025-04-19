@@ -15,6 +15,19 @@
 .searchInput {
   width: 100%;
   padding-left: 40px;
+  width: 768px; 
+  height: 40px;
+  top: 172px;
+  left: 180px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #0A273B;
+  border-style: solid;
+  background-color: #fff;
+  color: #0A273B;
+  font-family: 'Montserrat';
+  
+  
 }
 
 .searchIcon {

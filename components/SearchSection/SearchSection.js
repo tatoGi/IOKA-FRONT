@@ -162,7 +162,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               handleFilterChange("propertyType", e.target.value);
             }}
           >
-            <option value="">All Property Types</option>
+            <option value="">Property Types</option>
             {filterOptions.propertyTypes.map((type) => (
               <option key={type} value={type}>
                 {type}

@@ -10,39 +10,37 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Prevent body scroll when popup is open
-      document.body.style.overflow = 'hidden';
-      
-      // iOS specific handling
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      if (isIOS) {
-        // Add a small delay to ensure the popup is fully rendered
-        setTimeout(() => {
-          if (minInputRef.current) {
-            minInputRef.current.focus();
-            // Force scroll into view on iOS
-            minInputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 300);
-      } else {
-        // Regular focus for non-iOS devices
-        if (minInputRef.current) {
-          minInputRef.current.focus();
-        }
+      // Focus the min input when modal opens
+      if (minInputRef.current) {
+        minInputRef.current.focus();
       }
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
+      // Add event listener for escape key
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
+
+      // Add event listener for click outside
+      const handleClickOutside = (e) => {
+        if (popupRef.current && !popupRef.current.contains(e.target)) {
+          onClose();
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.body.style.overflow = '';
+      };
     }
-  };
+  }, [isOpen, onClose]);
 
   const handleApply = () => {
     if (min && max) {
@@ -65,7 +63,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.popupContainer} onClick={handleBackdropClick}>
+    <div className={styles.popupContainer}>
       <div className={styles.popupContent} ref={popupRef}>
         <h3>{title}</h3>
         <div className={styles.rangeInputs}>

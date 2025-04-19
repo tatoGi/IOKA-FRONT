@@ -1014,7 +1014,29 @@
     /* Adjust font size for medium screens */
   }
 }
-
+@media (max-width:992px){
+  .banner-search{
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 451px;
+    z-index: 10;
+    margin-top: 100px;
+    text-align: center;
+  }
+  .banner-content h1{
+    font-size: 35px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+    
+  }
+}
 /* --- MOBILE STYLES --- */
 @media (max-width: 768px) {
 

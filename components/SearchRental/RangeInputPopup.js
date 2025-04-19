@@ -49,15 +49,28 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
     return value.replace(/\D/g, '');
   };
 
+  const getPrefix = () => {
+    if (unit === 'USD') return '$';
+    return '';
+  };
+
+  const getSuffix = () => {
+    if (unit === 'Sq.Ft') return 'sq ft';
+    return '';
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className={styles.popupContainer} onClick={handleBackdropClick}>
-      <div className={styles.popupContent} ref={popupRef}>
-        <h3>{title}</h3>
+    <div className={styles.rangeModal} onClick={handleBackdropClick}>
+      <div className={styles.rangeModalContent} ref={popupRef}>
+        <div className={styles.rangeModalHeader}>
+          <h3 className={styles.rangeModalTitle}>{title}</h3>
+          <button className={styles.rangeModalClose} onClick={onClose}>×</button>
+        </div>
         <div className={styles.rangeInputs}>
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
+            <div className={styles.inputWrapper} data-prefix={getPrefix()} data-suffix={getSuffix()}>
               <input
                 type="text"
                 value={min}
@@ -69,7 +82,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
               />
             </div>
             <span className={styles.rangeSeparator}>-</span>
-            <div className={styles.inputWrapper}>
+            <div className={styles.inputWrapper} data-prefix={getPrefix()} data-suffix={getSuffix()}>
               <input
                 type="text"
                 value={max}
@@ -82,7 +95,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
             </div>
           </div>
         </div>
-        <div className={styles.popupButtons}>
+        <div className={styles.rangeModalButtons}>
           <button onClick={onClose} className={styles.cancelButton}>
             Cancel
           </button>

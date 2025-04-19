@@ -627,7 +627,23 @@ margin-top: 2px;
   gap: 15px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
-          justify-content: center;
+}
+
+.propertyCardLink{
+  text-decoration: none;
+        color: inherit;
+        display: block;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        -webkit-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        width: 267px;
+        height: 350px;
+        border: 1px solid #E6EBED;
 }
 .propertyCardLink:hover{
   border: 1px solid #3598db;
@@ -640,6 +656,24 @@ margin-top: 2px;
     -o-transition: 0.3s;
     transition: 0.3s;
   }
+}
+@media (max-width:1200px){
+.propertyCardLink{
+  text-decoration: none;
+        color: inherit;
+        display: block;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        -webkit-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        width: 222px;
+        height: 350px;
+        border: 1px solid #E6EBED;
+}
 }
 @media (max-width:992px){
   .resultsHeader{

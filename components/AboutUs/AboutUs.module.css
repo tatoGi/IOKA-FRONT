@@ -29,12 +29,12 @@
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: -2rem auto 4rem;
   position: relative;
   z-index: 2;
   margin-top: 80px;
-  gap: 2rem;
+  gap: 10rem;
   /* Add gap between stat boxes */
 }
 
@@ -125,39 +125,47 @@
   color: #07151F;
 }
 
+.teamSection {
+  margin: 80px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .teamGrid {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
   grid-template-columns: repeat(3, 1fr);
-  margin: 4.375rem 0;
-  height: 25.875rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
 }
 
 .teamMember {
   text-align: center;
-}
-
-.teamImage {
-  border-radius: 8px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  margin-bottom: 1rem;
-  width: 23.75rem;
-  height: 24.5rem;
-  -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: .3s ease-in-out;
-  -o-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .imageContainer {
-  overflow: hidden;
-  width: 23.75rem;
-  height: 24.5rem;
+  width: 100%;
+  max-width: 380px;
+  height: 380px;
   border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.teamImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transform: scale(1);
+  transition: .3s ease-in-out;
 }
 
 .teamImage:hover {
@@ -234,9 +242,8 @@
 
   .teamGrid {
     grid-template-columns: 1fr;
-    gap: 24px;
-    height: auto;
-    margin:0 ;
+    gap: 2rem;
+    margin: 2rem auto;
   }
 
   .formSection {
@@ -291,11 +298,9 @@
   }
 
   .imageContainer {
-    width: 354px;
-    height: 222px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 354px;
+    height: 354px;
   }
 
   .teamMember h3 {
@@ -497,16 +502,12 @@
   }
 
   .imageContainer {
-    width: 354px;
-    height: 222px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin: 0 auto;
+    max-width: 100%;
+    height: 300px;
   }
 
   .teamMember {
-    max-width: 354px;
-    margin: 0 auto;
+    max-width: 100%;
   }
 
   .contactSection {
@@ -958,54 +959,6 @@
   opacity: 0.2;
 }
 
-@media (max-width: 968px) {
-  .partnersTitle {
-    font-size: 28px;
-    text-align: center;
-  }
-
-  .subscribeContainer {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    text-align: center;
-  }
-
-  .subscribeContent {
-    margin-bottom: 40px;
-  }
-
-  .subscribeHeading {
-    font-size: 28px;
-  }
-
-  .subscribeForm {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    margin: 0 auto;
-  }
-
-  .skylineImage {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .partnersTitle {
-    font-size: 24px;
-  }
-
-  .subscribeHeading {
-    font-size: 24px;
-  }
-
-  .subscribeButton {
-    width: 100%;
-  }
-}
 
 .currentVacancies {
   margin-bottom: 40px;
@@ -1222,9 +1175,19 @@
     -webkit-transition: .3s ease-in-out;
     -o-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
-
   }
-
+  .statsContainer {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    margin: -2rem auto 4rem;
+    position: relative;
+    z-index: 2;
+    margin-top: 80px;
+    gap: 4rem;
+    /* Add gap between stat boxes */
+  }
   .imageContainer {
     overflow: hidden;
   }
@@ -1237,4 +1200,106 @@
     -o-transition: 0.3s;
     transition: 0.3s;
   }
+
+  .testimonialWrapper {
+    max-width: 75rem;
+    height: 22rem;
+    margin-left: 8rem;
+    padding: 33px;
+  }
+
+  .testimonialImageContainer {
+    top: 7rem;
+    left: 0rem;
+  }
+
+  .testimonialImageWrapper {
+    width: 20rem;
+    height: 12rem;
+  }
+
+  .testimonialName {
+    font-size: 22px;
+    margin-left: 12rem;
+  }
+
+  .testimonialRole {
+    font-size: 18px;
+    margin-left: 12rem;
+  }
+
+  .testimonialText {
+    font-size: 14px;
+    margin-left: 12rem;
+  }
+
+  .welcomeText {
+    font-size: 22px;
+    margin-left: 12rem;
+    margin-top: 2.5rem;
+  }
+}
+@media(max-width:1400px){
+  .statsContainer{
+    display: -ms-grid;
+        display: grid
+;
+        -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        margin: -2rem auto 4rem;
+        position: relative;
+        z-index: 2;
+        margin-top: 80px;
+        gap: 0rem;
+  }
+  .imageContainer{
+    width: 100%;
+    max-width: 320px;
+    height: 380px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 1200px){
+  .statsContainer{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+}
+.statBox p{
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+}
+.statBox{
+  gap: 4px;
+}
+.imageContainer{
+  width: 100%;
+  max-width: 270px;
+  height: 355px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.teamImage{
+  width: 100%;
+  height: 100%;
+}
 }

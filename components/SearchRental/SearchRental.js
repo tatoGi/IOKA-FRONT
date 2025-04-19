@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./SearchRental.module.css";  
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
@@ -18,6 +18,8 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
   const [showPricePopup, setShowPricePopup] = useState(false);
   const [showSqFtPopup, setShowSqFtPopup] = useState(false);
+  const priceButtonRef = useRef(null);
+  const areaButtonRef = useRef(null);
 
   const closeAllPopups = () => {
     setShowPricePopup(false);
@@ -166,6 +168,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
           
           <div className={styles.filterButtonWrapper}>
             <button
+              ref={priceButtonRef}
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
               onClick={() => setShowPricePopup(true)}
             >
@@ -181,15 +184,13 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showPricePopup && (
-              <div className={styles.popupContainer}>
-                <RangeInputPopup
-                  isOpen={showPricePopup}
-                  onClose={() => setShowPricePopup(false)}
-                  onApply={(value) => handleRangeApply("price", value)}
-                  title="Price Range"
-                  unit="USD"
-                />
-              </div>
+              <RangeInputPopup
+                isOpen={showPricePopup}
+                onClose={() => setShowPricePopup(false)}
+                onApply={(value) => handleRangeApply("price", value)}
+                title="Price Range"
+                unit="USD"
+              />
             )}
           </div>
 
@@ -235,6 +236,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
           <div className={styles.filterButtonWrapper}>
             <button
+              ref={areaButtonRef}
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => setShowSqFtPopup(true)}
             >
@@ -250,15 +252,13 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showSqFtPopup && (
-              <div className={styles.popupContainer}>
-                <RangeInputPopup
-                  isOpen={showSqFtPopup}
-                  onClose={() => setShowSqFtPopup(false)}
-                  onApply={(value) => handleRangeApply("sqFt", value)}
-                  title="Area Range"
-                  unit="Sq.Ft"
-                />
-              </div>
+              <RangeInputPopup
+                isOpen={showSqFtPopup}
+                onClose={() => setShowSqFtPopup(false)}
+                onApply={(value) => handleRangeApply("sqFt", value)}
+                title="Area Range"
+                unit="Sq.Ft"
+              />
             )}
           </div>
         </div>

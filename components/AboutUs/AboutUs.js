@@ -195,7 +195,7 @@ const AboutUs = ({ initialData, id }) => {
 
   return (
     <div className={styles.aboutSection}>
-      <div className={`${styles.mainContainer} ${isMobile ? styles.mobileContainer : ''}`}>
+      <div className={`container ${isMobile ? styles.mobileContainer : ''} container`}>
         {/* Mobile: Show Testimonial first */}
         {isMobile && <TestimonialSection />}
 
