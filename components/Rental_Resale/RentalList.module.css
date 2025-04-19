@@ -2219,3 +2219,7 @@
      }
     
   }
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS-ის სპეციფიკური სტილები */
+}
