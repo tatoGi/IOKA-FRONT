@@ -5,6 +5,13 @@
 * Browsers: last 4 version
 */
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .searchSection {
   width: 100%;
   background-color: #fff;
@@ -455,7 +462,8 @@
   z-index: 1000;
   margin-top: 8px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   min-width: 280px;
 }
@@ -465,7 +473,8 @@
   border-radius: 8px;
   border: 1px solid #E5E7EB;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .popupContent h3 {
@@ -562,7 +571,9 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     width: 90%;
     max-width: 400px;
     margin: 0;
@@ -581,7 +592,6 @@
     margin-top: 16px;
   }
 }
-
 
 
 

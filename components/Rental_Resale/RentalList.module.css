@@ -5,6 +5,13 @@
 * Browsers: last 4 version
 */
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .title_top{
   font-family: 'Montserrat';
   font-weight: 400;
@@ -1613,9 +1620,15 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
     }
     .whatsapp span{
       margin-left: 10px;
@@ -2037,7 +2050,10 @@
               align-items: center;
       gap: 5px;
       margin-bottom: 12px;
-      flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
     }
     .resaleCard {
       -webkit-box-orient: vertical;
@@ -2067,7 +2083,10 @@
               align-items: start;
       gap: 5px;
       margin-bottom: 12px;
-      flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
     }
     .heroContent h1 {
       font-size: 28px;
