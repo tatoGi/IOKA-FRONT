@@ -276,14 +276,15 @@ const DeveloperShow = (developerData) => {
                       </p>
                       <div className={styles.priceContainer}>
                         <span className={styles.priceStart}>Starting Price</span>
-                        <span className={styles.price}>
-                          USD {listing.amount}
-                        </span>
+                        <div className={styles.priceWrapper}>
+                          <span className={styles.price}>USD {listing.amount}</span>
+                          <span className={styles.price}>AED {listing.amount}</span>
+                        </div>
                       </div>
                       <div className={styles.propertyStats}>
                         <div className={styles.stat}>
                           <Image
-                            src={BedroomIcon}
+                            src={require("/assets/img/bad.svg")}
                             alt="Bedrooms"
                             width={20}
                             height={20}
@@ -292,7 +293,7 @@ const DeveloperShow = (developerData) => {
                         </div>
                         <div className={styles.stat}>
                           <Image
-                            src={BathroomIcon}
+                            src={require("/assets/img/bath.svg")}
                             alt="Bathrooms"
                             width={20}
                             height={20}
@@ -301,7 +302,7 @@ const DeveloperShow = (developerData) => {
                         </div>
                         <div className={styles.stat}>
                           <Image
-                            src={AreaVector}
+                            src={require("/assets/img/areavector.png")}
                             alt="Area"
                             width={20}
                             height={20}
@@ -310,7 +311,7 @@ const DeveloperShow = (developerData) => {
                         </div>
                         <div className={styles.stat}>
                           <Image
-                            src={WarehouseIcon}
+                            src={require("/assets/img/warehousevector.png")}
                             alt="Garage"
                             width={20}
                             height={20}
@@ -399,9 +400,10 @@ const DeveloperShow = (developerData) => {
                             <span className={styles.priceStart}>
                               Starting Price
                             </span>
-                            <span className={styles.price}>
-                              USD {listing.amount}
-                            </span>
+                            <div className={styles.priceWrapper}>
+                              <span className={styles.price}>USD {listing.amount}</span>
+                              <span className={styles.price}>AED {listing.amount}</span>
+                            </div>
                           </div>
                         </div>
                         <div className={styles.propertyStats}>

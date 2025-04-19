@@ -305,9 +305,9 @@
 }
 
 .listingCount {
-  color: #7ACBC4;
+  color: #007AFF;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: 'Montserrat';
 }
 
@@ -1365,6 +1365,8 @@ font-weight: 400;
 font-size: 16px;
 line-height: 100%;
 letter-spacing: 0%;
+color: #007AFF;
+margin-right: 20px;
 
   }
   .sortDropdown
@@ -1437,8 +1439,9 @@ padding: 12px 0px !important;
 
   .listItem .propertyType {
     position: absolute;
-    top: 74%;
-    left: 10px;
+    bottom: 16px;
+    left: 16px;
+    top: auto;
     background: #FFFFFF;
     color: #07151F;
     padding: 6px 12px;
@@ -1446,26 +1449,29 @@ padding: 12px 0px !important;
     font-size: 14px;
     font-weight: 600;
     z-index: 1;
-    /* bottom: 5px; */
     width: 123px;
     height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .listItem .propertyYear {
     position: absolute;
-    top: 74%;
+    bottom: 16px;
     right: 16px;
+    top: auto;
     background: #07151F;
     color: white;
-    padding: 10px 0px;
+    padding: 6px 12px;
     border-radius: 14px;
     font-size: 12px;
     font-weight: 600;
     z-index: 1;
     text-align: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
+    height: 32px;
+    display: flex;
   }
 
   .listItem .propertyInfo {
@@ -1508,8 +1514,8 @@ padding: 12px 0px !important;
     line-height: 100%;
     letter-spacing: 0%;
     color: #0A273B;
-    margin: 0;
-    
+    margin: 16px 0;
+    flex-direction: row;
   }
 
   .listItem .propertyStats {
@@ -1705,7 +1711,6 @@ letter-spacing: 0%;
         -ms-flex-direction: column;
             flex-direction: column;
     position: relative;
-    /* padding-left: 32px; */
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     width: 100%;
@@ -1783,6 +1788,42 @@ letter-spacing: 0%;
             align-items: start;
     gap: 8px;
   }
+  .priceContainer {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .priceWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .price {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #007AFF;
+  }
+
+  .priceStart {
+    display: block;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    color: #0A273B;
+  }
 }
 @media (max-width: 480px) {
   .listingInfo_mobile{
@@ -1796,6 +1837,7 @@ letter-spacing: 0%;
             -ms-flex-align: center;
                 align-items: center;
         gap: 75px;
+        width: 100%;
   }
   .priceStart{
     font-size: 14px;

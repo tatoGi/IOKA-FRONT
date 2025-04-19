@@ -785,8 +785,9 @@ margin-top: 2px;
 /* Add this media query at the end of the file */
 @media (max-width: 768px) {
   .container {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 16px;
+    max-width: 100%;
+    margin: 0 auto;
   }
   .card {
     width: 100%;
@@ -795,33 +796,30 @@ margin-top: 2px;
   }
   .searchContainer{
     position: relative;
-        width: 100%;
-        max-width: 354px;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
-        position: relative;
+    width: 100%;
+    max-width: 354px;
+    margin: 0 auto;
   }
-.searchInput{
-  width: 100%;
-  padding-left: 40px;
-  border: 1px solid #07151F;
-  border-radius: 8px;
-  height: 48px;
-}
-.cardsContainer{
-  margin: 0;
+  .searchInput{
+    width: 100%;
+    padding-left: 40px;
+    border: 1px solid #07151F;
+    border-radius: 8px;
+    height: 48px;
+  }
+  .cardsContainer{
+    margin: 0 auto;
     padding: 0;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-}
-.cardWrapper{
-  max-width: 354px;
-}
-.communitiesList{
-  gap: 8px;
-}
+    justify-content: center;
+    max-width: 354px;
+    width: 100%;
+  }
+  .cardWrapper{
+    max-width: 354px;
+  }
+  .communitiesList{
+    gap: 8px;
+  }
   .cardRow {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

@@ -1403,6 +1403,7 @@ letter-spacing: 0%;
   .swiperSlide {
     width: 280px !important;
     height: 200px !important;
+    margin-right: 16px;
   }
 
   .exteriorimage {
