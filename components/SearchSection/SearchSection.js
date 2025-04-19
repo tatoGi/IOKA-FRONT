@@ -93,7 +93,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
   };
 
   const formatRangeDisplay = (value, isPrice = false) => {
-    if (!value) return "Any";
+    if (!value) return "";
     const [min, max] = value.split("-");
     
     if (min && max) {
@@ -114,7 +114,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
       }
       return `Up to ${formatNumber(max)}`;
     }
-    return "Any";
+    return "";
   };
 
   return (
@@ -239,7 +239,9 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               onClick={() => setShowSqFtPopup(true)}
             >
               <span>Area</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}Square Meters</span>
+              <span className={styles.value}>
+                {filters.sqFt ? `${formatRangeDisplay(filters.sqFt)} Square Meters` : ""}
+              </span>
             </button>
             {filters.sqFt && (
               <button

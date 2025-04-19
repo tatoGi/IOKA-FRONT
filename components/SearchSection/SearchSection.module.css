@@ -377,24 +377,29 @@ select.filterBtn {
 }
 .popupContainer {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.popupContent {
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 350px;
-  margin: 0;
-  -webkit-overflow-scrolling: touch;
-  -webkit-transform: translate(-50%, -50%);
-}
-
-.popupContent {
   padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #E5E7EB;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .popupContent h3 {
@@ -408,14 +413,14 @@ select.filterBtn {
 }
 
 .inputGroup {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
   gap: 12px;
+}
+
+.inputWrapper {
+  flex: 1;
+  position: relative;
 }
 
 .rangeInput {
@@ -425,6 +430,9 @@ select.filterBtn {
   border-radius: 6px;
   font-size: 16px;
   background-color: #F9FAFB;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .rangeInput:focus {
@@ -434,16 +442,14 @@ select.filterBtn {
 }
 
 .rangeSeparator {
-  display: none;
+  color: #6B7280;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .popupButtons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  justify-content: flex-end;
   gap: 12px;
   margin-top: 20px;
 }
@@ -454,9 +460,10 @@ select.filterBtn {
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .cancelButton {
@@ -482,18 +489,21 @@ select.filterBtn {
 @media (max-width: 768px) {
   .popupContainer {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 350px;
-    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1100;
     -webkit-overflow-scrolling: touch;
   }
 
   .popupContent {
+    width: 90%;
+    max-width: 350px;
     padding: 16px;
     max-height: 80vh;
     overflow-y: auto;
@@ -518,12 +528,26 @@ select.filterBtn {
 
 @media (max-width: 480px) {
   .popupContainer {
-    width: 95%;
-    max-width: 320px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    -webkit-overflow-scrolling: touch;
   }
 
   .popupContent {
+    width: 95%;
+    max-width: 320px;
     padding: 12px;
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .rangeInput {
