@@ -118,6 +118,15 @@ const DeveloperShow = (developerData) => {
       ? strippedText.substring(0, maxLength) + "..."
       : strippedText;
   };
+
+  const formatPrice = (amount) => {
+    if (!amount) return '0';
+    if (amount >= 1000) {
+      return `${(amount / 1000).toFixed(1)}K`;
+    }
+    return amount.toString();
+  };
+
   return (
     <div className={styles.developerShowSection}>
       {/* <div className="container">
@@ -277,8 +286,8 @@ const DeveloperShow = (developerData) => {
                       <div className={styles.priceContainer}>
                         <span className={styles.priceStart}>Starting Price</span>
                         <div className={styles.priceWrapper}>
-                          <span className={styles.price}>USD {listing.amount}</span>
-                          <span className={styles.price}>AED {listing.amount}</span>
+                          <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
+                          <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
                         </div>
                       </div>
                       <div className={styles.propertyStats}>
@@ -401,8 +410,8 @@ const DeveloperShow = (developerData) => {
                               Starting Price
                             </span>
                             <div className={styles.priceWrapper}>
-                              <span className={styles.price}>USD {listing.amount}</span>
-                              <span className={styles.price}>AED {listing.amount}</span>
+                              <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
+                              <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
                             </div>
                           </div>
                         </div>
@@ -526,8 +535,8 @@ const DeveloperShow = (developerData) => {
                   <h4>{listing.title}</h4>
                   <p className={styles.location}>{listing.location}</p>
                   <div className={styles.priceContainer}>
-                    <span className={styles.price}>USD {listing.amount}</span>
-                    <span className={styles.price}>AED {listing.amount}</span>
+                    <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
+                    <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
                   </div>
                   <div className={styles.propertyStats}>
                     <div className={styles.stat}>
@@ -612,7 +621,7 @@ const DeveloperShow = (developerData) => {
                 <div className={styles.resaleContent}>
                   <h4>{listing.title}</h4>
                   <p className={styles.resaleLocation}>{listing.location}</p>
-                  <p className={styles.resalePrice}>AED {listing.amount}</p>
+                  <p className={styles.resalePrice}>AED {formatPrice(listing.amount)}</p>
                   <div className={styles.resaleStats}>
                     <div className={styles.statGroup}>
                       <Image
