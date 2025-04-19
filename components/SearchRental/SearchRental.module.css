@@ -302,7 +302,7 @@ select.filterBtn {
 }
 @media (max-width: 768px) {
   .searchSection {
-    margin-top: 16px;
+    margin-top: 20px;
     width: 100%;
   }
 
@@ -376,16 +376,19 @@ select.filterBtn {
   }
 }
 .popupContainer {
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   z-index: 1000;
-  margin-top: 8px;
   border-radius: 8px;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 350px;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate(-50%, -50%);
 }
 
 .popupContent {
@@ -481,17 +484,20 @@ select.filterBtn {
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
     width: 90%;
     max-width: 350px;
     margin: 0;
     z-index: 1100;
+    -webkit-overflow-scrolling: touch;
   }
 
   .popupContent {
     padding: 16px;
+    max-height: 80vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .rangeInput {
@@ -533,12 +539,6 @@ select.filterBtn {
   .applyButton {
     padding: 6px 12px;
     font-size: 14px;
-  }
-  .filterBtn::after {
-    right: 10px !important;
-    border-top: 4px solid #07151F;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
   }
   .propertyTypeSelect::after {
     right: 10px !important;
