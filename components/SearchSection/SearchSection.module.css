@@ -385,21 +385,29 @@ select.filterBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1100;
   -webkit-overflow-scrolling: touch;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .popupContent {
-  background-color: white;
+  background: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 350px;
-  padding: 20px;
-  position: relative;
+  padding: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   max-height: 80vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  margin: auto;
+  position: relative;
 }
 
 .popupContent h3 {
@@ -564,6 +572,42 @@ select.filterBtn {
   .applyButton {
     padding: 6px 12px;
   }
+}
+
+/* iOS specific fixes */
+.ios-device .popupContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  -webkit-overflow-scrolling: touch;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.ios-device .popupContent {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 350px;
+  padding: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: auto;
+  position: relative;
 }
 
 
