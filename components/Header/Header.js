@@ -199,7 +199,7 @@ const Header = ({ navigationData }) => {
 </div>
 
               <div className="right-search-contact" style={{ height: "42px" }}> {/* Adjust height */}
-              <div className={`right-form ${isSearchOpen ? "active" : ""}`}>
+              <div className={`right-form ${isSearchOpen && !isMobileMenuOpen ? "active" : ""}`}>
                   <form onSubmit={handleSearch}>
                     <input
                       type="text"

@@ -186,17 +186,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
                 ×
               </button>
             )}
-            {showPricePopup && (
-              <div className={styles.popupContainer}>
-                <RangeInputPopup
-                  isOpen={showPricePopup}
-                  onClose={() => setShowPricePopup(false)}
-                  onApply={(value) => handleRangeApply("price", value)}
-                  title="Price Range"
-                  unit="USD"
-                />
-              </div>
-            )}
           </div>
 
           <select
@@ -257,20 +246,33 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
                 ×
               </button>
             )}
-            {showSqFtPopup && (
-              <div className={styles.popupContainer}>
-                <RangeInputPopup
-                  isOpen={showSqFtPopup}
-                  onClose={() => setShowSqFtPopup(false)}
-                  onApply={(value) => handleRangeApply("sqFt", value)}
-                  title="Area Range"
-                  unit="Sq.Ft"
-                />
-              </div>
-            )}
           </div>
         </div>
       </div>
+
+      {showPricePopup && (
+        <div className={styles.popupContainer}>
+          <RangeInputPopup
+            isOpen={showPricePopup}
+            onClose={() => setShowPricePopup(false)}
+            onApply={(value) => handleRangeApply("price", value)}
+            title="Price Range"
+            unit="USD"
+          />
+        </div>
+      )}
+
+      {showSqFtPopup && (
+        <div className={styles.popupContainer}>
+          <RangeInputPopup
+            isOpen={showSqFtPopup}
+            onClose={() => setShowSqFtPopup(false)}
+            onApply={(value) => handleRangeApply("sqFt", value)}
+            title="Area Range"
+            unit="Sq.Ft"
+          />
+        </div>
+      )}
     </div>
   );
 };
