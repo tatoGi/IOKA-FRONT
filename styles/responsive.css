@@ -442,21 +442,13 @@
     gap: 15px;
   }
   .right-form {
-    position: relative;
-    width: auto;
+    display: block;
+    position: absolute;
+    right: 67px;
+    top: 0;
   }
-  .right-form input {
-    width: 150px;
-    height: 36px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    -webkit-transition: width 0.3s ease;
-    -o-transition: width 0.3s ease;
-    transition: width 0.3s ease;
-  }
-  .right-form:focus-within input {
-    width: 170px;
+  .right-form.active {
+    display: block;
   }
   .searchbtn {
     position: absolute;
@@ -541,20 +533,6 @@
     top: 42px;
     position: absolute;
     height: 21px !important;
-  }
-
-  .right-form {
-    right: 67px;
-    display: block;
-    cursor: pointer;
-    z-index: 101;
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-    width: 21px;
-    height: 18px;
-    top: 0px;
-    position: absolute;
   }
 
   .burger-lines {
@@ -1618,6 +1596,36 @@ margin-top: 24px;
 .s-t-2 span{
   font-size: 16px;
 }
+}
+
+@media (max-width: 992px) {
+  .header-nav.active ~ .right-search-contact .right-form {
+    display: none;
+  }
+  .right-form {
+    display: block;
+    position: absolute;
+    right: 67px;
+    top: 0;
+  }
+  .right-form.active {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-nav.active ~ .right-search-contact .right-form {
+    display: none;
+  }
+  .right-form {
+    display: block;
+    position: absolute;
+    right: 67px;
+    top: 0;
+  }
+  .right-form.active {
+    display: block;
+  }
 }
 
 

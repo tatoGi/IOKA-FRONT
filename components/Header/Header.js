@@ -52,8 +52,8 @@ const Header = ({ navigationData }) => {
 
   const handleSearchToggle = (e) => {
     e.stopPropagation();
+    if (isMobileMenuOpen) return; // Don't open search if mobile menu is open
     setIsSearchOpen(prev => !prev);
-    setIsMobileMenuOpen(false); // Ensure mobile menu is closed when search is opened
     if (!isSearchOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
     } else {

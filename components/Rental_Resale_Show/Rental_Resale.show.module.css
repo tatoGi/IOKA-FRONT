@@ -2078,11 +2078,20 @@ font-weight: 600;
   }
 }
 @media (max-width: 480px) {
+  .content_sharediv{
+    width: 309px;
+  }
   .sharediv{
     width: 100%;
   }
-  .contactBtnperson{
+  .shareButton{
     width: 100%;
+    max-width: 309px;
+    border-radius: 8px;
+    height: 40px;
+  }
+  .contactBtnperson{
+    width: 149px;
         height: 40px;
         border-radius: 8px;
         padding-top: 12px;
@@ -2091,7 +2100,13 @@ font-weight: 600;
         padding-left: 45px;
         gap: 10px;
         background-color: #0A273B;
-        max-width: 120px;
+  }
+  .whatsappperson{
+    width: 149px;
+    max-width: 149px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #0A273B;
   }
   .sidevabarlocation{
     width: 100%;
