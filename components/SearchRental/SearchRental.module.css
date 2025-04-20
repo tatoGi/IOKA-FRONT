@@ -337,7 +337,7 @@ select.filterBtn {
   }
 
   .searchBar {
-    width: 298px !important;  
+    width: 100% !important;  
     height: 48px;
     border-radius: 8px;
     border-width: 1px;
