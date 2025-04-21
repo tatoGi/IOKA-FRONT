@@ -17,6 +17,22 @@ const NewsSection = () => {
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 1024);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,100 +84,104 @@ const NewsSection = () => {
         </div>
         
         <div className="news-slider-s">
-          <Swiper
-            effect={"coverflow"}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={"auto"}
-            initialSlide={0}
-            allowTouchMove={true}
-            touchRatio={1}
-            touchAngle={45}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2,
-              slideShadows: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[EffectCoverflow, Pagination, Autoplay]}
-            className="mySwiper"
-            breakpoints={{
-              320: {
-                slidesPerView: 1.2,
-                spaceBetween: 16,
-                initialSlide: 0,
-                allowTouchMove: true,
-              },
-              575: {
-                slidesPerView: 1.2,
-                spaceBetween: 16,
-                initialSlide: 0,
-                allowTouchMove: true,
-              },
-              640: {
-                slidesPerView: 1.2,
-                spaceBetween: 24,
-                initialSlide: 0,
-                allowTouchMove: true,
-              },
-              768: {
-                slidesPerView: 1.2,
-                spaceBetween: 24,
-                initialSlide: 0,
-                allowTouchMove: true,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 24,
-                initialSlide: 0,
-                allowTouchMove: true,
-              },
-              1560: {
-                slidesPerView: 4,
-                spaceBetween: 24,
-                initialSlide: 0,
-                allowTouchMove: true,
-              }
-            }}
-          >
-            {blogs?.map((article, index) => (
-              <SwiperSlide key={index}>
-                <div className="news-item">
-                  <div className="n-image">
-                    <Image
-                      src={
-                        article.image
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(article.image)}`
-                          : baseimage
-                      }
-                      alt="newsimage"
-                      width={400}
-                      height={400}
-                    />
+          {isMobileView ? (
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={1.5}
+              initialSlide={1}
+              allowTouchMove={true}
+              touchRatio={1}
+              touchAngle={45}
+              coverflowEffect={{
+                rotate: 20,
+                stretch: 0,
+                depth: 350,
+                modifier: 1,
+                slideShadows: true,
+              }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              modules={[EffectCoverflow, Autoplay]}
+              className="mySwiper"
+              spaceBetween={-30}
+            >
+              {blogs?.map((article, index) => (
+                <SwiperSlide key={index}>
+                  <div className="news-item">
+                    <div className="n-image">
+                      <Image
+                        src={
+                          article.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(article.image)}`
+                            : baseimage
+                        }
+                        alt="newsimage"
+                        width={400}
+                        height={400}
+                      />
+                    </div>
+                    <div className="n-content">
+                      <span></span>
+                      <div className="n-text">{article.title}</div>
+                    </div>
+                    <Link
+                      href={`/blog/${article.slug}`}
+                      className="news-read-more"
+                    >
+                      Read More
+                      <LeftArrow />
+                    </Link>
                   </div>
-                  <div className="n-content">
-                    <span></span>
-                    <div className="n-text">{article.title}</div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <Swiper
+              slidesPerView={4}
+              spaceBetween={24}
+              grabCursor={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              modules={[Autoplay]}
+              className="mySwiper"
+            >
+              {blogs?.map((article, index) => (
+                <SwiperSlide key={index}>
+                  <div className="news-item">
+                    <div className="n-image">
+                      <Image
+                        src={
+                          article.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(article.image)}`
+                            : baseimage
+                        }
+                        alt="newsimage"
+                        width={400}
+                        height={400}
+                      />
+                    </div>
+                    <div className="n-content">
+                      <span></span>
+                      <div className="n-text">{article.title}</div>
+                    </div>
+                    <Link
+                      href={`/blog/${article.slug}`}
+                      className="news-read-more"
+                    >
+                      Read More
+                      <LeftArrow />
+                    </Link>
                   </div>
-                  <Link
-                    href={`/blog/${article.slug}`}
-                    className="news-read-more"
-                  >
-                    Read More
-                    <LeftArrow />
-                  </Link>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
           <Link
             href={pages.find(p => p.type_id === 6)?.slug || "/Blog-Page"}
             className="news-see-more_mobile-only"

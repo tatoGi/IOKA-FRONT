@@ -151,17 +151,18 @@ const Header = ({ navigationData }) => {
         <div className="header-cont">
           <div className="container">
             <div className="header-box">
+            <Link href={logoLink} className="logo-img">
               <div className="left-cont-image">
-                <Link href={logoLink} className="logo-img">
+               
                   <div className="white-logo">
-                    <Image src={Logo} alt="logo" width={138} height={42} />
+                    <Image src={Logo} alt="logo" width={138} height={42} priority />
                   </div>
                   <div className="dark-logo">
                     <Image src={LogoDark} alt="logo" width={138} height={42} />
                   </div>
-                </Link>
+                
               </div>
-
+              </Link>
               {/* Mobile Burger Menu */}
               <div
                 className="mobile-burger-menu"

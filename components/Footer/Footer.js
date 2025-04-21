@@ -36,16 +36,10 @@ const Footer = ({ navigationData, settings }) => {
   // Get footer settings
   const footerSettings = settings?.footer || [];
   const socialSettings = settings?.social || [];
-  
-  console.log('Full settings:', settings);
-  console.log('Footer settings:', footerSettings);
-  console.log('Description setting:', footerSettings.find(setting => setting.key === 'description'));
-  console.log('Description value:', footerSettings.find(setting => setting.key === 'description')?.value);
 
   // Helper function to get setting value by key
   const getSettingValue = (key) => {
     const setting = footerSettings.find(setting => setting.key === key);
-    console.log(`Getting ${key}:`, setting?.value);
     return setting?.value || '';
   };
 
@@ -56,7 +50,7 @@ const Footer = ({ navigationData, settings }) => {
           {/* Footer Logo */}
           <div className="footer-logo">
             <Link href={"/"}>
-              <Image src={Logo} alt="footer-logo" width={138} height={42} />
+              <Image src={Logo} alt="footer-logo" width={138} height={42} priority />
             </Link>
           </div>
 

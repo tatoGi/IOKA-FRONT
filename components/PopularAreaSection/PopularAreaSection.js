@@ -71,8 +71,7 @@ const PopularAreaSection = (sectionFourData) => {
                     width={400}
                     height={400}
                     alt={area.title || "Popular Area"}
-                    layout="responsive"
-                    objectFit="cover"
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="off-relase-box">
@@ -107,8 +106,7 @@ const PopularAreaSection = (sectionFourData) => {
                     width={400}
                     height={400}
                     alt={area.title || "Popular Area"}
-                    layout="responsive"
-                    objectFit="cover"
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="off-relase-box">

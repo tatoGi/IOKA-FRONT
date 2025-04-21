@@ -699,7 +699,7 @@ main {
   color: #7ACBC4;
   font-size: 24px;
   font-weight: 600; 
-  max-width: 352px;
+  max-width: 355px;
  font-family: 'Montserrat';
 }
 .s-t-1 span{
@@ -1499,7 +1499,7 @@ border: 1px #E6EBED solid;
 
 @media (max-width: 1200px) {
   .vacancies-grid {
-    -ms-grid-columns: (1fr)[2];
+    -ms-grid-columns: 1fr 20px 1fr;
     grid-template-columns: repeat(2, 1fr);
   }
 }
