@@ -1,17 +1,27 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Logo from "../../assets/img/ioka-logo-white.png";
-const Meta = ({
-  title = "IOKA - Your Trusted Real Estate Partner",
-  keywords = "real estate, property, Dubai, UAE, investment, luxury homes, apartments, villas",
-  description = "IOKA is your trusted real estate partner in Dubai, offering premium properties, expert guidance, and exceptional service for all your real estate needs.",
-  url = "",
-  image = "/assets/img/ioka-logo-white.png",
-  site = "IOKA Real Estate",
-  type = "website",
-}) => {
+import { SETTINGS_API } from "../../routes/apiRoutes";
+import { useEffect, useState } from "react";
+
+const Meta = () => {
   const router = useRouter();
+  const [settings, setSettings] = useState(null);
   
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch(SETTINGS_API);
+        const data = await response.json();
+        setSettings(data);
+      } catch (error) {
+        console.error('Error fetching settings:', error);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
   
@@ -20,36 +30,44 @@ const Meta = ({
     (isDevelopment ? 'http://localhost:3000' : 'https://ioka-front.vercel.app/');
   
   // Construct the current URL
-  const currentUrl = url || `${siteUrl}${router.asPath}`;
+  const currentUrl = `${siteUrl}${router.asPath}`;
   
+  // Get meta settings if available
+  const metaSettings = settings?.meta || [];
+  const getMetaValue = (key) => {
+    const setting = metaSettings.find(item => item.key === key);
+    return setting?.value || '';
+  };
+
   // Handle image URLs - if it's a relative path, prepend the site URL
-  const defaultImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+  const ogImage = getMetaValue('og_image') ? `${siteUrl}/storage/${getMetaValue('og_image')}` : `${siteUrl}/assets/img/ioka-logo-white.png`;
+  const twitterImage = getMetaValue('twitter_image') ? `${siteUrl}/storage/${getMetaValue('twitter_image')}` : `${siteUrl}/assets/img/ioka-logo-white.png`;
 
   return (
     <Head>
       {/* Basic Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-      <meta name="keywords" content={keywords} />
-      <meta name="description" content={description} />
+      <meta name="keywords" content={getMetaValue('keywords')} />
+      <meta name="description" content={getMetaValue('description')} />
       <link rel="icon" href="/favicon.ico" />
       <meta charSet="utf-8" />
-      <title>{title}</title>
+      <title>{getMetaValue('title')}</title>
 
       {/* Open Graph Meta Tags */}
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={getMetaValue('og_title')} />
       <meta property="og:url" content={currentUrl} />
-      <meta property="og:image" content={defaultImage} />
-      <meta property="og:description" content={description} />
-      <meta property="og:site_name" content={site} />
-      <meta property="og:type" content={type} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:description" content={getMetaValue('og_description')} />
+      <meta property="og:site_name" content="IOKA Real Estate" />
+      <meta property="og:type" content="website" />
 
       {/* Twitter Meta Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={site} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={defaultImage} />
+      <meta name="twitter:card" content={getMetaValue('twitter_card')} />
+      <meta name="twitter:site" content="IOKA Real Estate" />
+      <meta name="twitter:title" content={getMetaValue('twitter_title')} />
+      <meta name="twitter:description" content={getMetaValue('twitter_description')} />
+      <meta name="twitter:image" content={twitterImage} />
 
       {/* Additional Meta Tags */}
       <meta name="robots" content="index, follow" />
