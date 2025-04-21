@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/free-mode";
+import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 // import required modules
-import { FreeMode, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import LeftArrow from "../icons/LeftArrow";
 import Image from "next/image";
@@ -69,39 +69,66 @@ const NewsSection = () => {
         
         <div className="news-slider-s">
           <Swiper
-            slidesPerView={3}
-            spaceBetween={24}
-            freeMode={true}
+            effect={"coverflow"}
             grabCursor={true}
-            modules={[FreeMode, Pagination]}
-            className="mySwiper partners-swp"
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            initialSlide={0}
+            allowTouchMove={true}
+            touchRatio={1}
+            touchAngle={45}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2,
+              slideShadows: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            className="mySwiper"
             breakpoints={{
               320: {
                 slidesPerView: 1.2,
                 spaceBetween: 16,
-                centeredSlides: false,
-                initialSlide: 0
+                initialSlide: 0,
+                allowTouchMove: true,
               },
               575: {
                 slidesPerView: 1.2,
                 spaceBetween: 16,
-                centeredSlides: false
+                initialSlide: 0,
+                allowTouchMove: true,
               },
               640: {
-                slidesPerView: 2,
-                spaceBetween: 24
+                slidesPerView: 1.2,
+                spaceBetween: 24,
+                initialSlide: 0,
+                allowTouchMove: true,
               },
               768: {
-                slidesPerView: 2,
-                spaceBetween: 24
+                slidesPerView: 1.2,
+                spaceBetween: 24,
+                initialSlide: 0,
+                allowTouchMove: true,
               },
               1024: {
                 slidesPerView: 3,
-                spaceBetween: 24
+                spaceBetween: 24,
+                initialSlide: 0,
+                allowTouchMove: true,
               },
               1560: {
                 slidesPerView: 4,
-                spaceBetween: 24
+                spaceBetween: 24,
+                initialSlide: 0,
+                allowTouchMove: true,
               }
             }}
           >
