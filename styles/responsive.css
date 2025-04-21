@@ -441,28 +441,45 @@
             justify-content: center;
     gap: 15px;
   }
+  .header-nav.active ~ .right-search-contact .right-form {
+    display: none;
+  }
   .right-form {
     display: block;
     position: absolute;
     right: 67px;
     top: 0;
   }
-  .right-form.active {
-    display: block;
+  .right-form input {
+    width: 150px;
+    height: 36px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: width 0.3s ease;
   }
-  .searchbtn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
+  .right-form.active{
+    position:absolute;
   }
+  .right-form.active input {
+   
+    height: 48px;
+    width: 319px;
+    border-radius: 28px;
+    padding: 10px 40px 10px 44px;
+    border: 1px solid #0A273B;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    background-color: #ffffff;
+  }
+  .right-form.active input::placeholder {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
   .contactBtn {
     width: 120px;
     height: 36px;
@@ -706,12 +723,9 @@
             justify-content: flex-end;
   }
 
-  .right-form:focus-within input {
-    width: 150px;
-  }
 
   .right-form:focus-within .searchbtn {
-    left: -110px;
+    left: -280px;
   }
 
   .banner-slider {
@@ -1573,7 +1587,7 @@ margin-top: 24px;
 
 .news-see-more_mobile-only{
   display: block;
-  width: 310px;
+  width: 354px;
   height: 44px;
   top: 511px;
   left: 24px;
@@ -1598,20 +1612,7 @@ margin-top: 24px;
 }
 }
 
-@media (max-width: 992px) {
-  .header-nav.active ~ .right-search-contact .right-form {
-    display: none;
-  }
-  .right-form {
-    display: block;
-    position: absolute;
-    right: 67px;
-    top: 0;
-  }
-  .right-form.active {
-    display: block;
-  }
-}
+
 
 @media (max-width: 480px) {
   .header-nav.active ~ .right-search-contact .right-form {
@@ -1626,6 +1627,38 @@ margin-top: 24px;
   .right-form.active {
     display: block;
   }
+  .right-form.active .searchbtn {
+    position: absolute;
+    left: -270px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0A273B;
+}
+.clearbtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  border-radius: 14px;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 9;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  display: none;
+  background-color: #ffffff;
+  top: 31%;
+}
 }
 
 

@@ -52,7 +52,10 @@ const Header = ({ navigationData }) => {
 
   const handleSearchToggle = (e) => {
     e.stopPropagation();
-    if (isMobileMenuOpen) return; // Don't open search if mobile menu is open
+    if (isMobileMenuOpen) {
+      setIsSearchOpen(false);
+      return;
+    }
     setIsSearchOpen(prev => !prev);
     if (!isSearchOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
@@ -111,6 +114,22 @@ const Header = ({ navigationData }) => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
   }, [router.events]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isSearchOpen && 
+          !event.target.closest('.right-form') && 
+          !event.target.closest('.searchbtn')) {
+        setIsSearchOpen(false);
+        setInputValue("");
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSearchOpen]);
 
   const desktopPages = navigationData
     .filter((page) => page.type_id !== 3 && page.active === 1)

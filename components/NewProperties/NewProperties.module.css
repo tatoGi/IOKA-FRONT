@@ -576,28 +576,26 @@
 
 .propertyInfo_mobile details[open] {
   height: auto;
-  position: absolute;
+  position: static;
   width: 100%;
 }
 
 .propertyInfo_mobile details[open] .features_mobile {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   z-index: 100;
   -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: 200px;
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
 }
 
 .propertyInfo_mobile summary {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
           justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -612,6 +610,7 @@
   list-style: none;
   position: relative;
   z-index: 15;
+  gap: 8px;
 }
 
 .propertyInfo_mobile summary::-webkit-details-marker {
@@ -619,20 +618,28 @@
 }
 
 .propertyInfo_mobile summary::after {
-  content: '▼';
-  color: #8FE3DC;
-  font-size: 16px;
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: solid #8FE3DC;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   -o-transition: transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  position: relative;
+  top: -2px;
 }
 
 .propertyInfo_mobile details[open] summary::after {
-  -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-          transform: rotate(180deg);
+  -webkit-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  top: 2px;
 }
 
 .features_mobile {
@@ -640,7 +647,7 @@
   padding: 16px;
   margin: 0;
   background-color: #ffffff;
-  border-radius: 0 0 16px 16px;
+  border-radius:16px;
   width: 100%;
 }
 

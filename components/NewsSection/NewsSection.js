@@ -77,19 +77,22 @@ const NewsSection = () => {
             className="mySwiper partners-swp"
             breakpoints={{
               320: {
-                slidesPerView: 1,
-                spaceBetween: 10
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                centeredSlides: false,
+                initialSlide: 0
               },
               575: {
-                slidesPerView: 1,
-                spaceBetween: 24
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                centeredSlides: false
               },
               640: {
                 slidesPerView: 2,
                 spaceBetween: 24
               },
               768: {
-                slidesPerView: 1,
+                slidesPerView: 2,
                 spaceBetween: 24
               },
               1024: {
