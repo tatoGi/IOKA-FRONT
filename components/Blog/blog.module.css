@@ -261,12 +261,15 @@ margin-top: 2px;
         margin-bottom: 20px;
         -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border: none;
+        border: 1px solid transparent;
         border-radius: 1rem;
         height: 100%;
+        
     }
     
-   
+   .card:hover{
+    border-color: #0A273B;
+   }
     
     .description {
         font-size: 12px;
