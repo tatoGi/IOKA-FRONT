@@ -67,12 +67,12 @@ const Map = ({ locations = [] }) => {
   }
 
   return (
-    <div className={styles.mapWrapper}>
+    <div className={styles.mapWrapper} style={{ height: "400px", width: "100%" }}>
       <MapContainer
         center={[48.8566, 2.3522]}
         zoom={4}
         scrollWheelZoom={false}
-        style={{ height: "400px", width: "100%", borderRadius: "8px" }}
+        style={{ height: "100%", width: "100%", borderRadius: "8px" }}
         zoomControl={true}
         zoomControlPosition="topright"
       >
