@@ -84,7 +84,6 @@ const Blog = ({ initialData }) => {
                   alt={card.image_alt || card.title}
                   width={372}
                   height={200}
-                  priority={index < 2}
                 />
                 </div>
                 <div className={styles["card-body"]}>
