@@ -1,235 +1,64 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import Logo from "../../assets/img/ioka-logo-white.png";
-import InstagramIcon from "../icons/InstagramIcon";
-import LocationIcon from "../icons/LocationIcon";
-import MessageIcon from "../icons/MessageIcon";
-import PlaneIcon from "../icons/PlaneIcon";
-import YoutubeIcon from "../icons/YoutubeIcon";
-import FacebookIcon from "../icons/FacebookIcon";
-import XIcon from "../icons/XIcon";
-import PhoneIcon from "../icons/PhoneIcon";
-
-const isMobile = () => {
-  if (typeof window !== "undefined") {
-    return window.innerWidth <= 768;
-  }
-  return false;
-};
-
-const Footer = ({ navigationData, settings }) => {
-  const [mobileView, setMobileView] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setMobileView(isMobile());
-    handleResize(); // Check on initial render
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Filter and sort pages for footer categories
-  const footerPages = navigationData
-    ?.filter((page) => page.active === 1)
-    .sort((a, b) => a.sort - b.sort);
-
-  // Get footer settings
-  const footerSettings = settings?.footer || [];
-  const socialSettings = settings?.social || [];
-
-  // Helper function to get setting value by key
-  const getSettingValue = (key) => {
-    const setting = footerSettings.find(setting => setting.key === key);
-    return setting?.value || '';
-  };
+import { SETTINGS_API } from "../../routes/apiRoutes";
+const Meta = ({
+  title = "IOKA - Your Trusted Real Estate Partner",
+  keywords = "real estate, property, Dubai, UAE, investment, luxury homes, apartments, villas",
+  description = "IOKA is your trusted real estate partner in Dubai, offering premium properties, expert guidance, and exceptional service for all your real estate needs.",
+  url = "",
+  image = "/assets/img/ioka-logo-white.png",
+  site = "IOKA Real Estate",
+  type = "website",
+}) => {
+  const router = useRouter();
+  
+  // Get the current environment
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
+  // Set the base URL based on environment
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+    (isDevelopment ? 'http://localhost:3000' : 'https://ioka-front.vercel.app/');
+  
+  // Construct the current URL
+  const currentUrl = url || `${siteUrl}${router.asPath}`;
+  
+  // Handle image URLs - if it's a relative path, prepend the site URL
+  const defaultImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
   return (
-    <div className="footer">
-      <div className="container">
-        <div className="footer-cont">
-          {/* Footer Logo */}
-          <div className="footer-logo">
-            <Link href={"/"}>
-              <Image src={Logo} alt="footer-logo" width={138} height={42} priority />
-            </Link>
-          </div>
+    <Head>
+      {/* Basic Meta Tags */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-          {/* Mobile-specific order */}
-          <div className="mobile-order">
-            {/* Footer Contact Section */}
-            <div className="footer-contant">
-              <div className="contact-text" style={{ color: 'white' }}>
-                {getSettingValue('description')}
-              </div>
-            </div>
+      <meta name="keywords" content={keywords} />
+      <meta name="description" content={description} />
+      <link rel="icon" href="/favicon.ico" />
+      <meta charSet="utf-8" />
+      <title>{title}</title>
 
-            {/* Footer Categories */}
-            <div className="footer-category">
-              <div className="f-category-title">Categories</div>
-              <ul>
-                {footerPages?.map((page) => (
-                  <li key={page.id}>
-                    <Link href={`/${page.slug}`}>{page.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="footer-contact-links">
-              <Link href={"#"} className="footer-contact-item">
-                <div className="icon-00">
-                  <LocationIcon />
-                </div>
-                <div className="f-text-0">
-                  {getSettingValue('contact.address')}
-                </div>
-              </Link>
-              <Link href={"#"} className="footer-contact-item">
-                <div className="icon-00">
-                  <PhoneIcon />
-                </div>
-                <div className="f-text-0">{getSettingValue('contact.phone')}</div>
-              </Link>
-              <Link href={"#"} className="footer-contact-item">
-                <div className="icon-00">
-                  <MessageIcon />
-                </div>
-                <div className="f-text-0">{getSettingValue('contact.email')}</div>
-              </Link>
-            </div>
-            {/* Social Icons Section */}
-            <div className="soc-icons-b">
-              {socialSettings.map((social) => (
-                <Link key={social.id} href={social.value} className="soc-icon-item">
-                  <div className={`${social.key}-box soc-box`}>
-                    <div className="icon-circle">
-                      {social.key === 'facebook' && <FacebookIcon />}
-                      {social.key === 'twitter' && <XIcon />}
-                      {social.key === 'instagram' && <InstagramIcon />}
-                      {social.key === 'youtube' && <YoutubeIcon />}
-                    </div>
-                    <div className="soc-title"></div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+      {/* Open Graph Meta Tags */}
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={currentUrl} />
+      <meta property="og:image" content={defaultImage} />
+      <meta property="og:description" content={description} />
+      <meta property="og:site_name" content={site} />
+      <meta property="og:type" content={type} />
 
-          {/* Desktop-specific order */}
-          <div className="desktop-order">
-            {/* Footer Box */}
-            <div className="footer-box">
-              {/* Social Icons Section */}
-              <div className="soc-icons-b">
-                <div className="follow-text">Follow Us:</div>
-                {socialSettings.map((social) => (
-                  <Link key={social.id} href={social.value} className="soc-icon-item">
-                    <div className={`${social.key}-box soc-box`}>
-                      <div className="icon-circle">
-                        {social.key === 'facebook' && <FacebookIcon />}
-                        {social.key === 'twitter' && <XIcon />}
-                        {social.key === 'instagram' && <InstagramIcon />}
-                        {social.key === 'youtube' && <YoutubeIcon />}
-                      </div>
-                      <div className="soc-title">{social.key.charAt(0).toUpperCase() + social.key.slice(1)}</div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+      {/* Twitter Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={site} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={defaultImage} />
 
-              {/* Footer Contact Section */}
-              <div className="footer-contant">
-                <div className="contact-text">
-                  {getSettingValue('description')}
-                </div>
-                <div className="footer-contact-links">
-                  <Link href={"#"} className="footer-contact-item">
-                    <div className="icon-00">
-                      <LocationIcon />
-                    </div>
-                    <div className="f-text-0">
-                      {getSettingValue('contact.address')}
-                    </div>
-                  </Link>
-                  <Link href={"#"} className="footer-contact-item">
-                    <div className="icon-00">
-                      <PhoneIcon />
-                    </div>
-                    <div className="f-text-0">{getSettingValue('contact.phone')}</div>
-                  </Link>
-                  <Link href={"#"} className="footer-contact-item">
-                    <div className="icon-00">
-                      <MessageIcon />
-                    </div>
-                    <div className="f-text-0">{getSettingValue('contact.email')}</div>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Footer Categories */}
-              <div className="footer-category">
-                <div className="f-category-title">Categories</div>
-                <ul>
-                  {footerPages?.map((page) => (
-                    <li key={page.id}>
-                      <Link href={`/${page.slug}`}>{page.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Footer Subscribe */}
-              <div className="footer-message">
-                <div className="mes-f-title">{getSettingValue('newsletter.title')}</div>
-                <div className="mes-f-text">
-                  {getSettingValue('newsletter.description')}
-                </div>
-                <form action="#" method="POST">
-                  <div className="message-icon-send">
-                    <MessageIcon />
-                  </div>
-                  <input type="text" placeholder={getSettingValue('newsletter.placeholder')} />
-                  <div className="plane-icon">
-                    <PlaneIcon />
-                  </div>
-                  <button type="submit">{getSettingValue('newsletter.button_text')}</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="copyright-0">
-          {mobileView ? (
-            <>
-              <div className="r-c">
-                <ul>
-                  <li><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
-                  <div className="footer-line"></div>
-                  <li><Link href="/privacy-policy">Privacy & Cookies</Link></li>
-                </ul>
-              </div>
-              
-              <div className="l-c">
-                {getSettingValue('copyright')}
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="l-c">
-                {getSettingValue('copyright')}
-              </div>
-              <div className="r-c">
-                <ul>
-                  <li><Link href="/terms-and-conditions">Terms Of Service</Link></li>
-                  <li><Link href="/privacy-policy">Privacy Policy</Link></li>
-                  <li><Link href="/faq">FAQ</Link></li>
-                </ul>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+      {/* Additional Meta Tags */}
+      <meta name="robots" content="index, follow" />
+      <meta name="language" content="English" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="author" content="IOKA Real Estate" />
+    </Head>
   );
 };
 
-export default Footer;
+export default Meta;
