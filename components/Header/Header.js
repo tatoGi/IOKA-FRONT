@@ -70,17 +70,20 @@ const Header = ({ navigationData }) => {
     setIsSearchOpen(false); // Ensure search is closed when mobile menu is opened
   };
   useEffect(() => {
+    // Set scroll-header immediately for non-home pages
+    if (!isHomePage && !isSearchPage) {
+      setActiveScroll(true);
+      return;
+    }
+
     function handleScroll() {
       const currentScrollY = window.pageYOffset;
       
-      // Always add scroll-header when scrolling down on any page
+      // For home page, add scroll-header only when scrolling
       if (currentScrollY >= 20) {
         setActiveScroll(true);
       } else {
-        // Only remove scroll-header when at top if not on a regular page
-        if (!(!isHomePage && !isSearchPage)) {
-          setActiveScroll(false);
-        }
+        setActiveScroll(false);
       }
     }
 

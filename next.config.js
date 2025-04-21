@@ -37,6 +37,7 @@ const nextConfig = {
         pathname: '/**',
       }
     ],
+    unoptimized: false,
     domains: [API_HOSTNAME, 'test.ioka.ae'],
   },
   transpilePackages: ['@ant-design/icons'],
