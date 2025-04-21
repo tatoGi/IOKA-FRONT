@@ -8,26 +8,29 @@ import { CONTACT_API } from "../../routes/apiRoutes";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
-const MapComponent = dynamic(() => import("../Map/Map"), {
-  ssr: false,
-  loading: () => (
-    <div className={styles.mapPlaceholder}>
-      <div>Loading map...</div>
-    </div>
-  )
-});
+const MapComponent = dynamic(
+  () => import("../Map/Map").then((mod) => mod.default),
+  {
+    ssr: false,
+    loading: () => (
+      <div className={styles.mapPlaceholder}>
+        <div>Loading map...</div>
+      </div>
+    )
+  }
+);
 
 const Contact = ({ initialData, id }) => {
-  
   const [cardData, setCardData] = useState(initialData || {});
   const [isMobile, setIsMobile] = useState(false);
-  console.log("Contact", cardData);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // Check on initial render
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -35,7 +38,7 @@ const Contact = ({ initialData, id }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
-        console.error("No ID provided to AboutUs component");
+        console.error("No ID provided to Contact component");
         return;
       }
       try {
@@ -45,6 +48,7 @@ const Contact = ({ initialData, id }) => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(error.message);
       }
     };
 
@@ -52,6 +56,10 @@ const Contact = ({ initialData, id }) => {
       fetchData();
     }
   }, [initialData, id]);
+
+  if (error) {
+    return <div className={styles.errorContainer}>Error loading contact information: {error}</div>;
+  }
 
   return (
     <div className={styles.contactPage}>
@@ -107,7 +115,7 @@ const Contact = ({ initialData, id }) => {
           </div>
           <div className="col-md-6">
             <div className={styles.mapSection}>
-              <MapComponent locations={cardData.additional_fields?.locations} />
+              <MapComponent locations={cardData.additional_fields?.locations || []} />
             </div>
           </div>
         </div>
@@ -150,7 +158,7 @@ const Contact = ({ initialData, id }) => {
         )}
       </div>
       <div className={`container ${styles.containerWithMargin}`}>
-        <ContactForm  pageTitle="Contact Page"/>
+        <ContactForm pageTitle="Contact Page"/>
       </div>
     </div>
   );

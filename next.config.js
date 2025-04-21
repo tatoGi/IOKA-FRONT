@@ -41,7 +41,7 @@ const nextConfig = {
   },
   transpilePackages: ['@ant-design/icons'],
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
     optimizePackageImports: ['@ant-design/icons', 'antd'],
   },
   swcMinify: true,

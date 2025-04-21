@@ -10,6 +10,18 @@
   padding: 2rem 0;
 }
 
+.errorContainer {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  background-color: #fff3f3;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  color: #d32f2f;
+  text-align: center;
+  font-family: 'Montserrat';
+}
+
 .contactInfo {
   display: -ms-grid;
   display: grid;
