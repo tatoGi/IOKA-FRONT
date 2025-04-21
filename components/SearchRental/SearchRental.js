@@ -1,12 +1,18 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import styles from "./SearchRental.module.css";  
+import React, { useState, useEffect, useCallback } from "react";
+import styles from "./SearchSection.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 import RangeInputPopup from "./RangeInputPopup";
 
 const SearchSection = ({ onFilterChange, filterOptions }) => {
- 
+  useEffect(() => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      document.body.classList.add('ios-device');
+    }
+  }, []);
+
   const [filters, setFilters] = useState({
     propertyType: "",
     price: "",
@@ -18,8 +24,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
   const [showPricePopup, setShowPricePopup] = useState(false);
   const [showSqFtPopup, setShowSqFtPopup] = useState(false);
-  const priceButtonRef = useRef(null);
-  const areaButtonRef = useRef(null);
 
   const closeAllPopups = () => {
     setShowPricePopup(false);
@@ -55,13 +59,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         location: field === 'searchQuery' ? value : null,
       };
 
-      // Debug logging
-      console.log('Sending filters to backend:', {
-        field,
-        value,
-        backendFilters,
-        bathrooms: backendFilters.bathrooms
-      });
+  
 
       // Remove null or empty values from the query parameters
       const filteredParams = Object.fromEntries(
@@ -147,7 +145,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         </div>
         <div className={styles.filterButtons}>
           <select
-            className={styles.filterBtn + " " + styles.propertyTypeSelect}
+            className={`${styles.filterBtn} ${styles.propertyType}`}
             value={filters.propertyType}
             onClick={() => {
               setShowPricePopup(false);
@@ -168,12 +166,11 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
           
           <div className={styles.filterButtonWrapper}>
             <button
-              ref={priceButtonRef}
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
               onClick={() => setShowPricePopup(true)}
             >
               <span>Price</span>
-              {filters.price && <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>}
+              <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
             </button>
             {filters.price && (
               <button
@@ -184,7 +181,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showPricePopup && (
-              <div className={styles.popupWrapper}>
+              <div className={styles.popupContainer}>
                 <RangeInputPopup
                   isOpen={showPricePopup}
                   onClose={() => setShowPricePopup(false)}
@@ -238,12 +235,13 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
           <div className={styles.filterButtonWrapper}>
             <button
-              ref={areaButtonRef}
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => setShowSqFtPopup(true)}
             >
               <span>Area</span>
-              {filters.sqFt && <span className={styles.value}>{formatRangeDisplay(filters.sqFt)} Square Meters</span>}
+              <span className={styles.value}>
+                {filters.sqFt ? `${formatRangeDisplay(filters.sqFt)} Square Meters` : ""}
+              </span>
             </button>
             {filters.sqFt && (
               <button
@@ -254,7 +252,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showSqFtPopup && (
-              <div className={styles.popupWrapper}>
+              <div className={styles.popupContainer}>
                 <RangeInputPopup
                   isOpen={showSqFtPopup}
                   onClose={() => setShowSqFtPopup(false)}
