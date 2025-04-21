@@ -23,10 +23,11 @@
     background: #fff;
     overflow: hidden;
     max-height: 412px;
+    border: 1px solid transparent;
 }
 
 .card:hover {
-   border: 1px solid #0A273B;
+   border-color: #0A273B;
 }
 .imageContainer{
     overflow: hidden;
