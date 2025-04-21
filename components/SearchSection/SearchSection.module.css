@@ -130,7 +130,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 35px 10px 16px;
+  padding: 10px 16px;
   border: 1px solid #07151F;
   border-radius: 8px;
   background: white;
@@ -145,6 +145,13 @@
   height: 40px;
   position: relative;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  background-size: 14.004688262939453px 8.001562118530273px;
 }
 
 .filterBtn::after {
@@ -155,7 +162,7 @@
   border-right: 6px solid transparent;
   border-top: 6px solid #6B7280;
   position: absolute;
-  right: 16px;
+  right: 13px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -368,7 +375,7 @@ select.filterBtn {
   }
 
   .filterBtn {
-    padding: 10px 35px 10px 16px;
+    padding: 10px 16px;
     white-space: nowrap;
     border-radius: 8px;
     border-width: 1px;
@@ -381,10 +388,11 @@ select.filterBtn {
     color: #07151F;
     min-width: auto;
     flex-shrink: 0;
+    background-position: right 13px center;
   }
 
   .filterBtn::after {
-    right: 10px !important;
+    right: 13px !important;
     border-top: 4px solid #07151F;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -402,9 +410,8 @@ select.filterBtn {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
   -webkit-overflow-scrolling: touch;
@@ -426,8 +433,10 @@ select.filterBtn {
   max-height: 80vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  margin: auto;
+  margin: 20px auto 0;
   position: relative;
+  top: 25%;
+  left: 10%;
 }
 
 .popupContent h3 {

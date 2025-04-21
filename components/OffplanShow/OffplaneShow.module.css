@@ -161,7 +161,7 @@ letter-spacing: 0%;
   text-align: center;
   font-family: 'Montserrat'; /* Apply Montserrat font */
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 0;
   max-width: 538px;
 }
 
@@ -174,7 +174,7 @@ letter-spacing: 0%;
   text-align: center;
   font-family: 'Montserrat';
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 0;
   max-width: 538px;
 }
 
@@ -182,8 +182,10 @@ letter-spacing: 0%;
   font-size: 18px;
   color: #333;
   margin-bottom: 24px;
-  font-family: 'Montserrat'; /* Apply Montserrat font */
+  font-family: 'Montserrat';
   width: 10rem;
+  text-align: start;
+  padding: 0 16px;
 }
 
 .qrbody {
@@ -429,53 +431,48 @@ text-align: start;
 }
 
 .nearbyGrid {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; /* Stack items vertically */
-  gap: 16px; /* Add spacing between items */
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .nearbyColumn {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; /* Align items vertically */
-  gap: 12px; /* Space between image and text */
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  width: 100%;
+  max-width: 346.6666564941406px;
+height: 24px;
+justify-content: space-between;
+
 }
 
 .nearbyImage {
-  width: 40px; /* Adjust size as needed */
+  width: 40px;
   height: 40px;
-  border-radius: 50%; /* Make the image circular */
-  -o-object-fit: cover;
-     object-fit: cover;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .nearbyPlace {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
 .placeName {
   color: #07151F;
   font-weight: 500;
-  font-size: 16px; /* Adjust font size for mobile */
+  font-size: 16px;
   font-family: 'Montserrat';
 }
 
 .placeDistance {
   color: #007AFF;
   font-weight: 500;
-  font-size: 16px; /* Adjust font size for mobile */
+  font-size: 16px;
   font-family: 'Montserrat';
 }
 
@@ -493,7 +490,11 @@ text-align: start;
 
 .contactButton {
   margin-top: 20px;
-  text-align: center;
+  text-align: right;
+  margin-right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .contactBtn {
@@ -506,7 +507,7 @@ text-align: start;
   font-size: 16px;
   width: 100%;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 0;
   max-width: 538px;
 }
 
@@ -686,25 +687,20 @@ text-align: start;
 }
 .exteriorInteriorSection {
   margin-top: 40px;
-  background-color: #0A273B; /* Dark background */
-  padding: 40px 20px; /* Add padding for spacing */
-  color: #fff; /* White text for the entire section */
-  width: 100%; /* Full width */
+  background-color: #0A273B;
+  padding: 40px 20px;
+  color: #fff;
+  width: 100%;
 }
 .exteriorimage{
   border-radius: 20px;
 }
 .sectionHeader {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 40px; /* Adjusted margin */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
 }
 
 .exteriorInteriorSection h3 {
@@ -713,12 +709,9 @@ text-align: start;
   font-size: 30px;
   line-height: 100%;
   letter-spacing: 0%;
-  
 }
 
 .switcher {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   gap: 10px;
 }
@@ -730,12 +723,9 @@ text-align: start;
   padding: 6px 23px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
-  -webkit-transition: background-color 0.3s, color 0.3s;
-  -o-transition: background-color 0.3s, color 0.3s;
-  transition: background-color 0.3s, color 0.3s;
-  font-family: 'Montserrat'; /* Apply Montserrat font */
+  font-family: 'Montserrat';
   font-size: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .switchButton.active {
@@ -744,42 +734,36 @@ text-align: start;
 }
 
 .content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .exteriorSection, .interiorSection {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 20px;
+  width: 100%;
+}
+
+.exteriorSection .row, .interiorSection .row {
+  margin: -12px;
 }
 
 .exteriorSection .col-md-3, .interiorSection .col-md-3 {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 calc(25% - 20px);
-          flex: 1 1 calc(25% - 20px); /* Four items per row */
-  max-width: calc(25% - 20px);
+  padding: 12px;
 }
 
 .exteriorimage {
-  border-radius: 20px;
-  width: 100%;
-height: 272px;
-border-radius: 16px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  
+  width: 372px;
+  height: 272px;
+  border-radius: 16px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
+
+.exteriorimage:hover {
+  transform: scale(1.02);
+}
+
 .container {
   padding: 20px;
 }
@@ -1211,39 +1195,34 @@ letter-spacing: 0%;
     display: none;
   }
   .nearbyGrid {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; /* Stack items vertically */
-    gap: 12px; /* Add spacing between items */
+    flex-direction: column;
+    gap: 12px;
     margin-bottom: 40px;
   }
 
   .nearbyColumn {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between; /* Align items horizontally */
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center; /* Center items vertically */
-    padding: 8px 0; /* Add padding for spacing */
-    border-bottom: 1px solid #E5E7EB; /* Add a divider between items */
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .nearbyImage {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
   }
 
   .placeName {
-    font-size: 14px; /* Adjust font size for mobile */
+    font-size: 14px;
     font-weight: 500;
     color: #07151F;
   }
 
   .placeDistance {
-    font-size: 14px; /* Adjust font size for mobile */
+    font-size: 14px;
     font-weight: 500;
     color: #007AFF;
   }
@@ -1409,9 +1388,7 @@ letter-spacing: 0%;
 }
   .exteriorInteriorSection {
     margin-top: 0;
-    background-color: #0A2C3D;
     padding: 24px 0;
-    position: relative;
   }
 
   .sectionHeader {
@@ -1421,132 +1398,35 @@ letter-spacing: 0%;
   }
 
   .exteriorInteriorSection h3 {
-    font-family: 'Montserrat';
-    font-weight: 600;
     font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
     margin-bottom: 16px;
-    color: #FFFFFF;
   }
 
   .switcher {
-    display: flex;
     gap: 8px;
-    width: 100%;
   }
 
   .switchButton {
-    flex: 1;
-    font-family: 'Montserrat';
-    font-weight: 500;
     font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    border: 1px solid #FFFFFF;
-    color: #FFFFFF;
-    background: transparent;
-    width: 95px !important;
-    height: 32px !important;
+    padding: 8px 16px;
     border-radius: 8px;
-    padding: 8px 10px;
-    max-width: 95px !important;
   }
 
-  .switchButton.active {
-    background-color: #FFFFFF;
-    color: #0A2C3D;
-    width: 95px !important;
-    height: 32px !important;
-    border-radius: 8px;
-    padding: 8px 10px;
-    max-width: 95px !important;
-  }
-
-
-  .swiperSlide {
-    width: 280px !important;
-    height: 200px !important;
-    margin-right: 16px;
+  .content {
+    padding: 0;
   }
 
   .exteriorimage {
     width: 280px;
     height: 200px;
     border-radius: 12px;
-    object-fit: cover;
-  }
-
-  .content {
-    padding: 0;
-    margin-top: 24px;
-    overflow: visible;
-  }
-
-  .exteriorSection, .interiorSection {
-    width: 100%;
-  }
-
-  .exteriorSection .container, .interiorSection .container {
-    padding: 0;
-    overflow: visible;
-  }
-
-  .sectionTitle {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 24px;
-  }
-
-  .propertyCard {
-    width: 280px;
-    height: 200px;
-    margin-right: 0; /* Remove margin as spacing is handled by spaceBetween */
-  }
-
-  .imageContainer {
-    width: 100%;
-    height: 100%;
-  }
-
-  .sectionImage {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-  }
-
-  .overlay {
-    padding: 16px;
-  }
-
-  .propertyName {
-    font-size: 14px;
-  }
-
-  .arrowLink {
-    width: 32px;
-    height: 32px;
-  }
-
-  /* Property slider specific styles */
-  .swiper {
-    width: 100%;
-    padding-right: 16px !important;
-    overflow: hidden !important; /* Change from visible to hidden */
-    margin-bottom: 40px;
+    left: 5px;
+        position: relative;
   }
 
   .swiperSlide {
     width: 280px !important;
     height: 200px !important;
     margin-right: 16px;
-  }
-
-  /* Container adjustments */
-  .container {
-    padding: 0;
-    overflow-x: hidden; /* Hide horizontal overflow */
-    width: 100%;
   }
 }

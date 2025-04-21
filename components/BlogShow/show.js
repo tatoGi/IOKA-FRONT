@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styles from "./blogShow.module.css";
 import blogbanner from "../../assets/img/blogbanner.png"; // Ensure this path is correct
 import Image from "next/image";
-import BlogIcon from "../../assets/img/calendarblogshow.svg"; // Ensure this path is correct
+import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is correct
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
@@ -70,7 +70,7 @@ const BlogShow = ({ blogData }) => {
                 )}`
               : baseimage
           }
-          alt={blogData.blog.banner_image_alt}
+          alt={blogData.blog.banner_image_alt || "Blog banner image"}
           width={800}
           height={400}
           className={styles.banner_image}
@@ -78,7 +78,7 @@ const BlogShow = ({ blogData }) => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-9">
+          <div className="col-md-8">
             <h1 className={styles.title}>{blogData.blog.title}</h1>
             <div className={styles.date}>
               <Image src={BlogIcon} alt="blogicon" width={20} height={20} />
@@ -91,7 +91,7 @@ const BlogShow = ({ blogData }) => {
               {/* Display the blog body */}
             </div>
           </div>
-          <div className="col-md-3 d-none d-md-block">
+          <div className="col-md-4 d-none d-md-block">
             <div className={styles.sidebar}>
               <h3>Similar Articles</h3>
 
