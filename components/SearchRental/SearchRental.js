@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import styles from "./SearchSection.module.css";
+import styles from "./SearchRental.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
