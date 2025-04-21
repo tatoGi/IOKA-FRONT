@@ -40,6 +40,13 @@ const nextConfig = {
     domains: [API_HOSTNAME, 'test.ioka.ae'],
   },
   transpilePackages: ['@ant-design/icons'],
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@ant-design/icons', 'antd'],
+  },
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
 };
 
 module.exports = nextConfig;
