@@ -1276,7 +1276,7 @@
     letter-spacing: 0%;
     white-space   : nowrap;
     font-family   : 'Montserrat';
-    width         : 188px;
+    width         : 177px;
   }
 
   .contactBtnperson {
@@ -1479,7 +1479,7 @@
   }
 
   .contactButton {
-    width      : 456px;
+    width      : 100%;
     margin-left: auto;
   }
 
