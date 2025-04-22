@@ -1187,7 +1187,6 @@
 
   .sharediv {
     align-items   : center;
-    width         : 456px;
     height        : auto;
     border        : 1px solid #07151F;
     border-radius : 16px;
@@ -1198,6 +1197,8 @@
     font-family   : 'Montserrat';
     margin-bottom : 32px;
     margin-left   : auto;
+    max-width: 456px;
+    width: 100%;
   }
 
   .content_sharediv {
@@ -1308,7 +1309,8 @@
   }
 
   .sidevabarlocation {
-    width        : 28.5rem;
+    max-width        : 28.5rem;
+    width: 100%;
     height       : 13.5rem;
     border       : 1px solid #07151F;
     border-radius: 16px;
@@ -1318,7 +1320,8 @@
   }
 
   .sidebarqr {
-    width         : 28.5rem;
+    max-width         : 28.5rem;
+    width: 100%;
     height        : auto;
     border        : 1px solid #07151F;
     border-radius : 16px;
@@ -1905,8 +1908,9 @@
   }
 
   .sharediv {
-    width    : 354px;
+    max-width    : 354px;
     height   : auto;
+    width: 100%;
 
   }
 

@@ -437,7 +437,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <div className={styles.description}>
             <h1>Description</h1>
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-8 p-5">
                 <div className={styles.body}>
                   <pre className={styles.descriptionText}>
                     <div
