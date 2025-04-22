@@ -1260,7 +1260,7 @@
 
   .contactButtons {
     display      : flex;
-    gap          : 40px;
+    gap          : 20px;
     margin-bottom: 16px;
   }
 
