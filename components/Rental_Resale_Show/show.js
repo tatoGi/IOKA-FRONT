@@ -216,7 +216,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           </div>
         </div>
       )}
-      <div className={!isMobile ? "container-fluid" : "container"}>
+      <div className= "container">
         {!isMobile && (
           <div className={styles.gallery}>
             {/* Main Image */}
