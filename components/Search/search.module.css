@@ -306,6 +306,7 @@
   .searchBox {
     max-width: 1580px;
     height: 90px;
+    bottom: 20rem;
   }
   .searchInput {
     font-size: 18px;
@@ -338,6 +339,7 @@
   .searchBox {
     max-width: 1320px;
     height: 85px;
+    bottom: 20rem;
   }
   .searchInput {
     font-size: 17px;

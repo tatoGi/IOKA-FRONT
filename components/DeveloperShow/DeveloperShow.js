@@ -211,8 +211,7 @@ const DeveloperShow = (developerData) => {
             {!isMobileView && (
               <div className={styles.listingInfo}>
                 <h3>
-                  Off Plan properties for sale in Dubai developed by Emaar
-                  Properties
+                  Off Plan properties for sale 
                 </h3>
                 <span className={styles.listingCount}>
                   {offplanListings.length} Listings
@@ -718,8 +717,11 @@ const DeveloperShow = (developerData) => {
                     <div
                       className={styles.awardSubtitle}
                       dangerouslySetInnerHTML={{
-                        __html:
-                          award.award_description || "No description available"
+                        __html: award.award_description 
+                          ? (award.award_description.length > 150 
+                              ? award.award_description.substring(0, 150) + '...' 
+                              : award.award_description)
+                          : "No description available"
                       }}
                     />
                   </div>

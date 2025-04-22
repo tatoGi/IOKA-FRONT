@@ -155,7 +155,6 @@
   font-size: 20px;
   line-height: 1.6;
   max-width: 800px;
-  margin: 0 auto;
   color: #0A273B;
   font-family: 'Montserrat';
 }
@@ -455,7 +454,11 @@
   gap: 5px;
   margin-bottom: 12px;
 }
-
+.priceWrapper{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 .propertyStats {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1164,24 +1167,29 @@
 
 /* Award content container */
 .awardContent {
-  margin-bottom: 80px;
+  flex: 1;
+  padding-right: 20px;
 }
 
 /* Award title styling */
 .awardTitle {
-  color: #0A273B;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 32px;
-  margin-top: 36px;
-  font-family: 'Montserrat';
+  margin-bottom: 10px;
+  color: #1A1A1A;
 }
 
 /* Award subtitle styling */
 .awardSubtitle {
-  color: #0A273B;
-  font-size: 20px;
-  font-family: 'Montserrat';
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 15px;
 }
 
 /* Bottom section with year and button */
