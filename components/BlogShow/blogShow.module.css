@@ -230,6 +230,7 @@ letter-spacing: 0%;
     }
     .similarArticles .card-body {
         padding: 0;
+        border: 1px transparent;
     }
     .similarArticles .card-title {
         font-size: 14px;

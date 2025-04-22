@@ -154,18 +154,7 @@
   background-size: 14.004688262939453px 8.001562118530273px;
 }
 
-.filterBtn::after {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #6B7280;
-  position: absolute;
-  right: 13px;
-  top: 50%;
-  transform: translateY(-50%);
-}
+
 
 .filterBtn select {
   border: none;
@@ -391,12 +380,7 @@ select.filterBtn {
     background-position: right 13px center;
   }
 
-  .filterBtn::after {
-    right: 13px !important;
-    border-top: 4px solid #07151F;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-  }
+  
 
   select.filterBtn {
     padding-right: 25px;

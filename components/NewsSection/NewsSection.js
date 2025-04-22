@@ -85,29 +85,8 @@ const NewsSection = () => {
         
         <div className="news-slider-s">
           {isMobileView ? (
-            <Swiper
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={1.5}
-              initialSlide={1}
-              allowTouchMove={true}
-              touchRatio={1}
-              touchAngle={45}
-              coverflowEffect={{
-                rotate: 20,
-                stretch: 0,
-                depth: 350,
-                modifier: 1,
-                slideShadows: true,
-              }}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              modules={[EffectCoverflow, Autoplay]}
-              className="mySwiper"
-              spaceBetween={-30}
+            <Swiper className="mySwiper"
+          
             >
               {blogs?.map((article, index) => (
                 <SwiperSlide key={index}>
@@ -140,47 +119,35 @@ const NewsSection = () => {
               ))}
             </Swiper>
           ) : (
-            <Swiper
-              slidesPerView={4}
-              spaceBetween={24}
-              grabCursor={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-              className="mySwiper"
-            >
+            <div className="desktop-news-grid">
               {blogs?.map((article, index) => (
-                <SwiperSlide key={index}>
-                  <div className="news-item">
-                    <div className="n-image">
-                      <Image
-                        src={
-                          article.image
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(article.image)}`
-                            : baseimage
-                        }
-                        alt="newsimage"
-                        width={400}
-                        height={400}
-                      />
-                    </div>
-                    <div className="n-content">
-                      <span></span>
-                      <div className="n-text">{article.title}</div>
-                    </div>
-                    <Link
-                      href={`/blog/${article.slug}`}
-                      className="news-read-more"
-                    >
-                      Read More
-                      <LeftArrow />
-                    </Link>
+                <div key={index} className="news-item">
+                  <div className="n-image">
+                    <Image
+                      src={
+                        article.image
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(article.image)}`
+                          : baseimage
+                      }
+                      alt="newsimage"
+                      width={400}
+                      height={400}
+                    />
                   </div>
-                </SwiperSlide>
+                  <div className="n-content">
+                    <span></span>
+                    <div className="n-text">{article.title}</div>
+                  </div>
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="news-read-more"
+                  >
+                    Read More
+                    <LeftArrow />
+                  </Link>
+                </div>
               ))}
-            </Swiper>
+            </div>
           )}
           <Link
             href={pages.find(p => p.type_id === 6)?.slug || "/Blog-Page"}

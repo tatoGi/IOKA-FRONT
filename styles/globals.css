@@ -832,6 +832,11 @@ margin-top: 24px;
   width: 100%;
   background: #0A273B;
 }
+.desktop-news-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
 .news-header {
   display: -webkit-box;
   display: -ms-flexbox;
