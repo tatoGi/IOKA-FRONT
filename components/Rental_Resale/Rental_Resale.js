@@ -386,7 +386,7 @@ const Rental_Resale = () => {
                         <div className={Styles.iconGroup}>
                           <Image src={homeIcon} alt="Home" width={18} height={18} />
                         </div>
-                        <span>{listing.tags === 6 ? 'Rental' : 'Resale'}</span>
+                        <span>{listing.tags === 6 || listing.tags === 5 ? 'Resale' : 'Rental'}</span>
                       </div>
                     </div>
                     <div className={Styles.smallImagesGrid}>

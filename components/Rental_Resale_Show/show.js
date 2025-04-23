@@ -243,7 +243,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.iconGroup}>
                 <Image src={homeIcon} className={styles.iconGroupImg} alt="Home" width={18} height={18} />
                 </div>
-                <span>{RENTAL_RESALE_DATA.tags === 6 ? 'Resale' : 'Rental'}</span>
+                <span>{listing.tags === 6 || listing.tags === 5 ? 'Resale' : 'Rental'}</span>
               </div>
             </div>
 
