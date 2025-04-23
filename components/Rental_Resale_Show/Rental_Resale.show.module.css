@@ -284,6 +284,7 @@
 .description {
   margin-top  : 20px;
   font-family : 'Montserrat';
+  padding-left: 3rem;
 }
 
 .descriptionText {
@@ -1150,6 +1151,7 @@
   .description {
     margin-top  : 20px;
     font-family : 'Montserrat';
+    padding-left: 3rem;
   }
 
   .descriptionText {
