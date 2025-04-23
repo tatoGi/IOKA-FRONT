@@ -132,6 +132,10 @@
       line-height: 100%;
       margin-bottom: 1rem;
       font-family: 'Montserrat';
+      max-width: 372px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     
     .features {
