@@ -694,12 +694,12 @@ const DeveloperShow = (developerData) => {
                       <span>{listing.sq_ft} Sq.Ft</span>
                     </div>
                   </div>
+                  
                   <div className={styles.resaleDetails}>
-                    <p>{limitTextLength(listing.description, 150)}</p>
-                    <p>6,115 Sq. Ft. BUA</p>
-                    <p>10,111 Sq. Ft. PLOT</p>
-                    <p>Lime Tree Valley</p>
-                    <p>Trakheesi Permit: 6123123124512</p>
+                   
+                    {listing.details && listing.details.map((detail, index) => (
+                      <p key={index}>{detail.title}: {detail.info}</p>
+                    ))}
                   </div>
                   <div className={styles.resaleFooter}>
                     <div className={styles.agentInfo}>

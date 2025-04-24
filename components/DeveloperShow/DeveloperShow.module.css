@@ -370,7 +370,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
-  width: 437px;
+  width: 504px;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
@@ -831,7 +831,6 @@
 
 .resaleHeader {
   max-width: 1360px;
-  margin: 0 auto;
   margin-bottom: 24px;
 }
 
@@ -913,6 +912,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 16px;
+  width: 642px;
 }
 
 .resaleContent h4 {
@@ -1307,6 +1307,18 @@ letter-spacing: 0%;
 /* Active dot styling */
 .slickDots li.slick-active .dot {
   background-color: #4DEFE1;
+}
+@media (max-width: 1600px) {
+  .propertyCard{
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    width: 412px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+  }
 }
 @media (max-width: 768px) {
   .heroSection{
