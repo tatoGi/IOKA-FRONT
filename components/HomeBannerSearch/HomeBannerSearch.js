@@ -22,6 +22,7 @@ const HomeBannerSearch = () => {
     bathMax: ""
   });
   const [locations, setLocations] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
   const [loadingLocations, setLoadingLocations] = useState(false);
   const [error, setError] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState([]);
@@ -49,6 +50,7 @@ const HomeBannerSearch = () => {
           setError(null);
           const response = await axios.get(LOCATIONS_API);
           setLocations(response.data);
+          setFilteredLocations(response.data);
         } catch (err) {
           setError("Failed to fetch locations");
           console.error("Error fetching locations:", err);
@@ -150,6 +152,14 @@ const HomeBannerSearch = () => {
       ...prev,
       [name]: value
     }));
+
+    // Filter locations when searching in the "where" input
+    if (name === "where") {
+      const filtered = locations.filter(location =>
+        location.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredLocations(filtered);
+    }
   };
 
   // Property type toggle
@@ -251,7 +261,7 @@ const HomeBannerSearch = () => {
             </div>
             
             <div className={styles.location_cards}>
-              {locations.map((location) => (
+              {filteredLocations.map((location) => (
                 <div
                   key={location.id}
                   className={`${styles.location_card} ${
@@ -471,7 +481,7 @@ const HomeBannerSearch = () => {
                   </div>
                   
                   <div className={styles.location_cards}>
-                    {locations.map((location) => (
+                    {filteredLocations.map((location) => (
                       <div
                         key={location.id}
                         className={`${styles.location_card} ${

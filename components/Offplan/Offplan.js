@@ -64,7 +64,7 @@ const Offplan = ({ initialData, initialPagination }) => {
     setIsLoading(true);
     try {
       const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
-      
+      console.log(filters);
       // Prepare query parameters
       const queryParams = new URLSearchParams();
       queryParams.append('page', page);
