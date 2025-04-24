@@ -311,7 +311,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
         
       </div>
       
-      {(showLocationDropdown || isLoading) && (
+      {(showLocationDropdown && filters.searchQuery) && (
           <div className={styles.locationDropdown}>
             {filters.searchQuery && (
               <button
@@ -339,7 +339,22 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
                 </div>
               ))
             ) : (
-              <div className={styles.locationItem}>No locations found</div>
+              <div className={styles.locationItem}>
+                No locations found
+                {filters.searchQuery && (
+                  <button
+                    className={styles.clearButton}
+                    onClick={() => {
+                      setFilters(prev => ({ ...prev, searchQuery: "" }));
+                      setMatchingLocations([]);
+                      setShowLocationDropdown(false);
+                      handleFilterChange("searchQuery", "");
+                    }}
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
             )}
           </div>
         )}

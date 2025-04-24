@@ -91,24 +91,37 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   }, [searchQuery, cardData, initialPagination]);
 
-  const handleSearch = async (e) => {
-    if (e.key === 'Enter' && searchQuery.length >= 3) {
+  const handleSearch = async (searchText) => {
+    if (searchText.length >= 3) {
       setIsLoading(true);
       try {
         const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
           params: {
-            search: searchQuery,
+            search: searchText,
             per_page: 10
           }
         });
-        console.log('Search Response:', response.data); // Debug log
+        
         const { data, meta } = response.data;
         
-        // Ensure data is properly structured
-        const processedData = Array.isArray(data) ? data : [data];
-        console.log('Processed Data:', processedData); // Debug log
+        // Process the data array from the response
+        const processedData = data.data.map(developer => ({
+          id: developer.id,
+          title: developer.title || 'No Title',
+          paragraph: developer.paragraph || 'No Description',
+          tags: typeof developer.tags === 'string' ? JSON.parse(developer.tags || '[]') : 
+                (Array.isArray(developer.tags) ? developer.tags : []),
+          photo: typeof developer.photo === 'string' ? JSON.parse(developer.photo || '[]') : 
+                 (Array.isArray(developer.photo) ? developer.photo : []),
+          phone: developer.phone || '',
+          whatsapp: developer.whatsapp || '',
+          slug: developer.slug || '',
+          awards: developer.awards || [],
+          offplan_listings: developer.offplan_listings || [],
+          rental_listings: developer.rental_listings || [],
+          rental_resale_listings: developer.rental_resale_listings || []
+        }));
         
-        // Update both filteredData and cardData
         setCardData(processedData);
         setFilteredData(processedData);
         setTotalPages(meta.last_page);
@@ -120,6 +133,26 @@ const Developer = ({ initialData, initialPagination }) => {
       } finally {
         setIsLoading(false);
       }
+    }
+  };
+
+  // Handle search input changes
+  const handleSearchInputChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (value.length >= 3) {
+      handleSearch(value);
+    } else if (value.length === 0) {
+      // Reset to initial data if search is cleared
+      fetchData(1);
+      setCurrentPage(1);
+    }
+  };
+
+  // Handle search icon click
+  const handleSearchIconClick = () => {
+    if (searchQuery.length >= 3) {
+      handleSearch(searchQuery);
     }
   };
 
@@ -212,11 +245,14 @@ const Developer = ({ initialData, initialPagination }) => {
               type="text"
               placeholder="City, Building or community"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleSearch}
+              onChange={handleSearchInputChange}
               className={`form-control ${styles.searchInput}`}
             />
-            <FaSearch className={`position-absolute ${styles.searchIcon}`} />
+            <FaSearch 
+              className={`position-absolute ${styles.searchIcon}`} 
+              onClick={handleSearchIconClick}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
 
           {/* Developer Cards */}
@@ -315,7 +351,7 @@ const Developer = ({ initialData, initialPagination }) => {
           <div className={styles.pagination}>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
-                key={page}
+                key={`page-${page}`}
                 onClick={() => handlePageChangeForSearch(page)}
                 className={`${styles.pageButton} ${
                   currentPage === page ? styles.active : ""
@@ -326,6 +362,7 @@ const Developer = ({ initialData, initialPagination }) => {
               </button>
             ))}
             <button
+              key="next-button"
               onClick={() => handlePageChangeForSearch(currentPage + 1)}
               disabled={currentPage === totalPages || isLoading}
               className={styles.pageButton}

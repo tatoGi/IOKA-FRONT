@@ -59,9 +59,12 @@
     -webkit-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    border: 1px solid transparent;
   }
   
-    
+    .propertyCard:hover {
+     border: 1px solid #3480b2;
+    }
     .imageContainer {
       position: relative;
       width: 100%;
@@ -901,8 +904,11 @@
       margin-top: 24px;
       cursor: pointer;
       height: 380px;
+      border: 1px solid transparent;
     }
-    
+    .resaleCard:hover {
+      border: 1px solid #6b7280;
+    }
     .resaleImage {
       position: relative;
       width: 50%;
