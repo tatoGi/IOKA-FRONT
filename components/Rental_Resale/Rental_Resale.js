@@ -30,7 +30,7 @@ const Rental_Resale = () => {
 
   // Filter options for SearchRental component
   const filterOptions = {
-    propertyTypes: ['Apartment', 'Villa', 'Townhouse', 'Penthouse', 'Land'],
+    propertyTypes: ["Apartment", "Villa", "Townhouse", "Penthouse", "Land"],
     bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
     bathrooms: [1, 2, 3, 4, 5, 6, 7, 8]
   };
@@ -55,15 +55,15 @@ const Rental_Resale = () => {
     try {
       // Use FILTER_RENTAL_RESALE_API when filters are present
       const apiUrl = filterParams ? FILTER_RENTAL_RESALE_API : RENTAL_RESALE;
-      
+
       // Prepare query parameters
       const queryParams = new URLSearchParams();
-      queryParams.append('page', page);
-      
+      queryParams.append("page", page);
+
       // Add filters if they exist
       if (filterParams) {
         Object.entries(filterParams).forEach(([key, value]) => {
-          if (value !== null && value !== '') {
+          if (value !== null && value !== "") {
             queryParams.append(key, value);
           }
         });
@@ -293,7 +293,8 @@ const Rental_Resale = () => {
                           </span>
                           <span className={Styles.price}>
                             AED{" "}
-                            {property.amount?.amount_dirhams?.toLocaleString() || "N/A"}
+                            {property.amount?.amount_dirhams?.toLocaleString() ||
+                              "N/A"}
                           </span>
                         </div>
                       </div>
@@ -323,8 +324,8 @@ const Rental_Resale = () => {
             </div>
           )}
 
-          <SearchRental 
-            onFilterChange={handleFilterChange} 
+          <SearchRental
+            onFilterChange={handleFilterChange}
             filterOptions={filterOptions}
           />
 
@@ -382,29 +383,48 @@ const Rental_Resale = () => {
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
                       />
-                      {listing.tags === 6 || listing.tags === 5 ? (
-                        <>
-                          <div className={Styles.resaleButton}>
-                            <div className={Styles.iconGroup}>
-                              <Image src={homeIcon} alt="Home" width={18} height={18} />
-                            </div>
-                            <span>Resale</span>
-                          </div>
-                          {listing.tags === 6 && (
-                            <div className={Styles.resaleButton}>
+                      {Array.isArray(listing.tags) ? (
+                        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', position: 'absolute', bottom: '10px', left: '10px' }}>
+                          {listing.tags.includes("6") && (
+                            <div className={Styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
                               <div className={Styles.iconGroup}>
-                                <Image src={homeIcon} alt="Home" width={18} height={18} />
+                                <Image
+                                  src={homeIcon}
+                                  alt="Home"
+                                  width={18}
+                                  height={18}
+                                />
+                              </div>
+                              <span>Resale</span>
+                            </div>
+                          )}
+                          {listing.tags.includes("5") && (
+                            <div className={Styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
+                              <div className={Styles.iconGroup}>
+                                <Image
+                                  src={homeIcon}
+                                  alt="Home"
+                                  width={18}
+                                  height={18}
+                                />
                               </div>
                               <span>Rental</span>
                             </div>
                           )}
-                        </>
+                        </div>
                       ) : (
                         <div className={Styles.resaleButton}>
                           <div className={Styles.iconGroup}>
-                            <Image src={homeIcon} alt="Home" width={18} height={18} />
+                            <Image
+                              src={homeIcon}
+                              alt="Home"
+                              width={18}
+                              height={18}
+                            />
                           </div>
-                          <span>Rental</span>
+                          <span>
+                            {listing.tags === "6" ? "Resale" : "Rental"}
+                          </span>
                         </div>
                       )}
                     </div>
@@ -529,12 +549,11 @@ const Rental_Resale = () => {
                         {listing.subtitle}
                       </p>
                       <div className={Styles.priceContainer}>
-                      {isMobile && (
-                        <div className={Styles.starting_price}>
-
-                          <span>Starting Price</span>
-                        </div>
-                      )}
+                        {isMobile && (
+                          <div className={Styles.starting_price}>
+                            <span>Starting Price</span>
+                          </div>
+                        )}
                         <p className={Styles.resalePrice}>
                           USD {listing.amount.amount?.toLocaleString() || "N/A"}
                           K
@@ -546,7 +565,7 @@ const Rental_Resale = () => {
                           K
                         </p>
                       </div>
-                     
+
                       <div className={Styles.resaleStats}>
                         <div className={Styles.statGroup}>
                           <Image
@@ -587,11 +606,14 @@ const Rental_Resale = () => {
                           />
                           <span>{listing.sq_ft} Gr</span>
                         </div>
-
                       </div>
                       {isMobile && (
                         <div className={Styles.description}>
-                          <p dangerouslySetInnerHTML={{ __html: listing.description }} />
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: listing.description
+                            }}
+                          />
                         </div>
                       )}
                       {!isMobile && (
@@ -787,7 +809,8 @@ const Rental_Resale = () => {
                         </span>
                         <span className={Styles.price}>
                           AED{" "}
-                          {property.amount?.amount_dirhams?.toLocaleString() || "N/A"}
+                          {property.amount?.amount_dirhams?.toLocaleString() ||
+                            "N/A"}
                         </span>
                       </div>
                     </div>

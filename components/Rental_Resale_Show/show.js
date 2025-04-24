@@ -239,12 +239,50 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   alt="Main"
                 />
               </a>
-              <div className={styles.resaleButton}>
-                <div className={styles.iconGroup}>
-                <Image src={homeIcon} className={styles.iconGroupImg} alt="Home" width={18} height={18} />
-                </div>
-                 <span>{RENTAL_RESALE_DATA.tags === 6 || RENTAL_RESALE_DATA.tags === 5 ? 'Resale' : 'Rental'}</span>
-              </div>
+              {Array.isArray(RENTAL_RESALE_DATA.tags) ? (
+                        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', position: 'absolute', bottom: '10px', left: '10px' }}>
+                          {RENTAL_RESALE_DATA.tags.includes("6") && (
+                            <div className={styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
+                              <div className={styles.iconGroup}>
+                                <Image
+                                  src={homeIcon}
+                                  alt="Home"
+                                  width={18}
+                                  height={18}
+                                />
+                              </div>
+                              <span>Resale</span>
+                            </div>
+                          )}
+                          {RENTAL_RESALE_DATA.tags.includes("5") && (
+                            <div className={styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
+                              <div className={styles.iconGroup}>
+                                <Image
+                                  src={homeIcon}
+                                  alt="Home"
+                                  width={18}
+                                  height={18}
+                                />
+                              </div>
+                              <span>Rental</span>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className={styles.resaleButton}>
+                          <div className={styles.iconGroup}>
+                            <Image
+                              src={homeIcon}
+                              alt="Home"
+                              width={18}
+                              height={18}
+                            />
+                          </div>
+                          <span>
+                            {RENTAL_RESALE_DATA.tags === "6" ? "Resale" : "Rental"}
+                          </span>
+                        </div>
+                      )}
             </div>
 
             {/* Small Images Grid */}
