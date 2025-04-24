@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 import RangeInputPopup from "./RangeInputPopup";
+import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
 const SearchSection = ({ onFilterChange, filterOptions }) => {
   useEffect(() => {
@@ -24,6 +25,9 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
   const [showPricePopup, setShowPricePopup] = useState(false);
   const [showSqFtPopup, setShowSqFtPopup] = useState(false);
+  const [matchingLocations, setMatchingLocations] = useState([]);
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeAllPopups = () => {
     setShowPricePopup(false);
@@ -117,6 +121,41 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
     return "";
   };
 
+  const handleLocationSearch = useCallback(
+    debounce(async (query) => {
+      if (!query.trim()) {
+        setMatchingLocations([]);
+        setShowLocationDropdown(false);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${LOCATION_SEARCH_API}?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        // Handle both array and object response formats
+        const locations = data.locations || data || [];
+        
+        setMatchingLocations(locations);
+        // Always show dropdown if we're loading or have results
+        setShowLocationDropdown(true);
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+        setMatchingLocations([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300),
+    []
+  );
+
+  const handleLocationSelect = (location) => {
+    setFilters(prev => ({ ...prev, searchQuery: location }));
+    setShowLocationDropdown(false);
+    handleFilterChange("searchQuery", location);
+  };
+
   return (
     <div className={styles.searchSection}>
       <div className={styles.container}>
@@ -127,22 +166,27 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             placeholder="Search by location"
             className={styles.searchInput}
             value={filters.searchQuery}
-            onChange={(e) => setFilters(prev => ({ ...prev, searchQuery: e.target.value }))}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleFilterChange("searchQuery", e.target.value);
+            onChange={(e) => {
+              const value = e.target.value;
+              setFilters(prev => ({ ...prev, searchQuery: value }));
+              handleLocationSearch(value);
+            }}
+            onFocus={() => {
+              setShowLocationDropdown(true);
+              if (filters.searchQuery) {
+                handleLocationSearch(filters.searchQuery);
+              }
+            }}
+            onClick={() => {
+              setShowLocationDropdown(true);
+              if (filters.searchQuery) {
+                handleLocationSearch(filters.searchQuery);
               }
             }}
           />
-          {filters.searchQuery && (
-            <button
-              className={styles.clearButton}
-              onClick={() => clearFilter("searchQuery")}
-            >
-              ×
-            </button>
-          )}
         </div>
+
+
         <div className={styles.filterButtons}>
           <select
             className={`${styles.filterBtn} ${styles.propertyType}`}
@@ -264,7 +308,41 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             )}
           </div>
         </div>
+        
       </div>
+      
+      {(showLocationDropdown || isLoading) && (
+          <div className={styles.locationDropdown}>
+            {filters.searchQuery && (
+              <button
+                className={styles.clearButton}
+                onClick={() => {
+                  setFilters(prev => ({ ...prev, searchQuery: "" }));
+                  setMatchingLocations([]);
+                  setShowLocationDropdown(false);
+                  handleFilterChange("searchQuery", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+            {isLoading ? (
+              <div className={styles.locationItem}>Loading...</div>
+            ) : matchingLocations && matchingLocations.length > 0 ? (
+              matchingLocations.map((location, index) => (
+                <div
+                  key={index}
+                  className={styles.locationItem}
+                  onClick={() => handleLocationSelect(location)}
+                >
+                  {location}
+                </div>
+              ))
+            ) : (
+              <div className={styles.locationItem}>No locations found</div>
+            )}
+          </div>
+        )}
     </div>
   );
 };
