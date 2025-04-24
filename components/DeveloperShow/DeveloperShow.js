@@ -15,6 +15,7 @@ import awardimg1 from "../../assets/img/awardimg1.png";
 import Slider from "react-slick";
 import SearchSection from "../SearchSection/SearchSection";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import Link from "next/link";
 
 const DeveloperShow = (developerData) => {
   const photos = developerData.developerData.photo
@@ -109,7 +110,10 @@ const DeveloperShow = (developerData) => {
     centerMode: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true
+    variableWidth: true,
+    swipeToSlide: true,
+    touchThreshold: 10,
+    touchMove: true
   };
 
   const limitTextLength = (text, maxLength) => {
@@ -125,6 +129,38 @@ const DeveloperShow = (developerData) => {
       return `${(amount / 1000).toFixed(1)}K`;
     }
     return amount.toString();
+  };
+
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+    if (!touchStart) return;
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 30;
+    const isRightSwipe = distance < -30;
+
+    if (isLeftSwipe && currentSlide < offplanListings.length - 2) {
+      setCurrentSlide(prev => prev + 1);
+    } else if (isRightSwipe && currentSlide > 0) {
+      setCurrentSlide(prev => prev - 1);
+    }
+
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   return (
@@ -256,7 +292,7 @@ const DeveloperShow = (developerData) => {
             {isMobileView ? (
               <div className={styles.listView}>
                 {offplanListings.map((listing) => (
-                  <div key={listing.id} className={styles.listItem}>
+                  <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.listItem}>
                     <div className={styles.propertyImage}>
                       <Image
                         src={
@@ -345,10 +381,9 @@ const DeveloperShow = (developerData) => {
                         </button>
                       </div>
                     </div>
-                  </div>
-                 
+                  </Link>
                 ))}
-                 <div className={styles.show_more_button}>Show more properties</div>
+                <div className={styles.show_more_button}>Show more properties</div>
               </div>
             ) : (
               <div className={styles.sliderWrapper}>
@@ -373,11 +408,19 @@ const DeveloperShow = (developerData) => {
                 <div
                   className={styles.propertyGrid}
                   style={{
-                    transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`
+                    transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`,
+                    touchAction: 'none',
+                    WebkitOverflowScrolling: 'touch',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    msUserSelect: 'none'
                   }}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
                 >
                   {offplanListings.map((listing) => (
-                    <div key={listing.id} className={styles.propertyCard}>
+                    <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard}>
                       <div className={styles.propertyImage}>
                         <span className={styles.propertyType}>
                           {listing.property_type}
@@ -470,7 +513,7 @@ const DeveloperShow = (developerData) => {
                           </button>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
 
@@ -515,7 +558,7 @@ const DeveloperShow = (developerData) => {
         {isMobileView ? (
           <div className={styles.listView}>
             {rentalListings.map((listing) => (
-              <div key={listing.id} className={styles.listItem}>
+              <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.listItem}>
                 <div className={styles.propertyImage}>
                   <Image
                     src={
@@ -596,13 +639,13 @@ const DeveloperShow = (developerData) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
           <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
             {rentalListings.map((listing) => (
-              <div key={listing.id} className={styles.resaleCard}>
+              <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.resaleCard}>
                 <div className={styles.resaleImage}>
                   <Image
                     src={
@@ -683,7 +726,7 @@ const DeveloperShow = (developerData) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </Slider>
         )}
