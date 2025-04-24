@@ -382,19 +382,31 @@ const Rental_Resale = () => {
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
                       />
-                      <div className={Styles.resaleButton}>
-                        <div className={Styles.iconGroup}>
-                          <Image src={homeIcon} alt="Home" width={18} height={18} />
-                        </div>
-                        {listing.tags === 6 || listing.tags === 5 ? (
-                          <>
+                      {listing.tags === 6 || listing.tags === 5 ? (
+                        <>
+                          <div className={Styles.resaleButton}>
+                            <div className={Styles.iconGroup}>
+                              <Image src={homeIcon} alt="Home" width={18} height={18} />
+                            </div>
                             <span>Resale</span>
-                            {listing.tags === 6 && <span>Rental</span>}
-                          </>
-                        ) : (
+                          </div>
+                          {listing.tags === 6 && (
+                            <div className={Styles.resaleButton}>
+                              <div className={Styles.iconGroup}>
+                                <Image src={homeIcon} alt="Home" width={18} height={18} />
+                              </div>
+                              <span>Rental</span>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className={Styles.resaleButton}>
+                          <div className={Styles.iconGroup}>
+                            <Image src={homeIcon} alt="Home" width={18} height={18} />
+                          </div>
                           <span>Rental</span>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                     <div className={Styles.smallImagesGrid}>
                       {galleryImages.slice(1, 3).map((image, index) => (
