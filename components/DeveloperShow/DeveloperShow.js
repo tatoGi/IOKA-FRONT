@@ -135,18 +135,15 @@ const DeveloperShow = (developerData) => {
   const [touchEnd, setTouchEnd] = useState(null);
 
   const handleTouchStart = (e) => {
-    e.preventDefault();
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
-    e.preventDefault();
     if (!touchStart) return;
     setTouchEnd(e.touches[0].clientX);
   };
 
-  const handleTouchEnd = (e) => {
-    e.preventDefault();
+  const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     
     const distance = touchStart - touchEnd;
@@ -409,11 +406,13 @@ const DeveloperShow = (developerData) => {
                   className={styles.propertyGrid}
                   style={{
                     transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`,
-                    touchAction: 'none',
+                    touchAction: 'pan-x',
                     WebkitOverflowScrolling: 'touch',
                     userSelect: 'none',
                     WebkitUserSelect: 'none',
-                    msUserSelect: 'none'
+                    msUserSelect: 'none',
+                    overflowX: 'hidden',
+                    overflowY: 'hidden'
                   }}
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
