@@ -1539,7 +1539,7 @@ background-color: #FFFFFF;
   }
   .news-see-more_mobile-only{
     display: block;
-    width: 354px;
+    width: 100%;
     height: 44px;
     top: 511px;
     left: 24px;
@@ -1651,10 +1651,27 @@ margin-top: 24px;
   .subscribe-section{
     padding: 0;
   }
-
+  .mobile-burger-menu {
+    right: 24px;
+    display: block;
+    cursor: pointer;
+    z-index: 101;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    width: 21px;
+    height: 18px;
+    top: 42px;
+    position: absolute;
+    height: 21px !important;
+  }
+   /* When menu is open, make burger lines black */
+   .header-nav.active~.mobile-burger-menu .burger-line {
+    background-color: #000;
+  }
 .news-see-more_mobile-only{
   display: block;
-  width: 354px;
+  width: 100%;
   height: 44px;
   top: 511px;
   left: 24px;
@@ -1724,7 +1741,25 @@ top: 31%;
 }
 @media (max-width: 400px) {
   .news-see-more_mobile-only{
-    width: 345px;
+    width: 100%;
+  }
+  .mobile-burger-menu {
+    right: 24px;
+    display: block;
+    cursor: pointer;
+    z-index: 101;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    width: 21px;
+    height: 18px;
+    top: 42px;
+    position: absolute;
+    height: 21px !important;
+  }
+   /* When menu is open, make burger lines black */
+   .header-nav.active~.mobile-burger-menu .burger-line {
+    background-color: #000;
   }
   .right-form.active input {
     height: 48px;
