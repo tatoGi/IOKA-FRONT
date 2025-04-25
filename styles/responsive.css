@@ -1124,7 +1124,7 @@
     font-weight: 600;
     color: #7ACBC4;
     text-decoration: none;
-    margin: 0 2px 0 0;
+    margin: 0 5px 0 0;
     text-align: start;
     display: block;
   }
@@ -1677,55 +1677,83 @@ margin-top: 24px;
 .s-t-2 span{
   font-size: 16px;
 }
+.header-nav.active ~ .right-search-contact .right-form {
+  display: none;
 }
-
-
-
-@media (max-width: 480px) {
-  .header-nav.active ~ .right-search-contact .right-form {
-    display: none;
-  }
-  .right-form {
-    display: block;
-    position: absolute;
-    right: 67px;
-    top: 0;
-  }
-  .right-form.active {
-    display: block;
-  }
-  .right-form.active .searchbtn {
-    position: absolute;
-    left: -270px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    opacity: 0.8;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #0A273B;
+.right-form {
+  display: block;
+  position: absolute;
+  right: 67px;
+  top: 0;
+}
+.right-form.active {
+  display: block;
+}
+.right-form.active .searchbtn {
+  position: absolute;
+  left: -270px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0A273B;
 }
 .clearbtn {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  border: none;
-  padding: 0;
-  border-radius: 14px;
-  width: 22px;
-  height: 22px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+outline: none;
+border: none;
+padding: 0;
+border-radius: 14px;
+width: 22px;
+height: 22px;
+position: absolute;
+z-index: 9;
+-webkit-transition: 0.2s;
+-o-transition: 0.2s;
+transition: 0.2s;
+display: none;
+background-color: #ffffff;
+top: 31%;
+}
+}
+@media (max-width: 400px) {
+  .news-see-more_mobile-only{
+    width: 345px;
+  }
+  .right-form.active input {
+    height: 48px;
+    width: 275px;
+    border-radius: 28px;
+    padding: 10px 40px 10px 44px;
+    border: 1px solid #0A273B;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    background-color: #ffffff;
+}
+.right-form.active .searchbtn {
   position: absolute;
-  z-index: 9;
-  -webkit-transition: 0.2s;
-  -o-transition: 0.2s;
-  transition: 0.2s;
-  display: none;
-  background-color: #ffffff;
-  top: 31%;
+  left: -227px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0A273B;
 }
+
 }
+
+
+
+
 
 

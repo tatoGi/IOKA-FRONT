@@ -1565,7 +1565,20 @@
   /* Media Queries for Responsive Layout */
   
   /* For desktops and larger screens */
-  
+  @media (max-width: 1600px) {
+   .propertyCard{
+    border: 1px solid transparent;
+   }
+   .propertyCard:hover{
+    border: 1px solid #3480b2;
+   }
+   .resaleCard{
+    border: 1px solid transparent;
+   }
+   .resaleCard:hover{
+    border: 1px solid #6b7280;
+   }  
+  }
   @media (max-width: 1200px) {
     .title_top {
       font-size: 18px;
