@@ -421,6 +421,8 @@ select.filterBtn {
   position: relative;
   top: 25%;
   left: 10%;
+  min-height: 180px;
+  max-height: 800px;
 }
 
 .popupContent h3 {
@@ -514,6 +516,8 @@ select.filterBtn {
     max-width: 350px;
     padding: 20px;
     max-height: 80vh;
+    min-height: 180px;
+    max-height: 800px;
   }
 }
 
@@ -536,6 +540,8 @@ select.filterBtn {
     position: relative;
     top: 32%;
     left: 0%;
+    min-height: 180px;
+    max-height: 800px;
 }
 .popupContent h3 {
   margin-bottom: 16px;
