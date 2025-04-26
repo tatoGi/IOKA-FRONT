@@ -49,16 +49,14 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
           <div className={`${styles.sliderContainer} col-md-6`}>
             {isMobile ? (
               <Swiper
-                spaceBetween={24}
-                slidesPerView={1}
-                className={styles.mobileSwiper}
+              className="mySwiper"
               >
                 {sliderData.map((item) => (
                   <SwiperSlide key={item.id}>
                     <a
                       href={item.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                     
                     >
                       <Image
                         src={

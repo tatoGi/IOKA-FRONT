@@ -189,7 +189,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
 
         <div className={styles.filterButtons}>
           <select
-            className={`${styles.filterBtn} ${styles.propertyType}`}
+            className={`${styles.filterBtn}`}
             value={filters.propertyType}
             onClick={() => {
               setShowPricePopup(false);

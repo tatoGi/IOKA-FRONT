@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import styles from "./Clients.module.css";
-import leftquote from "../../assets/img/QuotesRight.svg";
+// Import Swiper styles
+import "swiper/css";
 
 const Clients = ({ sectionSixData }) => {
   const googleReviews = sectionSixData?.additional_fields?.google_reviews;
@@ -28,13 +28,8 @@ const Clients = ({ sectionSixData }) => {
         </div>
 
         <Swiper
-          spaceBetween={16}
-          slidesPerView="auto"
-          breakpoints={{
-            768: { slidesPerView: 4 },
-            576: { slidesPerView: 2 },
-            0: { slidesPerView: 1 }
-          }}
+          className="mySwiper"
+         
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide
