@@ -190,45 +190,8 @@ const Header = ({ navigationData }) => {
                 </div>
               </div>
 
-              {/* Navigation Menu */}
-              <div className={`header-nav ${
-  isMobileView 
-    ? (isMobileMenuOpen ? "active" : "") 
-    : (isSearchOpen ? "shift-left" : "")
-}`}>
-  <ul>
-    {isMobileView ? (
-      // Mobile view menu items
-      mobilePages.map((page) => (
-        <Link href={`/${page.slug}`} key={page.id}>
-          <li
-            className={
-              normalizedPathname === `/${page.slug}`
-                ? "active-link"
-                : ""
-            }
-          >
-            <span>{page.title}</span>
-          </li>
-        </Link>
-      ))
-    ) : (
-      // Desktop view menu items
-      desktopPages.map((page) => (
-        <li
-          key={page.id}
-          className={
-            normalizedPathname === `/${page.slug}`
-              ? "active-link"
-              : ""
-          }
-        >
-          <Link href={`/${page.slug}`}>{page.title}</Link>
-        </li>
-      ))
-    )}
-  </ul>
-</div>
+               
+            
 
               <div className="right-search-contact" style={{ height: "42px" }}> {/* Adjust height */}
               <div className={`right-form ${isSearchOpen && !isMobileMenuOpen ? "active" : ""}`}>
@@ -265,6 +228,45 @@ const Header = ({ navigationData }) => {
               </div>
             </div>
           </div>
+        </div>
+        
+        <div className={`header-nav ${
+  isMobileView 
+    ? (isMobileMenuOpen ? "active" : "") 
+    : (isSearchOpen ? "shift-left" : "")
+}`}>
+  <ul>
+    {isMobileView ? (
+      // Mobile view menu items
+      mobilePages.map((page) => (
+        <Link href={`/${page.slug}`} key={page.id}>
+          <li
+            className={
+              normalizedPathname === `/${page.slug}`
+                ? "active-link"
+                : ""
+            }
+          >
+            <span>{page.title}</span>
+          </li>
+        </Link>
+      ))
+    ) : (
+      // Desktop view menu items
+      desktopPages.map((page) => (
+        <li
+          key={page.id}
+          className={
+            normalizedPathname === `/${page.slug}`
+              ? "active-link"
+              : ""
+          }
+        >
+          <Link href={`/${page.slug}`}>{page.title}</Link>
+        </li>
+      ))
+    )}
+  </ul>
         </div>
       </header>
     </>
