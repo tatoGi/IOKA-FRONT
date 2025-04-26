@@ -208,7 +208,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             ))}
           </select>
           
-          <div className={styles.filterButtonWrapper}>
+          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
             <button
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
               onClick={() => setShowPricePopup(true)}
@@ -225,7 +225,11 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showPricePopup && (
-              <div className={styles.popupContainer}>
+              <div className={styles.popupContainer} onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setShowPricePopup(false);
+                }
+              }}>
                 <RangeInputPopup
                   isOpen={showPricePopup}
                   onClose={() => setShowPricePopup(false)}
@@ -277,7 +281,7 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
             ))}
           </select>
 
-          <div className={styles.filterButtonWrapper}>
+          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
             <button
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => setShowSqFtPopup(true)}
@@ -296,7 +300,11 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               </button>
             )}
             {showSqFtPopup && (
-              <div className={styles.popupContainer}>
+              <div className={styles.popupContainer} onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setShowSqFtPopup(false);
+                }
+              }}>
                 <RangeInputPopup
                   isOpen={showSqFtPopup}
                   onClose={() => setShowSqFtPopup(false)}

@@ -390,3 +390,9 @@
         /* No longer needed as Swiper handles the layout */
     }
 }
+@media (max-width:400px) {
+    .testimonialCard {
+        width: 320px !important;
+        height: 384px !important;
+    }
+}

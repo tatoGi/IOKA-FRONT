@@ -10,7 +10,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Focus the min input when modal opens
+      // Focus the min input when popup opens
       if (minInputRef.current) {
         minInputRef.current.focus();
       }
@@ -31,13 +31,9 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
       };
       document.addEventListener('mousedown', handleClickOutside);
 
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
-
       return () => {
         document.removeEventListener('keydown', handleEscape);
         document.removeEventListener('mousedown', handleClickOutside);
-        document.body.style.overflow = '';
       };
     }
   }, [isOpen, onClose]);
