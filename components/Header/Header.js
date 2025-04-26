@@ -68,7 +68,15 @@ const Header = ({ navigationData }) => {
     e.stopPropagation();
     setIsMobileMenuOpen(prev => !prev);
     setIsSearchOpen(false); // Ensure search is closed when mobile menu is opened
+    
+    // Add/remove body scroll lock
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   };
+
   useEffect(() => {
     // Set scroll-header immediately for non-home pages
     if (!isHomePage && !isSearchPage) {
@@ -110,6 +118,7 @@ const Header = ({ navigationData }) => {
     // Close the mobile menu when the route changes
     const handleRouteChange = () => {
       setIsMobileMenuOpen(false);
+      document.body.style.overflow = '';
     };
 
     router.events.on("routeChangeStart", handleRouteChange);

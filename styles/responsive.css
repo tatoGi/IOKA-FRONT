@@ -433,6 +433,32 @@
   }
 }
 @media (max-width: 992px) {
+  .header-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #07151f;
+    flex-direction: column;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    -webkit-transition: -webkit-transform 0.3s ease;
+  }
+
+  .header-nav.active {
+    display: flex;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    top: 70px;
+    background-color: #ffffff;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .header-nav ul li a {
     color: #FFFFFF;
     font-family: 'Montserrat';
@@ -641,46 +667,6 @@
   /* When menu is open, make burger lines black */
   .header-nav.active~.mobile-burger-menu .burger-line {
     background-color: #000;
-  }
-
-  .header-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #07151f;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
-    z-index: 100;
-    -webkit-transition: -webkit-transform 0.3s ease;
-    transition: -webkit-transform 0.3s ease;
-    -o-transition: transform 0.3s ease;
-    transition: transform 0.3s ease;
-    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-    -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-            transform: translateY(-100%);
-  }
-
-  .header-nav.active {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    /* Show when active */
-    -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0);
-    top: 70px;
-    background-color: #ffffff;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: start;
   }
 
   .header-nav ul {
@@ -1663,7 +1649,6 @@ margin-top: 24px;
     width: 21px;
     height: 18px;
     top: 42px;
-    position: absolute;
     height: 21px !important;
   }
    /* When menu is open, make burger lines black */
