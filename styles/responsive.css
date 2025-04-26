@@ -718,9 +718,6 @@
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: start;
-            position: absolute!important;
-            overflow-y: auto!important;
-            padding-bottom: 99px!important;
   }
 
   .header-nav ul {
