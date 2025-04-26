@@ -238,13 +238,13 @@ const DeveloperShow = (developerData) => {
         </div>
 
         {/* Property Listings Section */}
-        <div className={styles.listingsSection}>
+        <div className={`container ${styles.listingsSection}`}>
           <div className={styles.listingsContainer}>
             <div className={styles.listingsHeader}>
             {!isMobileView && (
               <div className={styles.listingInfo}>
                 <h3>
-                  Off Plan properties for sale 
+                  Off Plan Properties
                 </h3>
                 <span className={styles.listingCount}>
                   {offplanListings.length} Listings
@@ -254,7 +254,7 @@ const DeveloperShow = (developerData) => {
                {isMobileView && (
                 <div className={styles.listingInfo_mobile}>
                 <h3>
-                Emaar Properties
+                  Off Plan Properties
                 </h3>
                 <span className={styles.listingCount}>
                   {offplanListings.length} Listings
@@ -542,11 +542,11 @@ const DeveloperShow = (developerData) => {
       </div>
 
       {/* Resale Section */}
-      <div className={styles.resaleSection}>
+      <div className={`container ${styles.resaleSection}`}>
         <div className="container">
           <div className={styles.resaleHeader}>
             <div className={styles.resaleTitle}>
-              <h3>Resale</h3>
+              <h3>Rental Resale</h3>
               <span className={styles.listingCount}>
                 {rentalListings.length} Listings
               </span>

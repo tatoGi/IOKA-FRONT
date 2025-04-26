@@ -1743,4 +1743,12 @@ justify-content: start;
     border-bottom: 1px solid #E5E7EB;
     margin-top: 2.4px;
   }
+  
 }
+@media (max-width:400px) {
+  .swiperSlide{
+    width: 330px !important;
+    height: 240px !important;
+  }
+}
+

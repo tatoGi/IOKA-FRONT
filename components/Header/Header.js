@@ -267,7 +267,7 @@ const Header = ({ navigationData }) => {
           </div>
         </div>
         
-        <div className={`header-nav ${
+        <div className={`header-nav mobile-nav ${
   isMobileView 
     ? (isMobileMenuOpen ? "active" : "") 
     : (isSearchOpen ? "shift-left" : "")

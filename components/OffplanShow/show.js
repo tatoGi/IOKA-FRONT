@@ -153,7 +153,17 @@ const OffplanShow = ({ offplanData }) => {
           left: ["infobar"],
           middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW"],
           right: ["slideshow", "thumbs", "close"]
-        }
+        },
+        position: "top",
+        top: "10%"
+      },
+      mobile: {
+        preventCaptionOverlap: true,
+        toolbar: true,
+        buttons: ["close", "zoom", "slideShow", "fullScreen", "thumbs"],
+        click: "close",
+        dblclick: "zoom",
+        dragToClose: true
       }
     });
 

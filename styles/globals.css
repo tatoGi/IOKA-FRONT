@@ -68,6 +68,9 @@ main {
  .home-header  .right-form .searchbtn span svg path{
   stroke: #0A273B;
 } 
+.mobile-nav{
+  display: none;
+}
   .header-cont{  
     height: 104px;
     border-bottom: 1px solid transition;
