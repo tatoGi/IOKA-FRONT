@@ -364,7 +364,7 @@ select.filterBtn {
   }
 
   .filterBtn {
-    padding: 10px 16px;
+    padding: 10px 30px;
     white-space: nowrap;
     border-radius: 8px;
     border-width: 1px;
@@ -383,37 +383,35 @@ select.filterBtn {
   
 
   select.filterBtn {
-    padding-right: 25px;
+    padding-right: 30px;
     text-align: center;
     padding-left: 12px;
   }
 }
 .popupContainer {
-  position: absolute;
-  top: 100%;
-  left: -30px;
+  position: fixed;
+  top: 0;
+  left: 0;
   right: 0;
+  bottom: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  z-index: 10;
-  -webkit-overflow-scrolling: touch;
-  width: 300px;
-  margin-top: 8px;
+  z-index: 9999;
+  padding-top: 100px;
 }
 
 .popupContent {
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   padding: 24px;
-  max-height: 80vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   position: relative;
   margin: 0 auto;
+  z-index: 9999;
+  top: 25%;
 }
 
 .popupContent h3 {
@@ -506,23 +504,24 @@ select.filterBtn {
     width: 90%;
     max-width: 350px;
     padding: 20px;
-    max-height: 80vh;
+    z-index: 9999;
   }
 }
 
 @media (max-width: 480px) {
   .popupContent {
     width: 90%;
-    max-width: 320px;
+    max-width: 300px;
     padding: 16px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 9999;
   }
 }
 
-/* Remove iOS specific fixes since we're now using a modal for all devices */
+/* Remove iOS specific fixes since we're now using a popup for all devices */
 .ios-device .popupContainer,
 .ios-device .popupContent {
-  all: unset;
+  position: fixed;
+  z-index: 9999;
 }
 
 .locationDropdown {
@@ -557,6 +556,7 @@ select.filterBtn {
 .locationItem:hover {
   background-color: #f5f5f5;
 }
+
 
 
 

@@ -200,11 +200,12 @@ const Header = ({ navigationData }) => {
       mobilePages.map((page) => (
         <Link href={`/${page.slug}`} key={page.id}>
           <li
-            className={
+            className={`mobile-menu-item ${
               normalizedPathname === `/${page.slug}`
                 ? "active-link"
                 : ""
-            }
+            }`}
+            style={{ padding: '20px 0', fontSize: '18px' }}
           >
             <span>{page.title}</span>
           </li>
@@ -278,11 +279,12 @@ const Header = ({ navigationData }) => {
       mobilePages.map((page) => (
         <Link href={`/${page.slug}`} key={page.id}>
           <li
-            className={
+            className={`mobile-menu-item ${
               normalizedPathname === `/${page.slug}`
                 ? "active-link"
                 : ""
-            }
+            }`}
+            style={{ padding: '20px 0', fontSize: '18px' }}
           >
             <span>{page.title}</span>
           </li>

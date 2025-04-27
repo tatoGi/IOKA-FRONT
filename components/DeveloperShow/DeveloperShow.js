@@ -767,23 +767,44 @@ const DeveloperShow = (developerData) => {
                       }}
                     />
                   </div>
-                  <div className={styles.awardIconWrapper}>
-                    <Image
-                      src={
-                        award.award_photo
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(award.award_photo)}`
-                          : EmaarLogo // Fallback image
-                      }
-                      alt="Award Trophy"
-                      width={156}
-                      height={108}
-                      className={styles.trophyImage}
-                    />
-                  </div>
+                  {isMobileView ? (
+                    <div className={styles.mobileAwardLayout}>
+                      <span className={styles.awardYear}>{award.award_year}</span>
+                      <div className={styles.awardIconWrapper}>
+                        <Image
+                          src={
+                            award.award_photo
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(award.award_photo)}`
+                              : EmaarLogo
+                          }
+                          alt="Award Trophy"
+                          width={156}
+                          height={108}
+                          className={styles.trophyImage}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={styles.awardIconWrapper}>
+                      <Image
+                        src={
+                          award.award_photo
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(award.award_photo)}`
+                            : EmaarLogo
+                        }
+                        alt="Award Trophy"
+                        width={156}
+                        height={108}
+                        className={styles.trophyImage}
+                      />
+                    </div>
+                  )}
                   <div className={styles.awardBottom}>
-                    <span className={styles.awardYear}>{award.award_year}</span>
+                    {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
                     <button className={styles.viewAwardBtn}>View Awards</button>
                   </div>
                 </div>

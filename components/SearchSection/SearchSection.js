@@ -3,10 +3,9 @@ import styles from "./SearchSection.module.css";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
-import RangeInputPopup from "./RangeInputPopup";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
-const SearchSection = ({ onFilterChange, filterOptions }) => {
+const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup }) => {
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
@@ -23,8 +22,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
     searchQuery: "",
   });
 
-  const [showPricePopup, setShowPricePopup] = useState(false);
-  const [showSqFtPopup, setShowSqFtPopup] = useState(false);
   const [matchingLocations, setMatchingLocations] = useState([]);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -186,7 +183,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
           />
         </div>
 
-
         <div className={styles.filterButtons}>
           <select
             className={`${styles.filterBtn}`}
@@ -223,21 +219,6 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
               >
                 ×
               </button>
-            )}
-            {showPricePopup && (
-              <div className={styles.popupContainer} onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                  setShowPricePopup(false);
-                }
-              }}>
-                <RangeInputPopup
-                  isOpen={showPricePopup}
-                  onClose={() => setShowPricePopup(false)}
-                  onApply={(value) => handleRangeApply("price", value)}
-                  title="Price Range"
-                  unit="USD"
-                />
-              </div>
             )}
           </div>
 
@@ -299,73 +280,57 @@ const SearchSection = ({ onFilterChange, filterOptions }) => {
                 ×
               </button>
             )}
-            {showSqFtPopup && (
-              <div className={styles.popupContainer} onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                  setShowSqFtPopup(false);
-                }
-              }}>
-                <RangeInputPopup
-                  isOpen={showSqFtPopup}
-                  onClose={() => setShowSqFtPopup(false)}
-                  onApply={(value) => handleRangeApply("sqFt", value)}
-                  title="Area Range"
-                  unit="Sq.Ft"
-                />
-              </div>
-            )}
           </div>
         </div>
-        
       </div>
       
       {(showLocationDropdown && filters.searchQuery) && (
-          <div className={styles.locationDropdown}>
-            {filters.searchQuery && (
-              <button
-                className={styles.clearButton}
-                onClick={() => {
-                  setFilters(prev => ({ ...prev, searchQuery: "" }));
-                  setMatchingLocations([]);
-                  setShowLocationDropdown(false);
-                  handleFilterChange("searchQuery", "");
-                }}
+        <div className={styles.locationDropdown}>
+          {filters.searchQuery && (
+            <button
+              className={styles.clearButton}
+              onClick={() => {
+                setFilters(prev => ({ ...prev, searchQuery: "" }));
+                setMatchingLocations([]);
+                setShowLocationDropdown(false);
+                handleFilterChange("searchQuery", "");
+              }}
+            >
+              ×
+            </button>
+          )}
+          {isLoading ? (
+            <div className={styles.locationItem}>Loading...</div>
+          ) : matchingLocations && matchingLocations.length > 0 ? (
+            matchingLocations.map((location, index) => (
+              <div
+                key={index}
+                className={styles.locationItem}
+                onClick={() => handleLocationSelect(location)}
               >
-                ×
-              </button>
-            )}
-            {isLoading ? (
-              <div className={styles.locationItem}>Loading...</div>
-            ) : matchingLocations && matchingLocations.length > 0 ? (
-              matchingLocations.map((location, index) => (
-                <div
-                  key={index}
-                  className={styles.locationItem}
-                  onClick={() => handleLocationSelect(location)}
-                >
-                  {location}
-                </div>
-              ))
-            ) : (
-              <div className={styles.locationItem}>
-                No locations found
-                {filters.searchQuery && (
-                  <button
-                    className={styles.clearButton}
-                    onClick={() => {
-                      setFilters(prev => ({ ...prev, searchQuery: "" }));
-                      setMatchingLocations([]);
-                      setShowLocationDropdown(false);
-                      handleFilterChange("searchQuery", "");
-                    }}
-                  >
-                    ×
-                  </button>
-                )}
+                {location}
               </div>
-            )}
-          </div>
-        )}
+            ))
+          ) : (
+            <div className={styles.locationItem}>
+              No locations found
+              {filters.searchQuery && (
+                <button
+                  className={styles.clearButton}
+                  onClick={() => {
+                    setFilters(prev => ({ ...prev, searchQuery: "" }));
+                    setMatchingLocations([]);
+                    setShowLocationDropdown(false);
+                    handleFilterChange("searchQuery", "");
+                  }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

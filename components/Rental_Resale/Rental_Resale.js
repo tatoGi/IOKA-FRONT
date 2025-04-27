@@ -12,6 +12,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import SearchRental from "../SearchRental/SearchRental";
+import RangeInputPopup from "../SearchSection/RangeInputPopup";
 
 const Rental_Resale = () => {
   const [cardData, setCardData] = useState([]);
@@ -27,6 +28,8 @@ const Rental_Resale = () => {
   const slideRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [filters, setFilters] = useState(null);
+  const [showPricePopup, setShowPricePopup] = useState(false);
+  const [showSqFtPopup, setShowSqFtPopup] = useState(false);
 
   // Filter options for SearchRental component
   const filterOptions = {
@@ -327,31 +330,47 @@ const Rental_Resale = () => {
           <SearchRental
             onFilterChange={handleFilterChange}
             filterOptions={filterOptions}
+            showPricePopup={showPricePopup}
+            setShowPricePopup={setShowPricePopup}
+            showSqFtPopup={showSqFtPopup}
+            setShowSqFtPopup={setShowSqFtPopup}
           />
+
+          {showPricePopup && (
+            <div className={Styles.popupContainer} onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowPricePopup(false);
+              }
+            }}>
+              <RangeInputPopup
+                isOpen={showPricePopup}
+                onClose={() => setShowPricePopup(false)}
+                onApply={(value) => handleFilterChange("price", value)}
+                title="Price Range"
+                unit="USD"
+              />
+            </div>
+          )}
+
+          {showSqFtPopup && (
+            <div className={Styles.popupContainer} onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowSqFtPopup(false);
+              }
+            }}>
+              <RangeInputPopup
+                isOpen={showSqFtPopup}
+                onClose={() => setShowSqFtPopup(false)}
+                onApply={(value) => handleFilterChange("sqFt", value)}
+                title="Area Range"
+                unit="Sq.Ft"
+              />
+            </div>
+          )}
 
           <div className={Styles.resaleSection}>
             <div className={Styles.resaleHeader}>
-              {isMobile && (
-                <div className={Styles.search_result}>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span className={Styles.search_result_text}>
-                      Search Results
-                    </span>
-                    <div className={Styles.search_result_sort}>
-                      <span>Sort:</span>
-                      <select
-                        className={Styles.sort_dropdown}
-                        onChange={(e) => handleSortChange(e.target.value)}
-                      >
-                        <option value="newest">Newest First</option>
-                        <option value="oldest">Oldest First</option>
-                        <option value="priceHigh">Price: High to Low</option>
-                        <option value="priceLow">Price: Low to High</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              )}
+              
             </div>
 
             <div className={Styles.resaleList}>
@@ -701,25 +720,36 @@ const Rental_Resale = () => {
           </div>
         )}
         {isMobile && (
-          <div className={Styles.sliderWrapper}>
-            <button
-              className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
-              onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
-              disabled={currentSlide === 0}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="#666666"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+          <div 
+            className={Styles.sliderWrapper}
+            onTouchStart={(e) => {
+              const touch = e.touches[0];
+              setTouchStart(touch.clientX);
+            }}
+            onTouchMove={(e) => {
+              const touch = e.touches[0];
+              setTouchEnd(touch.clientX);
+            }}
+            onTouchEnd={() => {
+              if (!touchStart || !touchEnd) return;
+              const distance = touchStart - touchEnd;
+              const isLeftSwipe = distance > 50;
+              const isRightSwipe = distance < -50;
+
+              if (isLeftSwipe && currentSlide < Math.ceil(topProperties.length / 2) - 1) {
+                setCurrentSlide(prev => prev + 1);
+              }
+              if (isRightSwipe && currentSlide > 0) {
+                setCurrentSlide(prev => prev - 1);
+              }
+
+              setTouchStart(0);
+              setTouchEnd(0);
+            }}
+          >
             <div
               className={Styles.propertyGrid}
-              style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
+              style={{ transform: `translateX(-${currentSlide * 296}px)` }}
             >
               {topProperties.map((property) => (
                 <div
@@ -788,7 +818,6 @@ const Rental_Resale = () => {
                             width={24}
                             height={24}
                           />
-
                           <span>{property.sq_ft} Sq.Ft</span>
                         </div>
                         <div className={Styles.feature}>
@@ -818,35 +847,14 @@ const Rental_Resale = () => {
                 </div>
               ))}
             </div>
-            <button
-              className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
-              onClick={() =>
-                setCurrentSlide((prev) =>
-                  prev + 1 >= topProperties.length - 2 ? prev : prev + 1
-                )
-              }
-              disabled={currentSlide >= topProperties.length - 2}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="#666666"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
           </div>
         )}
       </div>
-      {isMobile ? (
-        <SubscribeSection />
-      ) : (
+      
         <div className="container">
           <SubscribeSection />
         </div>
-      )}
+    
     </>
   );
 };

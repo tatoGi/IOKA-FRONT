@@ -1183,6 +1183,10 @@
   color: #1A1A1A;
   position: relative;
   top: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Award subtitle styling */
@@ -1193,11 +1197,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin-bottom: 15px;
   position: relative;
   top: 79px;
+  max-width: 100%;
 }
 
 /* Bottom section with year and button */
@@ -1752,22 +1757,29 @@ letter-spacing: 0%;
     font-size: 16px;
     color: #0A273B;
     margin-bottom: 8px;
+    top: 29px;
   }
 
   .awardSubtitle {
     font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 14px;
-    color: #666666;
-    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-top: 4px;
+    top: 14%;
+    left: 3%;
   }
 
   .awardYear {
     font-family: 'Montserrat';
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: 600;
+    font-size: 32px !important;
+    line-height: 100%;
+    letter-spacing: 0%;
     color: #0A273B;
-    margin-bottom: 16px;
+    margin-bottom: 0;
   }
   .awardLeft{
     top: 0;
@@ -1775,20 +1787,18 @@ letter-spacing: 0%;
   }
   .awardIconWrapper {
     width: 81px;
-    height: 60px;
+    height: 56px;
+    position: relative;
+    top: 8px;
+    left: 2px;
     background: #FFFFFF;
     border: 1px solid #E6EBED;
     border-radius: 8px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    margin-bottom: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-right: 0;
     padding: 0;
   }
 
@@ -1816,6 +1826,7 @@ letter-spacing: 0%;
         -ms-flex-align: start;
             align-items: start;
     gap: 8px;
+    padding: 0;
   }
   .priceContainer {
     font-family: 'Montserrat';
@@ -1853,8 +1864,77 @@ letter-spacing: 0%;
     font-size: 16px;
     color: #0A273B;
   }
+
+  .awardTitle {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    color: #0A273B;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+  .awardContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  .awardDateIconRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 94px;
+    margin-bottom: 12px;
+  }
+  .awardYear {
+    font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  left: 10px;
+  position: relative;
+  }
+  .awardBottom{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 16px;
+    margin-right: 0;
+    margin-top: 48px;
+    /* margin-right: 22px; */
+}
+  
+  .awardIconWrapper {
+    width: 81px;
+    height: 56px;
+    top: 8px;
+    left: 2px;
+    
+  }
+  .viewAwardBtn {
+    width: 100%;
+    margin-top: 12px;
+  }
 }
 @media (max-width: 480px) {
+  .listingsSection{
+    padding: 0;
+  }
   .listingInfo_mobile{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1913,17 +1993,41 @@ letter-spacing: 0%;
     margin-right: 0px;
   }
   .awardTitle{
-    font-size: 12px !important;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    
   }
   .awardCard{
-    width: 300px !important;
-    height: 450px !important;
+    width: 320px !important;
+    height: 487px !important;
   }
-  .awardYear{
-    font-size: 16px !important;
-  }
+ 
   .awardCard{
     gap: 0;
   }
   
+}
+
+.mobileAwardLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mobileAwardLayout .awardYear {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+
+}
+
+.mobileAwardLayout .awardIconWrapper {
+  flex-shrink: 0;
 }

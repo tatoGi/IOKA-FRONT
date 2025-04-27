@@ -25,41 +25,39 @@
   .sliderWrapper {
     position: relative;
     width: 100%;
-    overflow: visible; /* Ensure arrows are not cut off */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     max-width: 1560px;
+    margin: 0 auto;
+    padding: 0 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .sliderWrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
   
   .propertyGrid {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     gap: 24px;
-    -webkit-transition: -webkit-transform 0.5s ease;
-    transition: -webkit-transform 0.5s ease;
-    -o-transition: transform 0.5s ease;
     transition: transform 0.5s ease;
-    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
-    width: -webkit-max-content;
-    width: -moz-max-content;
     width: max-content;
-    
-    -webkit-box-flex: 0;
-    
-        -ms-flex: 0 0 calc(25% - 18px);
-    
-            flex: 0 0 calc(25% - 18px); /* 25% width for each card, minus the gap */
+    scroll-snap-align: start;
   }
   
   .propertyCard {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    -webkit-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
-    border: 1px solid transparent;
+    border: 1px solid #E6EBED;
+    width: 320px;
+    flex: 0 0 auto;
+    height: auto;
+    scroll-snap-align: start;
   }
   
     .propertyCard:hover {
@@ -1486,7 +1484,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgb(230 230 230 / 50%);
+    background: rgba(255, 255, 255, 0.9);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1498,22 +1496,23 @@
             justify-content: center;
     cursor: pointer;
     z-index: 2;
-    border: none;
+    border: 1px solid #E6EBED;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
   }
   
   .prevArrow {
-    left: 16px;
+    left: 0;
   }
   
   .nextArrow {
-    right: 16px;
+    right: 0;
   }
   
   .sliderArrow:hover {
-    background: rgb(255 255 255 / 70%);
+    background: rgba(255, 255, 255, 0.9);
   }
   
   .sliderArrow:disabled {
@@ -1694,6 +1693,8 @@
     
     .sliderWrapper {
       padding: 0 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .resaleList {
       display: -webkit-box;
@@ -2152,7 +2153,7 @@ margin: 8px 0 8px 0;
     .starting_price {
       font-family: 'Montserrat';
 font-weight: 500;
-font-size: 16px;
+font-size: 14px;
 line-height: 100%;
 letter-spacing: 0%;
 
@@ -2161,7 +2162,7 @@ letter-spacing: 0%;
     .resalePrice {
       font-family: 'Montserrat';
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 100%;
       letter-spacing: 0%;
 
@@ -2188,8 +2189,11 @@ letter-spacing: 0%;
     .actionButton_call,
     .actionButton_whatsapp {
       width: auto;
-      padding: 0px 7px 0 7px;
-      font-size: 11px;
+      padding: 0px 13px 0 11px;
+      font-size: 12px;
+      border-radius: 40px;
+      color: #0A273B;
+      font-weight: 600;
     }
     .actionButton svg{
       width: 16px;
@@ -2278,4 +2282,18 @@ letter-spacing: 0%;
     font-size: 12px;
   }
  
+}
+
+.popupContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
 }

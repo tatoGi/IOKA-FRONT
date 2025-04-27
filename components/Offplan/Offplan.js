@@ -10,6 +10,7 @@ import { OFFPLAN_APi, FILTER_OFFPLAN_API } from "@/routes/apiRoutes";
 import defaultImage from "../../assets/img/default.webp";
 import { LoadingWrapper } from "../LoadingWrapper/index";
 import { Container, Row, Col } from "react-bootstrap"; // Import Bootstrap components
+import RangeInputPopup from "../SearchSection/RangeInputPopup";
 
 // Configure Montserrat
 const montserrat = Montserrat({
@@ -27,6 +28,8 @@ const Offplan = ({ initialData, initialPagination }) => {
     initialPagination?.last_page || 1
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [showPricePopup, setShowPricePopup] = useState(false);
+  const [showSqFtPopup, setShowSqFtPopup] = useState(false);
   const [filterOptions, setFilterOptions] = useState({
     propertyTypes: [
       "Apartment",
@@ -160,7 +163,41 @@ const Offplan = ({ initialData, initialPagination }) => {
         <SearchSection
           onFilterChange={handleFilterChange}
           filterOptions={filterOptions}
+          showPricePopup={showPricePopup}
+          setShowPricePopup={setShowPricePopup}
+          showSqFtPopup={showSqFtPopup}
+          setShowSqFtPopup={setShowSqFtPopup}
         />
+        {showPricePopup && (
+          <div className={styles.popupContainer} onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowPricePopup(false);
+            }
+          }}>
+            <RangeInputPopup
+              isOpen={showPricePopup}
+              onClose={() => setShowPricePopup(false)}
+              onApply={(value) => handleFilterChange("price", value)}
+              title="Price Range"
+              unit="USD"
+            />
+          </div>
+        )}
+        {showSqFtPopup && (
+          <div className={styles.popupContainer} onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowSqFtPopup(false);
+            }
+          }}>
+            <RangeInputPopup
+              isOpen={showSqFtPopup}
+              onClose={() => setShowSqFtPopup(false)}
+              onApply={(value) => handleFilterChange("sqFt", value)}
+              title="Area Range"
+              unit="Sq.Ft"
+            />
+          </div>
+        )}
         <div className={styles.resultsHeader}>
           <h2 className={styles.title}>New Developments for sale in Dubai</h2>
           <span className={styles.resultsCount}>{cardData.length} results</span>
