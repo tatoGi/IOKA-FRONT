@@ -203,6 +203,7 @@ letter-spacing: 0%;
             -ms-flex-direction: column;
                 flex-direction: column;
         gap: 16px;
+        margin-top: 16px;
     }
     .similarArticles .card {
         display: -webkit-box;
