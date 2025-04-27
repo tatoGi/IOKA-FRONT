@@ -1750,5 +1750,43 @@ justify-content: start;
     width: 330px !important;
     height: 240px !important;
   }
+  .feature{
+    font-size: 14px;
+  }
+  .aedPrice{
+    font-size:13px;
+  }
+  .usdPrice{
+    font-size:13px;
+  }
+  .aedPricestart{
+    font-size:13px;
+  }
+  .contactButtons{
+    width: 280px;
+  }
+  .sharelist{
+    width: 280px;
+  }
+  .downloadBtn{
+    width: 280px;
+  }
+  .enquireBtn{
+    width: 280px;
+  }
+  .sectionTitle{
+    font-size: 20px;
+  }
+  .swiperSlide{
+    width: 300px !important;
+    height: 200px !important;
+  }
+  .exteriorimage{
+    width: 300px;
+    height: 200px;
+  }
+  .fancybox__toolbar{
+    top: 30% !important;
+  }
+  
 }
-
