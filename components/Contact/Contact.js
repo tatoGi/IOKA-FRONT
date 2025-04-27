@@ -113,7 +113,7 @@ const Contact = ({ initialData, id }) => {
               )}
             </div>
           </div>
-          <div className="col-md-6">
+          <div className={`${isMobile ? 'w-100 p-0' : 'col-md-6'}`}>
             <div className={styles.mapSection}>
               <MapComponent locations={cardData.additional_fields?.locations || []} />
             </div>

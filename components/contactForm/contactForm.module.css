@@ -113,13 +113,13 @@
 }
 @media (max-width: 768px) {
   .title{
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-weight: 700;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
     margin-bottom: 24px;
-    
+    text-align: center;
   }
 .form input{
   height: 72px;

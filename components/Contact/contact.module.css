@@ -216,6 +216,9 @@
 }
 
 @media (max-width: 768px) {
+  .contactPage {
+    padding: 0;
+  }
   .contactInfo {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
@@ -237,14 +240,26 @@
   }
 
   .infoSection h1 {
-    font-size: 28px;
-    margin-bottom: 16px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    text-align: center;
   }
+  .infoSection p{
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
 
+    color: #0A273B;
+  }
   .contactDetails {
     background: #fff;
-    padding: 24px 15px;
-    margin: 0 -15px;
     gap: 24px;
   }
 
@@ -280,6 +295,13 @@
   .containerWithMargin {
     margin-bottom: 40px;
   }
+  .rowWithBorder{
+    padding: 0 !important;
+    border-bottom: none !important;
+  }
+  .containerWithMargin{
+    margin-bottom: 64 !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -296,20 +318,31 @@
   }
 
   .iconWrapper {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
   }
 
   .iconWrapper svg {
     font-size: 18px;
   }
 
-  .contactItem h3 {
-    font-size: 14px;
+  .contactItem h3{
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
   }
 
   .contactItem p {
-    font-size: 13px;
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
   }
 }
 

@@ -81,3 +81,11 @@
   color: #333 !important;
   font-weight: 600 !important;
 }
+@media (max-width: 768px) {
+  .mapWrapper {
+    width: 100% !important;
+height: 257px !important;
+top: 294px !important;
+
+  }
+}
