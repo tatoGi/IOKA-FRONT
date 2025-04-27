@@ -390,7 +390,7 @@ const OffplanShow = ({ offplanData }) => {
         {/* Building Section */}
         <div className={style.buildingSection}>
           <div className="row">
-            <div className="col-12 col-md-6">
+            <div className={`${isMobile ? "w-100 p-0" : "col-12 col-md-6"}`}>
               <Image
                 src={
                   offplanData.offplan.main_photo

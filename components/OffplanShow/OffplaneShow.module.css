@@ -1565,6 +1565,13 @@ justify-content: start;
     object-fit: cover;
     max-height: 240px;
   }
+
+  .fancybox__toolbar {
+    position: absolute !important;
+    top: 12% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
 }
 
 @media (max-width:480px) {
@@ -1743,7 +1750,12 @@ justify-content: start;
     border-bottom: 1px solid #E5E7EB;
     margin-top: 2.4px;
   }
-  
+  .fancybox__toolbar {
+    position: absolute;
+    top: 12% !important;
+    left: 0;
+    right: 0;
+}
 }
 @media (max-width:400px) {
   .swiperSlide{
