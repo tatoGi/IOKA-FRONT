@@ -167,7 +167,7 @@ const Header = ({ navigationData }) => {
               <div className="left-cont-image">
                
                   <div className="white-logo">
-                    <Image src={Logo} alt="logo" width={138} height={42} priority />
+                    <Image src={Logo} alt="logo" width={138} height={42} />
                   </div>
                   <div className="dark-logo">
                     <Image src={LogoDark} alt="logo" width={138} height={42} />
