@@ -38,6 +38,7 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+            max-width: 1200px;
   
   }
   .contactBtn{
@@ -166,6 +167,9 @@
   .arrow-box {
     height: 28px;
     width: 28px;
+  }
+  .header-nav{
+    max-width: 800px;
   }
   .right-form:focus-within input,
   .header-nav.active ~ .right-search-contact .right-form input {
