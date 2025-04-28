@@ -1693,9 +1693,10 @@
     }
     
     .sliderWrapper {
-      padding: 0 20px;
+      padding: 0; 
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      max-width: 320px;
     }
     .resaleList {
       display: -webkit-box;
@@ -2088,6 +2089,15 @@
     }
   }
   @media (max-width: 480px) {
+    .propertyCardLink{
+      width: 320px;
+    }
+    .propertyCard{
+      width: 100%;
+    }
+    .projectsGrid{
+      gap: 24px;
+    }
     .projectsGrid {
       -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
