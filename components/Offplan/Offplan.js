@@ -194,7 +194,7 @@ const Offplan = ({ initialData, initialPagination }) => {
               onClose={() => setShowSqFtPopup(false)}
               onApply={(value) => handleFilterChange("sqFt", value)}
               title="Area Range"
-              unit="Sq.Ft"
+              unit="Sq.m"
             />
           </div>
         )}

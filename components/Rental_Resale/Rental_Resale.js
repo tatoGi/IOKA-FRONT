@@ -276,7 +276,7 @@ const Rental_Resale = () => {
                               height={24}
                             />
 
-                            <span>{property.sq_ft} Sq.Ft</span>
+                            <span>{property.sq_ft} Sq.m</span>
                           </div>
                           <div className={Styles.feature}>
                             <Image
@@ -363,7 +363,7 @@ const Rental_Resale = () => {
                 onClose={() => setShowSqFtPopup(false)}
                 onApply={(value) => handleFilterChange("sqFt", value)}
                 title="Area Range"
-                unit="Sq.Ft"
+                unit="Sq.m"
               />
             </div>
           )}
@@ -613,7 +613,7 @@ const Rental_Resale = () => {
                             width={16}
                             height={16}
                           />
-                          <span>{listing.sq_ft} Sq.Ft</span>
+                          <span>{listing.sq_ft} Sq.m</span>
                         </div>
                         <div className={Styles.statSeparator}>|</div>
                         <div className={Styles.statGroup}>
@@ -818,7 +818,7 @@ const Rental_Resale = () => {
                             width={24}
                             height={24}
                           />
-                          <span>{property.sq_ft} Sq.Ft</span>
+                          <span>{property.sq_ft} Sq.m</span>
                         </div>
                         <div className={Styles.feature}>
                           <Image

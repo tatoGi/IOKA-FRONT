@@ -363,7 +363,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       width={24}
                       height={24}
                     />
-                    <span>{RENTAL_RESALE_DATA.sq_ft} Sq.Ft</span>
+                    <span>{RENTAL_RESALE_DATA.sq_ft} Sq.m</span>
                   </div>
                   <div className={styles.feature}>
                     <Image
@@ -452,7 +452,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       width={24}
                       height={24}
                     />
-                    <span>{RENTAL_RESALE_DATA.sq_ft} Sq.Ft</span>
+                    <span>{RENTAL_RESALE_DATA.sq_ft} Sq.m</span>
                   </div>
                   <div className={styles.feature}>
                     <Image
@@ -941,7 +941,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                             width={24}
                             height={24}
                           />
-                          <span>{property.sq_ft} Sq.Ft</span>
+                          <span>{property.sq_ft} Sq.m</span>
                         </div>
                         <div className={styles.feature}>
                           <Image
@@ -1039,7 +1039,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                             width={20}
                             height={20}
                           />
-                          <span>{property.sq_ft} Sq.Ft</span>
+                          <span>{property.sq_ft} Sq.m</span>
                         </div>
                       </div>
                       <div className={styles.priceRow}>

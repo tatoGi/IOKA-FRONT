@@ -295,7 +295,7 @@ const SearchHomeResult = ({ searchParams }) => {
                                   width={24}
                                   height={24}
                                 />
-                                <span>{property.sq_ft} Sq.Ft</span>
+                                <span>{property.sq_ft} Sq.m</span>
                               </div>
                               <div
                                 className={`${offplanStyles.feature} ${offplanStyles.textEllipsis}`}
@@ -493,7 +493,7 @@ const SearchHomeResult = ({ searchParams }) => {
                                 width={16}
                                 height={16}
                               />
-                              <span>3200 Sq.Ft</span>
+                              <span>3200 Sq.m</span>
                             </div>
                             <div className={stylesrental.statSeparator}>|</div>
                             <div className={stylesrental.statGroup}>
@@ -677,7 +677,7 @@ const SearchHomeResult = ({ searchParams }) => {
                                   width={16}
                                   height={16}
                                 />
-                                <span>{property.sq_ft} Sq.Ft</span>
+                                <span>{property.sq_ft} Sq.m</span>
                               </div>
                               <div className={stylesrental.statSeparator}>
                                 |

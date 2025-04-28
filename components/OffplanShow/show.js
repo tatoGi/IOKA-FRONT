@@ -230,7 +230,7 @@ const OffplanShow = ({ offplanData }) => {
                           width={24}
                           height={24}
                         />
-                        <span>{offplanData.offplan?.sq_ft || 0} Sq.Ft</span>
+                        <span>{offplanData.offplan?.sq_ft || 0} Sq.m</span>
                       </div>
                       <div className={`${style.feature} ${style.textEllipsis}`}>
                         <Image

@@ -33,7 +33,7 @@ const PropertyList = () => {
                 <span>3 Br</span>
                 <span>3 Ba</span>
                 <span>
-                  <FiSquare /> 2300 Sq.Ft
+                  <FiSquare /> 2300 Sq.m
                 </span>
                 <span>1 Gr</span>
               </div>

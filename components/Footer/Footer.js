@@ -205,6 +205,8 @@ const Footer = ({ navigationData, settings }) => {
                   <li><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
                   <div className="footer-line"></div>
                   <li><Link href="/privacy-policy">Privacy & Cookies</Link></li>
+                  <div className="footer-line"></div>
+                  <li><Link href="/faq">FAQ</Link></li>
                 </ul>
               </div>
               

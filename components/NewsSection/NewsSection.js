@@ -106,7 +106,7 @@ const NewsSection = () => {
                     </div>
                     <div className="n-content">
                     <div className="n-meta">
-                      <span className="n-category">Tips & Tricks</span>
+                     
                       <span className="n-date">
                         {new Date(article.date).toLocaleDateString('en-US', {
                           month: 'short',

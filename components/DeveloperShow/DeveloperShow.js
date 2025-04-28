@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./DeveloperShow.module.css";
 import Image from "next/image";
 import EmaarLogo from "../../assets/img/emmar.png";
-import AreaVector from "../../assets/img/areavector.png";
-import BathroomIcon from "../../assets/img/bathroom.png";
-import BedroomIcon from "../../assets/img/Vector2.png";
-import WarehouseIcon from "../../assets/img/warehousevector.png";
+import AreaVector from "../../assets/img/place.svg";
+import BathroomIcon from "../../assets/img/bath.svg";
+import BedroomIcon from "../../assets/img/bad.svg";
+import WarehouseIcon from "../../assets/img/garage.svg";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsWhatsapp } from "react-icons/bs";
 import agentInfo from "../../assets/img/agentinfo.png";
@@ -343,16 +343,16 @@ const DeveloperShow = (developerData) => {
                         </div>
                         <div className={styles.stat}>
                           <Image
-                            src={require("/assets/img/areavector.png")}
+                            src={require("/assets/img/place.svg")}
                             alt="Area"
                             width={20}
                             height={20}
                           />
-                          <span>{listing.sq_ft} Sq.Ft</span>
+                          <span>{listing.sq_ft} Sq.m</span>
                         </div>
                         <div className={styles.stat}>
                           <Image
-                            src={require("/assets/img/warehousevector.png")}
+                            src={require("/assets/img/garage.svg")}
                             alt="Garage"
                             width={20}
                             height={20}
@@ -482,7 +482,7 @@ const DeveloperShow = (developerData) => {
                               width={20}
                               height={20}
                             />
-                            <span>{listing.sq_ft} Sq.Ft</span>
+                            <span>{listing.sq_ft} Sq.m</span>
                           </div>
                           <div className={styles.stat}>
                             <Image
@@ -605,14 +605,23 @@ const DeveloperShow = (developerData) => {
                         width={20}
                         height={20}
                       />
-                      <span>{listing.sq_ft} Sq.Ft</span>
+                      <span>{listing.sq_ft} Sq.m</span>
+                    </div>
+                    <div className={styles.stat}>
+                      <Image
+                        src={require("/assets/img/garage.svg")}
+                        alt="Garage"
+                        width={20}
+                        height={20}
+                      />
+                      <span>{listing.garage} Gr</span>
                     </div>
                   </div>
                   <div className={styles.propertyDetails}>
-                    <p>6,115 Sq. Ft. BUA</p>
-                    <p>10,111 Sq. Ft. PLOT</p>
-                    <p>Lime Tree Valley</p>
-                    <p>Trakheesi Permit: 6123123124512</p>
+                      <p>6,115 Sq. Ft. BUA</p>
+                      <p>10,111 Sq. Ft. PLOT</p>
+                      <p>Lime Tree Valley</p>
+                      <p>Trakheesi Permit: 6123123124512</p>
                   </div>
                   <div className={styles.resaleFooter}>
                     <div className={styles.agentInfo}>
@@ -691,7 +700,7 @@ const DeveloperShow = (developerData) => {
                         width={16}
                         height={16}
                       />
-                      <span>{listing.sq_ft} Sq.Ft</span>
+                      <span>{listing.sq_ft} Sq.m</span>
                     </div>
                   </div>
                   

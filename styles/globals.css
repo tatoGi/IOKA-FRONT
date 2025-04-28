@@ -2001,7 +2001,7 @@ margin: 64px 0 24px 0;
   margin: 0 auto;
 }
 .faq-container{
-  margin-top: 104px;
+  margin-top: 24px;
 }
 .faq-left {
   padding-right: 40px;
@@ -2187,32 +2187,6 @@ margin: 64px 0 24px 0;
   height: 24px;
 }
 
-
-@media (max-width: 768px) {
-  .faq-content {
-    padding: 24px 16px;
-  }
-
-  .faq-left {
-    padding-right: 0;
-    margin-bottom: 32px;
-  }
-
-  .faq-left h1 {
-    font-size: 32px;
-  }
-
-  .contact-buttons-faq {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-
-  .call-btn, .whatsapp-btn {
-    width: 100%;
-  }
-}
 
 .right-form:focus-within ~ .header-nav {
   -webkit-transform: translateX(-100px);
