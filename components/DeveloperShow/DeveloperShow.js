@@ -113,7 +113,18 @@ const DeveloperShow = (developerData) => {
     variableWidth: true,
     swipeToSlide: true,
     touchThreshold: 10,
-    touchMove: true
+    touchMove: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          variableWidth: false
+        }
+      }
+    ]
   };
 
   const limitTextLength = (text, maxLength) => {
@@ -542,8 +553,8 @@ const DeveloperShow = (developerData) => {
       </div>
 
       {/* Resale Section */}
-      <div className={`container ${styles.resaleSection}`}>
-        <div className="container">
+      <div className={styles.resaleSection}>
+        <div className="container" style={{ overflow: 'hidden' }}>
           <div className={styles.resaleHeader}>
             <div className={styles.resaleTitle}>
               <h3>Rental Resale</h3>

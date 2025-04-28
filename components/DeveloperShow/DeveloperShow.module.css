@@ -7,6 +7,7 @@
 
 .developerShowSection {
   width: 100%;
+  overflow: hidden;
 }
 .filterButtons {
   display: -webkit-box;
@@ -274,14 +275,10 @@
   font-family: 'Montserrat';
 }
 
-.listingsSection {
-  padding: 0 24px;
-}
+
 
 .listingsContainer {
   width: 100%;
-  max-width: 1360px;
-  margin: 0 auto;
 }
 
 .listingsHeader {
@@ -357,7 +354,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 24px;
+  gap: 16px;
   -webkit-transition: -webkit-transform 0.5s ease;
   transition: -webkit-transform 0.5s ease;
   -o-transition: transform 0.5s ease;
@@ -1202,7 +1199,7 @@
   margin-bottom: 15px;
   position: relative;
   top: 79px;
-  max-width: 100%;
+  max-width: 300px;
 }
 
 /* Bottom section with year and button */
