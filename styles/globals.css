@@ -869,6 +869,7 @@ margin-top: 24px;
   width: 100%;
   height: 174px;
   overflow: hidden;
+  display: block;
 }
 .partners-slider-item img{
   width: 100%;

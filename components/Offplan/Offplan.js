@@ -59,7 +59,26 @@ const Offplan = ({ initialData, initialPagination }) => {
       // If filters are null, fetch all properties
       fetchData(1);
     } else {
-      fetchData(1, filters);
+      // Format the filters to match backend expectations
+      const formattedFilters = { ...filters };
+      
+      // Handle price range
+      if (filters.price) {
+        const [priceMin, priceMax] = filters.price.split('-');
+        formattedFilters.price_min = priceMin || null;
+        formattedFilters.price_max = priceMax || null;
+        delete formattedFilters.price;
+      }
+
+      // Handle sqFt range
+      if (filters.sqFt) {
+        const [sqFtMin, sqFtMax] = filters.sqFt.split('-');
+        formattedFilters.sq_ft_min = sqFtMin || null;
+        formattedFilters.sq_ft_max = sqFtMax || null;
+        delete formattedFilters.sqFt;
+      }
+
+      fetchData(1, formattedFilters);
     }
   };
 
@@ -67,27 +86,18 @@ const Offplan = ({ initialData, initialPagination }) => {
     setIsLoading(true);
     try {
       const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
-      console.log(filters);
+     
+      
       // Prepare query parameters
       const queryParams = new URLSearchParams();
       queryParams.append('page', page);
       
-      // Add filters if they exist
-      if (filters.location) {
-        queryParams.append('location', filters.location);
-      }
-      if (filters.property_type) {
-        queryParams.append('property_type', filters.property_type);
-      }
-      if (filters.price_min) {
-        queryParams.append('price_min', filters.price_min);
-      }
-      if (filters.price_max) {
-        queryParams.append('price_max', filters.price_max);
-      }
-      if (filters.bedrooms) {
-        queryParams.append('bedrooms', filters.bedrooms);
-      }
+      // Add all filters to query params
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== null && value !== undefined && value !== '') {
+          queryParams.append(key, value);
+        }
+      });
 
       const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
       const data = response.data.data;
@@ -177,7 +187,10 @@ const Offplan = ({ initialData, initialPagination }) => {
             <RangeInputPopup
               isOpen={showPricePopup}
               onClose={() => setShowPricePopup(false)}
-              onApply={(value) => handleFilterChange("price", value)}
+              onApply={(value) => {
+                const filters = { price: value };
+                handleFilterChange(filters);
+              }}
               title="Price Range"
               unit="USD"
             />
@@ -192,7 +205,10 @@ const Offplan = ({ initialData, initialPagination }) => {
             <RangeInputPopup
               isOpen={showSqFtPopup}
               onClose={() => setShowSqFtPopup(false)}
-              onApply={(value) => handleFilterChange("sqFt", value)}
+              onApply={(value) => {
+                const filters = { sqFt: value };
+                handleFilterChange(filters);
+              }}
               title="Area Range"
               unit="Sq.m"
             />

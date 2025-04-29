@@ -58,18 +58,48 @@ const Rental_Resale = () => {
     try {
       // Use FILTER_RENTAL_RESALE_API when filters are present
       const apiUrl = filterParams ? FILTER_RENTAL_RESALE_API : RENTAL_RESALE;
-
+      
       // Prepare query parameters
       const queryParams = new URLSearchParams();
       queryParams.append("page", page);
 
       // Add filters if they exist
       if (filterParams) {
-        Object.entries(filterParams).forEach(([key, value]) => {
-          if (value !== null && value !== "") {
-            queryParams.append(key, value);
-          }
-        });
+        // Handle property type
+        if (filterParams.property_type) {
+          queryParams.append("property_type", filterParams.property_type);
+        }
+
+        // Handle price range
+        if (filterParams.price_min) {
+          queryParams.append("price_min", filterParams.price_min);
+        }
+        if (filterParams.price_max) {
+          queryParams.append("price_max", filterParams.price_max);
+        }
+
+        // Handle bedrooms
+        if (filterParams.bedrooms) {
+          queryParams.append("bedrooms", filterParams.bedrooms);
+        }
+
+        // Handle bathrooms
+        if (filterParams.bathrooms) {
+          queryParams.append("bathrooms", filterParams.bathrooms);
+        }
+
+        // Handle area (sq_ft) range
+        if (filterParams.sq_ft_min) {
+          queryParams.append("sq_ft_min", filterParams.sq_ft_min);
+        }
+        if (filterParams.sq_ft_max) {
+          queryParams.append("sq_ft_max", filterParams.sq_ft_max);
+        }
+
+        // Handle location search
+        if (filterParams.location) {
+          queryParams.append("location", filterParams.location);
+        }
       }
 
       const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);

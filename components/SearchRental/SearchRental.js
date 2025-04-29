@@ -49,18 +49,27 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
       const updatedFilters = { ...filters, [field]: value };
       setFilters(updatedFilters);
 
+      // Format the filters to match backend expectations
       const backendFilters = {
         property_type: updatedFilters.propertyType || null,
-        price_min: updatedFilters.price ? updatedFilters.price.split("-")[0] : null,
-        price_max: updatedFilters.price ? updatedFilters.price.split("-")[1] : null,
         bedrooms: updatedFilters.bedrooms || null,
         bathrooms: updatedFilters.bathrooms || null,
-        sq_ft_min: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[0] : null,
-        sq_ft_max: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[1] : null,
         location: field === 'searchQuery' ? value : null,
       };
 
-  
+      // Handle price range
+      if (updatedFilters.price) {
+        const [priceMin, priceMax] = updatedFilters.price.split('-');
+        backendFilters.price_min = priceMin || null;
+        backendFilters.price_max = priceMax || null;
+      }
+
+      // Handle sqFt range
+      if (updatedFilters.sqFt) {
+        const [sqFtMin, sqFtMax] = updatedFilters.sqFt.split('-');
+        backendFilters.sq_ft_min = sqFtMin || null;
+        backendFilters.sq_ft_max = sqFtMax || null;
+      }
 
       // Remove null or empty values from the query parameters
       const filteredParams = Object.fromEntries(

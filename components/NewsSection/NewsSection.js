@@ -89,7 +89,7 @@ const NewsSection = () => {
           
             >
               {blogs?.map((article, index) => (
-                console.log(article),
+               
                 <SwiperSlide key={index}>
                   <div className="news-item">
                     <div className="n-image">
@@ -106,7 +106,7 @@ const NewsSection = () => {
                     </div>
                     <div className="n-content">
                     <div className="n-meta">
-                     
+                      
                       <span className="n-date">
                         {new Date(article.date).toLocaleDateString('en-US', {
                           month: 'short',
@@ -145,7 +145,15 @@ const NewsSection = () => {
                     />
                   </div>
                   <div className="n-content">
-                    <span></span>
+                    <div className="n-meta">
+                      <span className="n-date">
+                        {new Date(article.date).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </span>
+                    </div>
                     <div className="n-text">{article.title}</div>
                   </div>
                   <Link

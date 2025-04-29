@@ -267,6 +267,7 @@
 
   .imageContainer {
     height: 350px; /* Adjusted height */
+    max-width: 794px !important;
   }
 
   .features li {
