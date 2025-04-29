@@ -530,6 +530,7 @@
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  max-width: 146px;
 }
 
 .actionButton span {
@@ -2032,4 +2033,58 @@ letter-spacing: 0%;
 
 .mobileAwardLayout .awardIconWrapper {
   flex-shrink: 0;
+}
+
+.singleRentalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.singleRentalContainer .resaleCard {
+  margin: 0;
+  width: 1252px !important;
+  height: 380px !important;
+}
+
+@media (max-width: 768px) {
+  .singleRentalContainer {
+    padding: 0 16px;
+  }
+  
+  .singleRentalContainer .resaleCard {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+.singleAwardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.singleAwardContainer .awardCard {
+  margin: 0;
+  width: 1079px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 768px) {
+  .singleAwardContainer {
+    padding: 0 16px;
+  }
+  
+  .singleAwardContainer .awardCard {
+    width: 100% !important;
+    height: auto !important;
+  }
 }

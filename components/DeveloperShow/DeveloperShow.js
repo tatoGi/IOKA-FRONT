@@ -667,6 +667,89 @@ const DeveloperShow = (developerData) => {
               </Link>
             ))}
           </div>
+        ) : rentalListings.length === 1 ? (
+          <div className={styles.singleRentalContainer}>
+            <Link href={`/rental/${rentalListings[0].slug}`} className={styles.resaleCard}>
+              <div className={styles.resaleImage}>
+                <Image
+                  src={
+                    rentalListings[0].main_photo
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(rentalListings[0].main_photo)}`
+                      : baseimage
+                  }
+                  alt={rentalListings[0].title}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+              <div className={styles.resaleContent}>
+                <h4>{rentalListings[0].title}</h4>
+                <p className={styles.resaleLocation}>{rentalListings[0].location}</p>
+                <p className={styles.resalePrice}>AED {formatPrice(rentalListings[0].amount)}</p>
+                <div className={styles.resaleStats}>
+                  <div className={styles.statGroup}>
+                    <Image
+                      src={BedroomIcon}
+                      alt="Bedrooms"
+                      width={16}
+                      height={16}
+                    />
+                    <span>{rentalListings[0].bedroom} Br</span>
+                  </div>
+                  <div className={styles.statSeparator}>|</div>
+                  <div className={styles.statGroup}>
+                    <Image
+                      src={BathroomIcon}
+                      alt="Bathrooms"
+                      width={16}
+                      height={16}
+                    />
+                    <span>{rentalListings[0].bathroom} Ba</span>
+                  </div>
+                  <div className={styles.statSeparator}>|</div>
+                  <div className={styles.statGroup}>
+                    <Image
+                      src={AreaVector}
+                      alt="Area"
+                      width={16}
+                      height={16}
+                    />
+                    <span>{rentalListings[0].sq_ft} Sq.m</span>
+                  </div>
+                </div>
+                <div className={styles.resaleDetails}>
+                  {rentalListings[0].details && rentalListings[0].details.map((detail, index) => (
+                    <p key={index}>{detail.title}: {detail.info}</p>
+                  ))}
+                </div>
+                <div className={styles.resaleFooter}>
+                  <div className={styles.agentInfo}>
+                    <Image
+                      src={rentalListings[0].agent_image || agentInfo}
+                      alt="Agent"
+                      width={40}
+                      height={40}
+                      className={styles.agentImage}
+                    />
+                    <span>{rentalListings[0].agent_title || "Darren Murphy"}</span>
+                  </div>
+                  <div className={styles.footerActions}>
+                    <button className={styles.footerButton}>
+                      <BsWhatsapp size={20} color="#34C759" />
+                      <span>WhatsApp</span>
+                    </button>
+                    <div className={styles.footerSeparator}>|</div>
+                    <button className={styles.footerButton}>
+                      <Image src={callVector} alt="Call" />
+                      <span>Call Us</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
         ) : (
           <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
             {rentalListings.map((listing) => (
@@ -761,58 +844,38 @@ const DeveloperShow = (developerData) => {
       <div className={styles.awardsSection}>
         <div className={styles.awardsContainer}>
           <div className="container">
-          <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
+            <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
           </div>
-        
 
-          <Slider {...awardSliderSettings} className={styles.awardsSlider}>
-            {awards.map((award, index) => (
-              <div key={index} className={styles.awardCard}>
-                <div className={styles.awardLeft}>
-                  <div className={styles.awardTeamImage}>
-                    <Image
-                      src={awardimg1} // Use a fallback or dynamic image if available
-                      alt="Team Photo"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.awardRight}>
-                  <div className={styles.awardContent}>
-                    <h4 className={styles.awardTitle}>{award.award_title}</h4>
-                    <div
-                      className={styles.awardSubtitle}
-                      dangerouslySetInnerHTML={{
-                        __html: award.award_description 
-                          ? (award.award_description.length > 150 
-                              ? award.award_description.substring(0, 150) + '...' 
-                              : award.award_description)
-                          : "No description available"
-                      }}
-                    />
-                  </div>
-                  {isMobileView ? (
-                    <div className={styles.mobileAwardLayout}>
-                      <span className={styles.awardYear}>{award.award_year}</span>
-                      <div className={styles.awardIconWrapper}>
-                        <Image
-                          src={
-                            award.award_photo
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(award.award_photo)}`
-                              : EmaarLogo
-                          }
-                          alt="Award Trophy"
-                          width={156}
-                          height={108}
-                          className={styles.trophyImage}
-                        />
-                      </div>
+          {isMobileView ? (
+            <div className={styles.listView}>
+              {awards.map((award, index) => (
+                <div key={index} className={styles.awardCard}>
+                  <div className={styles.awardLeft}>
+                    <div className={styles.awardTeamImage}>
+                      <Image
+                        src={awardimg1}
+                        alt="Team Photo"
+                        layout="fill"
+                        objectFit="cover"
+                      />
                     </div>
-                  ) : (
+                  </div>
+
+                  <div className={styles.awardRight}>
+                    <div className={styles.awardContent}>
+                      <h4 className={styles.awardTitle}>{award.award_title}</h4>
+                      <div
+                        className={styles.awardSubtitle}
+                        dangerouslySetInnerHTML={{
+                          __html: award.award_description 
+                            ? (award.award_description.length > 150 
+                                ? award.award_description.substring(0, 150) + '...' 
+                                : award.award_description)
+                            : "No description available"
+                        }}
+                      />
+                    </div>
                     <div className={styles.awardIconWrapper}>
                       <Image
                         src={
@@ -828,16 +891,138 @@ const DeveloperShow = (developerData) => {
                         className={styles.trophyImage}
                       />
                     </div>
-                  )}
+                    <div className={styles.awardBottom}>
+                      <span className={styles.awardYear}>{award.award_year}</span>
+                      <button className={styles.viewAwardBtn}>View Awards</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : awards.length === 1 ? (
+            <div className={styles.singleAwardContainer}>
+              <div className={styles.awardCard}>
+                <div className={styles.awardLeft}>
+                  <div className={styles.awardTeamImage}>
+                    <Image
+                      src={awardimg1}
+                      alt="Team Photo"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.awardRight}>
+                  <div className={styles.awardContent}>
+                    <h4 className={styles.awardTitle}>{awards[0].award_title}</h4>
+                    <div
+                      className={styles.awardSubtitle}
+                      dangerouslySetInnerHTML={{
+                        __html: awards[0].award_description 
+                          ? (awards[0].award_description.length > 150 
+                              ? awards[0].award_description.substring(0, 150) + '...' 
+                              : awards[0].award_description)
+                          : "No description available"
+                      }}
+                    />
+                  </div>
+                  <div className={styles.awardIconWrapper}>
+                    <Image
+                      src={
+                        awards[0].award_photo
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(awards[0].award_photo)}`
+                          : EmaarLogo
+                      }
+                      alt="Award Trophy"
+                      width={156}
+                      height={108}
+                      className={styles.trophyImage}
+                    />
+                  </div>
                   <div className={styles.awardBottom}>
-                    {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
+                    <span className={styles.awardYear}>{awards[0].award_year}</span>
                     <button className={styles.viewAwardBtn}>View Awards</button>
                   </div>
                 </div>
               </div>
-            ))}
-          </Slider>
+            </div>
+          ) : (
+            <Slider {...awardSliderSettings} className={styles.awardsSlider}>
+              {awards.map((award, index) => (
+                <div key={index} className={styles.awardCard}>
+                  <div className={styles.awardLeft}>
+                    <div className={styles.awardTeamImage}>
+                      <Image
+                        src={awardimg1}
+                        alt="Team Photo"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  </div>
 
+                  <div className={styles.awardRight}>
+                    <div className={styles.awardContent}>
+                      <h4 className={styles.awardTitle}>{award.award_title}</h4>
+                      <div
+                        className={styles.awardSubtitle}
+                        dangerouslySetInnerHTML={{
+                          __html: award.award_description 
+                            ? (award.award_description.length > 150 
+                                ? award.award_description.substring(0, 150) + '...' 
+                                : award.award_description)
+                            : "No description available"
+                        }}
+                      />
+                    </div>
+                    {isMobileView ? (
+                      <div className={styles.mobileAwardLayout}>
+                        <span className={styles.awardYear}>{award.award_year}</span>
+                        <div className={styles.awardIconWrapper}>
+                          <Image
+                            src={
+                              award.award_photo
+                                ? `${
+                                    process.env.NEXT_PUBLIC_API_URL
+                                  }/storage/${decodeImageUrl(award.award_photo)}`
+                                : EmaarLogo
+                            }
+                            alt="Award Trophy"
+                            width={156}
+                            height={108}
+                            className={styles.trophyImage}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.awardIconWrapper}>
+                        <Image
+                          src={
+                            award.award_photo
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(award.award_photo)}`
+                              : EmaarLogo
+                          }
+                          alt="Award Trophy"
+                          width={156}
+                          height={108}
+                          className={styles.trophyImage}
+                        />
+                      </div>
+                    )}
+                    <div className={styles.awardBottom}>
+                      {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
+                      <button className={styles.viewAwardBtn}>View Awards</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
       <div className="container">
