@@ -255,7 +255,7 @@ const DeveloperShow = (developerData) => {
         </div>
 
         {/* Property Listings Section */}
-        <div className={`container ${styles.listingsSection}`}>
+        <div className={styles.listingsSection}>
           <div className={styles.listingsContainer}>
             <div className={styles.listingsHeader}>
             {!isMobileView && (
@@ -278,29 +278,7 @@ const DeveloperShow = (developerData) => {
                 </span>
               </div>
                )}
-              {!isMobileView && (
-                <div className={styles.sortDropdown}>
-                  <span>Sort:</span>
-                  <button className={styles.sortButton}>
-                    Newest First
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4 6L8 10L12 6"
-                        stroke="#666666"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
+             
             </div>
 
             {isMobileView ? (

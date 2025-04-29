@@ -28,8 +28,6 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     max-width: 1560px;
-    margin: 0 auto;
-    padding: 0 20px;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
@@ -1578,6 +1576,32 @@
    .resaleCard:hover{
     border: 1px solid #6b7280;
    }  
+   .propertyGrid{
+    display: flex
+;
+    gap: 14px;
+    transition: transform 0.5s ease;
+    width: max-content;
+    scroll-snap-align: start;
+   }
+   .propertyCardLink{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 319px;
+   }
+   .features{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+;
+    gap: 19px;
+    color: #07151F;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #E6EBED;
+    padding-bottom: 12px;
+    font-family: 'Montserrat';
+   }
   }
   @media (max-width: 1200px) {
     .title_top {
