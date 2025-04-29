@@ -63,14 +63,14 @@ const DeveloperShow = (developerData) => {
    */
   const awardSliderSettings = {
     className: "slider variable-width",
-    dots: true,
-    infinite: true,
-    centerMode: true,
+    dots: awards.length > 1,
+    infinite: awards.length > 1,
+    centerMode: awards.length > 1,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true,
-    dotsClass: styles.slickDots, // Custom class for dots container
-    customPaging: () => <div className={styles.dot} />, // Custom dot element
+    variableWidth: awards.length > 1,
+    dotsClass: styles.slickDots,
+    customPaging: () => <div className={styles.dot} />,
     beforeChange: (current, next) => {
       const slides = document.querySelectorAll('.slick-slide');
       slides.forEach((slide, index) => {
@@ -83,34 +83,38 @@ const DeveloperShow = (developerData) => {
     },
     responsive: [
       {
-        breakpoint: 768, // For screens <= 768px
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: false, // Disable center mode for smaller screens
-          variableWidth: false, // Ensure full-width cards
-        },
-      },
-      {
-        breakpoint: 480, // For screens <= 480px
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
           variableWidth: false,
-        },
+          dots: awards.length > 1,
+          arrows: false
+        }
       },
-    ],
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          variableWidth: false,
+          dots: awards.length > 1,
+          arrows: false
+        }
+      }
+    ]
   };
 
   const resaleSliderSettings = {
     className: "slider variable-width",
-    dots: true,
-    infinite: true,
-    centerMode: true,
+    dots: rentalListings.length > 1,
+    infinite: rentalListings.length > 1,
+    centerMode: rentalListings.length > 1,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true,
+    variableWidth: rentalListings.length > 1,
     swipeToSlide: true,
     touchThreshold: 10,
     touchMove: true,
@@ -121,7 +125,9 @@ const DeveloperShow = (developerData) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
-          variableWidth: false
+          variableWidth: false,
+          dots: rentalListings.length > 1,
+          arrows: false
         }
       }
     ]
