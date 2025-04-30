@@ -32,11 +32,11 @@ const Map = ({ location_link }) => {
         fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(location_link)}`)
           .then(response => response.json())
           .then(data => {
-            console.log('Resolved URL data:', data);
+           
             
             // Extract the full URL from the response
             const fullUrl = data.contents;
-            console.log('Full URL:', fullUrl);
+            
             
             // Extract coordinates from the full URL
             const match = fullUrl.match(/@([-?\d.]+),([-?\d.]+)/);

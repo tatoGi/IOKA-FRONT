@@ -340,6 +340,7 @@
     max-width: 1320px;
     height: 85px;
     bottom: 20rem;
+    top: 48%;
   }
   .searchInput {
     font-size: 17px;

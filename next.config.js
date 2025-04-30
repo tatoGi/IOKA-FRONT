@@ -48,6 +48,18 @@ const nextConfig = {
   swcMinify: true,
   compress: true,
   poweredByHeader: false,
+  webpack: (config, { isServer }) => {
+    config.optimization = {
+      ...config.optimization,
+      minimize: true,
+    };
+    
+    return config;
+  },
+  onError: (err) => {
+    console.error('Next.js build error:', err);
+  },
+  productionBrowserSourceMaps: true,
 };
 
 module.exports = nextConfig;
