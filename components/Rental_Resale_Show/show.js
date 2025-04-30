@@ -31,6 +31,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const decodeImageUrl = (url) => {
+    return decodeURIComponent(url);
+  };
   useEffect(() => {
     if (typeof window !== "undefined") {
       const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -196,12 +199,13 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           queryParams.append("sq_ft_max", areaMax);
         }
 
-        // Exclude current property
-        queryParams.append("exclude", RENTAL_RESALE_DATA.id);
-
         const response = await fetch(`${RENTAL_RESALE_RELATED_API}?${queryParams.toString()}`);
         const data = await response.json();
-        setRelatedProperties(data);
+        
+        // Filter out the current property from the results
+        const filteredData = data.filter(property => property.id !== RENTAL_RESALE_DATA.id);
+        
+        setRelatedProperties(filteredData);
       } catch (error) {
         console.error('Error fetching related properties:', error);
       } finally {
@@ -945,7 +949,16 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={property.main_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${property.main_image}` : defaultImage}
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -1034,6 +1047,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               }}
             >
               {!isLoading && relatedProperties.map((property, index) => (
+                console.log(property),
                 <div
                   key={index}
                   className={styles.propertyCardLink}
@@ -1043,7 +1057,16 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={property.main_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${property.main_image}` : defaultImage}
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw"

@@ -1766,7 +1766,20 @@
   width: 130px;
  }
 }
-
+@media (max-width: 1200px) {
+  .mainImage{
+    flex: 2;
+    position: relative;
+    max-width: 470px;
+    border-radius: 16px;
+  }
+  .contactButtons{
+    gap: 10px;
+  }
+  .contactBtnperson{
+    width: 74px;
+  }
+}
 @media (max-width: 768px) {
   .mobileGallery {
     display: block;
