@@ -19,6 +19,24 @@ const decodeImageUrl = (url) => {
 
 const PartnersSection = () => {
   const [partners, setPartners] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkResolution = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 992);
+    };
+
+    // Initial check
+    checkResolution();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkResolution);
+
+    // Cleanup event listener
+    return () => window.removeEventListener('resize', checkResolution);
+  }, []);
 
   useEffect(() => {
     fetch(PARTNER_API)
@@ -57,8 +75,8 @@ const PartnersSection = () => {
                 spaceBetween: 22,
               },
               1024: {
-                slidesPerView: 6,
-                spaceBetween: 22,
+                slidesPerView: 4,
+                spaceBetween: 15,
               },
               1560: {
                 slidesPerView: 8,
@@ -76,11 +94,17 @@ const PartnersSection = () => {
                     height={80} 
                     style={{ borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  
-                </Link>
-                <div className="partner-title">
+                  {isMobile && !isTablet && (
+                    <div className="partner-title">
                     {partner.title}
                     </div>
+                  )}
+                </Link>
+                {!isMobile && !isTablet && (
+                  <div className="partner-title">
+                    {partner.title}
+                  </div>
+                )}
               </SwiperSlide>
             ))}
           </Swiper>

@@ -72,7 +72,7 @@ main {
   display: none;
 }
   .header-cont{  
-    height: 104px;
+    height: 105px;
     border-bottom: 1px solid transition;
     position: fixed;
     top: 0;
@@ -1557,23 +1557,7 @@ border: 1px #E6EBED solid;
   color: #666;
 }
 
-@media (max-width: 1200px) {
-  .vacancies-grid {
-    -ms-grid-columns: 1fr 20px 1fr;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
-@media (max-width: 768px) {
-  .vacancies-grid {
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-  }
-
-  .vacancyCard {
-    width: 100%;
-  }
-}
 
 /* Breadcrumb Styles */
 .breadcrumb-section {
@@ -1650,78 +1634,6 @@ border: 1px #E6EBED solid;
 .breadcrumb-list li span {
   color: #0A273B;
   opacity: 0.8;
-}
-
-/* Responsive Styles */
-@media (max-width: 1920px) {
-  .breadcrumb-content {
-    padding: 0 40px;
-  }
-}
-
-@media (max-width: 1600px) {
-  .breadcrumb-content {
-    padding: 0 32px;
-  }
-  
-  .breadcrumb-list li,
-  .breadcrumb-list li a {
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 1366px) {
-  .breadcrumb-content {
-    padding: 0 24px;
-  }
-  
-  .breadcrumb-list li,
-  .breadcrumb-list li a {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .breadcrumb-section {
-    margin-top: 80px;
-  }
-  
-  .breadcrumb-content {
-    padding: 0 20px;
-  }
-  
-  .breadcrumb-list li,
-  .breadcrumb-list li a {
-    font-size: 13px;
-  }
-  
-  .breadcrumb-separator {
-    margin: 0 6px;
-  }
-}
-
-@media (max-width: 768px) {
-  .breadcrumb-section {
-    margin-top: 60px;
-    padding: 8px 0;
-  }
-  
-  .breadcrumb-content {
-    padding: 0 16px;
-  }
-  
-  .breadcrumb-list {
-    gap: 2px;
-  }
-  
-  .breadcrumb-list li,
-  .breadcrumb-list li a {
-    font-size: 12px;
-  }
-  
-  .breadcrumb-separator {
-    margin: 0 4px;
-  }
 }
 
 /* Modal Styles */

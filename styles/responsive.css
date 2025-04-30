@@ -320,6 +320,23 @@
   .mobile-nav{
     display: none;
   }
+  .subscribe-box {
+    padding: 0px 20px;
+    border-radius: 16px;
+    background: #E6EBED;
+    height: 220px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+}
 }
 @media (max-width:1200px) {
   .header-nav ul li a {
@@ -382,8 +399,19 @@
           flex-direction: column;
   gap: 16px;
 }
+.middle-image-sub {
+  width: 380px;
+  height: 152px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 }
 @media (max-width: 1024px) {
+  
   .logo-img {
     width: 100px;
     height: 35px;
@@ -1203,7 +1231,9 @@
     margin: 0;
 
   }
-
+  .subscribe-form{
+    margin: 15px 0px;
+  }
   .left-s-text .s-t-1 span {
     font-weight: 600;
     color: #7ACBC4;
@@ -1211,21 +1241,22 @@
     margin: 0 5px 0 0;
     text-align: start;
     display: block;
-  }
+    font-size: 16px;
+}
 
   .middle-image-sub {
     width: 100%;
-    max-width: 94px;
+    max-width: 145px;
     /* margin: 16px 0; */
     height: 100%;
-    left: 77%;
+    left: 92%;
     /* align-items: end; */
     -webkit-box-pack: stretch;
     -ms-flex-pack: stretch;
     justify-content: stretch;
-    top: 29%;
+    top: 0%;
     max-height: 41px;
-  }
+}
 
   .middle-image-sub img {
     width: 100%;
@@ -1233,129 +1264,7 @@
     -o-object-fit: contain;
        object-fit: contain;
   }
-  .subscribe-section {
-    padding: 24px 16px;
-    background: transparent;
-    margin-bottom: 40px;
-  }
-
-  .subscribe-box {
-    padding: 40px;
-    border-radius: 16px;
-    background: #E6EBED;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    width: 100%;
-    gap: 20px;
-    overflow: hidden;
-  }
-
-  .left-s-text {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: auto;
-    text-align: left;
-    z-index: 1;
-  }
-
-  .left-s-text .s-t-0 {
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: left;
-    margin: 0;
-    color: #07151F;
-  }
-
-  .left-s-text .s-t-1 {
-    margin: 0;
-  }
-
-  .left-s-text .s-t-1 p {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 14px !important;
-    line-height: 120%;
-    letter-spacing: 0%;
-    color: #07151F;
-    text-align: left;
-    width: auto;
-    margin: 0;
-    display: inline;
-  }
-
-  .left-s-text .s-t-1 span {
-    font-weight: 600;
-    color: #7ACBC4;
-    text-decoration: none;
-    margin: 0 4px 0 0;
-    text-align: left;
-    display: inline;
-  }
-
-  .middle-image-sub {
-    width: auto;
-    height: 100%;
-    position: absolute;
-    right: 0%;
-    top: 6%;
-    transform: translateY(-50%);
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .middle-image-sub img {
-    width: auto;
-    height: 80px;
-    object-fit: contain;
-  }
-
-  .subscribe-form {
-    width: auto;
-    margin: 0;
-    flex-shrink: 0;
-    z-index: 1;
-  }
-
-  .subscribe-form form {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    width: auto;
-    align-items: center;
-  }
-
-  .subscribe-form input {
-    width: 200px !important;
-    height: 40px !important;
-    border-radius: 8px !important;
-    border: 1px solid #07151F !important;
-    padding: 0 16px;
-    font-size: 14px;
-    background: white;
-  }
-
-  .subscribe-form button {
-    width: auto !important;
-    min-width: 100px !important;
-    height: 40px !important;
-    border-radius: 8px !important;
-    padding: 0 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-    background: #07151F;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
+ 
   /* Added improvements for tablets and smaller screens */
   .flex-container {
     -webkit-box-orient: vertical;
@@ -1400,10 +1309,6 @@
     padding: 24px 0;
   }
 
-  .partners-section .container {
-    padding: 0;
-    margin: 0;
-  }
 
   .partners-slider-item {
     width: 91px;
@@ -1471,8 +1376,23 @@
   }
 
   .subscribe-section {
-    margin: 0;
-
+    margin: 50px 0;
+  }
+  .subscribe-box {
+    /* padding: 39px 63px; */
+    border-radius: 16px;
+    /* background: #E6EBED; */
+    height: 220px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: block;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
   }
   .footer-logo {
     display: block;
@@ -1790,8 +1710,86 @@ margin-top: 24px;
   }
 }
 @media (max-width: 480px) {
-  .subscribe-section{
-    padding: 0;
+  .subscribe-section {
+    margin: 50px 0;
+  }
+  .subscribe-box {
+    padding: 24px 0px;
+    border-radius: 16px;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .subscribe-form {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .subscribe-form form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+  .subscribe-form input {
+    width: 226px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+    border: 1px #07151F solid !important;
+  }
+  .subscribe-form input::-webkit-input-placeholder {
+    color: #98A2B3;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px !important;
+  }
+  .subscribe-form input::-moz-placeholder {
+    color: #98A2B3;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px !important;
+  }
+  .subscribe-form input:-ms-input-placeholder {
+    color: #98A2B3;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px !important;
+  }
+  .subscribe-form input::-ms-input-placeholder {
+    color: #98A2B3;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px !important;
+  }
+  .subscribe-form input::placeholder {
+    color: #98A2B3;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px !important;
+  }
+  .subscribe-form button {
+    width: 120px !important;
+    height: 44px !important;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 13px !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+  }
+  .subscribe-form button:hover {
+    background-color: #122834;
   }
   .breadcrumb-section {
     margin-top: 110px;

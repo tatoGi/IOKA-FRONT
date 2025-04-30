@@ -104,7 +104,7 @@ const Header = ({ navigationData }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 768);
+      setIsMobileView(window.innerWidth <= 992);
     };
 
     // Initial check
