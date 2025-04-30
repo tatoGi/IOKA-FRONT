@@ -762,9 +762,17 @@ const SearchHomeResult = ({ searchParams }) => {
                           <Image
                             src={
                               developer.photo
-                                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${
-                                    JSON.parse(developer.photo)[0].file
-                                  }`
+                                ? (() => {
+                                    try {
+                                      const parsedPhoto = JSON.parse(developer.photo);
+                                      return parsedPhoto && parsedPhoto[0] && parsedPhoto[0].file
+                                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${parsedPhoto[0].file}`
+                                        : defaultImage;
+                                    } catch (e) {
+                                      console.error('Error parsing developer photo:', e);
+                                      return defaultImage;
+                                    }
+                                  })()
                                 : defaultImage
                             }
                             alt={developer.title || "Developer Image"}
