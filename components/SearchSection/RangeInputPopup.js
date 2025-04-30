@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './SearchSection.module.css';
 
-const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
+const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit, initialValue }) => {
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const popupRef = useRef(null);
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen && initialValue) {
+      const [minVal, maxVal] = initialValue.split('-');
+      setMin(minVal || '');
+      setMax(maxVal || '');
+    }
+  }, [isOpen, initialValue]);
 
   useEffect(() => {
     if (isOpen) {

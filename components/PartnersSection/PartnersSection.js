@@ -76,11 +76,11 @@ const PartnersSection = () => {
                     height={80} 
                     style={{ borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  <div className="partner-title">
+                  
+                </Link>
+                <div className="partner-title">
                     {partner.title}
                     </div>
-                </Link>
-               
               </SwiperSlide>
             ))}
           </Swiper>

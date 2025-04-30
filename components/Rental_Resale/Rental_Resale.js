@@ -272,11 +272,11 @@ const Rental_Resale = () => {
                           <span className={Styles.topBadge}>Top</span>
                         )}
                       </div>
-
+                        
                       <div className={Styles.propertyInfo}>
                         <h3 className={Styles.title}>{property.title}</h3>
                         <p className={Styles.location}>
-                          {property.location_link}
+                          {property.locations && property.locations[0] ? property.locations[0].title : ''}
                         </p>
 
                         <div className={Styles.features}>
@@ -819,7 +819,7 @@ const Rental_Resale = () => {
                     <div className={Styles.propertyInfo}>
                       <h3 className={Styles.title}>{property.title}</h3>
                       <p className={Styles.location}>
-                        {property.location_link}
+                        {property.locations && property.locations[0] ? property.locations[0].title : ''}
                       </p>
 
                       <div className={Styles.features}>
