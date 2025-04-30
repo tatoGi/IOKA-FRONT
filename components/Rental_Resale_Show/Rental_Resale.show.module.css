@@ -1780,6 +1780,223 @@
     width: 74px;
   }
 }
+@media (max-width: 992px) {
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    max-height: none;
+  }
+
+  .mainImage {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+  }
+
+  .smallImagesGrid {
+    flex: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .smallImage {
+    width: 100%;
+    height: 120px;
+  }
+
+  .mainImage img,
+  .smallImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .description {
+    padding: 0;
+  }
+
+  .description .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .description .col-md-8,
+  .description .col-md-4 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    padding: 0;
+  }
+
+  .description .col-md-8 {
+    order: 1;
+  }
+
+  .description .col-md-4 {
+    order: 2;
+    margin-top: 32px;
+  }
+
+  .details {
+    margin: 32px 0;
+  }
+
+  .sharediv {
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
+  }
+
+  .sidevabarlocation {
+    max-width: 100%;
+    width: 100%;
+    height: 300px;
+    margin: 32px 0;
+  }
+
+  .sidebarqr {
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
+  }
+  .contactButtons{
+    width: 100%;
+  }
+  .contactButton {
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
+  }
+
+  .amenities_section {
+    width: 100%;
+    max-width: 100%;
+    margin: 32px 0;
+  }
+
+  .body {
+    margin: 32px 0;
+  }
+
+  .sameArea_poperies {
+    margin-top: 48px;
+    padding: 0 16px;
+  }
+
+  .sameArea_poperies h4 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .propertyGrid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 8px 0;
+  }
+
+  .propertyGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .propertyCardLink {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    width: 300px;
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  .propertyCard {
+    height: 100%;
+    border: 1px solid #E6EBED;
+  }
+
+  .imageContainer {
+    height: 200px;
+  }
+
+  .propertyInfo {
+    padding: 12px;
+  }
+
+  .propertyInfo h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .propertyInfo .location {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .features {
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .feature {
+    font-size: 12px;
+  }
+
+  .priceRow {
+    gap: 12px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .propertyGridContainer {
+    position: relative;
+    width: 100%;
+  }
+
+  .sliderArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    border: 1px solid #E6EBED;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 24px;
+    color: #0A273B;
+  }
+
+  .prevArrow {
+    left: 4px;
+  }
+
+  .nextArrow {
+    right: 4px;
+  }
+}
+
 @media (max-width: 768px) {
   .mobileGallery {
     display: block;
@@ -2187,4 +2404,20 @@
   .description {
     margin-right: 0;
   }
+}
+
+.tabletLayout {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabletLayout .col-md-8 {
+  width: 100%;
+  padding: 0;
+}
+
+.tabletLayout .col-md-4 {
+  width: 100%;
+  padding: 0;
+  margin-top: 32px;
 }

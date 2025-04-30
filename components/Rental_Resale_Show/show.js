@@ -17,6 +17,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const galleryImages = JSON.parse(RENTAL_RESALE_DATA.gallery_images || "[]");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPropertySlide, setCurrentPropertySlide] = useState(0);
   const [relatedProperties, setRelatedProperties] = useState([]);
@@ -36,13 +37,22 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   };
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const mediaQuery = window.matchMedia("(max-width: 768px)");
-      setIsMobile(mediaQuery.matches);
+      const mobileQuery = window.matchMedia("(max-width: 768px)");
+      const tabletQuery = window.matchMedia("(max-width: 992px)");
+      
+      setIsMobile(mobileQuery.matches);
+      setIsTablet(tabletQuery.matches);
 
-      const handleResize = () => setIsMobile(mediaQuery.matches);
-      mediaQuery.addEventListener("change", handleResize);
+      const handleMobileResize = () => setIsMobile(mobileQuery.matches);
+      const handleTabletResize = () => setIsTablet(tabletQuery.matches);
+      
+      mobileQuery.addEventListener("change", handleMobileResize);
+      tabletQuery.addEventListener("change", handleTabletResize);
 
-      return () => mediaQuery.removeEventListener("change", handleResize);
+      return () => {
+        mobileQuery.removeEventListener("change", handleMobileResize);
+        tabletQuery.removeEventListener("change", handleTabletResize);
+      };
     }
   }, []);
   useEffect(() => {
@@ -524,8 +534,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         {!isMobile && (
           <div className={styles.description}>
             <h1>Description</h1>
-            <div className="row">
-              <div className="col-md-8 pt-5 pe-5">
+            <div className={`row ${isTablet ? styles.tabletLayout : ''}`}>
+              <div className={`col-md-8 ${isTablet ? 'w-100' : ''}`}>
                 <div className={styles.body}>
                   <pre className={styles.descriptionText}>
                     <div
@@ -575,7 +585,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className={`col-md-4 ${isTablet ? 'w-100 mt-4' : ''}`}>
                 {/* Contact Information Section */}
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
@@ -919,107 +929,121 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         {!isMobile && (
           <div className={styles.sameArea_poperies}>
             <h4>Properties available in the same area</h4>
-            <div 
-              className={styles.propertyGrid} 
-              ref={propertyGridRef}
-              onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-              onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
-              onTouchEnd={() => {
-                if (!touchStart || !touchEnd) return;
-                const distance = touchStart - touchEnd;
-                const isLeftSwipe = distance > 50;
-                const isRightSwipe = distance < -50;
+            <div className={styles.propertyGridContainer}>
+              <button 
+                className={`${styles.sliderArrow} ${styles.prevArrow}`}
+                onClick={scrollToPrevProperty}
+              >
+                ‹
+              </button>
+              <div 
+                className={styles.propertyGrid} 
+                ref={propertyGridRef}
+                onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+                onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
+                onTouchEnd={() => {
+                  if (!touchStart || !touchEnd) return;
+                  const distance = touchStart - touchEnd;
+                  const isLeftSwipe = distance > 50;
+                  const isRightSwipe = distance < -50;
 
-                if (isLeftSwipe) {
-                  scrollToNextProperty();
-                } else if (isRightSwipe) {
-                  scrollToPrevProperty();
-                }
-                setTouchStart(0);
-                setTouchEnd(0);
-              }}
-            >
-              {!isLoading && relatedProperties.map((property, index) => (
-                <div
-                  key={index}
-                  className={styles.propertyCardLink}
-                  onClick={() => handleReadMore(property.slug)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <div className={styles.propertyCard}>
-                    <div className={styles.imageContainer}>
-                      <Image
-                        src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
-                              )}`
-                            : defaultImage
-                        }
-                        alt={property.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className={styles.propertyImage}
-                        priority
-                        unoptimized
-                      />
-                      {property.is_exclusive && (
-                        <span className={styles.exclusive}>Exclusive</span>
-                      )}
-                    </div>
-
-                    <div className={styles.propertyInfo}>
-                      <h3 className={styles.propertytitle}>{property.title}</h3>
-                      <p className={styles.location}>{property.location}</p>
-                      <div className={styles.features}>
-                        <div className={styles.feature}>
-                          <Image
-                            src={require("/assets/img/bad.svg")}
-                            alt="Bed Icon"
-                            width={24}
-                            height={24}
-                          />
-                          <span>{property.bedroom} Br</span>
-                        </div>
-                        <div className={styles.feature}>
-                          <Image
-                            src={require("/assets/img/bath.svg")}
-                            alt="Bath Icon"
-                            width={24}
-                            height={24}
-                          />
-                          <span>{property.bathroom} Ba</span>
-                        </div>
-                        <div className={styles.feature}>
-                          <Image
-                            src={require("/assets/img/place.svg")}
-                            alt="Area Icon"
-                            width={24}
-                            height={24}
-                          />
-                          <span>{property.sq_ft} Sq.m</span>
-                        </div>
-                        <div className={styles.feature}>
-                          <Image
-                            src={require("/assets/img/garage.svg")}
-                            alt="Car Icon"
-                            width={24}
-                            height={24}
-                          />
-                          <span>{property.garage} Gr</span>
-                        </div>
+                  if (isLeftSwipe) {
+                    scrollToNextProperty();
+                  } else if (isRightSwipe) {
+                    scrollToPrevProperty();
+                  }
+                  setTouchStart(0);
+                  setTouchEnd(0);
+                }}
+              >
+                {!isLoading && relatedProperties.map((property, index) => (
+                  <div
+                    key={index}
+                    className={styles.propertyCardLink}
+                    onClick={() => handleReadMore(property.slug)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className={styles.propertyCard}>
+                      <div className={styles.imageContainer}>
+                        <Image
+                          src={
+                            property.gallery_images &&
+                            JSON.parse(property.gallery_images)[0]
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(
+                                  JSON.parse(property.gallery_images)[0]
+                                )}`
+                              : defaultImage
+                          }
+                          alt={property.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className={styles.propertyImage}
+                          priority
+                          unoptimized
+                        />
+                        {property.is_exclusive && (
+                          <span className={styles.exclusive}>Exclusive</span>
+                        )}
                       </div>
-                      <div className={styles.priceRow}>
-                        <span className={styles.price}>USD {property.amount?.amount}</span>
-                        <span className={styles.price}>AED {property.amount?.amount_dirhams}</span>
+
+                      <div className={styles.propertyInfo}>
+                        <h3 className={styles.propertytitle}>{property.title}</h3>
+                        <p className={styles.location}>{property.location}</p>
+                        <div className={styles.features}>
+                          <div className={styles.feature}>
+                            <Image
+                              src={require("/assets/img/bad.svg")}
+                              alt="Bed Icon"
+                              width={24}
+                              height={24}
+                            />
+                            <span>{property.bedroom} Br</span>
+                          </div>
+                          <div className={styles.feature}>
+                            <Image
+                              src={require("/assets/img/bath.svg")}
+                              alt="Bath Icon"
+                              width={24}
+                              height={24}
+                            />
+                            <span>{property.bathroom} Ba</span>
+                          </div>
+                          <div className={styles.feature}>
+                            <Image
+                              src={require("/assets/img/place.svg")}
+                              alt="Area Icon"
+                              width={24}
+                              height={24}
+                            />
+                            <span>{property.sq_ft} Sq.m</span>
+                          </div>
+                          <div className={styles.feature}>
+                            <Image
+                              src={require("/assets/img/garage.svg")}
+                              alt="Car Icon"
+                              width={24}
+                              height={24}
+                            />
+                            <span>{property.garage} Gr</span>
+                          </div>
+                        </div>
+                        <div className={styles.priceRow}>
+                          <span className={styles.price}>USD {property.amount?.amount}</span>
+                          <span className={styles.price}>AED {property.amount?.amount_dirhams}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <button 
+                className={`${styles.sliderArrow} ${styles.nextArrow}`}
+                onClick={scrollToNextProperty}
+              >
+                ›
+              </button>
             </div>
           </div>
         )}

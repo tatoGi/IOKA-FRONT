@@ -1234,109 +1234,126 @@
        object-fit: contain;
   }
   .subscribe-section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding: 24px 24px 24px 24px;
-    text-align: center;
-    background: #fff;
+    padding: 24px 16px;
+    background: transparent;
+    margin-bottom: 40px;
   }
 
   .subscribe-box {
-    padding: 24px 0px;
+    padding: 40px;
     border-radius: 16px;
-    /* background: #E6EBED; */
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    background: #E6EBED;
+    height: auto;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     width: 100%;
-    background-color: #ffffff;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    gap: 20px;
+    overflow: hidden;
+  }
+
+  .left-s-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: auto;
+    text-align: left;
+    z-index: 1;
+  }
+
+  .left-s-text .s-t-0 {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: left;
+    margin: 0;
+    color: #07151F;
+  }
+
+  .left-s-text .s-t-1 {
+    margin: 0;
+  }
+
+  .left-s-text .s-t-1 p {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 14px !important;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: #07151F;
+    text-align: left;
+    width: auto;
+    margin: 0;
+    display: inline;
+  }
+
+  .left-s-text .s-t-1 span {
+    font-weight: 600;
+    color: #7ACBC4;
+    text-decoration: none;
+    margin: 0 4px 0 0;
+    text-align: left;
+    display: inline;
+  }
+
+  .middle-image-sub {
+    width: auto;
+    height: 100%;
+    position: absolute;
+    right: 0%;
+    top: 6%;
+    transform: translateY(-50%);
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .middle-image-sub img {
+    width: auto;
+    height: 80px;
+    object-fit: contain;
   }
 
   .subscribe-form {
-    width: 100%;
-    margin-top: 20px;
+    width: auto;
+    margin: 0;
+    flex-shrink: 0;
+    z-index: 1;
   }
 
   .subscribe-form form {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
+    flex-direction: row;
     gap: 8px;
-    width: 100%;
+    width: auto;
+    align-items: center;
   }
 
   .subscribe-form input {
-    width: 226px !important;
-    height: 44px !important;
+    width: 200px !important;
+    height: 40px !important;
     border-radius: 8px !important;
-    border: 1px #07151F solid !important;
-  }
-
-  .subscribe-form input::-webkit-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-
-  .subscribe-form input::-moz-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-
-  .subscribe-form input:-ms-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-
-  .subscribe-form input::-ms-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-
-  .subscribe-form input::placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
+    border: 1px solid #07151F !important;
+    padding: 0 16px;
+    font-size: 14px;
+    background: white;
   }
 
   .subscribe-form button {
-    width: 120px !important;
-    height: 44px !important;
-    gap: 10px;
-    border-radius: 8px;
-    padding: 13px !important;
+    width: auto !important;
+    min-width: 100px !important;
+    height: 40px !important;
     border-radius: 8px !important;
+    padding: 0 20px !important;
     margin: 0 !important;
-  }
-
-  .subscribe-form button:hover {
-    background-color: #122834;
+    font-size: 14px;
+    background: #07151F;
+    color: white;
+    border: none;
+    cursor: pointer;
   }
 
   /* Added improvements for tablets and smaller screens */
