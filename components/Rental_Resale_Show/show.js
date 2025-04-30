@@ -153,7 +153,53 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   useEffect(() => {
     const fetchRelatedProperties = async () => {
       try {
-        const response = await fetch(RENTAL_RESALE_RELATED_API);
+        // Create query parameters based on current property
+        const queryParams = new URLSearchParams();
+        
+        // Add property type (rental/resale)
+        if (Array.isArray(RENTAL_RESALE_DATA.tags)) {
+          if (RENTAL_RESALE_DATA.tags.includes("6")) {
+            queryParams.append("type", "resale");
+          } else if (RENTAL_RESALE_DATA.tags.includes("5")) {
+            queryParams.append("type", "rental");
+          }
+        } else {
+          queryParams.append("type", RENTAL_RESALE_DATA.tags === "6" ? "resale" : "rental");
+        }
+
+        // Add location
+        if (RENTAL_RESALE_DATA.location) {
+          queryParams.append("location", RENTAL_RESALE_DATA.location);
+        }
+
+        // Add price range (±20% of current price)
+        const currentPrice = RENTAL_RESALE_DATA.amount.amount;
+        const priceMin = Math.floor(currentPrice * 0.8);
+        const priceMax = Math.ceil(currentPrice * 1.2);
+        queryParams.append("price_min", priceMin);
+        queryParams.append("price_max", priceMax);
+
+        // Add bedrooms and bathrooms if available
+        if (RENTAL_RESALE_DATA.bedroom) {
+          queryParams.append("bedrooms", RENTAL_RESALE_DATA.bedroom);
+        }
+        if (RENTAL_RESALE_DATA.bathroom) {
+          queryParams.append("bathrooms", RENTAL_RESALE_DATA.bathroom);
+        }
+
+        // Add area range (±20% of current area)
+        if (RENTAL_RESALE_DATA.sq_ft) {
+          const currentArea = parseInt(RENTAL_RESALE_DATA.sq_ft);
+          const areaMin = Math.floor(currentArea * 0.8);
+          const areaMax = Math.ceil(currentArea * 1.2);
+          queryParams.append("sq_ft_min", areaMin);
+          queryParams.append("sq_ft_max", areaMax);
+        }
+
+        // Exclude current property
+        queryParams.append("exclude", RENTAL_RESALE_DATA.id);
+
+        const response = await fetch(`${RENTAL_RESALE_RELATED_API}?${queryParams.toString()}`);
         const data = await response.json();
         setRelatedProperties(data);
       } catch (error) {
@@ -164,7 +210,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     };
 
     fetchRelatedProperties();
-  }, []);
+  }, [RENTAL_RESALE_DATA]);
 
   const handleReadMore = (slug) => {
     window.location.href = `/rental-resale/${slug}`;
