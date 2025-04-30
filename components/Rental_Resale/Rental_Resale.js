@@ -30,6 +30,10 @@ const Rental_Resale = () => {
   const [filters, setFilters] = useState(null);
   const [showPricePopup, setShowPricePopup] = useState(false);
   const [showSqFtPopup, setShowSqFtPopup] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({
+    price: "",
+    sqFt: ""
+  });
 
   // Filter options for SearchRental component
   const filterOptions = {
@@ -193,8 +197,68 @@ const Rental_Resale = () => {
   };
 
   const handleFilterChange = (newFilters) => {
-    setFilters(newFilters);
+    // Update current filters state with the raw filter values
+    setCurrentFilters(prev => ({
+      ...prev,
+      price: newFilters?.price || "",
+      sqFt: newFilters?.sqFt || ""
+    }));
+
+    // Format the filters to match backend expectations
+    const formattedFilters = {};
+    
+    // Handle price range
+    if (newFilters?.price) {
+      const [priceMin, priceMax] = newFilters.price.split('-');
+      formattedFilters.price_min = priceMin || null;
+      formattedFilters.price_max = priceMax || null;
+    }
+
+    // Handle sqFt range
+    if (newFilters?.sqFt) {
+      const [sqFtMin, sqFtMax] = newFilters.sqFt.split('-');
+      formattedFilters.sq_ft_min = sqFtMin || null;
+      formattedFilters.sq_ft_max = sqFtMax || null;
+    }
+
+    // Add other filters
+    if (newFilters?.propertyType) formattedFilters.property_type = newFilters.propertyType;
+    if (newFilters?.bedrooms) formattedFilters.bedrooms = newFilters.bedrooms;
+    if (newFilters?.bathrooms) formattedFilters.bathrooms = newFilters.bathrooms;
+    if (newFilters?.searchQuery) formattedFilters.location = newFilters.searchQuery;
+
+    // Remove null or empty values
+    const filteredParams = Object.fromEntries(
+      Object.entries(formattedFilters).filter(([_, v]) => v !== null && v !== "")
+    );
+
+    setFilters(filteredParams);
     setCurrentPage(1); // Reset to first page when filters change
+  };
+
+  const formatRangeDisplay = (value, isPrice = false) => {
+    if (!value) return "";
+    const [min, max] = value.split("-");
+    
+    if (min && max) {
+      if (isPrice) {
+        return `$${Number(min).toLocaleString()} - $${Number(max).toLocaleString()}`;
+      }
+      return `${Number(min).toLocaleString()} - ${Number(max).toLocaleString()}`;
+    }
+    if (min) {
+      if (isPrice) {
+        return `From $${Number(min).toLocaleString()}`;
+      }
+      return `From ${Number(min).toLocaleString()}`;
+    }
+    if (max) {
+      if (isPrice) {
+        return `Up to $${Number(max).toLocaleString()}`;
+      }
+      return `Up to ${Number(max).toLocaleString()}`;
+    }
+    return "";
   };
 
   return (
@@ -364,6 +428,7 @@ const Rental_Resale = () => {
             setShowPricePopup={setShowPricePopup}
             showSqFtPopup={showSqFtPopup}
             setShowSqFtPopup={setShowSqFtPopup}
+            currentFilters={currentFilters}
           />
 
           {showPricePopup && (
@@ -375,9 +440,12 @@ const Rental_Resale = () => {
               <RangeInputPopup
                 isOpen={showPricePopup}
                 onClose={() => setShowPricePopup(false)}
-                onApply={(value) => handleFilterChange("price", value)}
+                onApply={(value) => {
+                  handleFilterChange({ ...currentFilters, price: value });
+                }}
                 title="Price Range"
                 unit="USD"
+                initialValue={currentFilters.price}
               />
             </div>
           )}
@@ -391,9 +459,12 @@ const Rental_Resale = () => {
               <RangeInputPopup
                 isOpen={showSqFtPopup}
                 onClose={() => setShowSqFtPopup(false)}
-                onApply={(value) => handleFilterChange("sqFt", value)}
+                onApply={(value) => {
+                  handleFilterChange({ ...currentFilters, sqFt: value });
+                }}
                 title="Area Range"
                 unit="Sq.m"
+                initialValue={currentFilters.sqFt}
               />
             </div>
           )}

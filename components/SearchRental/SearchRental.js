@@ -5,7 +5,7 @@ import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
-const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup }) => {
+const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {} }) => {
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
@@ -15,16 +15,27 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
   const [filters, setFilters] = useState({
     propertyType: "",
-    price: "",
+    price: currentFilters?.price || "",
     bedrooms: "",
     bathrooms: "",
-    sqFt: "",
+    sqFt: currentFilters?.sqFt || "",
     searchQuery: "",
   });
 
   const [matchingLocations, setMatchingLocations] = useState([]);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Update filters when currentFilters changes
+  useEffect(() => {
+    if (currentFilters) {
+      setFilters(prev => ({
+        ...prev,
+        price: currentFilters.price || "",
+        sqFt: currentFilters.sqFt || ""
+      }));
+    }
+  }, [currentFilters]);
 
   const closeAllPopups = () => {
     setShowPricePopup(false);
@@ -78,24 +89,11 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
         )
       );
 
-      console.log('Filtered params being sent:', filteredParams);
-
-      // If all filters are cleared, send null to indicate we should use OFFPLAN_APi
+      // If all filters are cleared, send null to indicate we should use default API
       onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
     }, 500),
     [filters, onFilterChange]
   );
-
-  // Add a function to clear individual filters
-  const clearFilter = (field) => {
-    setFilters(prev => ({ ...prev, [field]: "" }));
-    handleFilterChange(field, "");
-  };
-
-  const handleRangeApply = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
-    handleFilterChange(field, value);
-  };
 
   const formatNumber = (num) => {
     if (!num) return '';
@@ -108,7 +106,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     
     if (min && max) {
       if (isPrice) {
-        return `${formatNumber(min)} - ${formatNumber(max)}`;
+        return `$${formatNumber(min)} - $${formatNumber(max)}`;
       }
       return `${formatNumber(min)} - ${formatNumber(max)}`;
     }
@@ -125,6 +123,25 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
       return `Up to ${formatNumber(max)}`;
     }
     return "";
+  };
+
+  const clearFilter = (field) => {
+    const updatedFilters = { ...filters, [field]: "" };
+    setFilters(updatedFilters);
+    
+    // Create a new object with all current filters
+    const newFilters = {
+      ...filters,
+      [field]: ""
+    };
+    
+    // Call onFilterChange with the updated filters
+    onFilterChange(newFilters);
+  };
+
+  const handleRangeApply = (field, value) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+    handleFilterChange(field, value);
   };
 
   const handleLocationSearch = useCallback(
@@ -200,95 +217,102 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("propertyType", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("propertyType", e.target.value)}
           >
-            <option value="">Property Types</option>
+            <option value="">Property Type</option>
             {filterOptions.propertyTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
               </option>
             ))}
           </select>
-          
-          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
+
+          <div className={styles.filterBtnWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
-              onClick={() => setShowPricePopup(true)}
+              onClick={() => {
+                setShowPricePopup(!showPricePopup);
+                setShowSqFtPopup(false);
+              }}
             >
-              <span>Price</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+              {filters.price ? (
+                <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+              ) : (
+                "Price"
+              )}
+              {filters.price && (
+                <button
+                  className={styles.clearFilterButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearFilter("price");
+                  }}
+                >
+                  ×
+                </button>
+              )}
             </button>
-            {filters.price && (
-              <button
-                className={styles.clearFilterButton}
-                onClick={() => clearFilter("price")}
-              >
-                ×
-              </button>
-            )}
           </div>
 
           <select
-            className={styles.filterBtn}
+            className={`${styles.filterBtn}`}
             value={filters.bedrooms}
             onClick={() => {
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("bedrooms", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
           >
             <option value="">Bedrooms</option>
-            {filterOptions.bedrooms.map((bedroom) => (
-              <option key={bedroom} value={bedroom}>
-                {bedroom} Bedroom{bedroom > 1 ? "s" : ""}
+            {filterOptions.bedrooms.map((num) => (
+              <option key={num} value={num}>
+                {num}
               </option>
             ))}
           </select>
 
           <select
-            className={styles.filterBtn}
+            className={`${styles.filterBtn}`}
             value={filters.bathrooms}
             onClick={() => {
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("bathrooms", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
           >
             <option value="">Bathrooms</option>
-            {filterOptions.bathrooms.map((bathroom) => (
-              <option key={bathroom} value={bathroom}>
-                {bathroom} Bathroom{bathroom > 1 ? "s" : ""}
+            {filterOptions.bathrooms.map((num) => (
+              <option key={num} value={num}>
+                {num}
               </option>
             ))}
           </select>
 
-          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
+          <div className={styles.filterBtnWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
-              onClick={() => setShowSqFtPopup(true)}
+              onClick={() => {
+                setShowSqFtPopup(!showSqFtPopup);
+                setShowPricePopup(false);
+              }}
             >
-              <span>Area</span>
-              <span className={styles.value}>
-                {filters.sqFt ? `${formatRangeDisplay(filters.sqFt)} Square Meters` : ""}
-              </span>
+              {filters.sqFt ? (
+                <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
+              ) : (
+                "Area"
+              )}
+              {filters.sqFt && (
+                <button
+                  className={styles.clearFilterButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearFilter("sqFt");
+                  }}
+                >
+                  ×
+                </button>
+              )}
             </button>
-            {filters.sqFt && (
-              <button
-                className={styles.clearFilterButton}
-                onClick={() => clearFilter("sqFt")}
-              >
-                ×
-              </button>
-            )}
           </div>
         </div>
       </div>

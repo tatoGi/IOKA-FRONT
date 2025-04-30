@@ -5,7 +5,7 @@ import Image from "next/image";
 import filterVector from "../../assets/img/filter.svg";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
-const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup }) => {
+const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters }) => {
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
@@ -15,12 +15,23 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
   const [filters, setFilters] = useState({
     propertyType: "",
-    price: "",
+    price: currentFilters?.price || "",
     bedrooms: "",
     bathrooms: "",
-    sqFt: "",
+    sqFt: currentFilters?.sqFt || "",
     searchQuery: "",
   });
+
+  // Update filters when currentFilters changes
+  useEffect(() => {
+    if (currentFilters) {
+      setFilters(prev => ({
+        ...prev,
+        price: currentFilters.price || "",
+        sqFt: currentFilters.sqFt || ""
+      }));
+    }
+  }, [currentFilters]);
 
   const [matchingLocations, setMatchingLocations] = useState([]);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
@@ -48,36 +59,11 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     debounce(async (field, value) => {
       const updatedFilters = { ...filters, [field]: value };
       setFilters(updatedFilters);
-
-      const backendFilters = {
-        property_type: updatedFilters.propertyType || null,
-        price_min: updatedFilters.price ? updatedFilters.price.split("-")[0] : null,
-        price_max: updatedFilters.price ? updatedFilters.price.split("-")[1] : null,
-        bedrooms: updatedFilters.bedrooms || null,
-        bathrooms: updatedFilters.bathrooms || null,
-        sq_ft_min: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[0] : null,
-        sq_ft_max: updatedFilters.sqFt ? updatedFilters.sqFt.split("-")[1] : null,
-        location: field === 'searchQuery' ? value : null,
-      };
-
-  
-
-      // Remove null or empty values from the query parameters
-      const filteredParams = Object.fromEntries(
-        Object.entries(backendFilters).filter(
-          ([_, v]) => v !== null && v !== ""
-        )
-      );
-
-      console.log('Filtered params being sent:', filteredParams);
-
-      // If all filters are cleared, send null to indicate we should use OFFPLAN_APi
-      onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
+      onFilterChange(updatedFilters);
     }, 500),
     [filters, onFilterChange]
   );
 
-  // Add a function to clear individual filters
   const clearFilter = (field) => {
     setFilters(prev => ({ ...prev, [field]: "" }));
     handleFilterChange(field, "");
@@ -85,7 +71,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
   const handleRangeApply = (field, value) => {
     setFilters(prev => ({ ...prev, [field]: value }));
-    handleFilterChange(field, value);
+    onFilterChange({ [field]: value });
   };
 
   const formatNumber = (num) => {
@@ -99,7 +85,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     
     if (min && max) {
       if (isPrice) {
-        return `${formatNumber(min)} - ${formatNumber(max)}`;
+        return `$${formatNumber(min)} - $${formatNumber(max)}`;
       }
       return `${formatNumber(min)} - ${formatNumber(max)}`;
     }
@@ -204,13 +190,16 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             ))}
           </select>
           
-          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
+          <div className={styles.filterButtonWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
               onClick={() => setShowPricePopup(true)}
             >
-              <span>Price</span>
-              <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+              {filters.price ? (
+                <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
+              ) : (
+                <span>Price</span>
+              )}
             </button>
             {filters.price && (
               <button
@@ -262,15 +251,16 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             ))}
           </select>
 
-          <div className={styles.filterButtonWrapper} style={{ position: 'relative' }}>
+          <div className={styles.filterButtonWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => setShowSqFtPopup(true)}
             >
-              <span>Area</span>
-              <span className={styles.value}>
-                {filters.sqFt ? `${formatRangeDisplay(filters.sqFt)} Square Meters` : ""}
-              </span>
+              {filters.sqFt ? (
+                <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
+              ) : (
+                <span>Area</span>
+              )}
             </button>
             {filters.sqFt && (
               <button

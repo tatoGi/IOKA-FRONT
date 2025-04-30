@@ -30,6 +30,10 @@ const Offplan = ({ initialData, initialPagination }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPricePopup, setShowPricePopup] = useState(false);
   const [showSqFtPopup, setShowSqFtPopup] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({
+    price: "",
+    sqFt: ""
+  });
   const [filterOptions, setFilterOptions] = useState({
     propertyTypes: [
       "Apartment",
@@ -58,16 +62,23 @@ const Offplan = ({ initialData, initialPagination }) => {
     if (filters === null) {
       // If filters are null, fetch all properties
       fetchData(1);
+      setCurrentFilters({ price: "", sqFt: "" });
     } else {
+      // Update current filters state with the raw filter values
+      setCurrentFilters(prev => ({
+        ...prev,
+        price: filters.price || "",
+        sqFt: filters.sqFt || ""
+      }));
+      
       // Format the filters to match backend expectations
-      const formattedFilters = { ...filters };
+      const formattedFilters = {};
       
       // Handle price range
       if (filters.price) {
         const [priceMin, priceMax] = filters.price.split('-');
         formattedFilters.price_min = priceMin || null;
         formattedFilters.price_max = priceMax || null;
-        delete formattedFilters.price;
       }
 
       // Handle sqFt range
@@ -75,8 +86,13 @@ const Offplan = ({ initialData, initialPagination }) => {
         const [sqFtMin, sqFtMax] = filters.sqFt.split('-');
         formattedFilters.sq_ft_min = sqFtMin || null;
         formattedFilters.sq_ft_max = sqFtMax || null;
-        delete formattedFilters.sqFt;
       }
+
+      // Add other filters
+      if (filters.propertyType) formattedFilters.property_type = filters.propertyType;
+      if (filters.bedrooms) formattedFilters.bedrooms = filters.bedrooms;
+      if (filters.bathrooms) formattedFilters.bathrooms = filters.bathrooms;
+      if (filters.searchQuery) formattedFilters.location = filters.searchQuery;
 
       fetchData(1, formattedFilters);
     }
@@ -177,6 +193,7 @@ const Offplan = ({ initialData, initialPagination }) => {
           setShowPricePopup={setShowPricePopup}
           showSqFtPopup={showSqFtPopup}
           setShowSqFtPopup={setShowSqFtPopup}
+          currentFilters={currentFilters}
         />
         {showPricePopup && (
           <div className={styles.popupContainer} onClick={(e) => {
@@ -188,11 +205,11 @@ const Offplan = ({ initialData, initialPagination }) => {
               isOpen={showPricePopup}
               onClose={() => setShowPricePopup(false)}
               onApply={(value) => {
-                const filters = { price: value };
-                handleFilterChange(filters);
+                handleFilterChange({ ...currentFilters, price: value });
               }}
               title="Price Range"
               unit="USD"
+              initialValue={currentFilters.price}
             />
           </div>
         )}
@@ -206,11 +223,11 @@ const Offplan = ({ initialData, initialPagination }) => {
               isOpen={showSqFtPopup}
               onClose={() => setShowSqFtPopup(false)}
               onApply={(value) => {
-                const filters = { sqFt: value };
-                handleFilterChange(filters);
+                handleFilterChange({ ...currentFilters, sqFt: value });
               }}
               title="Area Range"
               unit="Sq.m"
+              initialValue={currentFilters.sqFt}
             />
           </div>
         )}

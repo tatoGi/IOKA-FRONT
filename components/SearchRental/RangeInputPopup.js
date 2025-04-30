@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './SearchSection.module.css';
 
-const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
+const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit, initialValue }) => {
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const popupRef = useRef(null);
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
+
+  // Update local state when initialValue changes
+  useEffect(() => {
+    if (initialValue) {
+      const [minVal, maxVal] = initialValue.split('-');
+      setMin(minVal || '');
+      setMax(maxVal || '');
+    } else {
+      setMin('');
+      setMax('');
+    }
+  }, [initialValue, isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,21 +51,32 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
   }, [isOpen, onClose]);
 
   const handleApply = () => {
+    let value = '';
     if (min && max) {
-      onApply(`${min}-${max}`);
+      value = `${min}-${max}`;
     } else if (min) {
-      onApply(`${min}-`);
+      value = `${min}-`;
     } else if (max) {
-      onApply(`-${max}`);
-    } else {
-      onApply('');
+      value = `-${max}`;
     }
+    onApply(value);
     onClose();
   };
 
   const formatInput = (value) => {
     if (!value) return '';
+    // Remove any non-digit characters
     return value.replace(/\D/g, '');
+  };
+
+  const handleMinChange = (e) => {
+    const formattedValue = formatInput(e.target.value);
+    setMin(formattedValue);
+  };
+
+  const handleMaxChange = (e) => {
+    const formattedValue = formatInput(e.target.value);
+    setMax(formattedValue);
   };
 
   if (!isOpen) return null;
@@ -68,7 +91,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
               ref={minInputRef}
               type="text"
               value={min}
-              onChange={(e) => setMin(formatInput(e.target.value))}
+              onChange={handleMinChange}
               placeholder={`Min ${unit}`}
               className={styles.rangeInput}
               inputMode="numeric"
@@ -82,7 +105,7 @@ const RangeInputPopup = ({ isOpen, onClose, onApply, title, unit }) => {
               ref={maxInputRef}
               type="text"
               value={max}
-              onChange={(e) => setMax(formatInput(e.target.value))}
+              onChange={handleMaxChange}
               placeholder={`Max ${unit}`}
               className={styles.rangeInput}
               inputMode="numeric"
