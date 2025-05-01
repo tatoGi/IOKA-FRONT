@@ -696,6 +696,16 @@ const DeveloperShow = (developerData) => {
                     />
                     <span>{rentalListings[0].sq_ft} Sq.m</span>
                   </div>
+                  <div className={styles.statSeparator}>|</div>
+                  <div className={styles.statGroup}>
+                    <Image
+                      src={require("/assets/img/garage.svg")}
+                      alt="Garage"
+                      width={16}
+                      height={16}
+                    />
+                    <span>{rentalListings[0].garage} Gr</span>
+                  </div>
                 </div>
                 <div className={styles.resaleDetails}>
                   {rentalListings[0].details && rentalListings[0].details.map((detail, index) => (
