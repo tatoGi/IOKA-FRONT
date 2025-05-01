@@ -790,6 +790,16 @@ const DeveloperShow = (developerData) => {
                       />
                       <span>{listing.sq_ft} Sq.m</span>
                     </div>
+                    <div className={styles.statSeparator}>|</div>
+                    <div className={styles.statGroup}>
+                      <Image
+                        src={require("/assets/img/garage.svg")}
+                        alt="Garage"
+                        width={16}
+                        height={16}
+                      />
+                      <span>{listing.garage} Gr</span>
+                    </div>
                   </div>
                   
                   <div className={styles.resaleDetails}>
