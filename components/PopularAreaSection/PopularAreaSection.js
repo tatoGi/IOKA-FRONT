@@ -84,9 +84,9 @@ const PopularAreaSection = (sectionFourData) => {
                 </div>
                 <div className="area-title">
                   <div className="ar-title">{area.title}</div>
-                  <div className="arrow-box">
+                  <Link href={area.redirect_link || "#"} target="_blank" className="arrow-box">
                     <WhiteArrow />
-                  </div>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -94,36 +94,38 @@ const PopularAreaSection = (sectionFourData) => {
         ) : (
           <div className="popular-area-box">
             {popularArea.map((area, index) => (
-              <Link href={"#"} className="area-item" key={index}>
-                <div className="area-image-wrapper">
-                  <Image
-                    src={
-                      area.image
-                        ? `${
-                            process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(area.image)}`
-                        : area
-                    }
-                    width={400}
-                    height={400}
-                    alt={area.title || "Popular Area"}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <div className="off-relase-box">
-                  {area.property_types?.map((type, typeIndex) => (
-                    <div key={typeIndex} className="topic">
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </div>
-                  ))}
-                </div>
-                <div className="area-title">
-                  <div className="ar-title">{area.title}</div>
-                  <div className="arrow-box">
-                    <WhiteArrow />
+              <div className="area-item" key={index}>
+                <Link href={area.redirect_link || "#"} className="area-content">
+                  <div className="area-image-wrapper">
+                    <Image
+                      src={
+                        area.image
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(area.image)}`
+                          : area
+                      }
+                      width={400}
+                      height={400}
+                      alt={area.title || "Popular Area"}
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
-                </div>
-              </Link>
+                  <div className="off-relase-box">
+                    {area.property_types?.map((type, typeIndex) => (
+                      <div key={typeIndex} className="topic">
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="area-title">
+                    <div className="ar-title">{area.title}</div>
+                    <div className="arrow-box">
+                      <WhiteArrow />
+                    </div>
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         )}

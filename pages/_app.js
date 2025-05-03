@@ -21,7 +21,8 @@ import { SETTINGS_API } from "@/routes/apiRoutes";
 function App({ Component, pageProps }) {
   const [navigationData, setNavigationData] = useState([]);
   const [settings, setSettings] = useState({});
-  const [isRedirecting, setIsRedirecting] = useState(false); // State to track redirection
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPageTransitioning, setIsPageTransitioning] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -47,29 +48,54 @@ function App({ Component, pageProps }) {
       }
     };
 
-    fetchNavigationData();
-    fetchSettings();
+    const loadData = async () => {
+      setIsLoading(true);
+      await Promise.all([fetchNavigationData(), fetchSettings()]);
+      setIsLoading(false);
+    };
+
+    loadData();
   }, []);
 
- 
+  // Handle route change loading states
+  useEffect(() => {
+    const handleStart = () => {
+      setIsPageTransitioning(true);
+      document.body.style.overflow = 'hidden';
+    };
+    
+    const handleComplete = () => {
+      setIsPageTransitioning(false);
+      document.body.style.overflow = '';
+    };
 
-  // If redirecting, show LoadingWrapper
-  if (isRedirecting) {
-    return <LoadingWrapper />; // Show loading state while redirecting
-  }
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+    };
+  }, [router]);
 
   // Get meta data from pageProps
   const metaData = pageProps.meta || {};
 
+  if (isLoading || isPageTransitioning) {
+    return <LoadingWrapper />;
+  }
+
   return (
-    <>
+    <div style={{ visibility: isPageTransitioning ? 'hidden' : 'visible' }}>
       <Meta {...metaData} />
       <Header navigationData={navigationData} />
       <Layout>
         <Component {...pageProps} />
       </Layout>
       <Footer navigationData={navigationData} settings={settings} />
-    </>
+    </div>
   );
 }
 

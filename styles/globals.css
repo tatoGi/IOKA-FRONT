@@ -2109,3 +2109,9 @@ margin: 64px 0 24px 0;
 .right-form:focus-within ~ .header-nav ul {
   gap: 40px;
 }
+.partner-swiper-slide .swiper-slide {
+  width: 174px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

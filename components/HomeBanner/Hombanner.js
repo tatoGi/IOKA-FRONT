@@ -71,32 +71,36 @@ const Hombanner = ({ initialData }) => {
     fetchData();
   }, [initialData]);
 
-  if (isLoading) {
+  if (isLoading || !sectionOneData || !sectionTwoData || !sectionThreeData || 
+      !sectionFourData || !sectionFiveData || !sectionSixData || !sectionSevenData) {
     return <LoadingWrapper />; // Show loading wrapper while data is loading
   }
   
   return (
-    <div>
-    <div className="home-banner">
-      <div className="banner-slider">
-        <HomeBannerSwiper sectionData={sectionOneData} /> {/* Pass section_one data */}
-        <HomeBannerSearch />
-      </div>
-    </div>
-     <LiveInvestSection sectionDataTwo={sectionTwoData} /> {/* Pass section_two data */}
-     {/* Add components for sections three, four, five, and six */}
-     <NewProperties sectionDataThree={sectionThreeData} /> {/* Pass section_three data */}
-     <PopularAreaSection sectionDataFour={sectionFourData} /> {/* Pass section_four data */}
-     <TeamSection sectionDataFive={sectionFiveData} /> {/* Pass section_five data */}
-     <Clients sectionSixData={sectionSixData} /> {/* Pass section_six data */}
-     <NewsSection sectionSevenData={sectionSevenData} /> {/* Pass section_seven data */}
-     <PartnersSection />
-    
-       <div className="container">
-         <SubscribeSection />
-       </div>
-    
-    </div>
+    <LoadingWrapper isLoading={isLoading}>
+      {!isLoading && (
+        <div className="home-banner">
+          <div className="banner-slider">
+            <HomeBannerSwiper sectionData={sectionOneData} />
+            <HomeBannerSearch />
+          </div>
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          <LiveInvestSection sectionDataTwo={sectionTwoData} />
+          <NewProperties sectionDataThree={sectionThreeData} />
+          <PopularAreaSection sectionDataFour={sectionFourData} />
+          <TeamSection sectionDataFive={sectionFiveData} />
+          <Clients sectionSixData={sectionSixData} />
+          <NewsSection sectionSevenData={sectionSevenData} />
+          <PartnersSection />
+          <div className="container">
+            <SubscribeSection />
+          </div>
+        </>
+      )}
+    </LoadingWrapper>
   );
 };
 

@@ -76,7 +76,11 @@ const PartnersSection = () => {
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 15,
+                spaceBetween: 22,
+              },
+              1600: {
+                slidesPerView: 6,
+                spaceBetween: 22,
               },
               1560: {
                 slidesPerView: 8,
@@ -86,25 +90,27 @@ const PartnersSection = () => {
           >
             {partners.map((partner, index) => (
               <SwiperSlide key={index}>
-                <Link href={partner.url} className="partners-slider-item">
-                  <Image 
-                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
-                    alt={partner.title} 
-                    width={80} 
-                    height={80} 
-                    style={{ borderRadius: '50%', objectFit: 'cover' }}
-                  />
-                  {isMobile && !isTablet && (
-                    <div className="partner-title">
-                    {partner.title}
+                <div className="partner-item">
+                  <Link href={partner.url} className="partners-slider-item">
+                    <Image 
+                      src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
+                      alt={partner.title} 
+                      width={80} 
+                      height={80} 
+                      style={{ borderRadius: '50%', objectFit: 'cover' }}
+                    />
+                    {isMobile && !isTablet && (
+                      <div className="partner-title" style={{ textAlign: 'center' }}>
+                        {partner.title}
+                      </div>
+                    )}
+                  </Link>
+                  {!isMobile && !isTablet && (
+                    <div className="partner-title" style={{ textAlign: 'center' }}>
+                      {partner.title}
                     </div>
                   )}
-                </Link>
-                {!isMobile && !isTablet && (
-                  <div className="partner-title">
-                    {partner.title}
-                  </div>
-                )}
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

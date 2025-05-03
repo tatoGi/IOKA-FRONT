@@ -12,10 +12,12 @@ import baseimage from "../../assets/img/blogimage.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { LoadingWrapper } from "../LoadingWrapper/index";
 
 const AboutUs = ({ initialData, id }) => {
-  const [cardData, setCardData] = useState(initialData || {});
+  const [cardData, setCardData] = useState(null);
   const [sectionFiveData, setSectionFiveData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
   const [isMobile, setIsMobile] = useState(false);
@@ -32,38 +34,95 @@ const AboutUs = ({ initialData, id }) => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    // Set initial mobile state after component mounts
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       if (!id) {
         console.error("No ID provided to AboutUs component");
+        if (isMounted) setIsLoading(false);
         return;
       }
 
       try {
-        const response = await axios.get(`${ABOUT_API}/${id}`);
-        const responseTeam = await axios.get(`${SECTION_API}`);
-        const sectionFive = responseTeam.data.sections.find(
+        const [aboutResponse, teamResponse] = await Promise.all([
+          axios.get(`${ABOUT_API}/${id}`),
+          axios.get(`${SECTION_API}`)
+        ]);
+
+        if (!isMounted) return;
+
+        const sectionFive = teamResponse.data.sections.find(
           (section) => section.section_key === "section_five"
         );
+        
         setSectionFiveData(sectionFive);
-        if (response.data && response.data.about) {
-          setCardData(response.data.about);
+        if (aboutResponse.data && aboutResponse.data.about) {
+          setCardData(aboutResponse.data.about);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
-    if (!initialData && id) {
+    if (initialData) {
+      setCardData(initialData);
+      if (!sectionFiveData) {
+        axios.get(`${SECTION_API}`)
+          .then(response => {
+            if (!isMounted) return;
+            const sectionFive = response.data.sections.find(
+              (section) => section.section_key === "section_five"
+            );
+            setSectionFiveData(sectionFive);
+          })
+          .catch(error => {
+            console.error("Error fetching team data:", error);
+          })
+          .finally(() => {
+            if (isMounted) {
+              setIsLoading(false);
+            }
+          });
+      } else {
+        setIsLoading(false);
+      }
+    } else {
       fetchData();
     }
-  }, [initialData, id]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id, initialData]);
+
+  // Handle route changes
+  useEffect(() => {
+    const handleRouteChangeStart = () => {
+      setIsLoading(true);
+    };
+
+    const handleRouteChangeComplete = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [router]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,8 +141,6 @@ const AboutUs = ({ initialData, id }) => {
     return decodeURIComponent(url);
   };
 
-  const testimonial = cardData.additional_fields?.testimonials?.[0] || {};
-
   const renderStats = () => {
     if (isMobile) {
       return (
@@ -92,7 +149,7 @@ const AboutUs = ({ initialData, id }) => {
           slidesPerView={4}
           className={styles.statsSwiper}
         >
-          {cardData.additional_fields?.number_boxes?.map((box, index) => (
+          {cardData?.additional_fields?.number_boxes?.map((box, index) => (
             <SwiperSlide key={index} className={styles.statSlide}>
               <div className={styles.statBox}>
                 <div className={styles.statCircle}></div>
@@ -111,7 +168,7 @@ const AboutUs = ({ initialData, id }) => {
 
     return (
       <div className={styles.statsContainer}>
-        {cardData.additional_fields?.number_boxes?.map((box, index) => (
+        {cardData?.additional_fields?.number_boxes?.map((box, index) => (
           <div key={index} className={styles.statBox}>
             <div className={styles.statCircle}></div>
             <p>
@@ -145,53 +202,64 @@ const AboutUs = ({ initialData, id }) => {
     }));
   };
 
-  const TestimonialSection = () => (
-    <div className={styles.testimonialSection}>
-      <div className={styles.testimonialContainer}>
-        <div className={styles.testimonialImageContainer}>
-          <div className={styles.testimonialImageWrapper}>
-            <Image
-              src={
-                testimonial.image
-                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
-                  : baseimage
-              }
-              alt="CEO Portrait"
-              width={400}
-              height={400}
-              className={styles.testimonialImage}
-            />
-          </div>
-        </div>
-        <div className={styles.testimonialWrapper}>
-          <div className={styles.testimonialContent}>
-            <div className={styles.testimonialHeader}>
-              <h3 className={styles.testimonialName}>
-                {testimonial.name || "Max Musterman"}
-              </h3>
-              <p className={styles.testimonialRole}>
-                {testimonial.position || "CEO Chairman"}
-              </p>
+  const TestimonialSection = () => {
+    if (!cardData?.additional_fields?.testimonials?.[0]) {
+      return null;
+    }
+
+    const testimonial = cardData.additional_fields.testimonials[0];
+    return (
+      <div className={styles.testimonialSection}>
+        <div className={styles.testimonialContainer}>
+          <div className={styles.testimonialImageContainer}>
+            <div className={styles.testimonialImageWrapper}>
+              <Image
+                src={
+                  testimonial.image
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
+                    : baseimage
+                }
+                alt="CEO Portrait"
+                width={400}
+                height={400}
+                className={styles.testimonialImage}
+              />
             </div>
-            <div className={styles.testimonialBody}>
-              <p className={styles.testimonialText}>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: testimonial?.description
-                  }}
-                ></span>
-              </p>
-              <p className={styles.welcomeText}>
-                <span
-                  dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                ></span>
-              </p>
+          </div>
+          <div className={styles.testimonialWrapper}>
+            <div className={styles.testimonialContent}>
+              <div className={styles.testimonialHeader}>
+                <h3 className={styles.testimonialName}>
+                  {testimonial.name || "Max Musterman"}
+                </h3>
+                <p className={styles.testimonialRole}>
+                  {testimonial.position || "CEO Chairman"}
+                </p>
+              </div>
+              <div className={styles.testimonialBody}>
+                <p className={styles.testimonialText}>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: testimonial?.description
+                    }}
+                  ></span>
+                </p>
+                <p className={styles.welcomeText}>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
+                  ></span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  if (isLoading) {
+    return <LoadingWrapper isLoading={true} />;
+  }
 
   return (
     <div className={styles.aboutSection}>
@@ -201,10 +269,10 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* About Banner */}
         <AboutBanner
-          title={cardData.title || "ABOUT US"}
+          title={cardData?.title || "ABOUT US"}
           description={
             <span
-              dangerouslySetInnerHTML={{ __html: testimonial?.description }}
+              dangerouslySetInnerHTML={{ __html: cardData?.additional_fields?.testimonials?.[0]?.description }}
             ></span>
           }
         />
@@ -219,10 +287,10 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* Agency Section */}
         <div className={styles.agencySection}>
-          <h2>{cardData.additional_fields?.your_agency}</h2>
+          <h2>{cardData?.additional_fields?.your_agency}</h2>
           <div
             dangerouslySetInnerHTML={{
-              __html: cardData.additional_fields?.your_agency_description
+              __html: cardData?.additional_fields?.your_agency_description
             }}
           ></div>
         </div>
