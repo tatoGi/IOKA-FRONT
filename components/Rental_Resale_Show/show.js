@@ -23,6 +23,14 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const propertyGridRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const galleryRef = useRef(null);
+  const imageRef = useRef(null);
 
   // Initialize client-side state
   useEffect(() => {
@@ -199,6 +207,112 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     };
   }, [galleryImages]);
 
+  // Handle keyboard navigation
+  useEffect(() => {
+    if (!isGalleryOpen) return;
+
+    const handleKeyDown = (e) => {
+      switch (e.key) {
+        case 'Escape':
+          closeGallery();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+        case '+':
+        case '=':
+          zoomIn();
+          break;
+        case '-':
+          zoomOut();
+          break;
+        case '0':
+          resetZoom();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isGalleryOpen, currentImageIndex, scale]);
+
+  // Handle wheel zoom
+  const handleWheel = (e) => {
+    if (!isGalleryOpen) return;
+    e.preventDefault();
+    
+    const delta = e.deltaY * -0.01;
+    const newScale = Math.min(Math.max(0.5, scale + delta), 3);
+    setScale(newScale);
+  };
+
+  // Handle mouse drag
+  const handleMouseDown = (e) => {
+    if (scale <= 1) return;
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || scale <= 1) return;
+    setPosition({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Gallery controls
+  const openGallery = (index) => {
+    setCurrentImageIndex(index);
+    setIsGalleryOpen(true);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    document.body.style.overflow = '';
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => 
+      prev === galleryImages.length - 1 ? 0 : prev + 1
+    );
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? galleryImages.length - 1 : prev - 1
+    );
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const zoomIn = () => {
+    setScale((prev) => Math.min(prev + 0.5, 3));
+  };
+
+  const zoomOut = () => {
+    setScale((prev) => Math.max(prev - 0.5, 0.5));
+  };
+
+  const resetZoom = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
   // Render gallery image
   const renderGalleryImage = (image, index, isMain = false) => {
     if (!image) return null;
@@ -208,14 +322,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       if (!imageUrl) return null;
       
       return (
-        <a
-          href={imageUrl}
-          className="gallery-item"
-          key={`gallery-${image}-${index}`}
-          data-pswp-width="1920"
-          data-pswp-height="1080"
-          target="_blank"
-          rel="noreferrer"
+        <div
+          key={`gallery-${index}`}
+          className={styles.galleryItem}
+          onClick={() => openGallery(index)}
+          style={{ cursor: 'pointer', width: '100%', height: '100%' }}
         >
           <img
             src={imageUrl}
@@ -227,8 +338,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               height: '100%',
               objectFit: 'cover'
             }}
+            onError={(e) => {
+              e.target.src = defaultImage;
+            }}
           />
-        </a>
+        </div>
       );
     } catch (error) {
       return null;
@@ -1330,6 +1444,68 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         )}
       
       </div>
+
+      {/* Custom Gallery Modal */}
+      {isGalleryOpen && (
+        <div 
+          className={styles.galleryModal}
+          onWheel={handleWheel}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          <div className={styles.galleryOverlay} onClick={closeGallery} />
+          
+          <div className={styles.galleryContent}>
+            <button 
+              className={`${styles.galleryButton} ${styles.closeButton}`}
+              onClick={closeGallery}
+            >
+              ×
+            </button>
+            
+            <button 
+              className={`${styles.galleryButton} ${styles.prevButton}`}
+              onClick={prevImage}
+            >
+              ‹
+            </button>
+            
+            <div 
+              className={styles.galleryImageContainer}
+              ref={galleryRef}
+              onMouseDown={handleMouseDown}
+            >
+              <img
+                ref={imageRef}
+                src={getImageUrl(galleryImages[currentImageIndex])}
+                alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${currentImageIndex + 1}`}
+                style={{
+                  transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
+                  cursor: scale > 1 ? 'move' : 'default'
+                }}
+                className={styles.galleryModalImage}
+              />
+            </div>
+            
+            <button 
+              className={`${styles.galleryButton} ${styles.nextButton}`}
+              onClick={nextImage}
+            >
+              ›
+            </button>
+
+            <div className={styles.galleryControls}>
+              <button onClick={zoomIn} className={styles.controlButton}>+</button>
+              <button onClick={zoomOut} className={styles.controlButton}>-</button>
+              <button onClick={resetZoom} className={styles.controlButton}>Reset</button>
+              <span className={styles.imageCounter}>
+                {currentImageIndex + 1} / {galleryImages.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
