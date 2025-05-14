@@ -1,0 +1,17 @@
+# Browsers that we support
+
+# Modern browsers
+last 2 versions
+not dead
+> 0.2%
+
+# Specific browser versions
+not IE 11
+not op_mini all
+not and_uc > 0
+not and_qq > 0
+not baidu > 0
+not kaios > 0
+not samsung 4
+not android 4.4
+not ios 9 

@@ -5,48 +5,51 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Preconnect to Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Add Google Fonts with display=swap */}
+        {/* Preload critical fonts */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&display=swap"
-          rel="stylesheet"
-          media="print"
-          onLoad="this.media='all'"
+          rel="preload"
+          href="/fonts/Montserrat-VariableFont_wght.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
         />
-        
-        {/* Add IcoMoon Free font with display=swap */}
         <link
-          href="https://cdn.jsdelivr.net/npm/icomoon-free@1.0.0/fonts/icomoon-free.css"
-          rel="stylesheet"
-          media="print"
-          onLoad="this.media='all'"
+          rel="preload"
+          href="/fonts/felixtitlingmt.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
         />
 
-        {/* Add font-display: swap to local fonts */}
-        <style>{`
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
-            font-display: swap;
-          }
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype');
-            font-weight: 600;
-            font-display: swap;
-          }
+        {/* Add font-face declarations with font-display: swap */}
+        <style jsx global>{`
           @font-face {
             font-family: 'Montserrat';
             src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations');
+            font-weight: 100 900;
+            font-style: normal;
             font-display: swap;
+            ascent-override: 90%;
+            descent-override: 20%;
+            line-gap-override: normal;
           }
+
           @font-face {
             font-family: 'Felix Titling';
             src: url('/fonts/felixtitlingmt.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
             font-display: swap;
+            ascent-override: 90%;
+            descent-override: 20%;
+            line-gap-override: normal;
+          }
+
+          /* Add font metric overrides to prevent layout shift */
+          :root {
+            --font-montserrat-ascent: 90%;
+            --font-montserrat-descent: 20%;
+            --font-montserrat-line-gap: normal;
           }
         `}</style>
       </Head>
