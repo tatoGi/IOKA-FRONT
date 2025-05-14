@@ -81,12 +81,18 @@ function App({ Component, pageProps }) {
 
   return (
     <LoadingWrapper isLoading={isLoading}>
-      <Meta {...metaData} />
-      <Header navigationData={appData.navigationData} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-      <Footer navigationData={appData.navigationData} settings={appData.settings} />
+      <div style={{ 
+        opacity: isLoading ? 0 : 1, 
+        transition: 'opacity 0.3s ease-in-out',
+        visibility: isLoading ? 'hidden' : 'visible'
+      }}>
+        <Meta {...metaData} />
+        <Header navigationData={appData.navigationData} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        <Footer navigationData={appData.navigationData} settings={appData.settings} />
+      </div>
     </LoadingWrapper>
   );
 }
