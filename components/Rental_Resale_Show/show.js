@@ -4,12 +4,13 @@ import Image from "next/image";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import dynamic from "next/dynamic";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import galleryIcon from "../../assets/img/gallery-icon.svg";
 import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
+import PhotoSwipe from 'photoswipe';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Initialize state
@@ -44,7 +45,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Parse gallery images
   const galleryImages = React.useMemo(() => {
     if (!RENTAL_RESALE_DATA?.gallery_images) {
-      console.warn('No gallery images provided');
       return [];
     }
   
@@ -77,10 +77,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           return cleanPath.replace(/^\/+|\/+$/g, '');
         });
   
-      console.log('Processed gallery images:', validImages);
       return validImages;
     } catch (error) {
-      console.error('Error processing gallery images:', error);
       return [];
     }
   }, [RENTAL_RESALE_DATA?.gallery_images]);
@@ -88,7 +86,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Get image URL helper
   const getImageUrl = (image) => {
     if (!image) {
-      console.warn('No image provided, using default');
       return defaultImage;
     }
   
@@ -103,10 +100,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       
       // Construct the full URL
       const url = `${process.env.NEXT_PUBLIC_API_URL}/storage/${cleanPath}`;
-      console.log('Generated image URL:', url);
       return decodeImageUrl(url);
     } catch (error) {
-      console.error('Error processing image URL:', error, { image });
       return defaultImage;
     }
   };
@@ -116,89 +111,91 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     try {
       return decodeURIComponent(url);
     } catch (error) {
-      console.error('Error decoding image URL:', error);
       return url; // Return original URL if decoding fails
     }
   };
 
-  // Initialize Fancybox
+  // Initialize PhotoSwipe
   useEffect(() => {
-    // Only run on client side
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !galleryImages?.length) return;
 
-    const initializeFancybox = () => {
-      if (!galleryImages?.length) {
-        console.log('No gallery images available');
-        return;
-      }
-
+    const initializePhotoSwipe = () => {
       try {
-        // Destroy any existing instance
-        Fancybox.destroy();
-
-        // Create simple gallery items array
+        // Create properly structured gallery items
         const items = galleryImages
           .filter(image => image && typeof image === 'string')
           .map((image, index) => {
-            try {
-              const src = getImageUrl(image);
-              if (!src) return null;
-              
-              // Simplified item structure
-              return {
-                src,
-                type: "image"
-              };
-            } catch (error) {
-              console.error('Error processing gallery image:', error, { image, index });
-              return null;
-            }
-          })
-          .filter(Boolean);
+            const src = getImageUrl(image);
+            return {
+              src,
+              w: 1920, // Default width
+              h: 1080, // Default height
+              alt: `${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`
+            };
+          });
 
         if (items.length === 0) {
-          console.warn('No valid gallery items to display');
           return;
         }
 
-        // Simplified Fancybox initialization
-        Fancybox.bind("[data-fancybox='gallery']", {
-          items,
-          dragToClose: false,
-          closeButton: "top",
-          Image: {
-            zoom: true
-          },
-          Carousel: {
-            infinite: true
-          },
-          Toolbar: {
-            display: [
-              { id: "prev", position: "center" },
-              { id: "counter", position: "center" },
-              { id: "next", position: "center" },
-              "zoom",
-              "close"
-            ]
+        // Initialize PhotoSwipe Lightbox
+        const lightbox = new PhotoSwipeLightbox({
+          gallery: '.gallery',
+          children: 'a',
+          pswpModule: PhotoSwipe,
+          showHideAnimationType: 'fade',
+          showAnimationDuration: 300,
+          hideAnimationDuration: 300,
+          zoomAnimationDuration: 300,
+          easing: 'cubic-bezier(0.4, 0, 0.22, 1)',
+          paddingFn: () => {
+            return {
+              top: 30,
+              bottom: 30,
+              left: 0,
+              right: 0
+            };
           }
         });
 
+        // Add PhotoSwipe UI
+        const pswp = new PhotoSwipe({
+          dataSource: items,
+          ...lightbox.options
+        });
+
+        // Bind click events
+        lightbox.on('uiRegister', () => {
+          lightbox.pswp.ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            html: 'Caption text',
+            onInit: (el, pswp) => {
+              lightbox.pswp.on('change', () => {
+                const currSlideIndex = lightbox.pswp.currIndex;
+                el.innerHTML = `${currSlideIndex + 1} / ${items.length}`;
+              });
+            }
+          });
+        });
+
+        lightbox.init();
+
+        return () => {
+          lightbox.destroy();
+        };
       } catch (error) {
-        console.error('Error initializing Fancybox:', error);
+        // Silent error handling
       }
     };
 
-    // Wait for component to be fully mounted
-    const timer = setTimeout(() => {
-      setIsClient(true);
-      initializeFancybox();
-    }, 100);
+    // Wait for component to be fully mounted and images to be loaded
+    const timer = setTimeout(initializePhotoSwipe, 1000);
 
     return () => {
       clearTimeout(timer);
-      if (typeof Fancybox !== 'undefined') {
-        Fancybox.destroy();
-      }
     };
   }, [galleryImages]);
 
@@ -213,61 +210,27 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       return (
         <a
           href={imageUrl}
-          data-fancybox="gallery"
+          className="gallery-item"
           key={`gallery-${image}-${index}`}
-          onClick={(e) => {
-            e.preventDefault();
-            if (typeof window !== 'undefined' && typeof Fancybox !== 'undefined') {
-              try {
-                // Create simple items array
-                const items = galleryImages
-                  .filter(img => img && typeof img === 'string')
-                  .map(img => {
-                    const src = getImageUrl(img);
-                    return src ? { src, type: "image" } : null;
-                  })
-                  .filter(Boolean);
-
-                if (items.length > 0) {
-                  // Simplified Fancybox.show call
-                  Fancybox.show(items, {
-                    startIndex: index,
-                    dragToClose: false,
-                    closeButton: "top",
-                    Image: {
-                      zoom: true
-                    },
-                    Carousel: {
-                      infinite: true
-                    },
-                    Toolbar: {
-                      display: [
-                        { id: "prev", position: "center" },
-                        { id: "counter", position: "center" },
-                        { id: "next", position: "center" },
-                        "zoom",
-                        "close"
-                      ]
-                    }
-                  });
-                }
-              } catch (error) {
-                console.error('Error showing Fancybox gallery:', error);
-              }
-            }
-          }}
+          data-pswp-width="1920"
+          data-pswp-height="1080"
+          target="_blank"
+          rel="noreferrer"
         >
           <img
             src={imageUrl}
             alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
             loading={isMain || index === 0 ? "eager" : "lazy"}
-            width="100%"
-            height="auto"
+            className={styles.galleryImage}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }}
           />
         </a>
       );
     } catch (error) {
-      console.error('Error rendering gallery image:', error, { image, index });
       return null;
     }
   };
@@ -301,7 +264,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
       return null;
     } catch (error) {
-      console.error('Error processing location data:', error);
       return null;
     }
   }, [RENTAL_RESALE_DATA.location_link]);
@@ -333,7 +295,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         })
         .filter(Boolean); // Remove any null/undefined results
     } catch (error) {
-      console.error('Error processing addresses:', error);
       return [];
     }
   }, [RENTAL_RESALE_DATA?.addresses]);
@@ -359,7 +320,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         })
         .filter(Boolean); // Remove any null/undefined results
     } catch (error) {
-      console.error('Error processing amenities:', error);
       return [];
     }
   }, [RENTAL_RESALE_DATA?.amenities]);
@@ -385,7 +345,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         })
         .filter(Boolean); // Remove any null/undefined results
     } catch (error) {
-      console.error('Error processing languages:', error);
       return [];
     }
   }, [RENTAL_RESALE_DATA?.languages]);
@@ -482,7 +441,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         
         setRelatedProperties(filteredData);
       } catch (error) {
-        console.error('Error fetching related properties:', error);
+        // Silent error handling
       } finally {
         setIsLoading(false);
       }
@@ -1380,7 +1339,6 @@ const RentalResaleShowWithErrorBoundary = (props) => {
   try {
     return <RentalResaleShow {...props} />;
   } catch (error) {
-    console.error('Error in RentalResaleShow:', error);
     return <div>Something went wrong. Please try again later.</div>;
   }
 };

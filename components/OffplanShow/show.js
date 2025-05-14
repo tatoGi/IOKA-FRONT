@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import style from "./OffplaneShow.module.css";
 import Image from "next/image";
@@ -8,8 +8,9 @@ import ContactForm from "../contactForm/ContactForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import success from "../../assets/img/succsess.svg";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import PhotoSwipe from 'photoswipe';
+import 'photoswipe/style.css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,73 +24,84 @@ const decodeImageUrl = (url) => {
 
 const MobileSlider = ({ images, type, decodeImageUrl, title }) => {
   const [isClient, setIsClient] = useState(false);
+  const galleryRef = useRef(null);
+  const [pswp, setPswp] = useState(null);
 
   useEffect(() => {
     setIsClient(true);
+    if (typeof window !== 'undefined' && galleryRef.current) {
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: galleryRef.current,
+        children: 'a',
+        pswpModule: PhotoSwipe,
+        showHideAnimationType: 'fade',
+        showAnimationDuration: 300,
+        hideAnimationDuration: 300,
+        zoom: true,
+        paddingFn: () => {
+          return {
+            top: 30,
+            bottom: 30,
+            left: 0,
+            right: 0
+          };
+        }
+      });
+
+      lightbox.init();
+      setPswp(lightbox);
+
+      return () => {
+        lightbox.destroy();
+      };
+    }
   }, []);
 
   const handleClick = (e, index) => {
     e.preventDefault();
-    if (!isClient) return;
+    if (!isClient || !pswp) return;
+    
     const galleryItems = images
       .filter(Boolean)
       .map((img, idx) => ({
         src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
-        type: "image",
-        caption: `${title || ''} - ${type} Image ${idx + 1}`
+        w: 1200,
+        h: 800,
+        title: `${title || ''} - ${type} Image ${idx + 1}`
       }));
 
     if (galleryItems.length === 0) return;
 
-    if (typeof Fancybox.show === "function") {
-      Fancybox.show(galleryItems, {
-        startIndex: index,
-        dragToClose: false,
-        closeButton: "top",
-        Image: {
-          zoom: true,
-          fit: "contain"
-        },
-        Carousel: {
-          infinite: true,
-          center: true,
-          fill: true,
-          dragFree: true,
-          slidesPerPage: 1,
-          Navigation: true,
-          Dots: true
-        },
-        Toolbar: {
-          display: [
-            { id: "prev", position: "center" },
-            { id: "counter", position: "center" },
-            { id: "next", position: "center" },
-            "zoom",
-            "close"
-          ]
-        }
-      });
-    } else {
-      console.error("Fancybox.show is not available");
-    }
+    pswp.loadAndOpen(index, galleryItems);
   };
 
   return (
-    <Swiper className="mySwiper">
-      {images.filter(Boolean).map((image, index) => (
-        <SwiperSlide key={index} className={style.swiperSlide}>
-          <div onClick={(e) => handleClick(e, index)} style={{ cursor: 'pointer' }}>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-              alt={`${type} Image ${index + 1}`}
-              width={280}
-              height={200}
-              className={style.exteriorimage}
-            />
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div ref={galleryRef} className="gallery">
+      <Swiper className="mySwiper">
+        {images.filter(Boolean).map((image, index) => (
+          <SwiperSlide key={index} className={style.swiperSlide}>
+            <a
+              href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+              onClick={(e) => handleClick(e, index)}
+              style={{ cursor: 'pointer', display: 'block' }}
+              data-pswp-width="1200"
+              data-pswp-height="800"
+            >
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                alt={`${type} Image ${index + 1}`}
+                width={280}
+                height={200}
+                className={style.exteriorimage}
+                priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+                quality={90}
+              />
+            </a>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
@@ -138,9 +150,37 @@ const OffplanShow = ({ offplanData }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const galleryRef = useRef(null);
+  const [pswp, setPswp] = useState(null);
 
   useEffect(() => {
     setIsClient(true);
+    if (typeof window !== 'undefined' && galleryRef.current) {
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: galleryRef.current,
+        children: 'a',
+        pswpModule: PhotoSwipe,
+        showHideAnimationType: 'fade',
+        showAnimationDuration: 300,
+        hideAnimationDuration: 300,
+        zoom: true,
+        paddingFn: () => {
+          return {
+            top: 30,
+            bottom: 30,
+            left: 0,
+            right: 0
+          };
+        }
+      });
+
+      lightbox.init();
+      setPswp(lightbox);
+
+      return () => {
+        lightbox.destroy();
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -203,79 +243,50 @@ const OffplanShow = ({ offplanData }) => {
     
     const handleClick = (e) => {
       e.preventDefault();
-      if (!isClient) return;
+      if (!isClient || !pswp) return;
       
-      // Get the current gallery items
       const currentGallery = galleryType === 'exterior' ? exteriorGallery : interiorGallery;
       
-      // Ensure we have valid items
       if (!Array.isArray(currentGallery) || currentGallery.length === 0) {
         console.error('No valid gallery items found');
         return;
       }
 
-      // Create gallery items with proper error handling
       const galleryItems = currentGallery
-        .filter(Boolean) // Remove any null/undefined items
+        .filter(Boolean)
         .map((img, idx) => {
           try {
             const decodedUrl = decodeImageUrl(img);
             return {
               src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodedUrl}`,
-              type: "image",
-              caption: `${offplanData?.offplan?.title || ''} - ${galleryType} Image ${idx + 1}`
+              w: 1200,
+              h: 800,
+              title: `${offplanData?.offplan?.title || ''} - ${galleryType} Image ${idx + 1}`
             };
           } catch (error) {
             console.error('Error processing gallery item:', error);
             return null;
           }
         })
-        .filter(Boolean); // Remove any items that failed to process
+        .filter(Boolean);
 
       if (galleryItems.length === 0) {
         console.error('No valid gallery items after processing');
         return;
       }
 
-      if (typeof Fancybox.show === "function") {
-        Fancybox.show(galleryItems, {
-          startIndex: index,
-          dragToClose: false,
-          closeButton: "top",
-          Image: {
-            zoom: true,
-            fit: "contain"
-          },
-          Carousel: {
-            infinite: true,
-            center: true,
-            fill: true,
-            dragFree: true,
-            slidesPerPage: 1,
-            Navigation: true,
-            Dots: true
-          },
-          Toolbar: {
-            display: [
-              { id: "prev", position: "center" },
-              { id: "counter", position: "center" },
-              { id: "next", position: "center" },
-              "zoom",
-              "close"
-            ]
-          }
-        });
-      } else {
-        console.error("Fancybox.show is not available");
-      }
+      pswp.loadAndOpen(index, galleryItems);
     };
     
     return (
-      <div
+      <a
         key={`gallery-${image}-${index}`}
-        className={style.galleryItem}
+        href={imageUrl}
         onClick={handleClick}
-        style={{ cursor: 'pointer' }}
+        className={style.galleryItem}
+        style={{ cursor: 'pointer', display: 'block' }}
+        data-pswp-width="1200"
+        data-pswp-height="800"
       >
         <Image
           src={imageUrl}
@@ -283,15 +294,15 @@ const OffplanShow = ({ offplanData }) => {
           width={300}
           height={200}
           className={style.exteriorimage}
-          loading={isMain || index === 0 ? "eager" : "lazy"}
+          loading={isMain ? "eager" : "lazy"}
+          priority={isMain}
+          quality={90}
           onError={(e) => {
             console.error('Error loading image:', imageUrl);
             e.target.src = baseimage;
           }}
-          priority={isMain || index === 0}
-          quality={90}
         />
-      </div>
+      </a>
     );
   };
 
@@ -526,6 +537,8 @@ const OffplanShow = ({ offplanData }) => {
                 height={400}
                 className={style.buildingImage}
                 sizes="(max-width: 768px) 100vw, 600px"
+                priority
+                quality={90}
               />
             </div>
             <div className="col-12 col-md-6">
@@ -579,7 +592,7 @@ const OffplanShow = ({ offplanData }) => {
       </div>
 
       {/* Gallery Section */}
-      <div className={style.exteriorInteriorSection}>
+      <div ref={galleryRef} className={`gallery ${style.exteriorInteriorSection}`}>
         <div className={`container ${style.sectionHeader}`}>
           <h3>{offplanData.offplan.title}</h3>
           <div className={style.switcher}>
@@ -603,9 +616,73 @@ const OffplanShow = ({ offplanData }) => {
             <div className={style.exteriorSection}>
               <div className="container">
                 <div className="row d-none d-md-flex">
-                  {exteriorGallery.slice(0, 8).map((image, index) => (
+                  {exteriorGallery.slice(0, 4).map((image, index) => (
                     <div key={index} className="col-md-3 mb-3">
-                      {renderGalleryImage(image, index)}
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (!isClient || !pswp) return;
+                          const galleryItems = exteriorGallery
+                            .filter(Boolean)
+                            .map((img, idx) => ({
+                              src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
+                              w: 1200,
+                              h: 800,
+                              title: `${offplanData?.offplan?.title || ''} - Exterior Image ${idx + 1}`
+                            }));
+                          pswp.loadAndOpen(index, galleryItems);
+                        }}
+                        className={style.galleryItem}
+                        style={{ cursor: 'pointer', display: 'block' }}
+                        data-pswp-width="1200"
+                        data-pswp-height="800"
+                      >
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                          alt={`${offplanData?.offplan?.title || ''} - Exterior Image ${index + 1}`}
+                          width={300}
+                          height={200}
+                          className={style.exteriorimage}
+                          priority={index === 0}
+                          loading={index === 0 ? "eager" : "lazy"}
+                          quality={90}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                  {exteriorGallery.slice(4, 8).map((image, index) => (
+                    <div key={index + 4} className="col-md-3 mb-3">
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (!isClient || !pswp) return;
+                          const galleryItems = exteriorGallery
+                            .filter(Boolean)
+                            .map((img, idx) => ({
+                              src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
+                              w: 1200,
+                              h: 800,
+                              title: `${offplanData?.offplan?.title || ''} - Exterior Image ${idx + 1}`
+                            }));
+                          pswp.loadAndOpen(index + 4, galleryItems);
+                        }}
+                        className={style.galleryItem}
+                        style={{ cursor: 'pointer', display: 'block' }}
+                        data-pswp-width="1200"
+                        data-pswp-height="800"
+                      >
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                          alt={`${offplanData?.offplan?.title || ''} - Exterior Image ${index + 5}`}
+                          width={300}
+                          height={200}
+                          className={style.exteriorimage}
+                          loading="lazy"
+                          quality={90}
+                        />
+                      </a>
                     </div>
                   ))}
                 </div>
@@ -623,9 +700,73 @@ const OffplanShow = ({ offplanData }) => {
             <div className={style.interiorSection}>
               <div className="container">
                 <div className="row d-none d-md-flex">
-                  {interiorGallery.slice(0, 8).map((image, index) => (
+                  {interiorGallery.slice(0, 4).map((image, index) => (
                     <div key={index} className="col-md-3 mb-3">
-                      {renderGalleryImage(image, index)}
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (!isClient || !pswp) return;
+                          const galleryItems = interiorGallery
+                            .filter(Boolean)
+                            .map((img, idx) => ({
+                              src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
+                              w: 1200,
+                              h: 800,
+                              title: `${offplanData?.offplan?.title || ''} - Interior Image ${idx + 1}`
+                            }));
+                          pswp.loadAndOpen(index, galleryItems);
+                        }}
+                        className={style.galleryItem}
+                        style={{ cursor: 'pointer', display: 'block' }}
+                        data-pswp-width="1200"
+                        data-pswp-height="800"
+                      >
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                          alt={`${offplanData?.offplan?.title || ''} - Interior Image ${index + 1}`}
+                          width={300}
+                          height={200}
+                          className={style.exteriorimage}
+                          priority={index === 0}
+                          loading={index === 0 ? "eager" : "lazy"}
+                          quality={90}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                  {interiorGallery.slice(4, 8).map((image, index) => (
+                    <div key={index + 4} className="col-md-3 mb-3">
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (!isClient || !pswp) return;
+                          const galleryItems = interiorGallery
+                            .filter(Boolean)
+                            .map((img, idx) => ({
+                              src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
+                              w: 1200,
+                              h: 800,
+                              title: `${offplanData?.offplan?.title || ''} - Interior Image ${idx + 1}`
+                            }));
+                          pswp.loadAndOpen(index + 4, galleryItems);
+                        }}
+                        className={style.galleryItem}
+                        style={{ cursor: 'pointer', display: 'block' }}
+                        data-pswp-width="1200"
+                        data-pswp-height="800"
+                      >
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
+                          alt={`${offplanData?.offplan?.title || ''} - Interior Image ${index + 5}`}
+                          width={300}
+                          height={200}
+                          className={style.exteriorimage}
+                          loading="lazy"
+                          quality={90}
+                        />
+                      </a>
                     </div>
                   ))}
                 </div>

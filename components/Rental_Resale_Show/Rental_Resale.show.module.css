@@ -2193,12 +2193,9 @@
 
   .whatsappperson {
     width: 149px;
+    max-width: 149px;
     height: 40px;
     border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 70px;
-    padding-bottom: 12px;
-    padding-left: 30px;
     background-color: #0A273B;
   }
 
@@ -2420,4 +2417,76 @@
   width: 100%;
   padding: 0;
   margin-top: 32px;
+}
+
+/* PhotoSwipe custom styles */
+:global(.pswp) {
+  z-index: 999999 !important;
+}
+
+:global(.pswp__bg) {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+:global(.pswp__ui--fit .pswp__caption),
+:global(.pswp__ui--fit .pswp__top-bar) {
+  background-color: transparent !important;
+}
+
+:global(.pswp__button--arrow--left:before),
+:global(.pswp__button--arrow--right:before) {
+  background: none !important;
+  font-family: 'Montserrat' !important;
+  font-size: 24px !important;
+  color: white !important;
+}
+
+:global(.pswp__button--arrow--left:before) {
+  content: '←' !important;
+}
+
+:global(.pswp__button--arrow--right:before) {
+  content: '→' !important;
+}
+
+:global(.pswp__button--close) {
+  background: none !important;
+  font-family: 'Montserrat' !important;
+  font-size: 24px !important;
+  color: white !important;
+}
+
+:global(.pswp__button--close:before) {
+  content: '×' !important;
+}
+
+:global(.pswp__caption) {
+  font-family: 'Montserrat' !important;
+  font-size: 14px !important;
+  color: white !important;
+  text-align: center !important;
+  padding: 10px !important;
+}
+
+:global(.pswp__custom-caption) {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+  color: white !important;
+  font-family: 'Montserrat' !important;
+  font-size: 14px !important;
+  padding: 10px !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Gallery item styles */
+.galleryItem {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover {
+  transform: scale(1.02);
 }
