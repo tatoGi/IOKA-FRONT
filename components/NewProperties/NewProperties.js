@@ -76,7 +76,8 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                     <div className={styles.imageContainer}>
                         <Image src={ activeData.image_field ? `${ process.env.NEXT_PUBLIC_API_URL
                             }/storage/${decodeImageUrl(activeData.image_field)}` : homeBanner }
-                            alt={activeData.title_one} width={1200} height={600} className={styles.propertyImage}
+                            alt={`${activeData.alt_text}`} 
+                            width={1200} height={600} className={styles.propertyImage}
                             priority />
                     </div>
 

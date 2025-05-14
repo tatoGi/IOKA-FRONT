@@ -27,7 +27,7 @@ const TeamSection = ({ sectionDataFive }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
                     : homeBanner
                 }
-                alt="member"
+                alt={member.alt_text || "member"}
                 width={200}
                 height={200}
                 className="team-member-image"

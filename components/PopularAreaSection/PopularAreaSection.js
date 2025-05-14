@@ -70,7 +70,7 @@ const PopularAreaSection = (sectionFourData) => {
                     }
                     width={400}
                     height={400}
-                    alt={area.title || "Popular Area"}
+                    alt={area.alt_text || "Popular Area"}
                     style={{ objectFit: 'cover' }}
                     unoptimized={true}
                   />
@@ -107,7 +107,7 @@ const PopularAreaSection = (sectionFourData) => {
                       }
                       width={400}
                       height={400}
-                      alt={area.title || "Popular Area"}
+                      alt={area.alt_text || "Popular Area"}
                       style={{ objectFit: 'cover' }}
                     />
                   </div>

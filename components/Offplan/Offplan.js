@@ -239,6 +239,7 @@ const Offplan = ({ initialData, initialPagination }) => {
         <LoadingWrapper isLoading={isLoading}>
           <div className={styles.cardContainer}>
             {cardData?.filter(property => property?.id).map((property) => (
+             
               <div
                 key={property?.id || Math.random()}
                 className={styles.propertyCardLink}
@@ -253,7 +254,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                           ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
                           : defaultImage
                       }
-                      alt={property?.title || "Default Property Image"}
+                      alt={property?.alt_texts?.main_photo || property?.title || "Default Property Image"}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={styles.propertyImage}

@@ -56,9 +56,6 @@ const nextConfig = {
     
     return config;
   },
-  onError: (err) => {
-    console.error('Next.js build error:', err);
-  },
   productionBrowserSourceMaps: true,
 };
 

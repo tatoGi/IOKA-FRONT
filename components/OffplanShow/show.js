@@ -67,7 +67,7 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
                     : baseimage
                 }
-                alt={property.title}
+                alt={property.main_photo_alt || property.title}
                 width={280}
                 height={200}
                 className={style.sectionImage}
@@ -187,7 +187,7 @@ const OffplanShow = ({ offplanData }) => {
                 )}`
               : baseimage
           }
-          alt={offplanData.offplan.title}
+          alt={offplanData.offplan.banner_photo_alt || "Banner Image"}
           fill
           priority
           sizes="100vw"
@@ -281,7 +281,7 @@ const OffplanShow = ({ offplanData }) => {
                         )}`
                       : baseimage
                   }
-                  alt={offplanData.offplan.agent_title}
+                  alt={offplanData.offplan.agent_image_alt || offplanData.offplan.agent_title}
                   width={100}
                   height={100}
                 />
@@ -335,7 +335,7 @@ const OffplanShow = ({ offplanData }) => {
                         )}`
                       : baseimage
                   }
-                  alt="QR Code"
+                  alt={offplanData.offplan.qr_photo_alt || "QR Code"}
                   width={180}
                   height={180}
                 />
@@ -397,7 +397,7 @@ const OffplanShow = ({ offplanData }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(offplanData.offplan.main_photo)}`
                     : baseimage
                 }
-                alt={offplanData.offplan.title}
+                alt={offplanData.offplan.main_photo_alt || offplanData.offplan.title}
                 width={600}
                 height={400}
                 className={style.buildingImage}
@@ -488,7 +488,7 @@ const OffplanShow = ({ offplanData }) => {
                     >
                       <Image
                         src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                        alt="Exterior Image"
+                        alt={offplanData.offplan.exterior_gallery_alt?.[index] || `Exterior Image ${index + 1}`}
                         width={300}
                         height={200}
                         className={style.exteriorimage}
@@ -518,7 +518,7 @@ const OffplanShow = ({ offplanData }) => {
                     >
                       <Image
                         src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                        alt="Interior Image"
+                        alt={offplanData.offplan.interior_gallery_alt?.[index] || `Interior Image ${index + 1}`}
                         width={300}
                         height={200}
                         className={style.exteriorimage}
@@ -553,7 +553,7 @@ const OffplanShow = ({ offplanData }) => {
                         ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
                         : baseimage
                     }
-                    alt={property.title}
+                    alt={property.main_photo_alt || property.title}
                     width={300}
                     height={200}
                     className={style.sectionImage}

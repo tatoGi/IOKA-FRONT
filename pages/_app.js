@@ -13,51 +13,47 @@ import "slick-carousel/slick/slick-theme.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's already imported
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { LoadingWrapper } from "@/components/LoadingWrapper/index"; // Import LoadingWrapper
+import { LoadingWrapper } from "@/components/LoadingWrapper/index";
 import { SETTINGS_API } from "@/routes/apiRoutes";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 function App({ Component, pageProps }) {
-  const [navigationData, setNavigationData] = useState([]);
-  const [settings, setSettings] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [appData, setAppData] = useState({
+    navigationData: [],
+    settings: {},
+    isLoading: true
+  });
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch navigation data from the API
-    const fetchNavigationData = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-        const data = await res.json();
-        setNavigationData(data.pages);
+        const [navigationRes, settingsRes] = await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`),
+          fetch(SETTINGS_API)
+        ]);
+
+        const [navigationData, settingsData] = await Promise.all([
+          navigationRes.json(),
+          settingsRes.json()
+        ]);
+
+        setAppData({
+          navigationData: navigationData.pages || [],
+          settings: settingsData || {},
+          isLoading: false
+        });
       } catch (error) {
-        console.error("Error fetching navigation data:", error);
+        console.error("Error fetching app data:", error);
+        setAppData(prev => ({ ...prev, isLoading: false }));
       }
     };
 
-    // Fetch settings data from the API
-    const fetchSettings = async () => {
-      try {
-        const res = await fetch(SETTINGS_API);
-        const data = await res.json();
-        setSettings(data);
-      } catch (error) {
-        console.error("Error fetching settings data:", error);
-      }
-    };
-
-    const loadData = async () => {
-      setIsLoading(true);
-      await Promise.all([fetchNavigationData(), fetchSettings()]);
-      setIsLoading(false);
-    };
-
-    loadData();
+    fetchData();
   }, []);
 
-  // Handle route change loading states
   useEffect(() => {
     const handleStart = () => {
       setIsPageTransitioning(true);
@@ -80,22 +76,18 @@ function App({ Component, pageProps }) {
     };
   }, [router]);
 
-  // Get meta data from pageProps
   const metaData = pageProps.meta || {};
-
-  if (isLoading || isPageTransitioning) {
-    return <LoadingWrapper />;
-  }
+  const isLoading = appData.isLoading || isPageTransitioning;
 
   return (
-    <div style={{ visibility: isPageTransitioning ? 'hidden' : 'visible' }}>
+    <LoadingWrapper isLoading={isLoading}>
       <Meta {...metaData} />
-      <Header navigationData={navigationData} />
+      <Header navigationData={appData.navigationData} />
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <Footer navigationData={navigationData} settings={settings} />
-    </div>
+      <Footer navigationData={appData.navigationData} settings={appData.settings} />
+    </LoadingWrapper>
   );
 }
 

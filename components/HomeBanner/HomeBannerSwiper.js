@@ -28,6 +28,7 @@ const HomeBannerSwiper = ({ sectionData }) => {
     >
       {sectionData &&
         sectionData.additional_fields.slider_images.map((image, index) => (
+          
           <SwiperSlide key={index} className={styles['swiper-item-relative']}>
             <Link href={'#'} className={styles['in-sw-item']}>
               <div className={styles['image-overlay']}></div>
@@ -46,7 +47,7 @@ const HomeBannerSwiper = ({ sectionData }) => {
                         }/storage/${decodeImageUrl(image.image)}`
                       : baseimage
                   }
-                  alt="homeBanner"
+                  alt={image.alt_text || "homeBanner"}
                   priority
                   quality={100}
                   width={1920}

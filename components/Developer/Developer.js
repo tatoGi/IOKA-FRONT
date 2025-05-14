@@ -191,13 +191,17 @@ const Developer = ({ initialData, initialPagination }) => {
       const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
       if (Array.isArray(photos) && photos.length > 0) {
         const currentIndex = imageIndexes[cardId] || 0;
-        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(
-          photos[currentIndex].file
-        )}`;
+        const currentPhoto = photos[currentIndex];
+        return {
+          url: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(
+            currentPhoto.file
+          )}`,
+          alt: currentPhoto.alt || 'Developer image'
+        };
       }
-      return defaultImage;
+      return { url: defaultImage, alt: 'Default developer image' };
     } catch (e) {
-      return defaultImage;
+      return { url: defaultImage, alt: 'Default developer image' };
     }
   };
 
@@ -258,6 +262,7 @@ const Developer = ({ initialData, initialPagination }) => {
           {/* Developer Cards */}
           <div className={styles.cardsContainer}>
             {filteredData.map((card) => (
+             
               <div key={card.id} className={styles.cardWrapper}>
                 <div className={styles.card}>
                   <div className={styles.cardRow}>
@@ -269,8 +274,8 @@ const Developer = ({ initialData, initialPagination }) => {
                         </div>
                       )}
                       <Image
-                        src={getImageUrl(card.photo, card.id)}
-                        alt={card.title}
+                        src={getImageUrl(card.photo, card.id).url}
+                        alt={getImageUrl(card.photo, card.id).alt}
                         width={400}
                         height={300}
                         className={styles.cardImage}

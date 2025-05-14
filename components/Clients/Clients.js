@@ -64,7 +64,7 @@ const Clients = ({ sectionSixData }) => {
                         ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
                         : "/images/user.png"
                     }
-                    alt={testimonial.name}
+                    alt={testimonial.alt_text || testimonial.name}
                     width={50}
                     height={50}
                     className={styles.clientImage}

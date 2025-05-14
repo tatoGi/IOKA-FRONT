@@ -871,7 +871,7 @@ const DeveloperShow = (developerData) => {
                               }/storage/${decodeImageUrl(award.award_photo)}`
                             : EmaarLogo
                         }
-                        alt="Award Trophy"
+                        alt={award.logo_alt || "Award Trophy"}
                         width={156}
                         height={108}
                         className={styles.trophyImage}

@@ -20,7 +20,8 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
   const sliderData = additionalFields.slider_images.map((item, index) => ({
     id: index + 1,
     image: item.image,
-    url: item.url
+    url: item.url,
+    alt_text: item.alt_text || "Dubai Property"
   }));
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
@@ -66,7 +67,7 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
                               }/storage/${decodeImageUrl(item.image)}`
                             : homeBanner
                         }
-                        alt="Dubai Property"
+                        alt={item.alt_text || "Dubai Property"}
                         width={320}
                         height={222}
                         style={{ objectFit: "cover", borderRadius: "16px" }}
@@ -103,7 +104,7 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
                                 }/storage/${decodeImageUrl(item.image)}`
                               : homeBanner
                           }
-                          alt="Dubai Property"
+                          alt={item.alt_text || "Dubai Property"}
                           width={364}
                           height={364}
                           style={{ objectFit: "cover", borderRadius: "16px" }}

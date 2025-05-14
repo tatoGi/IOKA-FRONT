@@ -219,7 +219,7 @@ const AboutUs = ({ initialData, id }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
                     : baseimage
                 }
-                alt="CEO Portrait"
+                alt={testimonial.alt_text || "CEO Portrait"}
                 width={400}
                 height={400}
                 className={styles.testimonialImage}
@@ -269,7 +269,7 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* About Banner */}
         <AboutBanner
-          title={cardData?.title || "ABOUT US"}
+          title={cardData?.alt_text || "ABOUT US"}
           description={
             <span
               dangerouslySetInnerHTML={{ __html: cardData?.additional_fields?.testimonials?.[0]?.description }}
@@ -307,7 +307,7 @@ const AboutUs = ({ initialData, id }) => {
                         ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
                         : baseimage
                     }
-                    alt="Team Member"
+                    alt={member.alt_text || "Team Member"}
                     width={200}
                     height={200}
                     className={styles.teamImage}
