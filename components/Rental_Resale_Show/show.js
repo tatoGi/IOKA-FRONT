@@ -44,32 +44,41 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Parse gallery images
   const galleryImages = React.useMemo(() => {
     if (!RENTAL_RESALE_DATA?.gallery_images) {
+      console.warn('No gallery images provided');
       return [];
     }
-
+  
     try {
-      // If it's already an array, use it directly
+      let images = [];
+      
+      // If it's already an array
       if (Array.isArray(RENTAL_RESALE_DATA.gallery_images)) {
-        return RENTAL_RESALE_DATA.gallery_images.filter(img => 
-          img && typeof img === 'string' && img.trim() !== ''
-        );
+        images = RENTAL_RESALE_DATA.gallery_images;
       }
-
-      // If it's a string, try to parse it as JSON
-      if (typeof RENTAL_RESALE_DATA.gallery_images === 'string') {
+      // If it's a string, try to parse as JSON
+      else if (typeof RENTAL_RESALE_DATA.gallery_images === 'string') {
         try {
-          const unescaped = RENTAL_RESALE_DATA.gallery_images.replace(/\\/g, '');
-          const parsed = JSON.parse(unescaped);
-          return Array.isArray(parsed) ? parsed.filter(img => 
-            img && typeof img === 'string' && img.trim() !== ''
-          ) : [];
+          // First try to parse as JSON
+          const parsed = JSON.parse(RENTAL_RESALE_DATA.gallery_images);
+          images = Array.isArray(parsed) ? parsed : [parsed];
         } catch (e) {
-          console.error('Error parsing gallery images:', e);
-          return [];
+          // If JSON parsing fails, treat it as a single image path
+          images = [RENTAL_RESALE_DATA.gallery_images];
         }
       }
-
-      return [];
+  
+      // Filter and clean image paths
+      const validImages = images
+        .filter(img => img && typeof img === 'string' && img.trim() !== '')
+        .map(img => {
+          // Remove any quotes and backslashes
+          const cleanPath = img.replace(/^["']|["']$/g, '').replace(/\\/g, '');
+          // Remove any leading/trailing slashes
+          return cleanPath.replace(/^\/+|\/+$/g, '');
+        });
+  
+      console.log('Processed gallery images:', validImages);
+      return validImages;
     } catch (error) {
       console.error('Error processing gallery images:', error);
       return [];
@@ -78,15 +87,26 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   // Get image URL helper
   const getImageUrl = (image) => {
-    if (!image) return defaultImage;
+    if (!image) {
+      console.warn('No image provided, using default');
+      return defaultImage;
+    }
+  
     try {
-      if (image.startsWith('http')) {
-        return decodeImageUrl(image);
+      // Clean the image path
+      const cleanPath = image.replace(/^["']|["']$/g, '').replace(/\\/g, '').replace(/^\/+|\/+$/g, '');
+      
+      // If it's already a full URL, return it
+      if (cleanPath.startsWith('http')) {
+        return decodeImageUrl(cleanPath);
       }
-      const cleanPath = image.replace(/^["']|["']$/g, '').replace(/\\/g, '');
-      return decodeImageUrl(`${process.env.NEXT_PUBLIC_API_URL}/storage/${cleanPath}`);
+      
+      // Construct the full URL
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/storage/${cleanPath}`;
+      console.log('Generated image URL:', url);
+      return decodeImageUrl(url);
     } catch (error) {
-      console.error('Error processing image URL:', error);
+      console.error('Error processing image URL:', error, { image });
       return defaultImage;
     }
   };
@@ -103,95 +123,153 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   // Initialize Fancybox
   useEffect(() => {
-    if (!isClient || !galleryImages?.length) return;
+    // Only run on client side
+    if (typeof window === 'undefined') return;
 
     const initializeFancybox = () => {
+      if (!galleryImages?.length) {
+        console.log('No gallery images available');
+        return;
+      }
+
       try {
         // Destroy any existing instance
         Fancybox.destroy();
 
-        // Create gallery items
-        const items = galleryImages.map((image, index) => ({
-          src: getImageUrl(image),
-          type: "image",
-          caption: `${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`
-        }));
+        // Create simple gallery items array
+        const items = galleryImages
+          .filter(image => image && typeof image === 'string')
+          .map((image, index) => {
+            try {
+              const src = getImageUrl(image);
+              if (!src) return null;
+              
+              // Simplified item structure
+              return {
+                src,
+                type: "image"
+              };
+            } catch (error) {
+              console.error('Error processing gallery image:', error, { image, index });
+              return null;
+            }
+          })
+          .filter(Boolean);
 
-        // Initialize Fancybox
+        if (items.length === 0) {
+          console.warn('No valid gallery items to display');
+          return;
+        }
+
+        // Simplified Fancybox initialization
         Fancybox.bind("[data-fancybox='gallery']", {
+          items,
           dragToClose: false,
           closeButton: "top",
-          Image: { zoom: true, fit: "contain" },
-          Thumbs: false,
+          Image: {
+            zoom: true
+          },
+          Carousel: {
+            infinite: true
+          },
           Toolbar: {
             display: [
               { id: "prev", position: "center" },
               { id: "counter", position: "center" },
               { id: "next", position: "center" },
               "zoom",
-              "close",
-            ],
-          },
-          groupAll: true,
-          infinite: true,
-          keyboard: true,
-          touch: { vertical: true, momentum: true },
-          items: items,
-          on: {
-            done: () => {
-              const fancybox = Fancybox.getInstance();
-              if (fancybox) {
-                fancybox.options.Thumbs = {
-                  type: "classic",
-                  autoStart: true,
-                  showOnStart: true,
-                };
-                fancybox.update();
-              }
-            },
-            destroy: () => Fancybox.destroy()
+              "close"
+            ]
           }
         });
+
       } catch (error) {
         console.error('Error initializing Fancybox:', error);
       }
     };
 
-    initializeFancybox();
+    // Wait for component to be fully mounted
+    const timer = setTimeout(() => {
+      setIsClient(true);
+      initializeFancybox();
+    }, 100);
 
     return () => {
-      try {
+      clearTimeout(timer);
+      if (typeof Fancybox !== 'undefined') {
         Fancybox.destroy();
-      } catch (error) {
-        console.error('Error destroying Fancybox:', error);
       }
     };
-  }, [isClient, galleryImages, RENTAL_RESALE_DATA?.title]);
+  }, [galleryImages]);
 
   // Render gallery image
   const renderGalleryImage = (image, index, isMain = false) => {
     if (!image) return null;
     
-    const imageUrl = getImageUrl(image);
-    const caption = `${RENTAL_RESALE_DATA?.title || ''} - ${isMain ? 'Main Image' : `Image ${index + 1}`}`;
-    
-    return (
-      <a
-        href={imageUrl}
-        data-fancybox="gallery"
-        data-caption={caption}
-        data-type="image"
-        key={`gallery-${image}-${index}`}
-      >
-        <img
-          src={imageUrl}
-          alt={caption}
-          loading={isMain || index === 0 ? "eager" : "lazy"}
-          width="100%"
-          height="auto"
-        />
-      </a>
-    );
+    try {
+      const imageUrl = getImageUrl(image);
+      if (!imageUrl) return null;
+      
+      return (
+        <a
+          href={imageUrl}
+          data-fancybox="gallery"
+          key={`gallery-${image}-${index}`}
+          onClick={(e) => {
+            e.preventDefault();
+            if (typeof window !== 'undefined' && typeof Fancybox !== 'undefined') {
+              try {
+                // Create simple items array
+                const items = galleryImages
+                  .filter(img => img && typeof img === 'string')
+                  .map(img => {
+                    const src = getImageUrl(img);
+                    return src ? { src, type: "image" } : null;
+                  })
+                  .filter(Boolean);
+
+                if (items.length > 0) {
+                  // Simplified Fancybox.show call
+                  Fancybox.show(items, {
+                    startIndex: index,
+                    dragToClose: false,
+                    closeButton: "top",
+                    Image: {
+                      zoom: true
+                    },
+                    Carousel: {
+                      infinite: true
+                    },
+                    Toolbar: {
+                      display: [
+                        { id: "prev", position: "center" },
+                        { id: "counter", position: "center" },
+                        { id: "next", position: "center" },
+                        "zoom",
+                        "close"
+                      ]
+                    }
+                  });
+                }
+              } catch (error) {
+                console.error('Error showing Fancybox gallery:', error);
+              }
+            }
+          }}
+        >
+          <img
+            src={imageUrl}
+            alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
+            loading={isMain || index === 0 ? "eager" : "lazy"}
+            width="100%"
+            height="auto"
+          />
+        </a>
+      );
+    } catch (error) {
+      console.error('Error rendering gallery image:', error, { image, index });
+      return null;
+    }
   };
 
   const locationData = React.useMemo(() => {
@@ -235,32 +313,83 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     setIsModalOpen(false);
   };
 
-  const flattenedAddresses = RENTAL_RESALE_DATA.addresses
-    .flat()
-    .map((address) => {
-      if (typeof address === "object" && address !== null) {
-        return Object.values(address).join(", ");
-      }
-      return address;
-    });
-  const normalizedAmenities = RENTAL_RESALE_DATA.amenities.map((item) => {
-    if (Array.isArray(item)) {
-      return item[0]; // Extract the first element if it's an array
-    } else if (typeof item === "object" && item !== null) {
-      return Object.values(item)[0]; // Extract the first value if it's an object
+  const flattenedAddresses = React.useMemo(() => {
+    if (!RENTAL_RESALE_DATA?.addresses) return [];
+    
+    try {
+      // Ensure addresses is an array
+      const addressesArray = Array.isArray(RENTAL_RESALE_DATA.addresses) 
+        ? RENTAL_RESALE_DATA.addresses 
+        : [RENTAL_RESALE_DATA.addresses];
+
+      return addressesArray
+        .filter(Boolean) // Remove null/undefined
+        .flat()
+        .map((address) => {
+          if (typeof address === "object" && address !== null) {
+            return Object.values(address).join(", ");
+          }
+          return address;
+        })
+        .filter(Boolean); // Remove any null/undefined results
+    } catch (error) {
+      console.error('Error processing addresses:', error);
+      return [];
     }
-    return item; // Return the item as-is if it's already a string
-  });
-  const normalizedLanguages = RENTAL_RESALE_DATA.languages
-    .map((item) => {
-      if (Array.isArray(item)) {
-        return item[0]; // Extract the first element if it's an array
-      } else if (typeof item === "object" && item !== null) {
-        return Object.values(item)[0]; // Extract the first value if it's an object
-      }
-      return item; // Return the item as-is if it's already a string
-    })
-    .filter(Boolean); // Remove any undefined or null values
+  }, [RENTAL_RESALE_DATA?.addresses]);
+
+  const normalizedAmenities = React.useMemo(() => {
+    if (!RENTAL_RESALE_DATA?.amenities) return [];
+    
+    try {
+      // Ensure amenities is an array
+      const amenitiesArray = Array.isArray(RENTAL_RESALE_DATA.amenities) 
+        ? RENTAL_RESALE_DATA.amenities 
+        : [RENTAL_RESALE_DATA.amenities];
+
+      return amenitiesArray
+        .filter(Boolean) // Remove null/undefined
+        .map((item) => {
+          if (Array.isArray(item)) {
+            return item[0]; // Extract the first element if it's an array
+          } else if (typeof item === "object" && item !== null) {
+            return Object.values(item)[0]; // Extract the first value if it's an object
+          }
+          return item; // Return the item as-is if it's already a string
+        })
+        .filter(Boolean); // Remove any null/undefined results
+    } catch (error) {
+      console.error('Error processing amenities:', error);
+      return [];
+    }
+  }, [RENTAL_RESALE_DATA?.amenities]);
+
+  const normalizedLanguages = React.useMemo(() => {
+    if (!RENTAL_RESALE_DATA?.languages) return [];
+    
+    try {
+      // Ensure languages is an array
+      const languagesArray = Array.isArray(RENTAL_RESALE_DATA.languages) 
+        ? RENTAL_RESALE_DATA.languages 
+        : [RENTAL_RESALE_DATA.languages];
+
+      return languagesArray
+        .filter(Boolean) // Remove null/undefined
+        .map((item) => {
+          if (Array.isArray(item)) {
+            return item[0]; // Extract the first element if it's an array
+          } else if (typeof item === "object" && item !== null) {
+            return Object.values(item)[0]; // Extract the first value if it's an object
+          }
+          return item; // Return the item as-is if it's already a string
+        })
+        .filter(Boolean); // Remove any null/undefined results
+    } catch (error) {
+      console.error('Error processing languages:', error);
+      return [];
+    }
+  }, [RENTAL_RESALE_DATA?.languages]);
+
   const languagesString = normalizedLanguages.join(", ");
   const Map = dynamic(
     () => import("./Map"), // Create a new Map.js component

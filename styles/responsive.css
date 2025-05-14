@@ -1480,9 +1480,9 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: start;
+    -webkit-box-pack: flex-start;
+        -ms-flex-pack: flex-start;
+            justify-content: flex-start;
     margin: 5px 0;
 }
 
@@ -2001,6 +2001,20 @@ letter-spacing: 0%;
   color: #0A273B;
 }
 
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;  /* Changed from 'start' */
+  }
+
+  /* ... rest of media query styles ... */
 }
 
 

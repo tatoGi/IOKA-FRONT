@@ -50,7 +50,16 @@ const Footer = ({ navigationData, settings }) => {
           {/* Footer Logo */}
           <div className="footer-logo">
             <Link href={"/"}>
-              <Image src={Logo} alt="footer-logo" width={138} height={42} priority />
+              <Image 
+                src={Logo} 
+                alt="footer-logo" 
+                width={138} 
+                height={42} 
+                priority={true}
+                loading="eager"
+                fetchPriority="high"
+                style={{ width: '138px', height: '42px' }}
+              />
             </Link>
           </div>
 

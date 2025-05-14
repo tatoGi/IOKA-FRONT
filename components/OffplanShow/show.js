@@ -11,12 +11,9 @@ import success from "../../assets/img/succsess.svg";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import callVector from "../../assets/img/call.svg";
-import whatsappVector from "../../assets/img/whatsapp.svg";
 
 const Map = dynamic(() => import("./Map"), { ssr: false });
 
@@ -24,16 +21,64 @@ const decodeImageUrl = (url) => {
   return decodeURIComponent(url);
 };
 
+const MobileSlider = ({ images, type, decodeImageUrl, title }) => {
+  const [isClient, setIsClient] = useState(false);
 
-const MobileSlider = ({ images, type, decodeImageUrl }) => {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleClick = (e, index) => {
+    e.preventDefault();
+    if (!isClient) return;
+    const galleryItems = images
+      .filter(Boolean)
+      .map((img, idx) => ({
+        src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`,
+        type: "image",
+        caption: `${title || ''} - ${type} Image ${idx + 1}`
+      }));
+
+    if (galleryItems.length === 0) return;
+
+    if (typeof Fancybox.show === "function") {
+      Fancybox.show(galleryItems, {
+        startIndex: index,
+        dragToClose: false,
+        closeButton: "top",
+        Image: {
+          zoom: true,
+          fit: "contain"
+        },
+        Carousel: {
+          infinite: true,
+          center: true,
+          fill: true,
+          dragFree: true,
+          slidesPerPage: 1,
+          Navigation: true,
+          Dots: true
+        },
+        Toolbar: {
+          display: [
+            { id: "prev", position: "center" },
+            { id: "counter", position: "center" },
+            { id: "next", position: "center" },
+            "zoom",
+            "close"
+          ]
+        }
+      });
+    } else {
+      console.error("Fancybox.show is not available");
+    }
+  };
+
   return (
-    <Swiper  className="mySwiper">
-      {images.map((image, index) => (
+    <Swiper className="mySwiper">
+      {images.filter(Boolean).map((image, index) => (
         <SwiperSlide key={index} className={style.swiperSlide}>
-          <div
-            data-fancybox="gallery"
-            data-src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-          >
+          <div onClick={(e) => handleClick(e, index)} style={{ cursor: 'pointer' }}>
             <Image
               src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
               alt={`${type} Image ${index + 1}`}
@@ -92,6 +137,11 @@ const OffplanShow = ({ offplanData }) => {
   const [showExterior, setShowExterior] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,12 +159,20 @@ const OffplanShow = ({ offplanData }) => {
   }, []);
 
   function safeParse(json) {
-    if (Array.isArray(json)) return json;
     if (!json) return [];
     try {
-      return typeof json === 'string' ? JSON.parse(json) : [];
+      if (Array.isArray(json)) return json;
+      if (typeof json === 'string') {
+        const parsed = JSON.parse(json);
+        return Array.isArray(parsed) ? parsed : [];
+      }
+      // Handle case where json might be a single string
+      if (typeof json === 'string' && json.trim()) {
+        return [json];
+      }
+      return [];
     } catch (e) {
-      console.error('Failed to parse:', json);
+      console.error('Failed to parse JSON:', e);
       return [];
     }
   }
@@ -122,56 +180,120 @@ const OffplanShow = ({ offplanData }) => {
   const features = safeParse(offplanData.offplan.features);
   const amenities = safeParse(offplanData.offplan.amenities);
   const nearbyPlaces = safeParse(offplanData.offplan.near_by);
-  const exteriorGallery = safeParse(offplanData.offplan.exterior_gallery);
-  const interiorGallery = safeParse(offplanData.offplan.interior_gallery);
+  const exteriorGallery = Array.isArray(offplanData?.offplan?.exterior_gallery) 
+    ? offplanData.offplan.exterior_gallery 
+    : safeParse(offplanData?.offplan?.exterior_gallery);
+  
+  const interiorGallery = Array.isArray(offplanData?.offplan?.interior_gallery)
+    ? offplanData.offplan.interior_gallery
+    : safeParse(offplanData?.offplan?.interior_gallery);
+
   const shortDescription = offplanData.offplan.description?.slice(0, 300) || '';
-
-  useEffect(() => {
-    Fancybox.bind("[data-fancybox='gallery']", {
-      buttons: [
-        "slideShow",
-        "thumbs",
-        "zoom",
-        "fullScreen",
-        "share",
-        "close"
-      ],
-      loop: false,
-      protect: true,
-      closeButton: "top",
-      click: "close",
-      dragToClose: true,
-      Images: {
-        protected: true
-      },
-      Carousel: {
-        friction: 0.8
-      },
-      Toolbar: {
-        display: {
-          left: ["infobar"],
-          middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW"],
-          right: ["slideshow", "thumbs", "close"]
-        },
-        position: "top",
-        top: "10%"
-      },
-      mobile: {
-        preventCaptionOverlap: true,
-        toolbar: true,
-        buttons: ["close", "zoom", "slideShow", "fullScreen", "thumbs"],
-        click: "close",
-        dblclick: "zoom",
-        dragToClose: true
-      }
-    });
-
-    return () => Fancybox.destroy();
-  }, [showExterior]);
 
   const toggleReadMore = () => setIsExpanded(!isExpanded);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const renderGalleryImage = (image, index, isMain = false) => {
+    if (!image) return null;
+    
+    const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`;
+    const galleryType = showExterior ? 'exterior' : 'interior';
+    const caption = `${offplanData?.offplan?.title || ''} - ${galleryType} Image ${index + 1}`;
+    
+    const handleClick = (e) => {
+      e.preventDefault();
+      if (!isClient) return;
+      
+      // Get the current gallery items
+      const currentGallery = galleryType === 'exterior' ? exteriorGallery : interiorGallery;
+      
+      // Ensure we have valid items
+      if (!Array.isArray(currentGallery) || currentGallery.length === 0) {
+        console.error('No valid gallery items found');
+        return;
+      }
+
+      // Create gallery items with proper error handling
+      const galleryItems = currentGallery
+        .filter(Boolean) // Remove any null/undefined items
+        .map((img, idx) => {
+          try {
+            const decodedUrl = decodeImageUrl(img);
+            return {
+              src: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodedUrl}`,
+              type: "image",
+              caption: `${offplanData?.offplan?.title || ''} - ${galleryType} Image ${idx + 1}`
+            };
+          } catch (error) {
+            console.error('Error processing gallery item:', error);
+            return null;
+          }
+        })
+        .filter(Boolean); // Remove any items that failed to process
+
+      if (galleryItems.length === 0) {
+        console.error('No valid gallery items after processing');
+        return;
+      }
+
+      if (typeof Fancybox.show === "function") {
+        Fancybox.show(galleryItems, {
+          startIndex: index,
+          dragToClose: false,
+          closeButton: "top",
+          Image: {
+            zoom: true,
+            fit: "contain"
+          },
+          Carousel: {
+            infinite: true,
+            center: true,
+            fill: true,
+            dragFree: true,
+            slidesPerPage: 1,
+            Navigation: true,
+            Dots: true
+          },
+          Toolbar: {
+            display: [
+              { id: "prev", position: "center" },
+              { id: "counter", position: "center" },
+              { id: "next", position: "center" },
+              "zoom",
+              "close"
+            ]
+          }
+        });
+      } else {
+        console.error("Fancybox.show is not available");
+      }
+    };
+    
+    return (
+      <div
+        key={`gallery-${image}-${index}`}
+        className={style.galleryItem}
+        onClick={handleClick}
+        style={{ cursor: 'pointer' }}
+      >
+        <Image
+          src={imageUrl}
+          alt={caption}
+          width={300}
+          height={200}
+          className={style.exteriorimage}
+          loading={isMain || index === 0 ? "eager" : "lazy"}
+          onError={(e) => {
+            console.error('Error loading image:', imageUrl);
+            e.target.src = baseimage;
+          }}
+          priority={isMain || index === 0}
+          quality={90}
+        />
+      </div>
+    );
+  };
 
   return (
     <>
@@ -191,6 +313,7 @@ const OffplanShow = ({ offplanData }) => {
           priority
           sizes="100vw"
           className={style.bannerImage}
+          quality={90}
         />
         <div className={style.bannerContent}>
           <h1>{offplanData.offplan.title}</h1>
@@ -283,6 +406,8 @@ const OffplanShow = ({ offplanData }) => {
                   alt={offplanData.offplan.agent_image_alt || offplanData.offplan.agent_title}
                   width={100}
                   height={100}
+                  priority={false}
+                  loading="lazy"
                 />
                 <div className={style.consultantDetails}>
                   <span className={style.consultantName}>
@@ -479,19 +604,8 @@ const OffplanShow = ({ offplanData }) => {
               <div className="container">
                 <div className="row d-none d-md-flex">
                   {exteriorGallery.slice(0, 8).map((image, index) => (
-                    <div
-                      key={index}
-                      className="col-md-3 mb-3"
-                      data-fancybox="gallery"
-                      data-src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                    >
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                        alt={offplanData.offplan.exterior_gallery_alt?.[index] || `Exterior Image ${index + 1}`}
-                        width={300}
-                        height={200}
-                        className={style.exteriorimage}
-                      />
+                    <div key={index} className="col-md-3 mb-3">
+                      {renderGalleryImage(image, index)}
                     </div>
                   ))}
                 </div>
@@ -500,6 +614,7 @@ const OffplanShow = ({ offplanData }) => {
                     images={exteriorGallery}
                     type="EXTERIOR"
                     decodeImageUrl={decodeImageUrl}
+                    title={offplanData.offplan.title}
                   />
                 </div>
               </div>
@@ -509,19 +624,8 @@ const OffplanShow = ({ offplanData }) => {
               <div className="container">
                 <div className="row d-none d-md-flex">
                   {interiorGallery.slice(0, 8).map((image, index) => (
-                    <div
-                      key={index}
-                      className="col-md-3 mb-3"
-                      data-fancybox="gallery"
-                      data-src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                    >
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`}
-                        alt={offplanData.offplan.interior_gallery_alt?.[index] || `Interior Image ${index + 1}`}
-                        width={300}
-                        height={200}
-                        className={style.exteriorimage}
-                      />
+                    <div key={index} className="col-md-3 mb-3">
+                      {renderGalleryImage(image, index)}
                     </div>
                   ))}
                 </div>
@@ -530,6 +634,7 @@ const OffplanShow = ({ offplanData }) => {
                     images={interiorGallery}
                     type="INTERIOR"
                     decodeImageUrl={decodeImageUrl}
+                    title={offplanData.offplan.title}
                   />
                 </div>
               </div>
