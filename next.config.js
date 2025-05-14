@@ -1,6 +1,7 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae';
 const API_HOSTNAME = new URL(API_BASE_URL).hostname;
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
     return [
@@ -39,21 +40,52 @@ const nextConfig = {
     ],
     unoptimized: true,
     domains: [API_HOSTNAME, 'test.ioka.ae'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   transpilePackages: ['@ant-design/icons'],
   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@ant-design/icons', 'antd'],
+    modern: true,
   },
   swcMinify: true,
   compress: true,
   poweredByHeader: false,
-  webpack: (config, { isServer }) => {
+  webpack: (config, { dev, isServer }) => {
+    // Only include necessary polyfills
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      // Remove unnecessary polyfills
+      fs: false,
+      net: false,
+      tls: false,
+      crypto: false,
+    };
+
+    // Optimize chunks
     config.optimization = {
       ...config.optimization,
-      minimize: true,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 20000,
+        maxSize: 244000,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
     };
-    
+
     return config;
   },
   productionBrowserSourceMaps: true,
