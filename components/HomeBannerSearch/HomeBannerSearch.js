@@ -881,6 +881,7 @@ const HomeBannerSearch = () => {
                 e.preventDefault();
                 handleSearch(e);
               }}
+              aria-label="Search properties"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -892,6 +893,7 @@ const HomeBannerSearch = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>

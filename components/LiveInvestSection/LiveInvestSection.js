@@ -42,8 +42,8 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
       <div className="container">
         <div className="row">
           <div className={`${styles.content} col-md-6`}>
-            <h4>{additionalFields.subtitle}</h4>
-            <h2>{additionalFields.title}</h2>
+            <h2>{additionalFields.subtitle}</h2>
+            <h1>{additionalFields.title}</h1>
             <p>{additionalFields.title_2}</p>
             <button className={styles.contactBtn}>Contact Us</button>
           </div>
@@ -142,10 +142,10 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
                 index === 0 && !isMobile ? "106px" : "0"
             }}
           >
-            <h3>
+            <h2>
               {item.number}
               {item.suffix}
-            </h3>
+            </h2>
             <p>{item.title}</p>
           </div>
         ))}

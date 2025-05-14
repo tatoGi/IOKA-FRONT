@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { RENTAL_RESALE, FILTER_RENTAL_RESALE_API } from "@/routes/apiRoutes";
 import axios from "axios";
 import { HiOutlineMail } from "react-icons/hi";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import SearchRental from "../SearchRental/SearchRental";
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
@@ -34,6 +33,8 @@ const Rental_Resale = () => {
     price: "",
     sqFt: ""
   });
+  const [sliderWidth, setSliderWidth] = useState(0);
+  const sliderRef = useRef(null);
 
   // Filter options for SearchRental component
   const filterOptions = {
@@ -41,6 +42,9 @@ const Rental_Resale = () => {
     bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
     bathrooms: [1, 2, 3, 4, 5, 6, 7, 8]
   };
+
+  // Move topProperties definition before useEffect
+  const topProperties = cardData.filter((property) => property.top === 1);
 
   useEffect(() => {
     setIsClient(true); // Ensures this runs only on the client
@@ -56,6 +60,13 @@ const Rental_Resale = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (sliderRef.current && topProperties.length > 0) {
+      const width = sliderRef.current.offsetWidth;
+      setSliderWidth(width);
+    }
+  }, [cardData]); // Change dependency to cardData since topProperties is derived from it
 
   const fetchData = async (page, filterParams = null) => {
     setIsLoading(true);
@@ -167,13 +178,13 @@ const Rental_Resale = () => {
     setCardData(sortedData);
   };
 
-  const topProperties = cardData.filter((property) => property.top === 1);
-
   const handleTouchStart = (e) => {
+    e.stopPropagation();
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
+    e.stopPropagation();
     setTouchEnd(e.touches[0].clientX);
   };
 
@@ -282,11 +293,15 @@ const Rental_Resale = () => {
           )}
 
           {!isMobile && (
-            <div className={Styles.sliderWrapper}>
+            <div className={Styles.sliderWrapper} ref={sliderRef}>
               <button
                 className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
-                onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentSlide((prev) => Math.max(prev - 1, 0));
+                }}
                 disabled={currentSlide === 0}
+                style={{ opacity: currentSlide === 0 ? 0.5 : 1 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -300,7 +315,36 @@ const Rental_Resale = () => {
               </button>
               <div
                 className={Styles.propertyGrid}
-                style={{ transform: `translateX(-${currentSlide * 33.33}%)` }}
+                style={{
+                  transform: `translateX(-${currentSlide * (sliderWidth / 3)}px)`,
+                  transition: 'transform 0.3s ease-out'
+                }}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  setTouchStart(e.touches[0].clientX);
+                }}
+                onTouchMove={(e) => {
+                  e.stopPropagation();
+                  setTouchEnd(e.touches[0].clientX);
+                }}
+                onTouchEnd={(e) => {
+                  e.stopPropagation();
+                  if (!touchStart || !touchEnd) return;
+                  
+                  const distance = touchStart - touchEnd;
+                  const isLeftSwipe = distance > 50;
+                  const isRightSwipe = distance < -50;
+                  const maxSlides = Math.ceil(topProperties.length / 3) - 1;
+
+                  if (isLeftSwipe && currentSlide < maxSlides) {
+                    setCurrentSlide(prev => prev + 1);
+                  } else if (isRightSwipe && currentSlide > 0) {
+                    setCurrentSlide(prev => prev - 1);
+                  }
+
+                  setTouchStart(0);
+                  setTouchEnd(0);
+                }}
               >
                 {topProperties.map((property) => (
                   <div
@@ -401,12 +445,15 @@ const Rental_Resale = () => {
               </div>
               <button
                 className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
-                onClick={() =>
-                  setCurrentSlide((prev) =>
-                    prev + 1 >= topProperties.length - 2 ? prev : prev + 1
-                  )
-                }
-                disabled={currentSlide >= topProperties.length - 2}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const maxSlides = Math.ceil(topProperties.length / 3) - 1;
+                  setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
+                }}
+                disabled={currentSlide >= Math.ceil(topProperties.length / 3) - 1}
+                style={{ 
+                  opacity: currentSlide >= Math.ceil(topProperties.length / 3) - 1 ? 0.5 : 1 
+                }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -573,7 +620,7 @@ const Rental_Resale = () => {
                       <button
                         className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
                         onClick={(e) => {
-                          e.stopPropagation(); // Add this line
+                          e.stopPropagation();
                           setCurrentImageIndex((prev) => Math.max(prev - 1, 0));
                         }}
                         disabled={currentImageIndex === 0}
@@ -597,11 +644,15 @@ const Rental_Resale = () => {
                         className={Styles.slideContainer}
                         ref={slideRef}
                         style={{
-                          transform: `translateX(-${currentImageIndex * 100}%)`
+                          transform: `translateX(-${currentImageIndex * 100}%)`,
+                          width: `${galleryImages.length * 100}%`
                         }}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
-                        onTouchEnd={() => handleTouchEnd(galleryImages)}
+                        onTouchEnd={(e) => {
+                          e.stopPropagation();
+                          handleTouchEnd(galleryImages);
+                        }}
                       >
                         {galleryImages.map((image, index) => (
                           <div key={index} className={Styles.slide}>
@@ -625,14 +676,12 @@ const Rental_Resale = () => {
                       <button
                         className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
                         onClick={(e) => {
-                          e.stopPropagation(); // Add this line
+                          e.stopPropagation();
                           setCurrentImageIndex((prev) =>
                             prev + 1 < galleryImages.length ? prev + 1 : prev
                           );
                         }}
-                        disabled={
-                          currentImageIndex === galleryImages.length - 1
-                        }
+                        disabled={currentImageIndex === galleryImages.length - 1}
                       >
                         <svg
                           width="24"
@@ -656,7 +705,10 @@ const Rental_Resale = () => {
                             className={`${Styles.indicator} ${
                               index === currentImageIndex ? Styles.active : ""
                             }`}
-                            onClick={() => setCurrentImageIndex(index)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentImageIndex(index);
+                            }}
                           />
                         ))}
                       </div>
@@ -951,11 +1003,6 @@ const Rental_Resale = () => {
           </div>
         )}
       </div>
-      
-        <div className="container">
-          <SubscribeSection />
-        </div>
-    
     </>
   );
 };

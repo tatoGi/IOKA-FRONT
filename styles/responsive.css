@@ -577,9 +577,9 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: flex-start;
+        -ms-flex-pack: flex-start;
+            justify-content: flex-start;
     gap: 15px;
   }
   .header-nav.active ~ .right-search-contact .right-form {
@@ -825,9 +825,9 @@
             transform: translateY(0);
     top: 70px;
     background-color: #ffffff;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: start;
+    -webkit-box-pack: flex-start;
+        -ms-flex-pack: flex-start;
+            justify-content: flex-start;
   }
 
   .header-nav ul {
@@ -975,12 +975,9 @@
 
   .popular-area-box {
     margin-top: 32px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .popular-area-slider {
@@ -990,19 +987,10 @@
   .area-item {
     width: 300px !important;
     height: 180px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     text-align: center;
     margin-right: 16px;
   }
@@ -1744,73 +1732,51 @@ margin-top: 24px;
 @media (max-width: 480px) {
   .subscribe-section {
     margin: 50px 0;
+    transform: translateZ(0);
+    will-change: transform;
   }
+
   .subscribe-box {
     padding: 24px 0px;
     border-radius: 16px;
     height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     width: 100%;
     background-color: #ffffff;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
   }
+
   .subscribe-form {
     width: 100%;
     margin-top: 20px;
+    transform: translateZ(0);
+    will-change: transform;
   }
+
   .subscribe-form form {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     gap: 8px;
     width: 100%;
+    transform: translateZ(0);
+    will-change: transform;
   }
+
   .subscribe-form input {
     width: 226px !important;
     height: 44px !important;
     border-radius: 8px !important;
     border: 1px #07151F solid !important;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: border-color 0.3s ease;
   }
-  .subscribe-form input::-webkit-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-  .subscribe-form input::-moz-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-  .subscribe-form input:-ms-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-  .subscribe-form input::-ms-input-placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
-  .subscribe-form input::placeholder {
-    color: #98A2B3;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 16px !important;
-  }
+
   .subscribe-form button {
     width: 120px !important;
     height: 44px !important;
@@ -1819,10 +1785,23 @@ margin-top: 24px;
     padding: 13px !important;
     border-radius: 8px !important;
     margin: 0 !important;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: background-color 0.3s ease;
   }
-  .subscribe-form button:hover {
-    background-color: #122834;
+
+  .success-message,
+  .alert-message {
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    text-align: center;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
+
   .breadcrumb-section {
     margin-top: 110px;
     padding: 8px 0;

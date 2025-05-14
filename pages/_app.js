@@ -2,6 +2,7 @@ import Meta from "@/components/Meta/Meta";
 import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import SharedLayout from "@/components/Layout/SharedLayout";
 import { LoadingWrapper } from "@/components/LoadingWrapper/index";
 import { SETTINGS_API } from "@/routes/apiRoutes";
 import { useState, useEffect } from "react";
@@ -104,9 +105,11 @@ function App({ Component, pageProps }) {
         <Meta {...metaData} />
         <Header navigationData={appData.navigationData} />
         <Layout>
-          <main className={montserrat.variable}>
-            <Component {...pageProps} />
-          </main>
+          <SharedLayout>
+            <main className={montserrat.variable}>
+              <Component {...pageProps} />
+            </main>
+          </SharedLayout>
         </Layout>
         <Footer navigationData={appData.navigationData} settings={appData.settings} />
       </div>

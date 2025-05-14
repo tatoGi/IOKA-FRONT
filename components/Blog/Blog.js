@@ -3,7 +3,6 @@ import styles from "./blog.module.css";
 import baseimage from "../../assets/img/blogimage.png";
 import Image from "next/image";
 import BlogIcon from "../../assets/img/calendaricon.svg";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import axios from "axios";
 import { BLOGS_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
@@ -138,14 +137,6 @@ const Blog = ({ initialData }) => {
           Next
         </button>
       </div>
-      {/* SubscribeSection moved here */}
-      {isMobile ? (
-        <SubscribeSection />
-      ) : (
-        <div className="container">
-          <SubscribeSection />
-        </div>
-      )}
     </div> 
   );
 };

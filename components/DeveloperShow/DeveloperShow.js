@@ -10,7 +10,6 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BsWhatsapp } from "react-icons/bs";
 import agentInfo from "../../assets/img/agentinfo.png";
 import callVector from "../../assets/img/callvector.png";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import awardimg1 from "../../assets/img/awardimg1.png";
 import Slider from "react-slick";
 import SearchSection from "../SearchSection/SearchSection";
@@ -1010,9 +1009,6 @@ const DeveloperShow = (developerData) => {
             </Slider>
           )}
         </div>
-      </div>
-      <div className="container">
-        <SubscribeSection />
       </div>
     </div>
   );

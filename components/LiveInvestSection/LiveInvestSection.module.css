@@ -17,7 +17,7 @@
   margin-top: 7.5625rem;
 }
 
-.content h4 {
+.content h2 {
   font-size: 1.5vw;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -26,7 +26,7 @@
   font-family: "Montserrat";
 }
 
-.content h2 {
+.content h1 {
   font-size: 3vw;
   font-weight: 400;
   color: #0a273b;
@@ -34,6 +34,15 @@
   font-family: "Felix Titling";
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.content h4 {
+  font-size: 1.5vw;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 100%;
+  color: #0a273b;
+  font-family: "Montserrat";
 }
 
 .content p {
@@ -278,9 +287,9 @@
 
 
 .statItems {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
+  -webkit-box-pack: flex-end;
+      -ms-flex-pack: flex-end;
+          justify-content: flex-end;
   padding-right: 5%;
   margin-bottom: 5%;
   width: 100%;
@@ -303,7 +312,7 @@
   gap: 1vw;
 }
 
-.statItem h3 {
+.statItem h2 {
   font-size: 48px;
   font-weight: 400;
   line-height: 100%;
@@ -339,6 +348,12 @@
   }
 
   .content h2 {
+    font-size: 1.5rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+  }
+
+  .content h1 {
     font-size: 2.5rem;
   }
 
@@ -386,7 +401,7 @@
     font-size: 2.5rem;
   }
 
-  .statItem h3 {
+  .statItem h2 {
     font-size: 2.5rem;
   }
 
@@ -434,6 +449,12 @@
   }
 
   .content h2 {
+    font-size: 1.25rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+  }
+
+  .content h1 {
     font-size: 2rem;
   }
 
@@ -468,7 +489,7 @@
     left: 5rem;
   }
 
-  .statItem h3 {
+  .statItem h2 {
     font-size: 2rem;
   }
 
@@ -547,6 +568,10 @@
   }
 
   .content h2 {
+    font-size: 1.25rem;
+  }
+
+  .content h1 {
     font-size: 2rem;
   }
 
@@ -572,7 +597,7 @@
     font-size: 2rem;
   }
 
-  .statItem h3 {
+  .statItem h2 {
     font-size: 2rem;
   }
 
@@ -705,6 +730,10 @@
   }
 
   .content h2 {
+    font-size: 1rem;
+  }
+
+  .content h1 {
     font-size: 1.75rem;
   }
 
@@ -726,8 +755,13 @@
     font-size: 1.75rem;
   }
 
-  .statItem h3 {
-    font-size: 1.75rem;
+  .statItem h2 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #000;
+    font-family: "Felix Titling";
   }
 
   .statItem p {
@@ -884,6 +918,16 @@
 
   .content h2 {
     font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 100%;
+    color: #0a273b;
+    font-family: "Montserrat";
+    text-align: center;
+  }
+
+  .content h1 {
+    font-size: 16px;
     font-weight: 400;
     color: #0a273b;
     line-height: 1.3;
@@ -893,7 +937,6 @@
     text-align: center;
     position: static;
     margin: 0 0 12px 0;
-
   }
 
   .content p {
@@ -1037,7 +1080,7 @@
     margin: 0;
   }
 
-  .statItem h3 {
+  .statItem h2 {
     font-size: 24px;
     font-weight: 400;
     line-height: 100%;

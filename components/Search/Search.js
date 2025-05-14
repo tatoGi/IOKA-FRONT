@@ -73,6 +73,8 @@ const SearchResult = ({ results = {}, query }) => {
         <button 
           className={styles.searchButton}
           onClick={handleSearch}
+          aria-label="Search properties"
+          type="submit"
         >
           Search
         </button>

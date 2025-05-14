@@ -3,11 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./blogShow.module.css";
-import blogbanner from "../../assets/img/blogbanner.png"; // Ensure this path is correct
 import Image from "next/image";
 import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is correct
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 
 const BlogShow = ({ blogData }) => {
   const router = useRouter(); // Initialize useRouter
@@ -44,7 +42,7 @@ const BlogShow = ({ blogData }) => {
     router.push(`/blog/${slug}`);
   };
   return (
-    <div>
+    <div className={styles.blogShowContainer}>
       <div className={`d-none d-md-block container ${styles.blogShow}`}>
         {/* Container applied only for non-mobile resolutions */}
         <Image
@@ -175,11 +173,6 @@ const BlogShow = ({ blogData }) => {
           </div>
         </div>
       </div>
-     
-        <div className="container">
-          <SubscribeSection />
-        </div>
-     
     </div>
   );
 };

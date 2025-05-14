@@ -4,7 +4,6 @@ import { NAVIGATION_MENU } from "@/routes/apiRoutes";
 import callVector from "../assets/img/call.svg";
 import whatsappVector from "../assets/img/whatsapp.svg";
 import Image from "next/image";
-import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
 import axios from "axios";
 import { FAQ_API } from "@/routes/apiRoutes";
 import { useMediaQuery } from 'react-responsive';
@@ -131,7 +130,6 @@ const FAQ = ({ pageData }) => {
             </>
           )}
         </div>
-        <SubscribeSection />
       </div>
     </>
   );

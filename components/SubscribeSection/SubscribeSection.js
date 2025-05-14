@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import ConstrImage from "../../assets/img/constructions-dubai.svg";
 import Image from "next/image";
 import { SUBSCRIBE_API } from "@/routes/apiRoutes";
@@ -10,15 +10,20 @@ const SubscribeSection = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
-  const showAlertMessage = (message) => {
+  const showAlertMessage = useCallback((message) => {
     setAlertMessage(message);
     setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 2000);
-  };
+    // Use requestAnimationFrame for smoother animations
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          setShowAlert(false);
+        });
+      }, 2000);
+    });
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -36,9 +41,16 @@ const SubscribeSection = () => {
       if (response.ok) {
         setShowSuccess(true);
         setEmail("");
-        setTimeout(() => setShowSuccess(false), 2000);
+        // Use requestAnimationFrame for smoother animations
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              setShowSuccess(false);
+            });
+          }, 2000);
+        });
       } else {
-        if (data.errors && data.errors.email && data.errors.email.includes("The email has already been taken.")) {
+        if (data.errors?.email?.includes("The email has already been taken.")) {
           showAlertMessage("This email is already subscribed. Please use a different email address.");
         } else {
           showAlertMessage("Failed to subscribe. Please try again.");
@@ -49,52 +61,74 @@ const SubscribeSection = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [email, showAlertMessage]);
 
   return (
-    <div className="subscribe-section">
+    <div className="subscribe-section" style={{ willChange: 'transform' }}>
       <div className="subscribe-box">
         <div className="left-s-text">
           <div className="s-t-0">GET FIRST UPDATE</div>
           <div className="s-t-1">
-            <p> Get the news in front line by </p>
+            <p>Get the news in front line by</p>
             <div className="s-t-2 d-flex">
               <span>subscribe</span>
-              <p>our latest updates</p> 
+              <p>our latest updates</p>
             </div>
           </div>
         </div>
-        <div className="middle-image-sub">
-          <Image  
+        <div className="middle-image-sub" style={{ willChange: 'transform' }}>
+          <Image
             src={ConstrImage}
             alt="Dubai skyline illustration"
             width={320}
             height={160}
             priority
+            style={{ transform: 'translateZ(0)' }}
           />
         </div>
         <div className="subscribe-form">
           <form onSubmit={handleSubmit}>
-            <input 
-              type="email" 
-              placeholder="Your email" 
-              required 
+            <input
+              type="email"
+              placeholder="Your email"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              style={{ willChange: 'transform' }}
             />
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{ willChange: 'transform' }}
+            >
               {isSubmitting ? "Subscribing..." : "Subscribe"}
             </button>
           </form>
         </div>
       </div>
       {showSuccess && (
-        <div className="success-message">
+        <div
+          className="success-message"
+          style={{
+            willChange: 'transform, opacity',
+            transform: 'translateZ(0)',
+            opacity: showSuccess ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out'
+          }}
+        >
           Successfully subscribed! Thank you.
         </div>
       )}
       {showAlert && (
-        <div className="alert-message">
+        <div
+          className="alert-message"
+          style={{
+            willChange: 'transform, opacity',
+            transform: 'translateZ(0)',
+            opacity: showAlert ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out'
+          }}
+        >
           {alertMessage}
         </div>
       )}
@@ -102,4 +136,4 @@ const SubscribeSection = () => {
   );
 };
 
-export default SubscribeSection;
+export default React.memo(SubscribeSection);

@@ -56,7 +56,7 @@
 }
 
 .rating {
-    color: #7ACBC4 !important;
+    color: #0A273B !important;
     font-family: "Montserrat";
     font-weight: 600;
     font-size: 24px;
@@ -164,7 +164,7 @@
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
-    color: #1B1F26B8;
+    color: #0A273B;
     margin-bottom: 16px;
 
 }
@@ -361,7 +361,7 @@
         line-height: 100%;
         letter-spacing: 0%;
         text-align: center;
-        color: #1B1F26B8;
+        color: #0A273B;
         margin-bottom: 16px;
 
     }

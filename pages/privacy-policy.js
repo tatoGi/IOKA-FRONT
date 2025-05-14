@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
-import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
 import axios from "axios";
 import { POLICY_API } from "@/routes/apiRoutes";
 
@@ -48,7 +47,6 @@ const PrivacyPolicy = () => {
           {/* <div dangerouslySetInnerHTML={{ __html: policyData.cookie_policy }} /> */}
           {/* <div dangerouslySetInnerHTML={{ __html: policyData.terms_agreement }} /> */}
         </div>
-        <SubscribeSection />
       </div>
     </>
   );

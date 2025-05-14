@@ -4,7 +4,6 @@ import styles from "./AboutUs.module.css";
 import Image from "next/image";
 import ContactForm from "../contactForm/ContactForm";
 import PartnersSection from "../PartnersSection/PartnersSection";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import { ABOUT_API, SECTION_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -330,11 +329,6 @@ const AboutUs = ({ initialData, id }) => {
 
         {/* Partners Section */}
         <PartnersSection />
-      </div>
-
-      {/* Subscribe Section */}
-      <div className="container">
-        <SubscribeSection />
       </div>
     </div>
   );

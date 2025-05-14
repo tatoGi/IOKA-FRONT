@@ -5,7 +5,6 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import baseimage from "../../assets/img/blogimage.png";
 import ContactForm from "../contactForm/ContactForm";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import success from "../../assets/img/succsess.svg";
@@ -579,11 +578,6 @@ const OffplanShow = ({ offplanData }) => {
           />
         </div>
       </div>
-    
-        <div className="container">
-          <SubscribeSection />
-        </div>
-  
     </>
   );
 };

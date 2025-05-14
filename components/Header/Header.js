@@ -165,14 +165,28 @@ const Header = ({ navigationData }) => {
             <div className="header-box">
             <Link href={logoLink} className="logo-img">
               <div className="left-cont-image">
-               
-                  <div className="white-logo">
-                    <Image src={Logo} alt="logo" width={138} height={42} />
-                  </div>
-                  <div className="dark-logo">
-                    <Image src={LogoDark} alt="logo" width={138} height={42} />
-                  </div>
-                
+                <div className="white-logo">
+                  <Image 
+                    src={Logo} 
+                    alt="logo" 
+                    width={138} 
+                    height={42} 
+                    priority={true}
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+                <div className="dark-logo">
+                  <Image 
+                    src={LogoDark} 
+                    alt="logo" 
+                    width={138} 
+                    height={42} 
+                    priority={true}
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
               </div>
               </Link>
               {/* Mobile Burger Menu */}
@@ -231,20 +245,28 @@ const Header = ({ navigationData }) => {
                
             
 
-              <div className="right-search-contact" style={{ height: "42px" }}> {/* Adjust height */}
-              <div className={`right-form ${isSearchOpen && !isMobileMenuOpen ? "active" : ""}`}>
+              <div className="right-search-contact" style={{ height: "42px" }}>
+                <div className={`right-form ${isSearchOpen && !isMobileMenuOpen ? "active" : ""}`}>
                   <form onSubmit={handleSearch}>
+                    <label 
+                      htmlFor="header-search" 
+                      className={`search-label ${isSearchOpen ? 'visible' : 'hidden'}`}
+                    >
+                    </label>
                     <input
+                      id="header-search"
                       type="text"
                       ref={inputRef}
                       value={inputValue}
                       onChange={handleInputChange}
                       onFocus={() => setIsSearchOpen(true)}
                       placeholder={isSearchOpen ? "Search..." : ""}
+                      aria-label="Search properties"
                     />
                     <button 
                       type="submit" 
                       className="searchbtn"
+                      aria-label="Submit search"
                     >
                       <SearchBtn />
                     </button>
@@ -253,6 +275,7 @@ const Header = ({ navigationData }) => {
                         type="button"
                         className="clearbtn"
                         onClick={handleSearchToggle}
+                        aria-label="Clear search"
                       >
                         <SearchCloseBtn />
                       </button>

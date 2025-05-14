@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
-import SubscribeSection from '@/components/SubscribeSection/SubscribeSection';
 import axios from 'axios';
 import { POLICY_API } from "@/routes/apiRoutes";
 
@@ -43,7 +42,6 @@ const TermsAndConditions = () => {
           dangerouslySetInnerHTML={{ __html: termsAgreement }}
         />
       </div>
-      <SubscribeSection />
     </div>
   );
 };

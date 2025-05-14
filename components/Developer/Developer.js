@@ -13,8 +13,8 @@ import { DEVELOPER_API } from "@/routes/apiRoutes";
 import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
 import { LoadingWrapper } from "../LoadingWrapper/index";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
+import { useMediaQuery } from "react-responsive";
 
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -376,11 +376,6 @@ const Developer = ({ initialData, initialPagination }) => {
             </button>
           </div>
         </div>
-        
-          <div className="container">
-            <SubscribeSection />
-          </div>
-      
       </>
     </LoadingWrapper>
   );

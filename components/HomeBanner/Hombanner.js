@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios
 import HomeBannerSwiper from "./HomeBannerSwiper";
 import HomeBannerSearch from "../HomeBannerSearch/HomeBannerSearch";
-import SubscribeSection from "../SubscribeSection/SubscribeSection";
 import PartnersSection from "../PartnersSection/PartnersSection";
 import NewsSection from "../NewsSection/NewsSection";
 import TeamSection from "../TeamSection/TeamSection";
@@ -95,9 +94,6 @@ const Hombanner = ({ initialData }) => {
           <Clients sectionSixData={sectionSixData} />
           <NewsSection sectionSevenData={sectionSevenData} />
           <PartnersSection />
-          <div className="container">
-            <SubscribeSection />
-          </div>
         </>
       )}
     </LoadingWrapper>
