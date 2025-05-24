@@ -17,7 +17,7 @@ export default function Index() {
         
         // Find the home page (type_id === 1)
         const homePage = data.pages.find(page => page.type_id === 1);
-        
+       
         if (homePage) {
           // Redirect to the home page slug
           router.push(`/${homePage.slug}`);

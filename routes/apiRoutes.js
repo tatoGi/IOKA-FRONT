@@ -23,4 +23,5 @@ export const PAGE_API = `${API_BASE_URL}/pages`;
 export const POLICY_API = `${API_BASE_URL}/policies`;
 export const FAQ_API = `${API_BASE_URL}/faqs`;
 export const LOCATION_SEARCH_API = `${API_BASE_URL}/searchOffplanLocations`;
+export const METADATA_API = `${API_BASE_URL}/metadata`;
 // Add more routes as needed

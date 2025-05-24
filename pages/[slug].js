@@ -71,7 +71,6 @@ const DynamicPage = ({ pageData }) => {
 export async function getStaticPaths() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-    
     // Check if the response is successful
     if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
@@ -85,7 +84,6 @@ export async function getStaticPaths() {
 
     const data = await res.json();
     const pages = data.pages;
-
     // Generate paths from the pages data
     const paths = pages.map((page) => ({
       params: { slug: page.slug },
@@ -107,7 +105,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
-
+    
     // Handle the root path (`/`)
     const isRootPath = slug === "/";
 
@@ -119,7 +117,7 @@ export async function getStaticProps({ params }) {
 
     const data = await res.json();
     let pageData;
-
+   
     // If the slug is the root path (`/`), find the home page
     if (isRootPath) {
       pageData = data.pages.find((page) => page.type_id === 1); // Home page type_id

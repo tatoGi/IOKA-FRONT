@@ -4,7 +4,6 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import SharedLayout from "@/components/Layout/SharedLayout";
 import { LoadingWrapper } from "@/components/LoadingWrapper/index";
-import { SETTINGS_API } from "@/routes/apiRoutes";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { montserrat } from '../utils/fonts';
@@ -37,38 +36,65 @@ if (typeof window !== 'undefined') {
 function App({ Component, pageProps }) {
   const [appData, setAppData] = useState({
     navigationData: [],
-    settings: {},
+    settings: { meta: [] },
     isLoading: true
   });
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
+  const [currentPageMeta, setCurrentPageMeta] = useState({});
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [navigationRes, settingsRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`),
-          fetch(SETTINGS_API)
-        ]);
-
-        const [navigationData, settingsData] = await Promise.all([
-          navigationRes.json(),
-          settingsRes.json()
-        ]);
-
-        setAppData({
+        const navigationRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+        const navigationData = await navigationRes.json();
+        setAppData(prevAppData => ({
+          ...prevAppData,
           navigationData: navigationData.pages || [],
-          settings: settingsData || {},
-          isLoading: false
-        });
+          isLoading: false 
+        }));
       } catch (error) {
-        console.error("Error fetching app data:", error);
+        console.error("Error fetching navigation data:", error);
         setAppData(prev => ({ ...prev, isLoading: false }));
       }
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (router.isReady && appData.navigationData && appData.navigationData.length > 0) {
+      const pathWithoutQuery = router.asPath.split('?')[0];
+      const currentSlug = pathWithoutQuery === '/' ? 'IOKA' : pathWithoutQuery.replace(/^\//, '');
+
+      const currentPageData = appData.navigationData.find(page => page.slug === currentSlug);
+
+      if (currentPageData && currentPageData.metadata) {
+        const apiMeta = currentPageData.metadata;
+        const transformedMeta = {
+          title: apiMeta.meta_title,
+          keywords: apiMeta.meta_keywords,
+          description: apiMeta.meta_description,
+          og_title: apiMeta.og_title,
+          og_description: apiMeta.og_description,
+          og_image: apiMeta.og_image,
+          twitter_card: apiMeta.twitter_card,
+          twitter_title: apiMeta.twitter_title,
+          twitter_description: apiMeta.twitter_description,
+          twitter_image: apiMeta.twitter_image,
+        };
+        
+        Object.keys(transformedMeta).forEach(key => {
+          if (transformedMeta[key] === undefined || transformedMeta[key] === null) {
+            delete transformedMeta[key];
+          }
+        });
+        setCurrentPageMeta(transformedMeta);
+      } else {
+        setCurrentPageMeta({});
+      }
+    }
+  }, [router.asPath, router.isReady, appData.navigationData]);
 
   useEffect(() => {
     const handleStart = () => {
@@ -91,8 +117,24 @@ function App({ Component, pageProps }) {
       router.events.off('routeChangeError', handleComplete);
     };
   }, [router]);
+  
+  const globalMeta = appData.settings?.meta || [];
+  const pageMeta = currentPageMeta;
 
-  const metaData = pageProps.meta || {};
+  const pageMetaArray = Object.keys(pageMeta).map(key => ({
+    key: key,
+    value: pageMeta[key]
+  }));
+
+  const finalMetaItems = [...globalMeta];
+  pageMetaArray.forEach(pageItem => {
+    const index = finalMetaItems.findIndex(globalItem => globalItem.key === pageItem.key);
+    if (index !== -1) {
+      finalMetaItems[index] = pageItem;
+    } else {
+      finalMetaItems.push(pageItem);
+    }
+  });
   const isLoading = appData.isLoading || isPageTransitioning;
 
   return (
@@ -102,7 +144,7 @@ function App({ Component, pageProps }) {
         transition: 'opacity 0.3s ease-in-out',
         visibility: isLoading ? 'hidden' : 'visible'
       }}>
-        <Meta {...metaData} />
+        <Meta items={finalMetaItems} />
         <Header navigationData={appData.navigationData} />
         <Layout>
           <SharedLayout>

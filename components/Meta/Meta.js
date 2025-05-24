@@ -1,26 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Logo from "../../assets/img/ioka-logo-white.png";
-import { SETTINGS_API } from "../../routes/apiRoutes";
-import { useEffect, useState } from "react";
 
-const Meta = () => {
+const Meta = ({ items }) => {
   const router = useRouter();
-  const [settings, setSettings] = useState(null);
-  
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const response = await fetch(SETTINGS_API);
-        const data = await response.json();
-        setSettings(data);
-      } catch (error) {
-        console.error('Error fetching settings:', error);
-      }
-    };
-
-    fetchSettings();
-  }, []);
 
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -32,16 +14,17 @@ const Meta = () => {
   // Construct the current URL
   const currentUrl = `${siteUrl}${router.asPath}`;
   
-  // Get meta settings if available
-  const metaSettings = settings?.meta || [];
+  // Use items prop for metaSettings
+  const metaSettings = items || [];
+
   const getMetaValue = (key) => {
     const setting = metaSettings.find(item => item.key === key);
     return setting?.value || '';
   };
 
   // Handle image URLs - if it's a relative path, prepend the site URL
-  const ogImage = getMetaValue('og_image') ? `${siteUrl}/storage/${getMetaValue('og_image')}` : `${siteUrl}/assets/img/ioka-logo-white.png`;
-  const twitterImage = getMetaValue('twitter_image') ? `${siteUrl}/storage/${getMetaValue('twitter_image')}` : `${siteUrl}/assets/img/ioka-logo-white.png`;
+  const ogImage = getMetaValue('og_image') ? (getMetaValue('og_image').startsWith('http') ? getMetaValue('og_image') : `${siteUrl}/storage/${getMetaValue('og_image')}`) : `${siteUrl}/assets/img/ioka-logo-white.png`;
+  const twitterImage = getMetaValue('twitter_image') ? (getMetaValue('twitter_image').startsWith('http') ? getMetaValue('twitter_image') : `${siteUrl}/storage/${getMetaValue('twitter_image')}`) : `${siteUrl}/assets/img/ioka-logo-white.png`;
 
   return (
     <Head>

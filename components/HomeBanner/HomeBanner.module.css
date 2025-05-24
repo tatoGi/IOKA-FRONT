@@ -15,6 +15,7 @@
 .banner-slider {
   position: relative;
   height: 100%;
+  overflow: hidden;
 }
 
 .swiper-item-relative {
