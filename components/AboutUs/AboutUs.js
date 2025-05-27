@@ -11,16 +11,13 @@ import baseimage from "../../assets/img/blogimage.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { LoadingWrapper } from "../LoadingWrapper/index";
 
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(null);
   const [sectionFiveData, setSectionFiveData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  const [router] = useRouter();
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
   const [isMobile, setIsMobile] = useState(false);
-  const [showScrollButton, setShowScrollButton] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,7 +41,6 @@ const AboutUs = ({ initialData, id }) => {
     const fetchData = async () => {
       if (!id) {
         console.error("No ID provided to AboutUs component");
-        if (isMounted) setIsLoading(false);
         return;
       }
 
@@ -66,10 +62,6 @@ const AboutUs = ({ initialData, id }) => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
       }
     };
 
@@ -87,13 +79,6 @@ const AboutUs = ({ initialData, id }) => {
           .catch(error => {
             console.error("Error fetching team data:", error);
           })
-          .finally(() => {
-            if (isMounted) {
-              setIsLoading(false);
-            }
-          });
-      } else {
-        setIsLoading(false);
       }
     } else {
       fetchData();
@@ -107,11 +92,11 @@ const AboutUs = ({ initialData, id }) => {
   // Handle route changes
   useEffect(() => {
     const handleRouteChangeStart = () => {
-      setIsLoading(true);
+      // setIsLoading(true);
     };
 
     const handleRouteChangeComplete = () => {
-      setIsLoading(false);
+      // setIsLoading(false);
     };
 
     router.events.on('routeChangeStart', handleRouteChangeStart);
@@ -255,10 +240,6 @@ const AboutUs = ({ initialData, id }) => {
       </div>
     );
   };
-
-  if (isLoading) {
-    return <LoadingWrapper isLoading={true} />;
-  }
 
   return (
     <div className={styles.aboutSection}>

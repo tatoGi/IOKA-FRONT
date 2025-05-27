@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { OFFPLAN_APi, FILTER_OFFPLAN_API } from "@/routes/apiRoutes";
 import defaultImage from "../../assets/img/default.webp";
-import { LoadingWrapper } from "../LoadingWrapper/index";
 import { Container, Row, Col } from "react-bootstrap"; // Import Bootstrap components
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
 
@@ -236,7 +235,9 @@ const Offplan = ({ initialData, initialPagination }) => {
           <span className={styles.resultsCount}>{cardData.length} results</span>
         </div>
 
-        <LoadingWrapper isLoading={isLoading}>
+        {isLoading ? (
+          <div className={styles.loadingState}>Loading...</div>
+        ) : (
           <div className={styles.cardContainer}>
             {cardData?.filter(property => property?.id).map((property) => (
              
@@ -325,7 +326,7 @@ const Offplan = ({ initialData, initialPagination }) => {
               </div>
             ))}
           </div>
-        </LoadingWrapper>
+        )}
 
         <div className={styles.pagination}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (

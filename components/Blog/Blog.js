@@ -6,7 +6,6 @@ import BlogIcon from "../../assets/img/calendaricon.svg";
 import axios from "axios";
 import { BLOGS_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
-import { LoadingWrapper } from "../LoadingWrapper/index";
 import { useMediaQuery } from "react-responsive";
 
 const Blog = ({ initialData }) => {
@@ -65,57 +64,55 @@ const Blog = ({ initialData }) => {
       <div className={`${styles.title}`}>
         <h1>Articles</h1>
       </div>
-      <LoadingWrapper isLoading={isLoading}>
-        <div className="row">
-          {cardData.map((card, index) => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index}>
-              <div className={`${styles.card}`}>
-                <div className={styles.imageContainer}>
-                <Image
-                  src={
-                    card.image
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(card.image)}`
-                      : baseimage
-                  }
-                  className={styles["card-img-top"]}
-                  alt={card.image_alt || card.title}
-                  width={372}
-                  height={200}
-                />
+      <div className="row">
+        {cardData.map((card, index) => (
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index}>
+            <div className={`${styles.card}`}>
+              <div className={styles.imageContainer}>
+              <Image
+                src={
+                  card.image
+                    ? `${
+                        process.env.NEXT_PUBLIC_API_URL
+                      }/storage/${decodeImageUrl(card.image)}`
+                    : baseimage
+                }
+                className={styles["card-img-top"]}
+                alt={card.image_alt || card.title}
+                width={372}
+                height={200}
+              />
+              </div>
+              <div className={styles["card-body"]}>
+                <h5 className={styles["card-title"]}>
+                  {limitTextLength(card.title, 40)}
+                </h5>
+                <div className={styles.date}>
+                  <Image
+                    src={BlogIcon}
+                    alt="Calendar"
+                    width={16}
+                    height={16}
+                    style={{ marginRight: 8 }}
+                  />
+                  <span className={styles.formattedDate}>
+                    {formatDate(card.date)}
+                  </span>
                 </div>
-                <div className={styles["card-body"]}>
-                  <h5 className={styles["card-title"]}>
-                    {limitTextLength(card.title, 40)}
-                  </h5>
-                  <div className={styles.date}>
-                    <Image
-                      src={BlogIcon}
-                      alt="Calendar"
-                      width={16}
-                      height={16}
-                      style={{ marginRight: 8 }}
-                    />
-                    <span className={styles.formattedDate}>
-                      {formatDate(card.date)}
-                    </span>
-                  </div>
-                  <p className={styles.description}>
-                    {limitTextLength(card.body, 108)}
-                  </p>
-                  <button
-                    onClick={() => handleReadMore(card.slug)}
-                    className={styles["card-button"]}
-                  >
-                    Read more
-                  </button>
-                </div>
+                <p className={styles.description}>
+                  {limitTextLength(card.body, 108)}
+                </p>
+                <button
+                  onClick={() => handleReadMore(card.slug)}
+                  className={styles["card-button"]}
+                >
+                  Read more
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-      </LoadingWrapper>
+          </div>
+        ))}
+      </div>
       <div className={styles.pagination}>
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <button

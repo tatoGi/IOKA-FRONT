@@ -12,12 +12,6 @@ import Blog from "@/pages/page-components/blog";
 const DynamicPage = ({ pageData }) => {
   const router = useRouter();
 
-
-  // If the page is not yet generated, show a loading state
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   // Check if pageData or pageData.title is null or undefined
   if (!pageData || !pageData.title) {
     return <div>Page data is not available.</div>;

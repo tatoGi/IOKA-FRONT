@@ -3,11 +3,11 @@ import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import SharedLayout from "@/components/Layout/SharedLayout";
-import { LoadingWrapper } from "@/components/LoadingWrapper/index";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import { montserrat } from '../utils/fonts';
-
+import "nprogress/nprogress.css";
 // Import styles in correct order
 import "../styles/bootstrap.css";
 import "../styles/fonts.css";
@@ -36,10 +36,8 @@ if (typeof window !== 'undefined') {
 function App({ Component, pageProps }) {
   const [appData, setAppData] = useState({
     navigationData: [],
-    settings: { meta: [] },
-    isLoading: true
+    settings: { meta: [] }
   });
-  const [isPageTransitioning, setIsPageTransitioning] = useState(false);
   const [currentPageMeta, setCurrentPageMeta] = useState({});
   const router = useRouter();
 
@@ -66,12 +64,11 @@ function App({ Component, pageProps }) {
         setAppData(prevAppData => ({
           ...prevAppData,
           navigationData: navigationData.pages || [],
-          settings: transformedSettings,
-          isLoading: false 
+          settings: transformedSettings
         }));
       } catch (error) {
         console.error("Error fetching data:", error);
-        setAppData(prev => ({ ...prev, isLoading: false }));
+        setAppData(prev => ({ ...prev }));
       }
     };
 
@@ -112,28 +109,8 @@ function App({ Component, pageProps }) {
     }
   }, [router.asPath, router.isReady, appData.navigationData]);
 
-  useEffect(() => {
-    const handleStart = () => {
-      setIsPageTransitioning(true);
-      document.body.style.overflow = 'hidden';
-    };
-    
-    const handleComplete = () => {
-      setIsPageTransitioning(false);
-      document.body.style.overflow = '';
-    };
 
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
 
-    return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
-    };
-  }, [router]);
-  
   const globalMeta = appData.settings?.meta || [];
   const pageMeta = currentPageMeta;
 
@@ -151,27 +128,26 @@ function App({ Component, pageProps }) {
       finalMetaItems.push(pageItem);
     }
   });
-  const isLoading = appData.isLoading || isPageTransitioning;
-
+  const TopProgressBar = dynamic(
+    () => {
+      return import("@/components/TopProgressBar/TopProgressBar");
+    },
+    { ssr: true },
+  );
   return (
-    <LoadingWrapper isLoading={isLoading}>
-      <div style={{ 
-        opacity: isLoading ? 0 : 1, 
-        transition: 'opacity 0.3s ease-in-out',
-        visibility: isLoading ? 'hidden' : 'visible'
-      }}>
-        <Meta items={finalMetaItems} />
-        <Header navigationData={appData.navigationData} />
-        <Layout>
-          <SharedLayout>
-            <main className={montserrat.variable}>
-              <Component {...pageProps} />
-            </main>
-          </SharedLayout>
-        </Layout>
-        <Footer navigationData={appData.navigationData} settings={appData.settings} />
-      </div>
-    </LoadingWrapper>
+    <div>
+      <Meta items={finalMetaItems} />
+      <Header navigationData={appData.navigationData} />
+      <Layout>
+        <SharedLayout>
+          <main className={montserrat.variable}>
+            <TopProgressBar />
+            <Component {...pageProps} />
+          </main>
+        </SharedLayout>
+      </Layout>
+      <Footer navigationData={appData.navigationData} settings={appData.settings} />
+    </div>
   );
 }
 

@@ -27,6 +27,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "lightgallery": "^2.8.3",
     "next": "^15.3.2",
+    "nprogress": "^0.2.0",
     "photoswipe": "^5.4.4",
     "rc-slider": "^11.1.8",
     "rc-util": "^5.44.4",

@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
-import { LoadingWrapper } from "@/components/LoadingWrapper/index";
-import Home from "@/pages/page-components/home";
+import { useEffect } from 'react';
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
 import { useRouter } from 'next/router';
 
 export default function Index() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [pageData, setPageData] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,17 +20,11 @@ export default function Index() {
         }
       } catch (error) {
         console.error("Error fetching home page:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchHomePage();
   }, [router]);
-
-  if (isLoading) {
-    return <LoadingWrapper />;
-  }
 
   return null;
 }

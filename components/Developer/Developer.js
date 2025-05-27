@@ -12,7 +12,6 @@ import axios from "axios";
 import { DEVELOPER_API } from "@/routes/apiRoutes";
 import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
-import { LoadingWrapper } from "../LoadingWrapper/index";
 import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
 import { useMediaQuery } from "react-responsive";
 
@@ -240,144 +239,143 @@ const Developer = ({ initialData, initialPagination }) => {
   }
 
   return (
-    <LoadingWrapper isLoading={isLoading}>
-      <>
-        <div className="container py-4">
-          {/* Search Section */}
-          <div className={`mb-4 position-relative ${styles.searchContainer}`}>
-            <input
-              type="text"
-              placeholder="City, Building or community"
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              className={`form-control ${styles.searchInput}`}
-            />
-            <FaSearch 
-              className={`position-absolute ${styles.searchIcon}`} 
-              onClick={handleSearchIconClick}
-              style={{ cursor: 'pointer' }}
-            />
-          </div>
+    <>
+      {isLoading && <div className="text-center py-5">Loading...</div>}
+      <div className="container py-4">
+        {/* Search Section */}
+        <div className={`mb-4 position-relative ${styles.searchContainer}`}>
+          <input
+            type="text"
+            placeholder="City, Building or community"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            className={`form-control ${styles.searchInput}`}
+          />
+          <FaSearch 
+            className={`position-absolute ${styles.searchIcon}`} 
+            onClick={handleSearchIconClick}
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
 
-          {/* Developer Cards */}
-          <div className={styles.cardsContainer}>
-            {filteredData.map((card) => (
-             
-              <div key={card.id} className={styles.cardWrapper}>
-                <div className={styles.card}>
-                  <div className={styles.cardRow}>
-                    {/* Image Section */}
-                    <div className={styles.imageContainer}>
-                      {isMobile && (
-                        <div className={styles.mobileTitleOverlay}>
-                          <h2 className={styles.mobileTitle}>{card.title}</h2>
-                        </div>
-                      )}
-                      <Image
-                        src={getImageUrl(card.photo, card.id).url}
-                        alt={getImageUrl(card.photo, card.id).alt}
-                        width={400}
-                        height={300}
-                        className={styles.cardImage}
-                        style={{ objectFit: "cover" }}
-                      />
-                      {Array.isArray(card.photo) && card.photo.length > 1 && (
-                        <div className={styles.imageNav}>
-                          <button
-                            onClick={() => handlePrevImage(card.id, card.photo)}
-                            className={styles.prevButtonimage}
-                          >
-                            <FaChevronLeft />
-                          </button>
-                          <button
-                            onClick={() => handleNextImage(card.id, card.photo)}
-                            className={styles.nextButtonimage}
-                          >
-                            <FaChevronRight />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content Section */}
-                    <div className={styles.cardContent}>
-                      <h2 className={styles.title}>{card.title}</h2>
-                      <div className={styles.description}>
-                        <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+        {/* Developer Cards */}
+        <div className={styles.cardsContainer}>
+          {filteredData.map((card) => (
+           
+            <div key={card.id} className={styles.cardWrapper}>
+              <div className={styles.card}>
+                <div className={styles.cardRow}>
+                  {/* Image Section */}
+                  <div className={styles.imageContainer}>
+                    {isMobile && (
+                      <div className={styles.mobileTitleOverlay}>
+                        <h2 className={styles.mobileTitle}>{card.title}</h2>
                       </div>
-                      <div className={styles.communitiesSection}>
-                        <h3 className={styles.communitiesTitle}>Top Communities</h3>
-                        <div className={styles.communitiesList}>
-                          {Array.isArray(card.tags) ? card.tags.map((tag, index) => (
-                            <span key={index} className={styles.badge}>
-                              {tag}
-                            </span>
-                          )) : JSON.parse(card.tags || '[]').map((tag, index) => (
-                            <span key={index} className={styles.badge}>
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Buttons Section */}
-                      <div className={styles.buttonsSection}>
-                        {/* Left Side: Call and WhatsApp Buttons */}
-                        <div className={styles.contactButtons}>
-                          <button
-                            className={styles.call}
-                            onClick={() => (window.location.href = `tel:${card.phone}`)}
-                          >
-                            <FaPhone />
-                            <span>Call</span>
-                          </button>
-                          <button
-                            className={styles.whatsapp}
-                            onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
-                          >
-                            <FaWhatsapp />
-                            <span>WhatsApp</span>
-                          </button>
-                        </div>
-
-                        {/* Right Side: See More Button */}
-                        <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
-                          See More
+                    )}
+                    <Image
+                      src={getImageUrl(card.photo, card.id).url}
+                      alt={getImageUrl(card.photo, card.id).alt}
+                      width={400}
+                      height={300}
+                      className={styles.cardImage}
+                      style={{ objectFit: "cover" }}
+                    />
+                    {Array.isArray(card.photo) && card.photo.length > 1 && (
+                      <div className={styles.imageNav}>
+                        <button
+                          onClick={() => handlePrevImage(card.id, card.photo)}
+                          className={styles.prevButtonimage}
+                        >
+                          <FaChevronLeft />
+                        </button>
+                        <button
+                          onClick={() => handleNextImage(card.id, card.photo)}
+                          className={styles.nextButtonimage}
+                        >
+                          <FaChevronRight />
                         </button>
                       </div>
+                    )}
+                  </div>
+
+                  {/* Content Section */}
+                  <div className={styles.cardContent}>
+                    <h2 className={styles.title}>{card.title}</h2>
+                    <div className={styles.description}>
+                      <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
+                    </div>
+                    <div className={styles.communitiesSection}>
+                      <h3 className={styles.communitiesTitle}>Top Communities</h3>
+                      <div className={styles.communitiesList}>
+                        {Array.isArray(card.tags) ? card.tags.map((tag, index) => (
+                          <span key={index} className={styles.badge}>
+                            {tag}
+                          </span>
+                        )) : JSON.parse(card.tags || '[]').map((tag, index) => (
+                          <span key={index} className={styles.badge}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Buttons Section */}
+                    <div className={styles.buttonsSection}>
+                      {/* Left Side: Call and WhatsApp Buttons */}
+                      <div className={styles.contactButtons}>
+                        <button
+                          className={styles.call}
+                          onClick={() => (window.location.href = `tel:${card.phone}`)}
+                        >
+                          <FaPhone />
+                          <span>Call</span>
+                        </button>
+                        <button
+                          className={styles.whatsapp}
+                          onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
+                        >
+                          <FaWhatsapp />
+                          <span>WhatsApp</span>
+                        </button>
+                      </div>
+
+                      {/* Right Side: See More Button */}
+                      <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
+                        See More
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Pagination */}
-          <div className={styles.pagination}>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={`page-${page}`}
-                onClick={() => handlePageChangeForSearch(page)}
-                className={`${styles.pageButton} ${
-                  currentPage === page ? styles.active : ""
-                }`}
-                disabled={isLoading}
-              >
-                {page}
-              </button>
-            ))}
-            <button
-              key="next-button"
-              onClick={() => handlePageChangeForSearch(currentPage + 1)}
-              disabled={currentPage === totalPages || isLoading}
-              className={styles.pageButton}
-            >
-              Next
-            </button>
-          </div>
+            </div>
+          ))}
         </div>
-      </>
-    </LoadingWrapper>
+
+        {/* Pagination */}
+        <div className={styles.pagination}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={`page-${page}`}
+              onClick={() => handlePageChangeForSearch(page)}
+              className={`${styles.pageButton} ${
+                currentPage === page ? styles.active : ""
+              }`}
+              disabled={isLoading}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            key="next-button"
+            onClick={() => handlePageChangeForSearch(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className={styles.pageButton}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

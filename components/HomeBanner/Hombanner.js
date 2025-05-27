@@ -10,7 +10,6 @@ import PopularAreaSection from "../PopularAreaSection/PopularAreaSection";
 import LiveInvestSection from "../LiveInvestSection/LiveInvestSection";
 import NewProperties from "../NewProperties/NewProperties";
 import Clients from "../Clients/Clients";
-import { LoadingWrapper } from "../LoadingWrapper/index";
 import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
 import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
@@ -24,7 +23,6 @@ const Hombanner = ({ initialData }) => {
   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const [sectionSixData, setSectionSixData] = useState(null); // State for section_six data
   const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
-  const [isLoading, setIsLoading] = useState(true); // Loading state
   const router = useRouter(); // Initialize useRouter
   const isMobile = useMediaQuery({ maxWidth: 768 }); // Check if the view is mobile
 
@@ -62,41 +60,34 @@ const Hombanner = ({ initialData }) => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false); // Set loading to false after data is fetched
       }
     };
 
     fetchData();
   }, [initialData]);
 
-  if (isLoading || !sectionOneData || !sectionTwoData || !sectionThreeData || 
+  // Return null only if data is missing, not for loading state
+  if (!sectionOneData || !sectionTwoData || !sectionThreeData || 
       !sectionFourData || !sectionFiveData || !sectionSixData || !sectionSevenData) {
-    return <LoadingWrapper />; // Show loading wrapper while data is loading
+    return null;
   }
   
   return (
-    <LoadingWrapper isLoading={isLoading}>
-      {!isLoading && (
-        <div className="home-banner">
-          <div className="banner-slider">
-            <HomeBannerSwiper sectionData={sectionOneData} />
-            <HomeBannerSearch />
-          </div>
+    <>
+      <div className="home-banner">
+        <div className="banner-slider">
+          <HomeBannerSwiper sectionData={sectionOneData} />
+          <HomeBannerSearch />
         </div>
-      )}
-      {!isLoading && (
-        <>
-          <LiveInvestSection sectionDataTwo={sectionTwoData} />
-          <NewProperties sectionDataThree={sectionThreeData} />
-          <PopularAreaSection sectionDataFour={sectionFourData} />
-          <TeamSection sectionDataFive={sectionFiveData} />
-          <Clients sectionSixData={sectionSixData} />
-          <NewsSection sectionSevenData={sectionSevenData} />
-          <PartnersSection />
-        </>
-      )}
-    </LoadingWrapper>
+      </div>
+      <LiveInvestSection sectionDataTwo={sectionTwoData} />
+      <NewProperties sectionDataThree={sectionThreeData} />
+      <PopularAreaSection sectionDataFour={sectionFourData} />
+      <TeamSection sectionDataFive={sectionFiveData} />
+      <Clients sectionSixData={sectionSixData} />
+      <NewsSection sectionSevenData={sectionSevenData} />
+      <PartnersSection />
+    </>
   );
 };
 
