@@ -46,15 +46,31 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const navigationRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
-        const navigationData = await navigationRes.json();
+        const [navigationRes, settingsRes] = await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`)
+        ]);
+        
+        const [navigationData, settingsData] = await Promise.all([
+          navigationRes.json(),
+          settingsRes.json()
+        ]);
+
+        // Transform settings data into the expected structure
+        const transformedSettings = {
+          meta: settingsData.meta || [],
+          footer: settingsData.footer || [],
+          social: settingsData.social || []
+        };
+        
         setAppData(prevAppData => ({
           ...prevAppData,
           navigationData: navigationData.pages || [],
+          settings: transformedSettings,
           isLoading: false 
         }));
       } catch (error) {
-        console.error("Error fetching navigation data:", error);
+        console.error("Error fetching data:", error);
         setAppData(prev => ({ ...prev, isLoading: false }));
       }
     };
