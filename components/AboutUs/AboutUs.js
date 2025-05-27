@@ -13,9 +13,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const AboutUs = ({ initialData, id }) => {
-  const [cardData, setCardData] = useState(null);
+  const [cardData, setCardData] = useState(initialData || null);
   const [sectionFiveData, setSectionFiveData] = useState(null);
-  const [router] = useRouter();
+  const router = useRouter();
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const TeamMembers = sectionFiveData?.additional_fields?.team_members || [];
   const [isMobile, setIsMobile] = useState(false);
   const [formData, setFormData] = useState({
@@ -45,68 +46,44 @@ const AboutUs = ({ initialData, id }) => {
       }
 
       try {
-        const [aboutResponse, teamResponse] = await Promise.all([
-          axios.get(`${ABOUT_API}/${id}`),
-          axios.get(`${SECTION_API}`)
-        ]);
+        if (!initialData) {
+          const [aboutResponse, teamResponse] = await Promise.all([
+            axios.get(`${ABOUT_API}/${id}`),
+            axios.get(`${SECTION_API}`)
+          ]);
 
-        if (!isMounted) return;
+          if (!isMounted) return;
 
-        const sectionFive = teamResponse.data.sections.find(
-          (section) => section.section_key === "section_five"
-        );
-        
-        setSectionFiveData(sectionFive);
-        if (aboutResponse.data && aboutResponse.data.about) {
-          setCardData(aboutResponse.data.about);
+          const sectionFive = teamResponse.data.sections.find(
+            (section) => section.section_key === "section_five"
+          );
+          
+          setSectionFiveData(sectionFive);
+          if (aboutResponse.data && aboutResponse.data.about) {
+            setCardData(aboutResponse.data.about);
+          }
+        }
+
+        if (!sectionFiveData) {
+          const teamResponse = await axios.get(`${SECTION_API}`);
+          if (!isMounted) return;
+          
+          const sectionFive = teamResponse.data.sections.find(
+            (section) => section.section_key === "section_five"
+          );
+          setSectionFiveData(sectionFive);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    if (initialData) {
-      setCardData(initialData);
-      if (!sectionFiveData) {
-        axios.get(`${SECTION_API}`)
-          .then(response => {
-            if (!isMounted) return;
-            const sectionFive = response.data.sections.find(
-              (section) => section.section_key === "section_five"
-            );
-            setSectionFiveData(sectionFive);
-          })
-          .catch(error => {
-            console.error("Error fetching team data:", error);
-          })
-      }
-    } else {
-      fetchData();
-    }
+    fetchData();
 
     return () => {
       isMounted = false;
     };
-  }, [id, initialData]);
-
-  // Handle route changes
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      // setIsLoading(true);
-    };
-
-    const handleRouteChangeComplete = () => {
-      // setIsLoading(false);
-    };
-
-    router.events.on('routeChangeStart', handleRouteChangeStart);
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChangeStart);
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, [router]);
+  }, [id, initialData, sectionFiveData]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,8 +99,13 @@ const AboutUs = ({ initialData, id }) => {
   };
 
   const decodeImageUrl = (url) => {
+    if (!url) return '';
     return decodeURIComponent(url);
   };
+
+  if (!cardData) {
+    return null;
+  }
 
   const renderStats = () => {
     if (isMobile) {
@@ -244,10 +226,8 @@ const AboutUs = ({ initialData, id }) => {
   return (
     <div className={styles.aboutSection}>
       <div className={`container ${isMobile ? styles.mobileContainer : ''} container`}>
-        {/* Mobile: Show Testimonial first */}
         {isMobile && <TestimonialSection />}
 
-        {/* About Banner */}
         <AboutBanner
           title={cardData?.alt_text || "ABOUT US"}
           description={
@@ -257,15 +237,12 @@ const AboutUs = ({ initialData, id }) => {
           }
         />
 
-        {/* Desktop: Show Testimonial after banner */}
         {!isMobile && <TestimonialSection />}
 
-        {/* Statistics section */}
         <div className={styles.statsSection}>
           {renderStats()}
         </div>
 
-        {/* Agency Section */}
         <div className={styles.agencySection}>
           <h2>{cardData?.additional_fields?.your_agency}</h2>
           <div
@@ -275,7 +252,6 @@ const AboutUs = ({ initialData, id }) => {
           ></div>
         </div>
 
-        {/* Team Section */}
         <div className={styles.teamSection}>
           <div className={styles.teamGrid}>
             {TeamMembers.map((member, index) => (
@@ -300,7 +276,6 @@ const AboutUs = ({ initialData, id }) => {
           </div>
         </div>
 
-        {/* Contact Form Section */}
         <div className={styles.formSection}>
           <div className={styles.formContainer}>
             <h5>Send us Email</h5>
@@ -308,7 +283,6 @@ const AboutUs = ({ initialData, id }) => {
           </div>
         </div>
 
-        {/* Partners Section */}
         <PartnersSection />
       </div>
     </div>

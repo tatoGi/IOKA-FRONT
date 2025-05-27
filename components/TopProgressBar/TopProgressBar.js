@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 
@@ -17,6 +17,7 @@ const delay = 250;
 
 function TopProgressBar() {
   const router = useRouter();
+  const isInitialMount = useRef(true);
 
   // Add styles when component mounts
   useEffect(() => {
@@ -59,6 +60,12 @@ function TopProgressBar() {
 
   useEffect(() => {
     const handleStart = () => {
+      // Don't show progress bar on initial page load
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+
       if (timer) return;
       
       timer = setTimeout(() => {
@@ -82,6 +89,11 @@ function TopProgressBar() {
     // Handle fetch requests
     const originalFetch = window.fetch;
     window.fetch = async function (...args) {
+      // Don't show progress bar for initial data fetches
+      if (isInitialMount.current) {
+        return originalFetch(...args);
+      }
+
       if (activeRequests === 0) {
         handleStart();
       }
