@@ -524,8 +524,8 @@ const OffplanShow = ({ offplanData }) => {
                     : baseimage
                 }
                 alt={offplanData.offplan.main_photo_alt || offplanData.offplan.title}
-                width={600}
-                height={400}
+                width={737}
+                height={461}
                 className={style.buildingImage}
                 sizes="(max-width: 768px) 100vw, 600px"
               />

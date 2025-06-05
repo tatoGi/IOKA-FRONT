@@ -14,18 +14,15 @@ const HomeBannerSwiper = ({ sectionData }) => {
 
   return (
     <Swiper
-      pagination={{
-        clickable: true,
-        bulletActiveClass: `${styles['swiper-pagination-bullet-active']}`,
-      }}
-      modules={[Pagination, Autoplay]}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
-      className={`mySwiper ${styles['swiper-container']}`}
-      style={{ height: '100%' }}
-    >
+    pagination={{ clickable: true }}
+    modules={[Pagination, Autoplay]}
+    autoplay={{
+      delay: 5000,
+      disableOnInteraction: false,
+    }}
+    className={`mySwiper ${styles['swiper-container']}`}
+    style={{ height: '100%' }}
+  >
       {sectionData &&
         sectionData.additional_fields.slider_images.map((image, index) => (
           

@@ -20,6 +20,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 25px;
+  width: 1563px;
 }
 
 /* github */
@@ -76,9 +77,9 @@
 }
 
 .title {
-  font-size: 16px; /* 18px */
-  font-weight: 600;
-  color: #1f2937;
+  font-size: 20px; /* 18px */
+  font-weight: 500;
+  color: #0A273B;
   margin-bottom: 8px;
   margin-top: 12px;
   line-height: 1.4;
@@ -134,7 +135,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   gap: 16px;
 }
 
@@ -210,7 +211,7 @@
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  width: 370px; /* Full width of the column */
+  width: 372px; /* Full width of the column */
   height:360px; /* Minimum height */
   border: 1px solid #E6EBED; /* Border width */
 }

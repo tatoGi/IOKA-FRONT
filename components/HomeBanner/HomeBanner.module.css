@@ -9,6 +9,8 @@
   position: relative;
   height: 100vh;
   min-height: 600px;
+  
+  max-height: 826px;
   /* Keep a min-height for very short viewports */
 }
 
@@ -16,13 +18,16 @@
   position: relative;
   height: 100%;
   overflow: hidden;
+  
+  max-height: 826px;
 }
 
 .swiper-container {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
+  max-height: 826px;
 }
 
 .swiper-item-relative {
@@ -42,6 +47,7 @@
   background-color: rgba(32, 30, 30, 0.5);
   /* Black with 50% opacity */
   z-index: 1;
+  
   /* Ensure it's above the image but below content */
 }
 
@@ -87,7 +93,7 @@
   font-size: 16px;
   font-weight: 400;
   font-family: 'Montserrat';
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #E6EBED;
@@ -96,7 +102,7 @@
 .banner-content h1 {
   font-size: 56px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.25;
   max-width: 1067px;
   margin: 0 auto;
   font-family: "Felix Titling";
@@ -130,7 +136,7 @@
   -ms-flex-pack: center;
   justify-content: center;
   gap: 14px;
-  margin-bottom: 25px;
+  margin-bottom: 12px;
   /* Space below tabs */
   /* Removed margin-top: 5rem; let banner-search positioning handle it */
 }
@@ -235,30 +241,15 @@
   -ms-flex-align: center;
   align-items: center;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
   /* Horizontal padding */
   cursor: pointer;
   /* Indicate clickable */
 }
 
-/* Flex distribution for desktop */
-.where {
-  -webkit-box-flex: 1.2;
-  -ms-flex: 1.2;
-  flex: 1.2;
-}
 
-.size {
-  -webkit-box-flex: 0.9;
-  -ms-flex: 0.9;
-  flex: 0.9;
-}
-
-.price-input-container {
-  -webkit-box-flex: 0.9;
-  -ms-flex: 0.9;
-  flex: 0.9;
-  /* padding-right: 60px; /* Removed, handled by search button positioning */
+.price-input-container input {
+ text-align: start !important;
 }
 
 /* Separator Lines */
@@ -282,7 +273,7 @@
   width: 100%;
   padding: 0;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   font-family: 'Montserrat';
   background: transparent;
@@ -296,37 +287,33 @@
   /* Add ellipsis for overflow */
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
 }
 
 .search-inputs input::-webkit-input-placeholder {
   color: #1A202C;
   font-weight: 500;
-  opacity: 0.6;
   /* Slightly dim placeholder */
 }
 
 .search-inputs input::-moz-placeholder {
   color: #1A202C;
   font-weight: 500;
-  opacity: 0.6;
 }
 
 .search-inputs input:-ms-input-placeholder {
   color: #1A202C;
   font-weight: 500;
-  opacity: 0.6;
 }
 
 .search-inputs input::-ms-input-placeholder {
   color: #1A202C;
   font-weight: 500;
-  opacity: 0.6;
 }
 
 .search-inputs input::placeholder {
   color: #1A202C;
   font-weight: 500;
-  opacity: 0.6;
 }
 
 .search-button {
@@ -368,8 +355,8 @@
 }
 
 .search-button svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Clear Button ('x') */
@@ -526,7 +513,7 @@
 }
 
 .search_input::placeholder {
-  color: #A0AEC0;
+  color: #1A202C;
 }
 
 .search_input:focus {
@@ -706,17 +693,19 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 1rem;
-  margin-bottom: 1.5rem; /* Space below input row */
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
-.input { /* General style for min/max inputs in modal */
+.input {
+  /* General style for min/max inputs in modal */
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   padding: 0.75rem;
   border: 1px solid #E6EBED;
   border-radius: 10px;
@@ -725,20 +714,36 @@
   background: white;
   color: #0A273B;
   height: 36px;
-  text-align: center; /* Center text in inputs */
-  -moz-appearance: textfield; /* Hide number spinners Firefox */
+  text-align: center;
+  width: 100%;
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.modal_inputs {
+  position: relative;
+  top: 56px;
+  max-width: 354px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .input::-webkit-outer-spin-button,
 .input::-webkit-inner-spin-button {
-  -webkit-appearance: none; /* Hide number spinners Chrome/Safari */
+  -webkit-appearance: none;
   margin: 0;
 }
 
 .input:focus {
   outline: none;
-  border-color: #7ACBC4; /* Highlight border on focus */
+  border-color: #7ACBC4;
   -webkit-box-shadow: 0 0 0 1px #7ACBC4;
-          box-shadow: 0 0 0 1px #7ACBC4;
+  box-shadow: 0 0 0 1px #7ACBC4;
+  text-align: center;
 }
 
 
@@ -892,7 +897,57 @@
 }
 
 .price_inputs {
-  margin-top: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.price_heading {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  text-align: center;
+  margin: 24px 0 16px 0;
+  width: 100%;
+}
+
+.price_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.price-search .price_card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-search .modal_inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.price-search .input {
+  width: 100%;
+  max-width: 322px;
+  margin: 0 auto 9px auto;
 }
 
 .mobile_actions {
@@ -2143,9 +2198,9 @@ left: 61px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
     /* Space below input row */
@@ -2294,3 +2349,4 @@ left: 61px;
     font-size: 11px;
   }
 }
+/* Custom pagination bullet */

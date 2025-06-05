@@ -57,21 +57,19 @@
 }
 
 .contactBtn {
-  background-color: white;
-  border: none;
-  padding: 1.5% 3%;
-  border-radius: 30px;
-  font-size: 1.2vw;
-  cursor: pointer;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-top: 10%;
-  margin-bottom: 8.6875rem;
+  border-radius: 16px;
+    background-color: white;
+    border: 1px solid;
+    padding: 1.5% 3%;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 10%;
+    margin-bottom: 8.6875rem;
 }
 
 .contactBtn:hover {
@@ -195,7 +193,12 @@
   /* Responsive font size */
   color: #8FE3DC;
 }
-
+.navButton svg {
+  width: 21.007031142292476px;
+  height: 12.002342462400009px;
+  top: 22.5px;
+  left: 7.5px;
+}
 .prevButton {
   left:40px;
   /* Responsive positioning */

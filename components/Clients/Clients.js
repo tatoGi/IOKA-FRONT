@@ -78,7 +78,10 @@ const Clients = ({ sectionSixData }) => {
                     ))}
                   </div>
                 </div>
-                <p className={styles.review}>{testimonial.body}</p>
+                <div 
+                  className={styles.review}
+                  dangerouslySetInnerHTML={{ __html: testimonial.body }}
+                />
               </div>
             </SwiperSlide>
           ))}

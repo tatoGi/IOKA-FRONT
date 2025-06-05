@@ -20,7 +20,7 @@
     font-size: 40px;
     margin-bottom: 0.5rem;
     color: #0A273B;
-    font-weight: 600;
+    font-weight: 700;
     font-family: 'Montserrat';
 }
 
@@ -29,6 +29,10 @@
     font-size: 20px;
     margin-bottom: 0.5rem;
     font-family: "Montserrat";
+    max-width: 799px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
 }
 
 .googleReviews {
@@ -42,6 +46,7 @@
         -ms-flex-pack: center;
             justify-content: center;
     gap: 0.5rem;
+    margin-bottom: 56px;
 }
 
 .googleReviews span {
@@ -97,10 +102,15 @@
 .rightQuote {
     position: absolute;
     width: 52px;
-    height: 52px;
+    height: 35px;
     z-index: 1;
-    bottom: 4px;
-    right: 10px;
+    bottom: 22px;
+    right: 15px;
+    color: #7ACBC4;
+}
+
+.rightQuote svg {
+    fill: #7ACBC4;
 }
 
 .leftQuote img, .rightQuote img {
@@ -148,12 +158,16 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    gap: 0.15rem;
+    gap: 12px;
+    margin-bottom: 16px;
+    margin-top: 12px;
 }
 
 .star {
     color: #FF9500;
     font-size: 24px;
+    width: 24px;
+    height: 22px;
 }
 
 .review {
