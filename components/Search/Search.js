@@ -81,8 +81,8 @@ const SearchResult = ({ results = {}, query }) => {
       </div>
     
       
-
-      <div className="container">
+    <div className={styles.searchResultsContainer}>
+    <div className="container">
         <div className={styles.searchResults}>
           <div className={styles.searchHeader}>
             <h2>Search Results for "{query}"</h2>
@@ -118,7 +118,7 @@ const SearchResult = ({ results = {}, query }) => {
                       <div key={uniqueKey} className={styles.resultCard}>
                         <div className={styles.breadcrumbs}>
                           <span>
-                            <Link href="/">Home</Link>  &gt; <Link href={`${transformedCategory}/${item.slug}`} style={{color: '#7ACBC4'}}>{item.slug}</Link>
+                            <Link href="/">Home</Link>  &gt; <Link href={`${transformedCategory}/${item.slug}`}>{item.slug}</Link>
                           </span>
                         </div>
                         <Link href={`${transformedCategory}/${item.slug}`} className={styles.resultLink}>
@@ -138,6 +138,8 @@ const SearchResult = ({ results = {}, query }) => {
           )}
         </div>
       </div>
+    </div>
+     
     </>
   );
 };

@@ -13,7 +13,7 @@ export default function Custom404() {
       <main className="error-main">
         <div className="error-content">
           {/* <Image src={require("/assets/img/404.png")} alt="404" width={100} height={100} /> */}
-          <p className="error-oh-no">Oh No!</p>
+        
           <h2 className="error-title">Page Not Found</h2>
           <p className="error-description">
             The page you requested, doesn't exist or was removed. We suggest you to visit our home page,

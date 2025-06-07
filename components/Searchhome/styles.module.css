@@ -406,6 +406,7 @@ color: #007AFF;
         -ms-flex-align: center;
             align-items: center;
     gap: 1rem;
+    margin-top: 166px;
   }
 
   .searchIcon {
@@ -423,12 +424,24 @@ color: #007AFF;
   }
 
   .noResultsContent p {
-    color: #666;
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5;
+    color: rgba(10, 39, 59, 1);
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    
   }
+  .noResultsContent span{
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 24px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
 
+  }
   .developerInfo {
     display: -webkit-box;
     display: -ms-flexbox;

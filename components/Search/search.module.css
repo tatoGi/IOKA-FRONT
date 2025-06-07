@@ -1,3 +1,6 @@
+.searchResultsContainer{
+  background-color: rgba(248, 252, 255, 1);
+}
 .searchBanner {
   position: relative;
   width: 100%;
@@ -88,7 +91,7 @@
 
 .searchButton {
   position: absolute;
-  right: 8px;
+  right: 32px;
   top: 50%;
   transform: translateY(-50%);
   padding: 8px 16px 8px 16px;
@@ -103,9 +106,9 @@
   align-items: center;
   gap: 4px;
   width: 160px;
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 20px;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 24px;
   line-height: 100%;
   letter-spacing: 0%;
   justify-content: center;
@@ -232,6 +235,7 @@
   letter-spacing: 0;
   color: #07151F;
   margin: 0;
+  opacity: 80%;
 }
 
 .noResults {

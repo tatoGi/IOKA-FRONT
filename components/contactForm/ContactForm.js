@@ -8,7 +8,6 @@ const ContactForm = ({ pageTitle = "" }) => {
     name: "",
     email: "",
     phone: "",
-    country: "",
     message: ""
   });
   const [error, setError] = useState(null);
@@ -61,7 +60,6 @@ const ContactForm = ({ pageTitle = "" }) => {
         name: '',
         email: '',
         phone: '',
-        country: '',
         message: '',
       });
     } catch (error) {
@@ -81,11 +79,12 @@ const ContactForm = ({ pageTitle = "" }) => {
     fontSize: '16px',
     lineHeight: '100%',
     letterSpacing: '0%',
-    color: '#0A273B'
+    color: '#8B9DA8'
   };
 
   return (
     <div className={styles.formContainer}>
+      <p className={styles.toptitle}>Send us Email</p>
       <h2 className={styles.title}>Feel free to write</h2>
       
       {/* Modal-style status message */}
@@ -124,16 +123,6 @@ const ContactForm = ({ pageTitle = "" }) => {
           value={formData.phone}
           onChange={handleChange}
           placeholder="Phone Number"
-          className={styles.input}
-          required
-          style={placeholderStyle}
-        />
-        <input
-          type="text"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          placeholder="Country"
           className={styles.input}
           required
           style={placeholderStyle}

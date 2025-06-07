@@ -628,6 +628,7 @@ margin-top: 2px;
   gap: 15px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
+      max-width: 696px;
 }
 
 .propertyCardLink{

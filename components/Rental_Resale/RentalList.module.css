@@ -20,6 +20,7 @@
   letter-spacing: 0%;
   color: #0A273B;
   margin-bottom: 24px;
+  margin-top: 24px;
   
   }
   .sliderWrapper {
@@ -1321,11 +1322,13 @@
   .largeImage {
     display: block;
     position: relative;
-    width: 100%; /* Full width on all screens */
-    height: 100%; /* Height adjusts automatically */
-    aspect-ratio: 580 / 378; /* Maintain aspect ratio */
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 582 / 380; */
     margin-right: 2px;
     overflow: hidden;
+    max-width: 582px;
+    height: 380px;
   }
   
   .largeImage img{
@@ -1438,6 +1441,7 @@
     -o-transition: transform 0.3s ease;
     transition: transform 0.3s ease;
     transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    max-height: 189px;
   }
   
   .smallImage:hover {
@@ -1608,7 +1612,7 @@
       font-size: 18px;
     }
     .propertyCard {
-      width: calc(50vw - 52px);
+      width: 100%;
     }
     .propertyInfo h3 {
       font-size: 1rem;
@@ -1625,27 +1629,20 @@
     .resaleLocation, .resalePrice, .statGroup span {
       font-size: 12px;
     }
+    .largeImage{
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      /* aspect-ratio: 582 / 380; */
+      margin-right: 2px;
+      overflow: hidden;
+      max-width: 330px;
+      height: 380px;
+    }
   }
     
-  @media (min-width: 1024px) {
-   
-  
-    .largeImage {
-      width: 500px; /* Fixed width for large screens */
-      height: 100%; /* Fixed height for large screens */
-      margin-right: 2px;
-    }
-  
-    .smallImagesGrid {
-      width: 334px; /* Fixed width for large screens */
-      gap: 2px; /* Adjust the gap between the small images */
-    }
-  
-    .smallImage {
-      width: 334px; /* Fixed width for large screens */
-      height: 100%; /* Fixed height for large screens */
-    }
-  }
+
   
   @media (max-width: 768px) {
     .resaleSection{
@@ -1680,25 +1677,30 @@
     .whatsapp span{
       margin-left: 10px;
     }
-    .modalContent {
-      position: relative;
-      background: white;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 16px;
-      padding: 20px;
-      z-index: 1001;
-      margin-top: 60px;
-    }
-
     .modalOverlay {
       position: fixed;
-      top: 0;
+      top: 5%;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Semi-transparent background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      /* Ensure it's on top of other content */
+    }
+    
+    .modalContent {
+      background-color: white;
+      padding: 124px 208px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 1560px;
+      /* Adjust as needed */
+      position: relative;
+      overflow-y: auto;
     }
 
     .listingsHeader {

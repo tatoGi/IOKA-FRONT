@@ -9,12 +9,24 @@
   max-width: 100%;
   margin: 0 auto;
 }
+.toptitle{
+  font-family: 'Montserrat';
+font-weight: 400;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 24px;
 
+text-align: start;
+
+}
 .title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 24px;
   color: #1a1a1a;
   font-family: 'Montserrat';
+  text-align: start;
 }
 
 .form {
@@ -33,29 +45,35 @@
   width: 100%;
   padding: 1rem;
   border: none;
-  border-radius: 16px;
-  background-color: #f5f6f7;
+  border-radius: 12px;
+  background-color: #E6EBED;
   font-size: 1rem;
 }
 
+.input {
+  height: 72px;
+}
+
 .textarea {
-  min-height: 150px;
+  min-height: 149px;
   resize: vertical;
   font-family: 'Montserrat';
 }
 
 .submitButton {
-  background-color: #0f2454 !important;
+  background-color: #0A273B !important;
   color: white !important;
   padding: 1rem !important;
   border: none !important;
-  border-radius: 16px !important;
-  font-size: 1rem !important;
+  border-radius: 12px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
   cursor: pointer !important;
   -webkit-transition: background-color 0.3s ease !important;
   -o-transition: background-color 0.3s ease !important;
   transition: background-color 0.3s ease !important;
   font-family: 'Montserrat' !important;
+  height: 80px;
 }
 
 .submitButton:hover {

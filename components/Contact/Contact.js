@@ -65,7 +65,7 @@ const Contact = ({ initialData, id }) => {
     <div className={styles.contactPage}>
       <div className={`container ${styles.containerWithMargin}`}>
         <div className={`row align-items-stretch ${styles.rowWithBorder}`}>
-          <div className="col-md-6 d-flex flex-column">
+          <div className={`col-md-6 d-flex flex-column ${styles.col}`}>
             <div className={styles.infoSection}>
               {!isMobile && <h2>{cardData.additional_fields?.subtitle}</h2>}
               <h1>{cardData.additional_fields?.title}</h1>
@@ -113,7 +113,7 @@ const Contact = ({ initialData, id }) => {
               )}
             </div>
           </div>
-          <div className={`${isMobile ? 'w-100 p-0' : 'col-md-6'}`}>
+          <div className={`${isMobile ? 'w-100 p-0' : 'col-md-6'} ${styles.col}`}>
             <div className={styles.mapSection}>
               <MapComponent locations={cardData.additional_fields?.locations || []} />
             </div>

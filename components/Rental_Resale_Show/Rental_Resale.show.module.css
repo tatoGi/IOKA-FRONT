@@ -103,6 +103,7 @@
   width: 100%;
   height: 272px;
   border-radius: 16px;
+  max-width: 372px;
 
 }
 
@@ -855,7 +856,7 @@
 
 .modalOverlay {
   position: fixed;
-  top: 0;
+  top: 5%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -870,10 +871,10 @@
 
 .modalContent {
   background-color: white;
-  padding: 24px;
+  padding: 124px 208px;
   border-radius: 12px;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1560px;
   /* Adjust as needed */
   position: relative;
   overflow-y: auto;
@@ -889,6 +890,7 @@
   cursor: pointer;
   color: #333;
   width: auto;
+
 }
 
 .modalContent .closeButton:hover {
@@ -1772,6 +1774,7 @@
     position: relative;
     max-width: 470px;
     border-radius: 16px;
+    height: 100%;
   }
   .contactButtons{
     gap: 10px;
@@ -1781,6 +1784,9 @@
   }
 }
 @media (max-width: 992px) {
+  .col{
+    width: 100%;
+  }
   .gallery {
     display: flex;
     flex-direction: column;

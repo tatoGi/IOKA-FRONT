@@ -376,8 +376,9 @@ const DeveloperShow = (developerData) => {
                 ))}
                 <div className={styles.show_more_button}>Show more properties</div>
               </div>
+              
             ) : (
-              <div className={styles.sliderWrapper}>
+              <div className={styles.sliderContainer}>
                 <button
                   className={`${styles.sliderArrow} ${styles.prevArrow}`}
                   onClick={() =>
@@ -385,368 +386,275 @@ const DeveloperShow = (developerData) => {
                   }
                   disabled={currentSlide === 0}
                 >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 12L6 8L10 4" stroke="#666666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="28" viewBox="0 0 16 28" fill="none">
+                    <path d="M0.585821 12.588C-0.195277 13.369 -0.195277 14.6373 0.585821 15.4183L12.5835 27.4143C13.3646 28.1952 14.6331 28.1952 15.4142 27.4143C16.1953 26.6333 16.1953 25.3649 15.4142 24.584L4.82874 14L15.4079 3.41604C16.189 2.63506 16.189 1.36673 15.4079 0.585741C14.6268 -0.195247 13.3583 -0.195247 12.5772 0.585741L0.579572 12.5817L0.585821 12.588Z" fill="#0A273B"/>
                   </svg>
                 </button>
-
-                <div
-                  className={styles.propertyGrid}
-                  style={{
-                    transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`,
-                    touchAction: 'pan-x',
-                    WebkitOverflowScrolling: 'touch',
-                    userSelect: 'none',
-                    WebkitUserSelect: 'none',
-                    msUserSelect: 'none',
-                    overflowX: 'hidden',
-                    overflowY: 'hidden'
-                  }}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                >
-                  {offplanListings.map((listing) => (
-                    <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard}>
-                      <div className={styles.propertyImage}>
-                        <span className={styles.propertyType}>
-                          {listing.property_type}
-                        </span>
-                        <span className={styles.propertyYear}>
-                          {new Date(listing.created_at).getFullYear()}
-                        </span>
-                        <Image
-                          src={
-                            listing.main_photo
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(listing.main_photo)}`
-                              : baseimage
-                          }
-                          alt={listing.title}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                      <div className={styles.propertyInfo}>
-                        <div>
-                          <h4>{listing.title}</h4>
-                          <p className={styles.location}>
-                            by {developerData.developerData.title}
-                          </p>
-                          <div className={styles.priceContainer}>
-                            <span className={styles.priceStart}>
-                              Starting Price
-                            </span>
-                            <div className={styles.priceWrapper}>
-                              <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
-                              <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
+                <div className={styles.sliderWrapper}>
+                  <div
+                    className={styles.propertyGrid}
+                    style={{
+                      transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`,
+                      touchAction: 'pan-x',
+                      WebkitOverflowScrolling: 'touch',
+                      userSelect: 'none',
+                      WebkitUserSelect: 'none',
+                      msUserSelect: 'none',
+                      overflowX: 'hidden',
+                      overflowY: 'hidden'
+                    }}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                  >
+                    {offplanListings.map((listing) => (
+                      <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard}>
+                        <div className={styles.propertyImage}>
+                          <span className={styles.propertyType}>
+                            {listing.property_type}
+                          </span>
+                          <span className={styles.propertyYear}>
+                            {new Date(listing.created_at).getFullYear()}
+                          </span>
+                          <Image
+                            src={
+                              listing.main_photo
+                                ? `${
+                                    process.env.NEXT_PUBLIC_API_URL
+                                  }/storage/${decodeImageUrl(listing.main_photo)}`
+                                : baseimage
+                            }
+                            alt={listing.title}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        </div>
+                        <div className={styles.propertyInfo}>
+                          <div>
+                            <h4>{listing.title}</h4>
+                            <p className={styles.location}>
+                              by {developerData.developerData.title}
+                            </p>
+                            <div className={styles.priceContainer}>
+                              <span className={styles.priceStart}>
+                                Starting Price
+                              </span>
+                              <div className={styles.priceWrapper}>
+                                <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
+                                <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className={styles.propertyStats}>
-                          <div className={styles.stat}>
-                            <Image
-                              src={BedroomIcon}
-                              alt="Bedrooms"
-                              width={20}
-                              height={20}
-                            />
-                            <span>{listing.bedroom} Br</span>
+                          <div className={styles.propertyStats}>
+                            <div className={styles.stat}>
+                              <Image
+                                src={BedroomIcon}
+                                alt="Bedrooms"
+                                width={20}
+                                height={20}
+                              />
+                              <span>{listing.bedroom} Br</span>
+                            </div>
+                            <div className={styles.stat}>
+                              <Image
+                                src={BathroomIcon}
+                                alt="Bathrooms"
+                                width={20}
+                                height={20}
+                              />
+                              <span>{listing.bathroom} Ba</span>
+                            </div>
+                            <div className={styles.stat}>
+                              <Image
+                                src={AreaVector}
+                                alt="Area"
+                                width={20}
+                                height={20}
+                              />
+                              <span>{listing.sq_ft} Sq.m</span>
+                            </div>
+                            <div className={styles.stat}>
+                              <Image
+                                src={WarehouseIcon}
+                                alt="Area"
+                                width={20}
+                                height={20}
+                              />
+                              <span>{listing.garage} Gr</span>
+                            </div>
                           </div>
-                          <div className={styles.stat}>
-                            <Image
-                              src={BathroomIcon}
-                              alt="Bathrooms"
-                              width={20}
-                              height={20}
-                            />
-                            <span>{listing.bathroom} Ba</span>
+                          <div className={styles.propertyDetails}>
+                            <p>{limitTextLength(listing.description, 150)}</p>
                           </div>
-                          <div className={styles.stat}>
-                            <Image
-                              src={AreaVector}
-                              alt="Area"
-                              width={20}
-                              height={20}
-                            />
-                            <span>{listing.sq_ft} Sq.m</span>
-                          </div>
-                          <div className={styles.stat}>
-                            <Image
-                              src={WarehouseIcon}
-                              alt="Area"
-                              width={20}
-                              height={20}
-                            />
-                            <span>{listing.garage} Gr</span>
+                          <div className={styles.propertyActions}>
+                            <button className={`${styles.actionButton} ${styles.email}`}>
+                              <HiOutlineMail size={20} color="#1A1A1A" />
+                              <span>Email</span>
+                            </button>
+                            <button className={`${styles.actionButton} ${styles.phone}`}>
+                              <Image src={callVector} alt="Call" />
+                              <span>Call</span>
+                            </button>
+                            <button className={`${styles.actionButton} ${styles.whatsapp}`}>
+                              <BsWhatsapp size={20} color="#34C759" />
+                              <span>WhatsApp</span>
+                            </button>
                           </div>
                         </div>
-                        <div className={styles.propertyDetails}>
-                          <p>{limitTextLength(listing.description, 150)}</p>
-                        </div>
-                        <div className={styles.propertyActions}>
-                          <button className={`${styles.actionButton} ${styles.email}`}>
-                            <HiOutlineMail size={20} color="#1A1A1A" />
-                            <span>Email</span>
-                          </button>
-                          <button className={`${styles.actionButton} ${styles.phone}`}>
-                            <Image src={callVector} alt="Call" />
-                            <span>Call</span>
-                          </button>
-                          <button className={`${styles.actionButton} ${styles.whatsapp}`}>
-                            <BsWhatsapp size={20} color="#34C759" />
-                            <span>WhatsApp</span>
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-
-                <button
-                  className={`${styles.sliderArrow} ${styles.nextArrow}`}
-                  onClick={() =>
-                    setCurrentSlide((prev) =>
-                      prev + 1 >= offplanListings.length - 2 ? prev : prev + 1
-                    )
-                  }
-                  disabled={currentSlide >= offplanListings.length - 2}
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 12L10 8L6 4" stroke="#666666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
+                <div className={styles.sliderArrowContainer}>
+                  <button
+                    className={`${styles.sliderArrow} ${styles.nextArrow}`}
+                    onClick={() =>
+                      setCurrentSlide((prev) =>
+                        prev + 1 >= offplanListings.length - 2 ? prev : prev + 1
+                      )
+                    }
+                    disabled={currentSlide >= offplanListings.length - 2}
+                  >
+                    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.4142 15.412C16.1953 14.631 16.1953 13.3627 15.4142 12.5817L3.41652 0.585741C2.63542 -0.195248 1.36692 -0.195248 0.585823 0.585741C-0.195274 1.36673 -0.195274 2.63506 0.585823 3.41604L11.1713 14L0.592071 24.584C-0.189026 25.3649 -0.189026 26.6333 0.592071 27.4143C1.37317 28.1952 2.64167 28.1952 3.42277 27.4143L15.4204 15.4183L15.4142 15.412Z" fill="#0A273B"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
-      </div>
 
-      {/* Resale Section */}
-      <div className={styles.resaleSection}>
-        <div className="container" style={{ overflow: 'hidden' }}>
-          <div className={styles.resaleHeader}>
-            <div className={styles.resaleTitle}>
-              <h3>Rental Resale</h3>
-              <span className={styles.listingCount}>
-                {rentalListings.length} Listings
-              </span>
+        {/* Resale Section */}
+        <div className={styles.resaleSection}>
+          <div className="container" style={{ overflow: 'hidden' }}>
+            <div className={styles.resaleHeader}>
+              <div className={styles.resaleTitle}>
+                <h3>Rental Resale</h3>
+                <span className={styles.listingCount}>
+                  {rentalListings.length} Listings
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {isMobileView ? (
-          <div className={styles.listView}>
-            {rentalListings.map((listing) => (
-              <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.listItem}>
-                <div className={styles.propertyImage}>
-                  <Image
-                    src={
-                      listing.main_photo
-                        ? `${
-                            process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(listing.main_photo)}`
-                        : baseimage
-                    }
-                    alt={listing.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-                <div className={styles.propertyInfo}>
-                  <h4>{listing.title}</h4>
-                  <p className={styles.location}>{listing.location}</p>
-                  <div className={styles.priceContainer}>
-                    <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
-                    <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
-                  </div>
-                  <div className={styles.propertyStats}>
-                    <div className={styles.stat}>
-                      <Image
-                        src={BedroomIcon}
-                        alt="Bedrooms"
-                        width={20}
-                        height={20}
-                      />
-                      <span>{listing.bedroom} Br</span>
-                    </div>
-                    <div className={styles.stat}>
-                      <Image
-                        src={BathroomIcon}
-                        alt="Bathrooms"
-                        width={20}
-                        height={20}
-                      />
-                      <span>{listing.bathroom} Ba</span>
-                    </div>
-                    <div className={styles.stat}>
-                      <Image
-                        src={AreaVector}
-                        alt="Area"
-                        width={20}
-                        height={20}
-                      />
-                      <span>{listing.sq_ft} Sq.m</span>
-                    </div>
-                    <div className={styles.stat}>
-                      <Image
-                        src={require("/assets/img/garage.svg")}
-                        alt="Garage"
-                        width={20}
-                        height={20}
-                      />
-                      <span>{listing.garage} Gr</span>
-                    </div>
-                  </div>
-                  <div className={styles.propertyDetails}>
-                      <p>6,115 Sq. Ft. BUA</p>
-                      <p>10,111 Sq. Ft. PLOT</p>
-                      <p>Lime Tree Valley</p>
-                      <p>Trakheesi Permit: 6123123124512</p>
-                  </div>
-                  <div className={styles.resaleFooter}>
-                    <div className={styles.agentInfo}>
-                      <Image
-                        src={listing.agent_image || agentInfo}
-                        alt="Agent"
-                        width={40}
-                        height={40}
-                        className={styles.agentImage}
-                      />
-                      <span>{listing.agent_title || "Darren Murphy"}</span>
-                    </div>
-                    <div className={styles.footerActions}>
-                      <button className={styles.footerButton}>
-                        <BsWhatsapp size={20} color="#34C759" />
-                        
-                      </button>
-                      <div className={styles.footerSeparator}>|</div>
-                      <button className={styles.footerButton}>
-                        <Image src={callVector} alt="Call" />
-                       
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : rentalListings.length === 1 ? (
-          <div className={styles.singleRentalContainer}>
-            <Link href={`/rental/${rentalListings[0].slug}`} className={styles.resaleCard}>
-              <div className={styles.resaleImage}>
-                <Image
-                  src={
-                    rentalListings[0].main_photo
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(rentalListings[0].main_photo)}`
-                      : baseimage
-                  }
-                  alt={rentalListings[0].title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className={styles.resaleContent}>
-                <h4>{rentalListings[0].title}</h4>
-                <p className={styles.resaleLocation}>{rentalListings[0].location}</p>
-                <p className={styles.resalePrice}>AED {formatPrice(rentalListings[0].amount)}</p>
-                <div className={styles.resaleStats}>
-                  <div className={styles.statGroup}>
+          {isMobileView ? (
+            <div className={styles.listView}>
+              {rentalListings.map((listing) => (
+                <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.listItem}>
+                  <div className={styles.propertyImage}>
                     <Image
-                      src={BedroomIcon}
-                      alt="Bedrooms"
-                      width={16}
-                      height={16}
+                      src={
+                        listing.main_photo
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(listing.main_photo)}`
+                          : baseimage
+                      }
+                      alt={listing.title}
+                      layout="fill"
+                      objectFit="cover"
                     />
-                    <span>{rentalListings[0].bedroom} Br</span>
                   </div>
-                  <div className={styles.statSeparator}>|</div>
-                  <div className={styles.statGroup}>
-                    <Image
-                      src={BathroomIcon}
-                      alt="Bathrooms"
-                      width={16}
-                      height={16}
-                    />
-                    <span>{rentalListings[0].bathroom} Ba</span>
+                  <div className={styles.propertyInfo}>
+                    <h4>{listing.title}</h4>
+                    <p className={styles.location}>{listing.location}</p>
+                    <div className={styles.priceContainer}>
+                      <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
+                      <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
+                    </div>
+                    <div className={styles.propertyStats}>
+                      <div className={styles.stat}>
+                        <Image
+                          src={BedroomIcon}
+                          alt="Bedrooms"
+                          width={20}
+                          height={20}
+                        />
+                        <span>{listing.bedroom} Br</span>
+                      </div>
+                      <div className={styles.stat}>
+                        <Image
+                          src={BathroomIcon}
+                          alt="Bathrooms"
+                          width={20}
+                          height={20}
+                        />
+                        <span>{listing.bathroom} Ba</span>
+                      </div>
+                      <div className={styles.stat}>
+                        <Image
+                          src={AreaVector}
+                          alt="Area"
+                          width={20}
+                          height={20}
+                        />
+                        <span>{listing.sq_ft} Sq.m</span>
+                      </div>
+                      <div className={styles.stat}>
+                        <Image
+                          src={require("/assets/img/garage.svg")}
+                          alt="Garage"
+                          width={20}
+                          height={20}
+                        />
+                        <span>{listing.garage} Gr</span>
+                      </div>
+                    </div>
+                    <div className={styles.propertyDetails}>
+                        <p>6,115 Sq. Ft. BUA</p>
+                        <p>10,111 Sq. Ft. PLOT</p>
+                        <p>Lime Tree Valley</p>
+                        <p>Trakheesi Permit: 6123123124512</p>
+                    </div>
+                    <div className={styles.resaleFooter}>
+                      <div className={styles.agentInfo}>
+                        <Image
+                          src={listing.agent_image || agentInfo}
+                          alt="Agent"
+                          width={40}
+                          height={40}
+                          className={styles.agentImage}
+                        />
+                        <span>{listing.agent_title || "Darren Murphy"}</span>
+                      </div>
+                      <div className={styles.footerActions}>
+                        <button className={styles.footerButton}>
+                          <BsWhatsapp size={20} color="#34C759" />
+                          
+                        </button>
+                        <div className={styles.footerSeparator}>|</div>
+                        <button className={styles.footerButton}>
+                          <Image src={callVector} alt="Call" />
+                         
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.statSeparator}>|</div>
-                  <div className={styles.statGroup}>
-                    <Image
-                      src={AreaVector}
-                      alt="Area"
-                      width={16}
-                      height={16}
-                    />
-                    <span>{rentalListings[0].sq_ft} Sq.m</span>
-                  </div>
-                  <div className={styles.statSeparator}>|</div>
-                  <div className={styles.statGroup}>
-                    <Image
-                      src={require("/assets/img/garage.svg")}
-                      alt="Garage"
-                      width={16}
-                      height={16}
-                    />
-                    <span>{rentalListings[0].garage} Gr</span>
-                  </div>
-                </div>
-                <div className={styles.resaleDetails}>
-                  {rentalListings[0].details && rentalListings[0].details.map((detail, index) => (
-                    <p key={index}>{detail.title}: {detail.info}</p>
-                  ))}
-                </div>
-                <div className={styles.resaleFooter}>
-                  <div className={styles.agentInfo}>
-                    <Image
-                      src={rentalListings[0].agent_image || agentInfo}
-                      alt="Agent"
-                      width={40}
-                      height={40}
-                      className={styles.agentImage}
-                    />
-                    <span>{rentalListings[0].agent_title || "Darren Murphy"}</span>
-                  </div>
-                  <div className={styles.footerActions}>
-                    <button className={styles.footerButton}>
-                      <BsWhatsapp size={20} color="#34C759" />
-                      <span>WhatsApp</span>
-                    </button>
-                    <div className={styles.footerSeparator}>|</div>
-                    <button className={styles.footerButton}>
-                      <Image src={callVector} alt="Call" />
-                      <span>Call Us</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        ) : (
-          <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
-            {rentalListings.map((listing) => (
-              <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.resaleCard}>
+                </Link>
+              ))}
+            </div>
+          ) : rentalListings.length === 1 ? (
+            <div className={styles.singleRentalContainer}>
+              <Link href={`/rental/${rentalListings[0].slug}`} className={styles.resaleCard}>
                 <div className={styles.resaleImage}>
                   <Image
                     src={
-                      listing.main_photo
+                      rentalListings[0].main_photo
                         ? `${
                             process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(listing.main_photo)}`
+                          }/storage/${decodeImageUrl(rentalListings[0].main_photo)}`
                         : baseimage
                     }
-                    alt={listing.title}
+                    alt={rentalListings[0].title}
                     layout="fill"
                     objectFit="cover"
                   />
                 </div>
                 <div className={styles.resaleContent}>
-                  <h4>{listing.title}</h4>
-                  <p className={styles.resaleLocation}>{listing.location}</p>
-                  <p className={styles.resalePrice}>AED {formatPrice(listing.amount)}</p>
+                  <h4>{rentalListings[0].title}</h4>
+                  <p className={styles.resaleLocation}>{rentalListings[0].location}</p>
+                  <p className={styles.resalePrice}>AED {formatPrice(rentalListings[0].amount)}</p>
                   <div className={styles.resaleStats}>
                     <div className={styles.statGroup}>
                       <Image
@@ -755,7 +663,7 @@ const DeveloperShow = (developerData) => {
                         width={16}
                         height={16}
                       />
-                      <span>{listing.bedroom} Br</span>
+                      <span>{rentalListings[0].bedroom} Br</span>
                     </div>
                     <div className={styles.statSeparator}>|</div>
                     <div className={styles.statGroup}>
@@ -765,7 +673,7 @@ const DeveloperShow = (developerData) => {
                         width={16}
                         height={16}
                       />
-                      <span>{listing.bathroom} Ba</span>
+                      <span>{rentalListings[0].bathroom} Ba</span>
                     </div>
                     <div className={styles.statSeparator}>|</div>
                     <div className={styles.statGroup}>
@@ -775,7 +683,7 @@ const DeveloperShow = (developerData) => {
                         width={16}
                         height={16}
                       />
-                      <span>{listing.sq_ft} Sq.m</span>
+                      <span>{rentalListings[0].sq_ft} Sq.m</span>
                     </div>
                     <div className={styles.statSeparator}>|</div>
                     <div className={styles.statGroup}>
@@ -785,26 +693,24 @@ const DeveloperShow = (developerData) => {
                         width={16}
                         height={16}
                       />
-                      <span>{listing.garage} Gr</span>
+                      <span>{rentalListings[0].garage} Gr</span>
                     </div>
                   </div>
-                  
                   <div className={styles.resaleDetails}>
-                   
-                    {listing.details && listing.details.map((detail, index) => (
+                    {rentalListings[0].details && rentalListings[0].details.map((detail, index) => (
                       <p key={index}>{detail.title}: {detail.info}</p>
                     ))}
                   </div>
                   <div className={styles.resaleFooter}>
                     <div className={styles.agentInfo}>
                       <Image
-                        src={listing.agent_image || agentInfo} // Use agent image or fallback
+                        src={rentalListings[0].agent_image || agentInfo}
                         alt="Agent"
                         width={40}
                         height={40}
                         className={styles.agentImage}
                       />
-                      <span>{listing.agent_title || "Darren Murphy"}</span>
+                      <span>{rentalListings[0].agent_title || "Darren Murphy"}</span>
                     </div>
                     <div className={styles.footerActions}>
                       <button className={styles.footerButton}>
@@ -820,22 +726,169 @@ const DeveloperShow = (developerData) => {
                   </div>
                 </div>
               </Link>
-            ))}
-          </Slider>
-        )}
-      </div>
+            </div>
+          ) : (
+            <Slider {...resaleSliderSettings} className={styles.resaleSlider}>
+              {rentalListings.map((listing) => (
+                <Link href={`/rental/${listing.slug}`} key={listing.id} className={styles.resaleCard}>
+                  <div className={styles.resaleImage}>
+                    <Image
+                      src={
+                        listing.main_photo
+                          ? `${
+                              process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(listing.main_photo)}`
+                          : baseimage
+                      }
+                      alt={listing.title}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className={styles.resaleContent}>
+                    <h4>{listing.title}</h4>
+                    <p className={styles.resaleLocation}>{listing.location}</p>
+                    <p className={styles.resalePrice}>AED {formatPrice(listing.amount)}</p>
+                    <div className={styles.resaleStats}>
+                      <div className={styles.statGroup}>
+                        <Image
+                          src={BedroomIcon}
+                          alt="Bedrooms"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{listing.bedroom} Br</span>
+                      </div>
+                      <div className={styles.statSeparator}>|</div>
+                      <div className={styles.statGroup}>
+                        <Image
+                          src={BathroomIcon}
+                          alt="Bathrooms"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{listing.bathroom} Ba</span>
+                      </div>
+                      <div className={styles.statSeparator}>|</div>
+                      <div className={styles.statGroup}>
+                        <Image
+                          src={AreaVector}
+                          alt="Area"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{listing.sq_ft} Sq.m</span>
+                      </div>
+                      <div className={styles.statSeparator}>|</div>
+                      <div className={styles.statGroup}>
+                        <Image
+                          src={require("/assets/img/garage.svg")}
+                          alt="Garage"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{listing.garage} Gr</span>
+                      </div>
+                    </div>
+                    
+                    <div className={styles.resaleDetails}>
+                     
+                      {listing.details && listing.details.map((detail, index) => (
+                        <p key={index}>{detail.title}: {detail.info}</p>
+                      ))}
+                    </div>
+                    <div className={styles.resaleFooter}>
+                      <div className={styles.agentInfo}>
+                        <Image
+                          src={listing.agent_image || agentInfo} // Use agent image or fallback
+                          alt="Agent"
+                          width={40}
+                          height={40}
+                          className={styles.agentImage}
+                        />
+                        <span>{listing.agent_title || "Darren Murphy"}</span>
+                      </div>
+                      <div className={styles.footerActions}>
+                        <button className={styles.footerButton}>
+                          <BsWhatsapp size={20} color="#34C759" />
+                          <span>WhatsApp</span>
+                        </button>
+                        <div className={styles.footerSeparator}>|</div>
+                        <button className={styles.footerButton}>
+                          <Image src={callVector} alt="Call" />
+                          <span>Call Us</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </Slider>
+          )}
+        </div>
 
-      {/* Add Awards Section after resaleSection */}
-      <div className={styles.awardsSection}>
-        <div className={styles.awardsContainer}>
-          <div className="container">
-            <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
-          </div>
+        {/* Add Awards Section after resaleSection */}
+        <div className={styles.awardsSection}>
+          <div className={styles.awardsContainer}>
+            <div className="container">
+              <h3 className={styles.awardsTitle}>Awards Received from Emaar</h3>
+            </div>
 
-          {isMobileView ? (
-            <div className={styles.listView}>
-              {awards.map((award, index) => (
-                <div key={index} className={styles.awardCard}>
+            {isMobileView ? (
+              <div className={styles.listView}>
+                {awards.map((award, index) => (
+                  <div key={index} className={styles.awardCard}>
+                    <div className={styles.awardLeft}>
+                      <div className={styles.awardTeamImage}>
+                        <Image
+                          src={awardimg1}
+                          alt="Team Photo"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+
+                    <div className={styles.awardRight}>
+                      <div className={styles.awardContent}>
+                        <h4 className={styles.awardTitle}>{award.award_title}</h4>
+                        <div
+                          className={styles.awardSubtitle}
+                          dangerouslySetInnerHTML={{
+                            __html: award.award_description 
+                              ? (award.award_description.length > 150 
+                                  ? award.award_description.substring(0, 150) + '...' 
+                                  : award.award_description)
+                              : "No description available"
+                          }}
+                        />
+                      </div>
+                      <div className={styles.awardIconWrapper}>
+                        <Image
+                          src={
+                            award.award_photo
+                              ? `${
+                                  process.env.NEXT_PUBLIC_API_URL
+                                }/storage/${decodeImageUrl(award.award_photo)}`
+                              : EmaarLogo
+                          }
+                          alt={award.logo_alt || "Award Trophy"}
+                          width={156}
+                          height={108}
+                          className={styles.trophyImage}
+                        />
+                      </div>
+                      <div className={styles.awardBottom}>
+                        <span className={styles.awardYear}>{award.award_year}</span>
+                        <button className={styles.viewAwardBtn}>View Awards</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : awards.length === 1 ? (
+              <div className={styles.singleAwardContainer}>
+                <div className={styles.awardCard}>
                   <div className={styles.awardLeft}>
                     <div className={styles.awardTeamImage}>
                       <Image
@@ -849,14 +902,14 @@ const DeveloperShow = (developerData) => {
 
                   <div className={styles.awardRight}>
                     <div className={styles.awardContent}>
-                      <h4 className={styles.awardTitle}>{award.award_title}</h4>
+                      <h4 className={styles.awardTitle}>{awards[0].award_title}</h4>
                       <div
                         className={styles.awardSubtitle}
                         dangerouslySetInnerHTML={{
-                          __html: award.award_description 
-                            ? (award.award_description.length > 150 
-                                ? award.award_description.substring(0, 150) + '...' 
-                                : award.award_description)
+                          __html: awards[0].award_description 
+                            ? (awards[0].award_description.length > 150 
+                                ? awards[0].award_description.substring(0, 150) + '...' 
+                                : awards[0].award_description)
                             : "No description available"
                         }}
                       />
@@ -864,108 +917,74 @@ const DeveloperShow = (developerData) => {
                     <div className={styles.awardIconWrapper}>
                       <Image
                         src={
-                          award.award_photo
+                          awards[0].award_photo
                             ? `${
                                 process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(award.award_photo)}`
+                              }/storage/${decodeImageUrl(awards[0].award_photo)}`
                             : EmaarLogo
                         }
-                        alt={award.logo_alt || "Award Trophy"}
+                        alt="Award Trophy"
                         width={156}
                         height={108}
                         className={styles.trophyImage}
                       />
                     </div>
                     <div className={styles.awardBottom}>
-                      <span className={styles.awardYear}>{award.award_year}</span>
+                      <span className={styles.awardYear}>{awards[0].award_year}</span>
                       <button className={styles.viewAwardBtn}>View Awards</button>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : awards.length === 1 ? (
-            <div className={styles.singleAwardContainer}>
-              <div className={styles.awardCard}>
-                <div className={styles.awardLeft}>
-                  <div className={styles.awardTeamImage}>
-                    <Image
-                      src={awardimg1}
-                      alt="Team Photo"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.awardRight}>
-                  <div className={styles.awardContent}>
-                    <h4 className={styles.awardTitle}>{awards[0].award_title}</h4>
-                    <div
-                      className={styles.awardSubtitle}
-                      dangerouslySetInnerHTML={{
-                        __html: awards[0].award_description 
-                          ? (awards[0].award_description.length > 150 
-                              ? awards[0].award_description.substring(0, 150) + '...' 
-                              : awards[0].award_description)
-                          : "No description available"
-                      }}
-                    />
-                  </div>
-                  <div className={styles.awardIconWrapper}>
-                    <Image
-                      src={
-                        awards[0].award_photo
-                          ? `${
-                              process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(awards[0].award_photo)}`
-                          : EmaarLogo
-                      }
-                      alt="Award Trophy"
-                      width={156}
-                      height={108}
-                      className={styles.trophyImage}
-                    />
-                  </div>
-                  <div className={styles.awardBottom}>
-                    <span className={styles.awardYear}>{awards[0].award_year}</span>
-                    <button className={styles.viewAwardBtn}>View Awards</button>
-                  </div>
-                </div>
               </div>
-            </div>
-          ) : (
-            <Slider {...awardSliderSettings} className={styles.awardsSlider}>
-              {awards.map((award, index) => (
-                <div key={index} className={styles.awardCard}>
-                  <div className={styles.awardLeft}>
-                    <div className={styles.awardTeamImage}>
-                      <Image
-                        src={awardimg1}
-                        alt="Team Photo"
-                        layout="fill"
-                        objectFit="cover"
-                      />
+            ) : (
+              <Slider {...awardSliderSettings} className={styles.awardsSlider}>
+                {awards.map((award, index) => (
+                  <div key={index} className={styles.awardCard}>
+                    <div className={styles.awardLeft}>
+                      <div className={styles.awardTeamImage}>
+                        <Image
+                          src={awardimg1}
+                          alt="Team Photo"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className={styles.awardRight}>
-                    <div className={styles.awardContent}>
-                      <h4 className={styles.awardTitle}>{award.award_title}</h4>
-                      <div
-                        className={styles.awardSubtitle}
-                        dangerouslySetInnerHTML={{
-                          __html: award.award_description 
-                            ? (award.award_description.length > 150 
-                                ? award.award_description.substring(0, 150) + '...' 
-                                : award.award_description)
-                            : "No description available"
-                        }}
-                      />
-                    </div>
-                    {isMobileView ? (
-                      <div className={styles.mobileAwardLayout}>
-                        <span className={styles.awardYear}>{award.award_year}</span>
+                    <div className={styles.awardRight}>
+                      <div className={styles.awardContent}>
+                        <h4 className={styles.awardTitle}>{award.award_title}</h4>
+                        <div
+                          className={styles.awardSubtitle}
+                          dangerouslySetInnerHTML={{
+                            __html: award.award_description 
+                              ? (award.award_description.length > 150 
+                                  ? award.award_description.substring(0, 150) + '...' 
+                                  : award.award_description)
+                              : "No description available"
+                          }}
+                        />
+                      </div>
+                      {isMobileView ? (
+                        <div className={styles.mobileAwardLayout}>
+                          <span className={styles.awardYear}>{award.award_year}</span>
+                          <div className={styles.awardIconWrapper}>
+                            <Image
+                              src={
+                                award.award_photo
+                                  ? `${
+                                      process.env.NEXT_PUBLIC_API_URL
+                                    }/storage/${decodeImageUrl(award.award_photo)}`
+                                  : EmaarLogo
+                              }
+                              alt="Award Trophy"
+                              width={156}
+                              height={108}
+                              className={styles.trophyImage}
+                            />
+                          </div>
+                        </div>
+                      ) : (
                         <div className={styles.awardIconWrapper}>
                           <Image
                             src={
@@ -981,33 +1000,17 @@ const DeveloperShow = (developerData) => {
                             className={styles.trophyImage}
                           />
                         </div>
+                      )}
+                      <div className={styles.awardBottom}>
+                        {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
+                        <button className={styles.viewAwardBtn}>View Awards</button>
                       </div>
-                    ) : (
-                      <div className={styles.awardIconWrapper}>
-                        <Image
-                          src={
-                            award.award_photo
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(award.award_photo)}`
-                              : EmaarLogo
-                          }
-                          alt="Award Trophy"
-                          width={156}
-                          height={108}
-                          className={styles.trophyImage}
-                        />
-                      </div>
-                    )}
-                    <div className={styles.awardBottom}>
-                      {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
-                      <button className={styles.viewAwardBtn}>View Awards</button>
                     </div>
                   </div>
-                </div>
-              ))}
-            </Slider>
-          )}
+                ))}
+              </Slider>
+            )}
+          </div>
         </div>
       </div>
     </div>

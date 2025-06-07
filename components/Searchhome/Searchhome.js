@@ -59,12 +59,23 @@ const SearchHomeResult = ({ searchParams }) => {
         }
 
         // Convert searchParams to query string
+        // Log the search parameters being sent
+        console.log('Search Parameters:', searchParams);
+        
         const queryString = new URLSearchParams(searchParams).toString();
+        console.log('Query String:', queryString);
 
-        const response = await axios.get(`${PROPERTIES_API}?${queryString}`);
-
-        if (!response.data) {
-          throw new Error('No data received from server');
+        try {
+          const response = await axios.get(`${PROPERTIES_API}?${queryString}`);
+          
+          if (!response.data) {
+            throw new Error('No data received from server');
+          }
+          
+          return response;
+        } catch (error) {
+          console.error('API Error:', error.response?.data || error.message);
+          throw error;
         }
 
         // Get all available property types
@@ -148,7 +159,7 @@ const SearchHomeResult = ({ searchParams }) => {
           </div>
           <h2>No results found</h2>
           <p>Sorry, we couldn't find any results for this search.</p>
-          <p>Please try searching with another term</p>
+          <span>Please try searching with another term</span>
         </div>
       </div>
     );

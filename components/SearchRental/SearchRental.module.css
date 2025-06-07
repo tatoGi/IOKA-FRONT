@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   border: 1px solid #07151F;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 10px 12px;
   width: 100% !important;
   height: 40px;
@@ -132,7 +132,7 @@
   justify-content: center;
   padding: 10px 16px;
   border: 1px solid #07151F;
-  border-radius: 8px;
+  border-radius: 4px;
   background: white;
   color: #374151;
   font-family: 'Montserrat', sans-serif;
@@ -343,7 +343,7 @@ select.filterBtn {
   .searchBar {
     width: 100% !important;  
     height: 48px;
-    border-radius: 8px;
+    border-radius: 4px;
     border-width: 1px;
     border-color: #07151F;
     margin-left: 0;
@@ -374,7 +374,7 @@ select.filterBtn {
   .filterBtn {
     padding: 10px 30px;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 4px;
     border-width: 1px;
     border-color: #07151F;
     font-family: 'Montserrat';
@@ -411,7 +411,7 @@ select.filterBtn {
 
 .popupContent {
   background: white;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;

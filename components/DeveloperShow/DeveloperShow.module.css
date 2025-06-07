@@ -295,19 +295,23 @@
 }
 
 .listingInfo h3 {
-  font-size: 26px;
+  font-size: 16px;
   color: #0A273B;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-weight: 600;
   font-family: 'Montserrat';
   width: 100%;
 }
 
 .listingCount {
-  color: #007AFF;
-  font-size: 16px;
-  font-weight: 500;
+  color: #07151F;
   font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  opacity: 0.5;
+  
 }
 
 .sortDropdown {
@@ -804,11 +808,13 @@
 }
 
 .prevArrow {
-  left: 0;
+  left: -35px;
 }
 
 .nextArrow {
-  right: 0;
+  right: -20px;
+  opacity: 60%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .sliderArrow:hover {
@@ -817,8 +823,10 @@
 }
 
 .sliderArrow:disabled {
-  opacity: 0.5;
+ color: rgba(230, 235, 237, 1);
   cursor: not-allowed;
+  opacity: 10%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .sliderArrow svg {
@@ -852,14 +860,7 @@
   margin-bottom: 12px;
 }
 
-.listingCount {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #7ACBC4;
-}
+
 
 .resaleSlider {
   display: -webkit-box;
@@ -1135,7 +1136,6 @@
   margin-right: 20px; /* Add margin to show part of the next slide */
   width: 1079px !important; /* Fixed width */
   height: 360px !important;
-  gap: 32px;
 }
 
 /* Left section with team photo */
@@ -1147,8 +1147,8 @@
 }
 
 .awardTeamImage {
-  width: 484px;
-  height: 320px;
+  width: 400px;
+  height: 312px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -1179,7 +1179,7 @@
 
 /* Award title styling */
 .awardTitle {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
   color: #1A1A1A;
@@ -1234,7 +1234,7 @@ letter-spacing: 0%;
 /* Year text styling */
 .awardYear {
   color: #0A273B;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 600;
   font-family: 'Montserrat';
 }
@@ -1242,12 +1242,12 @@ letter-spacing: 0%;
 /* View Awards button styling */
 .viewAwardBtn {
   padding: 12px 24px;
-  background: #07151F;
+  background: rgba(10, 39, 59, 1);
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   font-family: 'Montserrat';
 }
@@ -1933,6 +1933,68 @@ letter-spacing: 0%;
     margin-top: 12px;
   }
 }
+@media (max-width: 1000px) {
+  .heroContent {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 44px 0;
+    display: block;
+    gap: 149px;
+    border-bottom: 1px solid #07151F;
+    margin-bottom: 44px;
+}
+.awardCard {
+  display: flex !important;
+  background: #FFFFFF;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid #E6EBED;
+  cursor: pointer;
+  pointer-events: auto;
+  margin-right: 20px;
+  width: 880px !important;
+  height: 360px !important;
+}
+.awardsSlider {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-height: 500px;
+}
+.developerLogo {
+  width: 100%;
+  height: 387px;
+  background-color: #07151F;
+  display: flex
+;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+ 
+  .statsContainer {
+    -ms-grid-columns: 1fr 30px 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .statItem {
+    padding: 15px;
+  }
+  
+  .statItem h3 {
+    font-size: 28px;
+  }
+  
+  .statItem p {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 480px) {
   .listingsSection{
     padding: 0;

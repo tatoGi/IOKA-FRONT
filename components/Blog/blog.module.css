@@ -71,8 +71,7 @@
 
 .card-title {
     font-size: 16px;
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-weight: 500;
     color: #0A273B;
     font-family: 'Montserrat';
     line-height: 1.4;
@@ -768,8 +767,8 @@
 
 @media (max-width:1000px) {
     .card-img-top {
-        max-width: 20.25rem;
-        max-height: 7.5rem;
+        max-width: 100%;
+        max-height: 100%;
         width: 100%;
         height: auto;
         border-top-left-radius: calc(1rem - 1px);

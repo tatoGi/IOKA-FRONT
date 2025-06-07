@@ -5,7 +5,7 @@ import L from "leaflet";
 import styles from "./Map.module.css";
 import "leaflet/dist/leaflet.css";
 
-const Map = ({ locations = [] }) => {
+const Map = ({ locations = [], initialCenter = [48.8566, 2.3522], initialZoom = 4 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [error, setError] = useState(null);
 
@@ -59,22 +59,40 @@ const Map = ({ locations = [] }) => {
   };
 
   if (error) {
-    return <div className={styles.mapWrapper}>Error loading map: {error}</div>;
+    return (
+      <div className={styles.mapWrapper}>
+        <div className={styles.errorContainer}>
+          <h3>Map Error</h3>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
   }
 
   if (!isMounted) {
-    return <div className={styles.mapWrapper}>Loading map...</div>;
+    return (
+      <div className={styles.mapWrapper}>
+        <div className={styles.loadingContainer}>
+          <div className={styles.loadingSpinner}></div>
+          <p>Loading map...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className={styles.mapWrapper} style={{ height: "400px", width: "100%" }}>
+    <div className={styles.mapWrapper} style={{ height: "100%", width: "100%" }}>
       <MapContainer
-        center={[48.8566, 2.3522]}
-        zoom={4}
-        scrollWheelZoom={false}
+        center={initialCenter}
+        zoom={initialZoom}
+        scrollWheelZoom={true}
         style={{ height: "100%", width: "100%", borderRadius: "8px" }}
         zoomControl={true}
         zoomControlPosition="topright"
+        attributionControl={true}
+        zoomAnimation={true}
+        fadeAnimation={true}
+        markerZoomAnimation={true}
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"

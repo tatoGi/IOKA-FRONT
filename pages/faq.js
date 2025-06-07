@@ -89,6 +89,7 @@ const FAQ = ({ pageData }) => {
                   <div className="title-line"></div>
                   <p className="question-text">Do you have any questions?</p>
                   <p className="contact-text">If you have any questions, just contact and ask us, we'll be glad to assist you.</p>
+                  
                   <button className="enquire-btn">Enquire Now</button>
                   <div className="contact-buttons-faq">
                     <button className="call-btn">
@@ -102,7 +103,7 @@ const FAQ = ({ pageData }) => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="col-md-6">
                 <div className="faq-right">
                   <div className="faq-list">

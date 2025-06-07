@@ -691,20 +691,14 @@
 
 .modalOverlay {
   position: fixed;
-  top: 0;
+  top: 5%;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   /* Semi-transparent background */
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   z-index: 1000;
   /* Ensure it's on top of other content */
@@ -712,10 +706,10 @@
 
 .modalContent {
   background-color: white;
-  padding: 40px;
+  padding: 124px 208px;
   border-radius: 12px;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1560px;
   /* Adjust as needed */
   position: relative;
   overflow-y: auto;
@@ -1129,7 +1123,14 @@
   font-size: 16px;
   font-family: 'Montserrat';
 }
-
+@media (max-width: 1650px){
+  .featuresSection{
+    margin-left: 10rem;
+  }
+  .amenitiesSection{
+    margin-left: 10rem;
+  }
+}
 @media (max-width: 1600px) {
   .exteriorimage {
     max-width: 320px;
@@ -1175,7 +1176,117 @@
 }
 
 @media (max-width: 992px) {
-  .qrbody {
+  .propertyCardCol{
+    width: 50%;
+    margin-bottom: 10px;
+  }
+  .propertyDetails h2{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 12px;
+  }
+  .aedPricestart{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .aedPrice{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .usdPrice{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .description {
+    margin-bottom: 30px;
+    margin-right: 10px;
+    font-family: 'Montserrat';
+    letter-spacing: 0%;
+}
+.qrCard {
+  margin-top: 82px;
+  border: 1px solid #07151F;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+  text-align: center;
+  font-family: 'Montserrat';
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 538px;
+}
+.contactBtnperson svg{
+  width: 10px;
+  height: 10px;
+}
+.contactBtnperson {
+  width: 149px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+}
+.whatsappperson {
+  width: 149px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+}
+.sharelist {
+  width: 250px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+}
+.qrCardmodern {
+  border: 1px solid #07151F;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+  text-align: center;
+  font-family: 'Montserrat';
+  margin-left: auto;
+  margin-right: 0;
+  text-align: center;
+  align-items: center;
+}
+.qrCardmodern h3{
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+.qrCardmodern .downloadBtn, .qrCardmodern .enquireBtn {
+  flex: 1;
+  padding: 12px 38px;
+  border-radius: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+.qrbody {
     text-align: center !important;
     /* display       : block !important; */
     /* text-align    : center !important; */
@@ -1188,22 +1299,80 @@
     justify-content: center;
     display: -webkit-box !important;
     display: -ms-flexbox !important;
-    display: flex !important;
   }
 
-  .qrbody img {
-    width: 149px !important;
-    height: 148px !important;
-
-  }
-
-  .buildingImage {
+.qrbody img {
     width: 100% !important;
-  }
+    height: 100% !important;
 
-  .qrButtons {
+  }
+.qrbody p {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    font-family: 'Montserrat';
+}
+.buildingImage {
+    width: 100% !important;
+    height: 100%;
+}
+.featuresSection{
+  margin-left: 5rem;
+}
+.amenitiesSection{
+  margin-left: 5rem;
+}
+.amenitiesList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  font-family: 'Montserrat';
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.qrButtons {
     display: block;
   }
+  .nearbyGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.exteriorInteriorSection h3 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #E6EBED;
+}
+.switchButton {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 23px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-size: 15px;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: 600;
+}
+.sectionTitle {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-family: 'Montserrat';
+  color: #0A273B;
+}
 }
 
 @media (max-width: 768px) {

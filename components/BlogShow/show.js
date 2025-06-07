@@ -114,7 +114,7 @@ const BlogShow = ({ blogData }) => {
                         {card.title}
                       </h5>
                       <ul className={`list-unstyled ${styles["card-list"]}`}>
-                        <li className={`${styles.date}`}>
+                        <li className={`${styles.similar_date}`}>
                           <Image
                             src={BlogIcon}
                             alt="blogicon"

@@ -274,7 +274,7 @@ const Rental_Resale = () => {
 
   return (
     <>
-      <div className="container mt-3">
+      <div className="container">
         {/* Sidebar elements moved out of the row */}
         <div className={Styles.sidebarWrapper}>
           <div className={Styles.sidebarqr}> {/* Sidebar QR code */}</div>

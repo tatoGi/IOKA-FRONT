@@ -7,7 +7,7 @@
 
 .contactPage {
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 40px 0;
 }
 
 .errorContainer {
@@ -34,7 +34,6 @@
 }
 
 .infoSection {
-  padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
   display: -webkit-box;
@@ -54,7 +53,7 @@
   font-family: 'Montserrat';
   font-weight: 400;
   font-size: 20px;
-  margin-bottom: 1rem;
+  margin-bottom: 24px;
   color: #0a273b;
 }
 
@@ -62,7 +61,7 @@
   font-family: 'Montserrat';
   font-weight: 700;
   font-size: 36px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 40px;
   color: #0a273b;
 }
 
@@ -71,7 +70,7 @@
   font-weight: 400;
   font-size: 16px;
   color: #0a273b;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .contactDetails {
@@ -82,7 +81,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
 }
 
 .contactItem {
@@ -92,12 +91,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1rem;
+  gap: 24px;
 }
 
 .iconWrapper {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   background-color: #0a273b;
   border-radius: 12px;
   display: -webkit-box;
@@ -113,7 +112,7 @@
 
 .iconWrapper svg {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .iconWrapper:hover .icon {
@@ -139,7 +138,7 @@
 .contactItem h3 {
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 18px; /* Slightly larger font for better readability */
+  font-size: 20px; /* Slightly larger font for better readability */
   line-height: 100%;
   letter-spacing: 0%;
   color: #0A273B;
@@ -149,7 +148,7 @@
 .contactItem p {
   font-family: 'Montserrat';
   font-weight: 400;
-  font-size: 14px; /* Adjust font size for better alignment */
+  font-size: 16px; /* Adjust font size for better alignment */
   line-height: 100%;
   letter-spacing: 0%;
 }
@@ -215,6 +214,66 @@
   color: #666;
 }
 
+@media (max-width: 992px) {
+  .rowWithBorder{
+    padding: 0 !important;
+    border-bottom: none !important;
+    display: block !important;
+  }
+}
+@media (max-width: 1200px) {
+  .col{
+    height: 500px;
+    margin-top: 50px;
+  }
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    max-height: none;
+  }
+
+  .mainImage {
+    flex: 2;
+    position: relative;
+    max-width: 470px;
+    border-radius: 16px;
+    height: 100%;
+  }
+  .contactButtons{
+    gap: 10px;
+  }
+  .contactBtnperson{
+    width: 74px;
+  }
+}
+@media (max-width: 992px) {
+  .col{
+    width: 100%;
+  }
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    max-height: none;
+  }
+
+  .mainImage {
+    flex: 2;
+    position: relative;
+    max-width: 470px;
+    border-radius: 16px;
+    height: 100%;
+  }
+  .contactButtons{
+    gap: 10px;
+  }
+  .contactBtnperson{
+    width: 74px;
+  }
+}
 @media (max-width: 768px) {
   .contactPage {
     padding: 0;

@@ -499,7 +499,7 @@ const OffplanShow = ({ offplanData }) => {
               </button>
               {isModalOpen && (
                 <div className={style.modalOverlay}>
-                  <div className={style.modalContent}>
+                  <div className={`${style.modalContent} container`}>
                     <button className={style.closeButton} onClick={closeModal}>
                       &times;
                     </button>
@@ -648,7 +648,7 @@ const OffplanShow = ({ offplanData }) => {
         <span className={style.sectionTitle}>Other Properties</span>
         <div className="row d-none d-md-flex">
           {offplanData.lastAddedOffplans.map((property) => (
-            <div className="col-md-3" key={property.id}>
+            <div className={`col-md-3 ${style.propertyCardCol}`} key={property.id}>
               <div className={style.propertyCard}>
                 <div className={style.imageContainer}>
                   <Image

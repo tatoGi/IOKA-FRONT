@@ -75,10 +75,21 @@
     /* No longer needed as Swiper handles the layout */
 }
 
+.sliderWrapper {
+    padding: 0 12px;
+    max-width: 100%;
+}
+
+.testimonialSlider {
+    margin: 0 -12px;
+}
+
+.slideItem {
+    padding: 0 12px;
+    width: 372px !important;
+}
+
 .testimonialCard {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
     width: 372px !important;
     height: 384px !important;
     border-radius: 16px;
@@ -86,7 +97,6 @@
     border: 1px solid #7ACBC4;
     position: relative;
     background: #fff;
-    margin-right: 24px;
 }
 
 .leftQuote {
@@ -198,6 +208,58 @@
     width: 320px !important;
     height: 384px !important;
 }
+@media (max-width: 1200px) {
+    .testimonialGrid {
+        display: none;
+        /* No longer needed as Swiper handles the layout */
+    }
+}
+@media (max-width: 992px) {
+   
+    .testimonialGrid {
+        display: none;
+    }
+
+    .swiper {
+        width: 100% !important;
+        max-width: 800px !important;
+        margin: 0 auto;
+        padding: 20px 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 320px !important;
+        height: 384px !important;
+    }
+
+    .testimonialCard {
+        margin: 0 auto;
+    }
+
+    .sliderWrapper {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 0 8px;
+    }
+
+    .testimonialSlider {
+        margin: 0 -8px;
+    }
+
+    .slideItem {
+        width: 372px !important;
+        padding: 0 8px;
+    }
+    
+    .testimonialCard {
+        width: 324px !important;
+    }
+}
+
 
 @media (max-width:768px) {
     .clientsSection {
@@ -379,6 +441,24 @@
         margin-bottom: 16px;
 
     }
+
+    .slideItem {
+        width: 355px !important;
+        padding: 0 12px;
+    }
+    
+    .testimonialCard {
+        width: 355px !important;
+    }
+
+    .sliderWrapper {
+        max-width: 100%;
+        padding: 0 12px;
+    }
+
+    .testimonialSlider {
+        margin: 0 -12px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -392,19 +472,7 @@
     }
 }
 
-@media (max-width: 992px) {
-    .testimonialGrid {
-        display: none;
-        /* No longer needed as Swiper handles the layout */
-    }
-}
 
-@media (max-width: 1200px) {
-    .testimonialGrid {
-        display: none;
-        /* No longer needed as Swiper handles the layout */
-    }
-}
 @media (max-width:400px) {
     .testimonialCard {
         width: 340px !important;
