@@ -430,6 +430,17 @@ main {
       -ms-flex-pack: justify;
           justify-content: space-between; 
 }
+.footer-contant .contact-text{
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+color: rgba(255, 255, 255, 1);
+margin: 0;
+opacity: 100%;
+
+}
 .soc-icons-b{
   max-width: 150px;
   display: -webkit-box;
