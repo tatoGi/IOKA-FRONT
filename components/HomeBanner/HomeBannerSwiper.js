@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import Link from 'next/link';
 import styles from './HomeBanner.module.css';
+import baseimage from "../../assets/img/blogimage.png";
 
 const HomeBannerSwiper = ({ sectionData }) => {
   const decodeImageUrl = (url) => {
