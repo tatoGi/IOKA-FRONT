@@ -220,7 +220,7 @@ const AboutUs = ({ initialData, id }) => {
         {isMobile && <TestimonialSection />}
 
         <AboutBanner
-          title={cardData?.alt_text || "ABOUT US"}
+          title={cardData?.title || "ABOUT US"}
           description={
             <span
               dangerouslySetInnerHTML={{ __html: cardData?.additional_fields?.testimonials?.[0]?.description }}
