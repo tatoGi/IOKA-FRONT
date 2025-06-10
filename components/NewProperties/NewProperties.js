@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./NewProperties.module.css";
 import Image from "next/image";
+import defaultImage from "../../assets/img/blogimage.png"; // Using the same default image as HomeBanner
 
 const NewProperties = ({ sectionDataThree }) => {
 const [activeTab, setActiveTab] = useState("offplan");
@@ -75,7 +76,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                 <div className={styles.propertyContent}>
                     <div className={styles.imageContainer}>
                         <Image src={ activeData.image_field ? `${ process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(activeData.image_field)}` : homeBanner }
+                            }/storage/${decodeImageUrl(activeData.image_field)}` : defaultImage }
                             alt={`${activeData.alt_text}`} 
                             width={1200} height={600} className={styles.propertyImage}
                             priority />
