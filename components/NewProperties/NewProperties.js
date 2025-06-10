@@ -83,7 +83,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
 
                     <div className={styles.propertyInfo}>
                         <ul className={styles.features}>
-                            {activeData.properties.map((property, index) => (
+                            {activeData.properties && activeData.properties.map((property, index) => (
                             <li key={index}>{property.title}</li>
                             ))}
                         </ul>
