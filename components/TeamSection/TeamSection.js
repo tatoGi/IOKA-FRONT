@@ -33,6 +33,7 @@ const TeamSection = ({ sectionDataFive }) => {
                 className="team-member-image"
               />
               <div className="name">{member.title}</div>
+              <div className="experience">{member.subtitle_1}</div>
               <div className="experience">{member.subtitle_2}</div>
             </div>
           ))}

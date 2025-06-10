@@ -94,7 +94,13 @@ const Contact = ({ initialData, id }) => {
                       </span>
                       <div>
                         <h3>Write email</h3>
-                        <p>{email.email}</p>
+                        <p 
+                          onClick={() => window.open(`mailto:${email.email}`, '_blank')}
+                          className={`${styles.clickable} ${styles.email}`}
+                          style={{ cursor: 'pointer', textDecoration: 'none' }}
+                        >
+                          {email.email}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -105,7 +111,13 @@ const Contact = ({ initialData, id }) => {
                       </span>
                       <div>
                         <h3>Visit anytime</h3>
-                        <p>{location.address}</p>
+                        <p 
+                          onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.address)}`, '_blank')}
+                          className={`${styles.clickable} ${styles.address}`}
+                          style={{ cursor: 'pointer', textDecoration: 'none', }}
+                        >
+                          {location.address}
+                        </p>
                       </div>
                     </div>
                   ))}
