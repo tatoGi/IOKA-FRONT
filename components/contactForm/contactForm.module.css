@@ -8,18 +8,19 @@
 .formContainer {
   max-width: 100%;
   margin: 0 auto;
+  padding: 0 16px;
 }
+
 .toptitle{
   font-family: 'Montserrat';
-font-weight: 400;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-margin-bottom: 24px;
-
-text-align: start;
-
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 24px;
+  text-align: start;
 }
+
 .title {
   font-size: 40px;
   font-weight: 700;
@@ -48,6 +49,8 @@ text-align: start;
   border-radius: 12px;
   background-color: #E6EBED;
   font-size: 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .input {
@@ -74,11 +77,20 @@ text-align: start;
   transition: background-color 0.3s ease !important;
   font-family: 'Montserrat' !important;
   height: 80px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .submitButton:hover {
   background-color: #1a3672;
-} 
+}
+
+.submitButton:active {
+  -webkit-transform: scale(0.98);
+      -ms-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
 /* Status Modal Styles */
 .statusModal {
   position: fixed;
@@ -129,29 +141,206 @@ text-align: start;
   from { opacity: 0; -webkit-transform: translate(-50%, -60%); transform: translate(-50%, -60%); }
   to { opacity: 1; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }
 }
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .formContainer {
+    padding: 0 24px;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+  
+  .toptitle {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .title{
+  .formContainer {
+    padding: 0 16px;
+  }
+  
+  .toptitle {
     font-family: 'Montserrat';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
     letter-spacing: 0%;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     text-align: center;
   }
-.form input{
-  height: 72px;
-  background-color: #E6EBED;
-  border-radius: 12px;
+  
+  .title {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form {
+    gap: 0.75rem;
+  }
+  
+  .input,
+  .textarea {
+    padding: 0.875rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 8px;
+  }
+  
+  .input {
+    height: 56px;
+  }
+  
+  .textarea {
+    min-height: 120px;
+    height: 120px;
+  }
+  
+  .submitButton {
+    height: 56px;
+    font-size: 16px !important;
+    padding: 0.875rem !important;
+    border-radius: 8px !important;
+  }
+  
+  .statusModal {
+    max-width: 90%;
+    padding: 16px;
+    margin: 0 16px;
+  }
 }
-.form textarea{
-  height: 149px;
-  background-color: #E6EBED;
-  border-radius: 12px;
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+
+  .formContainer {
+    padding: 0 12px 0 0;
+    height: 100%;
+  }
+  
+  .toptitle {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    text-align: start;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+  }
+  
+  .title {
+    margin-bottom: 16px;
+    text-align: start;
+    font-family: 'Montserrat';
+font-weight: 700;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
+  
+  .form {
+    gap: 0.5rem;
+    margin-top: 24px;
+  }
+  
+  .input,
+  .textarea {
+    padding: 0.75rem;
+    font-size: 16px;
+  }
+  
+  .input {
+    width: 354px;
+    height: 72px;
+    border-radius: 12px ;
+    
+  }
+  
+  .textarea {
+    width: 354px;
+    height: 149px;
+    border-radius: 12px;
+    
+  }
+  
+  .submitButton {
+    height: 48px;
+    font-size: 14px !important;
+    padding: 0.75rem !important;
+    width: 354px;
+    margin-top: 24px;
+  }
+ 
+  .statusModal {
+    max-width: 95%;
+    padding: 12px;
+    margin: 0 8px;
+  }
 }
-.form button{
-  height: 44px;
-  background-color: #0A273B;
-  padding: 10px 0 10px 0 !important;
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .formContainer {
+    padding: 0 8px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .toptitle {
+    font-size: 13px;
+  }
+  
+  .input,
+  .textarea {
+    padding: 0.625rem;
+  }
+  
+  .input {
+    height: 44px;
+  }
+  
+  .textarea {
+    min-height: 90px;
+    height: 90px;
+  }
+  
+  .submitButton {
+    height: 44px;
+    font-size: 13px !important;
+    padding: 0.625rem !important;
+  }
 }
+
+/* Landscape Mobile Styles */
+@media (max-width: 768px) and (orientation: landscape) {
+  .formContainer {
+    padding: 0 20px;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .toptitle {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .textarea {
+    min-height: 80px;
+    height: 80px;
+  }
 }

@@ -300,6 +300,20 @@ margin-top: 2px;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
 }
+
+.popupContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
+}
 @media (max-width: 1600px) {
 
   /* Default Styles (Mobile First) */
@@ -719,17 +733,33 @@ margin-top: 2px;
 
 
 }
+@media (max-width:480px)
+{
+  .propertyCardLink{
+    cursor: pointer;
+    max-width: 354px;
+    height: 360px;
+  }
+  .title{
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
 
-.popupContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding-top: 100px;
+  }
+  .resultsHeader{
+    padding-top: 24px;
+    padding-bottom: 16px;
+  }
+  .pagination{
+    display: flex
+;
+        justify-content: center;
+        margin-top: 38px;
+        /* margin-bottom: 142px; */
+        gap: 6px;
+        height: 48px;
+        margin-bottom: 24px;
+  }
 }

@@ -595,13 +595,17 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               onClick={prevSlide}
               className={`${styles.sliderArrow} ${styles.prevArrow}`}
             >
-              ‹
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
+<path d="M0.941016 9.94023C0.355078 10.5262 0.355078 11.4777 0.941016 12.0637L9.94102 21.0637C10.527 21.6496 11.4785 21.6496 12.0645 21.0637C12.6504 20.4777 12.6504 19.5262 12.0645 18.9402L4.12383 10.9996L12.0598 3.05898C12.6457 2.47305 12.6457 1.52148 12.0598 0.935547C11.4738 0.349609 10.5223 0.349609 9.93633 0.935547L0.936329 9.93555L0.941016 9.94023Z" fill="white"/>
+</svg>
             </button>
             <button
               onClick={nextSlide}
               className={`${styles.sliderArrow} ${styles.nextArrow}`}
             >
-              ›
+             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
+<path d="M12.059 12.0598C12.6449 11.4738 12.6449 10.5223 12.059 9.93633L3.05898 0.936328C2.47305 0.350391 1.52148 0.350391 0.935547 0.936328C0.349609 1.52227 0.349609 2.47383 0.935547 3.05977L8.87617 11.0004L0.940234 18.941C0.354296 19.527 0.354296 20.4785 0.940234 21.0645C1.52617 21.6504 2.47773 21.6504 3.06367 21.0645L12.0637 12.0645L12.059 12.0598Z" fill="white"/>
+</svg>
             </button>
           </div>
           <div className={styles.photoCount}>
@@ -1367,7 +1371,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               }}
             >
               {!isLoading && relatedProperties.map((property, index) => (
-                console.log(property),
                 <div
                   key={index}
                   className={styles.propertyCardLink}
@@ -1401,7 +1404,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3>{property.title}</h3>
-                      <p className={styles.location}>{property.location}</p>
+                      <p className={styles.subtitle}>{property.subtitle}</p>
                       <div className={styles.features}>
                         <div className={styles.feature}>
                           <Image
@@ -1431,6 +1434,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           <span>{property.sq_ft} Sq.m</span>
                         </div>
                       </div>
+                      <div className={styles.line}></div>
                       <div className={styles.priceRow}>
                         <span className={styles.price}>USD {property.amount?.amount}</span>
                         <span className={styles.price}>AED {property.amount?.amount_dirhams}</span>

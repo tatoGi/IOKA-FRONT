@@ -75,7 +75,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 12px;
-  
+
 }
 
 .pricing {
@@ -980,16 +980,24 @@
 .swiper {
   width: 100%;
   height: auto;
-  padding: 20px 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .swiperSlide {
   width: 100% !important;
   height: auto !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 10px;
 }
+
+/* Add proper Swiper wrapper styles */
+.swiper .swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+
 
 .swiper-slide img {
   border-radius: 16px;
@@ -1123,14 +1131,17 @@
   font-size: 16px;
   font-family: 'Montserrat';
 }
-@media (max-width: 1650px){
-  .featuresSection{
+
+@media (max-width: 1650px) {
+  .featuresSection {
     margin-left: 10rem;
   }
-  .amenitiesSection{
+
+  .amenitiesSection {
     margin-left: 10rem;
   }
 }
+
 @media (max-width: 1600px) {
   .exteriorimage {
     max-width: 320px;
@@ -1176,11 +1187,12 @@
 }
 
 @media (max-width: 992px) {
-  .propertyCardCol{
+  .propertyCardCol {
     width: 50%;
     margin-bottom: 10px;
   }
-  .propertyDetails h2{
+
+  .propertyDetails h2 {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 20px;
@@ -1188,105 +1200,119 @@
     letter-spacing: 0%;
     margin-bottom: 12px;
   }
-  .aedPricestart{
+
+  .aedPricestart {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
   }
-  .aedPrice{
+
+  .aedPrice {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
   }
-  .usdPrice{
+
+  .usdPrice {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
   }
+
   .description {
     margin-bottom: 30px;
     margin-right: 10px;
     font-family: 'Montserrat';
     letter-spacing: 0%;
-}
-.qrCard {
-  margin-top: 82px;
-  border: 1px solid #07151F;
-  border-radius: 12px;
-  padding: 14px;
-  background: #fff;
-  text-align: center;
-  font-family: 'Montserrat';
-  margin-left: auto;
-  margin-right: 0;
-  max-width: 538px;
-}
-.contactBtnperson svg{
-  width: 10px;
-  height: 10px;
-}
-.contactBtnperson {
-  width: 149px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  display: flex;
-}
-.whatsappperson {
-  width: 149px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  display: flex;
-}
-.sharelist {
-  width: 250px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  display: flex;
-}
-.qrCardmodern {
-  border: 1px solid #07151F;
-  border-radius: 12px;
-  padding: 14px;
-  background: #fff;
-  text-align: center;
-  font-family: 'Montserrat';
-  margin-left: auto;
-  margin-right: 0;
-  text-align: center;
-  align-items: center;
-}
-.qrCardmodern h3{
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 16px;
-  padding: 0;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%;
-}
-.qrCardmodern .downloadBtn, .qrCardmodern .enquireBtn {
-  flex: 1;
-  padding: 12px 38px;
-  border-radius: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 12px;
-  white-space: nowrap;
-  margin-top: 10px;
-}
-.qrbody {
+  }
+
+  .qrCard {
+    margin-top: 82px;
+    border: 1px solid #07151F;
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    text-align: center;
+    font-family: 'Montserrat';
+    margin-left: auto;
+    margin-right: 0;
+    max-width: 538px;
+  }
+
+  .contactBtnperson svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .contactBtnperson {
+    width: 149px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  .whatsappperson {
+    width: 149px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  .sharelist {
+    width: 250px;
+    height: 40px;
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  .qrCardmodern {
+    border: 1px solid #07151F;
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    text-align: center;
+    font-family: 'Montserrat';
+    margin-left: auto;
+    margin-right: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .qrCardmodern h3 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .qrCardmodern .downloadBtn,
+  .qrCardmodern .enquireBtn {
+    flex: 1;
+    padding: 12px 38px;
+    border-radius: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    margin-top: 10px;
+  }
+
+  .qrbody {
     text-align: center !important;
     /* display       : block !important; */
     /* text-align    : center !important; */
@@ -1301,78 +1327,88 @@
     display: -ms-flexbox !important;
   }
 
-.qrbody img {
+  .qrbody img {
     width: 100% !important;
     height: 100% !important;
 
   }
-.qrbody p {
+
+  .qrbody p {
     color: #666;
     font-size: 12px;
     line-height: 1.5;
     margin: 0;
     flex: 1;
     font-family: 'Montserrat';
-}
-.buildingImage {
+  }
+
+  .buildingImage {
     width: 100% !important;
     height: 100%;
-}
-.featuresSection{
-  margin-left: 5rem;
-}
-.amenitiesSection{
-  margin-left: 5rem;
-}
-.amenitiesList {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  font-family: 'Montserrat';
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0%;
-}
-.qrButtons {
+  }
+
+  .featuresSection {
+    margin-left: 5rem;
+  }
+
+  .amenitiesSection {
+    margin-left: 5rem;
+  }
+
+  .amenitiesList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .qrButtons {
     display: block;
   }
+
   .nearbyGrid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-}
-.exteriorInteriorSection h3 {
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #E6EBED;
-}
-.switchButton {
-  background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  padding: 8px 23px;
-  border-radius: 16px;
-  cursor: pointer;
-  font-family: 'Montserrat';
-  font-size: 15px;
-  transition: background-color 0.3s, color 0.3s;
-  font-weight: 600;
-}
-.sectionTitle {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  display: block;
-  width: 100%;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-family: 'Montserrat';
-  color: #0A273B;
-}
+  }
+
+  .exteriorInteriorSection h3 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #E6EBED;
+  }
+
+  .switchButton {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 23px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    font-size: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 600;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Montserrat';
+    color: #0A273B;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1417,62 +1453,6 @@
     max-width: 100%;
   }
 
-  .contactBtnperson {
-    width: 149px;
-    height: 40px;
-    gap: 10px;
-    border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 70px;
-    padding-bottom: 12px;
-    padding-left: 70px;
-
-  }
-
-  .whatsappperson {
-    width: 149px;
-    height: 40px;
-    gap: 10px;
-    border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 50px;
-    padding-bottom: 12px;
-    padding-left: 30px;
-
-  }
-
-  .sharelist {
-    width: 306px;
-    height: 40px;
-    top: 176px;
-    left: 24px;
-    border-radius: 8px;
-    border-width: 1px;
-
-  }
-
-  .contactBtn {
-    width: 354px;
-    height: 40px;
-    gap: 10px;
-    border-radius: 8px;
-    border-width: 2px;
-    padding-top: 8px;
-    padding-right: 16px;
-    padding-bottom: 8px;
-    padding-left: 16px;
-    margin-left: 0;
-    margin-right: 0;
-
-  }
-  .contactButton{
-    margin-top: 20px;
-    text-align: right;
-    margin-right: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-  }
   .locationMapBtn {
     width: 306px;
     height: 40px;
@@ -1535,6 +1515,7 @@
     font-size: 24px;
     line-height: 100%;
     letter-spacing: 0%;
+    margin-bottom: 50px;
 
   }
 
@@ -1545,9 +1526,11 @@
   .buildingSection {
     margin: 32px 0;
   }
-  .line{
+
+  .line {
     display: none;
   }
+
   .buildingImage {
     width: 100%;
     height: auto;
@@ -1570,9 +1553,11 @@
     gap: 12px;
     margin-bottom: 40px;
   }
-  .nearbyPlace{
+
+  .nearbyPlace {
     padding-bottom: 2.4px;
   }
+
   .nearbyColumn {
     display: flex;
     align-items: center;
@@ -1600,61 +1585,8 @@
     color: #007AFF;
   }
 
-  .qrCard {
-    margin-top: 16px;
-    max-width: 354px;
-    max-height: 240px;
-    margin-left: 0;
-    margin-right: 0;
-  }
 
-  .qrCardmodern {
-    border: 1px solid #07151F;
-    border-radius: 12px;
-    padding: 24px;
-    background: #fff;
-    max-width: 354px;
-    margin-left: 0;
-    margin-right: 0;
-  }
 
-  .qrCardmodern h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 24px;
-    font-family: 'Montserrat';
-    text-align: flex-start;
-  }
-
-  .qrbody {
-    justify-content: flex-start;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    max-height: 90px;
-  }
-
-  .qrbody img {
-    width: 92px !important;
-    height: 90px !important;
-    flex-shrink: 0;
-  }
-
-  .qrText {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0%;
-    text-align: flex-start;
-    margin-bottom: 0;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    height: 90px;
-    display: flex;
-  }
 
   .mapWrapper h4 {
     font-family: 'Montserrat';
@@ -1665,50 +1597,6 @@
 
   }
 
-  .qrButtons {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
-    width: 100%;
-  }
-
-  .downloadBtn,
-  .enquireBtn {
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 32px;
-    font-weight: 500;
-    cursor: pointer;
-    font-size: 14px;
-    white-space: nowrap;
-    font-family: 'Montserrat';
-  }
-
-  .downloadBtn {
-    background-color: #0A2C3D;
-    border: 1px solid #0A2C3D;
-    color: white;
-    -webkit-box-ordinal-group: 2;
-    -ms-flex-order: 1;
-    order: 1;
-    border-radius: 8px;
-  }
-
-  .enquireBtn {
-    background-color: white;
-    border: 1px solid #E5E7EB;
-    color: #333;
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
-    order: 2;
-    border-radius: 8px;
-  }
 
   .featuresSection,
   .amenitiesSection {
@@ -1814,12 +1702,20 @@
     position: relative;
   }
 
+  .swiperSlideForProperties {
+    width: 320px !important;
+    height: 240px !important;
+    margin-right: 16px;
+
+  }
+
   .swiperSlide {
-    width: 360px !important;
+    width: 280px !important;
     height: 240px !important;
     margin-right: 16px;
   }
-  .sectionImage{
+
+  .sectionImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1841,19 +1737,33 @@
   }
 
   .aedPricestart {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .usdPrice {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .aedPrice {
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  .propertyDetails {
+    margin-bottom: 16px !important;
+  }
+
+  .qrCard {
+    margin-top: 0;
+    width: 354px;
+    height: 240px;
+    border-width: 1px;
+    border-radius: 16px;
+    padding: 24px;
   }
 
   .propertyDetails h2 {
     font-size: 20px;
+    font-weight: 600;
   }
 
   .qrCard {
@@ -1902,7 +1812,7 @@
     display: flex;
     gap: 12px;
     margin-bottom: 16px;
-    width:306px;
+    width: 306px;
   }
 
   .contactBtnperson,
@@ -1968,7 +1878,39 @@
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0%;
+    justify-content: center;
 
+  }
+
+  .qrCardmodern {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .qrbody {
+    justify-content: flex-start;
+    display: flex !important;
+    align-items: flex-start;
+    gap: 16px;
+    max-height: 90px;
+  }
+
+  .qrButtons {
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .qrCardmodern .downloadBtn,
+  .qrCardmodern .enquireBtn {
+    flex: 1;
+    padding: 12px 38px;
+    border-radius: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    margin-top: 0;
+    /* margin-top: 10px; */
   }
 
   .enquireBtn {
@@ -1991,8 +1933,98 @@
 
   }
 
+  .modalContent {
+    background-color: white;
+    /* padding: 124px 208px; */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1560px;
+    position: relative;
+    overflow-y: auto;
+    width: 386px;
+    height: 620px;
+    border-radius: 8px;
+    gap: 10px;
+    padding: 16px;
+    overflow: hidden;
+
+  }
+
+  .closeButton {
+    width: 24px;
+    height: 24px;
+    opacity: 0.2;
+    border-radius: 28px;
+    background-color: rgba(230, 235, 237, 1);
+
+  }
+
+  .closeButton span {
+    color: rgba(10, 39, 59, 1);
+    width: 14.406734466552734px;
+    height: 14.405198097229004px;
+    display: block;
+    top: -6px;
+    position: relative;
+    left: -1px;
+
+  }
+
   .qrbody {
     padding: 0;
+  }
+
+  .featuresSection {
+    margin-left: 0;
+  }
+
+  .featuresList li {
+    font-weight: 300;
+  }
+
+  .locationSection h4 {
+    margin-top: 16px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+  }
+
+  .nearbyGrid {
+    gap: 16px;
+  }
+
+  .exteriorInteriorSection h3 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 16px;
+
+  }
+
+  .switchButton {
+    max-width: 94px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+
+  }
+
+  .swiper {
+    padding: 0;
+    /* Remove the problematic transform that prevents Swiper initialization */
+    /* transform: translate3d(0px, 0px, 0px) !important; */
+  }
+
+  .amenitiesSection {
+    margin-left: 0;
   }
 
   .nearbyColumn {
@@ -2003,44 +2035,82 @@
     border-bottom: 1px solid #E5E7EB;
     margin-top: 2.4px;
   }
-}
-@media (max-width:400px) {
-  .swiperSlide{
-    width: 300px !important;
-    height: 200px !important;
+
+  .contactButton {
+    margin-top: 20px;
+    text-align: right;
+    margin-right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    height: 40px;
   }
-  .feature{
+
+  .contactBtn {
+    border-radius: 28px;
+  }
+}
+
+@media (max-width:400px) {
+  .swiperSlide {
+    width: 280px !important;
+    height: 200px !important;
+    margin-right: 8px;
+  }
+
+  .swiper .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .feature {
     font-size: 14px;
   }
-  .aedPrice{
-    font-size:13px;
+
+  .aedPrice {
+    font-size: 13px;
   }
-  .usdPrice{
-    font-size:13px;
+
+  .usdPrice {
+    font-size: 13px;
   }
-  .aedPricestart{
-    font-size:13px;
+
+  .aedPricestart {
+    font-size: 13px;
   }
-  .contactButtons{
+
+  .contactButtons {
     width: 280px;
   }
-  .sharelist{
+
+  .sharelist {
     width: 280px;
   }
-  .downloadBtn{
+
+  .downloadBtn {
     width: 280px;
   }
-  .enquireBtn{
+
+  .enquireBtn {
     width: 280px;
   }
-  .sectionTitle{
+
+  .sectionTitle {
     font-size: 20px;
   }
-  .swiperSlide{
+
+  .swiperSlide {
     width: 300px !important;
     height: 200px !important;
   }
-  .exteriorimage{
+
+  .exteriorimage {
     width: 300px;
     height: 200px;
   }

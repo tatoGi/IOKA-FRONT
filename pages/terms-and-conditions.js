@@ -33,16 +33,18 @@ const TermsAndConditions = () => {
   if (error) return <div className="container">Error: {error}</div>;
 
   return (
+    <>
+    <Breadcrumb breadcrumbData={breadcrumbData} />
     <div className="container">
-      <Breadcrumb breadcrumbData={breadcrumbData} />
+
       <div className="terms-content">
         <h1>TERMS AND CONDITIONS</h1>
         <div
           className="content-section"
-          dangerouslySetInnerHTML={{ __html: termsAgreement }}
-        />
+          dangerouslySetInnerHTML={{ __html: termsAgreement }} />
       </div>
-    </div>
+    </div>  
+    </>
   );
 };
 

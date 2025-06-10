@@ -775,18 +775,21 @@
 .close_modal_button {
   position: absolute;
   top: 24px;
-  left: 24px;
+  left: 12px;
   background: none;
   border: none;
-  color: #fff;
+  color: rgba(10, 39, 59, 1);
   font-size: 24px;
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1001;
+  background: rgba(230, 235, 237, 1);
+  border-radius: 14px;
+  opacity: 70%;
 }
 
 .mobile_search_inputs {
@@ -831,17 +834,20 @@
 
 .mobile_input_field .label {
   font-family: 'Montserrat';
-  font-size: 14px;
-  color: #1A202C;
-  font-weight: 500;
+font-weight: 600;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+
 }
 
 .mobile_input_field .value {
   font-family: 'Montserrat';
-  font-size: 14px;
-  color: #1A202C;
-  opacity: 0.6;
-  text-align: right;
+font-weight: 400;
+font-size: 8px;
+line-height: 100%;
+letter-spacing: 0%;
+
 }
 
 .mobile_input_field.expanded .label,
@@ -1129,22 +1135,26 @@
   }
 
   .text-b-i {
-    font-size: 14px;
+    font-size: 20px;
     /* Smaller text */
     height: 24px;
     margin-top: 126px;
     margin-bottom: 10px;
+    font-weight: 400;
   }
 
   .banner-content h1 {
     font-size: 18px !important;
     /* Smaller heading */
     max-width: 90%;
+    font-family: 'Felix Titling';
+    font-weight: 400;
+    margin-top: 16px;
   }
 
   /* --- Mobile Search Positioning & Layout --- */
   .banner-search {
-    top: 275px;
+    top: 239px;
     /* Remove fixed top */
     bottom: 5%;
     /* Position from bottom */
@@ -1581,35 +1591,39 @@
   }
 
   .clear_all_button {
-    padding: 8px 16px;
     border: none;
     background: transparent;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
     font-family: 'Montserrat';
+    font-weight: 500;
   }
 
   .search_button {
     padding: 0 24px;
     border: none;
-    border-radius: 40px;
+    border-radius: 8px;
     background: #7BCBC7;
     color: #fff;
-    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    height: 32px;
+    width: 126px;
     font-family: 'Montserrat';
-    height: 36px;
-    width: 120px;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 100%;
+      letter-spacing: 0%;
+
   }
 
   .search_button svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   .location_search_slider {
@@ -1711,12 +1725,15 @@
   .mobile_actions {
     position: fixed;
     bottom: 15px;
-    left: 24px;
-    right: 24px;
-    display: flex;
+    left: 0px;
+    right: 0px;
+    display: flex
+;
     justify-content: space-between;
     align-items: center;
     z-index: 1001;
+    width: 100%;
+    max-width: 366px;
   }
 
   .modal_content_wrapper {
@@ -1734,8 +1751,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 0 24px;
-    margin-top: 80px;
+    padding: 0 12px;
+    margin-top: 72px;
     align-items: center;
     flex: 1;
   }
@@ -1744,7 +1761,7 @@
 /* Further adjustments for very small screens */
 @media screen and (min-width: 320px) and (max-width: 768px) {
   .mobile_input_field{
-    max-width: 310px;
+    max-width: 354px;
   }
   .mobile_input_field.expanded .location_cards {
     display: flex
@@ -2271,7 +2288,7 @@ left: 61px;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
-    color: #FFFFFF;
+    color: rgba(255, 255, 255, 1);
 
   }
 

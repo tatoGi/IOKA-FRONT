@@ -61,12 +61,12 @@
 }
 
 .rating {
-    color: #0A273B !important;
     font-family: "Montserrat";
     font-weight: 600;
     font-size: 24px;
     line-height: 100%;
     letter-spacing: 0%;
+    color: rgba(122, 203, 196, 1) !important;
 
 }
 
@@ -304,6 +304,9 @@
             -ms-flex-pack: center;
                 justify-content: center;
         gap: 0.5rem;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-bottom: 24px;
     }
 
     .googleReviews span {
@@ -448,7 +451,7 @@
     }
     
     .testimonialCard {
-        width: 355px !important;
+        width: 320px !important;
     }
 
     .sliderWrapper {
@@ -461,16 +464,7 @@
     }
 }
 
-@media (max-width: 576px) {
-    .testimonialGrid {
-        display: none;
-        /* No longer needed as Swiper handles the layout */
-    }
 
-    .header h2 {
-        font-size: 1.75rem;
-    }
-}
 
 
 @media (max-width:400px) {

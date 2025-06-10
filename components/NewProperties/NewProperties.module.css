@@ -269,7 +269,7 @@
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   color: #0A273B;
   padding: 0 16px;
   background-color: #ffffff;
@@ -279,6 +279,8 @@
   position: relative;
   z-index: 15;
   gap: 8px;
+  font-weight: 400;
+  font-family: 'Montserrat';
 }
 
 .propertyInfo_mobile summary::-webkit-details-marker {
@@ -471,6 +473,7 @@
     height: 100%;
     background-color: #ffffff;
     padding: 0;
+    margin-bottom: 0;
   }
 
   .filterButtons_mobile {
@@ -503,7 +506,6 @@
   }
 
   .propertyCard {
-    margin-top: 1rem;
     padding: 16px;
     border-radius: 16px;
     background-color: #0A273B;
@@ -522,7 +524,7 @@
     flex-direction: row;
     gap: 8px;
   }
-
+  
   .buttonGroup button {
     padding: 0;
     font-size: 12px !important;
@@ -535,7 +537,7 @@
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    width: 96px !important;
+    width: 81px !important;
     height: 31px !important;
   }
 
@@ -715,9 +717,3 @@
   }
 }
 
-@media (max-width: 480px) {
-  .propertyCard {
-    width: 325px;
-    height: 471px;
-  }
-}

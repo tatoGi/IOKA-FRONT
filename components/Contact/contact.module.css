@@ -275,6 +275,9 @@
   }
 }
 @media (max-width: 768px) {
+  .col{
+    height: auto;
+  }
   .contactPage {
     padding: 0;
   }
@@ -403,6 +406,16 @@ line-height: 100%;
 letter-spacing: 0%;
 
   }
+  .infoSection{
+    justify-content: unset;
+    padding: 0;
+  }
+  .col{
+    margin-top: 24px;
+    height: 100%;
+    padding: 0;
+  }
+  
 }
 
 .rowWithBorder {

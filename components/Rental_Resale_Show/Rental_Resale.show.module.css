@@ -708,10 +708,12 @@
   background: #f5f5f5;
   overflow: hidden;
 }
-.imageContainer img{
-  
+
+.imageContainer img {
+
   transition: transform 0.3s ease;
 }
+
 .imageContainer img:hover {
   transform: scale(1.05);
 }
@@ -990,6 +992,7 @@
   width: 16px;
   height: 16px;
 }
+
 @media (max-width: 1600px) {
   .title {
     font-family: 'Montserrat';
@@ -1001,6 +1004,7 @@
     margin-bottom: 16px;
     line-height: 1.4;
   }
+
   .imageContainer {
     position: relative;
     width: 100%;
@@ -1008,14 +1012,16 @@
     background: #f5f5f5;
     overflow: hidden;
   }
-  .imageContainer img{
-    
+
+  .imageContainer img {
+
     transition: transform 0.3s ease;
   }
+
   .imageContainer img:hover {
     transform: scale(1.05);
   }
-  
+
   .currency {
     font-family: 'Montserrat';
     font-weight: 600;
@@ -1078,7 +1084,7 @@
     border-radius: 16px;
     border-width: 1px;
     gap: 12px;
-    border: 1px   transparent;
+    border: 1px transparent;
 
   }
 
@@ -1763,30 +1769,36 @@
     font-size: 12px;
   }
 }
+
 @media (max-width: 1400px) {
- .contactBtnperson{
-  width: 130px;
- }
+  .contactBtnperson {
+    width: 130px;
+  }
 }
+
 @media (max-width: 1200px) {
-  .mainImage{
+  .mainImage {
     flex: 2;
     position: relative;
     max-width: 470px;
     border-radius: 16px;
     height: 100%;
   }
-  .contactButtons{
+
+  .contactButtons {
     gap: 10px;
   }
-  .contactBtnperson{
+
+  .contactBtnperson {
     width: 74px;
   }
 }
+
 @media (max-width: 992px) {
-  .col{
+  .col {
     width: 100%;
   }
+
   .gallery {
     display: flex;
     flex-direction: column;
@@ -1871,9 +1883,11 @@
     width: 100%;
     margin: 32px 0;
   }
-  .contactButtons{
+
+  .contactButtons {
     width: 100%;
   }
+
   .contactButton {
     max-width: 100%;
     width: 100%;
@@ -1997,260 +2011,130 @@
     font-size: 14px;
   }
 }
-
-@media (max-width: 768px) {
-  .mobileGallery {
-    display: block;
+@media (max-width: 768px){
+  .col {
     width: 100%;
   }
 
-  .sliderContainer {
-    display: flex;
-    transition: transform 0.3s ease;
-    width: 100% !important;
-  }
-
-  .prices {
-    margin-top: 24px;
-    align-items: start;
-  }
-
-  .price {
-    gap: 10px;
-    margin-bottom: 6px;
-  }
-
-  .currency {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
-  }
-
-  .amount {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
-  }
-
-  .affordable {
-    margin-top: 12px;
-    border: none;
-  }
-
-  .title {
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-
-  }
-
-  .subtitle {
-    font-family: Montserrat;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    margin-bottom: 24px;
-  }
-
-  .line {
-    width: 354px;
-    height: 1px;
-    background: #07151F;
-    margin-bottom: 12px;
-  }
-
-  .features {
-    gap: 24px;
-  }
-
-  .description {
-    margin-top: 24px;
-    margin-right: 0;
-  }
-
-  .details {
-    background-color: #ffffff;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    height: auto;
-  }
-
-  .details h3 {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 100%;
-    color: #0A273B;
-    margin-bottom: 24px;
-    margin-top: 0;
-  }
-
-  .detailsGrid {
+  .gallery {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 100%;
-  }
-
-  .detailItem {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    padding: 0;
-    border-bottom: 1px solid #E6EBED;
-    padding-bottom: 16px;
-  }
-
-  .detailLabel {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 100%;
-    color: #6B7280;
-    margin: 0;
-    grid-column: 1;
-  }
-
-  .detailValue {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 100%;
-    color: #0A273B;
-    margin: 0;
-    grid-column: 2 / span 2;
-    text-align: center;
-  }
-
-  /* Special styling for price detail */
-  .detailItem.priceDetail {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .detailItem.priceDetail .detailValue {
-    display: flex;
-    gap: 24px;
-    justify-content: flex-end;
-    text-align: right;
-  }
-
-  .body {
-    margin-top: 32px;
-    margin-right: 0;
-  }
-
-  .body h1 {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 100%;
-    color: #0A273B;
-    margin-bottom: 16px;
-  }
-
-  .descriptionText {
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    color: #0A273B;
-  }
-
-  .sharediv {
-    max-width: 354px;
     height: auto;
+    max-height: none;
+  }
+
+  .mainImage {
+    flex: none;
     width: 100%;
-
+    max-width: 100%;
+    height: 400px;
   }
 
-  .contactButtons {
-    gap: 8px;
-  }
-
-  .contactBtnperson {
-    width: 149px;
-    height: 40px;
-    border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 70px;
-    padding-bottom: 12px;
-    padding-left: 70px;
-    gap: 10px;
-
-    background-color: #0A273B;
-
-  }
-
-  .whatsappperson {
-    width: 149px;
-    height: 40px;
-    border-radius: 8px;
-    padding-top: 12px;
-    padding-right: 70px;
-    padding-bottom: 12px;
-    padding-left: 30px;
-    background-color: #0A273B;
-  }
-
-  .amenities_section {
-    margin: 24px 0 24px 0;
+  .smallImagesGrid {
+    flex: none;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 
-  .amenitiesGrid {
+  .smallImage {
+    width: 100%;
+    height: 120px;
+  }
+
+  .mainImage img,
+  .smallImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .description {
+    padding: 0;
+  }
+
+  .description .row {
     display: flex;
     flex-direction: column;
   }
 
+  .description .col-md-8,
+  .description .col-md-4 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    padding: 0;
+  }
+
+  .description .col-md-8 {
+    order: 1;
+  }
+
+  .description .col-md-4 {
+    order: 2;
+    margin-top: 32px;
+  }
+
+  .details {
+    margin: 32px 0;
+  }
+
+  .sharediv {
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
+  }
+
   .sidevabarlocation {
-    width: 354px;
-    height: 220px;
+    max-width: 100%;
+    width: 100%;
+    height: 300px;
+    margin: 32px 0;
   }
 
   .sidebarqr {
-    width: 354px;
-    height: auto;
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
   }
 
-  .sidebarqr .sectionTitle {
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-
+  .contactButtons {
+    width: 100%;
   }
 
   .contactButton {
-    width: 354px;
-    height: 40px;
-    border-radius: 8px;
+    max-width: 100%;
+    width: 100%;
+    margin: 32px 0;
   }
 
-  .sameArea_poperies h4 {
-    font-family: Montserrat;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #0A273B;
+  .amenities_section {
+    width: 100%;
+    max-width: 100%;
+    margin: 32px 0;
+  }
+
+  .body {
+    margin: 32px 0;
   }
 
   .sameArea_poperies {
-    position: relative;
+    margin-top: 48px;
     padding: 0 16px;
-    margin-top: 32px;
+  }
+
+  .sameArea_poperies h4 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .propertyGrid {
@@ -2292,7 +2176,7 @@
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    background: #FFFFFF;
+    background: rgba(230, 235, 237, 1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2321,7 +2205,9 @@
     font-size: 14px;
     margin-bottom: 4px;
   }
-
+  .galleryItem{
+    border-radius: 0 !important;
+  }
   .propertyInfo .location {
     font-size: 12px;
     margin-bottom: 8px;
@@ -2350,8 +2236,52 @@
     width: 309px;
   }
 
+  .sliderArrow {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(230, 235, 237, 1);
+  }
+
+  .nextArrow {
+    right: 24px;
+  }
+
+  .prevArrow {
+    left: 24px;
+  }
+
+  .show_galleryItem {
+    border-radius: 0;
+  }
+
+  .features {
+    padding: 0;
+    margin-bottom: 14px;
+    gap: 24px;
+  }
+
+  .body {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .body h1 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    color: #0A273B;
+    margin-bottom: 16px;
+    margin-top: 0;
+  }
+
   .sharediv {
-    width: 100%;
+    width: 354px;
+    gap: 8px;
+  }
+
+  .contactButtons {
+    margin: 0;
   }
 
   .shareButton {
@@ -2381,18 +2311,83 @@
     background-color: #0A273B;
   }
 
+  .amenities_section h4 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(10, 39, 59, 1);
+
+  }
+
   .sidevabarlocation {
-    width: 100%;
+    width: 354px;
+    margin-top: 24px;
+    max-width: 354px;
   }
 
   .sidebarqr {
-    width: 100%;
+    width: 354px;
+    max-width: 354px;
   }
 
   .contactButton {
-    width: 100%;
+    width: 354px;
+    max-width: 354px;
   }
 
+  .contactButton button {
+    border-radius: 28px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+
+  }
+  .propertyCardLink{
+    width: 320px;
+    height: 360px;
+  }
+  .propertyGrid{
+    width: 320px;
+  }
+  .galleryItem{
+    border-radius: 0 !important;
+  }
+  .propertyInfo{
+    padding: 16px;
+  }
+  .propertyInfo h3{
+    font-family: 'Montserrat';
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 8px;
+
+  }
+  .subtitle{
+    font-family: 'Montserrat';
+font-weight: 400;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 12px;
+
+  }
+  .line{
+    width: 288.0000112362919px;
+    border-width: 1px;
+    background-color: rgba(230, 235, 237, 1);
+    margin-bottom: 24px;
+    
+  }
+  .features{
+    gap: 16px;
+  }
   .sameArea_poperies {
     width: 100%;
     padding: 0;

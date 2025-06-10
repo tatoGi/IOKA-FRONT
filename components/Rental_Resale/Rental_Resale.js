@@ -809,7 +809,7 @@ const Rental_Resale = () => {
                           </div>
                           <div className={Styles.footerActions}>
                             <button className={Styles.footerButton}>
-                              <BsWhatsapp size={20} color="#34C759" />
+                              <BsWhatsapp size={16} color="#34C759" />
                               <span>WhatsApp</span>
                             </button>
                             <div className={Styles.footerSeparator}>|</div>
@@ -823,7 +823,7 @@ const Rental_Resale = () => {
                       {isMobile && (
                         <div className={Styles.propertyActions}>
                           <button className={Styles.actionButton_email}>
-                            <HiOutlineMail size={20} color="#1A1A1A" />
+                            <HiOutlineMail size={16} color="#1A1A1A" />
                             <span>Email</span>
                           </button>
                           <button className={Styles.actionButton_call}>
@@ -831,7 +831,7 @@ const Rental_Resale = () => {
                             <span>Call</span>
                           </button>
                           <button className={Styles.actionButton_whatsapp}>
-                            <BsWhatsapp size={20} color="#34C759" />
+                            <BsWhatsapp size={16} color="#34C759" />
                             <span>WhatsApp</span>
                           </button>
                         </div>

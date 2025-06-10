@@ -75,18 +75,15 @@ const MobileSlider = ({ images, type, openGalleryModal }) => {
 
   return (
     <Swiper
-      spaceBetween={16}
-      slidesPerView={1.2}
-      centeredSlides={true}
       className={style.swiper}
       breakpoints={{
         480: {
           slidesPerView: 1.5,
-          spaceBetween: 20,
+          spaceBetween: 10,
         },
         640: {
           slidesPerView: 2,
-          spaceBetween: 20,
+          spaceBetween: 10,
         }
       }}
     >
@@ -111,12 +108,22 @@ const MobileSlider = ({ images, type, openGalleryModal }) => {
 const PropertySlider = ({ properties, decodeImageUrl }) => {
   return (
     <Swiper
-     className="mySwiper"
+    className={style.swiper}
+      breakpoints={{
+        480: {
+          slidesPerView: 1.5,
+          spaceBetween: 10,
+        },
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        }
+      }}
     >
       {properties.map((property) => (
         <SwiperSlide
           key={property.id}
-          className={`${style.swiperSlide}`}
+          className={`${style.swiperSlideForProperties}`}
         >
           <div className={style.propertyCard}>
             <div className={style.imageContainer}>
@@ -501,7 +508,7 @@ const OffplanShow = ({ offplanData }) => {
                 <div className={style.modalOverlay}>
                   <div className={`${style.modalContent} container`}>
                     <button className={style.closeButton} onClick={closeModal}>
-                      &times;
+                      <span>&times;</span>  
                     </button>
                     <ContactForm pageTitle="Offplan Page"/>
                   </div>

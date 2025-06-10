@@ -53,7 +53,7 @@ const BlogShow = ({ blogData }) => {
                 )}`
               : baseimage
           }
-          alt={blogData.blog.banner_image_alt}
+          alt={blogData.blog.banner_image_alt || 'Blog banner image'}
           width={800}
           height={400}
         />

@@ -86,6 +86,13 @@
     width: 100% !important;
 height: 257px !important;
 top: 294px !important;
+border-radius: 0 !important;
 
+  }
+  .mapWrapper :global(.leaflet-container) {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;  
+    z-index: 1;
   }
 }

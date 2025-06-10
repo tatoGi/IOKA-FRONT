@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Slider from "react-slick";
 import styles from "./DeveloperShow.module.css";
 import Image from "next/image";
 import EmaarLogo from "../../assets/img/emmar.png";
@@ -11,12 +12,29 @@ import { BsWhatsapp } from "react-icons/bs";
 import agentInfo from "../../assets/img/agentinfo.png";
 import callVector from "../../assets/img/callvector.png";
 import awardimg1 from "../../assets/img/awardimg1.png";
-import Slider from "react-slick";
 import SearchSection from "../SearchSection/SearchSection";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import Link from "next/link";
 
 const DeveloperShow = (developerData) => {
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  };
+
   const photos = developerData.developerData.photo
     ? JSON.parse(developerData.developerData.photo)
     : [];
@@ -527,7 +545,7 @@ const DeveloperShow = (developerData) => {
 
         {/* Resale Section */}
         <div className={styles.resaleSection}>
-          <div className="container" style={{ overflow: 'hidden' }}>
+          <div className={`${isMobileView ? 'resalecontainer' : 'container'}`} style={{ overflow: 'hidden' }}>
             <div className={styles.resaleHeader}>
               <div className={styles.resaleTitle}>
                 <h3>Rental Resale</h3>
@@ -558,7 +576,7 @@ const DeveloperShow = (developerData) => {
                   </div>
                   <div className={styles.propertyInfo}>
                     <h4>{listing.title}</h4>
-                    <p className={styles.location}>{listing.location}</p>
+                    <p className={styles.location}>{listing.subtitle}</p>
                     <div className={styles.priceContainer}>
                       <span className={styles.price}>USD {formatPrice(listing.amount)}</span>
                       <span className={styles.price}>AED {formatPrice(listing.amount)}</span>
@@ -835,7 +853,10 @@ const DeveloperShow = (developerData) => {
             </div>
 
             {isMobileView ? (
-              <div className={styles.listView}>
+              <Slider
+                {...awardSliderSettings}
+                className={styles.awardsSlider}
+              >
                 {awards.map((award, index) => (
                   <div key={index} className={styles.awardCard}>
                     <div className={styles.awardLeft}>
@@ -863,7 +884,12 @@ const DeveloperShow = (developerData) => {
                           }}
                         />
                       </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                      <div className={styles.awardYear}>
+                          <span>{award.award_year}</span>
+                        </div>
                       <div className={styles.awardIconWrapper}>
+                        
                         <Image
                           src={
                             award.award_photo
@@ -877,15 +903,18 @@ const DeveloperShow = (developerData) => {
                           height={108}
                           className={styles.trophyImage}
                         />
+                       
                       </div>
+                      </div>
+                   
                       <div className={styles.awardBottom}>
-                        <span className={styles.awardYear}>{award.award_year}</span>
+                       
                         <button className={styles.viewAwardBtn}>View Awards</button>
                       </div>
                     </div>
                   </div>
                 ))}
-              </div>
+              </Slider>
             ) : awards.length === 1 ? (
               <div className={styles.singleAwardContainer}>
                 <div className={styles.awardCard}>

@@ -1722,7 +1722,6 @@
       padding: 0; 
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      max-width: 320px;
     }
     .resaleList {
       display: -webkit-box;
@@ -2111,7 +2110,7 @@
           -ms-flex-direction: column;
               flex-direction: column;
       height: auto;
-      width: 354px;
+      width: 100%;
     }
   }
   @media (max-width: 480px) {
@@ -2139,7 +2138,7 @@
       display: flex;
       -webkit-box-align: start;
           -ms-flex-align: center;
-              align-items: start;
+              align-items: flex-start;
       gap: 5px;
       margin-bottom: 12px;
       -webkit-box-orient: horizontal;
@@ -2156,14 +2155,17 @@
     }
   
     .resaleCard {
-      width: 100%;
+      width: 354px;
       margin: 16px 0;
     }
   
     .mobileImageSlider {
       height: 240px;
     }
-  
+    .sliderArrow{
+      width: 48px;
+      height: 48px;
+    }
     .resaleContent {
       padding: 16px;
     }
@@ -2174,6 +2176,7 @@
       font-size: 16px;
       line-height: 100%;
       letter-spacing: 0%;
+      margin: 0;
       
     }
   
@@ -2195,7 +2198,9 @@ line-height: 100%;
 letter-spacing: 0%;
 
     }
-  
+    .resaleStats{
+      margin: 0;
+    }
     .resalePrice {
       font-family: 'Montserrat';
       font-weight: 600;
@@ -2228,9 +2233,21 @@ letter-spacing: 0%;
       width: auto;
       padding: 0px 13px 0 11px;
       font-size: 12px;
-      border-radius: 40px;
+      border-radius: 8px;
       color: #0A273B;
       font-weight: 600;
+      font-family: 'Montserrat';
+    }
+    .title_top{
+      font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    }
+    .pagination{
+      margin-bottom: 0;
     }
     .actionButton svg{
       width: 16px;
@@ -2258,15 +2275,20 @@ letter-spacing: 0%;
     }
   
     .sliderArrow {
-      width: 32px;
-      height: 32px;
+      width: 48px;
+      height: 48px;
     }
   
     .sliderArrow svg {
-      width: 16px;
-      height: 16px;
+      width: 24px;
+      height: 24px;
     }
-  
+    .nextArrow{
+      right: 16px;
+    }
+    .prevArrow{
+      left: 16px;
+    }
     .indicator {
       width: 6px;
       height: 6px;
@@ -2285,9 +2307,7 @@ letter-spacing: 0%;
     .footerActions {
       gap: 8px;
     }
-    .title_top{
-      padding: 0 20px;
-    }
+   
     .propertyGrid{
       margin-bottom: 24px;
     }

@@ -65,7 +65,7 @@ const FAQ = ({ pageData }) => {
                   </div>
                 ))}
               </div>
-              <div style={{ background: '#fff', borderRadius: 16, padding: 24, marginTop: 24, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', marginBottom: 24 }}>
+              <div className="contact-box" style={{ background: '#fff', borderRadius: 16, padding: 24, marginTop: 24, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', marginBottom: 24, width: '354px' }}>
                 <p className="question-text" style={{ fontWeight: 600 }}>Do you have any questions ?</p>
                 <p className="contact-text">If you have any questions, just contact and ask us, we'll be glad to assist you.</p>
                 <button className="enquire-btn" style={{ width: '100%', marginBottom: 16 }}>Enquire Now</button>

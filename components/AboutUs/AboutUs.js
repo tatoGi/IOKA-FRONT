@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import baseimage from "../../assets/img/blogimage.png";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper';
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -46,6 +47,7 @@ const AboutUs = ({ initialData, id }) => {
       }
 
       try {
+        // Only fetch if we don't have initial data
         if (!initialData) {
           const [aboutResponse, teamResponse] = await Promise.all([
             axios.get(`${ABOUT_API}/${id}`),
@@ -63,16 +65,6 @@ const AboutUs = ({ initialData, id }) => {
             setCardData(aboutResponse.data.about);
           }
         }
-
-        if (!sectionFiveData) {
-          const teamResponse = await axios.get(`${SECTION_API}`);
-          if (!isMounted) return;
-          
-          const sectionFive = teamResponse.data.sections.find(
-            (section) => section.section_key === "section_five"
-          );
-          setSectionFiveData(sectionFive);
-        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -83,7 +75,7 @@ const AboutUs = ({ initialData, id }) => {
     return () => {
       isMounted = false;
     };
-  }, [id, initialData, sectionFiveData]);
+  }, [id, initialData]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,8 +103,7 @@ const AboutUs = ({ initialData, id }) => {
     if (isMobile) {
       return (
         <Swiper
-          spaceBetween={12}
-          slidesPerView={4}
+          slidesPerView={1}
           className={styles.statsSwiper}
         >
           {cardData?.additional_fields?.number_boxes?.map((box, index) => (

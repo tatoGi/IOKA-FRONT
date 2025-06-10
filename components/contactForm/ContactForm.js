@@ -13,6 +13,19 @@ const ContactForm = ({ pageTitle = "" }) => {
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Auto-hide status after 2 seconds
   useEffect(() => {
@@ -31,10 +44,15 @@ const ContactForm = ({ pageTitle = "" }) => {
       [name]: value
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
+    
+    // Prevent multiple submissions
+    if (isSubmitting) return;
+    
     try {
       const currentPageUrl = typeof window !== 'undefined' ? window.location.href : '';
       
@@ -44,7 +62,6 @@ const ContactForm = ({ pageTitle = "" }) => {
         page_url: currentPageUrl
       };
      
-      
       const response = await axios.post(CONTACT_SUBMISSION_API, formSubmissionData, {
         withCredentials: true,
         headers: {
@@ -76,7 +93,7 @@ const ContactForm = ({ pageTitle = "" }) => {
   const placeholderStyle = {
     fontFamily: 'Montserrat',
     fontWeight: 400,
-    fontSize: '16px',
+    fontSize: isMobile ? '16px' : '16px', // Prevent zoom on iOS
     lineHeight: '100%',
     letterSpacing: '0%',
     color: '#8B9DA8'
@@ -106,6 +123,8 @@ const ContactForm = ({ pageTitle = "" }) => {
           className={styles.input}
           required
           style={placeholderStyle}
+          autoComplete="name"
+          aria-label="Your Name"
         />
         <input
           type="email"
@@ -116,6 +135,8 @@ const ContactForm = ({ pageTitle = "" }) => {
           className={styles.input}
           required
           style={placeholderStyle}
+          autoComplete="email"
+          aria-label="Email Address"
         />
         <input
           type="tel"
@@ -126,6 +147,8 @@ const ContactForm = ({ pageTitle = "" }) => {
           className={styles.input}
           required
           style={placeholderStyle}
+          autoComplete="tel"
+          aria-label="Phone Number"
         />
         <textarea
           name="message"
@@ -135,11 +158,14 @@ const ContactForm = ({ pageTitle = "" }) => {
           className={styles.textarea}
           required
           style={placeholderStyle}
+          aria-label="Write a Message"
+          rows={isMobile ? 4 : 6}
         />
         <button 
           type="submit" 
           className={styles.submitButton} 
           disabled={isSubmitting}
+          aria-label={isSubmitting ? 'Sending message...' : 'Send message'}
         >
           {isSubmitting ? 'Sending...' : 'Send a Message'}
         </button>
