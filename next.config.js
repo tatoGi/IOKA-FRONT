@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://test.ioka.ae';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ioka.ae';
 const API_HOSTNAME = new URL(API_BASE_URL).hostname;
 
 /** @type {import('next').NextConfig} */
@@ -63,7 +63,7 @@ const nextConfig = {
       }
     ],
     unoptimized: false,
-    domains: [API_HOSTNAME, 'test.ioka.ae', '127.0.0.1', 'localhost'],
+    domains: [API_HOSTNAME, 'ioka.ae', 'test.ioka.ae', '127.0.0.1', 'localhost'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ['image/webp', 'image/avif'],
