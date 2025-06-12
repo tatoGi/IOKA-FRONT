@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/img/ioka-logo-white.png";
@@ -10,6 +10,7 @@ import YoutubeIcon from "../icons/YoutubeIcon";
 import FacebookIcon from "../icons/FacebookIcon";
 import XIcon from "../icons/XIcon";
 import PhoneIcon from "../icons/PhoneIcon";
+import { SUBSCRIBE_API } from "@/routes/apiRoutes";
 
 const isMobile = () => {
   if (typeof window !== "undefined") {
@@ -20,6 +21,11 @@ const isMobile = () => {
 
 const Footer = ({ navigationData, settings }) => {
   const [mobileView, setMobileView] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setMobileView(isMobile());
@@ -42,6 +48,59 @@ const Footer = ({ navigationData, settings }) => {
     const setting = footerSettings.find(setting => setting.key === key);
     return setting?.value || '';
   };
+
+  const showAlertMessage = useCallback((message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          setShowAlert(false);
+        });
+      }, 2000);
+    });
+  }, []);
+
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(SUBSCRIBE_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setShowSuccess(true);
+        setEmail("");
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              setShowSuccess(false);
+            });
+          }, 2000);
+        });
+      } else {
+        if (data.errors?.email?.includes("The email has already been taken.")) {
+          showAlertMessage("This email is already subscribed. Please use a different email address.");
+        } else {
+          showAlertMessage("Failed to subscribe. Please try again.");
+        }
+      }
+    } catch (error) {
+      showAlertMessage("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [email, showAlertMessage]);
 
   return (
     <div className="footer">
@@ -192,15 +251,30 @@ const Footer = ({ navigationData, settings }) => {
                 <div className="mes-f-text"
                   dangerouslySetInnerHTML={{ __html: getSettingValue('newsletter.description') }}
                 />
-                <form action="#" method="POST">
+                <form onSubmit={handleSubmit}>
                   <div className="message-icon-send">
                     <MessageIcon />
                   </div>
-                  <input type="text" placeholder={getSettingValue('newsletter.placeholder')} />
-                  <div className="plane-icon">
-                    <PlaneIcon />
-                  </div>
-                  <button type="submit">{getSettingValue('newsletter.button_text')}</button>
+                  <input 
+                    type="email" 
+                    placeholder={getSettingValue('newsletter.placeholder') || "Your email"} 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Subscribing...' : (getSettingValue('newsletter.button_text') || 'Subscribe')}
+                  </button>
+                  {showSuccess && (
+                    <div className="alert alert-success">
+                      Thank you for subscribing!
+                    </div>
+                  )}
+                  {showAlert && (
+                    <div className="alert alert-error">
+                      {alertMessage}
+                    </div>
+                  )}
                 </form>
               </div>
             </div>
