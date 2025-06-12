@@ -30,6 +30,8 @@ const Meta = ({ items }) => {
     <Head>
       {/* Basic Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta name="robots" content="noindex, nofollow" />
+      <meta name="googlebot" content="noindex, nofollow" />
 
       <meta name="keywords" content={getMetaValue('keywords')} />
       <meta name="description" content={getMetaValue('description')} />
@@ -53,7 +55,6 @@ const Meta = ({ items }) => {
       <meta name="twitter:image" content={twitterImage} />
 
       {/* Additional Meta Tags */}
-      <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
       <meta name="author" content="IOKA Real Estate" />
