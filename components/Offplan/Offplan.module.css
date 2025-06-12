@@ -735,6 +735,15 @@ margin-top: 2px;
 }
 @media (max-width:480px)
 {
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    max-width: 100%;
+    flex-direction: column;
+}
   .propertyCardLink{
     cursor: pointer;
     max-width: 354px;

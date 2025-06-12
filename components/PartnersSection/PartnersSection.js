@@ -3,11 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 // import required modules
-import { FreeMode, Pagination } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -51,40 +49,28 @@ const PartnersSection = () => {
         <div className="partners-title">Partners</div>
         <div className="partner-swiper-slide">
           <Swiper
-            slidesPerView={3}
             spaceBetween={22}
-            freeMode={true}
-            grabCursor={true}
-            modules={[FreeMode, Pagination]}
+            slidesPerView={4}
+            pagination={{ clickable: true }}
             className="mySwiper partners-swp"
             breakpoints={{
               320: {
                 slidesPerView: 2,
-                spaceBetween: 22, 
               },
               575: {
                 slidesPerView: 3,
-                spaceBetween: 22, 
               },
               640: {
                 slidesPerView: 4,
-                spaceBetween: 22,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 22,
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 22,
-              },
-              1600: {
-                slidesPerView: 6,
-                spaceBetween: 22,
               },
               1560: {
+                slidesPerView: 6,
+              },
+              1920: {
                 slidesPerView: 8,
-                spaceBetween: 22,
               },
             }}
           >
@@ -94,7 +80,7 @@ const PartnersSection = () => {
                   <Link href={partner.url} className="partners-slider-item">
                     <Image 
                       src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
-                      alt={partner.title} 
+                      alt={partner.alt || 'Partner logo'}
                       width={80} 
                       height={80} 
                       style={{ borderRadius: '50%', objectFit: 'cover' }}

@@ -2322,6 +2322,11 @@ letter-spacing: 0%;
      }
     
   }
+  @media (max-width: 400px){
+    .resaleCard{
+      width: 100%;
+    }
+  }
 @media (max-width: 375px) {
   .resaleCard{
     width: 320px;

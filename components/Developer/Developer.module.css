@@ -15,7 +15,7 @@
 .searchInput {
   width: 100%;
   padding-left: 40px;
-  width: 768px; 
+  width: 768px;
   height: 40px;
   top: 172px;
   left: 180px;
@@ -26,16 +26,16 @@
   background-color: #fff;
   color: #0A273B;
   font-family: 'Montserrat';
-  
-  
+
+
 }
 
 .searchIcon {
   top: 50%;
   left: 10px;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 /* Container */
@@ -49,15 +49,15 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
 /* Column */
 .col {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 calc(50% - 16px);
-          flex: 1 1 calc(50% - 16px);
+  -ms-flex: 1 1 calc(50% - 16px);
+  flex: 1 1 calc(50% - 16px);
   margin-bottom: 16px;
 }
 
@@ -67,7 +67,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -97,20 +97,22 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
-.card:hover{
+
+.card:hover {
   border: 1px solid #0A273B;
 }
+
 .cardRow {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   height: 100%;
 }
 
@@ -127,16 +129,18 @@
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
-.cardImage:hover{
+
+.cardImage:hover {
   -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
 }
+
 /* Image Navigation */
 .imageNav {
   top: 50%;
@@ -146,12 +150,12 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   padding: 0 10px;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   position: absolute;
 }
 
@@ -166,30 +170,30 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   cursor: pointer;
 }
 
 /* Content */
 .cardContent {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   padding: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .title {
@@ -209,8 +213,8 @@
   line-height: 1.4;
   margin-bottom: 24px;
   -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   color: #07151F;
   display: -webkit-box;
   -webkit-line-clamp: 6;
@@ -236,7 +240,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -260,8 +264,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .contactButtons {
@@ -280,11 +284,11 @@
 
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 5px;
   padding: 8px 16px;
   border-radius: 4px;
@@ -309,8 +313,8 @@
 
 .call svg {
   -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-          transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
   width: 16px;
   height: 16px;
 }
@@ -344,18 +348,20 @@
 .readMore:hover {
   color: #0056b3;
 }
+
 .pagination {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-top: 38px;
   margin-bottom: 142px;
   gap: 6px;
   height: 48px;
 }
+
 .pageButton {
   margin: 0 5px;
   padding: 5px 10px;
@@ -378,12 +384,12 @@
   width: 84px;
   height: 46px;
   font-family: 'Montserrat';
-font-weight: 500;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-color:#0A273B;
-margin-top: 2px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0A273B;
+  margin-top: 2px;
 
 }
 
@@ -391,8 +397,10 @@ margin-top: 2px;
   background-color: #0A273B;
   color: white;
   border-color: #0A273B;
-  width: 48px; /* Ensure same width */
-  height: 48px; /* Ensure same height */
+  width: 48px;
+  /* Ensure same width */
+  height: 48px;
+  /* Ensure same height */
   margin: 0;
 }
 
@@ -441,8 +449,8 @@ margin-top: 2px;
     top: 50%;
     left: 10px;
     -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 
   /* Container */
@@ -456,15 +464,15 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     gap: 16px;
   }
 
   /* Column */
   .col {
     -webkit-box-flex: 1;
-        -ms-flex: 1 1 calc(50% - 16px);
-            flex: 1 1 calc(50% - 16px);
+    -ms-flex: 1 1 calc(50% - 16px);
+    flex: 1 1 calc(50% - 16px);
     margin-bottom: 16px;
   }
 
@@ -474,7 +482,7 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     gap: 16px;
   }
 
@@ -501,12 +509,11 @@ margin-top: 2px;
     transition: transform 0.2s, -webkit-transform 0.2s;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 
   .cardRow {
@@ -515,8 +522,8 @@ margin-top: 2px;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     height: 100%;
   }
 
@@ -533,7 +540,7 @@ margin-top: 2px;
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   /* Image Navigation */
@@ -545,12 +552,12 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     padding: 0 10px;
     -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     position: absolute;
   }
 
@@ -565,30 +572,30 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     cursor: pointer;
   }
 
   /* Content */
   .cardContent {
     -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     padding: 16px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 
   .title {
@@ -608,15 +615,15 @@ margin-top: 2px;
     line-height: 1.3;
     margin-bottom: 24px;
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
     color: #07151F;
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
 
   .communitiesSection {
     margin-top: 0;
@@ -636,7 +643,7 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     gap: 3px;
   }
 
@@ -659,8 +666,8 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 
   .contactButtons {
@@ -679,11 +686,11 @@ margin-top: 2px;
 
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     gap: 5px;
     padding: 5px 10px;
     border-radius: 4px;
@@ -708,8 +715,8 @@ margin-top: 2px;
 
   .call svg {
     -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
     width: 14px;
     height: 14px;
   }
@@ -749,13 +756,14 @@ margin-top: 2px;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     margin-top: 38px;
     margin-bottom: 142px;
     gap: 6px;
     height: 48px;
   }
+
   .pageButton {
     margin: 0 5px;
     padding: 5px 10px;
@@ -773,44 +781,47 @@ margin-top: 2px;
     text-align: center;
     margin-top: 2px;
   }
-  
+
   .pageButton:last-child {
     width: 84px;
     height: 46px;
     font-family: 'Montserrat';
-font-weight: 500;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
-color:#0A273B;
-margin-top: 2px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-top: 2px;
 
   }
-  
+
   .pageButton.active {
     background-color: #0A273B;
     color: white;
     border-color: #0A273B;
-    width: 48px; /* Ensure same width */
-    height: 48px; /* Ensure same height */
+    width: 48px;
+    /* Ensure same width */
+    height: 48px;
+    /* Ensure same height */
     margin: 0;
   }
-  
+
   .pageButton:hover {
     background-color: #ddd;
   }
-  
 
-  
+
+
   .pageButton:hover {
     background-color: #ddd;
   }
-  
 
-  
+
+
 
 }
-@media (max-width: 768px){
+
+@media (max-width: 768px) {
   .card {
     width: 100%;
     height: auto;
@@ -820,10 +831,9 @@ margin-top: 2px;
     border-color: #e0e0e0;
     overflow: hidden;
     transition: transform 0.2s;
-    display: flex
-;
+    display: flex;
     flex-direction: column;
-}
+  }
 }
 
 .mobileTitleOverlay {
@@ -836,7 +846,8 @@ margin-top: 2px;
   z-index: 1;
   bottom: 0;
 }
-.mobileTitleOverlay h2{
+
+.mobileTitleOverlay h2 {
   font-family: 'Montserrat';
   color: white;
   font-size: 15px;
@@ -847,37 +858,312 @@ margin-top: 2px;
   position: relative;
   overflow: hidden;
 }
-@media (max-width: 480px){
-   .cardsContainer{
-    width: 354px;
-   }
-   .cardWrapper{
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .card {
     width: 100%;
-   }
-   .searchInput{
+    height: auto;
+    max-width: 100%;
+  }
+
+  .searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 354px;
+    margin: 0 auto;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding-left: 40px;
+    border: 1px solid #07151F;
+    border-radius: 8px;
+    height: 48px;
+  }
+
+  .cardsContainer {
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    max-width: 354px;
+    width: 100%;
+  }
+
+  .cardWrapper {
+    max-width: 354px;
+  }
+
+  .communitiesList {
+    gap: 8px;
+  }
+
+  .cardRow {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .cardImage {
+    width: 100%;
+    height: 200px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .description {
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    margin-bottom: 16px;
+  }
+
+  .communitiesTitle {
+    font-size: 14px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .buttonsSection {
+    margin-top: 16px;
+  }
+
+  .call {
+
+    width: 74px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .whatsapp {
+    width: 112px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 12px;
+
+  }
+
+  .readMore {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: right;
+
+  }
+
+  .cardsContainer {
+    width: 354px;
+  }
+
+  .cardWrapper {
+    width: 100%;
+  }
+
+  .searchInput {
     font-family: 'Montserrat';
     font-weight: 400;
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0%;
 
-   }
-   .mobileTitleOverlay h2{
+  }
+
+  .mobileTitleOverlay h2 {
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
 
-   }
-   .communitiesTitle{
+  }
+
+  .communitiesTitle {
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
-   }
-   .badge{
+  }
+
+  .badge {
     font-weight: 400;
-   }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 16px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 354px;
+    margin: 0 auto;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding-left: 40px;
+    border: 1px solid #07151F;
+    border-radius: 8px;
+    height: 48px;
+  }
+
+  .cardsContainer {
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cardWrapper {
+    max-width: 100%;
+  }
+
+  .communitiesList {
+    gap: 8px;
+  }
+
+  .cardRow {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .cardImage {
+    width: 100%;
+    height: 200px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .description {
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    margin-bottom: 16px;
+  }
+
+  .communitiesTitle {
+    font-size: 14px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .buttonsSection {
+    margin-top: 16px;
+  }
+
+  .call {
+
+    width: 74px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .whatsapp {
+    width: 112px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 12px;
+
+  }
+
+  .readMore {
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: right;
+
+  }
+
+  .cardsContainer {
+    width: 100%;
+  }
+
+  .cardWrapper {
+    width: 100%;
+  }
+
+  .searchInput {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+  }
+
+  .mobileTitleOverlay h2 {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+  }
+
+  .communitiesTitle {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .badge {
+    font-weight: 400;
+  }
 }

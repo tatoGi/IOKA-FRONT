@@ -24,7 +24,8 @@ const FAQ = ({ pageData }) => {
     const fetchFaqs = async () => {
       try {
         const response = await axios.get(FAQ_API);
-        setFaqs(response.data.faqs || []); // Set the faqs data to state
+        const activeFaqs = (response.data.faqs || []).filter(faq => faq.is_active === 1);
+        setFaqs(activeFaqs); // Set only active FAQs to state
       } catch (error) {
         console.error("Error fetching FAQs:", error);
         setFaqs([]); // Set empty array if error occurs

@@ -2251,3 +2251,11 @@ padding: 14px;
     
   }
 }
+@media (max-width: 400px) {
+ .listItem{
+  width: 100%;
+ } 
+ .show_more_button{
+  width: 100%;
+ }
+}

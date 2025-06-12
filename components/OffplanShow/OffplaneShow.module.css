@@ -1768,10 +1768,11 @@
 
   .qrCard {
     max-width: 354px;
+    margin-left: 0;
   }
 
   .qrCardmodern {
-    max-width: 354px;
+    width: 354px;
   }
 
   .personalInfo img {
@@ -1879,12 +1880,15 @@
     line-height: 100%;
     letter-spacing: 0%;
     justify-content: center;
+    width: 100%;
 
   }
 
   .qrCardmodern {
     padding: 16px;
     border-radius: 16px;
+    margin-left: 0;
+    
   }
 
   .qrbody {
@@ -1892,7 +1896,6 @@
     display: flex !important;
     align-items: flex-start;
     gap: 16px;
-    max-height: 90px;
   }
 
   .qrButtons {
@@ -1911,6 +1914,7 @@
     white-space: nowrap;
     margin-top: 0;
     /* margin-top: 10px; */
+    margin-bottom: 8px;
   }
 
   .enquireBtn {
@@ -2044,6 +2048,7 @@
     display: flex;
     justify-content: flex-start;
     height: 40px;
+    width: 354px;
   }
 
   .contactBtn {
@@ -2052,6 +2057,17 @@
 }
 
 @media (max-width:400px) {
+  .qrCardmodern {
+    margin-left: 0;
+    width: 100%;
+  }
+  .qrCard {
+    margin-left: 0;
+    width: 100%;
+  }
+  .contactButton{
+    width: 100%;
+  }
   .swiperSlide {
     width: 280px !important;
     height: 200px !important;

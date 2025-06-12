@@ -1335,7 +1335,15 @@
     width: 354px;
     margin: 0;
   }
-
+  .testimonialRole{
+    font-family: 'Montserrat';
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      text-align: center;
+      color: #0A273B;
+  }
   .teamMember {
     max-width: 354px !important;
     width: 100%;
@@ -1362,5 +1370,10 @@
   .submitButton {
     padding: 12px;
     font-size: 14px;
+  }
+}
+@media (max-width: 400px){
+  .testimonialSection{
+    width: 100%;
   }
 }

@@ -8,7 +8,8 @@ const ContactForm = ({ pageTitle = "" }) => {
     name: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
+    country: ""
   });
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,8 +72,10 @@ const ContactForm = ({ pageTitle = "" }) => {
       
       setStatus({
         success: true,
-        message: response.data.message || 'Form submitted successfully!',
+        message: response.data?.message || 'Form submitted successfully!',
       });
+      
+      // Reset form on successful submission
       setFormData({
         name: '',
         email: '',
@@ -80,11 +83,38 @@ const ContactForm = ({ pageTitle = "" }) => {
         message: '',
       });
     } catch (error) {
-      setStatus({
-        success: false,
-        message: error.response?.data?.message || error.message || 'Network error. Please try again.',
+      console.error('Form submission error:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        headers: error.response?.headers,
+        config: {
+          url: error.config?.url,
+          method: error.config?.method,
+          data: error.config?.data,
+          headers: error.config?.headers,
+        },
       });
-      console.error("Form submission error:", error);
+      
+      // Handle validation errors (422)
+      if (error.response?.status === 422) {
+        if (error.response?.data?.errors) {
+          // Format validation errors into a user-friendly message
+          const errorMessages = Object.entries(error.response.data.errors)
+            .map(([field, messages]) => `${field}: ${Array.isArray(messages) ? messages.join(', ') : messages}`)
+            .join('\n');
+          setError(`Validation errors:\n${errorMessages}`);
+        } else {
+          // If we don't have structured errors, show the raw response data
+          setError(`Validation failed: ${JSON.stringify(error.response?.data || 'Unknown validation error')}`);
+        }
+      } else {
+        // Handle other types of errors
+        setError(error.response?.data?.message || 
+                error.response?.data?.error || 
+                error.message ||
+                'An error occurred while submitting the form. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -160,6 +190,17 @@ const ContactForm = ({ pageTitle = "" }) => {
           style={placeholderStyle}
           aria-label="Write a Message"
           rows={isMobile ? 4 : 6}
+        />
+        <input
+          type="text"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          placeholder="Country"
+          className={styles.input}
+          required
+          style={placeholderStyle}
+          aria-label="Your Country"
         />
         <button 
           type="submit" 

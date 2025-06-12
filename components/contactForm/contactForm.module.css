@@ -287,7 +287,18 @@ letter-spacing: 0%;
     margin: 0 8px;
   }
 }
+@media (max-width: 400px){
+ .input{
+  width: 100%;
 
+ }
+ .textarea{
+  width: 100%;
+ }
+ .submitButton{
+  width: 100%;
+ }
+}
 /* Extra Small Mobile Styles */
 @media (max-width: 360px) {
   .formContainer {

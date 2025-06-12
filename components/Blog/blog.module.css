@@ -947,5 +947,11 @@
     .card{
         width: 354px;
         margin-top: 0;
+        margin-bottom: 24px !important;
+    }
+}
+@media (max-width: 400px){
+    .card{
+        width: 340px;
     }
 }

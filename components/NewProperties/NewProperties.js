@@ -114,9 +114,13 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                             <details>
                                 <summary>Key Highlights</summary>
                                 <ul className={styles.features_mobile}>
-                                    {activeData.properties.map((property, index) => (
-                                    <li key={index}>{property.title}</li>
-                                    ))}
+                                    {activeData?.properties?.length > 0 ? (
+                                        activeData.properties.map((property, index) => (
+                                            <li key={index}>{property.title || `Feature ${index + 1}`}</li>
+                                        ))
+                                    ) : (
+                                        <li>No features available</li>
+                                    )}
                                 </ul>
                             </details>
                         </div>

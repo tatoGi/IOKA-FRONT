@@ -2401,7 +2401,20 @@ margin-bottom: 12px;
     margin-right: 0;
   }
 }
-
+@media (max-width: 400px){
+  .sidevabarlocation{
+    width: 100%;
+  }
+  .sidebarqr{
+    width: 100%;
+  }
+  .contactButton{
+    width: 100%;
+  }
+  .amenities_section{
+    width: 100%;
+  }
+}
 .tabletLayout {
   display: flex;
   flex-direction: column;

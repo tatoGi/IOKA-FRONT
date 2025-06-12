@@ -469,7 +469,7 @@
 
 @media (max-width:400px) {
     .testimonialCard {
-        width: 340px !important;
+        width: 320px !important;
         height: 384px !important;
     }
 }
