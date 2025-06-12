@@ -143,6 +143,10 @@ const Header = ({ navigationData }) => {
     };
   }, [isSearchOpen]);
 
+  // Find contact page
+  const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
+  const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';
+
   const desktopPages = navigationData
     .filter((page) => page.type_id !== 3 && page.active === 1)
     .sort((a, b) => a.sort - b.sort);
@@ -286,7 +290,7 @@ const Header = ({ navigationData }) => {
                 </div>
 
                 <div className="contactBtn">
-                  <Link href={"/contact"}>CONTACT US</Link>
+                  <Link href={contactSlug}>CONTACT US</Link>
                 </div>
               </div>
             </div>

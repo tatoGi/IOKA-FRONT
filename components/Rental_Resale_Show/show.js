@@ -831,7 +831,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <div className={styles.description}>
             <h1>Description</h1>
             <div className="row">
-              <div className={styles.col ? "col-md-12" : "col-md-8"}>
+              <div className={`${styles.col} col-md-8`}>
                 <div className={styles.body}>
                   <pre className={styles.descriptionText}>
                     <div
@@ -881,7 +881,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               </div>
-              <div className={styles.col ? "col-md-12" : "col-md-4"}>
+              <div className={`${styles.col } col-md-4`}>
                 {/* Contact Information Section */}
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>

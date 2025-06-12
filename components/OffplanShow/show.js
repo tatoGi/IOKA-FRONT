@@ -24,12 +24,6 @@ const getImageUrl = (path) => {
   
   try {
     const decodedPath = decodeImageUrl(path);
-    console.log('Processing image path:', {
-      original: path,
-      decoded: decodedPath,
-      isFullUrl: decodedPath.startsWith('http://') || decodedPath.startsWith('https://'),
-      containsStorage: decodedPath.includes('storage/')
-    });
 
     // For development environment
     if (process.env.NODE_ENV === 'development') {
@@ -44,12 +38,7 @@ const getImageUrl = (path) => {
       // Construct the URL
       const baseUrl = 'http://127.0.0.1:8000';
       const finalUrl = `${baseUrl}/storage/${cleanPath}`;
-      
-      console.log('Generated URL:', {
-        baseUrl,
-        cleanPath,
-        finalUrl
-      });
+   
       
       return finalUrl;
     }
@@ -67,7 +56,7 @@ const getImageUrl = (path) => {
   }
 };
 
-const MobileSlider = ({ images, type, openGalleryModal }) => {
+const MobileSlider = ({ images, type, openGalleryModal, offplanData }) => {
   const handleClick = (e, index) => {
     e.preventDefault();
     openGalleryModal(images, index);
@@ -92,7 +81,7 @@ const MobileSlider = ({ images, type, openGalleryModal }) => {
           <div onClick={(e) => handleClick(e, index)} style={{ cursor: 'pointer', height: '100%' }}>
             <Image
               src={getImageUrl(image)}
-              alt={`${type} Image ${index + 1}`}
+              alt={offplanData?.offplan?.alt_texts?.[type]?.[index] || `${type} Image ${index + 1}`}
               width={400}
               height={300}
               className={style.exteriorimage}
@@ -133,7 +122,7 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
                     : baseimage
                 }
-                alt={property.main_photo_alt || property.title}
+                alt={property.alt_texts?.main_photo || property.title || `Property ${index + 1}`}
                 width={280}
                 height={200}
                 className={style.sectionImage}
@@ -283,7 +272,7 @@ const OffplanShow = ({ offplanData }) => {
       >
         <Image
           src={imageUrl}
-          alt={caption}
+          alt={offplanData.offplan.alt_texts?.[`${galleryType}_gallery`]?.[index] || caption}
           width={400}
           height={300}
           className={style.exteriorimage}
@@ -317,7 +306,7 @@ const OffplanShow = ({ offplanData }) => {
                 )}`
               : baseimage
           }
-          alt={offplanData.offplan.banner_photo_alt || "Banner Image"}
+          alt={offplanData.offplan.alt_texts?.banner_photo || "Banner Image"}
           fill
           priority
           sizes="100vw"
@@ -366,7 +355,7 @@ const OffplanShow = ({ offplanData }) => {
                       <div className={`${style.feature} ${style.textEllipsis}`}>
                         <Image
                           src={require("/assets/img/garage.svg")}
-                          alt="Area Icon"
+                          alt="Garage Icon"
                           width={24}
                           height={24}
                         />
@@ -412,7 +401,7 @@ const OffplanShow = ({ offplanData }) => {
                         )}`
                       : baseimage
                   }
-                  alt={offplanData.offplan.agent_image_alt || offplanData.offplan.agent_title}
+                  alt={offplanData.offplan.alt_texts?.agent_image || "Agent Image"}
                   width={100}
                   height={100}
                   priority={false}
@@ -619,10 +608,11 @@ const OffplanShow = ({ offplanData }) => {
                   ))}
                 </div>
                 <div className="d-md-none">
-                  <MobileSlider
-                    images={exteriorGallery}
-                    type="EXTERIOR"
+                  <MobileSlider 
+                    images={exteriorGallery} 
+                    type="exterior" 
                     openGalleryModal={openGalleryModal}
+                    offplanData={offplanData}
                   />
                 </div>
               </div>
@@ -638,10 +628,11 @@ const OffplanShow = ({ offplanData }) => {
                   ))}
                 </div>
                 <div className="d-md-none">
-                  <MobileSlider
-                    images={interiorGallery}
-                    type="INTERIOR"
+                  <MobileSlider 
+                    images={interiorGallery} 
+                    type="interior" 
                     openGalleryModal={openGalleryModal}
+                    offplanData={offplanData}
                   />
                 </div>
               </div>

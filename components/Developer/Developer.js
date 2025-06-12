@@ -84,11 +84,14 @@ const Developer = ({ initialData, initialPagination }) => {
   // Filter data based on search query
   useEffect(() => {
     if (!searchQuery) {
-      setFilteredData(cardData);
-      setTotalPages(initialPagination?.last_page || 1);
-      setCurrentPage(initialPagination?.current_page || 1);
+      // Only reset if we're not in the middle of a search
+      if (filteredData !== cardData) {
+        setFilteredData(cardData);
+        setTotalPages(initialPagination?.last_page || 1);
+        setCurrentPage(initialPagination?.current_page || 1);
+      }
     }
-  }, [searchQuery, cardData, initialPagination]);
+  }, [searchQuery, cardData, initialPagination, filteredData]);
 
   const handleSearch = async (searchText) => {
     if (searchText.length >= 3) {
@@ -97,30 +100,36 @@ const Developer = ({ initialData, initialPagination }) => {
         const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
           params: {
             search: searchText,
-            per_page: 10
-          }
+            per_page: 10,
+          },
         });
-        
+
         const { data, meta } = response.data;
-        
+
         // Process the data array from the response
-        const processedData = data.data.map(developer => ({
+        const processedData = data.data.map((developer) => ({
           id: developer.id,
-          title: developer.title || 'No Title',
-          paragraph: developer.paragraph || 'No Description',
-          tags: typeof developer.tags === 'string' ? JSON.parse(developer.tags || '[]') : 
-                (Array.isArray(developer.tags) ? developer.tags : []),
-          photo: typeof developer.photo === 'string' ? JSON.parse(developer.photo || '[]') : 
-                 (Array.isArray(developer.photo) ? developer.photo : []),
-          phone: developer.phone || '',
-          whatsapp: developer.whatsapp || '',
-          slug: developer.slug || '',
+          title: developer.title || "No Title",
+          paragraph: developer.paragraph || "No Description",
+          tags: typeof developer.tags === "string"
+            ? JSON.parse(developer.tags || "[]")
+            : Array.isArray(developer.tags)
+            ? developer.tags
+            : [],
+          photo: typeof developer.photo === "string"
+            ? JSON.parse(developer.photo || "[]")
+            : Array.isArray(developer.photo)
+            ? developer.photo
+            : [],
+          phone: developer.phone || "",
+          whatsapp: developer.whatsapp || "",
+          slug: developer.slug || "",
           awards: developer.awards || [],
           offplan_listings: developer.offplan_listings || [],
           rental_listings: developer.rental_listings || [],
-          rental_resale_listings: developer.rental_resale_listings || []
+          rental_resale_listings: developer.rental_resale_listings || [],
         }));
-        
+
         setCardData(processedData);
         setFilteredData(processedData);
         setTotalPages(meta.last_page);
@@ -139,11 +148,19 @@ const Developer = ({ initialData, initialPagination }) => {
   const handleSearchInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
+
     if (value.length >= 3) {
-      handleSearch(value);
+      // Debounce the search to avoid too many requests
+      const timer = setTimeout(() => {
+        handleSearch(value);
+      }, 500);
+
+      return () => clearTimeout(timer);
     } else if (value.length === 0) {
       // Reset to initial data if search is cleared
       fetchData(1);
+      setFilteredData(cardData);
+      setTotalPages(initialPagination?.last_page || 1);
       setCurrentPage(1);
     }
   };
@@ -157,25 +174,48 @@ const Developer = ({ initialData, initialPagination }) => {
 
   // Handle page change for search results
   const handlePageChangeForSearch = async (page) => {
-    if (page !== currentPage) {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
-          params: {
-            search: searchQuery,
-            per_page: 10,
-            page: page
-          }
-        });
-        const { data, meta } = response.data;
-        setFilteredData(Array.isArray(data) ? data : [data]);
-        setTotalPages(meta.last_page);
-        setCurrentPage(meta.current_page);
-      } catch (error) {
-        console.error("Error fetching page:", error);
-      } finally {
-        setIsLoading(false);
-      }
+    if (page === currentPage) return;
+
+    setIsLoading(true);
+    try {
+      const response = searchQuery.length >= 3
+        ? await axios.get(DEVELOPER_SEARCH_API, {
+            params: {
+              search: searchQuery,
+              per_page: 10,
+              page: page,
+            },
+          })
+        : await axios.get(DEVELOPER_API, {
+            params: {
+              page: page,
+              per_page: 10,
+            },
+          });
+
+      const { data, meta } = response.data;
+
+      // Process the data to match the expected format
+      const processedData = Array.isArray(data) ? data : [data];
+
+      setCardData(processedData);
+      setFilteredData(processedData);
+      setTotalPages(meta.last_page);
+      setCurrentPage(meta.current_page);
+
+      // Update URL with current page
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, page },
+        },
+        undefined,
+        { shallow: true }
+      );
+    } catch (error) {
+      console.error("Error fetching page:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

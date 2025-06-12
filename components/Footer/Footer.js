@@ -143,26 +143,37 @@ const Footer = ({ navigationData, settings }) => {
               </ul>
             </div>
             <div className="footer-contact-links">
-              <Link href={"#"} className="footer-contact-item">
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getSettingValue('contact.address'))}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="footer-contact-item"
+              >
                 <div className="icon-00">
                   <LocationIcon />
                 </div>
                 <div className="f-text-0">
                   {getSettingValue('contact.address')}
                 </div>
-              </Link>
-              <Link href={"#"} className="footer-contact-item">
+              </a>
+              <a 
+                href={`tel:${getSettingValue('contact.phone').replace(/[^\d+]/g, '')}`} 
+                className="footer-contact-item"
+              >
                 <div className="icon-00">
                   <PhoneIcon />
                 </div>
                 <div className="f-text-0">{getSettingValue('contact.phone')}</div>
-              </Link>
-              <Link href={"#"} className="footer-contact-item">
+              </a>
+              <a 
+                href={`mailto:${getSettingValue('contact.email')}`} 
+                className="footer-contact-item"
+              >
                 <div className="icon-00">
                   <MessageIcon />
                 </div>
                 <div className="f-text-0">{getSettingValue('contact.email')}</div>
-              </Link>
+              </a>
             </div>
             {/* Social Icons Section */}
             <div className="soc-icons-b">
@@ -210,26 +221,37 @@ const Footer = ({ navigationData, settings }) => {
                   dangerouslySetInnerHTML={{ __html: getSettingValue('description') }}
                 />
                 <div className="footer-contact-links">
-                  <Link href={"#"} className="footer-contact-item">
+                  <a 
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getSettingValue('contact.address'))}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="footer-contact-item"
+                  >
                     <div className="icon-00">
                       <LocationIcon />
                     </div>
                     <div className="f-text-0">
                       {getSettingValue('contact.address')}
                     </div>
-                  </Link>
-                  <Link href={"#"} className="footer-contact-item">
+                  </a>
+                  <a 
+                    href={`tel:${getSettingValue('contact.phone').replace(/[^\d+]/g, '')}`} 
+                    className="footer-contact-item"
+                  >
                     <div className="icon-00">
                       <PhoneIcon />
                     </div>
                     <div className="f-text-0">{getSettingValue('contact.phone')}</div>
-                  </Link>
-                  <Link href={"#"} className="footer-contact-item">
+                  </a>
+                  <a 
+                    href={`mailto:${getSettingValue('contact.email')}`} 
+                    className="footer-contact-item"
+                  >
                     <div className="icon-00">
                       <MessageIcon />
                     </div>
                     <div className="f-text-0">{getSettingValue('contact.email')}</div>
-                  </Link>
+                  </a>
                 </div>
               </div>
 

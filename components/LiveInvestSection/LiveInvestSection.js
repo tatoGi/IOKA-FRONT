@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "./LiveInvestSection.module.css";
 import homeBanner from "../../assets/img/homeBanner.jpg";
 // Import Swiper React components
@@ -8,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const LiveInvestSection = ({ sectionDataTwo }) => {
+const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
   const [activeSlide, setActiveSlide] = useState(1);
   const additionalFields = sectionDataTwo?.additional_fields || {
     slider_images: [],
@@ -35,6 +36,15 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
   };
 
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+  const router = useRouter();
+
+  // Find contact page
+  const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
+  const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';
+
+  const handleContactClick = () => {
+    router.push(contactSlug);
+  };
 
   return (
     <section className={styles.liveInvestSection}>
@@ -45,7 +55,7 @@ const LiveInvestSection = ({ sectionDataTwo }) => {
             <h2>{additionalFields.subtitle}</h2>
             <h1>{additionalFields.title}</h1>
             <p>{additionalFields.title_2}</p>
-            <button className={styles.contactBtn}>Contact Us</button>
+            <button className={styles.contactBtn} onClick={handleContactClick}>Contact Us</button>
           </div>
           <div className={`${styles.sliderContainer} col-md-6`}>
             {isMobile ? (

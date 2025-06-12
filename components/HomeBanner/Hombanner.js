@@ -14,7 +14,7 @@ import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
 import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
 
-const Hombanner = ({ initialData }) => {
+const Hombanner = ({ initialData, navigationData }) => {
   const [cardData, setCardData] = useState(initialData || []);
   const [sectionOneData, setSectionOneData] = useState(null); // State for section_one data
   const [sectionTwoData, setSectionTwoData] = useState(null); // State for section_two data
@@ -80,7 +80,7 @@ const Hombanner = ({ initialData }) => {
           <HomeBannerSearch />
         </div>
       </div>
-      <LiveInvestSection sectionDataTwo={sectionTwoData} />
+      <LiveInvestSection sectionDataTwo={sectionTwoData} navigationData={navigationData} />
       <NewProperties sectionDataThree={sectionThreeData} />
       <PopularAreaSection sectionDataFour={sectionFourData} />
       <TeamSection sectionDataFive={sectionFiveData} />
