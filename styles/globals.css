@@ -31,16 +31,17 @@ body {
 }
 
 .maintenance-banner {
-  background-color: #4CAF50; /* Green background */
+  background-color: #4CAF50;
   color: white;
   text-align: center;
   padding: 10px 0;
-  font-family: var(--font-montserrat);
   font-weight: 500;
   font-size: 14px;
   position: relative;
   z-index: 1000;
-  border-bottom: 1px solid #3e8e41; /* Slightly darker green border */
+  border-bottom: 1px solid #3e8e41;
+  font-family: 'Montserrat';
+  height: 31px;
 }
 
 .maintenance-banner span {
