@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ioka.ae';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://www.ioka.ae';
 const API_HOSTNAME = new URL(API_BASE_URL).hostname;
 
 /** @type {import('next').NextConfig} */
