@@ -6,7 +6,10 @@ import Image from "next/image";
 import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router"; // Import useRouter
+import { useRouter } from "next/router";
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 const Header = ({ navigationData }) => {
   const [activeScroll, setActiveScroll] = useState(false);
@@ -163,6 +166,9 @@ const Header = ({ navigationData }) => {
 
   return (
     <>
+      <div className="maintenance-banner">
+        <span>This website is currently operating in testing mode—some features may be limited or subject to change.</span>
+      </div>
       <header className={activeScroll ? "scroll-header" : ""}>
         <div className="header-cont">
           <div className="container">
