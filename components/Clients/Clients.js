@@ -26,6 +26,13 @@ const Clients = ({ sectionSixData }) => {
     className: styles.testimonialSlider,
     responsive: [
       {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
         breakpoint: 1200,
         settings: {
           slidesToShow: 3,
