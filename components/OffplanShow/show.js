@@ -129,7 +129,7 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
               />
               <div className={style.overlay}>
                 <div className={style.propertyName}>{property.title}</div>
-                <a href={`/offplan/${property.slug}`} className={style.arrowLink}>
+                <a href={`/offplan/${property.slug}`} className={style.arrowLink} title={`View details for ${property.title}`}>
                   <FontAwesomeIcon icon={faAngleRight} />
                 </a>
               </div>
@@ -665,6 +665,7 @@ const OffplanShow = ({ offplanData }) => {
                     <a
                       href={`/offplan/${property.slug}`}
                       className={style.arrowLink}
+                      title={`View details for ${property.title}`}
                     >
                       <FontAwesomeIcon icon={faAngleRight} />
                     </a>

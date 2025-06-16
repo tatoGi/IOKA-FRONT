@@ -1,11 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NAVIGATION_MENU } from "@/routes/apiRoutes";
 import { useRouter } from 'next/router';
 
 export default function Index() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    
     const fetchHomePage = async () => {
       try {
         const res = await fetch(NAVIGATION_MENU);
@@ -24,7 +31,7 @@ export default function Index() {
     };
 
     fetchHomePage();
-  }, [router]);
+  }, [router, isMounted]);
 
   return null;
 }

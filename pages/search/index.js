@@ -1,3 +1,4 @@
+'use client';
 import SearchPage, { getServerSideProps } from "@/pages/page-components/search"; // Import getServerSideProps
 
 export { getServerSideProps }; // Re-export getServerSideProps

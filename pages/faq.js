@@ -7,10 +7,12 @@ import Image from "next/image";
 import axios from "axios";
 import { FAQ_API } from "@/routes/apiRoutes";
 import { useMediaQuery } from 'react-responsive';
+
 const FAQ = ({ pageData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [faqs, setFaqs] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const breadcrumbData = [
     { title: "Home", path: "/" },
     { title: "FAQ", path: "/faq" }
@@ -19,6 +21,10 @@ const FAQ = ({ pageData }) => {
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchFaqs = async () => {
@@ -34,10 +40,20 @@ const FAQ = ({ pageData }) => {
 
     fetchFaqs();
   }, []);
+  
   const isMobileView = useMediaQuery({ query: '(max-width: 768px)' });
+  
   useEffect(() => {
-    setIsMobile(isMobileView);
-  }, [isMobileView]);
+    if (isMounted) {
+      setIsMobile(isMobileView);
+    }
+  }, [isMobileView, isMounted]);
+
+  // Don't render until component is mounted to prevent hydration mismatch
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <>
       <Breadcrumb breadcrumbData={breadcrumbData} />

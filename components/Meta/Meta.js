@@ -3,13 +3,16 @@ import { useRouter } from "next/router";
 
 const Meta = ({ items }) => {
   const router = useRouter();
+  
+  // Use require for favicon - access default export to get the path
+  const faviconPath = require("/assets/img/bad.svg").default || require("/assets/img/bad.svg");
 
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
   
   // Set the base URL based on environment
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-    (isDevelopment ? 'http://localhost:3000' : 'https://ioka-front.vercel.app/');
+    (isDevelopment ? 'http://localhost:3000' : 'https://ioka.ae');
   
   // Construct the current URL
   const currentUrl = `${siteUrl}${router.asPath}`;
@@ -35,7 +38,11 @@ const Meta = ({ items }) => {
 
       <meta name="keywords" content={getMetaValue('keywords')} />
       <meta name="description" content={getMetaValue('description')} />
-      <link rel="icon" href="/favicon.ico" />
+      
+      {/* Favicon - SVG format */}
+      <link rel="icon" type="image/svg+xml" href={faviconPath} />
+      <link rel="alternate icon" href="/favicon.ico" />
+      
       <meta charSet="utf-8" />
       <title>{getMetaValue('title')}</title>
 

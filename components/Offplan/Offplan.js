@@ -45,8 +45,8 @@ const Offplan = ({ initialData, initialPagination }) => {
       "Commercial"
     ],
     priceRanges: ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000", "5000001+"],
-    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
-    bathrooms: [1, 2, 3, 4, 5, 6, 7, 8],
+    bedrooms: ["Studio", 1, 2, 3, 4, "4+"],
+    bathrooms: [1, 2, 3, 4, "4+"],
     sqFtRanges: ["0-1000", "1001-2000", "2001-3000", "3001-4000", "4001-5000", "5001+"],
     listedAs: ["Available", "Sold", "Reserved", "Under Construction"],
   });
@@ -136,7 +136,23 @@ const Offplan = ({ initialData, initialPagination }) => {
       // Extract unique values for filters
       const bedrooms = [...new Set(options.data.map((item) => item.bedroom))]
         .filter(Boolean)
-        .sort((a, b) => a - b);
+        .sort((a, b) => {
+          // Handle "Studio" and "4+" values
+          if (a === "Studio") return -1;
+          if (b === "Studio") return 1;
+          if (a === "4+") return 1;
+          if (b === "4+") return -1;
+          return a - b;
+        });
+
+      // Extract unique bathroom values
+      const bathrooms = [...new Set(options.data.map((item) => item.bathroom))]
+        .filter(Boolean)
+        .sort((a, b) => {
+          if (a === "4+") return 1;
+          if (b === "4+") return -1;
+          return a - b;
+        });
 
       // Only update bedrooms if we got valid options from the API
       if (bedrooms.length > 0) {
@@ -145,9 +161,17 @@ const Offplan = ({ initialData, initialPagination }) => {
           bedrooms,
         }));
       }
+
+      // Update bathrooms if we got valid options from the API
+      if (bathrooms.length > 0) {
+        setFilterOptions(prev => ({
+          ...prev,
+          bathrooms,
+        }));
+      }
     } catch (error) {
       console.error("Error fetching filter options:", error);
-      // Keep the default bedroom options if API call fails
+      // Keep the default bedroom and bathroom options if API call fails
     }
   };
 

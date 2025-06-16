@@ -754,7 +754,7 @@ const SearchHomeResult = ({ searchParams }) => {
                   </span>
                 </div>
                 <div className={stylesearch.see_all}>
-                  <a href="#" className={stylesearch.see_all_link}>
+                  <a href="#" className={stylesearch.see_all_link} title="View all developers">
                     See All
                   </a>
                 </div>

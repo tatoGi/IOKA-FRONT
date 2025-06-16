@@ -13,8 +13,13 @@ const Blog = ({ initialData }) => {
   const [cardData, setCardData] = useState(initialData || []);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isMounted, setIsMounted] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchData = async (page) => {
@@ -34,6 +39,11 @@ const Blog = ({ initialData }) => {
       fetchData(currentPage);
     }
   }, [currentPage, initialData]);
+
+  // Don't render until component is mounted to prevent hydration mismatch
+  if (!isMounted) {
+    return null;
+  }
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

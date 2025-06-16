@@ -95,9 +95,10 @@ const AboutUs = ({ initialData, id }) => {
     return decodeURIComponent(url);
   };
 
-  if (!cardData) {
-    return null;
-  }
+  // Always render the component - data will populate when available
+  // if (!cardData) {
+  //   return null;
+  // }
 
   const renderStats = () => {
     if (isMobile) {

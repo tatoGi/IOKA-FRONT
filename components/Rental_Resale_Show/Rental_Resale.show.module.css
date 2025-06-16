@@ -1,6 +1,6 @@
 .gallery {
   display: flex;
-  gap: 10px;
+  gap: 24px;
   /* Adjust gap between main and small images */
   width: 100%;
   /* Ensure gallery takes full width of its container */
@@ -319,7 +319,6 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-top: 16px;
-  margin-right: 40px;
 
 }
 
@@ -873,13 +872,14 @@
 
 .modalContent {
   background-color: white;
-  padding: 124px 208px;
+  padding: 24px 208px;
   border-radius: 12px;
   width: 100%;
-  max-width: 1560px;
+  max-width: 1300px;
   /* Adjust as needed */
   position: relative;
   overflow-y: auto;
+  height: 800px;
 }
 
 .modalContent .closeButton {
@@ -1004,7 +1004,17 @@
     margin-bottom: 16px;
     line-height: 1.4;
   }
-
+  .modalContent {
+    background-color: white;
+    padding: 24px 208px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1200px;
+    /* Adjust as needed */
+    position: relative;
+    overflow-y: auto;
+    height: 600px;
+  }
   .imageContainer {
     position: relative;
     width: 100%;

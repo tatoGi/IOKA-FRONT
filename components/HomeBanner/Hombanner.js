@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios
 import HomeBannerSwiper from "./HomeBannerSwiper";
@@ -23,8 +22,13 @@ const Hombanner = ({ initialData, navigationData }) => {
   const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
   const [sectionSixData, setSectionSixData] = useState(null); // State for section_six data
   const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter(); // Initialize useRouter
   const isMobile = useMediaQuery({ maxWidth: 768 }); // Check if the view is mobile
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,12 +70,12 @@ const Hombanner = ({ initialData, navigationData }) => {
     fetchData();
   }, [initialData]);
 
-  // Return null only if data is missing, not for loading state
-  if (!sectionOneData || !sectionTwoData || !sectionThreeData || 
-      !sectionFourData || !sectionFiveData || !sectionSixData || !sectionSevenData) {
+  // Don't render until component is mounted to prevent hydration mismatch
+  if (!isMounted) {
     return null;
   }
-  
+
+  // Always render all components - data will populate when available
   return (
     <>
       <div className="home-banner">

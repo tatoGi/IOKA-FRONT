@@ -39,8 +39,8 @@ const Rental_Resale = () => {
   // Filter options for SearchRental component
   const filterOptions = {
     propertyTypes: ["Apartment", "Villa", "Townhouse", "Penthouse", "Land"],
-    bedrooms: [1, 2, 3, 4, 5, 6, 7, 8],
-    bathrooms: [1, 2, 3, 4, 5, 6, 7, 8]
+    bedrooms: ["studio", 1, 2, 3, 4, "4+"],
+    bathrooms: ["studio", 1, 2, 3, 4, "4+"]
   };
 
   // Move topProperties definition before useEffect
@@ -208,6 +208,17 @@ const Rental_Resale = () => {
   };
 
   const handleFilterChange = (newFilters) => {
+    // If newFilters is null, clear all filters
+    if (!newFilters) {
+      setCurrentFilters({
+        price: "",
+        sqFt: ""
+      });
+      setFilters(null);
+      setCurrentPage(1);
+      return;
+    }
+
     // Update current filters state with the raw filter values
     setCurrentFilters(prev => ({
       ...prev,
@@ -215,32 +226,10 @@ const Rental_Resale = () => {
       sqFt: newFilters?.sqFt || ""
     }));
 
-    // Format the filters to match backend expectations
-    const formattedFilters = {};
-    
-    // Handle price range
-    if (newFilters?.price) {
-      const [priceMin, priceMax] = newFilters.price.split('-');
-      formattedFilters.price_min = priceMin || null;
-      formattedFilters.price_max = priceMax || null;
-    }
-
-    // Handle sqFt range
-    if (newFilters?.sqFt) {
-      const [sqFtMin, sqFtMax] = newFilters.sqFt.split('-');
-      formattedFilters.sq_ft_min = sqFtMin || null;
-      formattedFilters.sq_ft_max = sqFtMax || null;
-    }
-
-    // Add other filters
-    if (newFilters?.propertyType) formattedFilters.property_type = newFilters.propertyType;
-    if (newFilters?.bedrooms) formattedFilters.bedrooms = newFilters.bedrooms;
-    if (newFilters?.bathrooms) formattedFilters.bathrooms = newFilters.bathrooms;
-    if (newFilters?.searchQuery) formattedFilters.location = newFilters.searchQuery;
-
-    // Remove null or empty values
+    // The newFilters object already contains the backend-formatted filters
+    // Just remove null or empty values
     const filteredParams = Object.fromEntries(
-      Object.entries(formattedFilters).filter(([_, v]) => v !== null && v !== "")
+      Object.entries(newFilters).filter(([_, v]) => v !== null && v !== "")
     );
 
     setFilters(filteredParams);
@@ -384,7 +373,9 @@ const Rental_Resale = () => {
                       <div className={Styles.propertyInfo}>
                         <h3 className={Styles.title}>{property.title}</h3>
                         <p className={Styles.location}>
-                          {property.locations && property.locations[0] ? property.locations[0].title : ''}
+                          {property.locations && property.locations.length > 0 
+                            ? property.locations[0].title 
+                            : property.subtitle || property.location || ''}
                         </p>
 
                         <div className={Styles.features}>
@@ -595,25 +586,27 @@ const Rental_Resale = () => {
                         </div>
                       )}
                     </div>
-                    <div className={Styles.smallImagesGrid}>
-                      {galleryImages.slice(1, 3).map((image, index) => (
-                        <div key={index} className={Styles.smallImage}>
-                          <Image
-                            src={
-                              image
-                                ? `${
-                                    process.env.NEXT_PUBLIC_API_URL
-                                  }/storage/${decodeImageUrl(image)}`
-                                : defaultImage
-                            }
-                            alt={`Gallery Image ${index + 1}`}
-                            style={{ objectFit: "cover" }}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 334px"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    {galleryImages.length > 1 && (
+                      <div className={Styles.smallImagesGrid}>
+                        {galleryImages.slice(1, 3).map((image, index) => (
+                          <div key={index} className={Styles.smallImage}>
+                            <Image
+                              src={
+                                image
+                                  ? `${
+                                      process.env.NEXT_PUBLIC_API_URL
+                                    }/storage/${decodeImageUrl(image)}`
+                                  : defaultImage
+                              }
+                              alt={`Gallery Image ${index + 1}`}
+                              style={{ objectFit: "cover" }}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 334px"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Mobile view slider */}
                     <div className={Styles.mobileImageSlider}>
@@ -718,7 +711,9 @@ const Rental_Resale = () => {
                       <h4>{listing.title}</h4>
 
                       <p className={Styles.resaleLocation}>
-                        {listing.subtitle}
+                        {listing.locations && listing.locations.length > 0 
+                          ? listing.locations[0].title 
+                          : listing.subtitle || listing.location || ''}
                       </p>
                       <div className={Styles.priceContainer}>
                         {isMobile && (
@@ -942,7 +937,9 @@ const Rental_Resale = () => {
                     <div className={Styles.propertyInfo}>
                       <h3 className={Styles.title}>{property.title}</h3>
                       <p className={Styles.location}>
-                        {property.locations && property.locations[0] ? property.locations[0].title : ''}
+                        {property.locations && property.locations.length > 0 
+                          ? property.locations[0].title 
+                          : property.subtitle || property.location || ''}
                       </p>
 
                       <div className={Styles.features}>

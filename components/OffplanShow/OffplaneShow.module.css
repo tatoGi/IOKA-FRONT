@@ -712,13 +712,14 @@
 
 .modalContent {
   background-color: white;
-  padding: 124px 208px;
+  padding: 24px 208px;
   border-radius: 12px;
   width: 100%;
-  max-width: 1560px;
+  max-width: 1300px;
   /* Adjust as needed */
   position: relative;
   overflow-y: auto;
+  height: 800px;
 }
 
 .closeButton {
@@ -1158,6 +1159,17 @@
 
   .interiorimage {
     max-width: 320px;
+  }
+  .modalContent {
+    background-color: white;
+    padding: 20px 208px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1200px;
+    /* Adjust as needed */
+    position: relative;
+    overflow-y: auto;
+    height: 550px;
   }
 }
 

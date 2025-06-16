@@ -5,8 +5,6 @@ import { NAVIGATION_MENU } from '@/routes/apiRoutes';
 
 const List = () => {
   const [navigationData, setNavigationData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNavigationData = async () => {
@@ -17,18 +15,13 @@ const List = () => {
         }
       } catch (err) {
         console.error('Error fetching navigation data:', err);
-        setError('Failed to load navigation data');
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchNavigationData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
+  // Always render the component - data will populate when available
   return (
     <Hombanner navigationData={navigationData} />
   );

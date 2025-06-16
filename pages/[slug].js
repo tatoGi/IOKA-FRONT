@@ -1,15 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Home from "@/pages/page-components/home";
+import Home from "@/components/HomeBanner/Hombanner";
 import Developer from "@/components/Developer/Developer";
-import About from "@/pages/page-components/about";
-import Contact from "@/pages/page-components/contact";
-import OffPlan from "@/pages/page-components/offplan";
-import Rental_Resale from "@/pages/page-components/rentalResale";
+import About from "@/components/AboutUs/AboutUs";
+import Contact from "@/components/Contact/Contact";
+import OffPlan from "@/components/Offplan/Offplan";
+import Rental_Resale from "@/components/Rental_Resale/Rental_Resale";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
-import Blog from "@/pages/page-components/blog";
-
-const DynamicPage = ({ pageData }) => {
+import Blog from "@/components/Blog/Blog";
+  const DynamicPage = ({ pageData }) => {
   const router = useRouter();
 
   // Check if pageData or pageData.title is null or undefined
@@ -17,7 +16,7 @@ const DynamicPage = ({ pageData }) => {
     return <div>Page data is not available.</div>;
   }
 
-  // Generate breadcrumb data dynamically, ensuring no null or undefined segments
+  // Generate breadcrumb data dynamically, ensuring no null or undefined segmentsalt
   const breadcrumbData = [
     { title: pageData.title, path: `/pages/${pageData.slug}` }
   ];

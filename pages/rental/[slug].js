@@ -1,3 +1,4 @@
+'use client';
 import axios from 'axios';
 import RentalResaleShow from '../../components/Rental_Resale_Show/show';
 import { RENTAL_RESALE } from '../../routes/apiRoutes';

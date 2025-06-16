@@ -331,6 +331,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <img
             src={imageUrl}
             alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
+            title={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
             loading={isMain || index === 0 ? "eager" : "lazy"}
             className={styles.galleryImage}
             style={{
@@ -893,6 +894,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                             : "/default.jpg"
                         }
                         alt={RENTAL_RESALE_DATA.title}
+                        title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
                       />
                     </div>
@@ -976,6 +978,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           : "/default.jpg"
                       }
                       alt="QR Code"
+                      title={`QR Code for ${RENTAL_RESALE_DATA.title}`}
                       className={styles.qrCode}
                     />
 
@@ -1086,6 +1089,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                             : "/default.jpg"
                         }
                         alt={RENTAL_RESALE_DATA.title}
+                        title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
                       />
                     </div>
@@ -1179,6 +1183,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           : "/default.jpg"
                       }
                       alt="QR Code"
+                      title={`QR Code for ${RENTAL_RESALE_DATA.title}`}
                       className={styles.qrCode}
                     />
 

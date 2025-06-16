@@ -148,6 +148,7 @@ const Footer = ({ navigationData, settings }) => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="footer-contact-item"
+                title={`View our location on Google Maps: ${getSettingValue('contact.address')}`}
               >
                 <div className="icon-00">
                   <LocationIcon />
@@ -159,6 +160,7 @@ const Footer = ({ navigationData, settings }) => {
               <a 
                 href={`tel:${getSettingValue('contact.phone').replace(/[^\d+]/g, '')}`} 
                 className="footer-contact-item"
+                title={`Call us at ${getSettingValue('contact.phone')}`}
               >
                 <div className="icon-00">
                   <PhoneIcon />
@@ -168,6 +170,7 @@ const Footer = ({ navigationData, settings }) => {
               <a 
                 href={`mailto:${getSettingValue('contact.email')}`} 
                 className="footer-contact-item"
+                title={`Send us an email at ${getSettingValue('contact.email')}`}
               >
                 <div className="icon-00">
                   <MessageIcon />
@@ -178,7 +181,7 @@ const Footer = ({ navigationData, settings }) => {
             {/* Social Icons Section */}
             <div className="soc-icons-b">
               {socialSettings.map((social) => (
-                <Link key={social.id} href={social.value} className="soc-icon-item">
+                <Link key={social.id} href={social.value} className="soc-icon-item" title={`Visit our ${social.key} page`}>
                   <div className={`${social.key}-box soc-box`}>
                     <div className="icon-circle">
                       {social.key === 'facebook' && <FacebookIcon />}
@@ -201,7 +204,7 @@ const Footer = ({ navigationData, settings }) => {
               <div className="soc-icons-b">
                 <div className="follow-text">Follow Us:</div>
                 {socialSettings.map((social) => (
-                  <Link key={social.id} href={social.value} className="soc-icon-item">
+                  <Link key={social.id} href={social.value} className="soc-icon-item" title={`Visit our ${social.key} page`}>
                     <div className={`${social.key}-box soc-box`}>
                       <div className="icon-circle">
                         {social.key === 'facebook' && <FacebookIcon />}
@@ -226,6 +229,7 @@ const Footer = ({ navigationData, settings }) => {
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="footer-contact-item"
+                    title={`View our location on Google Maps: ${getSettingValue('contact.address')}`}
                   >
                     <div className="icon-00">
                       <LocationIcon />
@@ -237,6 +241,7 @@ const Footer = ({ navigationData, settings }) => {
                   <a 
                     href={`tel:${getSettingValue('contact.phone').replace(/[^\d+]/g, '')}`} 
                     className="footer-contact-item"
+                    title={`Call us at ${getSettingValue('contact.phone')}`}
                   >
                     <div className="icon-00">
                       <PhoneIcon />
@@ -246,6 +251,7 @@ const Footer = ({ navigationData, settings }) => {
                   <a 
                     href={`mailto:${getSettingValue('contact.email')}`} 
                     className="footer-contact-item"
+                    title={`Send us an email at ${getSettingValue('contact.email')}`}
                   >
                     <div className="icon-00">
                       <MessageIcon />

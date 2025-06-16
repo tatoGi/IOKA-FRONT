@@ -1,120 +1,61 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
-import styles from "./Map.module.css";
-import "leaflet/dist/leaflet.css";
+import React, { useEffect, useRef } from 'react';
+import L from 'leaflet';
 
-const Map = ({ locations = [], initialCenter = [48.8566, 2.3522], initialZoom = 4 }) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const [error, setError] = useState(null);
+const Map = ({ locations = [] }) => {
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
 
   useEffect(() => {
-    try {
-      // Fix for Leaflet's default marker icons
-      if (typeof window !== 'undefined') {
-        delete L.Icon.Default.prototype._getIconUrl;
-        L.Icon.Default.mergeOptions({
-          iconRetinaUrl: '/images/marker-icon-2x.png',
-          iconUrl: '/images/marker-icon.png',
-          shadowUrl: '/images/marker-shadow.png',
-        });
+    if (typeof window !== 'undefined' && mapRef.current && !mapInstanceRef.current) {
+      // Initialize map
+      mapInstanceRef.current = L.map(mapRef.current).setView([25.2048, 55.2708], 13); // Dubai coordinates
+
+      // Add tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(mapInstanceRef.current);
+
+      // Add markers for locations
+      locations.forEach(location => {
+        if (location.latitude && location.longitude) {
+          L.marker([parseFloat(location.latitude), parseFloat(location.longitude)])
+            .addTo(mapInstanceRef.current)
+            .bindPopup(location.address || 'Location');
+        }
+      });
+
+      // Fit bounds if there are locations
+      if (locations.length > 0) {
+        const validLocations = locations.filter(loc => loc.latitude && loc.longitude);
+        if (validLocations.length > 0) {
+          const bounds = L.latLngBounds(
+            validLocations.map(loc => [parseFloat(loc.latitude), parseFloat(loc.longitude)])
+          );
+          if (bounds.isValid()) {
+            mapInstanceRef.current.fitBounds(bounds);
+          }
+        }
       }
-      setIsMounted(true);
-    } catch (err) {
-      console.error("Error initializing map:", err);
-      setError(err.message);
     }
-  }, []);
 
-  // Custom marker icon style
-  const createCustomIcon = (label) => {
-    try {
-      return L.divIcon({
-        className: styles.priceMarker,
-        html: `<div>${label}</div>`,
-        iconSize: [60, 40],
-        iconAnchor: [30, 40]
-      });
-    } catch (err) {
-      console.error("Error creating custom icon:", err);
-      return L.divIcon({
-        className: styles.priceMarker,
-        html: `<div>${label}</div>`,
-        iconSize: [60, 40],
-        iconAnchor: [30, 40]
-      });
-    }
-  };
-
-  const extractLatLng = (googleMapsLink) => {
-    try {
-      if (!googleMapsLink) return [0, 0];
-      const match = googleMapsLink.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-      return match ? [parseFloat(match[1]), parseFloat(match[2])] : [0, 0];
-    } catch (err) {
-      console.error("Error extracting coordinates:", err);
-      return [0, 0];
-    }
-  };
-
-  if (error) {
-    return (
-      <div className={styles.mapWrapper}>
-        <div className={styles.errorContainer}>
-          <h3>Map Error</h3>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isMounted) {
-    return (
-      <div className={styles.mapWrapper}>
-        <div className={styles.loadingContainer}>
-          <div className={styles.loadingSpinner}></div>
-          <p>Loading map...</p>
-        </div>
-      </div>
-    );
-  }
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [locations]);
 
   return (
-    <div className={styles.mapWrapper} style={{ height: "100%", width: "100%" }}>
-      <MapContainer
-        center={initialCenter}
-        zoom={initialZoom}
-        scrollWheelZoom={true}
-        style={{ height: "100%", width: "100%", borderRadius: "8px" }}
-        zoomControl={true}
-        zoomControlPosition="topright"
-        attributionControl={true}
-        zoomAnimation={true}
-        fadeAnimation={true}
-        markerZoomAnimation={true}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-
-        {Array.isArray(locations) && locations.map((location, index) => {
-          if (!location || !location.google_maps_link) return null;
-          
-          const [latitude, longitude] = extractLatLng(location.google_maps_link);
-          return (
-            <Marker
-              key={index}
-              position={[latitude, longitude]}
-              icon={createCustomIcon(location.label || 'Location')}
-            >
-              <Popup>{location.label || 'Location'}</Popup>
-            </Marker>
-          );
-        })}
-      </MapContainer>
-    </div>
+    <div 
+      ref={mapRef} 
+      style={{ 
+        width: '100%', 
+        height: '400px',
+        borderRadius: '8px',
+        overflow: 'hidden'
+      }} 
+    />
   );
 };
 

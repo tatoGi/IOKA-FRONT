@@ -78,6 +78,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                         <Image src={ activeData.image_field ? `${ process.env.NEXT_PUBLIC_API_URL
                             }/storage/${decodeImageUrl(activeData.image_field)}` : defaultImage }
                             alt={`${activeData.alt_text}`} 
+                            title={`${activeData.alt_text || activeData.title_one || 'Property Image'}`}
                             width={1200} height={600} className={styles.propertyImage}
                             priority />
                     </div>
@@ -104,7 +105,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                     </div>
 
                     <div className={styles.rightContent}>
-                        <a href={activeData.url} className={styles.seeMore}>
+                        <a href={activeData.url} className={styles.seeMore} title={`View more details about ${activeData.title_one || 'this property'}`}>
                             SEE MORE
                         </a>
                     </div>

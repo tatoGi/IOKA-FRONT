@@ -140,10 +140,10 @@ function App({ Component, pageProps }) {
       <Header navigationData={appData.navigationData} />
       <Layout>
         <SharedLayout>
-          <main className={montserrat.variable}>
+          <div className={montserrat.variable}>
             <TopProgressBar />
             <Component {...pageProps} />
-          </main>
+          </div>
         </SharedLayout>
       </Layout>
       <Footer navigationData={appData.navigationData} settings={appData.settings} />

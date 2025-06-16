@@ -143,6 +143,56 @@
 }
 
 /* Tablet Styles */
+@media (max-width: 1600px) {
+  .title{
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+    font-family: 'Montserrat';
+    text-align: start;
+  }
+  .formContainer {
+    max-width: 1200px;
+    padding: 0 32px;
+  }
+  
+  .title {
+    font-size: 26px;
+  }
+  
+  .toptitle {
+    font-size: 18px;
+  }
+  
+  .input {
+    height: 50px;
+  }
+  
+  .textarea {
+    min-height: 60px;
+  }
+  
+  .submitButton {
+    height: 50px;
+    font-size: 18px !important;
+  }
+  .form{
+    display: flex;
+        flex-direction: column;
+        gap: 8px;
+  }
+  .toptitle{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 10px;
+    text-align: start;
+  }
+}
+
+/* Tablet Styles */
 @media (max-width: 1024px) {
   .formContainer {
     padding: 0 24px;

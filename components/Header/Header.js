@@ -179,6 +179,7 @@ const Header = ({ navigationData }) => {
                   <Image 
                     src={Logo} 
                     alt="logo" 
+                    title="IOKA Logo"
                     width={138} 
                     height={42} 
                     priority={true}
@@ -191,6 +192,7 @@ const Header = ({ navigationData }) => {
                   <Image 
                     src={LogoDark} 
                     alt="logo" 
+                    title="IOKA Logo"
                     width={138} 
                     height={42} 
                     priority={true}

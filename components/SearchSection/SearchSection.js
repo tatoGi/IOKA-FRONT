@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./SearchSection.module.css";
-import { FiSearch } from "react-icons/fi";
-import Image from "next/image";
-import filterVector from "../../assets/img/filter.svg";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
 const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters }) => {
@@ -229,7 +226,9 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             <option value="">Bedrooms</option>
             {filterOptions.bedrooms.map((bedroom) => (
               <option key={bedroom} value={bedroom}>
-                {bedroom} Bedroom{bedroom > 1 ? "s" : ""}
+                {bedroom === "Studio" ? "Studio" : 
+                 bedroom === "4+" ? "4+ Bedrooms" : 
+                 `${bedroom} Bedroom${bedroom > 1 ? "s" : ""}`}
               </option>
             ))}
           </select>
@@ -249,7 +248,8 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             <option value="">Bathrooms</option>
             {filterOptions.bathrooms.map((bathroom) => (
               <option key={bathroom} value={bathroom}>
-                {bathroom} Bathroom{bathroom > 1 ? "s" : ""}
+                {bathroom === "4+" ? "4+ Bathrooms" : 
+                 `${bathroom} Bathroom${bathroom > 1 ? "s" : ""}`}
               </option>
             ))}
           </select>

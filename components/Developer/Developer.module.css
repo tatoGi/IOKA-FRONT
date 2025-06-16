@@ -339,10 +339,12 @@
   background-color: transparent;
   border: none;
   text-decoration: none;
-  -webkit-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
   transition: color 0.3s ease;
   cursor: pointer;
+  bottom: -14px;
+  position: relative;
+  /* height: auto; */
+  height: 17px;
 }
 
 .readMore:hover {

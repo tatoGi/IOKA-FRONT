@@ -67,7 +67,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                     <a
                       href={item.url}
                       target="_blank"
-                     
+                      title={`View ${item.alt_text || 'Dubai Property'}`}
                     >
                       <Image
                         src={
@@ -78,6 +78,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                             : homeBanner
                         }
                         alt={item.alt_text || "Dubai Property"}
+                        title={item.alt_text || "Dubai Property"}
                         width={320}
                         height={222}
                         style={{ objectFit: "cover", borderRadius: "16px" }}
@@ -105,6 +106,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        title={`View ${item.alt_text || 'Dubai Property'}`}
                       >
                         <Image
                           src={
@@ -115,6 +117,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                               : homeBanner
                           }
                           alt={item.alt_text || "Dubai Property"}
+                          title={item.alt_text || "Dubai Property"}
                           width={364}
                           height={364}
                           style={{ objectFit: "cover", borderRadius: "16px" }}
