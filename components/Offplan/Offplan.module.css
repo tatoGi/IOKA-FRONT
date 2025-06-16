@@ -85,11 +85,20 @@
   line-height: 1.4;
   font-family: 'Montserrat';
 }
+.property_title{
+  font-family: 'Montserrat';
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+color: rgba(10, 39, 59, 1);
+margin: 12px 0 8px 0;
 
+}
 .location {
   color: #07151F;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 100%;
   margin-bottom: 12px;
   font-family: 'Montserrat';

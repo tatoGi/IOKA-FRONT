@@ -67,64 +67,63 @@ const SearchHomeResult = ({ searchParams }) => {
 
         try {
           const response = await axios.get(`${PROPERTIES_API}?${queryString}`);
+          console.log(response);
           
           if (!response.data) {
             throw new Error('No data received from server');
           }
           
-          return response;
+          // Get all available property types
+          const offplanData = response.data?.data?.OFFPLAN || [];
+          const rentalData = response.data?.data?.RENTAL || [];
+          const resaleData = response.data?.data?.RESALE || [];
+          const developersData = response.data?.data?.developers || [];
+
+          // Set developers state
+          setDevelopers(developersData);
+
+          // Create a map of developer IDs to developer data for quick lookup
+          const developerMap = developersData.reduce((acc, developer) => {
+            acc[developer.id] = developer;
+            return acc;
+          }, {});
+
+          // Combine all properties into a single array with type information and developer data
+          const allProperties = [
+            ...(Array.isArray(offplanData)
+              ? offplanData.map((prop) => ({
+                  ...prop,
+                  type: "offplan",
+                  developer: prop.developer_id
+                    ? developerMap[prop.developer_id]
+                    : null
+                }))
+              : []),
+            ...(Array.isArray(rentalData)
+              ? rentalData.map((prop) => ({
+                  ...prop,
+                  type: "rental",
+                  developer: prop.developer_id
+                    ? developerMap[prop.developer_id]
+                    : null
+                }))
+              : []),
+            ...(Array.isArray(resaleData)
+              ? resaleData.map((prop) => ({
+                  ...prop,
+                  type: "resale",
+                  developer: prop.developer_id
+                    ? developerMap[prop.developer_id]
+                    : null
+                }))
+              : [])
+          ];
+
+          setProperties(allProperties);
         } catch (error) {
           console.error('API Error:', error.response?.data || error.message);
           throw error;
         }
-
-        // Get all available property types
-        const offplanData = response.data?.data?.OFFPLAN || [];
-        const rentalData = response.data?.data?.RENTAL || [];
-        const resaleData = response.data?.data?.RESALE || [];
-        const developersData = response.data?.data?.developers || [];
-
-        // Set developers state
-        setDevelopers(developersData);
-
-        // Create a map of developer IDs to developer data for quick lookup
-        const developerMap = developersData.reduce((acc, developer) => {
-          acc[developer.id] = developer;
-          return acc;
-        }, {});
-
-        // Combine all properties into a single array with type information and developer data
-        const allProperties = [
-          ...(Array.isArray(offplanData)
-            ? offplanData.map((prop) => ({
-                ...prop,
-                type: "offplan",
-                developer: prop.developer_id
-                  ? developerMap[prop.developer_id]
-                  : null
-              }))
-            : []),
-          ...(Array.isArray(rentalData)
-            ? rentalData.map((prop) => ({
-                ...prop,
-                type: "rental",
-                developer: prop.developer_id
-                  ? developerMap[prop.developer_id]
-                  : null
-              }))
-            : []),
-          ...(Array.isArray(resaleData)
-            ? resaleData.map((prop) => ({
-                ...prop,
-                type: "resale",
-                developer: prop.developer_id
-                  ? developerMap[prop.developer_id]
-                  : null
-              }))
-            : [])
-        ];
-
-        setProperties(allProperties);
       } catch (err) {
         console.error("Error fetching properties:", err);
         setError("Failed to fetch properties");
@@ -820,14 +819,36 @@ const SearchHomeResult = ({ searchParams }) => {
                               Top Communities
                             </h3>
                             <div className={stylesdeveloper.communitiesList}>
-                              {JSON.parse(developer.tags).map((tag, index) => (
-                                <span
-                                  key={index}
-                                  className={stylesdeveloper.badge}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+                              {(() => {
+                                try {
+                                  const tags = JSON.parse(developer.tags);
+                                  return Array.isArray(tags) 
+                                    ? tags.map((tag, index) => (
+                                        <span
+                                          key={index}
+                                          className={stylesdeveloper.badge}
+                                        >
+                                          {tag}
+                                        </span>
+                                      ))
+                                    : [developer.tags].map((tag, index) => (
+                                        <span
+                                          key={index}
+                                          className={stylesdeveloper.badge}
+                                        >
+                                          {tag}
+                                        </span>
+                                      ));
+                                } catch (e) {
+                                  console.error('Error parsing developer tags:', e);
+                                  // If parsing fails, treat it as a single string
+                                  return (
+                                    <span className={stylesdeveloper.badge}>
+                                      {developer.tags}
+                                    </span>
+                                  );
+                                }
+                              })()}
                             </div>
                           </div>
 

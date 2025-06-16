@@ -83,9 +83,9 @@
   display: -ms-flexbox;
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   font-family: 'Montserrat';
-  margin-top: 30px;
+  margin-top: 12px;
 }
 
 .priceWrapper {
@@ -101,22 +101,24 @@
 .aedPricestart {
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 100%;
   letter-spacing: 0%;
+  position: relative;
+    top: 2px;
 
 }
 
 .aedPrice {
   color: #007AFF;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   font-family: 'Montserrat';
 }
 
 .usdPrice {
   color: #007AFF;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   font-family: 'Montserrat';
 }
@@ -138,10 +140,10 @@
 
 .description p {
   color: #0A273B;
-  line-height: 1.6;
+  line-height: 36px;
   margin-bottom: 16px;
   font-family: 'Montserrat';
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
 
 }
@@ -152,8 +154,9 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Montserrat';
+  font-weight: 500;
 }
 
 
@@ -170,6 +173,7 @@
   margin-left: auto;
   margin-right: 0;
   max-width: 538px;
+  max-height: 264px;
 }
 
 .qrCardmodern {
@@ -343,7 +347,7 @@
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0%;
-  text-align: flex-start;
+  text-align: start;
 
 }
 
@@ -460,7 +464,7 @@
 .nearbyGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 260px;
+  gap: 30px 260px;
 }
 
 .nearbyColumn {
@@ -558,7 +562,7 @@
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 4px;
-  text-align: flex-start;
+  text-align: start;
 }
 
 .consultantName {
@@ -679,7 +683,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   margin-bottom: 16px;
 }
 
@@ -687,6 +691,8 @@
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: 8px;
+  max-width: 92px;
+  max-height: 92px;
 }
 
 .modalOverlay {
@@ -753,7 +759,7 @@
 .exteriorInteriorSection h3 {
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 30px;
+  font-size: 40px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #E6EBED;
@@ -776,11 +782,13 @@
   font-size: 20px;
   transition: background-color 0.3s, color 0.3s;
   font-weight: 600;
+  max-height: 48px;
 }
 
 .switchButton.active {
   background-color: #fff;
   color: #0A273B;
+  max-height: 48px;
 }
 
 .content {
@@ -926,6 +934,7 @@
   height: 32px;
   border-radius: 8px;
   border: 1px solid #FFFFFF;
+  padding: 8px;
 }
 
 .arrowLink:hover {

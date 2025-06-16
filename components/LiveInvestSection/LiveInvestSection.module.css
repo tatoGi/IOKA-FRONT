@@ -163,41 +163,26 @@
 .navButton {
   position: absolute;
   top: 330px;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-  width: 2.5vw;
-  /* Responsive width */
-  height: 2.5vw;
-  /* Responsive height */
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: white;
+  background: rgba(255, 255, 255, 1);
   border: none;
   cursor: pointer;
   z-index: 20;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   font-size: 1.5vw;
-  /* Responsive font size */
-  color: #8FE3DC;
+  color: #ffffff;
+  opacity: 80%;
+  padding: 12px;
 }
 .navButton svg {
-  width: 21.007031142292476px;
-  height: 12.002342462400009px;
-  top: 22.5px;
-  left: 7.5px;
+  width: 100%;
 }
 .prevButton {
   left:40px;

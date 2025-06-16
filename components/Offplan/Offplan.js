@@ -268,7 +268,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                   </div>
 
                   <div className={styles.propertyInfo}>
-                    <h3 className={`${styles.title} ${styles.textEllipsis}`}>
+                    <h3 className={`${styles.property_title} ${styles.textEllipsis}`}>
                       {property?.title || 'Untitled Property'}
                     </h3>
                     <p className={`${styles.location} ${styles.textEllipsis}`}>
