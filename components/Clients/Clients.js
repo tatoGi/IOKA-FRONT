@@ -15,10 +15,10 @@ const Clients = ({ sectionSixData }) => {
 
   const settings = {
     dots: false,
-    infinite: true,
-    speed: 500,
+    infinite: false,
+    speed: 300,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     autoplay: true,
     autoplaySpeed: 3000,
     centerMode: false,
@@ -29,28 +29,28 @@ const Clients = ({ sectionSixData }) => {
         breakpoint: 1600,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
         }
       },
       {
         breakpoint: 1200,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
         }
       },
       {
         breakpoint: 992,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }
       },
       {
