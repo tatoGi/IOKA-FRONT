@@ -37,13 +37,11 @@ const PopularAreaSection = (sectionFourData) => {
     autoplay: true,
     autoplaySpeed: 3000,
     centerMode: true,
-    centerPadding: "20px",
     variableWidth: true, // Enable variable width for spacing
     responsive: [
       {
         breakpoint: 480,
         settings: {
-          centerPadding: "10px",
           variableWidth: true, // Ensure spacing is applied in mobile
           adaptiveHeight: true // Adjust slider height dynamically
         }

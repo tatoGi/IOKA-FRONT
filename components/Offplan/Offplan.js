@@ -128,7 +128,6 @@ const Offplan = ({ initialData, initialPagination }) => {
   };
 
   const fetchData = async (page, filters = {}) => {
-    setIsLoading(true);
     try {
       const apiUrl =
         Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
@@ -152,15 +151,12 @@ const Offplan = ({ initialData, initialPagination }) => {
     } catch (error) {
       console.error("Error fetching data:", error);
       setCardData([]); // Clear data on error
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
   const fetchFilterOptions = async () => {
     try {
       const response = await axios.get(FILTER_OFFPLAN_API);
-      console.log(response.data);
       const options = response.data;
 
       // Extract unique values for filters and convert 0 to "Studio", group 4+ as "4+"

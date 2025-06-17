@@ -228,13 +228,14 @@
 
 
 .propertyInfo_mobile {
-  margin: 24px 0;
-  background-color: #ffffff;
-  border-radius: 16px;
-  text-align: center;
-  height: 32px;
-  position: relative;
-  z-index: 100;
+  margin: 24px 0 0 0;
+    background-color: #ffffff;
+    border-radius: 16px;
+    text-align: center;
+    height: 32px;
+    position: relative;
+    z-index: 100;
+    margin-bottom: 24px;
 }
 
 .propertyInfo_mobile details {
@@ -467,7 +468,7 @@
     display: -ms-grid;
     display: grid;
   }
-
+ 
   .newProperties {
     margin-top: 0;
     height: 100%;
@@ -477,7 +478,7 @@
   }
 
   .filterButtons_mobile {
-    margin-top: 24px;
+    margin-top: 8px;
     position: absolute;
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -502,7 +503,7 @@
     letter-spacing: 0%;
     color: #0A273B;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
 
   .propertyCard {
@@ -513,7 +514,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
     width: 354px;
-    height: 471px;
+    height: 100%;
   }
 
 

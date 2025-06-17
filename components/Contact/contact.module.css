@@ -60,7 +60,7 @@
 .infoSection h1 {
   font-family: 'Montserrat';
   font-weight: 700;
-  font-size: 36px;
+  font-size: 48px;
   margin-bottom: 40px;
   color: #0a273b;
 }
@@ -70,7 +70,7 @@
   font-weight: 400;
   font-size: 16px;
   color: #0a273b;
-  margin-bottom: 24px;
+  margin-bottom: 38px;
 }
 
 .contactDetails {
@@ -376,7 +376,8 @@ text-align: center;
   }
 
   .contactDetails {
-    gap: 20px;
+    gap: 24px;
+    margin-top: 24px;
   }
 
   .iconWrapper {
@@ -384,7 +385,9 @@ text-align: center;
     height: 60px;
     border-radius: 16px;
   }
-
+  .infoSection p{
+    margin-bottom: 0;
+  }
   .iconWrapper svg {
     font-size: 18px;
   }

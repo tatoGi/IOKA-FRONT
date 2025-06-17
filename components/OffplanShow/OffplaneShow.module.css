@@ -1909,6 +1909,7 @@
     padding: 16px;
     border-radius: 16px;
     margin-left: 0;
+    margin-top: 32px;
     
   }
 
@@ -1967,7 +1968,7 @@
     position: relative;
     overflow-y: auto;
     width: 386px;
-    height: 620px;
+    height: auto;
     border-radius: 8px;
     gap: 10px;
     padding: 16px;

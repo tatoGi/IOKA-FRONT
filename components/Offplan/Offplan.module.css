@@ -751,6 +751,9 @@ margin-top: 2px;
 }
 @media (max-width:480px)
 {
+  .priceRow{
+    margin-top: 24.5px;
+  }
   .cardContainer {
     display: flex;
     flex-wrap: wrap;

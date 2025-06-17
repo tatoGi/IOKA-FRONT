@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+
 import styles from "./blogShow.module.css";
 import Image from "next/image";
 import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is correct
@@ -41,6 +42,7 @@ const BlogShow = ({ blogData }) => {
   const handleReadMore = (slug) => {
     router.push(`/blog/${slug}`);
   };
+  
   return (
     <div className={styles.blogShowContainer}>
       <div className={`d-none d-md-block container ${styles.blogShow}`}>

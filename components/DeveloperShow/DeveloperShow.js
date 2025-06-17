@@ -36,7 +36,9 @@ const DeveloperShow = (developerData) => {
   };
 
   const photos = developerData.developerData.photo
-    ? JSON.parse(developerData.developerData.photo)
+    ? typeof developerData.developerData.photo === 'string'
+      ? JSON.parse(developerData.developerData.photo)
+      : developerData.developerData.photo
     : [];
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
@@ -657,7 +659,12 @@ const DeveloperShow = (developerData) => {
                 </div>
                 <div className={styles.resaleContent}>
                   <h4>{rentalListings[0].title}</h4>
-                  <p className={styles.resaleLocation}>{rentalListings[0].location}</p>
+                  <p className={styles.resaleLocation}>
+                   
+                        {rentalListings[0].locations && rentalListings[0].locations.length > 0 
+                          ? rentalListings[0].locations[0].title 
+                          : rentalListings[0].subtitle || rentalListings[0].location || ''}
+                      </p>
                   <p className={styles.resalePrice}>AED {formatPrice(rentalListings[0].amount)}</p>
                   <div className={styles.resaleStats}>
                     <div className={styles.statGroup}>
@@ -797,9 +804,30 @@ const DeveloperShow = (developerData) => {
                     
                     <div className={styles.resaleDetails}>
                      
-                      {listing.details && listing.details.map((detail, index) => (
-                        <p key={index}>{detail.title}: {detail.info}</p>
-                      ))}
+                      {(() => {
+                        const details = listing.details;
+                        let parsedDetails = [];
+
+                        if (details) {
+                          if (typeof details === 'string') {
+                            try {
+                              parsedDetails = JSON.parse(details);
+                            } catch (e) {
+                              console.error("Failed to parse details:", e);
+                            }
+                          } else {
+                            parsedDetails = details;
+                          }
+                        }
+
+                        if (Array.isArray(parsedDetails)) {
+                          return parsedDetails.map((detail, index) => (
+                            <p key={index}>{detail.title}: {detail.info}</p>
+                          ));
+                        }
+
+                        return null;
+                      })()}
                     </div>
                     <div className={styles.resaleFooter}>
                       <div className={styles.agentInfo}>

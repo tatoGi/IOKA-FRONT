@@ -22,7 +22,6 @@ const Clients = ({ sectionSixData }) => {
     autoplay: true,
     autoplaySpeed: 3000,
     centerMode: false,
-    centerPadding: '0px',
     className: styles.testimonialSlider,
     responsive: [
       {

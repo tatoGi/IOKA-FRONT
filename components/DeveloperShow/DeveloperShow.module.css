@@ -425,7 +425,7 @@
 .propertyInfo h4 {
   font-size: 16px;
   color: #0A273B;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 8px;
   font-family: 'Montserrat';
 }
@@ -439,13 +439,13 @@
 .priceStart {
   color: #0A273B;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: 'Montserrat';
 }
 .price {
   color: #007AFF;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: 'Montserrat';
 }
 .priceContainer {
@@ -468,8 +468,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 24px;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
 }
 
 .stat {
@@ -481,8 +480,9 @@
           align-items: center;
   gap: 8px;
   color: #0A273B;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Montserrat';
+  font-weight: 500;
 }
 
 .propertyDetails {
@@ -509,7 +509,6 @@
   display: -ms-flexbox;
   display: flex;
   gap: 12px;
-  padding-top: 16px;
 }
 
 .actionButton {
@@ -654,9 +653,9 @@
 
 .location {
   color: #0A273B;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Montserrat';
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .sliderPrice {
@@ -698,7 +697,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .agent {
@@ -905,7 +904,7 @@
 }
 
 .resaleContent {
-  padding: 24px;
+  padding: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -913,7 +912,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 16px;
   width: 642px;
 }
 
@@ -923,12 +921,14 @@
   font-weight: 600;
   line-height: 1.2;
   font-family: 'Montserrat';
+  margin-bottom: 12px;
 }
 
 .resaleLocation {
   color: #0A273B;
   font-size: 14px;
   font-family: 'Montserrat';
+  margin-bottom: 12px;
 }
 
 .resalePrice {
@@ -936,6 +936,7 @@
   font-size: 14px;
   font-weight: 600;
   font-family: 'Montserrat';
+  margin-bottom: 20px;
 }
 
 .resaleStats {
@@ -946,7 +947,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 12px;
-  padding-bottom: 16px;
+  margin-bottom: 30px;
 }
 
 .statGroup {
@@ -969,21 +970,17 @@
 }
 
 .resaleDetails {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 8px;
-  color: #666666;
-  font-size: 14px;
-  font-family: 'Montserrat';
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  display: flex
+  ;
+      flex-direction: column;
+      gap: 12px;
+      color: #666666;
+      font-size: 14px;
+      font-family: 'Montserrat';
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      margin-bottom: 32px;
 }
 
 .resaleFooter {
@@ -1145,8 +1142,8 @@
 .awardLeft {
      /* flex: 0 0 484px; */
      position: relative;
-     top: 15px;
-     left: 13px;
+     max-height: 400px;
+
 }
 
 .awardTeamImage {
@@ -1155,6 +1152,8 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  top: 24px;
+  left: 16px;
   border-radius: 16px;
 }
 
@@ -1187,7 +1186,7 @@
   margin-bottom: 10px;
   color: #1A1A1A;
   position: relative;
-  top: 35px;
+  top: 36px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1196,9 +1195,9 @@
 
 /* Award subtitle styling */
 .awardSubtitle {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.5;
-  color: #666666;
+  color: rgba(10, 39, 59, 1);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -1206,7 +1205,7 @@
   -webkit-box-orient: vertical;
   margin-bottom: 15px;
   position: relative;
-  top: 79px;
+  top: 97px;
   max-width: 300px;
 }
 
@@ -2098,9 +2097,7 @@ letter-spacing: 0%;
   margin-top: 12px;
 }
 
-.awardLeft{
-  max-height: 189px;
-}
+
 .mobileAwardLayout .awardIconWrapper {
   flex-shrink: 0;
   margin-top: 16px;

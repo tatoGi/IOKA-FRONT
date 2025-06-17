@@ -51,6 +51,28 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   }, []);
 
   // Parse gallery images
+  const getRelatedPropertyImageUrl = (property) => {
+    if (!property.gallery_images) {
+      return defaultImage;
+    }
+
+    try {
+      const images = JSON.parse(property.gallery_images);
+      if (Array.isArray(images) && images.length > 0) {
+        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+          images[0]
+        )}`;
+      }
+    } catch (error) {
+      // If parsing fails, assume it might be a plain string
+      return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+        property.gallery_images
+      )}`;
+    }
+
+    return defaultImage;
+  };
+
   const galleryImages = React.useMemo(() => {
     if (!RENTAL_RESALE_DATA?.gallery_images) {
       return [];
@@ -90,6 +112,24 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       return [];
     }
   }, [RENTAL_RESALE_DATA?.gallery_images]);
+
+  const parsedDetails = React.useMemo(() => {
+    if (!RENTAL_RESALE_DATA?.details) {
+      return [];
+    }
+    try {
+      if (Array.isArray(RENTAL_RESALE_DATA.details)) {
+        return RENTAL_RESALE_DATA.details;
+      }
+      if (typeof RENTAL_RESALE_DATA.details === 'string') {
+        const parsed = JSON.parse(RENTAL_RESALE_DATA.details);
+        return Array.isArray(parsed) ? parsed : [];
+      }
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }, [RENTAL_RESALE_DATA?.details]);
 
   // Get image URL helper
   const getImageUrl = (image) => {
@@ -847,7 +887,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <h3>Details</h3>
                   <span className={styles.details_line}></span>
                   <div className={styles.detailsGrid}>
-                    {RENTAL_RESALE_DATA.details.map((detail, index) => {
+                    {parsedDetails.map((detail, index) => {
                       if (detail.title === "Price") {
                         return (
                           <div
@@ -1278,16 +1318,24 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
-                              )}`
-                            : defaultImage
-                        }
+                        src={(() => {
+                            let firstImage = null;
+                            if (property.gallery_images) {
+                              try {
+                                const images = JSON.parse(property.gallery_images);
+                                if (Array.isArray(images) && images.length > 0) {
+                                  firstImage = images[0];
+                                }
+                              } catch (e) {
+                                if (typeof property.gallery_images === 'string' && property.gallery_images.trim()) {
+                                  firstImage = property.gallery_images.trim();
+                                }
+                              }
+                            }
+                            return firstImage
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(firstImage)}`
+                              : defaultImage;
+                          })()}
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -1385,16 +1433,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
-                              )}`
-                            : defaultImage
-                        }
+                        src={getRelatedPropertyImageUrl(property)}
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw"

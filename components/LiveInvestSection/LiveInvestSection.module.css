@@ -1110,4 +1110,7 @@
     left: 0%;
     position: relative;
   }
+  .sliderContainer img{
+    height: 222px;
+  }
 }
