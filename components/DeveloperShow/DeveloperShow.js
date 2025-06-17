@@ -376,14 +376,7 @@ const DeveloperShow = (developerData) => {
                         <p>{limitTextLength(listing.description, 150)}</p>
                       </div>
                       <div className={styles.propertyActions}>
-                        <button className={`${styles.actionButton} ${styles.email}`}>
-                          <HiOutlineMail size={20} color="#1A1A1A" />
-                          <span>Email</span>
-                        </button>
-                        <button className={`${styles.actionButton} ${styles.phone}`}>
-                          <Image src={callVector} alt="Call" />
-                          <span>Call</span>
-                        </button>
+                       
                         <button className={`${styles.actionButton} ${styles.whatsapp}`}>
                           <BsWhatsapp size={20} color="#34C759" />
                           <span>WhatsApp</span>
@@ -505,14 +498,7 @@ const DeveloperShow = (developerData) => {
                             <p>{limitTextLength(listing.description, 150)}</p>
                           </div>
                           <div className={styles.propertyActions}>
-                            <button className={`${styles.actionButton} ${styles.email}`}>
-                              <HiOutlineMail size={20} color="#1A1A1A" />
-                              <span>Email</span>
-                            </button>
-                            <button className={`${styles.actionButton} ${styles.phone}`}>
-                              <Image src={callVector} alt="Call" />
-                              <span>Call</span>
-                            </button>
+                          
                             <button className={`${styles.actionButton} ${styles.whatsapp}`}>
                               <BsWhatsapp size={20} color="#34C759" />
                               <span>WhatsApp</span>
