@@ -150,12 +150,40 @@
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 13px center;
+  background-position: right 12px center;
   background-size: 14.004688262939453px 8.001562118530273px;
 }
 
-
-
+.areaButton{
+  display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 1px solid #07151F;
+      border-radius: 4px;
+      background: white;
+      color: #374151;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 89px;
+      height: 40px;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 14.004688262939453px 8.001562118530273px;
+}
+.areaButton span{
+  margin-right: 16px;
+}
 .filterBtn select {
   border: none;
   background: transparent;
@@ -253,7 +281,36 @@ select.filterBtn {
 .clearFilterButton:hover {
   background: #DC2626;
 }
-
+.pricebutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: 1px solid #07151F;
+  border-radius: 4px;
+  background: white;
+  color: #374151;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 89px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14.004688262939453px 8.001562118530273px;
+}
+.pricebutton span{
+  margin-right: 16px;
+}
 @media (max-width: 1600px) {
   .searchSection {
     width: 100%;

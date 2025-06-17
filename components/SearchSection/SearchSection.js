@@ -294,7 +294,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <div className={styles.filterBtnWrapper}>
             <button
-              className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
+              className={`${styles.pricebutton} ${filters.price ? styles.active : ''}`}
               onClick={() => {
                 setShowPricePopup(!showPricePopup);
                 setShowSqFtPopup(false);
@@ -355,7 +355,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <div className={styles.filterBtnWrapper}>
             <button
-              className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
+              className={`${styles.areaButton} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => {
                 setShowSqFtPopup(!showSqFtPopup);
                 setShowPricePopup(false);
@@ -364,7 +364,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               {filters.sqFt ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
               ) : (
-                "Area"
+               <span>Area</span>
               )}
               {filters.sqFt && (
                 <button
