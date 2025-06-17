@@ -185,7 +185,6 @@ const Header = ({ navigationData }) => {
                     priority={true}
                     loading="eager"
                     fetchPriority="high"
-                    style={{ width: '138px', height: '42px' }}
                   />
                 </div>
                 <div className="dark-logo">
@@ -198,7 +197,6 @@ const Header = ({ navigationData }) => {
                     priority={true}
                     loading="eager"
                     fetchPriority="high"
-                    style={{ width: '138px', height: '42px' }}
                   />
                 </div>
               </div>

@@ -5,7 +5,7 @@ const Meta = ({ items }) => {
   const router = useRouter();
   
   // Use require for favicon - access default export to get the path
-  const faviconPath = require("/assets/img/bad.svg").default || require("/assets/img/bad.svg");
+
 
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -40,7 +40,7 @@ const Meta = ({ items }) => {
       <meta name="description" content={getMetaValue('description')} />
       
       {/* Favicon - SVG format */}
-      <link rel="icon" type="image/svg+xml" href={faviconPath} />
+      <link rel="icon" type="image/svg+xml" href="/assets/img/Tiffany-01.svg" />
       <link rel="alternate icon" href="/favicon.ico" />
       
       <meta charSet="utf-8" />

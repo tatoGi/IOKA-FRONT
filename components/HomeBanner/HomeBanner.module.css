@@ -1757,7 +1757,18 @@ letter-spacing: 0%;
     flex: 1;
   }
 }
-
+@media (max-width: 480px){
+  .text-b-i {
+    font-size: 20px;
+    height: 24px;
+    margin-top: 126px;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+.banner-search{
+margin-top: 31px;
+}
+}
 /* Further adjustments for very small screens */
 @media screen and (min-width: 320px) and (max-width: 768px) {
   .mobile_input_field{

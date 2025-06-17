@@ -34,6 +34,7 @@ if (typeof window !== 'undefined') {
 }
 
 function App({ Component, pageProps }) {
+  const [loading, setLoading] = useState(true);
   const [appData, setAppData] = useState({
     navigationData: [],
     settings: { meta: [] }
@@ -74,6 +75,12 @@ function App({ Component, pageProps }) {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (appData.navigationData.length > 0 && appData.settings.meta.length > 0) {
+      setLoading(false);
+    }
+  }, [appData.navigationData, appData.settings.meta]);
 
   useEffect(() => {
     if (router.isReady && appData.navigationData && appData.navigationData.length > 0) {
@@ -134,6 +141,14 @@ function App({ Component, pageProps }) {
     },
     { ssr: true },
   );
+  if (loading) {
+    // Only show TopProgressBar while loading
+    return (
+      <div>
+        <TopProgressBar />
+      </div>
+    );
+  }
   return (
     <div>
       <Meta items={finalMetaItems} />

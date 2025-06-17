@@ -2279,8 +2279,8 @@
   .right-form {
     display: block;
     position: absolute;
-    right: 67px;
-    top: 30px;
+    right: 57px;
+    top: 27px;
     width: 38px;
     height: 38px;
 }
@@ -2435,12 +2435,29 @@
     /* padding: 24px; */
     display: block;
 }
+ 
+.news-slider-s .swiper-slide{
+    width: 100% !important;
+    max-width: 320px !important;
+    margin-right: 16px !important;
+  }
+  .header-box{
+    padding: 0;
+   }
 }
 
 @media (max-width: 400px) {
   .news-see-more_mobile-only {
     width: 100%;
   }
+ .header-box{
+  padding: 0;
+ }
+  .news-slider-s .swiper-slide {
+    width: 100% !important;
+    max-width: 300px !important;
+    margin-right: 16px !important;
+}
   .maintenance-banner {
     background-color: #4CAF50;
     color: white;

@@ -14,14 +14,9 @@ import { useRouter } from "next/router"; // Import useRouter
 import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
 
 const Hombanner = ({ initialData, navigationData }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [cardData, setCardData] = useState(initialData || []);
-  const [sectionOneData, setSectionOneData] = useState(null); // State for section_one data
-  const [sectionTwoData, setSectionTwoData] = useState(null); // State for section_two data
-  const [sectionThreeData, setSectionThreeData] = useState(null); // State for section_three data
-  const [sectionFourData, setSectionFourData] = useState(null); // State for section_four data
-  const [sectionFiveData, setSectionFiveData] = useState(null); // State for section_five data
-  const [sectionSixData, setSectionSixData] = useState(null); // State for section_six data
-  const [sectionSevenData, setSectionSevenData] = useState(null); // State for section_seven data
+  const [sections, setSections] = useState({}); // Store all sections in one object
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter(); // Initialize useRouter
   const isMobile = useMediaQuery({ maxWidth: 768 }); // Check if the view is mobile
@@ -33,63 +28,62 @@ const Hombanner = ({ initialData, navigationData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${SECTION_API}`);
-
-        if (response.data && response.data.sections) {
-          setCardData(response.data.sections); // Access the correct part of the response
-          // Find the section with section_key equal to section_one
-          const sectionOne = response.data.sections.find(section => section.section_key === "section_one");
-          setSectionOneData(sectionOne); // Set section_one data
-          // Find the section with section_key equal to section_two
-          const sectionTwo = response.data.sections.find(section => section.section_key === "section_two");
-          setSectionTwoData(sectionTwo); // Set section_two data
-          // Find the section with section_key equal to section_three
-          const sectionThree = response.data.sections.find(section => section.section_key === "section_three");
-          setSectionThreeData(sectionThree); // Set section_three data
-          // Find the section with section_key equal to section_four
-          const sectionFour = response.data.sections.find(section => section.section_key === "section_four");
-          setSectionFourData(sectionFour); // Set section_four data
-          // Find the section with section_key equal to section_five
-          const sectionFive = response.data.sections.find(section => section.section_key === "section_five");
-          setSectionFiveData(sectionFive); // Set section_five data
-        
-          // Find the section with section_key equal to section_six
-          const sectionSix = response.data.sections.find(section => section.section_key === "section_six");
-          setSectionSixData(sectionSix); // Set section_six data
-          
-          const sectionSeven = response.data.sections.find(section => section.section_key === "section_seven");
-          setSectionSevenData(sectionSeven); // Set section
+        const { data } = await axios.get(SECTION_API);
+        if (data?.sections) {
+          setCardData(data.sections);
+          const sectionMap = {};
+          data.sections.forEach(section => {
+            sectionMap[section.section_key] = section;
+          });
+          setSections(sectionMap);
         } else {
-          console.error("Invalid response structure:", response.data);
+          console.error("Invalid response structure:", data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     fetchData();
   }, [initialData]);
+  
 
   // Don't render until component is mounted to prevent hydration mismatch
-  if (!isMounted) {
-    return null;
+  if (!isMounted || isLoading) {
+    return null; // Or replace with a spinner if you have one
   }
 
-  // Always render all components - data will populate when available
+  // Only render when all sections are loaded
+  const sectionKeys = [
+    "section_one",
+    "section_two",
+    "section_three",
+    "section_four",
+    "section_five",
+    "section_six",
+    "section_seven"
+  ];
+  const allSectionsLoaded = sectionKeys.every(key => sections[key]);
+  if (!allSectionsLoaded) {
+    return null; // Or a spinner
+  }
+
+  // Render all sections only after all data is loaded
   return (
     <>
       <div className="home-banner">
         <div className="banner-slider">
-          <HomeBannerSwiper sectionData={sectionOneData} />
+          <HomeBannerSwiper sectionData={sections["section_one"]} />
           <HomeBannerSearch />
         </div>
       </div>
-      <LiveInvestSection sectionDataTwo={sectionTwoData} navigationData={navigationData} />
-      <NewProperties sectionDataThree={sectionThreeData} />
-      <PopularAreaSection sectionDataFour={sectionFourData} />
-      <TeamSection sectionDataFive={sectionFiveData} />
-      <Clients sectionSixData={sectionSixData} />
-      <NewsSection sectionSevenData={sectionSevenData} />
+      <LiveInvestSection sectionDataTwo={sections["section_two"]} navigationData={navigationData} />
+      <NewProperties sectionDataThree={sections["section_three"]} />
+      <PopularAreaSection sectionDataFour={sections["section_four"]} />
+      <TeamSection sectionDataFive={sections["section_five"]} />
+      <Clients sectionSixData={sections["section_six"]} />
+      <NewsSection sectionSevenData={sections["section_seven"]} />
       <PartnersSection />
     </>
   );
