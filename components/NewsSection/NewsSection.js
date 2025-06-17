@@ -11,6 +11,7 @@ import LeftArrow from "../icons/LeftArrow";
 import Image from "next/image";
 import {BLOGS_API, PAGE_API} from "../../routes/apiRoutes";
 import axios from "axios";
+import baseimage from "../../assets/img/blogimage.png";
 
 const NewsSection = () => {
   const [blogs, setBlogs] = useState([]);
