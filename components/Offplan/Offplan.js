@@ -15,7 +15,7 @@ import RangeInputPopup from "../SearchSection/RangeInputPopup";
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat",
+  variable: "--font-montserrat"
 });
 
 const Offplan = ({ initialData, initialPagination }) => {
@@ -44,11 +44,24 @@ const Offplan = ({ initialData, initialPagination }) => {
       "Plot",
       "Commercial"
     ],
-    priceRanges: ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000", "5000001+"],
+    priceRanges: [
+      "0-100000",
+      "100001-500000",
+      "500001-1000000",
+      "1000001-5000000",
+      "5000001+"
+    ],
     bedrooms: ["Studio", 1, 2, 3, 4, "4+"],
     bathrooms: ["Studio", 1, 2, 3, 4, "4+"],
-    sqFtRanges: ["0-1000", "1001-2000", "2001-3000", "3001-4000", "4001-5000", "5001+"],
-    listedAs: ["Available", "Sold", "Reserved", "Under Construction"],
+    sqFtRanges: [
+      "0-1000",
+      "1001-2000",
+      "2001-3000",
+      "3001-4000",
+      "4001-5000",
+      "5001+"
+    ],
+    listedAs: ["Available", "Sold", "Reserved", "Under Construction"]
   });
   const router = useRouter();
 
@@ -64,31 +77,32 @@ const Offplan = ({ initialData, initialPagination }) => {
       setCurrentFilters({ price: "", sqFt: "" });
     } else {
       // Update current filters state with the raw filter values
-      setCurrentFilters(prev => ({
+      setCurrentFilters((prev) => ({
         ...prev,
         price: filters.price || "",
         sqFt: filters.sqFt || ""
       }));
-      
+
       // Format the filters to match backend expectations
       const formattedFilters = {};
-      
+
       // Handle price range
       if (filters.price) {
-        const [priceMin, priceMax] = filters.price.split('-');
+        const [priceMin, priceMax] = filters.price.split("-");
         formattedFilters.price_min = priceMin || null;
         formattedFilters.price_max = priceMax || null;
       }
 
       // Handle sqFt range
       if (filters.sqFt) {
-        const [sqFtMin, sqFtMax] = filters.sqFt.split('-');
+        const [sqFtMin, sqFtMax] = filters.sqFt.split("-");
         formattedFilters.sq_ft_min = sqFtMin || null;
         formattedFilters.sq_ft_max = sqFtMax || null;
       }
 
       // Add other filters
-      if (filters.propertyType) formattedFilters.property_type = filters.propertyType;
+      if (filters.propertyType)
+        formattedFilters.property_type = filters.propertyType;
       if (filters.bedrooms) {
         if (filters.bedrooms === "Studio") {
           formattedFilters.bedrooms = 0;
@@ -116,16 +130,16 @@ const Offplan = ({ initialData, initialPagination }) => {
   const fetchData = async (page, filters = {}) => {
     setIsLoading(true);
     try {
-      const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
-     
-      
+      const apiUrl =
+        Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
+
       // Prepare query parameters
       const queryParams = new URLSearchParams();
-      queryParams.append('page', page);
-      
+      queryParams.append("page", page);
+
       // Add all filters to query params
       Object.entries(filters).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== '') {
+        if (value !== null && value !== undefined && value !== "") {
           queryParams.append(key, value);
         }
       });
@@ -150,12 +164,16 @@ const Offplan = ({ initialData, initialPagination }) => {
       const options = response.data;
 
       // Extract unique values for filters and convert 0 to "Studio", group 4+ as "4+"
-      const bedrooms = [...new Set(options.data.map((item) => {
-        const bedroom = item.bedroom;
-        if (bedroom === 0 || bedroom === "0") return "Studio";
-        if (bedroom >= 4) return "4+";
-        return bedroom;
-      }))]
+      const bedrooms = [
+        ...new Set(
+          options.data.map((item) => {
+            const bedroom = item.bedroom;
+            if (bedroom === 0 || bedroom === "0") return "Studio";
+            if (bedroom >= 4) return "4+";
+            return bedroom;
+          })
+        )
+      ]
         .filter(Boolean)
         .sort((a, b) => {
           // Handle "Studio" and "4+" values
@@ -167,12 +185,16 @@ const Offplan = ({ initialData, initialPagination }) => {
         });
 
       // Extract unique bathroom values and convert 0 to "Studio", group 4+ as "4+"
-      const bathrooms = [...new Set(options.data.map((item) => {
-        const bathroom = item.bathroom;
-        if (bathroom === 0 || bathroom === "0") return "Studio";
-        if (bathroom >= 4) return "4+";
-        return bathroom;
-      }))]
+      const bathrooms = [
+        ...new Set(
+          options.data.map((item) => {
+            const bathroom = item.bathroom;
+            if (bathroom === 0 || bathroom === "0") return "Studio";
+            if (bathroom >= 4) return "4+";
+            return bathroom;
+          })
+        )
+      ]
         .filter(Boolean)
         .sort((a, b) => {
           if (a === "Studio") return -1;
@@ -184,17 +206,17 @@ const Offplan = ({ initialData, initialPagination }) => {
 
       // Only update bedrooms if we got valid options from the API
       if (bedrooms.length > 0) {
-        setFilterOptions(prev => ({
+        setFilterOptions((prev) => ({
           ...prev,
-          bedrooms,
+          bedrooms
         }));
       }
 
       // Update bathrooms if we got valid options from the API
       if (bathrooms.length > 0) {
-        setFilterOptions(prev => ({
+        setFilterOptions((prev) => ({
           ...prev,
-          bathrooms,
+          bathrooms
         }));
       }
     } catch (error) {
@@ -210,7 +232,7 @@ const Offplan = ({ initialData, initialPagination }) => {
       router.push(
         {
           pathname: router.pathname,
-          query: { ...router.query, page },
+          query: { ...router.query, page }
         },
         undefined,
         { shallow: true }
@@ -247,11 +269,14 @@ const Offplan = ({ initialData, initialPagination }) => {
           currentFilters={currentFilters}
         />
         {showPricePopup && (
-          <div className={styles.popupContainer} onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowPricePopup(false);
-            }
-          }}>
+          <div
+            className={styles.popupContainer}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowPricePopup(false);
+              }
+            }}
+          >
             <RangeInputPopup
               isOpen={showPricePopup}
               onClose={() => setShowPricePopup(false)}
@@ -265,11 +290,14 @@ const Offplan = ({ initialData, initialPagination }) => {
           </div>
         )}
         {showSqFtPopup && (
-          <div className={styles.popupContainer} onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowSqFtPopup(false);
-            }
-          }}>
+          <div
+            className={styles.popupContainer}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowSqFtPopup(false);
+              }
+            }}
+          >
             <RangeInputPopup
               isOpen={showSqFtPopup}
               onClose={() => setShowSqFtPopup(false)}
@@ -291,108 +319,187 @@ const Offplan = ({ initialData, initialPagination }) => {
           <div className={styles.loadingState}>Loading...</div>
         ) : (
           <div className={styles.cardContainer}>
-            {cardData?.filter(property => property?.id).map((property) => (
-             
-              <div
-                key={property?.id || Math.random()}
-                className={styles.propertyCardLink}
-                onClick={() => property?.slug && handleReadMore(property.slug)}
-                style={{ cursor: "pointer" }}
-              >
-                <div className={styles.propertyCard}>
-                  <div className={styles.imageContainer}>
-                    <Image
-                      src={
-                        property?.main_photo
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(property.main_photo)}`
-                          : defaultImage
-                      }
-                      alt={property?.alt_texts?.main_photo || property?.title || "Default Property Image"}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={styles.propertyImage}
-                      priority
-                      unoptimized
-                    />
-                    {property?.exclusive && (
-                      <span className={styles.exclusive}>Exclusive</span>
-                    )}
-                  </div>
-
-                  <div className={styles.propertyInfo}>
-                    <h3 className={`${styles.property_title} ${styles.textEllipsis}`}>
-                      {property?.title || 'Untitled Property'}
-                    </h3>
-                    <p className={`${styles.location} ${styles.textEllipsis}`}>
-                      {property?.map_location || 'Location not specified'}
-                    </p>
-
-                    <div className={styles.features}>
-                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
-                        <Image
-                          src={require("/assets/img/bad.svg")}
-                          alt="Bed Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property?.bedroom === 0 || property?.bedroom === "0" ? "Studio" : property?.bedroom || 0} Br</span>
-                      </div>
-                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
-                        <Image
-                          src={require("/assets/img/bath.svg")}
-                          alt="Bath Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property?.bathroom === 0 || property?.bathroom === "0" ? "Studio" : property?.bathroom || 0} Ba</span>
-                      </div>
-                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
-                        <Image
-                          src={require("/assets/img/place.svg")}
-                          alt="Area Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property?.sq_ft || 0} Sq.m</span>
-                      </div>
-                      <div className={`${styles.feature} ${styles.textEllipsis}`}>
-                        <Image
-                          src={require("/assets/img/garage.svg")}
-                          alt="Area Icon"
-                          width={24}
-                          height={24}
-                        />
-                        <span>{property?.garage || 0} Gr</span>
-                      </div>
+            {cardData
+              ?.filter((property) => property?.id)
+              .map((property) => (
+                <div
+                  key={property?.id || Math.random()}
+                  className={styles.propertyCardLink}
+                  onClick={() =>
+                    property?.slug && handleReadMore(property.slug)
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className={styles.propertyCard}>
+                    <div className={styles.imageContainer}>
+                      <Image
+                        src={
+                          property?.main_photo
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(property.main_photo)}`
+                            : defaultImage
+                        }
+                        alt={
+                          property?.alt_texts?.main_photo ||
+                          property?.title ||
+                          "Default Property Image"
+                        }
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={styles.propertyImage}
+                        priority
+                        unoptimized
+                      />
+                      {property?.exclusive && (
+                        <span className={styles.exclusive}>Exclusive</span>
+                      )}
                     </div>
-                    <div className={styles.priceRow}>
-                      <span className={`${styles.price} ${styles.textEllipsis}`}>
-                        USD {property?.amount?.toLocaleString() || '0'}
-                      </span>
-                      <span className={`${styles.price} ${styles.textEllipsis}`}>
-                        AED {property?.amount_dirhams?.toLocaleString() || '0'}
-                      </span>
+
+                    <div className={styles.propertyInfo}>
+                      <h3
+                        className={`${styles.property_title} ${styles.textEllipsis}`}
+                      >
+                        {property?.title || "Untitled Property"}
+                      </h3>
+                      <p
+                        className={`${styles.location} ${styles.textEllipsis}`}
+                      >
+                        {property?.map_location || "Location not specified"}
+                      </p>
+
+                      <div className={styles.features}>
+                        <div
+                          className={`${styles.feature} ${styles.textEllipsis}`}
+                        >
+                          <Image
+                            src={require("/assets/img/bad.svg")}
+                            alt="Bed Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>
+                            {property?.bedroom === 0 ||
+                            property?.bedroom === "0"
+                              ? "Studio"
+                              : property?.bedroom || 0}{" "}
+                            Br
+                          </span>
+                        </div>
+                        <div
+                          className={`${styles.feature} ${styles.textEllipsis}`}
+                        >
+                          <Image
+                            src={require("/assets/img/bath.svg")}
+                            alt="Bath Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>
+                            {property?.bathroom === 0 ||
+                            property?.bathroom === "0"
+                              ? "Studio"
+                              : property?.bathroom || 0}{" "}
+                            Ba
+                          </span>
+                        </div>
+                        <div
+                          className={`${styles.feature} ${styles.textEllipsis}`}
+                        >
+                          <Image
+                            src={require("/assets/img/place.svg")}
+                            alt="Area Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property?.sq_ft || 0} Sq.m</span>
+                        </div>
+                        <div
+                          className={`${styles.feature} ${styles.textEllipsis}`}
+                        >
+                          <Image
+                            src={require("/assets/img/garage.svg")}
+                            alt="Area Icon"
+                            width={24}
+                            height={24}
+                          />
+                          <span>{property?.garage || 0} Gr</span>
+                        </div>
+                      </div>
+                      <div className={styles.priceRow}>
+                        <span
+                          className={`${styles.price} ${styles.textEllipsis}`}
+                        >
+                          USD {property?.amount?.toLocaleString() || "0"}
+                        </span>
+                        <span
+                          className={`${styles.price} ${styles.textEllipsis}`}
+                        >
+                          AED{" "}
+                          {property?.amount_dirhams?.toLocaleString() || "0"}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         )}
+        <div className={`${styles.pagination}`}>
+          {/* First Page */}
+          <button
+            key={1}
+            onClick={() => handlePageChange(1)}
+            className={`${styles.pageButton} ${
+              1 >= 100 ? styles.paginationMany : ""
+            } ${currentPage === 1 ? styles.active : ""}`}
+            disabled={isLoading}
+          >
+            1
+          </button>
 
-        <div className={styles.pagination}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {/* Ellipsis before the page range if needed */}
+          {currentPage > 6 && <span className={styles.ellipsis}>...</span>}
+
+          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(
+              Math.max(2, currentPage - 4), // Start of range
+              Math.min(totalPages, currentPage + 5) // End of range
+            )
+            .map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${styles.pageButton} ${
+                  page >= 100 ? styles.paginationMany : ""
+                } ${currentPage === page ? styles.active : ""}`}
+                disabled={isLoading}
+              >
+                {page}
+              </button>
+            ))}
+
+          {/* Ellipsis after the page range if needed */}
+          {currentPage < totalPages - 5 && (
+            <span className={styles.ellipsis}>...</span>
+          )}
+
+          {/* Last Page (if not already in range) */}
+          {totalPages > 1 && currentPage < totalPages - 4 && (
             <button
-              key={page}
-              onClick={() => handlePageChange(page)}
+              key={totalPages}
+              onClick={() => handlePageChange(totalPages)}
               className={`${styles.pageButton} ${
-                currentPage === page ? styles.active : ""
-              }`}
+                totalPages >= 100 ? styles.paginationMany : ""
+              } ${currentPage === totalPages ? styles.active : ""}`}
               disabled={isLoading}
             >
-              {page}
+              {totalPages}
             </button>
-          ))}
+          )}
+
+          {/* Next Button */}
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages || isLoading}

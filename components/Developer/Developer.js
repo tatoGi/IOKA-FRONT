@@ -392,22 +392,63 @@ const Developer = ({ initialData, initialPagination }) => {
         </div>
 
         {/* Pagination */}
-        <div className={styles.pagination}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+       <div className={`${styles.pagination}`}>
+          {/* First Page */}
+          <button
+            key={1}
+            onClick={() => handlePageChange(1)}
+            className={`${styles.pageButton} ${
+              1 >= 100 ? styles.paginationMany : ""
+            } ${currentPage === 1 ? styles.active : ""}`}
+            disabled={isLoading}
+          >
+            1
+          </button>
+
+          {/* Ellipsis before the page range if needed */}
+          {currentPage > 6 && <span className={styles.ellipsis}>...</span>}
+
+          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(
+              Math.max(2, currentPage - 4), // Start of range
+              Math.min(totalPages, currentPage + 5) // End of range
+            )
+            .map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${styles.pageButton} ${
+                  page >= 100 ? styles.paginationMany : ""
+                } ${currentPage === page ? styles.active : ""}`}
+                disabled={isLoading}
+              >
+                {page}
+              </button>
+            ))}
+
+          {/* Ellipsis after the page range if needed */}
+          {currentPage < totalPages - 5 && (
+            <span className={styles.ellipsis}>...</span>
+          )}
+
+          {/* Last Page (if not already in range) */}
+          {totalPages > 1 && currentPage < totalPages - 4 && (
             <button
-              key={`page-${page}`}
-              onClick={() => handlePageChangeForSearch(page)}
+              key={totalPages}
+              onClick={() => handlePageChange(totalPages)}
               className={`${styles.pageButton} ${
-                currentPage === page ? styles.active : ""
-              }`}
+                totalPages >= 100 ? styles.paginationMany : ""
+              } ${currentPage === totalPages ? styles.active : ""}`}
               disabled={isLoading}
             >
-              {page}
+              {totalPages}
             </button>
-          ))}
+          )}
+
+          {/* Next Button */}
           <button
-            key="next-button"
-            onClick={() => handlePageChangeForSearch(currentPage + 1)}
+            onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages || isLoading}
             className={styles.pageButton}
           >

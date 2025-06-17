@@ -346,7 +346,9 @@
   /* height: auto; */
   height: 17px;
 }
-
+.paginationMany{
+  width: auto !important;
+}
 .readMore:hover {
   color: #0056b3;
 }

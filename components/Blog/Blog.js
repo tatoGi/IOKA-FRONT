@@ -79,19 +79,19 @@ const Blog = ({ initialData }) => {
           <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index}>
             <div className={`${styles.card}`}>
               <div className={styles.imageContainer}>
-              <Image
-                src={
-                  card.image
-                    ? `${
-                        process.env.NEXT_PUBLIC_API_URL
-                      }/storage/${decodeImageUrl(card.image)}`
-                    : baseimage
-                }
-                className={styles["card-img-top"]}
-                alt={card.image_alt || card.title}
-                width={372}
-                height={200}
-              />
+                <Image
+                  src={
+                    card.image
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(card.image)}`
+                      : baseimage
+                  }
+                  className={styles["card-img-top"]}
+                  alt={card.image_alt || card.title}
+                  width={372}
+                  height={200}
+                />
               </div>
               <div className={styles["card-body"]}>
                 <h5 className={styles["card-title"]}>
@@ -123,28 +123,70 @@ const Blog = ({ initialData }) => {
           </div>
         ))}
       </div>
-      <div className={styles.pagination}>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+      <div className={`${styles.pagination}`}>
+          {/* First Page */}
           <button
-            key={page}
-            onClick={() => handlePageChange(page)}
+            key={1}
+            onClick={() => handlePageChange(1)}
             className={`${styles.pageButton} ${
-              currentPage === page ? styles.active : ""
-            }`}
+              1 >= 100 ? styles.paginationMany : ""
+            } ${currentPage === 1 ? styles.active : ""}`}
             disabled={isLoading}
           >
-            {page}
+            1
           </button>
-        ))}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages || isLoading}
-          className={styles.pageButton}
-        >
-          Next
-        </button>
-      </div>
-    </div> 
+
+          {/* Ellipsis before the page range if needed */}
+          {currentPage > 6 && <span className={styles.ellipsis}>...</span>}
+
+          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(
+              Math.max(2, currentPage - 4), // Start of range
+              Math.min(totalPages, currentPage + 5) // End of range
+            )
+            .map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${styles.pageButton} ${
+                  page >= 100 ? styles.paginationMany : ""
+                } ${currentPage === page ? styles.active : ""}`}
+                disabled={isLoading}
+              >
+                {page}
+              </button>
+            ))}
+
+          {/* Ellipsis after the page range if needed */}
+          {currentPage < totalPages - 5 && (
+            <span className={styles.ellipsis}>...</span>
+          )}
+
+          {/* Last Page (if not already in range) */}
+          {totalPages > 1 && currentPage < totalPages - 4 && (
+            <button
+              key={totalPages}
+              onClick={() => handlePageChange(totalPages)}
+              className={`${styles.pageButton} ${
+                totalPages >= 100 ? styles.paginationMany : ""
+              } ${currentPage === totalPages ? styles.active : ""}`}
+              disabled={isLoading}
+            >
+              {totalPages}
+            </button>
+          )}
+
+          {/* Next Button */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className={styles.pageButton}
+          >
+            Next
+          </button>
+        </div>
+    </div>
   );
 };
 

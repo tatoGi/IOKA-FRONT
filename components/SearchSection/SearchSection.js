@@ -303,7 +303,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               {filters.price ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
               ) : (
-                "Price"
+               <span>Price</span>
               )}
               {filters.price && (
                 <button

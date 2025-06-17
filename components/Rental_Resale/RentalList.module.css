@@ -403,7 +403,9 @@
             align-items: center;
     gap: 10px;
   }
-  
+  .paginationMany{
+    width: auto !important;
+  }
   .agentImage {
     border-radius: 50%;
     width: 40px;
@@ -2255,6 +2257,9 @@ letter-spacing: 0%;
     }
     .pagination{
       margin-bottom: 0;
+    }
+    .paginationMany{
+      width: auto !important;
     }
     .actionButton svg{
       width: 16px;

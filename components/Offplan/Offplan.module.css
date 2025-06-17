@@ -248,6 +248,9 @@ margin: 12px 0 8px 0;
   gap: 6px;
   height: 48px;
 }
+.paginationMany{
+  width: auto !important;
+}
 .pageButton {
   margin: 0 5px;
   padding: 5px 10px;
@@ -255,7 +258,7 @@ margin: 12px 0 8px 0;
   background-color: #fff;
   cursor: pointer;
   border-radius: 4px;
-  width: 46px;
+  width: 46px ;
   height: 46px;
   font-family: 'Montserrat';
   font-weight: 500;
@@ -265,6 +268,10 @@ margin: 12px 0 8px 0;
   text-align: center;
   margin-top: 2px;
   color: #0A273B;
+}
+
+.pageButtonAuto {
+  width: auto;
 }
 
 .pageButton:last-child {

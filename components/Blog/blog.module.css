@@ -251,7 +251,9 @@
     color: white;
     border-color: #0A273B;
 }
-
+.paginationMany{
+    width: auto !important;
+  }
 .pageButton:hover {
     background-color: #ddd;
 }

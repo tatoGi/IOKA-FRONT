@@ -152,6 +152,35 @@ const Rental_Resale = () => {
     return decodeURIComponent(url);
   };
 
+  const getFirstImageSrc = (galleryImages) => {
+    if (!galleryImages) {
+      return defaultImage;
+    }
+    try {
+      const images = JSON.parse(galleryImages);
+      if (Array.isArray(images) && images.length > 0 && images[0]) {
+        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+          images[0]
+        )}`;
+      }
+    } catch (e) {
+      // Fallback to default image if JSON is invalid
+    }
+    return defaultImage;
+  };
+
+  const parseGalleryImages = (galleryImagesString) => {
+    if (!galleryImagesString) {
+      return [];
+    }
+    try {
+      const images = JSON.parse(galleryImagesString);
+      return Array.isArray(images) ? images : [];
+    } catch (e) {
+      return [];
+    }
+  };
+
   const handleSortChange = (sortOption) => {
     // Implement sorting logic based on sortOption
     let sortedData = [...cardData];
@@ -345,16 +374,7 @@ const Rental_Resale = () => {
                     <div className={Styles.propertyCard}>
                       <div className={Styles.imageContainer}>
                         <Image
-                          src={
-                            property.gallery_images &&
-                            JSON.parse(property.gallery_images)[0]
-                              ? `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(
-                                  JSON.parse(property.gallery_images)[0]
-                                )}`
-                              : defaultImage
-                          }
+                          src={getFirstImageSrc(property.gallery_images)}
                           alt={property.title || "Default Property Image"}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -514,10 +534,17 @@ const Rental_Resale = () => {
 
             <div className={Styles.resaleList}>
               {cardData.map((listing) => {
-                const galleryImages = JSON.parse(
-                  listing.gallery_images || "[]"
-                );
-
+                let galleryImages = [];
+                try {
+                  if (listing.gallery_images) {
+                    const parsed = JSON.parse(listing.gallery_images);
+                    if (Array.isArray(parsed)) {
+                      galleryImages = parsed;
+                    }
+                  }
+                } catch (error) {
+                  // Malformed JSON, galleryImages will remain an empty array, preventing a crash.
+                }
                 return (
                   <div
                     key={listing.id}
@@ -785,7 +812,7 @@ const Rental_Resale = () => {
                       )}
                       {!isMobile && (
                         <div className={Styles.resaleDetails}>
-                          {listing.details.slice(0, 4).map((detail, index) => (
+                          {(Array.isArray(listing.details) ? listing.details.slice(0, 4) : []).map((detail, index) => (
                             <p key={index}>{detail.info}</p>
                           ))}
                         </div>
@@ -837,29 +864,69 @@ const Rental_Resale = () => {
               })}
             </div>
 
-            <div className={Styles.pagination}>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`${Styles.pageButton} ${
-                      currentPage === page ? Styles.active : ""
-                    }`}
-                    disabled={isLoading}
-                  >
-                    {page}
-                  </button>
-                )
-              )}
+            <div className={`${Styles.pagination}`}>
+          {/* First Page */}
+          <button
+            key={1}
+            onClick={() => handlePageChange(1)}
+            className={`${Styles.pageButton} ${
+              1 >= 100 ? Styles.paginationMany : ""
+            } ${currentPage === 1 ? Styles.active : ""}`}
+            disabled={isLoading}
+          >
+            1
+          </button>
+
+          {/* Ellipsis before the page range if needed */}
+          {currentPage > 6 && <span className={Styles.ellipsis}>...</span>}
+
+          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(
+              Math.max(2, currentPage - 4), // Start of range
+              Math.min(totalPages, currentPage + 5) // End of range
+            )
+            .map((page) => (
               <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages || isLoading}
-                className={Styles.pageButton}
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${Styles.pageButton} ${
+                  page >= 100 ? Styles.paginationMany : ""
+                } ${currentPage === page ? Styles.active : ""}`}
+                disabled={isLoading}
               >
-                Next
+                {page}
               </button>
-            </div>
+            ))}
+
+          {/* Ellipsis after the page range if needed */}
+          {currentPage < totalPages - 5 && (
+            <span className={Styles.ellipsis}>...</span>
+          )}
+
+          {/* Last Page (if not already in range) */}
+          {totalPages > 1 && currentPage < totalPages - 4 && (
+            <button
+              key={totalPages}
+              onClick={() => handlePageChange(totalPages)}
+              className={`${Styles.pageButton} ${
+                totalPages >= 100 ? Styles.paginationMany : ""
+              } ${currentPage === totalPages ? Styles.active : ""}`}
+              disabled={isLoading}
+            >
+              {totalPages}
+            </button>
+          )}
+
+          {/* Next Button */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className={Styles.pageButton}
+          >
+            Next
+          </button>
+        </div>
           </div>
         </div>
         {isMobile && topProperties.length > 0 && (
@@ -909,16 +976,7 @@ const Rental_Resale = () => {
                   <div className={Styles.propertyCard}>
                     <div className={Styles.imageContainer}>
                       <Image
-                        src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
-                              )}`
-                            : defaultImage
-                        }
+                        src={getFirstImageSrc(property.gallery_images)}
                         alt={property.title || "Default Property Image"}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
