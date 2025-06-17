@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./SearchRental.module.css";
-import { FiSearch } from "react-icons/fi";
-import Image from "next/image";
-import filterVector from "../../assets/img/filter.svg";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
 const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {} }) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import styles from "./SearchSection.module.css";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
-const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters }) => {
+const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {} }) => {
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
@@ -19,6 +19,10 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     searchQuery: "",
   });
 
+  const [matchingLocations, setMatchingLocations] = useState([]);
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   // Update filters when currentFilters changes
   useEffect(() => {
     if (currentFilters) {
@@ -29,10 +33,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
       }));
     }
   }, [currentFilters]);
-
-  const [matchingLocations, setMatchingLocations] = useState([]);
-  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const closeAllPopups = () => {
     setShowPricePopup(false);
@@ -56,20 +56,41 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     debounce(async (field, value) => {
       const updatedFilters = { ...filters, [field]: value };
       setFilters(updatedFilters);
-      onFilterChange(updatedFilters);
+
+      // Format the filters to match backend expectations
+      const backendFilters = {
+        property_type: updatedFilters.propertyType || null,
+        bedrooms: updatedFilters.bedrooms || null,
+        bathrooms: updatedFilters.bathrooms || null,
+        location: updatedFilters.searchQuery || null,
+      };
+
+      // Handle price range
+      if (updatedFilters.price) {
+        const [priceMin, priceMax] = updatedFilters.price.split('-');
+        backendFilters.price_min = priceMin || null;
+        backendFilters.price_max = priceMax || null;
+      }
+
+      // Handle sqFt range
+      if (updatedFilters.sqFt) {
+        const [sqFtMin, sqFtMax] = updatedFilters.sqFt.split('-');
+        backendFilters.sq_ft_min = sqFtMin || null;
+        backendFilters.sq_ft_max = sqFtMax || null;
+      }
+
+      // Remove null or empty values from the query parameters
+      const filteredParams = Object.fromEntries(
+        Object.entries(backendFilters).filter(
+          ([_, v]) => v !== null && v !== ""
+        )
+      );
+
+      // If all filters are cleared, send null to indicate we should use default API
+      onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
     }, 500),
     [filters, onFilterChange]
   );
-
-  const clearFilter = (field) => {
-    setFilters(prev => ({ ...prev, [field]: "" }));
-    handleFilterChange(field, "");
-  };
-
-  const handleRangeApply = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
-    onFilterChange({ [field]: value });
-  };
 
   const formatNumber = (num) => {
     if (!num) return '';
@@ -101,6 +122,48 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     return "";
   };
 
+  const clearFilter = (field) => {
+    const updatedFilters = { ...filters, [field]: "" };
+    setFilters(updatedFilters);
+    
+    // Format the filters to match backend expectations
+    const backendFilters = {
+      property_type: updatedFilters.propertyType || null,
+      bedrooms: updatedFilters.bedrooms || null,
+      bathrooms: updatedFilters.bathrooms || null,
+      location: updatedFilters.searchQuery || null,
+    };
+
+    // Handle price range
+    if (updatedFilters.price) {
+      const [priceMin, priceMax] = updatedFilters.price.split('-');
+      backendFilters.price_min = priceMin || null;
+      backendFilters.price_max = priceMax || null;
+    }
+
+    // Handle sqFt range
+    if (updatedFilters.sqFt) {
+      const [sqFtMin, sqFtMax] = updatedFilters.sqFt.split('-');
+      backendFilters.sq_ft_min = sqFtMin || null;
+      backendFilters.sq_ft_max = sqFtMax || null;
+    }
+
+    // Remove null or empty values from the query parameters
+    const filteredParams = Object.fromEntries(
+      Object.entries(backendFilters).filter(
+        ([_, v]) => v !== null && v !== ""
+      )
+    );
+
+    // Call onFilterChange with the updated filters
+    onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
+  };
+
+  const handleRangeApply = (field, value) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+    handleFilterChange(field, value);
+  };
+
   const handleLocationSearch = useCallback(
     debounce(async (query) => {
       if (!query.trim()) {
@@ -112,17 +175,57 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
       setIsLoading(true);
       try {
         const response = await fetch(`${LOCATION_SEARCH_API}?query=${encodeURIComponent(query)}`);
+        
+        // Check if response is ok
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Check if response is JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Response is not JSON");
+        }
+        
         const data = await response.json();
         
         // Handle both array and object response formats
         const locations = data.locations || data || [];
         
-        setMatchingLocations(locations);
+        // Transform location data to handle both string and object formats
+        const transformedLocations = locations.map(location => {
+          if (typeof location === 'string') {
+            return location;
+          } else if (location && typeof location === 'object') {
+            return location.title || location.name || location.location || JSON.stringify(location);
+          }
+          return String(location);
+        });
+        
+        setMatchingLocations(transformedLocations);
         // Always show dropdown if we're loading or have results
         setShowLocationDropdown(true);
       } catch (error) {
         console.error('Error fetching locations:', error);
-        setMatchingLocations([]);
+        
+        // Fallback: provide some basic location suggestions
+        const fallbackLocations = [
+          'Dubai Marina',
+          'Palm Jumeirah',
+          'Downtown Dubai',
+          'JBR',
+          'Business Bay',
+          'Dubai Hills Estate',
+          'Arabian Ranches',
+          'Emirates Hills',
+          'Meadows',
+          'Springs'
+        ].filter(location => 
+          location.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        setMatchingLocations(fallbackLocations);
+        setShowLocationDropdown(true);
       } finally {
         setIsLoading(false);
       }
@@ -131,9 +234,11 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
   );
 
   const handleLocationSelect = (location) => {
-    setFilters(prev => ({ ...prev, searchQuery: location }));
+    // Extract the location title if it's an object, otherwise use the string
+    const locationValue = typeof location === 'object' ? location.title : location;
+    setFilters(prev => ({ ...prev, searchQuery: locationValue }));
     setShowLocationDropdown(false);
-    handleFilterChange("searchQuery", location);
+    handleFilterChange("searchQuery", locationValue);
   };
 
   return (
@@ -146,7 +251,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <input
             type="text"
-            placeholder="City, Building or community"
+            placeholder="Search by location"
             className={styles.searchInput}
             value={filters.searchQuery}
             onChange={(e) => {
@@ -177,102 +282,102 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("propertyType", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("propertyType", e.target.value)}
           >
-            <option value="">Property Types</option>
+            <option value="">Property Type</option>
             {filterOptions.propertyTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
               </option>
             ))}
           </select>
-          
-          <div className={styles.filterButtonWrapper}>
+
+          <div className={styles.filterBtnWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
-              onClick={() => setShowPricePopup(true)}
+              onClick={() => {
+                setShowPricePopup(!showPricePopup);
+                setShowSqFtPopup(false);
+              }}
             >
               {filters.price ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
               ) : (
-                <span>Price</span>
+                "Price"
+              )}
+              {filters.price && (
+                <button
+                  className={styles.clearFilterButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearFilter("price");
+                  }}
+                >
+                  ×
+                </button>
               )}
             </button>
-            {filters.price && (
-              <button
-                className={styles.clearFilterButton}
-                onClick={() => clearFilter("price")}
-              >
-                ×
-              </button>
-            )}
           </div>
 
           <select
-            className={styles.filterBtn}
+            className={`${styles.filterBtn}`}
             value={filters.bedrooms}
             onClick={() => {
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("bedrooms", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
           >
             <option value="">Bedrooms</option>
-            {filterOptions.bedrooms.map((bedroom) => (
-              <option key={bedroom} value={bedroom}>
-                {bedroom === "Studio" ? "Studio" : 
-                 bedroom === "4+" ? "4+ Bedrooms" : 
-                 `${bedroom} Bedroom${bedroom > 1 ? "s" : ""}`}
+            {filterOptions.bedrooms.map((num) => (
+              <option key={num} value={num}>
+                {num === "studio" ? "Studio" : num}
               </option>
             ))}
           </select>
 
           <select
-            className={styles.filterBtn}
+            className={`${styles.filterBtn}`}
             value={filters.bathrooms}
             onClick={() => {
               setShowPricePopup(false);
               setShowSqFtPopup(false);
             }}
-            onChange={(e) => {
-              closeAllPopups();
-              handleFilterChange("bathrooms", e.target.value);
-            }}
+            onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
           >
             <option value="">Bathrooms</option>
-            {filterOptions.bathrooms.map((bathroom) => (
-              <option key={bathroom} value={bathroom}>
-                {bathroom === "4+" ? "4+ Bathrooms" : 
-                 `${bathroom} Bathroom${bathroom > 1 ? "s" : ""}`}
+            {filterOptions.bathrooms.map((num) => (
+              <option key={num} value={num}>
+                {num === "studio" ? "Studio" : num}
               </option>
             ))}
           </select>
 
-          <div className={styles.filterButtonWrapper}>
+          <div className={styles.filterBtnWrapper}>
             <button
               className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
-              onClick={() => setShowSqFtPopup(true)}
+              onClick={() => {
+                setShowSqFtPopup(!showSqFtPopup);
+                setShowPricePopup(false);
+              }}
             >
               {filters.sqFt ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
               ) : (
-                <span>Area</span>
+                "Area"
+              )}
+              {filters.sqFt && (
+                <button
+                  className={styles.clearFilterButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearFilter("sqFt");
+                  }}
+                >
+                  ×
+                </button>
               )}
             </button>
-            {filters.sqFt && (
-              <button
-                className={styles.clearFilterButton}
-                onClick={() => clearFilter("sqFt")}
-              >
-                ×
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -301,7 +406,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                 className={styles.locationItem}
                 onClick={() => handleLocationSelect(location)}
               >
-                {location}
+                {typeof location === 'object' ? location.title || location.name : location}
               </div>
             ))
           ) : (

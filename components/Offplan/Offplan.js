@@ -46,7 +46,7 @@ const Offplan = ({ initialData, initialPagination }) => {
     ],
     priceRanges: ["0-100000", "100001-500000", "500001-1000000", "1000001-5000000", "5000001+"],
     bedrooms: ["Studio", 1, 2, 3, 4, "4+"],
-    bathrooms: [1, 2, 3, 4, "4+"],
+    bathrooms: ["Studio", 1, 2, 3, 4, "4+"],
     sqFtRanges: ["0-1000", "1001-2000", "2001-3000", "3001-4000", "4001-5000", "5001+"],
     listedAs: ["Available", "Sold", "Reserved", "Under Construction"],
   });
@@ -89,8 +89,24 @@ const Offplan = ({ initialData, initialPagination }) => {
 
       // Add other filters
       if (filters.propertyType) formattedFilters.property_type = filters.propertyType;
-      if (filters.bedrooms) formattedFilters.bedrooms = filters.bedrooms;
-      if (filters.bathrooms) formattedFilters.bathrooms = filters.bathrooms;
+      if (filters.bedrooms) {
+        if (filters.bedrooms === "Studio") {
+          formattedFilters.bedrooms = 0;
+        } else if (filters.bedrooms === "4+") {
+          formattedFilters.bedrooms_min = 4;
+        } else {
+          formattedFilters.bedrooms = filters.bedrooms;
+        }
+      }
+      if (filters.bathrooms) {
+        if (filters.bathrooms === "Studio") {
+          formattedFilters.bathrooms = 0;
+        } else if (filters.bathrooms === "4+") {
+          formattedFilters.bathrooms_min = 4;
+        } else {
+          formattedFilters.bathrooms = filters.bathrooms;
+        }
+      }
       if (filters.searchQuery) formattedFilters.location = filters.searchQuery;
 
       fetchData(1, formattedFilters);
@@ -133,8 +149,13 @@ const Offplan = ({ initialData, initialPagination }) => {
       console.log(response.data);
       const options = response.data;
 
-      // Extract unique values for filters
-      const bedrooms = [...new Set(options.data.map((item) => item.bedroom))]
+      // Extract unique values for filters and convert 0 to "Studio", group 4+ as "4+"
+      const bedrooms = [...new Set(options.data.map((item) => {
+        const bedroom = item.bedroom;
+        if (bedroom === 0 || bedroom === "0") return "Studio";
+        if (bedroom >= 4) return "4+";
+        return bedroom;
+      }))]
         .filter(Boolean)
         .sort((a, b) => {
           // Handle "Studio" and "4+" values
@@ -145,10 +166,17 @@ const Offplan = ({ initialData, initialPagination }) => {
           return a - b;
         });
 
-      // Extract unique bathroom values
-      const bathrooms = [...new Set(options.data.map((item) => item.bathroom))]
+      // Extract unique bathroom values and convert 0 to "Studio", group 4+ as "4+"
+      const bathrooms = [...new Set(options.data.map((item) => {
+        const bathroom = item.bathroom;
+        if (bathroom === 0 || bathroom === "0") return "Studio";
+        if (bathroom >= 4) return "4+";
+        return bathroom;
+      }))]
         .filter(Boolean)
         .sort((a, b) => {
+          if (a === "Studio") return -1;
+          if (b === "Studio") return 1;
           if (a === "4+") return 1;
           if (b === "4+") return -1;
           return a - b;
@@ -193,7 +221,7 @@ const Offplan = ({ initialData, initialPagination }) => {
 
   // Fetch data when the component mounts (if no initialData is provided)
   useEffect(() => {
-    if (!initialData.length && !isLoading) {
+    if (!initialData?.length && !isLoading) {
       fetchData(currentPage);
     }
   }, []);
@@ -307,7 +335,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                           width={24}
                           height={24}
                         />
-                        <span>{property?.bedroom || 0} Br</span>
+                        <span>{property?.bedroom === 0 || property?.bedroom === "0" ? "Studio" : property?.bedroom || 0} Br</span>
                       </div>
                       <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image
@@ -316,7 +344,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                           width={24}
                           height={24}
                         />
-                        <span>{property?.bathroom || 0} Ba</span>
+                        <span>{property?.bathroom === 0 || property?.bathroom === "0" ? "Studio" : property?.bathroom || 0} Ba</span>
                       </div>
                       <div className={`${styles.feature} ${styles.textEllipsis}`}>
                         <Image

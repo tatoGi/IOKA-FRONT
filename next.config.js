@@ -4,7 +4,6 @@ const API_HOSTNAME = new URL(API_BASE_URL).hostname;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   experimental: {
     optimizeCss: true,
   },
