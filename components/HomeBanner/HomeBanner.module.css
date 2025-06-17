@@ -114,12 +114,10 @@
   top: 50%;
   /* Center vertically */
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 90%;
   /* Use percentage for better responsiveness */
-  max-width: 451px;
+  max-width: 697px;
   /* Max width for desktop */
   z-index: 10;
   margin-top: 100px;
@@ -158,6 +156,7 @@
   font-weight: 400;
   line-height: 100%;
   position: relative;
+  
 }
 
 .tab:after {
@@ -196,7 +195,7 @@
 .search-container {
   background: #fff;
   /* width          : 451px; /* Let banner-search control width */
-  width: 100%;
+  width:451px;
   /* Take full width of parent (.banner-search) */
   height: 72px;
   display: -webkit-box;
@@ -213,6 +212,15 @@
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   /* Mobile adjustments in media query */
+  -webkit-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  margin: 0 auto;
+  /* Center it if banner-search is wider */
+}
+
+.active-search {
+  width: 697px !important;
 }
 
 .search-inputs {

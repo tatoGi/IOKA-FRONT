@@ -324,7 +324,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
   }
 
   .header-nav ul li a {
@@ -421,7 +421,7 @@
     color: #FFFFFF;
     font-family: 'Montserrat';
     font-weight: 600;
-    font-size: 16px !important;
+    font-size: 15px !important;
     line-height: 100%;
     letter-spacing: 0%;
     text-transform: uppercase;
