@@ -13,7 +13,6 @@ import { DEVELOPER_API } from "@/routes/apiRoutes";
 import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
 import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
-import { useMediaQuery } from "react-responsive";
 
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -231,11 +230,17 @@ const Developer = ({ initialData, initialPagination }) => {
       if (Array.isArray(photos) && photos.length > 0) {
         const currentIndex = imageIndexes[cardId] || 0;
         const currentPhoto = photos[currentIndex];
+        const imageUrl = decodeURIComponent(currentPhoto.file);
+
+        // Check if the URL is absolute
+        const isAbsoluteUrl = /^(?:[a-z]+:)?\/\//i.test(imageUrl);
+        const finalUrl = isAbsoluteUrl
+          ? imageUrl
+          : `${process.env.NEXT_PUBLIC_API_URL}/storage/${imageUrl}`;
+
         return {
-          url: `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeURIComponent(
-            currentPhoto.file
-          )}`,
-          alt: currentPhoto.alt || 'Developer image'
+          url: finalUrl,
+          alt: currentPhoto.alt || 'Developer image',
         };
       }
       return { url: defaultImage, alt: 'Default developer image' };
