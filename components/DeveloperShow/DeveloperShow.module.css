@@ -388,15 +388,15 @@
 
 .propertyType {
   position: absolute;
-  top: 16px;
+  bottom: 11px;
   left: 16px;
-  background: #007AFF;
-  color: white;
-  padding: 10px 0px;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 1);
+  color: rgba(7, 21, 31, 1);
+  padding: 8.5px 16px;
+  border-radius: 14px;
   font-size: 12px;
   z-index: 1;
-  width: 102px;
+  width: 123px;
   font-weight: 700;
   height: 35px;
   text-align: center;
@@ -405,17 +405,17 @@
 
 .propertyYear {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: #07151F;
-  color: white;
-  padding: 10px 17px;
-  border-radius: 8px;
-  font-size: 12px;
-  z-index: 1;
-  width: 60px;
-  font-family: 'Montserrat';
-  height: 35px;
+    bottom: 10px;
+    right: 16px;
+    background: #07151F;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 1;
+    width: 60px;
+    font-family: 'Montserrat';
+    height: 35px;
 }
 
 .propertyInfo {
