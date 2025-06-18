@@ -96,7 +96,10 @@ const BlogShow = ({ blogData }) => {
               <h3>Similar Articles</h3>
 
               {blogData.related_blogs &&
-                blogData.related_blogs.map((card, index) => (
+                blogData.related_blogs
+                  .sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .slice(0, 4)
+                  .map((card, index) => (
                   <div className={`card ${styles.card}`} key={index}>
                     <Image
                       src={
@@ -147,7 +150,10 @@ const BlogShow = ({ blogData }) => {
             </div>
             
             {blogData.related_blogs &&
-              blogData.related_blogs.map((card, index) => (
+              blogData.related_blogs
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 4)
+                .map((card, index) => (
                 <div className={`card ${styles.card}`} key={index}>
                   <Image
                     src={

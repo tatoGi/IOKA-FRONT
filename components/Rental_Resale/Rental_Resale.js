@@ -911,7 +911,7 @@ const Rental_Resale = () => {
               {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
               {Array.from({ length: totalPages }, (_, i) => i + 1)
                 .slice(
-                  Math.max(2, currentPage - 4), // Start of range
+                  Math.max(1, currentPage - 5), // Start of range
                   Math.min(totalPages, currentPage + 5) // End of range
                 )
                 .map((page) => (
@@ -933,7 +933,7 @@ const Rental_Resale = () => {
               )}
 
               {/* Last Page (if not already in range) */}
-              {totalPages > 1 && currentPage < totalPages - 4 && (
+              {totalPages > 1 && currentPage < totalPages - 5 && (
                 <button
                   key={totalPages}
                   onClick={() => handlePageChange(totalPages)}

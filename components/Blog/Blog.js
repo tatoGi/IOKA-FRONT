@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./blog.module.css";
 import baseimage from "../../assets/img/blogimage.png";
 import Image from "next/image";
@@ -21,32 +21,42 @@ const Blog = ({ initialData }) => {
     setIsMounted(true);
   }, []);
 
-  useEffect(() => {
-    const fetchData = async (page) => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${BLOGS_API}?page=${page}`);
-        setCardData(response.data.data);
-        setTotalPages(response.data.last_page);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchData = useCallback(async (page) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${BLOGS_API}?page=${page}`);
+      setCardData(response.data.data);
+      setTotalPages(response.data.last_page);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
     if (!initialData) {
       fetchData(currentPage);
     }
-  }, [currentPage, initialData]);
+  }, [currentPage, initialData, fetchData]);
 
   // Don't render until component is mounted to prevent hydration mismatch
   if (!isMounted) {
     return null;
   }
-
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    if (page !== currentPage) {
+      setCurrentPage(page);
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, page }
+        },
+        undefined,
+        { shallow: true }
+      );
+      fetchData(page);
+    }
   };
 
   const limitTextLength = (text, maxLength) => {
@@ -174,7 +184,7 @@ const Blog = ({ initialData }) => {
               {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
               {Array.from({ length: totalPages }, (_, i) => i + 1)
                 .slice(
-                  Math.max(2, currentPage - 4), // Start of range
+                  Math.max(1, currentPage - 5), // Start of range
                   Math.min(totalPages, currentPage + 5) // End of range
                 )
                 .map((page) => (
@@ -196,7 +206,7 @@ const Blog = ({ initialData }) => {
               )}
 
               {/* Last Page (if not already in range) */}
-              {totalPages > 1 && currentPage < totalPages - 4 && (
+              {totalPages > 1 && currentPage < totalPages - 5 && (
                 <button
                   key={totalPages}
                   onClick={() => handlePageChange(totalPages)}
