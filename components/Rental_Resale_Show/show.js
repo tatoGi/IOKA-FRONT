@@ -1109,7 +1109,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.details}>
                   <h3>Key Information</h3>
                   <div className={styles.detailsGrid}>
-                    {RENTAL_RESALE_DATA.details.map((detail, index) => {
+                    {parsedDetails.map((detail, index) => {
                       if (detail.title === "Price") {
                         return (
                           <div
@@ -1155,12 +1155,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
               </div>
               <div className={styles.mobile_description_content_second}>
-                {/* Contact Information Section */}
-                <div className={styles.shareButtons}>
-                  <button className={styles.shareButton} onClick={handleShare}>
-                    <i className="fas fa-share-alt"></i> Share this listing
-                  </button>
-                </div>
+               
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
