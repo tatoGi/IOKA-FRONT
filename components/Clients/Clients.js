@@ -119,7 +119,9 @@ const Clients = ({ sectionSixData }) => {
                       <div className={styles.stars}>
                         {[...Array(Number(testimonial.rating))].map((_, index) => (
                           <span key={index} className={styles.star}>
-                            ★
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22" fill="none">
+                            <path d="M11.9565 2.79365L14.467 7.93537L14.8551 8.73016L15.4369 8.83911L20.4587 9.53752L16.8913 12.9164L16.2797 13.4898L20.4587 9.53752L14.8551 8.73016L11.9565 2.79365L9.3413 8.68267L3.50434 9.49911L7.63695 13.912L6.97166 13.2016L3.50434 9.49911L8.52608 8.8007L9.3413 8.68267L9.67316 7.93537L11.9565 2.79365ZM12 0L8.29057 7.24464L-5.52855e-06 8.39981L5.99999 14.0416L4.58188 22L12 18.2439L19.4188 22L18 14.0381L24 8.4047L15.7094 7.24464L12 0Z" fill="#FF9500"/>
+                            </svg>
                           </span>
                         ))}
                       </div>
