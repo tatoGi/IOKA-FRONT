@@ -407,7 +407,7 @@ const DeveloperShow = (developerData) => {
                   <div
                     className={styles.propertyGrid}
                     style={{
-                      transform: `translateX(calc(-${currentSlide} * (400px + 24px)))`,
+                      transform: `translateX(calc(-${currentSlide} * (500px + 20px)))`,
                       touchAction: 'pan-x',
                       WebkitOverflowScrolling: 'touch',
                       userSelect: 'none',
