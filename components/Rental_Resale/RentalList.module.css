@@ -582,7 +582,7 @@
           -ms-flex-align: center;
               align-items: center;
       gap: 5px;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
     
     .propertyStats {
@@ -929,7 +929,6 @@
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      gap: 16px;
       width: 100%;
     }
     
@@ -939,11 +938,18 @@
       font-weight: 600;
       line-height: 1.2;
       font-family: 'Montserrat';
+      margin-bottom: 12px;
     }
     
     .resaleLocation {
-      color: #0A273B;
-      font-size: 14px;
+      color: rgba(10, 39, 59, 1);
+      margin-bottom: 12px;
+      font-family: 'Montserrat';
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 100%;
+      letter-spacing: 0%;
+
     }
     
     .resalePrice {
@@ -965,7 +971,7 @@
           -ms-flex-align: center;
               align-items: center;
       gap: 12px;
-      padding-bottom: 16px;
+      margin-bottom: 30px;
     }
     
     .statGroup {
@@ -1448,7 +1454,6 @@
     -o-transition: transform 0.3s ease;
     transition: transform 0.3s ease;
     transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-    max-height: 189px;
   }
   
   .smallImage:hover {
@@ -2261,6 +2266,66 @@ letter-spacing: 0%;
     .paginationMany{
       width: auto !important;
     }
+    
+.mobilePagination {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.pageInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+.pageText{
+  font-family: 'Montserrat';
+font-size: 12px;
+color: rgba(10, 39, 59, 1);
+}
+.pageSelect {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(7, 21, 31, 1);
+  background-color: #fff;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #0A273B;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("../../assets/img/mobilepagesvg.svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px;
+  width: 55px;
+  height: 36px;
+  margin-right: 24px;
+}
+.pageTotal{
+  font-family: 'Montserrat';
+font-weight: 400;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-right: 56px;
+
+}
+.mobilePagination .pageButtonmobile{
+  border-radius: 4px;
+  border: 1px solid rgba(7, 21, 31, 1);
+  background-color: #fff;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #0A273B;
+  background-size: 12px;
+  width: 40px;
+  height: 36px;
+  align-items: center;
+}
     .actionButton svg{
       width: 16px;
       height: 16px;

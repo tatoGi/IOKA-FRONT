@@ -330,6 +330,66 @@ margin-top: 2px;
   background-color: rgba(0, 0, 0, 0.5);
   padding-top: 100px;
 }
+
+.mobilePagination {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.pageInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+.pageText{
+  font-family: 'Montserrat';
+font-size: 12px;
+color: rgba(10, 39, 59, 1);
+}
+.pageSelect {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(7, 21, 31, 1);
+  background-color: #fff;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #0A273B;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("../../assets/img/mobilepagesvg.svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px;
+  width: 55px;
+  height: 36px;
+  margin-right: 24px;
+}
+.pageTotal{
+  font-family: 'Montserrat';
+font-weight: 400;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-right: 56px;
+
+}
+.mobilePagination .pageButtonmobile{
+  border-radius: 4px;
+  border: 1px solid rgba(7, 21, 31, 1);
+  background-color: #fff;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #0A273B;
+  background-size: 12px;
+  width: 40px;
+  height: 36px;
+  align-items: center;
+}
 @media (max-width: 1600px) {
 
   /* Default Styles (Mobile First) */

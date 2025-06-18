@@ -73,7 +73,7 @@ const Rental_Resale = () => {
     try {
       // Use FILTER_RENTAL_RESALE_API when filters are present
       const apiUrl = filterParams ? FILTER_RENTAL_RESALE_API : RENTAL_RESALE;
-      
+
       // Prepare query parameters
       const queryParams = new URLSearchParams();
       queryParams.append("page", page);
@@ -268,7 +268,7 @@ const Rental_Resale = () => {
   const formatRangeDisplay = (value, isPrice = false) => {
     if (!value) return "";
     const [min, max] = value.split("-");
-    
+
     if (min && max) {
       if (isPrice) {
         return `$${Number(min).toLocaleString()} - $${Number(max).toLocaleString()}`;
@@ -348,7 +348,7 @@ const Rental_Resale = () => {
                 onTouchEnd={(e) => {
                   e.stopPropagation();
                   if (!touchStart || !touchEnd) return;
-                  
+
                   const distance = touchStart - touchEnd;
                   const isLeftSwipe = distance > 50;
                   const isRightSwipe = distance < -50;
@@ -389,12 +389,12 @@ const Rental_Resale = () => {
                           <span className={Styles.topBadge}>Top</span>
                         )}
                       </div>
-                        
+
                       <div className={Styles.propertyInfo}>
                         <h3 className={Styles.title}>{property.title}</h3>
                         <p className={Styles.location}>
-                          {property.locations && property.locations.length > 0 
-                            ? property.locations[0].title 
+                          {property.locations && property.locations.length > 0
+                            ? property.locations[0].title
                             : property.subtitle || property.location || ''}
                         </p>
 
@@ -462,8 +462,8 @@ const Rental_Resale = () => {
                   setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
                 }}
                 disabled={currentSlide >= Math.ceil(topProperties.length / 3) - 1}
-                style={{ 
-                  opacity: currentSlide >= Math.ceil(topProperties.length / 3) - 1 ? 0.5 : 1 
+                style={{
+                  opacity: currentSlide >= Math.ceil(topProperties.length / 3) - 1 ? 0.5 : 1
                 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -529,7 +529,7 @@ const Rental_Resale = () => {
 
           <div className={Styles.resaleSection}>
             <div className={Styles.resaleHeader}>
-              
+
             </div>
 
             <div className={Styles.resaleList}>
@@ -558,9 +558,8 @@ const Rental_Resale = () => {
                       <Image
                         src={
                           galleryImages[0]
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(galleryImages[0])}`
+                            ? `${process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(galleryImages[0])}`
                             : defaultImage
                         }
                         alt={listing.title}
@@ -620,9 +619,8 @@ const Rental_Resale = () => {
                             <Image
                               src={
                                 image
-                                  ? `${
-                                      process.env.NEXT_PUBLIC_API_URL
-                                    }/storage/${decodeImageUrl(image)}`
+                                  ? `${process.env.NEXT_PUBLIC_API_URL
+                                  }/storage/${decodeImageUrl(image)}`
                                   : defaultImage
                               }
                               alt={`Gallery Image ${index + 1}`}
@@ -679,9 +677,8 @@ const Rental_Resale = () => {
                             <Image
                               src={
                                 image
-                                  ? `${
-                                      process.env.NEXT_PUBLIC_API_URL
-                                    }/storage/${decodeImageUrl(image)}`
+                                  ? `${process.env.NEXT_PUBLIC_API_URL
+                                  }/storage/${decodeImageUrl(image)}`
                                   : defaultImage
                               }
                               alt={`Property Image ${index + 1}`}
@@ -722,9 +719,8 @@ const Rental_Resale = () => {
                         {galleryImages.map((_, index) => (
                           <div
                             key={index}
-                            className={`${Styles.indicator} ${
-                              index === currentImageIndex ? Styles.active : ""
-                            }`}
+                            className={`${Styles.indicator} ${index === currentImageIndex ? Styles.active : ""
+                              }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               setCurrentImageIndex(index);
@@ -738,8 +734,8 @@ const Rental_Resale = () => {
                       <h4>{listing.title}</h4>
 
                       <p className={Styles.resaleLocation}>
-                        {listing.locations && listing.locations.length > 0 
-                          ? listing.locations[0].title 
+                        {listing.locations && listing.locations.length > 0
+                          ? listing.locations[0].title
                           : listing.subtitle || listing.location || ''}
                       </p>
                       <div className={Styles.priceContainer}>
@@ -864,68 +860,102 @@ const Rental_Resale = () => {
               })}
             </div>
 
-            <div className={`${Styles.pagination}`}>
-          {/* First Page */}
-          <button
-            key={1}
-            onClick={() => handlePageChange(1)}
-            className={`${Styles.pageButton} ${
-              1 >= 100 ? Styles.paginationMany : ""
-            } ${currentPage === 1 ? Styles.active : ""}`}
-            disabled={isLoading}
-          >
-            1
-          </button>
-
-          {/* Ellipsis before the page range if needed */}
-          {currentPage > 6 && <span className={Styles.ellipsis}>...</span>}
-
-          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .slice(
-              Math.max(2, currentPage - 4), // Start of range
-              Math.min(totalPages, currentPage + 5) // End of range
-            )
-            .map((page) => (
+            <div className={Styles.pagination}>
+          {isMobile ? (
+            <div className={`${Styles.mobilePagination} container`} >
+             
+              <div className={Styles.pageInfo}>
+               <span className={Styles.pageText}>Page</span>
+                <select
+                  className={Styles.pageSelect}
+                  value={currentPage}
+                  onChange={(e) => handlePageChange(Number(e.target.value))}
+                >
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <option key={page} value={page}>
+                        {page}
+                      </option>
+                    )
+                  )}
+                </select>
+                <span className={Styles.pageTotal}>of {totalPages}</span>
+              </div>
               <button
-                key={page}
-                onClick={() => handlePageChange(page)}
+                className={Styles.pageButtonmobile}
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M7.70664 7.70586C8.09727 7.31523 8.09727 6.68086 7.70664 6.29023L1.70664 0.290234C1.31602 -0.100391 0.681641 -0.100391 0.291016 0.290234C-0.0996094 0.680859 -0.0996094 1.31523 0.291016 1.70586L5.58477 6.99961L0.29414 12.2934C-0.0964847 12.684 -0.0964847 13.3184 0.29414 13.709C0.684765 14.0996 1.31914 14.0996 1.70977 13.709L7.70977 7.70898L7.70664 7.70586Z" fill="#07151F"/>
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* First Page */}
+              <button
+                key={1}
+                onClick={() => handlePageChange(1)}
                 className={`${Styles.pageButton} ${
-                  page >= 100 ? Styles.paginationMany : ""
-                } ${currentPage === page ? Styles.active : ""}`}
+                  1 >= 100 ? Styles.paginationMany : ""
+                } ${currentPage === 1 ? Styles.active : ""}`}
                 disabled={isLoading}
               >
-                {page}
+                1
               </button>
-            ))}
 
-          {/* Ellipsis after the page range if needed */}
-          {currentPage < totalPages - 5 && (
-            <span className={Styles.ellipsis}>...</span>
+              {/* Ellipsis before the page range if needed */}
+              {currentPage > 6 && <span className={Styles.ellipsis}>...</span>}
+
+              {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .slice(
+                  Math.max(2, currentPage - 4), // Start of range
+                  Math.min(totalPages, currentPage + 5) // End of range
+                )
+                .map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`${Styles.pageButton} ${
+                      page >= 100 ? Styles.paginationMany : ""
+                    } ${currentPage === page ? Styles.active : ""}`}
+                    disabled={isLoading}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+              {/* Ellipsis after the page range if needed */}
+              {currentPage < totalPages - 5 && (
+                <span className={Styles.ellipsis}>...</span>
+              )}
+
+              {/* Last Page (if not already in range) */}
+              {totalPages > 1 && currentPage < totalPages - 4 && (
+                <button
+                  key={totalPages}
+                  onClick={() => handlePageChange(totalPages)}
+                  className={`${Styles.pageButton} ${
+                    totalPages >= 100 ? Styles.paginationMany : ""
+                  } ${currentPage === totalPages ? Styles.active : ""}`}
+                  disabled={isLoading}
+                >
+                  {totalPages}
+                </button>
+              )}
+
+              {/* Next Button */}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages || isLoading}
+                className={Styles.pageButton}
+              >
+                Next
+              </button>
+            </>
           )}
-
-          {/* Last Page (if not already in range) */}
-          {totalPages > 1 && currentPage < totalPages - 4 && (
-            <button
-              key={totalPages}
-              onClick={() => handlePageChange(totalPages)}
-              className={`${Styles.pageButton} ${
-                totalPages >= 100 ? Styles.paginationMany : ""
-              } ${currentPage === totalPages ? Styles.active : ""}`}
-              disabled={isLoading}
-            >
-              {totalPages}
-            </button>
-          )}
-
-          {/* Next Button */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages || isLoading}
-            className={Styles.pageButton}
-          >
-            Next
-          </button>
         </div>
           </div>
         </div>
@@ -935,7 +965,7 @@ const Rental_Resale = () => {
           </div>
         )}
         {isMobile && (
-          <div 
+          <div
             className={Styles.sliderWrapper}
             onTouchStart={(e) => {
               const touch = e.touches[0];
@@ -995,8 +1025,8 @@ const Rental_Resale = () => {
                     <div className={Styles.propertyInfo}>
                       <h3 className={Styles.title}>{property.title}</h3>
                       <p className={Styles.location}>
-                        {property.locations && property.locations.length > 0 
-                          ? property.locations[0].title 
+                        {property.locations && property.locations.length > 0
+                          ? property.locations[0].title
                           : property.subtitle || property.location || ''}
                       </p>
 
