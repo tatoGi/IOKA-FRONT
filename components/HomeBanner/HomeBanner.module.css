@@ -1109,6 +1109,9 @@ letter-spacing: 0%;
     margin-top: 100px;
     text-align: center;
   }
+  .active-search {
+    width: 492px !important;
+}
   .banner-content h1{
     font-size: 25px;
     line-height: 1.2;

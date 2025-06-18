@@ -421,20 +421,22 @@
     /* Reduced font size */
   }
 }
-
-/* Large Laptops and Desktops (1367px - 1920px) */
-@media (min-width: 1367px) and (max-width: 1920px) {
+@media (max-width: 1400px){
   .propertyCardTitle {
-    font-size: 38px;
+    font-size: 30px !important;
+  
   }
-
-  .imageContainer {
-    height: 338px;
-    max-width: 966px;
+  .imageContainer{
+    max-width: 600px !important;
   }
-
-  .features li {
-    font-size: 19px;
+}
+/* Large Laptops and Desktops (1367px - 1920px) */
+@media (max-width:1200px){
+  .propertyCardTitle {
+    font-size: 24px !important;
+  }
+  .imageContainer{
+    max-width: 450px !important;
   }
 }
 

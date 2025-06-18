@@ -77,7 +77,7 @@ const NewsSection = () => {
             href={pages.find(p => p.type_id === 6)?.slug || "/Blog-Page"}
             className="news-see-more"
           >
-          See More
+          SEE MORE
           </Link>
         </div>
         <div className="news-text">
