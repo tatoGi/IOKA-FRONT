@@ -27,6 +27,7 @@ const Developer = ({ initialData, initialPagination }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [noResults, setNoResults] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -93,33 +94,48 @@ const Developer = ({ initialData, initialPagination }) => {
   }, [searchQuery, cardData, initialPagination, filteredData]);
 
   const handleSearch = async (searchText) => {
-    if (searchText.length >= 3) {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
-          params: {
-            search: searchText,
-            per_page: 10,
-          },
-        });
+    if (searchText.length < 3) {
+      setFilteredData(cardData);
+      setNoResults(false);
+      setTotalPages(initialPagination?.last_page || 1);
+      setCurrentPage(initialPagination?.current_page || 1);
+      return;
+    }
 
-        const { data, meta } = response.data;
+    setIsLoading(true);
+    setNoResults(false);
+    try {
+      const response = await axios.get(`${DEVELOPER_SEARCH_API}`, {
+        params: {
+          search: searchText,
+          per_page: 10,
+        },
+      });
 
-        // Process the data array from the response
+      const { data, meta } = response.data;
+
+      if (data.data.length === 0) {
+        setFilteredData([]);
+        setNoResults(true);
+        setTotalPages(0);
+        setCurrentPage(1);
+      } else {
         const processedData = data.data.map((developer) => ({
           id: developer.id,
           title: developer.title || "No Title",
           paragraph: developer.paragraph || "No Description",
-          tags: typeof developer.tags === "string"
-            ? JSON.parse(developer.tags || "[]")
-            : Array.isArray(developer.tags)
-            ? developer.tags
-            : [],
-          photo: typeof developer.photo === "string"
-            ? JSON.parse(developer.photo || "[]")
-            : Array.isArray(developer.photo)
-            ? developer.photo
-            : [],
+          tags:
+            typeof developer.tags === "string"
+              ? JSON.parse(developer.tags || "[]")
+              : Array.isArray(developer.tags)
+              ? developer.tags
+              : [],
+          photo:
+            typeof developer.photo === "string"
+              ? JSON.parse(developer.photo || "[]")
+              : Array.isArray(developer.photo)
+              ? developer.photo
+              : [],
           phone: developer.phone || "",
           whatsapp: developer.whatsapp || "",
           slug: developer.slug || "",
@@ -129,17 +145,16 @@ const Developer = ({ initialData, initialPagination }) => {
           rental_resale_listings: developer.rental_resale_listings || [],
         }));
 
-        setCardData(processedData);
         setFilteredData(processedData);
         setTotalPages(meta.last_page);
         setCurrentPage(meta.current_page);
-      } catch (error) {
-        console.error("Error searching developers:", error);
-        setFilteredData([]);
-        setCardData([]);
-      } finally {
-        setIsLoading(false);
       }
+    } catch (error) {
+      console.error("Error searching developers:", error);
+      setFilteredData([]);
+      setNoResults(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -148,20 +163,12 @@ const Developer = ({ initialData, initialPagination }) => {
     const value = e.target.value;
     setSearchQuery(value);
 
-    if (value.length >= 3) {
-      // Debounce the search to avoid too many requests
-      const timer = setTimeout(() => {
-        handleSearch(value);
-      }, 500);
+    // Debounce search
+    const timer = setTimeout(() => {
+      handleSearch(value);
+    }, 500);
 
-      return () => clearTimeout(timer);
-    } else if (value.length === 0) {
-      // Reset to initial data if search is cleared
-      fetchData(1);
-      setFilteredData(cardData);
-      setTotalPages(initialPagination?.last_page || 1);
-      setCurrentPage(1);
-    }
+    return () => clearTimeout(timer);
   };
 
   // Handle search icon click
@@ -279,13 +286,8 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   };
 
-  if (!filteredData || filteredData.length === 0) {
-    return <div className="text-center py-5">No developers found</div>;
-  }
-
   return (
     <>
-      {isLoading && <div className="text-center py-5">Loading...</div>}
       <div className="container py-4">
         {/* Search Section */}
         <div className={`mb-4 position-relative ${styles.searchContainer}`}>
@@ -296,170 +298,199 @@ const Developer = ({ initialData, initialPagination }) => {
             onChange={handleSearchInputChange}
             className={`form-control ${styles.searchInput}`}
           />
-          <FaSearch 
-            className={`position-absolute ${styles.searchIcon}`} 
+          <FaSearch
+            className={`position-absolute ${styles.searchIcon}`}
             onClick={handleSearchIconClick}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           />
         </div>
 
         {/* Developer Cards */}
-        <div className={styles.cardsContainer}>
-          {filteredData.map((card) => (
-           
-            <div key={card.id} className={styles.cardWrapper}>
-              <div className={styles.card}>
-                <div className={styles.cardRow}>
-                  {/* Image Section */}
-                  <div className={styles.imageContainer}>
-                    {isMobile && (
-                      <div className={styles.mobileTitleOverlay}>
-                        <h2 className={styles.mobileTitle}>{card.title}</h2>
-                      </div>
-                    )}
-                    <Image
-                      src={getImageUrl(card.photo, card.id).url}
-                      alt={getImageUrl(card.photo, card.id).alt}
-                      width={400}
-                      height={300}
-                      className={styles.cardImage}
-                      style={{ objectFit: "cover" }}
-                    />
-                    {Array.isArray(card.photo) && card.photo.length > 1 && (
-                      <div className={styles.imageNav}>
-                        <button
-                          onClick={() => handlePrevImage(card.id, card.photo)}
-                          className={styles.prevButtonimage}
-                        >
-                          <FaChevronLeft />
-                        </button>
-                        <button
-                          onClick={() => handleNextImage(card.id, card.photo)}
-                          className={styles.nextButtonimage}
-                        >
-                          <FaChevronRight />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content Section */}
-                  <div className={styles.cardContent}>
-                    <h2 className={styles.title}>{card.title}</h2>
-                    <div className={styles.description}>
-                      <div dangerouslySetInnerHTML={{ __html: card.paragraph }} />
-                    </div>
-                    <div className={styles.communitiesSection}>
-                      <h3 className={styles.communitiesTitle}>Top Communities</h3>
-                      <div className={styles.communitiesList}>
-                        {Array.isArray(card.tags) ? card.tags.map((tag, index) => (
-                          <span key={index} className={styles.badge}>
-                            {tag}
-                          </span>
-                        )) : JSON.parse(card.tags || '[]').map((tag, index) => (
-                          <span key={index} className={styles.badge}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+        <div className={styles.cardsContainer} style={{ minHeight: "600px" }}>
+          {isLoading ? (
+            <div className="text-center py-5">Loading...</div>
+          ) : noResults ? (
+            <div className="text-center py-5">No developers found.</div>
+          ) : (
+            filteredData.map((card) => (
+              <div key={card.id} className={styles.cardWrapper}>
+                <div className={styles.card}>
+                  <div className={styles.cardRow}>
+                    {/* Image Section */}
+                    <div className={styles.imageContainer}>
+                      {isMobile && (
+                        <div className={styles.mobileTitleOverlay}>
+                          <h2 className={styles.mobileTitle}>{card.title}</h2>
+                        </div>
+                      )}
+                      <Image
+                        src={getImageUrl(card.photo, card.id).url}
+                        alt={getImageUrl(card.photo, card.id).alt}
+                        width={400}
+                        height={300}
+                        className={styles.cardImage}
+                        style={{ objectFit: "cover" }}
+                      />
+                      {Array.isArray(card.photo) && card.photo.length > 1 && (
+                        <div className={styles.imageNav}>
+                          <button
+                            onClick={() =>
+                              handlePrevImage(card.id, card.photo)
+                            }
+                            className={styles.prevButtonimage}
+                          >
+                            <FaChevronLeft />
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleNextImage(card.id, card.photo)
+                            }
+                            className={styles.nextButtonimage}
+                          >
+                            <FaChevronRight />
+                          </button>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Buttons Section */}
-                    <div className={styles.buttonsSection}>
-                      {/* Left Side: Call and WhatsApp Buttons */}
-                      <div className={styles.contactButtons}>
-                        <button
-                          className={styles.call}
-                          onClick={() => (window.location.href = `tel:${card.phone}`)}
-                        >
-                          <FaPhone />
-                          <span>Call</span>
-                        </button>
-                        <button
-                          className={styles.whatsapp}
-                          onClick={() => window.open(`https://wa.me/${card.whatsapp}`, "_blank")}
-                        >
-                          <FaWhatsapp />
-                          <span>WhatsApp</span>
-                        </button>
+                    {/* Content Section */}
+                    <div className={styles.cardContent}>
+                      <h2 className={styles.title}>{card.title}</h2>
+                      <div className={styles.description}>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: card.paragraph }}
+                        />
+                      </div>
+                      <div className={styles.communitiesSection}>
+                        <h3 className={styles.communitiesTitle}>
+                          Top Communities
+                        </h3>
+                        <div className={styles.communitiesList}>
+                          {Array.isArray(card.tags)
+                            ? card.tags.map((tag, index) => (
+                                <span key={index} className={styles.badge}>
+                                  {tag}
+                                </span>
+                              ))
+                            : JSON.parse(card.tags || "[]").map(
+                                (tag, index) => (
+                                  <span key={index} className={styles.badge}>
+                                    {tag}
+                                  </span>
+                                )
+                              )}
+                        </div>
                       </div>
 
-                      {/* Right Side: See More Button */}
-                      <button className={styles.readMore} onClick={() => handleReadMore(card.slug)}>
-                        See More
-                      </button>
+                      {/* Buttons Section */}
+                      <div className={styles.buttonsSection}>
+                        {/* Left Side: Call and WhatsApp Buttons */}
+                        <div className={styles.contactButtons}>
+                          <button
+                            className={styles.call}
+                            onClick={() =>
+                              (window.location.href = `tel:${card.phone}`)
+                            }
+                          >
+                            <FaPhone />
+                            <span>Call</span>
+                          </button>
+                          <button
+                            className={styles.whatsapp}
+                            onClick={() =>
+                              window.open(
+                                `https://wa.me/${card.whatsapp}`,
+                                "_blank"
+                              )
+                            }
+                          >
+                            <FaWhatsapp />
+                            <span>WhatsApp</span>
+                          </button>
+                        </div>
+
+                        {/* Right Side: See More Button */}
+                        <button
+                          className={styles.readMore}
+                          onClick={() => handleReadMore(card.slug)}
+                        >
+                          See More
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {/* Pagination */}
-       <div className={`${styles.pagination}`}>
-          {/* First Page */}
-          <button
-            key={1}
-            onClick={() => handlePageChange(1)}
-            className={`${styles.pageButton} ${
-              1 >= 100 ? styles.paginationMany : ""
-            } ${currentPage === 1 ? styles.active : ""}`}
-            disabled={isLoading}
-          >
-            1
-          </button>
-
-          {/* Ellipsis before the page range if needed */}
-          {currentPage > 6 && <span className={styles.ellipsis}>...</span>}
-
-          {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .slice(
-              Math.max(2, currentPage - 4), // Start of range
-              Math.min(totalPages, currentPage + 5) // End of range
-            )
-            .map((page) => (
-              <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`${styles.pageButton} ${
-                  page >= 100 ? styles.paginationMany : ""
-                } ${currentPage === page ? styles.active : ""}`}
-                disabled={isLoading}
-              >
-                {page}
-              </button>
-            ))}
-
-          {/* Ellipsis after the page range if needed */}
-          {currentPage < totalPages - 5 && (
-            <span className={styles.ellipsis}>...</span>
-          )}
-
-          {/* Last Page (if not already in range) */}
-          {totalPages > 1 && currentPage < totalPages - 4 && (
+        {!isLoading && !noResults && filteredData.length > 0 && (
+          <div className={`${styles.pagination}`}>
+            {/* First Page */}
             <button
-              key={totalPages}
-              onClick={() => handlePageChange(totalPages)}
+              key={1}
+              onClick={() => handlePageChange(1)}
               className={`${styles.pageButton} ${
-                totalPages >= 100 ? styles.paginationMany : ""
-              } ${currentPage === totalPages ? styles.active : ""}`}
+                1 >= 100 ? styles.paginationMany : ""
+              } ${currentPage === 1 ? styles.active : ""}`}
               disabled={isLoading}
             >
-              {totalPages}
+              1
             </button>
-          )}
 
-          {/* Next Button */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages || isLoading}
-            className={styles.pageButton}
-          >
-            Next
-          </button>
-        </div>
+            {/* Ellipsis before the page range if needed */}
+            {currentPage > 6 && <span className={styles.ellipsis}>...</span>}
+
+            {/* Dynamic page range: Show up to 10 pages centered around currentPage */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .slice(
+                Math.max(2, currentPage - 4), // Start of range
+                Math.min(totalPages, currentPage + 5) // End of range
+              )
+              .map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`${styles.pageButton} ${
+                    page >= 100 ? styles.paginationMany : ""
+                  } ${currentPage === page ? styles.active : ""}`}
+                  disabled={isLoading}
+                >
+                  {page}
+                </button>
+              ))}
+
+            {/* Ellipsis after the page range if needed */}
+            {currentPage < totalPages - 5 && (
+              <span className={styles.ellipsis}>...</span>
+            )}
+
+            {/* Last Page (if not already in range) */}
+            {totalPages > 1 && currentPage < totalPages - 4 && (
+              <button
+                key={totalPages}
+                onClick={() => handlePageChange(totalPages)}
+                className={`${styles.pageButton} ${
+                  totalPages >= 100 ? styles.paginationMany : ""
+                } ${currentPage === totalPages ? styles.active : ""}`}
+                disabled={isLoading}
+              >
+                {totalPages}
+              </button>
+            )}
+
+            {/* Next Button */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages || isLoading}
+              className={styles.pageButton}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

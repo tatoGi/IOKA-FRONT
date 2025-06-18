@@ -2536,5 +2536,15 @@
   cursor: pointer;
   color: #0A273B;
 }
- 
+.area-item {
+  width: 320px !important;
+  height: 240px;
+  display: flex
+;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: center;
+  margin-right: 13px !important;
+}
 }
