@@ -31,6 +31,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const galleryRef = useRef(null);
   const imageRef = useRef(null);
+  const [showCopyAlert, setShowCopyAlert] = useState(false);
 
   // Initialize client-side state
   useEffect(() => {
@@ -49,7 +50,42 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       return () => mediaQuery.removeEventListener("change", handleResize);
     }
   }, []);
+  const getAgentPhotoUrl = (photoData) => {
+    if (!photoData) {
+      return defaultImage;
+    }
+    try {
+      const parsed = JSON.parse(photoData);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const imagePath = parsed[0];
+        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(imagePath)}`;
+      }
+    } catch (error) {
+      // Fallback for plain string or other formats
+      return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(photoData)}`;
+    }
+    return defaultImage;
+  };
 
+  const handleShare = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+          setShowCopyAlert(true);
+          setTimeout(() => {
+            setShowCopyAlert(false);
+          }, 3000); // Hide after 3 seconds
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          // You might want a styled alert for errors too
+          alert("Failed to copy link.");
+        });
+    } else {
+      // And for this case as well
+      alert("Clipboard API not available on this browser.");
+    }
+  };
   // Parse gallery images
   const getRelatedPropertyImageUrl = (property) => {
     if (!property.gallery_images) {
@@ -616,6 +652,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   return (
     <>
+      {showCopyAlert && (
+        <div className={styles.copyAlert}>Link copied to clipboard!</div>
+      )}
       {isMobile && (
         <div className={styles.mobileGallery}>
           <div
@@ -927,12 +966,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
+                     
                       <img
-                        src={
-                          RENTAL_RESALE_DATA.agent_photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
-                            : "/default.jpg"
-                        }
+                        src={getAgentPhotoUrl(RENTAL_RESALE_DATA.agent_photo)}
                         alt={RENTAL_RESALE_DATA.title}
                         title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
@@ -948,7 +984,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <span className={styles.languages}>
                         Speaks: {languagesString}
                       </span>
-                      <span className={styles.email}>example@gmail.com</span>
+                      <span className={styles.email}> {RENTAL_RESALE_DATA.agent_email}</span>
                     </div>
                   </div>
 
@@ -981,7 +1017,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       WhatsApp
                     </button>
                   </div>
-                  <button className={styles.shareButton}>
+                  <button className={styles.shareButton} onClick={handleShare}>
                     <Image
                       src={require("../../assets/img/shareicon.png")}
                       alt="shareicon"
@@ -992,6 +1028,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                 {/* Location Map Section */}
                 <div className={styles.sidevabarlocation}>
+                 
                   {locationData ? (
                     <Map location_link={locationData} />
                   ) : (
@@ -1119,15 +1156,16 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               </div>
               <div className={styles.mobile_description_content_second}>
                 {/* Contact Information Section */}
+                <div className={styles.shareButtons}>
+                  <button className={styles.shareButton} onClick={handleShare}>
+                    <i className="fas fa-share-alt"></i> Share this listing
+                  </button>
+                </div>
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
                       <img
-                        src={
-                          RENTAL_RESALE_DATA.agent_photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
-                            : "/default.jpg"
-                        }
+                        src={getAgentPhotoUrl(RENTAL_RESALE_DATA.agent_photo)}
                         alt={RENTAL_RESALE_DATA.title}
                         title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
@@ -1143,7 +1181,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <span className={styles.languages}>
                         Speaks: {languagesString}
                       </span>
-                      <span className={styles.email}>example@gmail.com</span>
+                      <span className={styles.email}> {RENTAL_RESALE_DATA.agent_email}</span>
                     </div>
                   </div>
 
@@ -1176,7 +1214,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       WhatsApp
                     </button>
                   </div>
-                  <button className={styles.shareButton}>
+                  <button className={styles.shareButton} onClick={handleShare}>
                     <Image
                       src={require("../../assets/img/shareicon.png")}
                       alt="shareicon"

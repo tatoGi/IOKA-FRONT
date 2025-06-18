@@ -16,6 +16,7 @@ const customIcon = new L.Icon({
 });
 
 const Map = ({ location_link }) => {
+ 
   const [position, setPosition] = useState([25.2048, 55.2708]); // Default to Dubai coordinates
   const [error, setError] = useState(null);
 
@@ -25,72 +26,52 @@ const Map = ({ location_link }) => {
       return;
     }
 
-    let extractedLat, extractedLng;
+    const parseUrl = (url) => {
+      const match = url.match(/@([-?\d.]+),([-?\d.]+)/);
+      if (match) {
+        const lat = parseFloat(match[1]);
+        const lng = parseFloat(match[2]);
+        if (!isNaN(lat) && !isNaN(lng)) {
+          return [lat, lng];
+        }
+      }
+      return null;
+    };
 
-    try {
-      // Handle object location data
-      if (typeof location_link === 'object' && location_link !== null) {
-        if (location_link.lat && location_link.lng) {
-          extractedLat = parseFloat(location_link.lat);
-          extractedLng = parseFloat(location_link.lng);
-        } else if (location_link.latitude && location_link.longitude) {
-          extractedLat = parseFloat(location_link.latitude);
-          extractedLng = parseFloat(location_link.longitude);
-        }
+    // Priority 1: Object with Google Maps URL in 'address'
+    if (typeof location_link === 'object' && location_link !== null && typeof location_link.address === 'string' && location_link.address.startsWith('https://www.google.com/maps')) {
+      const coords = parseUrl(location_link.address);
+      if (coords) {
+        setPosition(coords);
+        setError(null);
+        return; // Exit after successful parsing
       }
-      // Handle string location data
-      else if (typeof location_link === 'string') {
-        // Handle Google Maps share links
-        if (location_link.includes('maps.app.goo.gl')) {
-          fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(location_link)}`)
-            .then(response => response.json())
-            .then(data => {
-              const fullUrl = data.contents;
-              const match = fullUrl.match(/@([-?\d.]+),([-?\d.]+)/);
-              if (match) {
-                const lat = parseFloat(match[1]);
-                const lng = parseFloat(match[2]);
-                if (!isNaN(lat) && !isNaN(lng)) {
-                  setPosition([lat, lng]);
-                } else {
-                  setError("Invalid coordinates from resolved URL");
-                }
-              } else {
-                setError("Could not extract coordinates from resolved URL");
-              }
-            })
-            .catch(err => {
-              console.error('Error resolving URL:', err);
-              setError("Error resolving short URL: " + err.message);
-            });
-          return;
-        }
-        // Handle regular Google Maps URLs
-        else if (location_link.startsWith('https://www.google.com/maps')) {
-          const match = location_link.match(/@([-?\d.]+),([-?\d.]+)/);
-          if (match) {
-            extractedLat = parseFloat(match[1]);
-            extractedLng = parseFloat(match[2]);
-          }
-        }
-        // Handle direct coordinate pairs
-        else if (location_link.includes(',')) {
-          const [lat, lng] = location_link.split(',').map(Number);
-          extractedLat = lat;
-          extractedLng = lng;
-        }
-      }
-
-      // Set position if valid coordinates were extracted
-      if (!isNaN(extractedLat) && !isNaN(extractedLng)) {
-        setPosition([extractedLat, extractedLng]);
-      } else {
-        setError("Invalid coordinates");
-      }
-    } catch (error) {
-      console.error('Error processing location data:', error);
-      setError("Error processing location data: " + error.message);
     }
+
+    // Priority 2: Object with lat/lng
+    if (typeof location_link === 'object' && location_link !== null && location_link.lat && location_link.lng) {
+      const lat = parseFloat(location_link.lat);
+      const lng = parseFloat(location_link.lng);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        setPosition([lat, lng]);
+        setError(null);
+        return; // Exit after successful parsing
+      }
+    }
+    
+    // Priority 3: String is a Google Maps URL
+    if (typeof location_link === 'string' && location_link.startsWith('https://www.google.com/maps')) {
+        const coords = parseUrl(location_link);
+        if (coords) {
+            setPosition(coords);
+            setError(null);
+            return; // Exit after successful parsing
+        }
+    }
+
+    // If none of the above worked, show an error
+    setError("Invalid or unsupported location format");
+
   }, [location_link]);
 
   if (error) {

@@ -302,6 +302,39 @@
   margin-bottom: 20px;
 }
 
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+}
+
+.copyAlert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  z-index: 1000;
+  font-size: 1.1rem;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
 .description h1 {
   margin-top: 56px;
   font-family: 'Montserrat';
@@ -328,7 +361,7 @@
   height: auto;
   border: 1px solid #07151F;
   border-radius: 16px;
-  padding: 20px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   font-family: 'Montserrat';
@@ -341,6 +374,7 @@
   align-items: center;
   gap: 20px;
   width: 100%;
+  margin-bottom: 26px;
 }
 
 .imageContainer {
@@ -348,12 +382,45 @@
 }
 
 .agentImage {
-  width: 100px;
+  width: 80px;
   /* Adjust as needed */
-  height: 100px;
+  height: 80px;
   /* Adjust as needed */
   object-fit: cover;
   border-radius: 8px;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+}
+
+.copyAlert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  z-index: 1000;
+  font-size: 1.1rem;
+  animation: fadeInOut 3s forwards;
 }
 
 .textContainer {
@@ -362,40 +429,40 @@
 }
 
 .name {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
   color: #0A273B;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-family: 'Montserrat';
 }
 
 .role {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #0A273B;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-family: 'Montserrat';
 }
 
 .languages {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #0A273B;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-family: 'Montserrat';
 }
 
 .email {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #0A273B;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   font-family: 'Montserrat';
 }
 
 .contactButtons {
   display: flex;
-  gap: 40px;
+  gap: 16px;
   margin-bottom: 16px;
 }
 

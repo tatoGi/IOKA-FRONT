@@ -306,7 +306,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                <span>Price</span>
               )}
               {filters.price && (
-                <button
+                <span
                   className={styles.clearFilterButton}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -314,7 +314,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                   }}
                 >
                   ×
-                </button>
+                </span>
               )}
             </button>
           </div>
@@ -367,7 +367,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                <span>Area</span>
               )}
               {filters.sqFt && (
-                <button
+                <span
                   className={styles.clearFilterButton}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -375,7 +375,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                   }}
                 >
                   ×
-                </button>
+                </span>
               )}
             </button>
           </div>

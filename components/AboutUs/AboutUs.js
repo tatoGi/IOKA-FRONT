@@ -161,57 +161,65 @@ const AboutUs = ({ initialData, id }) => {
   };
 
   const TestimonialSection = () => {
-    if (!cardData?.additional_fields?.testimonials?.[0]) {
+    // Check if testimonials array exists and has items
+    if (!cardData?.additional_fields?.testimonials?.length) {
       return null;
     }
-
-    const testimonial = cardData.additional_fields.testimonials[0];
+  
+    const testimonials = cardData.additional_fields.testimonials;
+  
     return (
-      <div className={styles.testimonialSection}>
-        <div className={styles.testimonialContainer}>
-          <div className={styles.testimonialImageContainer}>
-            <div className={styles.testimonialImageWrapper}>
-              <Image
-                src={
-                  testimonial.image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`
-                    : baseimage
-                }
-                alt={testimonial.alt_text || "CEO Portrait"}
-                width={400}
-                height={400}
-                className={styles.testimonialImage}
-              />
+      <>
+        {testimonials.map((testimonial, index) => (
+          <div key={index} className={styles.testimonialSection}>
+            <div className={styles.testimonialContainer}>
+              {testimonial.image && (
+                <div className={styles.testimonialImageContainer}>
+                  <div className={styles.testimonialImageWrapper}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(testimonial.image)}`}
+                      alt={testimonial.alt_text || 'Portrait'}
+                      width={400}
+                      height={400}
+                      className={styles.testimonialImage}
+                    />
+                  </div>
+                </div>
+              )}
+              <div className={styles.testimonialWrapper}>
+                <div className={styles.testimonialContent}>
+                  <div className={styles.testimonialHeader}>
+                    <h3 className={styles.testimonialName}>
+                      {testimonial.name || 'Unknown Name'}
+                    </h3>
+                    <p className={styles.testimonialRole}>
+                      {testimonial.position || 'Unknown Position'}
+                    </p>
+                  </div>
+                  <div className={styles.testimonialBody}>
+                    {testimonial.description && (
+                      <p className={styles.testimonialText}>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: testimonial.description,
+                          }}
+                        />
+                      </p>
+                    )}
+                    {testimonial.quote && (
+                      <p className={styles.welcomeText}>
+                        <span
+                          dangerouslySetInnerHTML={{ __html: testimonial.quote }}
+                        />
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className={styles.testimonialWrapper}>
-            <div className={styles.testimonialContent}>
-              <div className={styles.testimonialHeader}>
-                <h3 className={styles.testimonialName}>
-                  {testimonial.name || "Max Musterman"}
-                </h3>
-                <p className={styles.testimonialRole}>
-                  {testimonial.position || "CEO Chairman"}
-                </p>
-              </div>
-              <div className={styles.testimonialBody}>
-                <p className={styles.testimonialText}>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: testimonial?.description
-                    }}
-                  ></span>
-                </p>
-                <p className={styles.welcomeText}>
-                  <span
-                    dangerouslySetInnerHTML={{ __html: testimonial?.quote }}
-                  ></span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        ))}
+      </>
     );
   };
 

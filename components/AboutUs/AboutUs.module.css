@@ -263,7 +263,7 @@
 
 .testimonialImageContainer {
   position: absolute;
-  top: 110px;
+  margin-top: 47px;
   left: 0rem;
   z-index: 2;
 }
@@ -1352,7 +1352,7 @@
     width: 100%;
     margin: 0 auto;
   }
-
+  
   .contactSection {
     padding: 40px 0;
   }

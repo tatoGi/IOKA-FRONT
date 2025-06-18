@@ -639,6 +639,65 @@
   font-family: 'Montserrat';
   /* Apply Montserrat font */
 }
+.copyAlertoffplan {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  z-index: 1000;
+  font-size: 1.1rem;
+  animation: fadeInOut 3s forwards;
+}
+.sharelist {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 32px;
+  font-weight: 600;
+  /* Montserrat 600 */
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border: 1px solid #0A273B;
+  background-color: #fff;
+  color: #0A273B;
+  font-family: 'Montserrat';
+  /* Apply Montserrat font */
+}
+
+.shareContainer {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.shareButton {
+  background-color: #0A273B;
+  color: white;
+  border: 1px solid #0A273B;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 32px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Montserrat';
+}
+
+.copyAlert {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  z-index: 1000;
+}
 
 .contactBtnperson {
   background-color: #0A273B;

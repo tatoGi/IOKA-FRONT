@@ -73,55 +73,41 @@ const Offplan = ({ initialData, initialPagination }) => {
     setCurrentPage(1); // Reset to first page when filters change
     if (filters === null) {
       // If filters are null, fetch all properties
-      fetchData(1);
+      fetchData(1, {});
       setCurrentFilters({ price: "", sqFt: "" });
     } else {
-      // Update current filters state with the raw filter values
-      setCurrentFilters((prev) => ({
-        ...prev,
-        price: filters.price || "",
-        sqFt: filters.sqFt || ""
-      }));
+      // The filters are mostly formatted. We just need to handle bedrooms/bathrooms.
+      const formattedFilters = { ...filters };
 
-      // Format the filters to match backend expectations
-      const formattedFilters = {};
-
-      // Handle price range
-      if (filters.price) {
-        const [priceMin, priceMax] = filters.price.split("-");
-        formattedFilters.price_min = priceMin || null;
-        formattedFilters.price_max = priceMax || null;
-      }
-
-      // Handle sqFt range
-      if (filters.sqFt) {
-        const [sqFtMin, sqFtMax] = filters.sqFt.split("-");
-        formattedFilters.sq_ft_min = sqFtMin || null;
-        formattedFilters.sq_ft_max = sqFtMax || null;
-      }
-
-      // Add other filters
-      if (filters.propertyType)
-        formattedFilters.property_type = filters.propertyType;
-      if (filters.bedrooms) {
-        if (filters.bedrooms === "Studio") {
+      if (formattedFilters.bedrooms) {
+        if (formattedFilters.bedrooms === "Studio") {
           formattedFilters.bedrooms = 0;
-        } else if (filters.bedrooms === "4+") {
+        } else if (formattedFilters.bedrooms === "4+") {
+          delete formattedFilters.bedrooms; // remove the "4+" string
           formattedFilters.bedrooms_min = 4;
-        } else {
-          formattedFilters.bedrooms = filters.bedrooms;
         }
       }
-      if (filters.bathrooms) {
-        if (filters.bathrooms === "Studio") {
+      if (formattedFilters.bathrooms) {
+        if (formattedFilters.bathrooms === "Studio") {
           formattedFilters.bathrooms = 0;
-        } else if (filters.bathrooms === "4+") {
+        } else if (formattedFilters.bathrooms === "4+") {
+          delete formattedFilters.bathrooms; // remove the "4+" string
           formattedFilters.bathrooms_min = 4;
-        } else {
-          formattedFilters.bathrooms = filters.bathrooms;
         }
       }
-      if (filters.searchQuery) formattedFilters.location = filters.searchQuery;
+
+      // Reconstruct the range strings for the UI state
+      const priceRange = (filters.price_min || filters.price_max)
+        ? `${filters.price_min || ''}-${filters.price_max || ''}`
+        : "";
+      const sqFtRange = (filters.sq_ft_min || filters.sq_ft_max)
+        ? `${filters.sq_ft_min || ''}-${filters.sq_ft_max || ''}`
+        : "";
+        
+      setCurrentFilters({
+        price: priceRange,
+        sqFt: sqFtRange,
+      });
 
       fetchData(1, formattedFilters);
     }
