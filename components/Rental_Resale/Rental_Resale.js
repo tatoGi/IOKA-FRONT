@@ -42,9 +42,9 @@ const Rental_Resale = () => {
     bedrooms: ["studio", 1, 2, 3, 4, "4+"],
     bathrooms: ["studio", 1, 2, 3, 4, "4+"]
   };
-
   // Move topProperties definition before useEffect
-  const topProperties = cardData.filter((property) => property.top === 1);
+  const topProperties = cardData.filter((property) => property.top === 1 || property.top === true);
+
 
   useEffect(() => {
     setIsClient(true); // Ensures this runs only on the client
