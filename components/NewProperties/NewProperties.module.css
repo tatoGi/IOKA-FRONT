@@ -229,13 +229,13 @@
 
 .propertyInfo_mobile {
   margin: 24px 0 0 0;
-    background-color: #ffffff;
-    border-radius: 16px;
-    text-align: center;
-    height: 32px;
-    position: relative;
-    z-index: 100;
-    margin-bottom: 24px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  text-align: center;
+  height: 32px;
+  position: relative;
+  z-index: 100;
+  margin-bottom: 24px;
 }
 
 .propertyInfo_mobile details {
@@ -421,21 +421,25 @@
     /* Reduced font size */
   }
 }
-@media (max-width: 1400px){
+
+@media (max-width: 1400px) {
   .propertyCardTitle {
     font-size: 30px !important;
-  
+
   }
-  .imageContainer{
+
+  .imageContainer {
     max-width: 600px !important;
   }
 }
+
 /* Large Laptops and Desktops (1367px - 1920px) */
-@media (max-width:1200px){
+@media (max-width:1200px) {
   .propertyCardTitle {
     font-size: 24px !important;
   }
-  .imageContainer{
+
+  .imageContainer {
     max-width: 450px !important;
   }
 }
@@ -470,7 +474,7 @@
     display: -ms-grid;
     display: grid;
   }
- 
+
   .newProperties {
     margin-top: 0;
     height: 100%;
@@ -527,7 +531,7 @@
     flex-direction: row;
     gap: 8px;
   }
-  
+
   .buttonGroup button {
     padding: 0;
     font-size: 12px !important;
@@ -678,17 +682,18 @@
     gap: 1rem;
     max-width: 272px;
   }
-  .imageContainer{
+
+  .imageContainer {
     max-width: 400px !important;
   }
+
   .propertyCardTitle {
     font-size: 18px !important;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
+    /* margin-top  : 15px; */
+    top: 21px;
+    position: relative;
   }
 
   .imageContainer {
@@ -720,8 +725,8 @@
   }
 }
 
-@media (max-width:480px){
-  .mobileTitle{
+@media (max-width:480px) {
+  .mobileTitle {
     margin: 36px 0 24px;
   }
 }

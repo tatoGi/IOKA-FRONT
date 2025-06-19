@@ -314,6 +314,11 @@
   .mobile-nav {
     display: none;
   }
+  .right-form:focus-within .searchbtn,
+  .header-nav.active~.right-search-contact .right-form .searchbtn {
+    left: -300px;
+    pointer-events: initial;
+  }
 
   .header-nav ul {
     padding: 0;

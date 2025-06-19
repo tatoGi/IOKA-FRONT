@@ -1496,7 +1496,9 @@ margin-top: 24px;
   opacity: 0.9;
   font-size: 16px;
 }
-
+.partner-item{
+  max-width: 174px;
+}
 .stats-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2213,6 +2215,7 @@ color: rgba(122, 203, 196, 1);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 24px;
 }
 
 .visually-hidden {

@@ -4,16 +4,12 @@ import Image from "next/image";
 import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import dynamic from "next/dynamic";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import galleryIcon from "../../assets/img/gallery-icon.svg";
 import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
-import PhotoSwipe from 'photoswipe';
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Initialize state
@@ -26,18 +22,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const propertyGridRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [isSliderDragging, setIsSliderDragging] = useState(false);
-  const [sliderStartX, setSliderStartX] = useState(0);
-  const [sliderScrollLeft, setSliderScrollLeft] = useState(0);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [scale, setScale] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const galleryRef = useRef(null);
-  const imageRef = useRef(null);
-  const [showCopyAlert, setShowCopyAlert] = useState(false);
 
   // Initialize client-side state
   useEffect(() => {
@@ -56,67 +40,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       return () => mediaQuery.removeEventListener("change", handleResize);
     }
   }, []);
-  const getAgentPhotoUrl = (photoData) => {
-    if (!photoData) {
-      return defaultImage;
-    }
-    try {
-      const parsed = JSON.parse(photoData);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        const imagePath = parsed[0];
-        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(imagePath)}`;
-      }
-    } catch (error) {
-      // Fallback for plain string or other formats
-      return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(photoData)}`;
-    }
-    return defaultImage;
-  };
 
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href)
-        .then(() => {
-          setShowCopyAlert(true);
-          setTimeout(() => {
-            setShowCopyAlert(false);
-          }, 3000); // Hide after 3 seconds
-        })
-        .catch(err => {
-          console.error('Failed to copy: ', err);
-          // You might want a styled alert for errors too
-          alert("Failed to copy link.");
-        });
-    } else {
-      // And for this case as well
-      alert("Clipboard API not available on this browser.");
-    }
-  };
   // Parse gallery images
-  const getRelatedPropertyImageUrl = (property) => {
-    if (!property.gallery_images) {
-      return defaultImage;
-    }
-
-    try {
-      const images = JSON.parse(property.gallery_images);
-      if (Array.isArray(images) && images.length > 0) {
-        return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
-          images[0]
-        )}`;
-      }
-    } catch (error) {
-      // If parsing fails, assume it might be a plain string
-      return `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
-        property.gallery_images
-      )}`;
-    }
-
-    return defaultImage;
-  };
-
   const galleryImages = React.useMemo(() => {
     if (!RENTAL_RESALE_DATA?.gallery_images) {
+      console.warn('No gallery images provided');
       return [];
     }
   
@@ -130,68 +58,46 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       // If it's a string, try to parse as JSON
       else if (typeof RENTAL_RESALE_DATA.gallery_images === 'string') {
         try {
-          // First try to parse as JSON
-          const parsed = JSON.parse(RENTAL_RESALE_DATA.gallery_images);
-          images = Array.isArray(parsed) ? parsed : [parsed];
+          const unescaped = RENTAL_RESALE_DATA.gallery_images.replace(/\\/g, '');
+          images = JSON.parse(unescaped);
         } catch (e) {
-          // If JSON parsing fails, treat it as a single image path
-          images = [RENTAL_RESALE_DATA.gallery_images];
+          console.error('Error parsing gallery images JSON:', e);
+          return [];
         }
       }
   
-      // Filter and clean image paths
-      const validImages = images
-        .filter(img => img && typeof img === 'string' && img.trim() !== '')
-        .map(img => {
-          // Remove any quotes and backslashes
-          const cleanPath = img.replace(/^["']|["']$/g, '').replace(/\\/g, '');
-          // Remove any leading/trailing slashes
-          return cleanPath.replace(/^\/+|\/+$/g, '');
-        });
+      // Filter valid images
+      const validImages = images.filter(img => 
+        img && typeof img === 'string' && img.trim() !== ''
+      );
+  
+      if (validImages.length === 0) {
+        console.warn('No valid images found in gallery');
+      }
   
       return validImages;
     } catch (error) {
+      console.error('Error processing gallery images:', error);
       return [];
     }
   }, [RENTAL_RESALE_DATA?.gallery_images]);
 
-  const parsedDetails = React.useMemo(() => {
-    if (!RENTAL_RESALE_DATA?.details) {
-      return [];
-    }
-    try {
-      if (Array.isArray(RENTAL_RESALE_DATA.details)) {
-        return RENTAL_RESALE_DATA.details;
-      }
-      if (typeof RENTAL_RESALE_DATA.details === 'string') {
-        const parsed = JSON.parse(RENTAL_RESALE_DATA.details);
-        return Array.isArray(parsed) ? parsed : [];
-      }
-      return [];
-    } catch (error) {
-      return [];
-    }
-  }, [RENTAL_RESALE_DATA?.details]);
-
   // Get image URL helper
   const getImageUrl = (image) => {
     if (!image) {
+      console.warn('No image provided, using default');
       return defaultImage;
     }
   
     try {
-      // Clean the image path
-      const cleanPath = image.replace(/^["']|["']$/g, '').replace(/\\/g, '').replace(/^\/+|\/+$/g, '');
-      
-      // If it's already a full URL, return it
-      if (cleanPath.startsWith('http')) {
-        return decodeImageUrl(cleanPath);
+      if (image.startsWith('http')) {
+        return decodeImageUrl(image);
       }
-      
-      // Construct the full URL
+      const cleanPath = image.replace(/^["']|["']$/g, '').replace(/\\/g, '');
       const url = `${process.env.NEXT_PUBLIC_API_URL}/storage/${cleanPath}`;
       return decodeImageUrl(url);
     } catch (error) {
+      console.error('Error processing image URL:', error, { image });
       return defaultImage;
     }
   };
@@ -201,235 +107,117 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     try {
       return decodeURIComponent(url);
     } catch (error) {
+      console.error('Error decoding image URL:', error);
       return url; // Return original URL if decoding fails
     }
   };
 
-  // Initialize PhotoSwipe
+  // Initialize Fancybox
   useEffect(() => {
-    if (typeof window === 'undefined' || !galleryImages?.length) return;
-
-    const initializePhotoSwipe = () => {
+    if (!isClient || !galleryImages?.length) {
+      console.log('Skipping Fancybox initialization:', { isClient, galleryImagesLength: galleryImages?.length });
+      return;
+    }
+  
+    const initializeFancybox = () => {
       try {
-        // Create properly structured gallery items
-        const items = galleryImages
-          .filter(image => image && typeof image === 'string')
-          .map((image, index) => {
-            const src = getImageUrl(image);
-            return {
-              src,
-              w: 1920, // Default width
-              h: 1080, // Default height
-              alt: `${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`
-            };
-          });
-
-        if (items.length === 0) {
-          return;
-        }
-
-        // Initialize PhotoSwipe Lightbox
-        const lightbox = new PhotoSwipeLightbox({
-          gallery: '.gallery',
-          children: 'a',
-          pswpModule: PhotoSwipe,
-          showHideAnimationType: 'fade',
-          showAnimationDuration: 300,
-          hideAnimationDuration: 300,
-          zoomAnimationDuration: 300,
-          easing: 'cubic-bezier(0.4, 0, 0.22, 1)',
-          paddingFn: () => {
-            return {
-              top: 30,
-              bottom: 30,
-              left: 0,
-              right: 0
-            };
+        // Destroy any existing instance
+        Fancybox.destroy();
+  
+        // Create gallery items
+        const items = galleryImages.map((image, index) => {
+          console.log('Processing image:', { image, index });
+          const src = getImageUrl(image);
+          if (!src) {
+            console.warn(`Invalid image URL at index ${index}:`, image);
+          }
+          return {
+            src,
+            type: "image",
+            caption: `${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`
+          };
+        }).filter(item => item.src); // Remove items with invalid src
+  
+        console.log('Fancybox items:', items);
+  
+        // Initialize Fancybox
+        Fancybox.bind("[data-fancybox='gallery']", {
+          dragToClose: false,
+          closeButton: "top",
+          Image: { zoom: true, fit: "contain" },
+          Thumbs: false,
+          Toolbar: {
+            display: [
+              { id: "prev", position: "center" },
+              { id: "counter", position: "center" },
+              { id: "next", position: "center" },
+              "zoom",
+              "close",
+            ],
+          },
+          groupAll: true,
+          infinite: true,
+          keyboard: true,
+          touch: { vertical: true, momentum: true },
+          items,
+          on: {
+            done: () => {
+              const fancybox = Fancybox.getInstance();
+              if (fancybox) {
+                fancybox.options.Thumbs = {
+                  type: "classic",
+                  autoStart: true,
+                  showOnStart: true,
+                };
+                fancybox.update();
+              }
+            },
+            destroy: () => Fancybox.destroy()
           }
         });
-
-        // Add PhotoSwipe UI
-        const pswp = new PhotoSwipe({
-          dataSource: items,
-          ...lightbox.options
-        });
-
-        // Bind click events
-        lightbox.on('uiRegister', () => {
-          lightbox.pswp.ui.registerElement({
-            name: 'custom-caption',
-            order: 9,
-            isButton: false,
-            appendTo: 'root',
-            html: 'Caption text',
-            onInit: (el, pswp) => {
-              lightbox.pswp.on('change', () => {
-                const currSlideIndex = lightbox.pswp.currIndex;
-                el.innerHTML = `${currSlideIndex + 1} / ${items.length}`;
-              });
-            }
-          });
-        });
-
-        lightbox.init();
-
-        return () => {
-          lightbox.destroy();
-        };
       } catch (error) {
-        // Silent error handling
+        console.error('Error initializing Fancybox:', error);
       }
     };
-
-    // Wait for component to be fully mounted and images to be loaded
-    const timer = setTimeout(initializePhotoSwipe, 1000);
-
+  
+    initializeFancybox();
+  
     return () => {
-      clearTimeout(timer);
-    };
-  }, [galleryImages]);
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    if (!isGalleryOpen) return;
-
-    const handleKeyDown = (e) => {
-      switch (e.key) {
-        case 'Escape':
-          closeGallery();
-          break;
-        case 'ArrowLeft':
-          prevImage();
-          break;
-        case 'ArrowRight':
-          nextImage();
-          break;
-        case '+':
-        case '=':
-          zoomIn();
-          break;
-        case '-':
-          zoomOut();
-          break;
-        case '0':
-          resetZoom();
-          break;
+      try {
+        Fancybox.destroy();
+      } catch (error) {
+        console.error('Error destroying Fancybox:', error);
       }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isGalleryOpen, currentImageIndex, scale]);
-
-  // Handle wheel zoom
-  const handleWheel = (e) => {
-    if (!isGalleryOpen) return;
-    e.preventDefault();
-    
-    const delta = e.deltaY * -0.01;
-    const newScale = Math.min(Math.max(0.5, scale + delta), 3);
-    setScale(newScale);
-  };
-
-  // Handle mouse drag
-  const handleMouseDown = (e) => {
-    if (scale <= 1) return;
-    setIsDragging(true);
-    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging || scale <= 1) return;
-    setPosition({
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y
-    });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Gallery controls
-  const openGallery = (index) => {
-    setCurrentImageIndex(index);
-    setIsGalleryOpen(true);
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-    document.body.style.overflow = '';
-  };
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === galleryImages.length - 1 ? 0 : prev + 1
-    );
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? galleryImages.length - 1 : prev - 1
-    );
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const zoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.5, 3));
-  };
-
-  const zoomOut = () => {
-    setScale((prev) => Math.max(prev - 0.5, 0.5));
-  };
-
-  const resetZoom = () => {
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-  };
+  }, [isClient, galleryImages, RENTAL_RESALE_DATA?.title]);
 
   // Render gallery image
   const renderGalleryImage = (image, index, isMain = false) => {
-    if (!image) return null;
-    
-    try {
-      const imageUrl = getImageUrl(image);
-      if (!imageUrl) return null;
-      
-      return (
-        <div
-          key={`gallery-${index}`}
-          className={styles.galleryItem}
-          onClick={() => openGallery(index)}
-          style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-        >
-          <img
-            src={imageUrl}
-            alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
-            title={`${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`}
-            loading={isMain || index === 0 ? "eager" : "lazy"}
-            className={styles.galleryImage}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
-            onError={(e) => {
-              e.target.src = defaultImage;
-            }}
-          />
-        </div>
-      );
-    } catch (error) {
+    if (!image) {
+      console.warn('No image provided for rendering:', { index, isMain });
       return null;
     }
+    
+    const imageUrl = getImageUrl(image);
+    const caption = `${RENTAL_RESALE_DATA?.title || ''} - ${isMain ? 'Main Image' : `Image ${index + 1}`}`;
+    
+    return (
+      <a
+        href={imageUrl}
+        data-fancybox="gallery"
+        data-caption={caption}
+        data-type="image"
+        key={`gallery-${image}-${index}`}
+      >
+        <img
+          src={imageUrl}
+          alt={caption}
+          loading={isMain || index === 0 ? "eager" : "lazy"}
+          width="100%"
+          height="auto"
+        />
+      </a>
+    );
   };
 
   const locationData = React.useMemo(() => {
@@ -461,6 +249,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
       return null;
     } catch (error) {
+      console.error('Error processing location data:', error);
       return null;
     }
   }, [RENTAL_RESALE_DATA.location_link]);
@@ -472,80 +261,32 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     setIsModalOpen(false);
   };
 
-  const flattenedAddresses = React.useMemo(() => {
-    if (!RENTAL_RESALE_DATA?.addresses) return [];
-    
-    try {
-      // Ensure addresses is an array
-      const addressesArray = Array.isArray(RENTAL_RESALE_DATA.addresses) 
-        ? RENTAL_RESALE_DATA.addresses 
-        : [RENTAL_RESALE_DATA.addresses];
-
-      return addressesArray
-        .filter(Boolean) // Remove null/undefined
-        .flat()
-        .map((address) => {
-          if (typeof address === "object" && address !== null) {
-            return Object.values(address).join(", ");
-          }
-          return address;
-        })
-        .filter(Boolean); // Remove any null/undefined results
-    } catch (error) {
-      return [];
+  const flattenedAddresses = RENTAL_RESALE_DATA.addresses
+    .flat()
+    .map((address) => {
+      if (typeof address === "object" && address !== null) {
+        return Object.values(address).join(", ");
+      }
+      return address;
+    });
+  const normalizedAmenities = RENTAL_RESALE_DATA.amenities.map((item) => {
+    if (Array.isArray(item)) {
+      return item[0]; // Extract the first element if it's an array
+    } else if (typeof item === "object" && item !== null) {
+      return Object.values(item)[0]; // Extract the first value if it's an object
     }
-  }, [RENTAL_RESALE_DATA?.addresses]);
-
-  const normalizedAmenities = React.useMemo(() => {
-    if (!RENTAL_RESALE_DATA?.amenities) return [];
-    
-    try {
-      // Ensure amenities is an array
-      const amenitiesArray = Array.isArray(RENTAL_RESALE_DATA.amenities) 
-        ? RENTAL_RESALE_DATA.amenities 
-        : [RENTAL_RESALE_DATA.amenities];
-
-      return amenitiesArray
-        .filter(Boolean) // Remove null/undefined
-        .map((item) => {
-          if (Array.isArray(item)) {
-            return item[0]; // Extract the first element if it's an array
-          } else if (typeof item === "object" && item !== null) {
-            return Object.values(item)[0]; // Extract the first value if it's an object
-          }
-          return item; // Return the item as-is if it's already a string
-        })
-        .filter(Boolean); // Remove any null/undefined results
-    } catch (error) {
-      return [];
-    }
-  }, [RENTAL_RESALE_DATA?.amenities]);
-
-  const normalizedLanguages = React.useMemo(() => {
-    if (!RENTAL_RESALE_DATA?.languages) return [];
-    
-    try {
-      // Ensure languages is an array
-      const languagesArray = Array.isArray(RENTAL_RESALE_DATA.languages) 
-        ? RENTAL_RESALE_DATA.languages 
-        : [RENTAL_RESALE_DATA.languages];
-
-      return languagesArray
-        .filter(Boolean) // Remove null/undefined
-        .map((item) => {
-          if (Array.isArray(item)) {
-            return item[0]; // Extract the first element if it's an array
-          } else if (typeof item === "object" && item !== null) {
-            return Object.values(item)[0]; // Extract the first value if it's an object
-          }
-          return item; // Return the item as-is if it's already a string
-        })
-        .filter(Boolean); // Remove any null/undefined results
-    } catch (error) {
-      return [];
-    }
-  }, [RENTAL_RESALE_DATA?.languages]);
-
+    return item; // Return the item as-is if it's already a string
+  });
+  const normalizedLanguages = RENTAL_RESALE_DATA.languages
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return item[0]; // Extract the first element if it's an array
+      } else if (typeof item === "object" && item !== null) {
+        return Object.values(item)[0]; // Extract the first value if it's an object
+      }
+      return item; // Return the item as-is if it's already a string
+    })
+    .filter(Boolean); // Remove any undefined or null values
   const languagesString = normalizedLanguages.join(", ");
   const Map = dynamic(
     () => import("./Map"), // Create a new Map.js component
@@ -562,29 +303,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     setCurrentSlide((prev) =>
       prev === 0 ? galleryImages.length - 1 : prev - 1
     );
-  };
-
-  const handleMouseDownSlider = (e) => {
-    if (!propertyGridRef.current) return;
-    setIsSliderDragging(true);
-    setSliderStartX(e.pageX - propertyGridRef.current.offsetLeft);
-    setSliderScrollLeft(propertyGridRef.current.scrollLeft);
-  };
-
-  const handleMouseLeaveSlider = () => {
-    setIsSliderDragging(false);
-  };
-
-  const handleMouseUpSlider = () => {
-    setIsSliderDragging(false);
-  };
-
-  const handleMouseMoveSlider = (e) => {
-    if (!isSliderDragging || !propertyGridRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - propertyGridRef.current.offsetLeft;
-    const walk = (x - sliderStartX) * 1.5; // Scroll speed multiplier
-    propertyGridRef.current.scrollLeft = sliderScrollLeft - walk;
   };
 
   const scrollToNextProperty = () => {
@@ -661,7 +379,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         
         setRelatedProperties(filteredData);
       } catch (error) {
-        // Silent error handling
+        console.error('Error fetching related properties:', error);
       } finally {
         setIsLoading(false);
       }
@@ -681,9 +399,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   return (
     <>
-      {showCopyAlert && (
-        <div className={styles.copyAlert}>Link copied to clipboard!</div>
-      )}
       {isMobile && (
         <div className={styles.mobileGallery}>
           <div
@@ -704,17 +419,13 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               onClick={prevSlide}
               className={`${styles.sliderArrow} ${styles.prevArrow}`}
             >
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
-<path d="M0.941016 9.94023C0.355078 10.5262 0.355078 11.4777 0.941016 12.0637L9.94102 21.0637C10.527 21.6496 11.4785 21.6496 12.0645 21.0637C12.6504 20.4777 12.6504 19.5262 12.0645 18.9402L4.12383 10.9996L12.0598 3.05898C12.6457 2.47305 12.6457 1.52148 12.0598 0.935547C11.4738 0.349609 10.5223 0.349609 9.93633 0.935547L0.936329 9.93555L0.941016 9.94023Z" fill="white"/>
-</svg>
+              ‹
             </button>
             <button
               onClick={nextSlide}
               className={`${styles.sliderArrow} ${styles.nextArrow}`}
             >
-             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22" fill="none">
-<path d="M12.059 12.0598C12.6449 11.4738 12.6449 10.5223 12.059 9.93633L3.05898 0.936328C2.47305 0.350391 1.52148 0.350391 0.935547 0.936328C0.349609 1.52227 0.349609 2.47383 0.935547 3.05977L8.87617 11.0004L0.940234 18.941C0.354296 19.527 0.354296 20.4785 0.940234 21.0645C1.52617 21.6504 2.47773 21.6504 3.06367 21.0645L12.0637 12.0645L12.059 12.0598Z" fill="white"/>
-</svg>
+              ›
             </button>
           </div>
           <div className={styles.photoCount}>
@@ -940,7 +651,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <div className={styles.description}>
             <h1>Description</h1>
             <div className="row">
-              <div className={`${styles.col} col-md-8`}>
+              <div className="col-md-8 pt-5 pe-5">
                 <div className={styles.body}>
                   <pre className={styles.descriptionText}>
                     <div
@@ -955,7 +666,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <h3>Details</h3>
                   <span className={styles.details_line}></span>
                   <div className={styles.detailsGrid}>
-                    {parsedDetails.map((detail, index) => {
+                    {RENTAL_RESALE_DATA.details.map((detail, index) => {
                       if (detail.title === "Price") {
                         return (
                           <div
@@ -990,16 +701,18 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               </div>
-              <div className={`${styles.col } col-md-4`}>
+              <div className="col-md-4">
                 {/* Contact Information Section */}
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
-                     
                       <img
-                        src={getAgentPhotoUrl(RENTAL_RESALE_DATA.agent_photo)}
+                        src={
+                          RENTAL_RESALE_DATA.agent_photo
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
+                            : "/default.jpg"
+                        }
                         alt={RENTAL_RESALE_DATA.title}
-                        title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
                       />
                     </div>
@@ -1013,7 +726,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <span className={styles.languages}>
                         Speaks: {languagesString}
                       </span>
-                      <span className={styles.email}> {RENTAL_RESALE_DATA.agent_email}</span>
+                      <span className={styles.email}>example@gmail.com</span>
                     </div>
                   </div>
 
@@ -1046,7 +759,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       WhatsApp
                     </button>
                   </div>
-                  <button className={styles.shareButton} onClick={handleShare}>
+                  <button className={styles.shareButton}>
                     <Image
                       src={require("../../assets/img/shareicon.png")}
                       alt="shareicon"
@@ -1057,7 +770,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                 {/* Location Map Section */}
                 <div className={styles.sidevabarlocation}>
-                 
                   {locationData ? (
                     <Map location_link={locationData} />
                   ) : (
@@ -1084,7 +796,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           : "/default.jpg"
                       }
                       alt="QR Code"
-                      title={`QR Code for ${RENTAL_RESALE_DATA.title}`}
                       className={styles.qrCode}
                     />
 
@@ -1114,7 +825,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   {/* Modal */}
                   {isModalOpen && (
                     <div className={styles.modalOverlay}>
-                      <div className={`${styles.modalContent} container`} >
+                      <div className={styles.modalContent}>
                         <button
                           className={styles.closeButton}
                           onClick={closeModal}
@@ -1138,7 +849,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.details}>
                   <h3>Key Information</h3>
                   <div className={styles.detailsGrid}>
-                    {parsedDetails.map((detail, index) => {
+                    {RENTAL_RESALE_DATA.details.map((detail, index) => {
                       if (detail.title === "Price") {
                         return (
                           <div
@@ -1184,14 +895,17 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 </div>
               </div>
               <div className={styles.mobile_description_content_second}>
-               
+                {/* Contact Information Section */}
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
                       <img
-                        src={getAgentPhotoUrl(RENTAL_RESALE_DATA.agent_photo)}
+                        src={
+                          RENTAL_RESALE_DATA.agent_photo
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
+                            : "/default.jpg"
+                        }
                         alt={RENTAL_RESALE_DATA.title}
-                        title={`${RENTAL_RESALE_DATA.agent_title || 'Agent'} - ${RENTAL_RESALE_DATA.title}`}
                         className={styles.agentImage}
                       />
                     </div>
@@ -1205,7 +919,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <span className={styles.languages}>
                         Speaks: {languagesString}
                       </span>
-                      <span className={styles.email}> {RENTAL_RESALE_DATA.agent_email}</span>
+                      <span className={styles.email}>example@gmail.com</span>
                     </div>
                   </div>
 
@@ -1238,7 +952,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       WhatsApp
                     </button>
                   </div>
-                  <button className={styles.shareButton} onClick={handleShare}>
+                  <button className={styles.shareButton}>
                     <Image
                       src={require("../../assets/img/shareicon.png")}
                       alt="shareicon"
@@ -1285,7 +999,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           : "/default.jpg"
                       }
                       alt="QR Code"
-                      title={`QR Code for ${RENTAL_RESALE_DATA.title}`}
                       className={styles.qrCode}
                     />
 
@@ -1316,7 +1029,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   {/* Modal */}
                   {isModalOpen && (
                     <div className={styles.modalOverlay}>
-                      <div className={`${styles.modalContent} container`} >
+                      <div className={styles.modalContent}>
                         <button
                           className={styles.closeButton}
                           onClick={closeModal}
@@ -1350,37 +1063,25 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         {!isMobile && (
           <div className={styles.sameArea_poperies}>
             <h4>Properties available in the same area</h4>
-            <Slider
-              dots={false}
-              infinite={relatedProperties.length > 4}
-              speed={500}
-              slidesToShow={4}
-              slidesToScroll={1}
-              arrows={true}
-              responsive={[
-                {
-                  breakpoint: 1600,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                  },
-                },
-                {
-                  breakpoint: 1200,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                  },
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  },
-                },
-              ]}
-              className={styles.propertyGrid}
+            <div 
+              className={styles.propertyGrid} 
+              ref={propertyGridRef}
+              onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+              onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
+              onTouchEnd={() => {
+                if (!touchStart || !touchEnd) return;
+                const distance = touchStart - touchEnd;
+                const isLeftSwipe = distance > 50;
+                const isRightSwipe = distance < -50;
+
+                if (isLeftSwipe) {
+                  scrollToNextProperty();
+                } else if (isRightSwipe) {
+                  scrollToPrevProperty();
+                }
+                setTouchStart(0);
+                setTouchEnd(0);
+              }}
             >
               {!isLoading && relatedProperties.map((property, index) => (
                 <div
@@ -1392,24 +1093,16 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={(() => {
-                            let firstImage = null;
-                            if (property.gallery_images) {
-                              try {
-                                const images = JSON.parse(property.gallery_images);
-                                if (Array.isArray(images) && images.length > 0) {
-                                  firstImage = images[0];
-                                }
-                              } catch (e) {
-                                if (typeof property.gallery_images === 'string' && property.gallery_images.trim()) {
-                                  firstImage = property.gallery_images.trim();
-                                }
-                              }
-                            }
-                            return firstImage
-                              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(firstImage)}`
-                              : defaultImage;
-                          })()}
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -1424,9 +1117,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3 className={styles.propertytitle}>{property.title}</h3>
-                      <p className={styles.location}> {property.locations && property.locations.length > 0
-                            ? property.locations[0].title
-                            : property.subtitle || property.location || ''}</p>
+                      <p className={styles.location}>{property.location}</p>
                       <div className={styles.features}>
                         <div className={styles.feature}>
                           <Image
@@ -1473,7 +1164,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               ))}
-            </Slider>
+            </div>
           </div>
         )}
         {isMobile && (
@@ -1482,11 +1173,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
             <div 
               className={styles.propertyGrid} 
               ref={propertyGridRef}
-              style={{ cursor: isSliderDragging ? 'grabbing' : 'grab', userSelect: 'none' }}
-              onMouseDown={handleMouseDownSlider}
-              onMouseLeave={handleMouseLeaveSlider}
-              onMouseUp={handleMouseUpSlider}
-              onMouseMove={handleMouseMoveSlider}
               onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
               onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
               onTouchEnd={() => {
@@ -1505,6 +1191,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               }}
             >
               {!isLoading && relatedProperties.map((property, index) => (
+                console.log(property),
                 <div
                   key={index}
                   className={styles.propertyCardLink}
@@ -1514,7 +1201,16 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
-                        src={getRelatedPropertyImageUrl(property)}
+                        src={
+                          property.gallery_images &&
+                          JSON.parse(property.gallery_images)[0]
+                            ? `${
+                                process.env.NEXT_PUBLIC_API_URL
+                              }/storage/${decodeImageUrl(
+                                JSON.parse(property.gallery_images)[0]
+                              )}`
+                            : defaultImage
+                        }
                         alt={property.title}
                         fill
                         sizes="(max-width: 768px) 100vw"
@@ -1529,7 +1225,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3>{property.title}</h3>
-                      <p className={styles.subtitle}>{property.subtitle}</p>
+                      <p className={styles.location}>{property.location}</p>
                       <div className={styles.features}>
                         <div className={styles.feature}>
                           <Image
@@ -1572,68 +1268,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         )}
       
       </div>
-
-      {/* Custom Gallery Modal */}
-      {isGalleryOpen && (
-        <div 
-          className={styles.galleryModal}
-          onWheel={handleWheel}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          <div className={styles.galleryOverlay} onClick={closeGallery} />
-          
-          <div className={styles.galleryContent}>
-            <button 
-              className={`${styles.galleryButton} ${styles.closeButton}`}
-              onClick={closeGallery}
-            >
-              ×
-            </button>
-            
-            <button 
-              className={`${styles.galleryButton} ${styles.prevButton}`}
-              onClick={prevImage}
-            >
-              ‹
-            </button>
-            
-            <div 
-              className={styles.galleryImageContainer}
-              ref={galleryRef}
-              onMouseDown={handleMouseDown}
-            >
-              <img
-                ref={imageRef}
-                src={getImageUrl(galleryImages[currentImageIndex])}
-                alt={`${RENTAL_RESALE_DATA?.title || ''} - Image ${currentImageIndex + 1}`}
-                style={{
-                  transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-                  cursor: scale > 1 ? 'move' : 'default'
-                }}
-                className={styles.galleryModalImage}
-              />
-            </div>
-            
-            <button 
-              className={`${styles.galleryButton} ${styles.nextButton}`}
-              onClick={nextImage}
-            >
-              ›
-            </button>
-
-            <div className={styles.galleryControls}>
-              <button onClick={zoomIn} className={styles.controlButton}>+</button>
-              <button onClick={zoomOut} className={styles.controlButton}>-</button>
-              <button onClick={resetZoom} className={styles.controlButton}>Reset</button>
-              <span className={styles.imageCounter}>
-                {currentImageIndex + 1} / {galleryImages.length}
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
@@ -1643,6 +1277,7 @@ const RentalResaleShowWithErrorBoundary = (props) => {
   try {
     return <RentalResaleShow {...props} />;
   } catch (error) {
+    console.error('Error in RentalResaleShow:', error);
     return <div>Something went wrong. Please try again later.</div>;
   }
 };

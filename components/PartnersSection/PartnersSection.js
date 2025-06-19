@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
-// import required modules
 import Link from "next/link";
 import Image from "next/image";
 
@@ -43,63 +40,76 @@ const PartnersSection = () => {
       .catch(error => console.error('Error fetching partners:', error));
   }, []);
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 8,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1920,
+        settings: { slidesToShow: 8 }
+      },
+      {
+        breakpoint: 1700,
+        settings: { slidesToShow: 7 }
+      },
+      {
+        breakpoint: 1560,
+        settings: { slidesToShow: 6 }
+      },
+      {
+        breakpoint: 1200,
+        settings: { slidesToShow: 4 }
+      },
+      {
+        breakpoint: 992,
+        settings: { slidesToShow: 6 }
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 2 }
+      },
+      {
+        breakpoint: 576,
+        settings: { slidesToShow: 1 }
+      }
+
+     
+    ]
+  };
+
   return (
     <div className="partners-section">
       <div className="container">
         <div className="partners-title">Partners</div>
         <div className="partner-swiper-slide">
-          <Swiper
-            spaceBetween={22}
-            slidesPerView={4}
-            pagination={{ clickable: true }}
-            className="mySwiper partners-swp"
-            breakpoints={{
-              320: {
-                slidesPerView: 2,
-              },
-              575: {
-                slidesPerView: 3,
-              },
-              640: {
-                slidesPerView: 4,
-              },
-              1024: {
-                slidesPerView: 4,
-              },
-              1560: {
-                slidesPerView: 6,
-              },
-              1920: {
-                slidesPerView: 8,
-              },
-            }}
-          >
+          <Slider {...settings}>
             {partners.map((partner, index) => (
-              <SwiperSlide key={index}>
-                <div className="partner-item">
-                  <Link href={partner.url} className="partners-slider-item">
-                    <Image 
-                      src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
-                      alt={partner.alt || 'Partner logo'}
-                      width={80} 
-                      height={80} 
-                      style={{ borderRadius: '50%', objectFit: 'cover' }}
-                    />
-                    {isMobile && !isTablet && (
-                      <div className="partner-title" style={{ textAlign: 'center' }}>
-                        {partner.title}
-                      </div>
-                    )}
-                  </Link>
-                  {!isMobile && !isTablet && (
+              <div key={index} className="partner-item">
+                <Link href={partner.url} className="partners-slider-item">
+                  <Image 
+                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
+                    alt={partner.alt || 'Partner logo'}
+                    width={80} 
+                    height={80} 
+                    style={{ borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                  {(isMobile || isTablet) && (
                     <div className="partner-title" style={{ textAlign: 'center' }}>
                       {partner.title}
                     </div>
                   )}
-                </div>
-              </SwiperSlide>
+                </Link>
+                {!isMobile && !isTablet && (
+                  <div className="partner-title" style={{ textAlign: 'center' }}>
+                    {partner.title}
+                  </div>
+                )}
+              </div>
             ))}
-          </Swiper>
+          </Slider>
         </div>
       </div>
     </div>
