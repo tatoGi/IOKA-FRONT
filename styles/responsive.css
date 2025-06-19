@@ -2510,6 +2510,7 @@
   /* gap: 10px; */
   width: 32px;
   height: 32px;
+gap: 0;
 }
 .soc-icons-b .icon-circle {
   display: flex;
@@ -2680,6 +2681,7 @@
 .soc-box {
   display: flex
 ;
+gap: 0;
   align-items: center;
   /* gap: 10px; */
   width: 32px;
