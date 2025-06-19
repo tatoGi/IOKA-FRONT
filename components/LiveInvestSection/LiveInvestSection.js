@@ -81,7 +81,12 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                         title={item.alt_text || "Dubai Property"}
                         width={320}
                         height={222}
-                        style={{ objectFit: "cover", borderRadius: "16px" }}
+                        style={{
+                          objectFit: "cover",
+                          borderRadius: "16px",
+                          backgroundColor: "#fff" // Add a background color to prevent ghosting
+                        }}
+                        loading="lazy"
                       />
                     </a>
                   </SwiperSlide>
@@ -101,6 +106,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                     <div
                       key={item.id}
                       className={`${styles.slide} ${positionClass}`}
+                      style={{ backgroundColor: "#fff" }} // Add background color here as well
                     >
                       <a
                         href={item.url}
@@ -120,7 +126,12 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
                           title={item.alt_text || "Dubai Property"}
                           width={364}
                           height={364}
-                          style={{ objectFit: "cover", borderRadius: "16px" }}
+                          style={{
+                            objectFit: "cover",
+                            borderRadius: "16px",
+                            backgroundColor: "#fff" // Add a background color to prevent ghosting
+                          }}
+                          loading="lazy"
                         />
                       </a>
                     </div>

@@ -162,7 +162,7 @@
 
 .navButton {
   position: absolute;
-  top: 330px;
+  top: 276px;
   transform: translateY(-50%);
   width: 56px;
   height: 56px;
@@ -533,11 +533,11 @@
   }
 
   .prevButton {
-    left: 22px;
+    left: 12px;
   }
 
   .nextButton {
-    right: 45px;
+    right: 33px;
   }
 }
 
