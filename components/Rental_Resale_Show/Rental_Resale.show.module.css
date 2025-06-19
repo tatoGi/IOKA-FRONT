@@ -64,12 +64,14 @@
 
 
 .propertyCardLink {
-  width: 372px;
-  height: 360px;
+  width: 372px !important;
+  height: 360px !important;
   border-radius: 16px;
   border-width: 1px;
   gap: 12px;
-
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  padding: 0;
 }
 
 .mainImage img {
@@ -744,10 +746,10 @@
 
 }
 
-.propertyGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
+.propertyCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .propertyCard {
@@ -756,8 +758,8 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
+  height: 100%;
 }
-
 
 
 .imageContainer_share {
@@ -858,6 +860,7 @@
   padding-bottom: 12px;
   /* 12px distance from content to border */
   font-family: 'Montserrat';
+  border-bottom: 1px solid rgba(230, 235, 237, 1);
 }
 
 .feature {
@@ -1749,10 +1752,13 @@
   }
 
   .propertyGrid {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     gap: 1.25rem;
   }
+
+  /* Ensure slick carousel displays correctly */
+  
 
   .propertyCard {
     background: white;
@@ -2035,7 +2041,7 @@
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    background: #FFFFFF;
+    background: rgba(230, 235, 237, 1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2064,7 +2070,9 @@
     font-size: 14px;
     margin-bottom: 4px;
   }
-
+  .galleryItem{
+    border-radius: 0 !important;
+  }
   .propertyInfo .location {
     font-size: 12px;
     margin-bottom: 8px;

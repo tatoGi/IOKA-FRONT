@@ -11,6 +11,9 @@ import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Initialize state
@@ -23,6 +26,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const propertyGridRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isSliderDragging, setIsSliderDragging] = useState(false);
+  const [sliderStartX, setSliderStartX] = useState(0);
+  const [sliderScrollLeft, setSliderScrollLeft] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scale, setScale] = useState(1);
@@ -556,6 +562,29 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     setCurrentSlide((prev) =>
       prev === 0 ? galleryImages.length - 1 : prev - 1
     );
+  };
+
+  const handleMouseDownSlider = (e) => {
+    if (!propertyGridRef.current) return;
+    setIsSliderDragging(true);
+    setSliderStartX(e.pageX - propertyGridRef.current.offsetLeft);
+    setSliderScrollLeft(propertyGridRef.current.scrollLeft);
+  };
+
+  const handleMouseLeaveSlider = () => {
+    setIsSliderDragging(false);
+  };
+
+  const handleMouseUpSlider = () => {
+    setIsSliderDragging(false);
+  };
+
+  const handleMouseMoveSlider = (e) => {
+    if (!isSliderDragging || !propertyGridRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - propertyGridRef.current.offsetLeft;
+    const walk = (x - sliderStartX) * 1.5; // Scroll speed multiplier
+    propertyGridRef.current.scrollLeft = sliderScrollLeft - walk;
   };
 
   const scrollToNextProperty = () => {
@@ -1321,25 +1350,37 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         {!isMobile && (
           <div className={styles.sameArea_poperies}>
             <h4>Properties available in the same area</h4>
-            <div 
-              className={styles.propertyGrid} 
-              ref={propertyGridRef}
-              onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-              onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
-              onTouchEnd={() => {
-                if (!touchStart || !touchEnd) return;
-                const distance = touchStart - touchEnd;
-                const isLeftSwipe = distance > 50;
-                const isRightSwipe = distance < -50;
-
-                if (isLeftSwipe) {
-                  scrollToNextProperty();
-                } else if (isRightSwipe) {
-                  scrollToPrevProperty();
-                }
-                setTouchStart(0);
-                setTouchEnd(0);
-              }}
+            <Slider
+              dots={false}
+              infinite={relatedProperties.length > 4}
+              speed={500}
+              slidesToShow={4}
+              slidesToScroll={1}
+              arrows={true}
+              responsive={[
+                {
+                  breakpoint: 1600,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                  },
+                },
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                  },
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                  },
+                },
+              ]}
+              className={styles.propertyGrid}
             >
               {!isLoading && relatedProperties.map((property, index) => (
                 <div
@@ -1432,7 +1473,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </Slider>
           </div>
         )}
         {isMobile && (
@@ -1441,6 +1482,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
             <div 
               className={styles.propertyGrid} 
               ref={propertyGridRef}
+              style={{ cursor: isSliderDragging ? 'grabbing' : 'grab', userSelect: 'none' }}
+              onMouseDown={handleMouseDownSlider}
+              onMouseLeave={handleMouseLeaveSlider}
+              onMouseUp={handleMouseUpSlider}
+              onMouseMove={handleMouseMoveSlider}
               onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
               onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
               onTouchEnd={() => {

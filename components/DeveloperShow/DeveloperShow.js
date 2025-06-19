@@ -46,9 +46,28 @@ const DeveloperShow = (developerData) => {
   // Get the first photo (if available)
   // State for managing different sliders
   const [currentSlide, setCurrentSlide] = useState(0); // Controls off-plan properties slider
+  const propertyCardRef = useRef(null);
+  const [slideOffset, setSlideOffset] = useState(0);
 
   // Get offplanListings from developerData
   const offplanListings = developerData.developerData.offplan_listings || [];
+
+  useEffect(() => {
+    const calculateOffset = () => {
+      if (propertyCardRef.current) {
+        const cardWidth = propertyCardRef.current.offsetWidth;
+        const gap = 20; // from .propertyGrid style
+        setSlideOffset(cardWidth + gap);
+      }
+    };
+
+    calculateOffset();
+    window.addEventListener('resize', calculateOffset);
+
+    return () => {
+      window.removeEventListener('resize', calculateOffset);
+    };
+  }, [offplanListings]);
   const rentalListings =
     developerData.developerData.rental_resale_listings || [];
   const awards = developerData.developerData.awards || [];
@@ -280,7 +299,7 @@ const DeveloperShow = (developerData) => {
             {!isMobileView && (
               <div className={styles.listingInfo}>
                 <h3>
-                  Off Plan Properties
+                  OffPlan Properties
                 </h3>
                 <span className={styles.listingCount}>
                   {offplanListings.length} Listings
@@ -407,7 +426,7 @@ const DeveloperShow = (developerData) => {
                   <div
                     className={styles.propertyGrid}
                     style={{
-                      transform: `translateX(calc(-${currentSlide} * (500px + 20px)))`,
+                      transform: `translateX(-${currentSlide * slideOffset}px)`,
                       touchAction: 'pan-x',
                       WebkitOverflowScrolling: 'touch',
                       userSelect: 'none',
@@ -420,8 +439,8 @@ const DeveloperShow = (developerData) => {
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                   >
-                    {offplanListings.map((listing) => (
-                      <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard}>
+                    {offplanListings.map((listing, index) => (
+                      <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard} ref={index === 0 ? propertyCardRef : null}>
                         <div className={styles.propertyImage}>
                           <span className={styles.propertyType}>
                             {listing.property_type}
