@@ -2361,6 +2361,7 @@
     padding: 0;
     margin-bottom: 14px;
     gap: 24px;
+    padding-bottom: 12px;
   }
 
   .body {
@@ -2504,6 +2505,7 @@ margin-bottom: 12px;
   }
   .features{
     gap: 16px;
+    padding-bottom: 12px;
   }
   .sameArea_poperies {
     width: 100%;

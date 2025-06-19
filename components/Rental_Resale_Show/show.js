@@ -1559,7 +1559,6 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                           <span>{property.sq_ft} Sq.m</span>
                         </div>
                       </div>
-                      <div className={styles.line}></div>
                       <div className={styles.priceRow}>
                         <span className={styles.price}>USD {property.amount?.amount}</span>
                         <span className={styles.price}>AED {property.amount?.amount_dirhams}</span>
