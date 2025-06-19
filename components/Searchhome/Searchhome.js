@@ -491,8 +491,8 @@ const SearchHomeResult = ({ searchParams }) => {
                       {Array.isArray(listing.tags) ? (
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', position: 'absolute', bottom: '10px', left: '10px' }}>
                           {listing.tags.includes("6") && (
-                            <div className={Styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
-                              <div className={Styles.iconGroup}>
+                            <div className={stylesrental.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
+                              <div className={stylesrental.iconGroup}>
                                 <Image
                                   src={homeIcon}
                                   alt="Home"
@@ -504,8 +504,8 @@ const SearchHomeResult = ({ searchParams }) => {
                             </div>
                           )}
                           {listing.tags.includes("5") && (
-                            <div className={Styles.resaleButton} style={{ position: 'relative', zIndex: 1 }}>
-                              <div className={Styles.iconGroup}>
+                            <div className={stylesrental.rentalButton} style={{ position: 'relative', zIndex: 1 }}>
+                              <div className={stylesrental.iconGroup}>
                                 <Image
                                   src={homeIcon}
                                   alt="Home"
@@ -518,8 +518,8 @@ const SearchHomeResult = ({ searchParams }) => {
                           )}
                         </div>
                       ) : (
-                        <div className={Styles.resaleButton}>
-                          <div className={Styles.iconGroup}>
+                        <div className={stylesrental.resaleButton}>
+                          <div className={stylesrental.iconGroup}>
                             <Image
                               src={homeIcon}
                               alt="Home"
