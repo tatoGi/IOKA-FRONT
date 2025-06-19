@@ -33,8 +33,11 @@ const Rental_Resale = () => {
     price: "",
     sqFt: ""
   });
-  const [sliderWidth, setSliderWidth] = useState(0);
   const sliderRef = useRef(null);
+  const propertyCardRef = useRef(null);
+  const [slideOffset, setSlideOffset] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(3);
+  const [maxSlide, setMaxSlide] = useState(0);
 
   // Filter options for SearchRental component
   const filterOptions = {
@@ -62,11 +65,33 @@ const Rental_Resale = () => {
   }, []);
 
   useEffect(() => {
-    if (sliderRef.current && topProperties.length > 0) {
-      const width = sliderRef.current.offsetWidth;
-      setSliderWidth(width);
-    }
-  }, [cardData]); // Change dependency to cardData since topProperties is derived from it
+    const calculateLayout = () => {
+      if (propertyCardRef.current && sliderRef.current) {
+        const cardWidth = propertyCardRef.current.offsetWidth;
+        const gap = 35;
+        const currentSlideOffset = cardWidth + gap;
+        setSlideOffset(currentSlideOffset);
+
+        const containerWidth = sliderRef.current.offsetWidth;
+        const currentVisibleItems = Math.floor(containerWidth / currentSlideOffset);
+        setVisibleItems(currentVisibleItems);
+
+        if (topProperties.length > 0) {
+          const newMaxSlide = Math.max(0, topProperties.length - currentVisibleItems);
+          setMaxSlide(newMaxSlide);
+        } else {
+          setMaxSlide(0);
+        }
+      }
+    };
+
+    calculateLayout();
+    window.addEventListener('resize', calculateLayout);
+
+    return () => {
+      window.removeEventListener('resize', calculateLayout);
+    };
+  }, [topProperties]);
 
   const fetchData = async (page, filterParams = null) => {
     setIsLoading(true);
@@ -334,7 +359,7 @@ const Rental_Resale = () => {
               <div
                 className={Styles.propertyGrid}
                 style={{
-                  transform: `translateX(-${currentSlide * (sliderWidth / 3)}px)`,
+                  transform: `translateX(-${currentSlide * slideOffset}px)`,
                   transition: 'transform 0.3s ease-out'
                 }}
                 onTouchStart={(e) => {
@@ -352,9 +377,7 @@ const Rental_Resale = () => {
                   const distance = touchStart - touchEnd;
                   const isLeftSwipe = distance > 50;
                   const isRightSwipe = distance < -50;
-                  const maxSlides = Math.ceil(topProperties.length / 3) - 1;
-
-                  if (isLeftSwipe && currentSlide < maxSlides) {
+                  if (isLeftSwipe && currentSlide < maxSlide) {
                     setCurrentSlide(prev => prev + 1);
                   } else if (isRightSwipe && currentSlide > 0) {
                     setCurrentSlide(prev => prev - 1);
@@ -364,10 +387,11 @@ const Rental_Resale = () => {
                   setTouchEnd(0);
                 }}
               >
-                {topProperties.map((property) => (
+                {topProperties.map((property, index) => (
                   <div
                     key={property.id}
                     className={Styles.propertyCardLink}
+                    ref={index === 0 ? propertyCardRef : null}
                     onClick={() => handleReadMore(property.slug)}
                     style={{ cursor: "pointer" }}
                   >
@@ -458,12 +482,11 @@ const Rental_Resale = () => {
                 className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  const maxSlides = Math.ceil(topProperties.length / 3) - 1;
-                  setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
+                  setCurrentSlide((prev) => Math.min(prev + 1, maxSlide));
                 }}
-                disabled={currentSlide >= Math.ceil(topProperties.length / 3) - 1}
+                disabled={currentSlide >= maxSlide}
                 style={{
-                  opacity: currentSlide >= Math.ceil(topProperties.length / 3) - 1 ? 0.5 : 1
+                  opacity: currentSlide >= maxSlide ? 0.5 : 1
                 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
