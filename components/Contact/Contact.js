@@ -69,7 +69,7 @@ const Contact = ({ initialData, id }) => {
             <div className={styles.infoSection}>
               {!isMobile && <h2>{cardData.additional_fields?.subtitle}</h2>}
               <h1>{cardData.additional_fields?.title}</h1>
-              <div
+              <div className={styles.description}
                 dangerouslySetInnerHTML={{
                   __html: cardData.additional_fields?.description,
                 }}

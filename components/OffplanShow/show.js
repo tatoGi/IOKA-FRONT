@@ -65,16 +65,8 @@ const MobileSlider = ({ images, type, openGalleryModal, offplanData }) => {
   return (
     <Swiper
       className={style.swiper}
-      breakpoints={{
-        480: {
-          slidesPerView: 1.5,
-          spaceBetween: 10,
-        },
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        }
-      }}
+      slidesPerView={'auto'}
+      spaceBetween={10}
     >
       {images.map((image, index) => (
         <SwiperSlide key={index} className={style.swiperSlide}>
@@ -98,16 +90,8 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
   return (
     <Swiper
       className={style.swiper}
-      breakpoints={{
-        480: {
-          slidesPerView: 1.5,
-          spaceBetween: 10,
-        },
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        }
-      }}
+      slidesPerView={'auto'}
+      spaceBetween={10}
     >
       {properties.map((property) => (
         <SwiperSlide
@@ -527,13 +511,14 @@ const OffplanShow = ({ offplanData }) => {
             </div>
           </div>
         </div>
-
+      </div>
         <div className={style.line}></div>
 
         {/* Building Section */}
+        {isMobile ? (
         <div className={style.buildingSection}>
           <div className="row">
-            <div className={`${isMobile ? "w-100 p-0" : "col-12 col-md-6"}`}>
+            <div className="col-12 col-md-6">
               <Image
                 src={
                   offplanData.offplan.main_photo
@@ -572,8 +557,54 @@ const OffplanShow = ({ offplanData }) => {
             </div>
           </div>
         </div>
+          ) : (
+            <div className="container">
+               <div className={style.buildingSection}>
+          <div className="row">
+            <div className="col-12 col-md-6">
+              <Image
+                src={
+                  offplanData.offplan.main_photo
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(offplanData.offplan.main_photo)}`
+                    : baseimage
+                }
+                alt={offplanData.offplan.main_photo_alt || offplanData.offplan.title}
+                width={737}
+                height={461}
+                className={style.buildingImage}
+                sizes="(max-width: 768px) 100vw, 600px"
+              />
+            </div>
+            <div className="col-12 col-md-6">
+              <div className={style.featuresSection}>
+                <h3>Features</h3>
+                <ul className={style.featuresList}>
+                  {features.map((feature, index) => (
+                    <li key={index}>
+                      <Image src={success} alt="success" /> {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
+              <div className={style.amenitiesSection}>
+                <h3>Amenities</h3>
+                <div className={style.amenitiesList}>
+                  {amenities.map((amenity, index) => (
+                    <li key={index}>
+                      <Image src={success} alt="success" /> {amenity}
+                    </li>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            </div>
+          )}
         {/* Location Section */}
+        {!isMobile ? (
+        <div className="container">
         <div className={style.locationSection}>
           <h3>Location</h3>
           <div className={style.mapWrapper}>
@@ -595,7 +626,31 @@ const OffplanShow = ({ offplanData }) => {
             ))}
           </div>
         </div>
-      </div>
+        </div>
+        ) : (
+          <div className={style.locationSection}>
+          <h3>Location</h3>
+          <div className={style.mapWrapper}>
+            <div className={style.mapContainer}>
+              <Map address={offplanData.offplan.map_location} />
+            </div>
+            <button className={style.locationMapBtn}>Location Map</button>
+          </div>
+
+          <h4>Near by</h4>
+          <div className={style.nearbyGrid}>
+            {nearbyPlaces.map((place, index) => (
+              <div key={index} className={style.nearbyColumn}>
+                <div className={style.nearbyPlace}>
+                  <span className={style.placeName}>{place.title}</span>
+                  <span className={style.placeDistance}>{place.distance}m</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        )}
+
 
       {/* Gallery Section */}
       <div className={style.exteriorInteriorSection}>

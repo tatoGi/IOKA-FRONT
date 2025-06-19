@@ -25,11 +25,12 @@
   left: 16px;
   background: rgba(255, 255, 255, 0.9);
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 27px;
   display: flex;
   align-items: center;
   gap: 8px;
   z-index: 2;
+  width: 120px;
 }
 
 .propertyCardLink:hover {
@@ -81,6 +82,7 @@
   /* Rounded corners */
   object-fit: cover;
   /* Ensure image covers the area */
+  top: 0;
 }
 
 /* Small Images Grid (Right Side) */
@@ -767,7 +769,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 200px;
   background: #f5f5f5;
   overflow: hidden;
 }
@@ -806,7 +808,7 @@
 }
 
 .propertyInfo {
-  padding: 1rem;
+  padding: 12px 1rem;
 }
 
 .propertyInfo h3 {
@@ -853,7 +855,6 @@
   display: flex;
   gap: 9px;
   color: #07151F;
-  margin-bottom: 1.25rem;
   padding-bottom: 12px;
   /* 12px distance from content to border */
   font-family: 'Montserrat';
@@ -879,9 +880,10 @@
 
 .priceRow {
   display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 0.5rem;
+      gap: 20px;
+      align-items: center;
+      margin-top: 16px;
+      height: 32px;
 }
 
 .price {
@@ -2306,10 +2308,29 @@
 }
 
 @media (max-width: 480px) {
+  .detailsGrid{
+    display: block;
+  }
   .content_sharediv {
     width: 309px;
   }
 
+  .modalContent {
+    background-color: white;
+    /* padding: 124px 208px; */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1560px;
+    position: relative;
+    overflow-y: auto;
+    width: 386px;
+    height: auto;
+    border-radius: 8px;
+    gap: 10px;
+    padding: 16px;
+    overflow: hidden;
+
+  }
   .sliderArrow {
     width: 48px;
     height: 48px;
@@ -2411,7 +2432,14 @@
     width: 354px;
     max-width: 354px;
   }
-
+  .prices{
+    display: flex
+;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+    flex: 1;
+}
   .contactButton button {
     border-radius: 28px;
     font-family: 'Montserrat';
@@ -2500,7 +2528,17 @@ margin-bottom: 12px;
   display: flex;
   flex-direction: column;
 }
-
+.detailsGrid{
+  display: block;
+}
+.prices{
+  display: flex
+;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+  flex: 1;
+}
 .tabletLayout .col-md-8 {
   width: 100%;
   padding: 0;

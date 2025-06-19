@@ -81,7 +81,7 @@
   font-weight: 500;
   color: #0A273B;
   margin-bottom: 8px;
-  margin-top: 12px;
+  margin-top: 24px;
   line-height: 1.4;
   font-family: 'Montserrat';
 }
@@ -110,7 +110,6 @@ margin: 12px 0 8px 0;
   display: flex;
   gap: 24px; /* 24px gap between features */
   color: #07151F;
-  margin-bottom: 10.5px;
   border-bottom: 1px solid #E6EBED;
   padding-bottom: 12px; /* 12px distance from content to border */
 }
@@ -144,8 +143,9 @@ margin: 12px 0 8px 0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 0.8rem;
+  margin-top: 16px;
   gap: 16px;
+  height: 32px;
 }
 
 .price {
@@ -197,7 +197,6 @@ margin: 12px 0 8px 0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 24px;
   padding-bottom: 24px;
 }
 
@@ -400,6 +399,7 @@ margin-right: 56px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 15px;
+  width: 1293px;
 }
 .propertyCard:hover {
   -webkit-transform: translateY(-2px);
@@ -712,13 +712,14 @@ margin-top: 2px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex
+  
 ;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 15px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
-      max-width: 1350px;
+      max-width: 1113px;
 }
 
 .propertyCardLink{
@@ -766,6 +767,19 @@ margin-top: 2px;
         height: 350px;
         border: 1px solid #E6EBED;
 }
+.cardContainer{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+  
+;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      max-width: 933px;
+}
 }
 @media (max-width:992px){
   .resultsHeader{
@@ -781,6 +795,19 @@ margin-top: 2px;
       -webkit-transition: 0.3s;
       -o-transition: 0.3s;
       transition: 0.3s;
+    }
+    .cardContainer{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex
+      
+  ;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      gap: 15px;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          max-width: 697px;
     }
 }
 @media (max-width:768px)

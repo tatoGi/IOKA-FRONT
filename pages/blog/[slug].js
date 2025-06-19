@@ -25,7 +25,7 @@ const BlogShowPage = ({ blogData }) => {
     const breadcrumbData = [
         { title: 'Home', path: '/' },
         { title: 'Blog', path: '/blog' },
-        { title: blogData.title, path: `/blog/${blogData.slug}` }
+        { title: blogData.blog.title, path: `/blog/${blogData.blog.slug}` }
     ];
     return (
         <div>

@@ -251,7 +251,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <input
             type="text"
-            placeholder="Search by location"
+            placeholder="City, Building or community"
             className={styles.searchInput}
             value={filters.searchQuery}
             onChange={(e) => {

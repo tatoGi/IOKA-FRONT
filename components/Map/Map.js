@@ -51,7 +51,7 @@ const Map = ({ locations = [] }) => {
       ref={mapRef} 
       style={{ 
         width: '100%', 
-        height: '400px',
+        height: '539px',
         borderRadius: '8px',
         overflow: 'hidden'
       }} 

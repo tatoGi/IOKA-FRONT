@@ -32,7 +32,10 @@
   border-radius: 10px;
   overflow: hidden;
 }
-
+.description{
+margin-bottom: 24px;
+color: #0A273B;
+}
 .infoSection {
   background-color: #ffffff;
   border-radius: 12px;
@@ -45,7 +48,6 @@
           flex-direction: column;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between;
   height: 100%; /* Ensure it stretches to match the map section */
 }
 

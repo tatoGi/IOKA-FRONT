@@ -896,19 +896,17 @@
     }
     
     .resaleCard {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      background: #FFFFFF;
-      -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-              box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-      border-radius: 16px;
-      border: 1px solid #E6EBED;
-      margin-top: 24px;
-      cursor: pointer;
-      height: 380px;
-      border: 1px solid transparent;
-      overflow: hidden;
+      display: flex
+      ;
+          background: #FFFFFF;
+          /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); */
+          border-radius: 16px;
+          border: 1px solid #E6EBED;
+          margin-top: 24px;
+          cursor: pointer;
+          height: 380px;
+          /* border: 1px solid transparent; */
+          overflow: hidden;
     }
     .resaleCard:hover {
       border: 2px solid #6b7280;
@@ -1609,9 +1607,8 @@
    .features{
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-;
-    gap: 15px;
+    display: flex;
+    gap: 12px;
     color: #07151F;
     margin-bottom: 1.25rem;
     border-bottom: 1px solid #E6EBED;
@@ -2236,6 +2233,13 @@ letter-spacing: 0%;
       font-size: 14px;
       margin: 16px 0 0 0;
       max-width: 322px;
+      font-size: 14px;
+      margin: 16px 0 0 0;
+      max-width: 322px;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .propertyActions{
       margin-top: 20px;
@@ -2402,6 +2406,15 @@ margin-right: 56px;
   @media (max-width: 400px){
     .resaleCard{
       width: 100%;
+    }
+    .description{
+      font-size: 14px;
+      margin: 16px 0 0 0;
+      max-width: 322px;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 @media (max-width: 375px) {

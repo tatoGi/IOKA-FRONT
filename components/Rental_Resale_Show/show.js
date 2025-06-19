@@ -1383,7 +1383,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3 className={styles.propertytitle}>{property.title}</h3>
-                      <p className={styles.location}>{property.location}</p>
+                      <p className={styles.location}> {property.locations && property.locations.length > 0
+                            ? property.locations[0].title
+                            : property.subtitle || property.location || ''}</p>
                       <div className={styles.features}>
                         <div className={styles.feature}>
                           <Image

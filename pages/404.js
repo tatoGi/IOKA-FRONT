@@ -12,7 +12,7 @@ export default function Custom404() {
 
       <main className="error-main">
         <div className="error-content">
-          {/* <Image src={require("/assets/img/404.png")} alt="404" width={100} height={100} /> */}
+          <Image src={require("/assets/img/404.png")} alt="404" width={846} height={564} />
         
           <h2 className="error-title">Page Not Found</h2>
           <p className="error-description">

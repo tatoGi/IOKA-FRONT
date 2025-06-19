@@ -1879,6 +1879,13 @@
     object-fit: cover;
     aspect-ratio: 16/9;
   }
+  .breadcrumb-section {
+    width: 100%;
+    padding: 12px 0;
+    background: #fff;
+    border-bottom: 1px solid #07151F;
+    margin-top: 39px;
+}
 }
 
 @media (min-width: 769px) {
@@ -2458,6 +2465,84 @@
    .mobile-order{
     width: 100%;
    }
+   .footer-logo {
+    margin-bottom: 23px;
+}
+.footer-category .f-category-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.footer-category ul {
+  padding: 0;
+  margin: 0;
+  display: flex
+;
+  gap: 0;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-category{
+  margin-bottom: 32px;
+}
+.footer-contact-links .footer-contact-item {
+  display: flex
+;
+  align-items: center;
+  justify-content: flex-start;
+  /* margin: 5px 0; */
+  margin-top: 0;
+  margin-bottom: 14.5px;
+}
+.soc-icons-b .soc-icon-item {
+  display: inline-block;
+  margin-right: 32px;
+}
+.soc-icons-b .soc-icon-item {
+  display: inline-block;
+  margin-right: 32px;
+  margin-top: 0;
+}
+.soc-box {
+  display: flex
+;
+  align-items: center;
+  /* gap: 10px; */
+  width: 32px;
+  height: 32px;
+}
+.soc-icons-b .icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #002a3b;
+}
+.footer-contact-links {
+  margin-bottom: 32px;
+}
+.header-nav.active {
+  display: flex
+;
+  transform: translateY(0);
+  top: 70px;
+  background-color: #ffffff;
+  justify-content: flex-start;
+  display: flex
+;
+  transform: translateY(0);
+  top: 70px;
+  background-color: #fcfcfc;
+  justify-content: flex-start;
+  width: 100%;
+  left: 0;
+  border-radius: 0;
+  position: fixed;
+  z-index: 10000;
+}
 }
 
 @media (max-width: 400px) {
@@ -2487,29 +2572,34 @@
     position: absolute;
     display: none;  
 }
-  .mobile-burger-menu {
-    right: 24px;
-    display: block;
-    cursor: pointer;
-    z-index: 101;
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
-    order: 2;
-    width: 21px;
-    height: 18px;
-    top: 35px;
-    position: absolute;
-    height: 21px !important;
-  }
+.mobile-burger-menu {
+  right: 0px;
+  display: block;
+  cursor: pointer;
+  z-index: 101;
+  order: 2;
+  width: 21px;
+  height: 18px;
+  top: 35px;
+  position: absolute;
+  height: 21px !important;
+}
 
   /* When menu is open, make burger lines black */
   .header-nav.active~.mobile-burger-menu .burger-line {
     background-color: #000;
   }
-
+  .right-form {
+    display: block;
+    position: absolute;
+    right: 28px;
+    top: 27px;
+    width: 38px;
+    height: 38px;
+}
   .right-form.active input {
     height: 48px;
-    width: 275px;
+    width: 317px;
     border-radius: 28px;
     padding: 10px 40px 10px 44px;
     border: 1px solid #0A273B;
@@ -2517,7 +2607,7 @@
     font-weight: 300;
     background-color: #ffffff;
     top: -4px;
-  }
+}
   .team-button {
     padding: 24px 0 24px 0;
     /* padding: 24px; */
@@ -2546,5 +2636,66 @@
   justify-content: flex-start;
   text-align: center;
   margin-right: 13px !important;
+}
+.news-slider-s .swiper-slide{
+  width: 100% !important;
+  max-width: 320px !important;
+  margin-right: 16px !important;
+}
+.footer-category .f-category-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.footer-category ul {
+  padding: 0;
+  margin: 0;
+  display: flex
+;
+  gap: 0;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-category{
+  margin-bottom: 32px;
+}
+.footer-contact-links .footer-contact-item {
+  display: flex
+;
+  align-items: center;
+  justify-content: flex-start;
+  /* margin: 5px 0; */
+  margin-top: 0;
+  margin-bottom: 14.5px;
+}
+.soc-icons-b .soc-icon-item {
+  display: inline-block;
+  margin-right: 32px;
+}
+.soc-icons-b .soc-icon-item {
+  display: inline-block;
+  margin-right: 32px;
+  margin-top: 0;
+}
+.soc-box {
+  display: flex
+;
+  align-items: center;
+  /* gap: 10px; */
+  width: 32px;
+  height: 32px;
+}
+.soc-icons-b .icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #002a3b;
+}
+.footer-contact-links {
+  margin-bottom: 32px;
 }
 }

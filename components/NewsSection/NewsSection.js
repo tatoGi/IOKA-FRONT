@@ -84,7 +84,7 @@ const NewsSection = () => {
           passion for real estate. This distinctive approach set us apart from
         </div>
         
-        <div className="news-slider-s">
+        <div className="news-slider-s"> 
           {isMobileView ? (
             <Swiper className="mySwiper"
           
