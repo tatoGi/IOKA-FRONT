@@ -522,3 +522,13 @@
         overflow: hidden;
     }
 }
+@media (max-width:375px) {
+    .testimonialCard{
+        width: 286px !important;
+        height: 384px !important;
+    }
+    .slideItem {
+        width: 310px !important;
+        padding: 0 12px;
+    }
+}

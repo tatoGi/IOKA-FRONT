@@ -2419,7 +2419,7 @@ margin-right: 56px;
   }
 @media (max-width: 375px) {
   .resaleCard{
-    width: 320px;
+    width: 100%;
   }
   .starting_price{
     font-size: 12px;  
