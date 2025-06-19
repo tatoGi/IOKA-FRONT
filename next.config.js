@@ -66,7 +66,7 @@ const nextConfig = {
         pathname: '/**',
       }
     ],
-    unoptimized: false,
+    unoptimized: true,
     domains: [API_HOSTNAME, 'ioka.ae', '127.0.0.1', 'localhost', 'via.placeholder.com'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
