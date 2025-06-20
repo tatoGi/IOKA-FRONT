@@ -737,7 +737,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                         src={
                           RENTAL_RESALE_DATA.agent_photo
                             ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
-                            : "/default.jpg"
+                            : {defaultImage}
                         }
                         alt={RENTAL_RESALE_DATA.title}
                         className={styles.agentImage}

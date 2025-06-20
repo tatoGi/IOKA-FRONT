@@ -682,7 +682,7 @@
 
   .right-form.active input {
 
-    height: 48px;
+    height: 38px;
     width: 219px;
     border-radius: 28px;
     padding: 10px 40px 10px 44px;
@@ -703,7 +703,7 @@
   .right-form.active span {
     left: -30px;
     position: relative;
-    top: 5px;
+    top: 0px;
   }
 
   .right-form.active .clear-span {
@@ -1967,13 +1967,13 @@
   .right-form.active .clear-span {
     left: -20px;
     position: relative;
-    top: 0px;
+    top: -8px;
 }
 .right-form.active .searchbtn {
-  left: -220px;
-  position: relative;
-  top: 5px;
-}
+        left: -221px;
+        position: relative;
+        top: 5px;
+    }
   .container {
     padding: 0 15px;
   }
@@ -1984,7 +1984,11 @@
     justify-content: flex-start;
     /* Changed from 'start' */
   }
-
+  .right-form.active span {
+    left: -74px;
+    position: relative;
+    top: -3px;
+}
   /* ... rest of media query styles ... */
 }
 
@@ -2562,6 +2566,11 @@ gap: 0;
  .header-box{
   padding: 0;
  }
+ .right-form.active span {
+  left: -64px;
+  position: relative;
+  top: 15px;
+}
   .news-slider-s .swiper-slide {
     width: 100% !important;
     max-width: 300px !important;

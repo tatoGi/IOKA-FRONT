@@ -543,6 +543,9 @@
     }
 }
 @media (max-width:480px) {
+    .testimonialCard{
+        width: 100% !important;
+    }
     .leftQuote {
         position: absolute;
         width: 30px;

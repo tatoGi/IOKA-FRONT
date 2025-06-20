@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from 'swiper';
 import "swiper/css";
 import "swiper/css/pagination";
+import Slider from "react-slick";
 
 const AboutUs = ({ initialData, id }) => {
   const [cardData, setCardData] = useState(initialData || null);
@@ -101,14 +102,42 @@ const AboutUs = ({ initialData, id }) => {
   // }
 
   const renderStats = () => {
+    // Slick settings for infinite, responsive, centered slides
+    const settings = {
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 0,
+          settings: {
+            slidesToShow: 1,
+          },
+        },
+      ],
+      arrows: false, // or true if you want arrows
+      dots: false,   // or true if you want dots
+    };
+
     if (isMobile) {
       return (
-        <Swiper
-          slidesPerView={1}
-          className={styles.statsSwiper}
-        >
+        <Slider {...settings} className={styles.statsSwiper}>
           {cardData?.additional_fields?.number_boxes?.map((box, index) => (
-            <SwiperSlide key={index} className={styles.statSlide}>
+            <div key={index} className={styles.statSlide}>
               <div className={styles.statBox}>
                 <div className={styles.statCircle}></div>
                 <p>
@@ -118,9 +147,9 @@ const AboutUs = ({ initialData, id }) => {
                   {box.title}
                 </p>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </Slider>
       );
     }
 

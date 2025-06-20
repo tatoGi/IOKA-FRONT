@@ -883,7 +883,51 @@ margin-right: 56px;
 
 
 }
+@media (max-width:1640px){
+  .card{
+    width: 630px;
+    height: 341px;
+    border-radius: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e0e0e0;
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: flex
+;
+    flex-direction: column;
+  }
+}
+@media (max-width:1400px){
+      .card {
+        width: 550px;
+        height: 341px;
+        border-radius: 16px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #e0e0e0;
+        overflow: hidden;
+        transition: transform 0.2s;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width:1200px)
+{
+  .card {
+    width: 450px;
+    height: 270px;
+    border-radius: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e0e0e0;
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
 
+}
 @media (max-width: 768px) {
   .card {
     width: 100%;
@@ -898,7 +942,12 @@ margin-right: 56px;
     flex-direction: column;
   }
 }
-
+@media(max-width: 600px)
+{
+  .card{ 
+    max-width: 450px;
+  }
+}
 .mobileTitleOverlay {
   position: absolute;
   /* top: 74%; */
