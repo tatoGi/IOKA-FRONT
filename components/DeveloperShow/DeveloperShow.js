@@ -215,6 +215,29 @@ const DeveloperShow = (developerData) => {
     setTouchEnd(null);
   };
 
+  const sliderRef = useRef(null);
+
+  const offplanSliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false, // We'll use custom arrows
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: { slidesToShow: 2 }
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 1 }
+      }
+    ]
+  };
+
+  const [visibleMobileOffplan, setVisibleMobileOffplan] = useState(4);
+
   return (
     <div className={styles.developerShowSection}>
       {/* <div className="container">
@@ -321,7 +344,7 @@ const DeveloperShow = (developerData) => {
 
             {isMobileView ? (
               <div className={styles.listView}>
-                {offplanListings.map((listing) => (
+                {offplanListings.slice(0, visibleMobileOffplan).map((listing) => (
                   <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.listItem}>
                     <div className={styles.propertyImage}>
                       <Image
@@ -406,16 +429,22 @@ const DeveloperShow = (developerData) => {
                     </div>
                   </Link>
                 ))}
-                <div className={styles.show_more_button}>Show more properties</div>
+                {visibleMobileOffplan < offplanListings.length && (
+                  <div
+                    className={styles.show_more_button}
+                    onClick={() => setVisibleMobileOffplan(visibleMobileOffplan + 4)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Show more properties
+                  </div>
+                )}
               </div>
               
             ) : (
               <div className={styles.sliderContainer}>
                 <button
                   className={`${styles.sliderArrow} ${styles.prevArrow}`}
-                  onClick={() =>
-                    setCurrentSlide((prev) => Math.max(prev - 1, 0))
-                  }
+                  onClick={() => sliderRef.current && sliderRef.current.slickPrev()}
                   disabled={currentSlide === 0}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="28" viewBox="0 0 16 28" fill="none">
@@ -423,24 +452,17 @@ const DeveloperShow = (developerData) => {
                   </svg>
                 </button>
                 <div className={styles.sliderWrapper}>
-                  <div
-                    className={styles.propertyGrid}
-                    style={{
-                      transform: `translateX(-${currentSlide * slideOffset}px)`,
-                      touchAction: 'pan-x',
-                      WebkitOverflowScrolling: 'touch',
-                      userSelect: 'none',
-                      WebkitUserSelect: 'none',
-                      msUserSelect: 'none',
-                      overflowX: 'hidden',
-                      overflowY: 'hidden'
-                    }}
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
+                  <Slider
+                    {...offplanSliderSettings}
+                    ref={sliderRef}
+                    beforeChange={(_, next) => setCurrentSlide(next)}
                   >
                     {offplanListings.map((listing, index) => (
-                      <Link href={`/offplan/${listing.slug}`} key={listing.id} className={styles.propertyCard} ref={index === 0 ? propertyCardRef : null}>
+                      <Link
+                        href={`/offplan/${listing.slug}`}
+                        key={listing.id}
+                        className={styles.propertyCard}
+                      >
                         <div className={styles.propertyImage}>
                           <span className={styles.propertyType}>
                             {listing.property_type}
@@ -528,17 +550,13 @@ const DeveloperShow = (developerData) => {
                         </div>
                       </Link>
                     ))}
-                  </div>
+                  </Slider>
                 </div>
                 <div className={styles.sliderArrowContainer}>
                   <button
                     className={`${styles.sliderArrow} ${styles.nextArrow}`}
-                    onClick={() =>
-                      setCurrentSlide((prev) =>
-                        prev + 1 >= offplanListings.length - 2 ? prev : prev + 1
-                      )
-                    }
-                    disabled={currentSlide >= offplanListings.length - 2}
+                    onClick={() => sliderRef.current && sliderRef.current.slickNext()}
+                    disabled={currentSlide >= offplanListings.length - 3}
                   >
                     <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.4142 15.412C16.1953 14.631 16.1953 13.3627 15.4142 12.5817L3.41652 0.585741C2.63542 -0.195248 1.36692 -0.195248 0.585823 0.585741C-0.195274 1.36673 -0.195274 2.63506 0.585823 3.41604L11.1713 14L0.592071 24.584C-0.189026 25.3649 -0.189026 26.6333 0.592071 27.4143C1.37317 28.1952 2.64167 28.1952 3.42277 27.4143L15.4204 15.4183L15.4142 15.412Z" fill="#0A273B"/>

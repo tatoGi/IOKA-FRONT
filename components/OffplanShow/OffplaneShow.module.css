@@ -1331,9 +1331,11 @@
   .consultantDetails {
     text-align: center;
   }
-
+  .sharelist{
+    width: 100% !important;
+  }
   .qrCard {
-    margin-top: 82px;
+    margin-top: 22px;
     border: 1px solid #07151F;
     border-radius: 12px;
     padding: 14px;
@@ -1550,7 +1552,7 @@
   }
 
   .personalInfo {
-    height: 80px;
+    height: 100%;
     max-width: 100%;
   }
 
@@ -1749,11 +1751,13 @@
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
+    margin-left: 5rem;
 
   }
 
   .mapWrapper {
     height: 220px;
+    border-radius: 0;
   }
 
   .locationSection h4 {
@@ -1889,7 +1893,15 @@
     border-radius: 8px;
 
   }
+.locationSection h3 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-left: 24px;
 
+  }
   .consultantName {
     font-family: 'Montserrat';
     font-weight: 600;
@@ -2188,6 +2200,7 @@
   .personalInfo{
     display: flex;
     gap: 12px;
+    height: auto;
   }
   .consultantDetails{
     text-align: start;

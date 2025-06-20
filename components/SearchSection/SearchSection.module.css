@@ -325,6 +325,7 @@ select.filterBtn {
 
   .searchBar {
     width:100% !important;
+    max-width: 100%;
   }
   .filterButtons{
     gap: 5px;
@@ -484,6 +485,7 @@ select.filterBtn {
   color: #333;
   font-size: 20px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .rangeInputs {

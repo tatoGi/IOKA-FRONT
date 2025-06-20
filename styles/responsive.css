@@ -473,7 +473,7 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    gap: 0px;
+    gap: 50px;
   }
 
   .team-item {
@@ -658,12 +658,12 @@
     display: none;
   }
 
-  .right-form {
-    display: block;
-    position: absolute;
-    right: 67px;
-    top: 35px;
-  }
+      .right-form {
+        display: block;
+        position: absolute;
+        right: 67px;
+        top: 35px;
+    }
 
   .right-form input {
     width: 150px;
@@ -923,28 +923,26 @@
     transform: translateY(-100%);
   }
 
-  .header-nav.active {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    /* Show when active */
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-    top: 70px;
-    background-color: #ffffff;
-    -webkit-box-pack: flex-start;
-    -ms-flex-pack: flex-start;
-    justify-content: flex-start;
-    display: flex;
-    transform: translateY(0);
-    top: 109px;
-    background-color: #fcfcfc;
-    justify-content: flex-start;
-    width: 100%;
-    border-radius: 10px;
-    left: 10%;
-  }
+ .header-nav.active {
+        display: flex
+;
+        transform: translateY(0);
+        top: 70px;
+        background-color: #ffffff;
+        justify-content: flex-start;
+        display: flex
+;
+        transform: translateY(0);
+        top: 71px;
+        background-color: #fcfcfc;
+        justify-content: flex-start;
+        width: 100%;
+        border-radius: 10px;
+        left: 10%;
+        /* right: 1px; */
+        height: 600px;
+        overflow: auto;
+    }
 
   .header-nav ul {
     list-style: none;
@@ -1942,13 +1940,19 @@
     outline: none;
     transition: 0.2s;
 }
-.breadcrumb-section {
-  width: 100%;
-  padding: 12px 0;
-  background: #fff;
-  border-bottom: 1px solid #07151F;
-  margin-top: 70px;
-}
+    .breadcrumb-section {
+        width: 100%;
+        padding: 12px 0;
+        background: #fff;
+        border-bottom: 1px solid #07151F;
+        margin-top: 40px;
+    }
+        .right-form {
+        display: block;
+        position: absolute;
+        right: 67px;
+        top: 0px;
+    }
 .right-form.active input {
   height: 42px;
   width: 317px;

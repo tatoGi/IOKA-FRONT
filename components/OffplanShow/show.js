@@ -66,7 +66,6 @@ const MobileSlider = ({ images, type, openGalleryModal, offplanData }) => {
     <Swiper
       className={style.swiper}
       slidesPerView={'auto'}
-      spaceBetween={10}
     >
       {images.map((image, index) => (
         <SwiperSlide key={index} className={style.swiperSlide}>
@@ -91,7 +90,7 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
     <Swiper
       className={style.swiper}
       slidesPerView={'auto'}
-      spaceBetween={10}
+   
     >
       {properties.map((property) => (
         <SwiperSlide

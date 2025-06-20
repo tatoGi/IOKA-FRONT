@@ -261,14 +261,21 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     setIsModalOpen(false);
   };
 
-  const flattenedAddresses = RENTAL_RESALE_DATA.addresses
-    .flat()
-    .map((address) => {
-      if (typeof address === "object" && address !== null) {
-        return Object.values(address).join(", ");
-      }
-      return address;
-    });
+  // Ensure addressesArr is always an array before mapping
+  const addressesArr = Array.isArray(RENTAL_RESALE_DATA.addresses)
+    ? (Array.isArray(RENTAL_RESALE_DATA.addresses[0])
+        ? RENTAL_RESALE_DATA.addresses.flat()
+        : RENTAL_RESALE_DATA.addresses)
+    : [];
+
+  const flattenedAddresses = Array.isArray(addressesArr)
+    ? addressesArr.map((address) => {
+        if (typeof address === "object" && address !== null) {
+          return Object.values(address).join(", ");
+        }
+        return address;
+      })
+    : [];
   const normalizedAmenities = RENTAL_RESALE_DATA.amenities.map((item) => {
     if (Array.isArray(item)) {
       return item[0]; // Extract the first element if it's an array
@@ -390,6 +397,26 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   const handleReadMore = (slug) => {
     window.location.href = `/rental-resale/${slug}`;
+  };
+
+  // Helper to get the first gallery image from property.gallery_images (array or JSON string)
+  const getFirstGalleryImage = (gallery_images) => {
+    if (!gallery_images) return null;
+    if (Array.isArray(gallery_images)) {
+      return gallery_images[0] || null;
+    }
+    if (typeof gallery_images === "string") {
+      try {
+        const parsed = JSON.parse(gallery_images);
+        if (Array.isArray(parsed)) {
+          return parsed[0] || null;
+        }
+      } catch (e) {
+        // Not a valid JSON, treat as single image string
+        return gallery_images;
+      }
+    }
+    return null;
   };
 
   // Add error boundary
@@ -1048,24 +1075,18 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         )}
 
         {!isMobile && (
-          <div className={styles.amenities_section}>
-            <h4>Amenities</h4>
-            <div className={styles.amenitiesGrid}>
-              {normalizedAmenities.map((amenity, index) => (
-                <div key={index} className={styles.amenityItem}>
-                  <Image src={success} alt="success" />
-                  {amenity}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {!isMobile && (
           <div className={styles.sameArea_poperies}>
             <h4>Properties available in the same area</h4>
             <div 
               className={styles.propertyGrid} 
               ref={propertyGridRef}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                overflowX: "hidden",
+                touchAction: "pan-x",
+                gap: "24px" // <-- add 24px gap between cards
+              }}
               onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
               onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
               onTouchEnd={() => {
@@ -1088,18 +1109,17 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   key={index}
                   className={styles.propertyCardLink}
                   onClick={() => handleReadMore(property.slug)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", minWidth: 370, flex: "0 0 auto" }} // <-- add minWidth and flex
                 >
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
                         src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
+                          getFirstGalleryImage(property.gallery_images)
                             ? `${
                                 process.env.NEXT_PUBLIC_API_URL
                               }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
+                                getFirstGalleryImage(property.gallery_images)
                               )}`
                             : defaultImage
                         }
@@ -1117,7 +1137,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
                     <div className={styles.propertyInfo}>
                       <h3 className={styles.propertytitle}>{property.title}</h3>
-                      <p className={styles.location}>{property.location}</p>
+                  <p className={styles.location}>
+                        {property.locations && property.locations.length > 0
+                          ? property.locations[0].title
+                          : property.subtitle || property.location || ''}
+                      </p>
                       <div className={styles.features}>
                         <div className={styles.feature}>
                           <Image
@@ -1173,6 +1197,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
             <div 
               className={styles.propertyGrid} 
               ref={propertyGridRef}
+              style={{ display: "flex", flexDirection: "row", overflowX: "hidden", touchAction: "pan-x" }}
               onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
               onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
               onTouchEnd={() => {
@@ -1191,23 +1216,22 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
               }}
             >
               {!isLoading && relatedProperties.map((property, index) => (
-                console.log(property),
+                // console.log(property), // Remove or comment out this line in production
                 <div
                   key={index}
                   className={styles.propertyCardLink}
                   onClick={() => handleReadMore(property.slug)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", minWidth: 250, flex: "0 0 auto" }} // <-- add minWidth and flex
                 >
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
                       <Image
                         src={
-                          property.gallery_images &&
-                          JSON.parse(property.gallery_images)[0]
+                          getFirstGalleryImage(property.gallery_images)
                             ? `${
                                 process.env.NEXT_PUBLIC_API_URL
                               }/storage/${decodeImageUrl(
-                                JSON.parse(property.gallery_images)[0]
+                                getFirstGalleryImage(property.gallery_images)
                               )}`
                             : defaultImage
                         }

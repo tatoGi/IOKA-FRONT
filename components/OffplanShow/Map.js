@@ -21,6 +21,7 @@ const customIcon = new L.Icon({
 });
 
 const Map = ({ address }) => {
+  console.log("Map component rendered with address:", address);
   const [position, setPosition] = useState([25.2048, 55.2708]); // Default position (Dubai)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

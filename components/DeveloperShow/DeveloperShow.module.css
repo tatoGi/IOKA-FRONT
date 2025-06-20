@@ -9,6 +9,7 @@
   width: 100%;
   overflow: hidden;
 }
+
 .filterButtons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -30,8 +31,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
 }
 
@@ -49,8 +50,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .moreFiltersBtn {
@@ -66,8 +67,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
   font-weight: 500;
   width: 142px;
@@ -100,7 +101,7 @@
 }
 
 .developerInfo {
- width: 100%;
+  width: 100%;
 }
 
 .developerInfo h2 {
@@ -128,21 +129,22 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border-radius: 8px;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .developerLogo img {
-  width: 300px !important;  /* Adjust this value to match the screenshot */
+  width: 300px !important;
+  /* Adjust this value to match the screenshot */
   height: auto !important;
   -o-object-fit: contain !important;
-     object-fit: contain !important;
+  object-fit: contain !important;
 }
 
 .heroContent h1 {
@@ -182,7 +184,7 @@
   background-color: white;
   border-radius: 10px;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .statItem h3 {
@@ -227,7 +229,7 @@
   border-radius: 10px;
   overflow: hidden;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   -o-transition: transform 0.3s ease;
@@ -237,8 +239,8 @@
 
 .projectCard:hover {
   -webkit-transform: translateY(-5px);
-      -ms-transform: translateY(-5px);
-          transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .projectImage {
@@ -249,7 +251,7 @@
 
 .projectImage img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .projectInfo {
@@ -286,11 +288,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-bottom: 24px;
 }
 
@@ -311,7 +313,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   opacity: 0.5;
-  
+
 }
 
 .sortDropdown {
@@ -319,8 +321,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
 }
 
@@ -335,8 +337,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
   padding: 8px 16px;
   border: 1px solid #E5E5E5;
@@ -374,10 +376,10 @@
   border-radius: 16px;
   overflow: hidden;
   background: white;
-  width: 504px;
+  width: 504px !important;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .propertyImage {
@@ -405,17 +407,17 @@
 
 .propertyYear {
   position: absolute;
-    bottom: 10px;
-    right: 16px;
-    background: #07151F;
-    color: white;
-    padding: 10px 17px;
-    border-radius: 8px;
-    font-size: 12px;
-    z-index: 1;
-    width: 60px;
-    font-family: 'Montserrat';
-    height: 35px;
+  bottom: 10px;
+  right: 16px;
+  background: #07151F;
+  color: white;
+  padding: 10px 17px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 1;
+  width: 60px;
+  font-family: 'Montserrat';
+  height: 35px;
 }
 
 .propertyInfo {
@@ -436,33 +438,38 @@
   margin-bottom: 8px;
   font-family: 'Montserrat';
 }
+
 .priceStart {
   color: #0A273B;
   font-size: 16px;
   font-weight: 500;
   font-family: 'Montserrat';
 }
+
 .price {
   color: #007AFF;
   font-size: 16px;
   font-weight: 500;
   font-family: 'Montserrat';
 }
+
 .priceContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 5px;
   margin-bottom: 12px;
 }
-.priceWrapper{
+
+.priceWrapper {
   display: flex;
   align-items: center;
   gap: 15px;
 }
+
 .propertyStats {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -476,8 +483,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
   color: #0A273B;
   font-size: 12px;
@@ -491,8 +498,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   gap: 8px;
   height: 68px;
 }
@@ -516,19 +523,19 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 24px;
   border-radius: 8px;
   border: none;
   background-color: #F5F6F7;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -552,11 +559,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 24px;
   border-radius: 8px;
@@ -604,7 +611,7 @@
   position: relative;
   opacity: 0.5;
   -webkit-filter: brightness(0.7);
-          filter: brightness(0.7);
+  filter: brightness(0.7);
   pointer-events: none;
 }
 
@@ -638,8 +645,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .sliderContent h3 {
@@ -681,8 +688,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
   color: #666666;
   font-size: 14px;
@@ -694,8 +701,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
 }
@@ -705,8 +712,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 12px;
   margin-bottom: 24px;
   margin-left: 24px;
@@ -735,18 +742,18 @@
 
 .whatsappBtn, .callBtn {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   height: 44px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 8px;
   border-radius: 4px;
   font-size: 14px;
@@ -783,8 +790,8 @@
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   width: 64px;
   height: 64px;
   border-radius: 42px;
@@ -794,11 +801,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   cursor: pointer;
   z-index: 10;
   -webkit-transition: all 0.2s ease;
@@ -822,7 +829,7 @@
 }
 
 .sliderArrow:disabled {
- color: rgba(230, 235, 237, 1);
+  color: rgba(230, 235, 237, 1);
   cursor: not-allowed;
   opacity: 10%;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -832,9 +839,10 @@
   width: 20px;
   height: 20px;
 }
+
 .resaleSection {
   padding: 40px 0;
-  background-color: #fff; 
+  background-color: #fff;
 }
 
 .resaleHeader {
@@ -844,8 +852,8 @@
 
 .resaleTitle {
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
 }
 
@@ -867,8 +875,10 @@
   display: flex;
   overflow: hidden;
   position: relative;
-  width: 100%; /* Ensure it takes full width */
-  margin: 0 auto; /* Center the slider */
+  width: 100%;
+  /* Ensure it takes full width */
+  margin: 0 auto;
+  /* Center the slider */
 }
 
 .resaleSlider .slick-track {
@@ -876,8 +886,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .resaleCard {
@@ -887,13 +897,17 @@
   background: #FFFFFF;
   overflow: hidden;
   -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   border: 1px solid #E6EBED;
-  cursor: pointer; /* Ensure the cursor changes to pointer */
-  pointer-events: auto; /* Allow pointer events */
-  margin-right: 20px; /* Add margin to show part of the next slide */
-  width: 1252px !important; /* Adjust width to show partial slides */
+  cursor: pointer;
+  /* Ensure the cursor changes to pointer */
+  pointer-events: auto;
+  /* Allow pointer events */
+  margin-right: 20px;
+  /* Add margin to show part of the next slide */
+  width: 1252px !important;
+  /* Adjust width to show partial slides */
   height: 380px !important;
 }
 
@@ -909,8 +923,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -943,8 +957,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 12px;
   margin: 0 0 30px 32px;
 }
@@ -954,8 +968,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 8px;
   color: #0A273B;
   font-size: 14px;
@@ -969,31 +983,29 @@
 }
 
 .resaleDetails {
-  display: flex
-  ;
-      flex-direction: column;
-      gap: 12px;
-      color: #666666;
-      font-size: 14px;
-      font-family: 'Montserrat';
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 4;
-      margin: 0 0 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #666666;
+  font-size: 14px;
+  font-family: 'Montserrat';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+  margin: 0 0 32px 32px;
 }
 
 .resaleFooter {
-  display: flex
-  ;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      /* margin-left: -24px; */
-      /* margin-right: -24px; */
-      /* margin-bottom: -24px; */
-      background-color: #E6EBED;
-      border-bottom-right-radius: 12px;
-      height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  /* margin-left: -24px; */
+  /* margin-right: -24px; */
+  /* margin-bottom: -24px; */
+  background-color: #E6EBED;
+  border-bottom-right-radius: 12px;
+  height: 60px;
 }
 
 .agentInfo {
@@ -1001,8 +1013,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 12px;
   margin-left: 24px;
 }
@@ -1022,8 +1034,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 12px;
   margin-right: 24px;
 }
@@ -1033,11 +1045,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 16px;
   border-radius: 8px;
@@ -1060,16 +1072,18 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 /* Main section container */
 .awardsSection {
   padding: 44px 0;
   background-color: #07151F;
-  width: 100vw; /* Expand to full screen width */
-  position: relative; /* Ensure it stays within the viewport */
+  width: 100vw;
+  /* Expand to full screen width */
+  position: relative;
+  /* Ensure it stays within the viewport */
   left: 50%;
   right: 50%;
   margin-left: -50vw;
@@ -1109,8 +1123,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -1122,21 +1136,25 @@
   background: #FFFFFF;
   overflow: hidden;
   -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   border: 1px solid #E6EBED;
-  cursor: pointer; /* Ensure the cursor changes to pointer */
-  pointer-events: auto; /* Allow pointer events */
-  margin-right: 20px; /* Add margin to show part of the next slide */
-  width: 1079px !important; /* Fixed width */
+  cursor: pointer;
+  /* Ensure the cursor changes to pointer */
+  pointer-events: auto;
+  /* Allow pointer events */
+  margin-right: 20px;
+  /* Add margin to show part of the next slide */
+  width: 1079px !important;
+  /* Fixed width */
   height: 360px !important;
 }
 
 /* Left section with team photo */
 .awardLeft {
-     /* flex: 0 0 484px; */
-     position: relative;
-     max-height: 400px;
+  /* flex: 0 0 484px; */
+  position: relative;
+  max-height: 400px;
 
 }
 
@@ -1154,15 +1172,15 @@
 /* Right section with award details */
 .awardRight {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   position: relative;
   padding-left: 32px;
 }
@@ -1207,26 +1225,27 @@
 .awardBottom {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex
-  ;
-      -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      margin-top: auto;
-      margin-bottom: 26px;
-      margin-right: 22px;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 26px;
+  margin-right: 22px;
 }
-.developerDescription{
+
+.developerDescription {
   font-family: 'Montserrat';
-font-weight: 400;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
 
 }
+
 /* Year text styling */
 .awardYear {
   color: #0A273B;
@@ -1263,11 +1282,11 @@ letter-spacing: 0%;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-right: 22px;
 }
 
@@ -1275,7 +1294,7 @@ letter-spacing: 0%;
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 /* Custom navigation dots container */
@@ -1286,11 +1305,11 @@ letter-spacing: 0%;
   display: -ms-flexbox !important;
   display: flex !important;
   -webkit-box-pack: center !important;
-      -ms-flex-pack: center !important;
-          justify-content: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
   -webkit-box-align: center !important;
-      -ms-flex-align: center !important;
-          align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
   gap: 8px !important;
   padding: 0 20px !important;
 }
@@ -1311,8 +1330,9 @@ letter-spacing: 0%;
 .slickDots li.slick-active .dot {
   background-color: #4DEFE1;
 }
+
 @media (max-width: 1600px) {
-  .propertyCard{
+  .propertyCard {
     border: 1px solid #E5E5E5;
     border-radius: 8px;
     overflow: hidden;
@@ -1333,89 +1353,141 @@ letter-spacing: 0%;
     gap: 149px;
     border-bottom: 1px solid #07151F;
     margin-bottom: 44px;
-}
-.awardCard {
-  display: flex !important;
-  background: #FFFFFF;
-  overflow: hidden;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  border: 1px solid #E6EBED;
-  cursor: pointer;
-  pointer-events: auto;
-  margin-right: 20px;
-  width: 880px !important;
-  height: 360px !important;
-}
-.awardsSlider {
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  max-height: 500px;
-}
-.developerLogo {
-  width: 100%;
-  height: 387px;
-  background-color: #07151F;
-  display: flex
-;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
- 
+  }
+
+  .awardTitle {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1A1A1A;
+    position: relative;
+    top: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 221px;
+  }
+
+  .awardSubtitle {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(10, 39, 59, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-bottom: 15px;
+    position: relative;
+    top: 97px;
+    max-width: 220px;
+  }
+
+  .awardTeamImage {
+    width: 312px;
+    height: 312px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    top: 24px;
+    left: 16px;
+    border-radius: 16px;
+  }
+
+  .awardCard {
+    display: flex !important;
+    background: #FFFFFF;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    border: 1px solid #E6EBED;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-right: 20px;
+    width: 750px !important;
+    height: 360px !important;
+  }
+
+  .awardsSlider {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    max-height: 500px;
+  }
+
+  .developerLogo {
+    width: 100%;
+    height: 387px;
+    background-color: #07151F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
   .statsContainer {
     -ms-grid-columns: 1fr 30px 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
+
   .statItem {
     padding: 15px;
   }
-  
+
+  .stat {
+    font-size: 10px;
+  }
+
   .statItem h3 {
     font-size: 28px;
   }
-  
+
   .statItem p {
     font-size: 14px;
   }
+
+  .price {
+    font-size: 14px;
+  }
 }
+
 @media (max-width: 768px) {
-  .heroSection{
+  .heroSection {
     padding: 0;
   }
-  .listingInfo_mobile{
+
+  .listingInfo_mobile {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-    ;
-        -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        gap: 120px;
-        width: 100%;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 120px;
+    width: 100%;
   }
-  .listingInfo_mobile h3{
+
+  .listingInfo_mobile h3 {
     font-family: Montserrat;
-font-weight: 500;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
   }
+
   .heroContent {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     gap: 24px;
   }
 
@@ -1425,97 +1497,104 @@ letter-spacing: 0%;
     max-height: 236px;
     margin-top: 24px;
   }
-  .developerInfo h2{
+
+  .developerInfo h2 {
     font-family: 'Montserrat';
-font-weight: 500;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
   }
+
   .heroContent p {
     font-family: 'Montserrat';
-font-weight: 400;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
   }
-  .listingInfo h3{
+
+  .listingInfo h3 {
     font-family: 'Montserrat';
-font-weight: 500;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
   }
-  .listingCount{
+
+  .listingCount {
     font-family: 'Montserrat';
-font-weight: 400;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
-color: #007AFF;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #007AFF;
 
   }
-  .sortDropdown
-  {
+
+  .sortDropdown {
     display: none;
   }
 
   .listView {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-    ;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                    flex-direction: column;
-            gap: 16px;
-            -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                    justify-content: center;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
-  .phone{
+
+  .phone {
     width: 74px;
-height: 40px;
-border-radius: 8px;
-max-width: 74px;
-padding: 12px 0px !important;
-  
+    height: 40px;
+    border-radius: 8px;
+    max-width: 74px;
+    padding: 12px 0px !important;
+
 
   }
-  .email{
+
+  .email {
     width: 102px;
-height: 40px;
-border-radius: 8px;
-max-width: 102px;
-padding: 12px 0px !important;
-  
+    height: 40px;
+    border-radius: 8px;
+    max-width: 102px;
+    padding: 12px 0px !important;
+
 
   }
-  .whatsapp{
+
+  .whatsapp {
     width: 112px;
-height: 40px;
-border-radius: 8px;
-max-width: 112px;
-padding: 12px 0px !important;
+    height: 40px;
+    border-radius: 8px;
+    max-width: 112px;
+    padding: 12px 0px !important;
   }
+
   .listItem {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     border: 1px solid #E5E5E5;
     border-radius: 16px;
     overflow: hidden;
     background: white;
     -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   }
 
   .listItem .propertyImage {
@@ -1558,23 +1637,21 @@ padding: 12px 0px !important;
     text-align: center;
     align-items: center;
     height: 32px;
-    display: flex
-;
+    display: flex;
     justify-content: center;
   }
 
   .listItem .propertyInfo {
     padding: 16px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex
-;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
-  
+
 
   .listItem .propertyInfo h4 {
     font-size: 16px;
@@ -1593,7 +1670,7 @@ padding: 12px 0px !important;
     letter-spacing: 0%;
     color: #0A273B;
     margin-bottom: 8px;
-    
+
   }
 
   .listItem .priceContainer {
@@ -1622,22 +1699,24 @@ padding: 12px 0px !important;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     gap: 4px;
     font-size: 12px;
     color: #07151F;
   }
-  .listItem .stat img{
+
+  .listItem .stat img {
     max-width: 20px;
     max-height: 14px;
   }
+
   .listItem .propertyDetails {
     font-size: 12px !important;
-        color: #0A273B;
-        gap: 4px;
-        margin-bottom: 12px;
-        height: 100%;
+    color: #0A273B;
+    gap: 4px;
+    margin-bottom: 12px;
+    height: 100%;
   }
 
   .listItem .propertyActions {
@@ -1648,7 +1727,7 @@ padding: 12px 0px !important;
     margin-top: 16px;
   }
 
-  
+
   .listItem .actionButton span {
     color: #1A1A1A;
     font-size: 12px;
@@ -1659,35 +1738,38 @@ padding: 12px 0px !important;
   .listItem .actionButton:hover {
     background: #E8E9EA;
   }
-  .show_more_button{
-    width: 354px;
-height: 44px;
-top: 2918px;
-left: 24px;
-border-radius: 8px;
-padding-top: 12px;
-padding-right: 36px;
-padding-bottom: 12px;
-padding-left: 36px;
-gap: 10px;
+
+  .show_more_button {
+    width: 100%;
+    height: 44px;
+    top: 2918px;
+    left: 24px;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 36px;
+    padding-bottom: 12px;
+    padding-left: 36px;
+    gap: 10px;
     background-color: #0A273B;
     color: #FFFFFF;
     text-align: center;
   }
-  .resaleSection{
-    padding: 40px 24px;
+
+  .resaleSection {
+    padding: 40px 0;
     background-color: #fff;
   }
+
   .resaleFooter {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     margin-top: 16px;
     padding: 16px;
     background-color: #E6EBED;
@@ -1700,8 +1782,8 @@ gap: 10px;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     gap: 12px;
   }
 
@@ -1710,25 +1792,23 @@ gap: 10px;
   }
 
   .footerActions {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    gap: 12px;
+    align-items: center;
+    gap: 0px;
+    margin: 0;
   }
+
 
   .footerButton {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     gap: 8px;
     padding: 8px 16px;
     border-radius: 8px;
@@ -1741,24 +1821,27 @@ gap: 10px;
     color: #07151F;
     font-size: 24px;
   }
+
   .awardsSlider {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     gap: 16px;
   }
-  .awardsTitle{
+
+  .awardsTitle {
     font-family: 'Montserrat';
-font-weight: 700;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: 0%;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
   }
+
   .awardCard {
     width: 320px !important;
     height: 487px !important;
@@ -1766,47 +1849,50 @@ letter-spacing: 0%;
     background: #FFFFFF;
     border-radius: 16px;
     -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
     padding: 16px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     text-align: center;
   }
 
   .awardTeamImage {
-    width: 288px;
-    height: 189px;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 16px;
+    top: 0;
+    left: 0;
   }
-  .awardRight{
+
+  .awardRight {
     -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     position: relative;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     width: 100%;
     text-align: unset;
     padding: 0;
   }
+
   .awardTitle {
     font-family: 'Montserrat';
     font-weight: 600;
@@ -1837,10 +1923,14 @@ letter-spacing: 0%;
     color: #0A273B;
     margin-bottom: 0;
   }
-  .awardLeft{
+
+  .awardLeft {
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
   }
+
   .awardIconWrapper {
     width: 81px;
     height: 56px;
@@ -1869,21 +1959,23 @@ letter-spacing: 0%;
     padding: 12px 24px;
     cursor: pointer;
   }
-  .awardContent{
+
+  .awardContent {
     margin: 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
     gap: 8px;
     padding: 0;
   }
+
   .priceContainer {
     font-family: 'Montserrat';
     font-weight: 500;
@@ -1932,6 +2024,7 @@ letter-spacing: 0%;
     text-overflow: ellipsis;
     width: 100%;
   }
+
   .awardContent {
     width: 100%;
     display: flex;
@@ -1939,6 +2032,7 @@ letter-spacing: 0%;
     align-items: flex-start;
     margin-bottom: 8px;
   }
+
   .awardDateIconRow {
     width: 100%;
     display: flex;
@@ -1947,21 +2041,22 @@ letter-spacing: 0%;
     margin-top: 94px;
     margin-bottom: 12px;
   }
+
   .awardYear {
     font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #0A273B;
-  left: 10px;
-  position: relative;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    left: 10px;
+    position: relative;
   }
-  .awardBottom{
+
+  .awardBottom {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
-;
+    display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -1973,82 +2068,95 @@ letter-spacing: 0%;
     margin-right: 0;
     margin-top: 48px;
     /* margin-right: 22px; */
-}
-  
+  }
+
   .awardIconWrapper {
     width: 81px;
     height: 56px;
     top: 8px;
     left: 2px;
-    
+
   }
+
   .viewAwardBtn {
     width: 100%;
     margin-top: 12px;
   }
 }
+
 @media (max-width: 480px) {
-  .listingsSection{
+  .listingsSection {
     padding: 0;
   }
-  .listingInfo_mobile{
+
+  .listingInfo_mobile {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-        -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        gap: 75px;
-        width: 100%;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 75px;
+    width: 100%;
   }
-  .priceStart{
+
+  .priceStart {
     font-size: 14px;
   }
-  .price{
+
+  .price {
     font-size: 14px;
   }
-  .propertyStats{
+
+  .propertyStats {
     gap: 10px !important;
   }
-  .whatsapp{
+
+  .whatsapp {
     width: 100px;
     height: 40px;
     border-radius: 8px;
     max-width: 112px;
     padding: 12px 6px !important;
   }
-  .show_more_button{
+
+  .show_more_button {
     width: 100%;
-        height: 44px;
-        top: 2918px;
-        left: 24px;
-        border-radius: 8px;
-        padding-top: 12px;
-        padding-right: 36px;
-        padding-bottom: 12px;
-        padding-left: 36px;
-        gap: 10px;
-        background-color: #0A273B;
-        color: #FFFFFF;
-        text-align: center;
+    height: 44px;
+    top: 2918px;
+    left: 24px;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-right: 36px;
+    padding-bottom: 12px;
+    padding-left: 36px;
+    gap: 10px;
+    background-color: #0A273B;
+    color: #FFFFFF;
+    text-align: center;
   }
-  .agentImage{
+
+  .agentImage {
     display: none;
   }
-  .agentInfo{
+
+  .agentInfo {
     margin-left: 10px;
   }
-  .agentInfo span{
+
+  .agentInfo span {
     font-size: 12px;
   }
-  .footerActions{
+
+  .footerActions {
     gap: 10px;
     margin-right: 0px;
   }
-  .awardTitle{
+
+  .awardTitle {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 24px;
@@ -2057,21 +2165,23 @@ letter-spacing: 0%;
     text-align: start;
     max-width: 240px;
   }
-  .awardSubtitle{
+
+  .awardSubtitle {
     text-align: start;
     max-width: 240px;
     left: 0;
   }
-  .awardCard{
+
+  .awardCard {
     width: 320px !important;
     height: 487px !important;
-    margin:0 auto;
+    margin: 0 auto;
   }
- 
-  .awardCard{
+
+  .awardCard {
     gap: 0;
   }
-  
+
 }
 
 .mobileAwardLayout {
@@ -2131,122 +2241,163 @@ letter-spacing: 0%;
   height: 360px !important;
 }
 
-@media (max-width: 480px){
-  .developerLogo{
+@media (max-width: 480px) {
+  .developerLogo {
     border-radius: 16px;
     margin-bottom: 0;
   }
-  .developerInfo{
+
+  .developerInfo {
     padding: 24px 0 0 16px;
   }
-  .developerInfo h2{
+
+  .developerInfo h2 {
     margin-bottom: 16px;
   }
-  .heroContent{
+
+  .heroContent {
     padding: 0;
     margin-bottom: 24px;
   }
-  .listItem{
-    width: 354px;
+
+  .listItem {
+    width: 100%;
   }
-  .show_more_button{
+
+  .awardLeft {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .awardTeamImage {
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
-    width: 354px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .show_more_button {
+    border-radius: 8px;
+    width: 100%;
     font-family: 'Montserrat';
-font-weight: 400;
-font-size: 16px;
-line-height: 100%;
-letter-spacing: 0%;
-padding: 14px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    padding: 14px;
 
   }
-  .resaleSection{
+
+  .resaleSection {
     width: 100%;
     max-width: 100%;
     padding: 24px 0 24px 0;
   }
-  .resaleSection .container{
+
+  .resaleSection .container {
     padding: 0;
   }
-  .propertyImage{
+
+  .propertyImage {
     height: 203px;
   }
-  .listItem .propertyInfo h4{
+
+  .listItem .propertyInfo h4 {
     font-size: 16px;
-        color: #0A273B;
-        font-weight: 600;
-        margin-bottom: 8px;
-        font-family: 'Montserrat';
-        margin-top: 0;
+    color: #0A273B;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-family: 'Montserrat';
+    margin-top: 0;
   }
-  .listItem .location{
+
+  .listItem .location {
     font-size: 12px;
     color: rgba(0, 122, 255, 1) !important;
     font-weight: 500;
     font-family: 'Montserrat';
     margin-bottom: 0 !important;
   }
-  .price{
+
+  .price {
     color: rgba(10, 39, 59, 1);
   }
-  .priceContainer{
+
+  .priceContainer {
     margin-top: 4px !important;
     margin-bottom: 8px !important;
   }
-  .listItem .stat{
+
+  .listItem .stat {
     font-size: 14px !important;
-    
+
   }
-  .propertyStats{
+
+  .propertyStats {
     margin-top: 0 !important;
     margin-bottom: 14px !important;
   }
-  .resaleFooter{
+
+  .resaleFooter {
     margin-top: 0;
     height: 56px;
     padding: 10px 16px;
   }
-  .agentInfo span{
+
+  .agentInfo span {
     font-family: 'Montserrat';
     font-weight: 600;
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0%;
   }
-  .footerActions{
+
+  .footerActions {
     gap: 0;
   }
-  .awardYear{
+
+  .awardYear {
     left: 0;
     top: 21px;
   }
-  .awardIconWrapper{
+
+  .awardIconWrapper {
     width: 84px;
     height: 72px;
 
   }
-  .awardBottom{
+
+  .awardBottom {
     width: 288px;
     height: 44px;
     border-radius: 12px;
     margin-bottom: 0;
- 
+
 
   }
-  .awardBottom button{
+
+  .awardBottom button {
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
-    
+
   }
 }
+
 @media (max-width: 400px) {
- .listItem{
-  width: 100%;
- } 
- .show_more_button{
-  width: 100%;
- }
+  .listItem {
+    width: 100%;
+  }
+
+  .show_more_button {
+    width: 100%;
+  }
 }

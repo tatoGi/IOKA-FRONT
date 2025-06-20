@@ -123,8 +123,7 @@
   height: 320px;
   border-radius: 16px;
   overflow: hidden;
-  -webkit-box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+ 
 }
 
 .slide img {
@@ -141,7 +140,7 @@
       -ms-transform: translateX(-58%) translateY(20px) scale(0.9);
           transform: translateX(-58%) translateY(20px) scale(0.9);
   z-index: 1;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .slide.center {
@@ -157,12 +156,12 @@
       -ms-transform: translateX(50%) translateY(20px) scale(0.9);
           transform: translateX(50%) translateY(20px) scale(0.9);
   z-index: 1;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .navButton {
   position: absolute;
-  top: 276px;
+  top: 330px;
   transform: translateY(-50%);
   width: 56px;
   height: 56px;
@@ -539,6 +538,27 @@
   .nextButton {
     right: 33px;
   }
+  .navButton {
+  position: absolute;
+  top: 276px;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 1);
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 1.5vw;
+  color: #ffffff;
+  opacity: 80%;
+  padding: 12px;
+}
 }
 
 @media (max-width:1400px) {
@@ -710,6 +730,29 @@
     border-top-right-radius: 100px;
     z-index: 1;
   }
+  .slide.left {
+  -webkit-transform: translateX(-46%) translateY(20px) scale(0.9);
+      -ms-transform: translateX(-46%) translateY(20px) scale(0.9);
+          transform: translateX(-46%) translateY(20px) scale(0.9);
+  z-index: 1;
+  opacity: 1;
+}
+
+.slide.center {
+  -webkit-transform: translateX(0) translateY(130px) scale(1);
+      -ms-transform: translateX(0) translateY(130px) scale(1);
+          transform: translateX(0) translateY(130px) scale(1);
+  z-index: 3;
+  opacity: 1;
+}
+
+.slide.right {
+  -webkit-transform: translateX(50%) translateY(20px) scale(0.9);
+      -ms-transform: translateX(50%) translateY(20px) scale(0.9);
+          transform: translateX(47%) translateY(20px) scale(0.9);
+  z-index: 1;
+  opacity: 1;
+}
 }
 
 @media (max-width: 1024px) {
@@ -841,7 +884,27 @@
     z-index: 3;
     opacity: 1;
   }
-
+  .navButton{
+    position: absolute;
+        top: 370px;
+        transform: translateY(-50%);
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 1);
+        border: none;
+        cursor: pointer;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        font-size: 1.5vw;
+        color: #ffffff;
+        opacity: 80%;
+        padding: 12px;
+  }
   .sliderWrapper {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

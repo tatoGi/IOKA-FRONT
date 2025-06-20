@@ -38,6 +38,7 @@ const Rental_Resale = () => {
   const [slideOffset, setSlideOffset] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
   const [maxSlide, setMaxSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Filter options for SearchRental component
   const filterOptions = {
@@ -73,7 +74,7 @@ const Rental_Resale = () => {
         setSlideOffset(currentSlideOffset);
 
         const containerWidth = sliderRef.current.offsetWidth;
-        const currentVisibleItems = Math.floor(containerWidth / currentSlideOffset);
+        const currentVisibleItems = Math.max(1, Math.floor(containerWidth / currentSlideOffset));
         setVisibleItems(currentVisibleItems);
 
         if (topProperties.length > 0) {
@@ -315,6 +316,68 @@ const Rental_Resale = () => {
     return "";
   };
 
+  // Helper: clone slides for infinite effect
+  const getInfiniteSlides = () => {
+    // If not enough slides for infinite, just return originals
+    if (topProperties.length <= visibleItems) return topProperties;
+    const clonesBefore = topProperties.slice(-visibleItems);
+    const clonesAfter = topProperties.slice(0, visibleItems);
+    return [...clonesBefore, ...topProperties, ...clonesAfter];
+  };
+  const infiniteSlides = getInfiniteSlides();
+  const isInfinite = topProperties.length > visibleItems;
+
+  // Adjusted currentSlide for infinite logic
+  const [slickCurrent, setSlickCurrent] = useState(isInfinite ? visibleItems : 0);
+
+  useEffect(() => {
+    setSlickCurrent(isInfinite ? visibleItems : 0);
+  }, [visibleItems, topProperties.length]);
+
+  const handleSlickPrev = (e) => {
+    e.stopPropagation();
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlickCurrent((prev) => prev - visibleItems);
+  };
+  const handleSlickNext = (e) => {
+    e.stopPropagation();
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlickCurrent((prev) => prev + visibleItems);
+  };
+
+  const handleSlickTransitionEnd = () => {
+    setIsTransitioning(false);
+    if (!isInfinite) return;
+    // Jump without animation if at clone
+    if (slickCurrent === 0) {
+      setSlickCurrent(topProperties.length);
+    } else if (slickCurrent === topProperties.length + visibleItems) {
+      setSlickCurrent(visibleItems);
+    }
+  };
+
+  const handleSlickTouchStart = (e) => {
+    e.stopPropagation();
+    setTouchStart(e.touches[0].clientX);
+  };
+  const handleSlickTouchMove = (e) => {
+    e.stopPropagation();
+    setTouchEnd(e.touches[0].clientX);
+  };
+  const handleSlickTouchEnd = (e) => {
+    e.stopPropagation();
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    if (isLeftSwipe) handleSlickNext(e);
+    else if (isRightSwipe) handleSlickPrev(e);
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   return (
     <>
       <div className="container">
@@ -339,12 +402,9 @@ const Rental_Resale = () => {
             <div className={Styles.sliderWrapper} ref={sliderRef}>
               <button
                 className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSlide((prev) => Math.max(prev - 1, 0));
-                }}
-                disabled={currentSlide === 0}
-                style={{ opacity: currentSlide === 0 ? 0.5 : 1 }}
+                onClick={handleSlickPrev}
+                disabled={isTransitioning}
+                style={{ opacity: isTransitioning ? 0.5 : 1 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -359,39 +419,19 @@ const Rental_Resale = () => {
               <div
                 className={Styles.propertyGrid}
                 style={{
-                  transform: `translateX(-${currentSlide * slideOffset}px)`,
-                  transition: 'transform 0.3s ease-out'
+                  transform: `translateX(-${slickCurrent * slideOffset}px)`,
+                  transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
                 }}
-                onTouchStart={(e) => {
-                  e.stopPropagation();
-                  setTouchStart(e.touches[0].clientX);
-                }}
-                onTouchMove={(e) => {
-                  e.stopPropagation();
-                  setTouchEnd(e.touches[0].clientX);
-                }}
-                onTouchEnd={(e) => {
-                  e.stopPropagation();
-                  if (!touchStart || !touchEnd) return;
-
-                  const distance = touchStart - touchEnd;
-                  const isLeftSwipe = distance > 50;
-                  const isRightSwipe = distance < -50;
-                  if (isLeftSwipe && currentSlide < maxSlide) {
-                    setCurrentSlide(prev => prev + 1);
-                  } else if (isRightSwipe && currentSlide > 0) {
-                    setCurrentSlide(prev => prev - 1);
-                  }
-
-                  setTouchStart(0);
-                  setTouchEnd(0);
-                }}
+                onTransitionEnd={handleSlickTransitionEnd}
+                onTouchStart={handleSlickTouchStart}
+                onTouchMove={handleSlickTouchMove}
+                onTouchEnd={handleSlickTouchEnd}
               >
-                {topProperties.map((property, index) => (
+                {infiniteSlides.map((property, index) => (
                   <div
-                    key={property.id}
+                    key={property.id + '-' + index}
                     className={Styles.propertyCardLink}
-                    ref={index === 0 ? propertyCardRef : null}
+                    ref={index === (isInfinite ? visibleItems : 0) ? propertyCardRef : null}
                     onClick={() => handleReadMore(property.slug)}
                     style={{ cursor: "pointer" }}
                   >
@@ -480,14 +520,9 @@ const Rental_Resale = () => {
               </div>
               <button
                 className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSlide((prev) => Math.min(prev + 1, maxSlide));
-                }}
-                disabled={currentSlide >= maxSlide}
-                style={{
-                  opacity: currentSlide >= maxSlide ? 0.5 : 1
-                }}
+                onClick={handleSlickNext}
+                disabled={isTransitioning}
+                style={{ opacity: isTransitioning ? 0.5 : 1 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path

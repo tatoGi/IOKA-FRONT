@@ -233,8 +233,11 @@ const Developer = ({ initialData, initialPagination }) => {
   // Get image URL for a card
   const getImageUrl = (photoJson, cardId) => {
     try {
+      if (!photoJson || (Array.isArray(photoJson) && photoJson.length === 0)) {
+        return {defaultImage, alt: 'Default developer image' };
+      }
       const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
-      if (Array.isArray(photos) && photos.length > 0) {
+      if (Array.isArray(photos) && photos.length > 0 && photos[0] && photos[0].file) {
         const currentIndex = imageIndexes[cardId] || 0;
         const currentPhoto = photos[currentIndex];
         const imageUrl = decodeURIComponent(currentPhoto.file);
@@ -250,9 +253,9 @@ const Developer = ({ initialData, initialPagination }) => {
           alt: currentPhoto.alt || 'Developer image',
         };
       }
-      return { url: defaultImage, alt: 'Default developer image' };
+      return {  defaultImage, alt: 'Default developer image' };
     } catch (e) {
-      return { url: defaultImage, alt: 'Default developer image' };
+      return {  defaultImage, alt: 'Default developer image' };
     }
   };
 

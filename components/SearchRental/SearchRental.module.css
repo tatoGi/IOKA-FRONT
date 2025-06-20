@@ -268,6 +268,7 @@ select.filterBtn {
 
   .searchBar {
     width:100% !important;
+    max-width: 100%;
   }
   .filterButtons{
     gap: 5px;

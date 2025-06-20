@@ -721,7 +721,15 @@ margin-top: 2px;
       -ms-flex-pack: center;
       max-width: 1113px;
 }
-
+.features{
+  display: flex
+;
+        gap: 5px;
+        color: #07151F;
+        margin-bottom: 10.5px;
+        border-bottom: 1px solid #E6EBED;
+        padding-bottom: 12px;
+}
 .propertyCardLink{
   text-decoration: none;
         color: inherit;
@@ -780,6 +788,10 @@ margin-top: 2px;
       -ms-flex-pack: center;
       max-width: 933px;
 }
+.feature img{
+  width: 10px;
+  height: 12px;
+}
 }
 @media (max-width:992px){
   .resultsHeader{
@@ -799,9 +811,7 @@ margin-top: 2px;
     .cardContainer{
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex
-      
-  ;
+      display: flex;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
       gap: 15px;
@@ -820,6 +830,7 @@ margin-top: 2px;
   }
   .propertyCardLink{
     width: 100% !important;
+    max-width: 247px;
   }
   .propertyCardLink:hover{
     border: 1px solid #3598db;
@@ -832,9 +843,54 @@ margin-top: 2px;
       -o-transition: 0.3s;
       transition: 0.3s;
     }  
-    
+      .cardContainer{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      gap: 15px;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          max-width: 509px;
+    }
 
 
+}
+@media (max-width:600px)
+{
+  .resultsHeader{
+    margin-top: 20%;
+  }
+  .resultsCount{
+    display: none;
+  }
+  .propertyCardLink{
+    width: 100% !important;
+    max-width: 100%;
+  }
+  .propertyCardLink:hover{
+    border: 1px solid #3598db;
+    }
+    .propertyImage:hover{
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1);
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s;
+    }  
+      .cardContainer{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      gap: 15px;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+         max-width: 370px;
+    }
 }
 @media (max-width:480px)
 {
