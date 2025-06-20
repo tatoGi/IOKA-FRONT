@@ -1292,7 +1292,7 @@
   .statSlide {
     width: 99px !important;
     height: 107px !important;
-    padding-top: 8px;
+    padding-top: 0px;
   }
 
   .statsSwiper {
