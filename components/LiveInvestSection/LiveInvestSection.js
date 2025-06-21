@@ -54,7 +54,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
           <div className={`${styles.content} col-md-6`}>
             <h2>{additionalFields.subtitle}</h2>
             <h1>{additionalFields.title}</h1>
-            <p>{additionalFields.title_2}</p>
+            <div dangerouslySetInnerHTML={{ __html: sectionDataTwo.description }}></div>
             <button className={styles.contactBtn} onClick={handleContactClick}>Contact Us</button>
           </div>
           <div className={`${styles.sliderContainer} col-md-6`}>
