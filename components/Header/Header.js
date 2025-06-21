@@ -12,6 +12,7 @@ import { Montserrat } from 'next/font/google';
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 const Header = ({ navigationData }) => {
+  
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -150,13 +151,9 @@ const Header = ({ navigationData }) => {
   const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
   const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';
 
-  const desktopPages = navigationData
-    .filter((page) => page.type_id !== 3 && page.active === 1)
-    .sort((a, b) => a.sort - b.sort);
-
-  const mobilePages = navigationData
-    .filter((page) => page.active === 1)
-    .sort((a, b) => a.sort - b.sort);
+  // Show all pages for debugging
+  const desktopPages = navigationData;
+  const mobilePages = navigationData;
 
   const currentPage = navigationData.find((page) =>
     normalizedPathname.startsWith(`/${page.slug}`)

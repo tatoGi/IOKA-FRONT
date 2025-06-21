@@ -44,43 +44,53 @@ function App({ Component, pageProps }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      let navigationData = [];
+      let settingsData = {};
       try {
-        const [navigationRes, settingsRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`)
-        ]);
-        
-        const [navigationData, settingsData] = await Promise.all([
-          navigationRes.json(),
-          settingsRes.json()
-        ]);
-
-        // Transform settings data into the expected structure
-        const transformedSettings = {
-          meta: settingsData.meta || [],
-          footer: settingsData.footer || [],
-          social: settingsData.social || []
-        };
-        
-        setAppData(prevAppData => ({
-          ...prevAppData,
-          navigationData: navigationData.pages || [],
-          settings: transformedSettings
-        }));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setAppData(prev => ({ ...prev }));
+        const navigationRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+        navigationData = await navigationRes.json();
+      } catch (e) {
+        console.error("Error fetching navigation:", e);
       }
-    };
+      try {
+        const settingsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`);
+        settingsData = await settingsRes.json();
+      } catch (e) {
+        console.error("Error fetching settings:", e);
+        // Optionally set default settingsData here
+        settingsData = { meta: [], footer: [], social: [] };
+      }
+      // Transform settings data into the expected structure
+      const transformedSettings = {
+        meta: settingsData.meta || [],
+        footer: settingsData.footer || [],
+        social: settingsData.social || []
+      };
 
+      // Sort navigation pages by the "sort" field (ascending)
+      const sortedNavPages = (navigationData.pages || [])
+        .slice() // create a shallow copy to avoid mutating the original data
+        .sort((a, b) => {
+          const sortA = a?.sort ?? 0;
+          const sortB = b?.sort ?? 0;
+          return sortA - sortB;
+        });
+
+      setAppData(prevAppData => ({
+        ...prevAppData,
+        navigationData: sortedNavPages,
+        settings: transformedSettings
+      }));
+    };
     fetchData();
   }, []);
 
+  // Set loading to false once navigation data is available. Settings meta may legitimately be empty
   useEffect(() => {
-    if (appData.navigationData.length > 0 && appData.settings.meta.length > 0) {
+    if (appData.navigationData.length > 0) {
       setLoading(false);
     }
-  }, [appData.navigationData, appData.settings.meta]);
+  }, [appData.navigationData]);
 
   useEffect(() => {
     if (router.isReady && appData.navigationData && appData.navigationData.length > 0) {

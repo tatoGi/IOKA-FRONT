@@ -8,13 +8,15 @@ const SubscribeSection = dynamic(() => import('../SubscribeSection/SubscribeSect
 
 });
 
-const SharedLayout = ({ children }) => {
+const SharedLayout = ({ children, showSubscribe = true }) => {
   return (
     <>
       {children}
-      <div className="container">
-        <SubscribeSection />
-      </div>
+      {showSubscribe && (
+        <div className="container">
+          <SubscribeSection />
+        </div>
+      )}
     </>
   );
 };

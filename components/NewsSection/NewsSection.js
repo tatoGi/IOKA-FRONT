@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-// import required modules
-import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import LeftArrow from "../icons/LeftArrow";
 import Image from "next/image";
@@ -42,9 +39,17 @@ const NewsSection = () => {
           axios.get(BLOGS_API),
           axios.get(PAGE_API)
         ]);
-       
-        const filteredBlogs = blogsResponse.data.data.filter(blog => blog.show_on_main_page === true);
-       
+        // Handle possible variations in API response structure
+        const blogsArray = blogsResponse?.data?.data || blogsResponse?.data?.blogs || blogsResponse?.data || [];
+
+        // Keep only blogs that should appear on the main page (accept any truthy value)
+        const filteredBlogs = blogsArray.filter(blog => Boolean(blog.show_on_main_page));
+
+        // Helpful log in dev mode so we can see the raw response once (will be removed in prod)
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.debug('Blogs fetched:', blogsArray.length, 'Shown:', filteredBlogs.length);
+        }
         const blogPages = pagesResponse.data.pages.filter(page => page.type_id === 6);
         
         setBlogs(filteredBlogs);

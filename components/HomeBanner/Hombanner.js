@@ -31,9 +31,20 @@ const Hombanner = ({ initialData, navigationData }) => {
         const { data } = await axios.get(SECTION_API);
         if (data?.sections) {
           setCardData(data.sections);
+          // Build a map, but keep the first (or most complete) entry for every section_key
           const sectionMap = {};
           data.sections.forEach(section => {
-            sectionMap[section.section_key] = section;
+            const key = section.section_key;
+            if (!sectionMap[key]) {
+              sectionMap[key] = section; // first occurrence
+            } else {
+              // If the stored version has no slider images but the new one does, replace it
+              const prevImgs = sectionMap[key]?.additional_fields?.slider_images?.length || 0;
+              const currImgs = section?.additional_fields?.slider_images?.length || 0;
+              if (currImgs > prevImgs) {
+                sectionMap[key] = section;
+              }
+            }
           });
           setSections(sectionMap);
         } else {
@@ -49,41 +60,48 @@ const Hombanner = ({ initialData, navigationData }) => {
   }, [initialData]);
   
 
-  // Don't render until component is mounted to prevent hydration mismatch
-  if (!isMounted || isLoading) {
-    return null; // Or replace with a spinner if you have one
+  // Wait for mount. While loading, render a placeholder to preserve layout order
+  if (!isMounted) {
+    return null;
   }
 
-  // Only render when all sections are loaded
-  const sectionKeys = [
-    "section_one",
-    "section_two",
-    "section_three",
-    "section_four",
-    "section_five",
-    "section_six",
-    "section_seven"
-  ];
-  const allSectionsLoaded = sectionKeys.every(key => sections[key]);
-  if (!allSectionsLoaded) {
-    return null; // Or a spinner
+  if (isLoading) {
+    return (
+      <div className="home-banner" style={{ minHeight: '400px' }}>
+        {/* You can replace this with a spinner or skeleton */}
+      </div>
+    );
   }
 
-  // Render all sections only after all data is loaded
+  // Render sections only if they exist
   return (
     <>
       <div className="home-banner">
         <div className="banner-slider">
-          <HomeBannerSwiper sectionData={sections["section_one"]} />
+          {sections["section_one"] && (
+            <HomeBannerSwiper sectionData={sections["section_one"]} />
+          )}
           <HomeBannerSearch />
         </div>
       </div>
-      <LiveInvestSection sectionDataTwo={sections["section_two"]} navigationData={navigationData} />
-      <NewProperties sectionDataThree={sections["section_three"]} />
-      <PopularAreaSection sectionDataFour={sections["section_four"]} />
-      <TeamSection sectionDataFive={sections["section_five"]} />
-      <Clients sectionSixData={sections["section_six"]} />
-      <NewsSection sectionSevenData={sections["section_seven"]} />
+      {sections["section_two"] && (
+        <LiveInvestSection sectionDataTwo={sections["section_two"]} navigationData={navigationData} />
+      )}
+      {sections["section_three"] && (
+        <NewProperties sectionDataThree={sections["section_three"]} />
+      )}
+      {sections["section_four"] && (
+        <PopularAreaSection sectionDataFour={sections["section_four"]} />
+      )}
+      {sections["section_five"] && (
+        <TeamSection sectionDataFive={sections["section_five"]} />
+      )}
+      {sections["section_six"] && (
+        <Clients sectionSixData={sections["section_six"]} />
+      )}
+      
+        <NewsSection sectionSevenData={sections["section_seven"]} />
+      
       <PartnersSection />
     </>
   );

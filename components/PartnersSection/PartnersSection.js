@@ -40,43 +40,58 @@ const PartnersSection = () => {
       .catch(error => console.error('Error fetching partners:', error));
   }, []);
 
+  // Helper: decide how many slides should be visible based on viewport width
+  const getBaseSlidesToShow = () => {
+    if (typeof window === 'undefined') return 8;
+    const width = window.innerWidth;
+    if (width <= 576) return 3;
+    if (width <= 768) return 4;
+    if (width <= 992) return 6;
+    if (width <= 1200) return 4;
+    if (width <= 1560) return 6;
+    if (width <= 1700) return 7;
+    return 8;
+  };
+
+  // Ensure we never ask Slick to show more slides than we actually have
+  const baseSlides = getBaseSlidesToShow();
+  const slidesToShow = Math.max(1, Math.min(baseSlides, partners.length || baseSlides));
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: partners.length > slidesToShow,
     speed: 500,
-    slidesToShow: 8,
+    slidesToShow,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1920,
-        settings: { slidesToShow: 8 }
+        settings: { slidesToShow: Math.max(1, Math.min(8, partners.length || 8)) }
       },
       {
         breakpoint: 1700,
-        settings: { slidesToShow: 7 }
+        settings: { slidesToShow: Math.max(1, Math.min(7, partners.length || 7)) }
       },
       {
         breakpoint: 1560,
-        settings: { slidesToShow: 6 }
+        settings: { slidesToShow: Math.max(1, Math.min(6, partners.length || 6)) }
       },
       {
         breakpoint: 1200,
-        settings: { slidesToShow: 4 }
+        settings: { slidesToShow: Math.max(1, Math.min(4, partners.length || 4)) }
       },
       {
         breakpoint: 992,
-        settings: { slidesToShow: 6 }
+        settings: { slidesToShow: Math.max(1, Math.min(6, partners.length || 6)) }
       },
       {
         breakpoint: 768,
-        settings: { slidesToShow: 4 }
+        settings: { slidesToShow: Math.max(1, Math.min(4, partners.length || 4)) }
       },
       {
         breakpoint: 576,
-        settings: { slidesToShow: 3 }
+        settings: { slidesToShow: Math.max(1, Math.min(3, partners.length || 3)) }
       }
-
-     
     ]
   };
 
@@ -90,7 +105,7 @@ const PartnersSection = () => {
               <div key={index} className="partner-item">
                 <Link href={partner.url} className="partners-slider-item">
                   <Image 
-                    src={partner.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
+                    src={partner.image ? `${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
                     alt={partner.alt || 'Partner logo'}
                     width={80} 
                     height={80} 
