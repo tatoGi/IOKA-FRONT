@@ -112,6 +112,37 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     }
   };
 
+  // Parse agent photo path
+  const getAgentPhotoPath = (photoData) => {
+    try {
+      // If it's already a proper path string, return it
+      if (typeof photoData === 'string' && !photoData.startsWith('[')) {
+        return photoData;
+      }
+      
+      // If it looks like a JSON string, try to parse it
+      if (typeof photoData === 'string' && (photoData.startsWith('[') || photoData.startsWith('{'))) {
+        const parsed = JSON.parse(photoData);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed[0];
+        } else if (parsed && typeof parsed === 'object') {
+          return parsed.toString();
+        }
+      }
+      
+      // If it's already an array, return the first item
+      if (Array.isArray(photoData) && photoData.length > 0) {
+        return photoData[0];
+      }
+      
+      console.warn('Unable to parse agent photo data:', photoData);
+      return '';
+    } catch (error) {
+      console.error('Error parsing agent photo:', error, { photoData });
+      return '';
+    }
+  };
+
   // Initialize Fancybox
   useEffect(() => {
     if (!isClient || !galleryImages?.length) {
@@ -693,38 +724,76 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   <h3>Details</h3>
                   <span className={styles.details_line}></span>
                   <div className={styles.detailsGrid}>
-                    {RENTAL_RESALE_DATA.details.map((detail, index) => {
-                      if (detail.title === "Price") {
+                    {/* Left Column - First 5 items */}
+                    <div className={styles.detailsColumn}>
+                      {RENTAL_RESALE_DATA.details.slice(0, 5).map((detail, index) => {
+                        if (detail.title === "Price") {
+                          return (
+                            <div
+                              className={`${styles.detailItem} ${styles.priceDetail}`}
+                              key={index}
+                            >
+                              <span className={styles.detailLabel}>
+                                {detail.title}
+                              </span>
+                              <span className={styles.detailValue}>
+                                <span>
+                                  USD {RENTAL_RESALE_DATA.amount.amount}
+                                </span>
+                                <span>
+                                  AED {RENTAL_RESALE_DATA.amount.amount_dirhams}
+                                </span>
+                              </span>
+                            </div>
+                          );
+                        }
                         return (
-                          <div
-                            className={`${styles.detailItem} ${styles.priceDetail}`}
-                            key={index}
-                          >
+                          <div className={styles.detailItem} key={index}>
                             <span className={styles.detailLabel}>
                               {detail.title}
                             </span>
                             <span className={styles.detailValue}>
-                              <span>
-                                USD {RENTAL_RESALE_DATA.amount.amount}
-                              </span>
-                              <span>
-                                AED {RENTAL_RESALE_DATA.amount.amount_dirhams}
-                              </span>
+                              {detail.info}
                             </span>
                           </div>
                         );
-                      }
-                      return (
-                        <div className={styles.detailItem} key={index}>
-                          <span className={styles.detailLabel}>
-                            {detail.title}
-                          </span>
-                          <span className={styles.detailValue}>
-                            {detail.info}
-                          </span>
-                        </div>
-                      );
-                    })}
+                      })}
+                    </div>
+                    {/* Right Column - Next 5 items */}
+                    <div className={styles.detailsColumn}>
+                      {RENTAL_RESALE_DATA.details.slice(5, 10).map((detail, index) => {
+                        if (detail.title === "Price") {
+                          return (
+                            <div
+                              className={`${styles.detailItem} ${styles.priceDetail}`}
+                              key={index + 5}
+                            >
+                              <span className={styles.detailLabel}>
+                                {detail.title}
+                              </span>
+                              <span className={styles.detailValue}>
+                                <span>
+                                  USD {RENTAL_RESALE_DATA.amount.amount}
+                                </span>
+                                <span>
+                                  AED {RENTAL_RESALE_DATA.amount.amount_dirhams}
+                                </span>
+                              </span>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div className={styles.detailItem} key={index + 5}>
+                            <span className={styles.detailLabel}>
+                              {detail.title}
+                            </span>
+                            <span className={styles.detailValue}>
+                              {detail.info}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -736,8 +805,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <img
                         src={
                           RENTAL_RESALE_DATA.agent_photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
-                            : {defaultImage}
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
+                            : defaultImage
                         }
                         alt={RENTAL_RESALE_DATA.title}
                         className={styles.agentImage}
