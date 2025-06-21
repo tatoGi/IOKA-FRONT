@@ -116,6 +116,14 @@ const Clients = ({ sectionSixData }) => {
                     <div 
                       className={styles.review}
                       dangerouslySetInnerHTML={{ __html: testimonial.body }}
+                      style={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 5,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxHeight: '125px' // Fallback for browsers that don't support line-clamp
+                      }}
                     />
                   </div>
                 </div>
