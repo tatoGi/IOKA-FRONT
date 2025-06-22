@@ -2,7 +2,27 @@ import React, { useState, useEffect, useCallback } from "react";
 import styles from "./SearchRental.module.css";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
+// Add a style tag to hide empty options when dropdown is open
+const hideEmptyOptionsStyle = `
+  select:focus option[value=""] {
+    display: none !important;
+  }
+  option[value=""] {
+    display: none !important;
+  }
+`;
+
 const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {} }) => {
+  // Add style to head
+  useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = hideEmptyOptionsStyle;
+    document.head.appendChild(styleElement);
+    
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
@@ -60,10 +80,30 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
       // Format the filters to match backend expectations
       const backendFilters = {
         property_type: updatedFilters.propertyType || null,
-        bedrooms: updatedFilters.bedrooms || null,
-        bathrooms: updatedFilters.bathrooms || null,
         location: updatedFilters.searchQuery || null,
       };
+      
+      // Handle bedrooms - special case for "4+" to filter 4 or more
+      if (updatedFilters.bedrooms) {
+        if (updatedFilters.bedrooms === "4+") {
+          backendFilters.bedrooms_min = 4;
+        } else {
+          backendFilters.bedrooms = updatedFilters.bedrooms;
+        }
+      } else {
+        backendFilters.bedrooms = null;
+      }
+      
+      // Handle bathrooms - special case for "4+" to filter 4 or more
+      if (updatedFilters.bathrooms) {
+        if (updatedFilters.bathrooms === "4+") {
+          backendFilters.bathrooms_min = 4;
+        } else {
+          backendFilters.bathrooms = updatedFilters.bathrooms;
+        }
+      } else {
+        backendFilters.bathrooms = null;
+      }
 
       // Handle price range
       if (updatedFilters.price) {
@@ -129,10 +169,30 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     // Format the filters to match backend expectations
     const backendFilters = {
       property_type: updatedFilters.propertyType || null,
-      bedrooms: updatedFilters.bedrooms || null,
-      bathrooms: updatedFilters.bathrooms || null,
       location: updatedFilters.searchQuery || null,
     };
+    
+    // Handle bedrooms - special case for "4+" to filter 4 or more
+    if (updatedFilters.bedrooms) {
+      if (updatedFilters.bedrooms === "4+") {
+        backendFilters.bedrooms_min = 4;
+      } else {
+        backendFilters.bedrooms = updatedFilters.bedrooms;
+      }
+    } else {
+      backendFilters.bedrooms = null;
+    }
+    
+    // Handle bathrooms - special case for "4+" to filter 4 or more
+    if (updatedFilters.bathrooms) {
+      if (updatedFilters.bathrooms === "4+") {
+        backendFilters.bathrooms_min = 4;
+      } else {
+        backendFilters.bathrooms = updatedFilters.bathrooms;
+      }
+    } else {
+      backendFilters.bathrooms = null;
+    }
 
     // Handle price range
     if (updatedFilters.price) {
@@ -347,9 +407,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
           >
             <option value="">Bathrooms</option>
             {filterOptions.bathrooms.map((num) => (
-              <option key={num} value={num}>
-                {num === "studio" ? "Studio" : num}
-              </option>
+              <option key={num} value={num}>{num}</option>
             ))}
           </select>
 

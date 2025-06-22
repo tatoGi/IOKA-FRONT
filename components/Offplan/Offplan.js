@@ -53,7 +53,7 @@ const Offplan = ({ initialData, initialPagination }) => {
       "5000001+"
     ],
     bedrooms: ["Studio", 1, 2, 3, 4, "4+"],
-    bathrooms: ["Studio", 1, 2, 3, 4, "4+"],
+    bathrooms: [1, 2, 3, 4, "4+"],
     sqFtRanges: [
       "0-1000",
       "1001-2000",
@@ -146,6 +146,15 @@ const Offplan = ({ initialData, initialPagination }) => {
       const response = await axios.get(FILTER_OFFPLAN_API);
       const options = response.data;
 
+      // Extract unique property types from the API response
+      const propertyTypes = [
+        ...new Set(
+          options.data
+            .map((item) => item.property_type)
+            .filter(Boolean) // Remove null/undefined values
+        )
+      ].sort();
+
       // Extract unique values for filters and convert 0 to "Studio", group 4+ as "4+"
       const bedrooms = [
         ...new Set(
@@ -187,6 +196,14 @@ const Offplan = ({ initialData, initialPagination }) => {
           return a - b;
         });
 
+      // Update property types if we got valid options from the API
+      if (propertyTypes.length > 0) {
+        setFilterOptions((prev) => ({
+          ...prev,
+          propertyTypes
+        }));
+      }
+
       // Only update bedrooms if we got valid options from the API
       if (bedrooms.length > 0) {
         setFilterOptions((prev) => ({
@@ -204,7 +221,7 @@ const Offplan = ({ initialData, initialPagination }) => {
       }
     } catch (error) {
       console.error("Error fetching filter options:", error);
-      // Keep the default bedroom and bathroom options if API call fails
+      // Keep the default filter options if API call fails
     }
   };
 
@@ -390,10 +407,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                             height={24}
                           />
                           <span>
-                            {property?.bathroom === 0 ||
-                            property?.bathroom === "0"
-                              ? "Studio"
-                              : property?.bathroom || 0}{" "}
+                            {property?.bathroom || 0}{" "}
                             Ba
                           </span>
                         </div>

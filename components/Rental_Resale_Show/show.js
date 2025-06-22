@@ -709,7 +709,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           <div className={styles.description}>
             <h1>Description</h1>
             <div className="row">
-              <div className="col-md-8 pt-5 pe-5">
+              <div className="col-lg-8 col-md-12 pt-5 pe-lg-5">
                 <div className={styles.body}>
                   <pre className={styles.descriptionText}>
                     <div
@@ -797,7 +797,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-lg-4 col-md-12">
                 {/* Contact Information Section */}
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>

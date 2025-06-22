@@ -44,7 +44,7 @@ const Rental_Resale = () => {
   const filterOptions = {
     propertyTypes: ["Apartment", "Villa", "Townhouse", "Penthouse", "Land"],
     bedrooms: ["studio", 1, 2, 3, 4, "4+"],
-    bathrooms: ["studio", 1, 2, 3, 4, "4+"]
+    bathrooms: [1, 2, 3, 4, "4+"]
   };
   // Move topProperties definition before useEffect
   const topProperties = cardData.filter((property) => property.top === 1 || property.top === true);
