@@ -9,6 +9,7 @@ import styles from './HomeBanner.module.css';
 import baseimage from "../../assets/img/blogimage.png";
 
 const HomeBannerSwiper = ({ sectionData }) => {
+  
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
@@ -32,9 +33,9 @@ const HomeBannerSwiper = ({ sectionData }) => {
               <div className={styles['image-overlay']}></div>
               <div className={styles['banner-content']}>
                 <div className={styles['text-b-i']}>
-                  {sectionData.additional_fields.subtitle}
+                  {sectionData.additional_fields.image.title}
                 </div>
-                <h1>{sectionData.additional_fields.title}</h1>
+                <h1>{sectionData.additional_fields.image.description}</h1>
               </div>
               <div className={styles['swiper-item-img']}>
                 <Image
