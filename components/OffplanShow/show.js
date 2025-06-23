@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import ShareIcons from "../ShareIcons/ShareIcons";
 
 const Map = dynamic(() => import("./Map"), { ssr: false });
 
@@ -165,25 +166,7 @@ const OffplanShow = ({ offplanData }) => {
     setGalleryModalOpen(false);
     setCurrentImageIndex(0);
   };
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href)
-        .then(() => {
-          setCopyAlertoffplan(true);
-          setTimeout(() => {
-            setCopyAlertoffplan(false);
-          }, 3000); // Hide after 3 seconds
-        })
-        .catch(err => {
-          console.error('Failed to copy: ', err);
-          // You might want a styled alert for errors too
-          alert("Failed to copy link.");
-        });
-    } else {
-      // And for this case as well
-      alert("Clipboard API not available on this browser.");
-    }
-  };
+  // Share functionality now handled by ShareIcons component
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % currentGallery.length);
   };
@@ -318,6 +301,9 @@ const OffplanShow = ({ offplanData }) => {
         />
         <div className={style.bannerContent}>
           <h1>{offplanData.offplan.title}</h1>
+          <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
+            <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={offplanData.offplan.title} />
+          </div>
         </div>
       </div>
 

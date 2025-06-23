@@ -151,9 +151,9 @@ const Header = ({ navigationData }) => {
   const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
   const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';
 
-  // Show all pages for debugging
-  const desktopPages = navigationData;
-  const mobilePages = navigationData;
+  // Only show pages with active === 1
+  const desktopPages = navigationData.filter(page => page.active === 1);
+  const mobilePages = navigationData.filter(page => page.active === 1);
 
   const currentPage = navigationData.find((page) =>
     normalizedPathname.startsWith(`/${page.slug}`)
