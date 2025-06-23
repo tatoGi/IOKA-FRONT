@@ -137,6 +137,7 @@ const OffplanShow = ({ offplanData }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentGallery, setCurrentGallery] = useState([]);
   const [copyAlertoffplan, setCopyAlertoffplan] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -301,9 +302,7 @@ const OffplanShow = ({ offplanData }) => {
         />
         <div className={style.bannerContent}>
           <h1>{offplanData.offplan.title}</h1>
-          <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-            <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={offplanData.offplan.title} />
-          </div>
+          
         </div>
       </div>
 
@@ -427,12 +426,22 @@ const OffplanShow = ({ offplanData }) => {
                   WhatsApp
                 </button>
               </div>
-              <button className={style.sharelist} onClick={handleShare}>
-                <svg width="16" height="14" style={{ marginRight: "8px" }} viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                <path d="M9.59375 0.0881295C9.23438 0.247505 9 0.60688 9 1.00063V3.00063H5.5C2.4625 3.00063 0 5.46313 0 8.50063C0 12.0413 2.54688 13.6225 3.13125 13.9413C3.20937 13.985 3.29688 14.0006 3.38438 14.0006C3.725 14.0006 4 13.7225 4 13.385C4 13.1506 3.86562 12.935 3.69375 12.7756C3.4 12.4975 3 11.9506 3 11.0006C3 9.34438 4.34375 8.00063 6 8.00063H9V10.0006C9 10.3944 9.23125 10.7538 9.59375 10.9131C9.95625 11.0725 10.375 11.0069 10.6687 10.7444L15.6687 6.24438C15.8781 6.05375 16 5.785 16 5.50063C16 5.21625 15.8812 4.9475 15.6687 4.75688L10.6687 0.25688C10.375 -0.0087454 9.95312 -0.0743705 9.59375 0.0881295Z" fill="#0A273B" />
-              </svg>
-                Share this Listing
-              </button>
+              <div style={{ position: 'relative' }}>
+                <button className={style.sharelist} onClick={() => setShareOpen(!shareOpen)}>
+                  <svg width="16" height="14" style={{ marginRight: "8px" }} viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                  <path d="M9.59375 0.0881295C9.23438 0.247505 9 0.60688 9 1.00063V3.00063H5.5C2.4625 3.00063 0 5.46313 0 8.50063C0 12.0413 2.54688 13.6225 3.13125 13.9413C3.20937 13.985 3.29688 14.0006 3.38438 14.0006C3.725 14.0006 4 13.7225 4 13.385C4 13.1506 3.86562 12.935 3.69375 12.7756C3.4 12.4975 3 11.9506 3 11.0006C3 9.34438 4.34375 8.00063 6 8.00063H9V10.0006C9 10.3944 9.23125 10.7538 9.59375 10.9131C9.95625 11.0725 10.375 11.0069 10.6687 10.7444L15.6687 6.24438C15.8781 6.05375 16 5.785 16 5.50063C16 5.21625 15.8812 4.9475 15.6687 4.75688L10.6687 0.25688C10.375 -0.0087454 9.95312 -0.0743705 9.59375 0.0881295Z" fill="#0A273B" />
+                </svg>
+                  Share this Listing
+                </button>
+                {shareOpen && (
+                  <div style={{ position: 'absolute', zIndex: 100, top: '100%', right: 0 }}>
+                    <ShareIcons 
+                      url={typeof window !== 'undefined' ? window.location.href : ''} 
+                      title={offplanData?.offplan?.title || 'Check out this property'}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* QR Card */}
@@ -493,6 +502,13 @@ const OffplanShow = ({ offplanData }) => {
                   </div>
                 </div>
               )}
+            </div>
+            
+            <div className={style.shareIconsWrapper}>
+              <ShareIcons 
+                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                title={offplanData?.offplan?.title || 'Check out this property'}
+              />
             </div>
           </div>
         </div>

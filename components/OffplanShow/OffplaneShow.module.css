@@ -4,7 +4,14 @@
 * Autoprefixer: v10.4.7
 * Browsers: last 4 version
 */
-
+.shareIconsWrapper {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  align-items: end;
+  text-align: end;
+  margin-top: 50px;
+}
 .offplanebanner {
   position: relative;
   width: 100%;
@@ -2169,7 +2176,14 @@
     display: flex;
     justify-content: flex-start;
     height: 40px;
-    width: 354px;
+    width: auto;
+  }
+  
+  .shareIconsWrapper {
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+
   }
 
   .contactBtn {

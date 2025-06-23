@@ -33,9 +33,9 @@ const HomeBannerSwiper = ({ sectionData }) => {
               <div className={styles['image-overlay']}></div>
               <div className={styles['banner-content']}>
                 <div className={styles['text-b-i']}>
-                  {sectionData.additional_fields.image.title}
+                  {image.title}
                 </div>
-                <h1>{sectionData.additional_fields.image.description}</h1>
+                <h1>{image.description}</h1>
               </div>
               <div className={styles['swiper-item-img']}>
                 <Image

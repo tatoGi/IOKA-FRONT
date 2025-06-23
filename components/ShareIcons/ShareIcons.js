@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
   faFacebookF, 
@@ -12,6 +12,7 @@ import styles from './ShareIcons.module.css';
 const ShareIcons = ({ url, title }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const shareContainerRef = useRef(null);
   
   // Use the provided URL or current URL if not provided
   const shareUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
@@ -40,8 +41,27 @@ const ShareIcons = ({ url, title }) => {
     setIsExpanded(!isExpanded);
   };
 
+  // Close share icons when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (shareContainerRef.current && !shareContainerRef.current.contains(event.target) && isExpanded) {
+        setIsExpanded(false);
+      }
+    };
+
+    // Add event listener when the component is expanded
+    if (isExpanded) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isExpanded]);
+
   return (
-    <div className={styles.shareContainer}>
+    <div className={styles.shareContainer} ref={shareContainerRef}>
       <button 
         onClick={toggleExpand} 
         className={`${styles.shareToggleButton} ${isExpanded ? styles.active : ''}`}
