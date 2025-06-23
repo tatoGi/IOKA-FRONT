@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import styles from "./contactForm.module.css";
 import { CONTACT_SUBMISSION_API } from "../../routes/apiRoutes";
 
@@ -15,6 +16,7 @@ const ContactForm = ({ pageTitle = "" }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
 
   // Check if device is mobile
   useEffect(() => {
@@ -81,7 +83,14 @@ const ContactForm = ({ pageTitle = "" }) => {
         email: '',
         phone: '',
         message: '',
+        country: '',
       });
+      
+      // Redirect to thank you page after successful submission
+      // Show status message briefly before redirecting
+      setTimeout(() => {
+        router.push('/thank-you');
+      }, 1000);
     } catch (error) {
       console.error('Form submission error:', {
         status: error.response?.status,

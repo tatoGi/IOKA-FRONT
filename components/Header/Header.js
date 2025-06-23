@@ -292,9 +292,12 @@ const Header = ({ navigationData }) => {
                   </form>
                 </div>
 
-                <div className="contactBtn">
-                  <Link href={contactSlug}>CONTACT US</Link>
-                </div>
+                {/* Only show CONTACT US button if contact page exists and is active */}
+                {contactPage && (
+                  <div className="contactBtn">
+                    <Link href={contactSlug}>CONTACT US</Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
