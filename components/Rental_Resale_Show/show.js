@@ -9,10 +9,44 @@ import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import ShareIcons from "../ShareIcons/ShareIcons";
-// Imports for the new lightbox gallery
-import Lightbox from "yet-another-react-lightbox";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Slider from "react-slick";
+
+// Custom arrow component for the slider
+const CustomArrow = ({ direction, onClick }) => (
+  <button
+    onClick={onClick}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      [direction === 'prev' ? 'left' : 'right']: '10px',
+      transform: 'translateY(-50%)',
+      zIndex: 2,
+      width: '50px',
+      height: '50px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(255,255,255,0.15)',
+      border: 'none',
+      borderRadius: '50%',
+      color: 'white',
+      fontSize: '24px',
+      cursor: 'pointer',
+      transition: 'background-color 0.2s ease, transform 0.2s ease',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+    }}
+    onMouseOver={(e) => {
+      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.25)';
+      e.currentTarget.style.transform = `translateY(-50%) scale(1.05)`;
+    }}
+    onMouseOut={(e) => {
+      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+      e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+    }}
+  >
+    {direction === 'prev' ? '❮' : '❯'}
+  </button>
+);
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Initialize state
@@ -26,10 +60,10 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  // State for the new lightbox gallery
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [lightboxSlides, setLightboxSlides] = useState([]);
+  // State for the gallery modal
+  const [galleryModalOpen, setGalleryModalOpen] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [modalGalleryImages, setModalGalleryImages] = useState([]);
 
   // Initialize client-side state
   useEffect(() => {
@@ -187,6 +221,15 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     }
   };
 
+  // Open gallery modal with images
+  const openGalleryModal = (images, startIndex = 0) => {
+    if (!images || !images.length) return;
+    
+    setModalGalleryImages(images);
+    setCurrentSlideIndex(startIndex);
+    setGalleryModalOpen(true);
+  };
+
   // Render gallery image
   const renderGalleryImage = (image, index, isMain = false) => {
     if (!image) {
@@ -197,26 +240,27 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     const imageUrl = getImageUrl(image);
     const caption = `${RENTAL_RESALE_DATA?.title || ''} - ${isMain ? 'Main Image' : `Image ${index + 1}`}`;
 
-    const openLightbox = (e) => {
+    // Open gallery modal on click
+    const handleImageClick = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const slides = galleryImages.map(img => ({ src: getImageUrl(img) }));
-      setLightboxSlides(slides);
-      setLightboxIndex(index);
-      setLightboxOpen(true);
+      
+      // Prepare all gallery images for the modal
+      const allImages = galleryImages.map(img => getImageUrl(img));
+      openGalleryModal(allImages, index);
     };
 
     // Use a div instead of an anchor to prevent any default link behavior
     return (
       <div
-        onClick={openLightbox}
+        onClick={handleImageClick}
         key={`gallery-${image}-${index}`}
         style={{ cursor: 'pointer', display: 'block', width: '100%', height: '100%' }}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            openLightbox(e);
+            handleImageClick(e);
           }
         }}
       >
@@ -230,6 +274,24 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         />
       </div>
     );
+  };
+  
+  // Open gallery for related property
+  const openRelatedPropertyGallery = (property, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const images = safeGetGalleryImages(property.gallery_images);
+    if (!images.length) {
+        console.warn('No images for related property gallery:', property.title);
+        return;
+    }
+
+    const imageUrls = images.map(img => 
+      `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(img)}`
+    );
+
+    openGalleryModal(imageUrls, 0);
   };
 
   const locationData = React.useMemo(() => {
@@ -915,14 +977,15 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                   )}
                 </div>
-                 <div className={styles.shareIconsWrapper}>
+                
+              </div>
+            </div>
+            <div className={styles.shareIconsWrapper}>
                               <ShareIcons 
                                 url={typeof window !== 'undefined' ? window.location.href : ''} 
                                 title={RENTAL_RESALE_DATA?.title || 'Check out this property'}
                               />
                             </div>
-              </div>
-            </div>
           </div>
         )}
         {isMobile && (
@@ -1349,24 +1412,131 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       
       </div>
 
-      {/* The Lightbox component */}
-      <Lightbox
-        styles={{ root: { position: 'fixed', zIndex: 9999 } }} // Temporary fix to force positioning
-        open={lightboxOpen}
-        close={() => setLightboxOpen(false)}
-        slides={lightboxSlides}
-        index={lightboxIndex}
-        plugins={[Thumbnails, Zoom]}
-        thumbnails={{
-            border: 1,
-            borderColor: "white",
-            borderRadius: 4,
-            gap: 16,
-        }}
-        zoom={{
-            maxZoomPixelRatio: 2,
-        }}
-      />
+
+      
+      {/* Gallery Modal */}
+      {galleryModalOpen && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '40px 20px',
+            backdropFilter: 'blur(5px)',
+            transition: 'opacity 0.3s ease',
+            animation: 'fadeIn 0.3s ease'
+          }}
+          onClick={(e) => {
+            // Close when clicking the background (not the content)
+            if (e.target === e.currentTarget) {
+              setGalleryModalOpen(false);
+            }
+          }}
+        >
+          {/* Close button */}
+          <button 
+            onClick={() => setGalleryModalOpen(false)}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '20px',
+              cursor: 'pointer',
+              zIndex: 10000,
+              transition: 'background-color 0.2s ease',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
+          >
+            ✖
+          </button>
+          
+          {/* Image counter */}
+          <div style={{ 
+            color: 'white', 
+            marginBottom: '15px', 
+            fontSize: '14px',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            padding: '5px 15px',
+            borderRadius: '20px',
+            fontFamily: 'Montserrat, sans-serif'
+          }}>
+            {currentSlideIndex + 1} / {modalGalleryImages.length}
+          </div>
+          
+          {/* Slider */}
+          <div style={{ width: '85%', maxWidth: '1000px', height: '65vh' }}>
+            <Slider
+              dots={false}
+              infinite={true}
+              speed={500}
+              slidesToShow={1}
+              slidesToScroll={1}
+              initialSlide={currentSlideIndex}
+              afterChange={(index) => setCurrentSlideIndex(index)}
+              arrows={true}
+              adaptiveHeight={true}
+              cssEase={'cubic-bezier(0.45, 0, 0.15, 1)'}
+              prevArrow={<CustomArrow direction="prev" />}
+              nextArrow={<CustomArrow direction="next" />}
+            >
+              {modalGalleryImages.map((src, idx) => (
+                <div key={`modal-img-${idx}`} style={{ 
+                  height: '65vh', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  outline: 'none'
+                }}>
+                  <img 
+                    src={src} 
+                    alt={`Gallery image ${idx + 1}`}
+                    style={{ 
+                      maxHeight: '60vh', 
+                      maxWidth: '85%', 
+                      objectFit: 'contain',
+                      margin: '0 auto',
+                      boxShadow: '0 5px 20px rgba(0,0,0,0.3)',
+                      transition: 'transform 0.3s ease',
+                    }} 
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+          
+          {/* Keyboard navigation hint */}
+          <div style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: 'rgba(255,255,255,0.5)',
+            fontSize: '12px',
+            fontFamily: 'Montserrat, sans-serif'
+          }}>
+            Use arrow keys to navigate
+          </div>
+        </div>
+      )}
     </>
   );
 };
