@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./Rental_Resale.show.module.css";
 import Image from "next/image";
-import defaultImage from "../../assets/img/default.webp"; // ✅ Correct import
+import defaultImage from "../../assets/img/default.webp"; // Correct import
 import ContactForm from "../contactForm/ContactForm"; // Import the ContactForm component
 import dynamic from "next/dynamic";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import galleryIcon from "../../assets/img/gallery-icon.svg";
 import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
+import ShareIcons from "../ShareIcons/ShareIcons";
+// Imports for the new lightbox gallery
+import Lightbox from "yet-another-react-lightbox";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   // Initialize state
@@ -22,6 +25,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   const propertyGridRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+
+  // State for the new lightbox gallery
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxSlides, setLightboxSlides] = useState([]);
 
   // Initialize client-side state
   useEffect(() => {
@@ -81,6 +89,42 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
       return [];
     }
   }, [RENTAL_RESALE_DATA?.gallery_images]);
+
+  // Helper to safely get gallery images
+  const safeGetGalleryImages = (galleryData) => {
+    if (!galleryData) return [];
+  
+    try {
+      // Handle array format
+      if (Array.isArray(galleryData)) {
+        return galleryData.filter(Boolean);
+      }
+      
+      // Handle JSON string format
+      if (typeof galleryData === 'string') {
+        try {
+          const parsed = JSON.parse(galleryData);
+          if (Array.isArray(parsed)) {
+            return parsed.filter(Boolean);
+          }
+          return [];
+        } catch (e) {
+          // Not a valid JSON, might be a single image string
+          return [galleryData];
+        }
+      }
+      
+      // Handle object format (just in case)
+      if (typeof galleryData === 'object') {
+        return Object.values(galleryData).filter(Boolean);
+      }
+      
+      return [];
+    } catch (error) {
+      console.error('Error parsing gallery images:', error);
+      return [];
+    }
+  };
 
   // Get image URL helper
   const getImageUrl = (image) => {
@@ -143,102 +187,38 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     }
   };
 
-  // Initialize Fancybox
-  useEffect(() => {
-    if (!isClient || !galleryImages?.length) {
-      console.log('Skipping Fancybox initialization:', { isClient, galleryImagesLength: galleryImages?.length });
-      return;
-    }
-  
-    const initializeFancybox = () => {
-      try {
-        // Destroy any existing instance
-        Fancybox.destroy();
-  
-        // Create gallery items
-        const items = galleryImages.map((image, index) => {
-          console.log('Processing image:', { image, index });
-          const src = getImageUrl(image);
-          if (!src) {
-            console.warn(`Invalid image URL at index ${index}:`, image);
-          }
-          return {
-            src,
-            type: "image",
-            caption: `${RENTAL_RESALE_DATA?.title || ''} - Image ${index + 1}`
-          };
-        }).filter(item => item.src); // Remove items with invalid src
-  
-        console.log('Fancybox items:', items);
-  
-        // Initialize Fancybox
-        Fancybox.bind("[data-fancybox='gallery']", {
-          dragToClose: false,
-          closeButton: "top",
-          Image: { zoom: true, fit: "contain" },
-          Thumbs: false,
-          Toolbar: {
-            display: [
-              { id: "prev", position: "center" },
-              { id: "counter", position: "center" },
-              { id: "next", position: "center" },
-              "zoom",
-              "close",
-            ],
-          },
-          groupAll: true,
-          infinite: true,
-          keyboard: true,
-          touch: { vertical: true, momentum: true },
-          items,
-          on: {
-            done: () => {
-              const fancybox = Fancybox.getInstance();
-              if (fancybox) {
-                fancybox.options.Thumbs = {
-                  type: "classic",
-                  autoStart: true,
-                  showOnStart: true,
-                };
-                fancybox.update();
-              }
-            },
-            destroy: () => Fancybox.destroy()
-          }
-        });
-      } catch (error) {
-        console.error('Error initializing Fancybox:', error);
-      }
-    };
-  
-    initializeFancybox();
-  
-    return () => {
-      try {
-        Fancybox.destroy();
-      } catch (error) {
-        console.error('Error destroying Fancybox:', error);
-      }
-    };
-  }, [isClient, galleryImages, RENTAL_RESALE_DATA?.title]);
-
   // Render gallery image
   const renderGalleryImage = (image, index, isMain = false) => {
     if (!image) {
       console.warn('No image provided for rendering:', { index, isMain });
       return null;
     }
-    
+
     const imageUrl = getImageUrl(image);
     const caption = `${RENTAL_RESALE_DATA?.title || ''} - ${isMain ? 'Main Image' : `Image ${index + 1}`}`;
-    
+
+    const openLightbox = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const slides = galleryImages.map(img => ({ src: getImageUrl(img) }));
+      setLightboxSlides(slides);
+      setLightboxIndex(index);
+      setLightboxOpen(true);
+    };
+
+    // Use a div instead of an anchor to prevent any default link behavior
     return (
-      <a
-        href={imageUrl}
-        data-fancybox="gallery"
-        data-caption={caption}
-        data-type="image"
+      <div
+        onClick={openLightbox}
         key={`gallery-${image}-${index}`}
+        style={{ cursor: 'pointer', display: 'block', width: '100%', height: '100%' }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            openLightbox(e);
+          }
+        }}
       >
         <img
           src={imageUrl}
@@ -246,8 +226,9 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           loading={isMain || index === 0 ? "eager" : "lazy"}
           width="100%"
           height="auto"
+          style={{ display: 'block' }}
         />
-      </a>
+      </div>
     );
   };
 
@@ -934,6 +915,12 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     </div>
                   )}
                 </div>
+                 <div className={styles.shareIconsWrapper}>
+                              <ShareIcons 
+                                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                                title={RENTAL_RESALE_DATA?.title || 'Check out this property'}
+                              />
+                            </div>
               </div>
             </div>
           </div>
@@ -1361,6 +1348,25 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
         )}
       
       </div>
+
+      {/* The Lightbox component */}
+      <Lightbox
+        styles={{ root: { position: 'fixed', zIndex: 9999 } }} // Temporary fix to force positioning
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={lightboxSlides}
+        index={lightboxIndex}
+        plugins={[Thumbnails, Zoom]}
+        thumbnails={{
+            border: 1,
+            borderColor: "white",
+            borderRadius: 4,
+            gap: 16,
+        }}
+        zoom={{
+            maxZoomPixelRatio: 2,
+        }}
+      />
     </>
   );
 };
