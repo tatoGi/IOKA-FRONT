@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import ConstrImage from "../../assets/img/constructions-dubai.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { SUBSCRIBE_API } from "@/routes/apiRoutes";
 
 const SubscribeSection = () => {
@@ -9,6 +10,7 @@ const SubscribeSection = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const router = useRouter();
 
   const showAlertMessage = useCallback((message) => {
     setAlertMessage(message);
@@ -41,13 +43,12 @@ const SubscribeSection = () => {
       if (response.ok) {
         setShowSuccess(true);
         setEmail("");
-        // Use requestAnimationFrame for smoother animations
+        // Show success message briefly before redirecting
         requestAnimationFrame(() => {
           setTimeout(() => {
-            requestAnimationFrame(() => {
-              setShowSuccess(false);
-            });
-          }, 2000);
+            // Redirect to thank-you page
+            router.push('/thank-you');
+          }, 1000);
         });
       } else {
         if (data.errors?.email?.includes("The email has already been taken.")) {
@@ -61,7 +62,7 @@ const SubscribeSection = () => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [email, showAlertMessage]);
+  }, [email, showAlertMessage, router]);
 
   return (
     <div className="subscribe-section" style={{ willChange: 'transform' }}>

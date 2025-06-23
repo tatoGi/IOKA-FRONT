@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./LiveInvestSection.module.css";
 import homeBanner from "../../assets/img/homeBanner.jpg";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { NAVIGATION_MENU } from '@/routes/apiRoutes';
 // Import Swiper styles
 import "swiper/css";
+import axios from 'axios';
 import "swiper/css/pagination";
 
-const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
+const LiveInvestSection = ({ sectionDataTwo, navigationData: propNavigationData = [] }) => {
   const [activeSlide, setActiveSlide] = useState(1);
+  const [navigationData, setNavigationData] = useState(propNavigationData);
   const additionalFields = sectionDataTwo?.additional_fields || {
     slider_images: [],
     rolling_numbers: [],
@@ -18,6 +21,22 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
     title: "",
     title_2: ""
   };
+
+  useEffect(() => {
+    const fetchNavigationData = async () => {
+      try {
+        const response = await axios.get(NAVIGATION_MENU);
+        if (response.data && response.data.pages) {
+          setNavigationData(response.data.pages);
+        }
+      } catch (err) {
+        console.error('Error fetching navigation data:', err);
+      }
+    };
+
+    fetchNavigationData();
+  }, []);
+
   const sliderData = additionalFields.slider_images.map((item, index) => ({
     id: index + 1,
     image: item.image,
@@ -37,13 +56,17 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData = [] }) => {
 
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   const router = useRouter();
-
+  console.log(navigationData);
   // Find contact page
   const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
   const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';
 
   const handleContactClick = () => {
-    router.push(contactSlug);
+    if (contactSlug) {
+      window.open(contactSlug, '_blank', 'noopener,noreferrer');
+    } else {
+      console.error("Contact page URL is not defined");
+    }
   };
 
   return (
