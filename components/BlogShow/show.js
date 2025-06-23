@@ -91,7 +91,12 @@ const BlogShow = ({ blogData }) => {
               <div dangerouslySetInnerHTML={{ __html: blogData.blog.body }} />{" "}
               {/* Display the blog body */}
             </div>
-
+            <div style={{ position: 'relative' }}>
+              <h1 className={styles.title}>{blogData.blog.title}</h1>
+              <div style={{ position: 'absolute', top: '0', right: '0' }}>
+                <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={blogData.blog.title} />
+              </div>
+            </div>
           </div>
           <div className="col-md-4 d-none d-md-block">
             <div className={styles.sidebar}>
@@ -180,13 +185,9 @@ const BlogShow = ({ blogData }) => {
                 ))}
           </div>
         </div>
-        <div style={{ position: 'relative' }}>
-              <h1 className={styles.title}>{blogData.blog.title}</h1>
-              <div style={{ position: 'absolute', top: '0', right: '0' }}>
-                <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={blogData.blog.title} />
-              </div>
-            </div>
+       
       </div>
+    
     </div>
   );
 };
