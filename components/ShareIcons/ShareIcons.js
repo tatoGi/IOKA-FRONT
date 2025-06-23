@@ -8,6 +8,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import styles from './ShareIcons.module.css';
+import shareIcon from '../../assets/img/share.png';
+import Image from 'next/image';
 
 const ShareIcons = ({ url, title }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -67,7 +69,7 @@ const ShareIcons = ({ url, title }) => {
         className={`${styles.shareToggleButton} ${isExpanded ? styles.active : ''}`}
         aria-label="Toggle share options"
       >
-        <FontAwesomeIcon icon={faShareNodes} />
+        <Image src={shareIcon} alt="blogicon" width={20} height={20} />
       </button>
       
       <div className={`${styles.shareIconsWrapper} ${isExpanded ? styles.expanded : ''}`}>
