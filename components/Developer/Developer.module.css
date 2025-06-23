@@ -482,6 +482,14 @@ letter-spacing: 0%;
 margin-right: 56px;
 
 }
+.title_main{
+  font-size: 20px;
+  font-weight: 500;
+  color: #0A273B;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-family: 'Montserrat';
+}
 .mobilePagination .pageButtonmobile{
   border-radius: 4px;
   border: 1px solid rgba(7, 21, 31, 1);

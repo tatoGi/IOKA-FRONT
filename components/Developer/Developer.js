@@ -291,7 +291,9 @@ const Developer = ({ initialData, initialPagination }) => {
 
   return (
     <>
+   
       <div className="container py-4">
+      <h1 className={styles.title_main}>Developers</h1>
         {/* Search Section */}
         <div className={`mb-4 position-relative ${styles.searchContainer}`}>
           <input
