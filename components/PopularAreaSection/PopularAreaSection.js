@@ -70,7 +70,7 @@ const PopularAreaSection = (sectionFourData) => {
                     height={400}
                     alt={area.alt_text || "Popular Area"}
                     style={{ objectFit: 'cover' }}
-                    unoptimized={true}
+                    quality={80}
                   />
                 </div>
                 <div className="off-relase-box">
@@ -107,6 +107,7 @@ const PopularAreaSection = (sectionFourData) => {
                       height={400}
                       alt={area.alt_text || "Popular Area"}
                       style={{ objectFit: 'cover' }}
+                      quality={80}
                     />
                   </div>
                   <div className="off-relase-box">

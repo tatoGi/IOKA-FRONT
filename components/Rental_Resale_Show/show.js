@@ -264,13 +264,13 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
           }
         }}
       >
-        <img
+        <Image
           src={imageUrl}
           alt={caption}
-          loading={isMain || index === 0 ? "eager" : "lazy"}
-          width="100%"
-          height="auto"
-          style={{ display: 'block' }}
+          priority={isMain || index === 0}
+          width={800}
+          height={600}
+          style={{ width: '100%', height: '100%', display: 'block' }}
         />
       </div>
     );
@@ -845,13 +845,15 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
-                      <img
+                      <Image
                         src={
                           RENTAL_RESALE_DATA.agent_photo
                             ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
                             : defaultImage
                         }
                         alt={RENTAL_RESALE_DATA.title}
+                        width={80}
+                        height={80}
                         className={styles.agentImage}
                       />
                     </div>
@@ -1045,13 +1047,15 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
-                      <img
+                      <Image
                         src={
                           RENTAL_RESALE_DATA.agent_photo
                             ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.agent_photo}`
                             : "/default.jpg"
                         }
                         alt={RENTAL_RESALE_DATA.title}
+                        width={80}
+                        height={80}
                         className={styles.agentImage}
                       />
                     </div>
@@ -1506,9 +1510,11 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   justifyContent: 'center',
                   outline: 'none'
                 }}>
-                  <img 
+                  <Image 
                     src={src} 
                     alt={`Gallery image ${idx + 1}`}
+                    width={1200}
+                    height={800}
                     style={{ 
                       maxHeight: '60vh', 
                       maxWidth: '85%', 

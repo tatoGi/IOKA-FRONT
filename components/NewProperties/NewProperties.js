@@ -80,7 +80,8 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                             alt={`${activeData.alt_text}`} 
                             title={`${activeData.alt_text || activeData.title_one || 'Property Image'}`}
                             width={1200} height={600} className={styles.propertyImage}
-                            priority />
+                            priority
+                            quality={80} />
                     </div>
 
                     <div className={styles.propertyInfo}>

@@ -25,12 +25,13 @@ const TeamSection = ({ sectionDataFive }) => {
                 src={
                   member.image
                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
-                    : homeBanner
+                    : "/default.jpg"
                 }
                 alt={member.alt_text || "member"}
                 width={200}
                 height={200}
                 className="team-member-image"
+                quality={80}
               />
               <div className="name">{member.title}</div>
               <div className="experience">{member.subtitle_1}</div>
