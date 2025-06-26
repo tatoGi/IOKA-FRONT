@@ -54,7 +54,7 @@
 /* Position the icons to the left of the toggle button on desktop */
 @media (min-width: 768px) {
   .shareIconsWrapper {
-    right: 100%;
+    left: 100%;
     top: 0;
     margin-right: 10px;
     flex-direction: row;

@@ -91,7 +91,11 @@ const Blog = ({ initialData }) => {
               <div className={styles.imageContainer}>
                 <Image
                   src={
-                    card.image
+                    isMobile
+                      ? `${
+                          process.env.NEXT_PUBLIC_API_URL
+                        }/storage/${decodeImageUrl(card.mobile_image)}`
+                      : card.image
                       ? `${
                           process.env.NEXT_PUBLIC_API_URL
                         }/storage/${decodeImageUrl(card.image)}`

@@ -38,8 +38,13 @@
      font-family: 'Montserrat';
 }
 .formattedDate {
-    color: #007AFF;
+    color: rgba(122, 203, 196, 1);
      font-family: 'Montserrat';
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
 }
 .description {
     font-weight: 400;

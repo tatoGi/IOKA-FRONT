@@ -10,6 +10,7 @@ import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 
 const BlogShow = ({ blogData }) => {
+
   const router = useRouter(); // Initialize useRouter
 
   if (!blogData) {
@@ -50,7 +51,11 @@ const BlogShow = ({ blogData }) => {
         {/* Container applied only for non-mobile resolutions */}
         <Image
           src={
-            blogData.blog.banner_image
+            isMobile
+              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+                blogData.blog.mobile_banner_image
+              )}`
+              : blogData.blog.banner_image
               ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
                 blogData.blog.banner_image
               )}`
@@ -65,7 +70,8 @@ const BlogShow = ({ blogData }) => {
         {/* Direct image for mobile resolutions */}
         <Image
           src={
-            blogData.blog.banner_image
+           
+                blogData.blog.banner_image
               ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
                 blogData.blog.banner_image
               )}`
@@ -80,23 +86,22 @@ const BlogShow = ({ blogData }) => {
       <div className="container">
         <div className="row">
           <div className="col-md-8">
-
+          <div style={{ position: 'relative' }}>
+              <h1 className={styles.title}>{blogData.blog.title}</h1>
+            
+            </div>
             <div className={styles.date}>
               <Image src={BlogIcon} alt="blogicon" width={20} height={20} />
               <p className={styles.formattedDate}>
                 {formatDate(blogData.blog.date)}
               </p>
             </div>
+
             <div className={styles.description}>
               <div dangerouslySetInnerHTML={{ __html: blogData.blog.body }} />{" "}
               {/* Display the blog body */}
             </div>
-            <div style={{ position: 'relative' }}>
-              <h1 className={styles.title}>{blogData.blog.title}</h1>
-              <div style={{ position: 'absolute', top: '0', right: '0' }}>
-                <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={blogData.blog.title} />
-              </div>
-            </div>
+           
           </div>
           <div className="col-md-4 d-none d-md-block">
             <div className={styles.sidebar}>
@@ -110,7 +115,10 @@ const BlogShow = ({ blogData }) => {
                     <div className={`card ${styles.card}`} key={index}>
                       <Image
                         src={
-                          card.image
+                          isMobile
+                            ? `${process.env.NEXT_PUBLIC_API_URL
+                            }/storage/${decodeImageUrl(card.mobile_image)}`
+                            : card.image
                             ? `${process.env.NEXT_PUBLIC_API_URL
                             }/storage/${decodeImageUrl(card.image)}`
                             : baseimage
@@ -184,6 +192,9 @@ const BlogShow = ({ blogData }) => {
                   </div>
                 ))}
           </div>
+          <div style={{ position: 'relative', top: '0', right: '0' }}>
+                <ShareIcons url={typeof window !== 'undefined' ? window.location.href : ''} title={blogData.blog.title} />
+              </div>
         </div>
        
       </div>

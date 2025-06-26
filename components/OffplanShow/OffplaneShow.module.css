@@ -54,16 +54,15 @@
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
   z-index: 1;
   border-radius: 12px;
-  padding: 24px 16px;
   /* Add padding at bottom */
-  text-align: left;
+  text-align: center;
 }
 
 .bannerContent h1 {
   color: white;
   font-size: 56px;
   font-weight: 400;
-  text-align: left;
+  text-align: center;
   letter-spacing: normal;
   text-transform: none;
   margin-bottom: 80px;
@@ -139,7 +138,6 @@
 
 .description {
   margin-bottom: 30px;
-  margin-right: 133px;
   font-family: 'Montserrat';
   letter-spacing: 0%;
 
@@ -202,7 +200,7 @@
   margin-bottom: 24px;
   font-family: 'Montserrat';
   width: 100%;
-  text-align: flex-start;
+  text-align: start;
   padding: 0 16px;
 }
 
@@ -1105,6 +1103,7 @@
   color: #07151F;
   font-size: 16px;
   font-weight: 500;
+  font-family: 'Montserrat';
 }
 
 .feature img {
@@ -1856,6 +1855,7 @@
 
   .aedPricestart {
     font-size: 16px;
+    top: 0;
   }
 
   .usdPrice {
@@ -2188,6 +2188,8 @@
 
   .contactBtn {
     border-radius: 28px;
+    max-width: 354px;
+    margin: 0;
   }
 
   .pricing {

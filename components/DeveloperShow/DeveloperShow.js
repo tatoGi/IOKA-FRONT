@@ -221,13 +221,15 @@ const DeveloperShow = (developerData) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: offplanListings.length === 1 ? 1 : 3,
     slidesToScroll: 1,
     arrows: false, // We'll use custom arrows
+    centerMode: false, // Ensure items are left-aligned, especially when there's only one
+    variableWidth: false,
     responsive: [
       {
         breakpoint: 1200,
-        settings: { slidesToShow: 2 }
+        settings: { slidesToShow: offplanListings.length === 1 ? 1 : 2 }
       },
       {
         breakpoint: 768,
