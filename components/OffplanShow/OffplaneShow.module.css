@@ -18,6 +18,7 @@
   height: 405px;
   min-height: 400px;
   margin-top: 38px;
+  border-radius: 16px;
 }
 
 .bannerImageWrapper {
@@ -31,6 +32,7 @@
   -o-object-fit: cover;
   object-fit: cover;
   z-index: 0;
+  border-radius: 16px;
 }
 
 .bannerContent {
