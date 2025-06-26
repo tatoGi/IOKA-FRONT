@@ -712,13 +712,18 @@
   border: 1px solid #0A273B;
   color: white;
 }
-
+.contactBtnperson svg{
+  margin-right: 8px;
+}
 .whatsappperson {
   background-color: #0A273B;
   border: 1px solid #E5E7EB;
   color: white;
 }
 
+.whatsappperson svg{
+  margin-right: 8px;
+}
 .sharelist {
   width: 100%;
   padding: 12px 20px;
