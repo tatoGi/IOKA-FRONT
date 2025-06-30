@@ -299,7 +299,7 @@
   gap: 1vw;
 }
 
-.statItem h2 {
+.statItem p {
   font-size: 48px;
   font-weight: 400;
   line-height: 100%;
@@ -388,7 +388,7 @@
     font-size: 2.5rem;
   }
 
-  .statItem h2 {
+  .statItem p {
     font-size: 2.5rem;
   }
 
@@ -476,7 +476,7 @@
     left: 5rem;
   }
 
-  .statItem h2 {
+  .statItem p {
     font-size: 2rem;
   }
 
@@ -605,7 +605,7 @@
     font-size: 2rem;
   }
 
-  .statItem h2 {
+  .statItem p {
     font-size: 2rem;
   }
 
@@ -786,7 +786,7 @@
     font-size: 1.75rem;
   }
 
-  .statItem h2 {
+  .statItem p {
     font-size: 24px;
     font-weight: 400;
     line-height: 100%;
@@ -1126,7 +1126,7 @@
     align-items: center;
   }
 
-  .statItem h2 {
+  .statItem p {
     font-size: 24px;
     font-weight: 400;
     line-height: 100%;
