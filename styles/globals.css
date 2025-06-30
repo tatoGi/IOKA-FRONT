@@ -31,7 +31,7 @@ body {
 }
 
 .maintenance-banner {
-  background-color: #4CAF50;
+  background-color: #2E7D32; /* Darker green for better contrast with white text */
   color: white;
   text-align: center;
   padding: 10px 0;
@@ -39,7 +39,7 @@ body {
   font-size: 14px;
   position: relative;
   z-index: 1000;
-  border-bottom: 1px solid #3e8e41;
+  border-bottom: 1px solid #1B5E20;
   font-family: 'Montserrat';
   height: 31px;
 }
@@ -766,7 +766,7 @@ opacity: 100%;
   color: #E6EBED;
   /* margin-bottom: 16px; */
 }
-.banner-content h1{
+.banner-content p{
   max-width: 1067px;
   font-size: 56px;
   font-weight: 400;
@@ -818,7 +818,7 @@ opacity: 100%;
  font-family: 'Montserrat';
 }
 .s-t-1 p{
-  color: #7ACBC4;
+  color: #007D76; /* Darker teal for better contrast against light background */
 }
 .s-t-1 span{
   color: #0A273B;
@@ -1066,6 +1066,7 @@ margin-top: 24px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
   color: #0A273B;
   font-size: 16px;
@@ -1183,6 +1184,7 @@ margin-top: 24px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   overflow: hidden;
   text-align: center;
  }
@@ -1194,6 +1196,7 @@ margin-top: 24px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   overflow: hidden;
   text-align: center;
  }
@@ -1298,6 +1301,7 @@ margin-top: 24px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
   max-width: 80%;
 }

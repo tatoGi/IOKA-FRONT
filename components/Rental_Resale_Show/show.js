@@ -930,7 +930,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </h2>
                   <div className={styles.regulatoryInfo}>
                     {/* QR Code */}
-                    <img
+                    <Image
                       src={
                         RENTAL_RESALE_DATA.qr_photo
                           ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
@@ -1142,7 +1142,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </h2>
                   <div className={styles.regulatoryInfo}>
                     {/* QR Code */}
-                    <img
+                    <Image
                       src={
                         RENTAL_RESALE_DATA.qr_photo
                           ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`

@@ -99,7 +99,7 @@
   color: #E6EBED;
 }
 
-.banner-content h1 {
+.banner-content p {
   font-size: 56px;
   font-weight: 400;
   line-height: 1.25;
@@ -1090,7 +1090,7 @@ letter-spacing: 0%;
 /* --- Responsive Styles --- */
 
 @media (max-width: 1200px) {
-  .banner-content h1 {
+  .banner-content p {
     font-size: 45px;
     /* Adjust font size for medium screens */
   }
@@ -1112,7 +1112,7 @@ letter-spacing: 0%;
   .active-search {
     width: 492px !important;
 }
-  .banner-content h1{
+  .banner-content p{
     font-size: 20px;
     line-height: 1.2;
     margin-bottom: 10px;
@@ -1154,7 +1154,7 @@ letter-spacing: 0%;
     font-weight: 400;
   }
 
-  .banner-content h1 {
+  .banner-content p {
     font-size: 18px !important;
     /* Smaller heading */
     max-width: 90%;
@@ -1857,7 +1857,7 @@ margin-top: 31px;
   .mobile_input_field.expanded .value {
     display: none;
   }
-  .banner-content h1 {
+  .banner-content p {
     font-size: 18px !important;
     /* Smaller heading */
     max-width: 90%;

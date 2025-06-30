@@ -301,7 +301,7 @@ const OffplanShow = ({ offplanData }) => {
           quality={90}
         />
         <div className={style.bannerContent}>
-          <h1>{offplanData.offplan.title}</h1>
+          <h1>{offplanData.offplan.banner_title}</h1>
           
         </div>
       </div>

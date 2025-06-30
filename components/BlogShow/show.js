@@ -48,6 +48,7 @@ const BlogShow = ({ blogData }) => {
   return (
     <div className={styles.blogShowContainer}>
       <div className={`d-none d-md-block container ${styles.blogShow}`}>
+   
         {/* Container applied only for non-mobile resolutions */}
         <Image
           src={
@@ -69,14 +70,17 @@ const BlogShow = ({ blogData }) => {
       <div className="d-block d-md-none">
         {/* Direct image for mobile resolutions */}
         <Image
-          src={
-           
-                blogData.blog.banner_image
-              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
-                blogData.blog.banner_image
-              )}`
-              : baseimage
-          }
+            src={
+              isMobile
+                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+                  blogData.blog.mobile_banner_image
+                )}`
+                : blogData.blog.banner_image
+                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+                  blogData.blog.banner_image
+                )}`
+                : baseimage
+            }
           alt={blogData.blog.banner_image_alt || "Blog banner image"}
           width={800}
           height={400}

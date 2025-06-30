@@ -66,7 +66,7 @@
     font-size: 24px;
     line-height: 100%;
     letter-spacing: 0%;
-    color: rgba(122, 203, 196, 1) !important;
+    color: #007D76 !important; /* Darker teal for better contrast */
 
 }
 
@@ -239,6 +239,7 @@
           display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 7; /* number of lines */
+  line-clamp: 7; /* standard property for compatibility */
   overflow: hidden;
     }
 }
@@ -255,6 +256,7 @@
           display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6; /* number of lines */
+  line-clamp: 6; /* standard property for compatibility */
   overflow: hidden;
     }
 }
@@ -305,6 +307,7 @@
           display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6; /* number of lines */
+  line-clamp: 6; /* standard property for compatibility */
   overflow: hidden;
     }
 }
