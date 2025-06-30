@@ -35,7 +35,7 @@ const HomeBannerSwiper = ({ sectionData }) => {
                 <div className={styles['text-b-i']}>
                   {image.title}
                 </div>
-                <p>{image.description}</p>
+                <h3>{image.description}</h3>
               </div>
               <div className={styles['swiper-item-img']}>
                 <Image
