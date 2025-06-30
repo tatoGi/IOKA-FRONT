@@ -196,7 +196,7 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData: propNavigationData 
                 index === 0 && !isMobile ? "106px" : "0"
             }}
           >
-            <p>
+            <p className={styles.stat_number}>
               {item.number}
               {item.suffix}
             </p>
