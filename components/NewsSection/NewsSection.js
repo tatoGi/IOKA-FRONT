@@ -48,7 +48,6 @@ const NewsSection = () => {
         // Helpful log in dev mode so we can see the raw response once (will be removed in prod)
         if (process.env.NODE_ENV !== 'production') {
           // eslint-disable-next-line no-console
-          console.debug('Blogs fetched:', blogsArray.length, 'Shown:', filteredBlogs.length);
         }
         const blogPages = pagesResponse.data.pages.filter(page => page.type_id === 6);
         

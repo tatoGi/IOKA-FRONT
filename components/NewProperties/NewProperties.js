@@ -87,7 +87,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                     <div className={styles.propertyInfo}>
                         <ul className={styles.features}>
                             {activeData.properties && activeData.properties.map((property, index) => (
-                            <li key={index}>{property.title}</li>
+                            <li key={index}><p>{property.title}</p></li>
                             ))}
                         </ul>
 
@@ -118,7 +118,9 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                                 <ul className={styles.features_mobile}>
                                     {activeData?.properties?.length > 0 ? (
                                         activeData.properties.map((property, index) => (
-                                            <li key={index}>{property.title || `Feature ${index + 1}`}</li>
+                                            <li key={index}>
+                                               <p>{property.title || `Feature ${index + 1}`}</p> 
+                                                </li>
                                         ))
                                     ) : (
                                         <li>No features available</li>

@@ -21,7 +21,6 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData: propNavigationData 
     title: "",
     title_2: ""
   };
-
   useEffect(() => {
     const fetchNavigationData = async () => {
       try {
@@ -56,7 +55,6 @@ const LiveInvestSection = ({ sectionDataTwo, navigationData: propNavigationData 
 
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   const router = useRouter();
-  console.log(navigationData);
   // Find contact page
   const contactPage = navigationData.find(page => page.type_id === 3 && page.active === 1);
   const contactSlug = contactPage ? `/${contactPage.slug}` : '/contact';

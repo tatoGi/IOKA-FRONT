@@ -14,6 +14,8 @@ import { useRouter } from "next/router"; // Import useRouter
 import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
 
 const Hombanner = ({ initialData, navigationData }) => {
+  
+  
   const [isLoading, setIsLoading] = useState(true);
   const [cardData, setCardData] = useState(initialData || []);
   const [sections, setSections] = useState({}); // Store all sections in one object
@@ -24,27 +26,15 @@ const Hombanner = ({ initialData, navigationData }) => {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(SECTION_API);
         if (data?.sections) {
           setCardData(data.sections);
-          // Build a map, but keep the first (or most complete) entry for every section_key
           const sectionMap = {};
           data.sections.forEach(section => {
-            const key = section.section_key;
-            if (!sectionMap[key]) {
-              sectionMap[key] = section; // first occurrence
-            } else {
-              // If the stored version has no slider images but the new one does, replace it
-              const prevImgs = sectionMap[key]?.additional_fields?.slider_images?.length || 0;
-              const currImgs = section?.additional_fields?.slider_images?.length || 0;
-              if (currImgs > prevImgs) {
-                sectionMap[key] = section;
-              }
-            }
+            sectionMap[section.section_key] = section;
           });
           setSections(sectionMap);
         } else {
@@ -60,17 +50,9 @@ const Hombanner = ({ initialData, navigationData }) => {
   }, [initialData]);
   
 
-  // Wait for mount. While loading, render a placeholder to preserve layout order
-  if (!isMounted) {
-    return null;
-  }
-
-  if (isLoading) {
-    return (
-      <div className="home-banner" style={{ minHeight: '400px' }}>
-        {/* You can replace this with a spinner or skeleton */}
-      </div>
-    );
+  // Don't render until component is mounted to prevent hydration mismatch
+  if (!isMounted || isLoading) {
+    return null; // Or replace with a spinner if you have one
   }
 
   // Render sections only if they exist
@@ -91,7 +73,8 @@ const Hombanner = ({ initialData, navigationData }) => {
         <NewProperties sectionDataThree={sections["section_three"]} />
       )}
       {sections["section_four"] && (
-        <PopularAreaSection sectionDataFour={sections["section_four"]} />
+        
+        <PopularAreaSection sectionDataFour={sections["section_four"]} navigationData={navigationData} />
       )}
       {sections["section_five"] && (
         <TeamSection sectionDataFive={sections["section_five"]} />
@@ -99,9 +82,9 @@ const Hombanner = ({ initialData, navigationData }) => {
       {sections["section_six"] && (
         <Clients sectionSixData={sections["section_six"]} />
       )}
-      
+      {sections["section_seven"] && ( 
         <NewsSection sectionSevenData={sections["section_seven"]} />
-      
+      )}
       <PartnersSection />
     </>
   );
