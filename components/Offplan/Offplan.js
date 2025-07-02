@@ -323,9 +323,10 @@ const Offplan = ({ initialData, initialPagination }) => {
         )}
         <div className={styles.resultsHeader}>
           <h1 className={styles.title}>New Developments for sale in Dubai</h1>
+         
           <span className={styles.resultsCount}>{cardData.length} results</span>
         </div>
-
+        <h2 className={styles.title_second}> Off-Plan Properties in Dubai </h2>
         {isLoading ? (
           <div className={styles.loadingState}>Loading...</div>
         ) : (
