@@ -141,7 +141,7 @@ const ContactForm = ({ pageTitle = "" }) => {
   return (
     <div className={styles.formContainer}>
       <p className={styles.toptitle}>Send us Email</p>
-      <h2 className={styles.title}>Feel free to write</h2>
+      <h3 className={styles.title}>Feel free to write</h3>
       
       {/* Modal-style status message */}
       {status && (

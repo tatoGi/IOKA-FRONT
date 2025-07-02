@@ -23,6 +23,26 @@
   margin-top: 24px;
   
   }
+  .main_title{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-bottom: 24px;
+    margin-top: 24px; 
+  }
+  .second_title{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #0A273B;
+    margin-bottom: 24px;
+    margin-top: 24px; 
+  }
   .sliderWrapper {
     position: relative;
     width: 100%;
@@ -930,7 +950,7 @@
       width: 100%;
     }
     
-    .resaleContent h4 {
+    .resaleContent h3 {
       font-size: 20px;
       color: #0A273B;
       font-weight: 600;
@@ -1633,7 +1653,7 @@
     .propertyImage {
       height: 180px;
     }
-    .resaleContent h4 {
+    .resaleContent h3 {
       font-size: 18px;
     }
     .resaleLocation, .resalePrice, .statGroup span {
@@ -1876,7 +1896,7 @@
       gap: 0;
     }
   
-    .resaleContent h4 {
+    .resaleContent h3 {
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 4px;
@@ -2240,7 +2260,7 @@ margin-right: 56px;
       padding: 16px;
     }
   
-    .resaleContent h4 {
+    .resaleContent h3 {
       font-family: 'Montserrat';
       font-weight: 500;
       font-size: 16px;
@@ -2489,7 +2509,7 @@ margin-right: 56px;
   .resaleLocation{
     font-size: 12px;
   }
-  .resaleContent h4{
+  .resaleContent h3{
     font-size: 12px;
   }
  

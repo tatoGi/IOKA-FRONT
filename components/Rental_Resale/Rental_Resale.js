@@ -381,6 +381,8 @@ const Rental_Resale = () => {
   return (
     <>
       <div className="container">
+      <h1 className={Styles.main_title}>Rental Properties in Dubai</h1>
+      <h2 className={Styles.second_title}>Luxury Apartments and Villas for Rent with IOKA</h2>
         {/* Sidebar elements moved out of the row */}
         <div className={Styles.sidebarWrapper}>
           <div className={Styles.sidebarqr}> {/* Sidebar QR code */}</div>
@@ -789,7 +791,7 @@ const Rental_Resale = () => {
                     </div>
 
                     <div className={Styles.resaleContent}>
-                      <h4>{listing.title}</h4>
+                      <h3>{listing.title}</h3>
 
                       <p className={Styles.resaleLocation}>
                         {listing.locations && listing.locations.length > 0
