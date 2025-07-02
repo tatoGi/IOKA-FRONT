@@ -40,7 +40,7 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
-
+ 
   const handlePropertyTypeClick = (e, type) => {
     e.preventDefault();
     e.stopPropagation();
@@ -53,11 +53,11 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
 
     let navObj, prefix;
     if (propertyType === 'offplan') {
-      navObj = navigationData.find(item => item.title && item.title.toLowerCase() === 'offplan');
-     
+      navObj = navigationData.find(item => item.type_id === '4');
+      prefix = '/offplan/';
     } else if (propertyType === 'rental' || propertyType === 'resale') {
-      navObj = navigationData.find(item => item.title && item.title.toLowerCase().includes('rental resale'));
-      
+      navObj = navigationData.find(item => item.type_id === '5');
+      prefix = '/rentalResale/';
     }
 
     if (navObj && prefix) {
