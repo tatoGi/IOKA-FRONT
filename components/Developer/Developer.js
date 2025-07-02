@@ -294,6 +294,9 @@ const Developer = ({ initialData, initialPagination }) => {
    
       <div className="container py-4">
       <h1 className={styles.title_main}>Developers</h1>
+      <h2 className={styles.title_second}>
+      Learn more about UAE’s developers and their projects
+      </h2>
         {/* Search Section */}
         <div className={`mb-4 position-relative ${styles.searchContainer}`}>
           <input
@@ -325,7 +328,7 @@ const Developer = ({ initialData, initialPagination }) => {
                     <div className={styles.imageContainer}>
                       {isMobile && (
                         <div className={styles.mobileTitleOverlay}>
-                          <h2 className={styles.mobileTitle}>{card.title}</h2>
+                          <h3 className={styles.mobileTitle}>{card.title}</h3>
                         </div>
                       )}
                       <Image
@@ -360,7 +363,7 @@ const Developer = ({ initialData, initialPagination }) => {
 
                     {/* Content Section */}
                     <div className={styles.cardContent}>
-                      <h2 className={styles.title}>{card.title}</h2>
+                      <h3 className={styles.title}>{card.title}</h3>
                       <div className={styles.description}>
                         <div
                           dangerouslySetInnerHTML={{ __html: card.paragraph }}
