@@ -16,7 +16,7 @@
     margin-bottom: 3rem;
 }
 
-.header h2 {
+.header .title {
     font-size: 40px;
     margin-bottom: 0.5rem;
     color: #0A273B;

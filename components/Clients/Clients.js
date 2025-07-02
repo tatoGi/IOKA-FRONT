@@ -53,10 +53,10 @@ const Clients = ({ sectionSixData }) => {
     <section className={styles.clientsSection}>
       <div className="container">
         <div className={styles.header}>
-          <h2>{title}</h2>
+          <p className={styles.title}>{title}</p>
           <p>{subtitle}</p>
           <div className={styles.googleReviews}>
-            <span>
+            <span >
               {googleReviews?.value || ""}
               {googleReviews?.prefix || ""} {googleReviews?.title || ""}
             </span>
