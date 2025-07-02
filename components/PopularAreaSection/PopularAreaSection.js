@@ -55,14 +55,20 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
     if (propertyType === 'offplan') {
       navObj = navigationData.find(item => item.type_id === '4');
       prefix = '/offplan/';
+      if (navObj && prefix) {
+        router.push(`${prefix}${navObj.slug}`);
+        return;
+      }
     } else if (propertyType === 'rental' || propertyType === 'resale') {
-      navObj = navigationData.find(item => item.type_id === '5');
-      prefix = '/rentalResale/';
-    }
-
-    if (navObj && prefix) {
-      router.push(`${prefix}${navObj.slug}`);
-      return;
+      navObj = navigationData.find(item =>
+        item.type_id === '5' &&
+        item.title &&
+        item.title.toLowerCase().replace(/\s/g, '') === propertyType.replace(/\s/g, '')
+      );
+      if (navObj) {
+        router.push(`/rentalResale/${navObj.slug}`);
+        return;
+      }
     }
 
     // fallback: try to match by title and go to /[slug]

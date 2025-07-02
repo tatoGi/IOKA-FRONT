@@ -82,7 +82,8 @@ const Blog = ({ initialData }) => {
   return (
     <div className="container mt-3">
       <div className={`${styles.title}`}>
-        <h1>Articles</h1>
+        <h1>Articles & News</h1>
+        <h2>Explore Dubai’s investment market and stay updated on real estate news</h2>
       </div>
       <div className="row">
         {cardData.map((card, index) => (
@@ -108,9 +109,9 @@ const Blog = ({ initialData }) => {
                 />
               </div>
               <div className={styles["card-body"]}>
-                <h5 className={styles["card-title"]}>
+                <h3 className={styles["card-title"]}>
                   {limitTextLength(card.title, 40)}
-                </h5>
+                </h3>
                 <div className={styles.date}>
                   <Image
                     src={BlogIcon}
