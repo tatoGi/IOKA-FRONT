@@ -82,8 +82,8 @@ const Blog = ({ initialData }) => {
   return (
     <div className="container mt-3">
       <div className={`${styles.title}`}>
-        <h1>Articles & News</h1>
-        <h2>Explore Dubai’s investment market and stay updated on real estate news</h2>
+        <h1> Insights from Dubai’s Real Estate Market</h1>
+        <h2>Read articles, news, and lifestyle advices from industry experts</h2>
       </div>
       <div className="row">
         {cardData.map((card, index) => (

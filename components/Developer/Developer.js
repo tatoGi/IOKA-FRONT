@@ -293,9 +293,9 @@ const Developer = ({ initialData, initialPagination }) => {
     <>
    
       <div className="container py-4">
-      <h1 className={styles.title_main}>Developers</h1>
+      <h1 className={styles.title_main}> Trusted Developers Behind Iconic Projects in Dubai</h1>
       <h2 className={styles.title_second}>
-      Learn more about UAE’s developers and their projects
+      Learn more about developers, their values, and vision
       </h2>
         {/* Search Section */}
         <div className={`mb-4 position-relative ${styles.searchContainer}`}>

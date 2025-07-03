@@ -322,11 +322,11 @@ const Offplan = ({ initialData, initialPagination }) => {
           </div>
         )}
         <div className={styles.resultsHeader}>
-          <h1 className={styles.title}>New Developments for sale in Dubai</h1>
+          <h1 className={styles.title}>Dubai’s Off-Plan Opportunities with High Growth Potential</h1>
          
           <span className={styles.resultsCount}>{cardData.length} results</span>
         </div>
-        <h2 className={styles.title_second}> Off-Plan Properties in Dubai </h2>
+        <h2 className={styles.title_second}> Get early access to pre-launch projects in Dubai’s most promising new communities </h2>
         {isLoading ? (
           <div className={styles.loadingState}>Loading...</div>
         ) : (
