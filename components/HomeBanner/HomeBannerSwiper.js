@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import 'swiper/css';
@@ -9,11 +9,20 @@ import styles from './HomeBanner.module.css';
 import baseimage from "../../assets/img/blogimage.png";
 
 const HomeBannerSwiper = ({ sectionData }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
-
   return (
     <Swiper
     pagination={{ clickable: true }}
@@ -40,11 +49,11 @@ const HomeBannerSwiper = ({ sectionData }) => {
               <div className={styles['swiper-item-img']}>
                 <Image
                   src={
-                    image.image
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(image.image)}`
-                      : baseimage
+                    (isMobile && image.mobile_image)
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image.mobile_image)}`
+                      : image.image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image.image)}`
+                        : baseimage
                   }
                   alt={image.alt_text || "homeBanner"}
                   priority

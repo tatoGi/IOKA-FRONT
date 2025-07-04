@@ -86,7 +86,7 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
   const sectionData = sectionDataFour;
   const title = sectionData?.additional_fields?.title || "Default Title";
   const popularArea = sectionData?.additional_fields?.Add_Popular_Areas || [];
-
+ 
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -116,15 +116,16 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
         {isMobile ? (
           <Slider {...sliderSettings} className="popular-area-slider">
             {popularArea.map((area, index) => (
+              
               <div className="area-item" key={index}>
                 <div className="area-image-wrapper">
                   <Image
-                    src={
-                      area.image
-                        ? `${
-                            process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(area.image)}`
-                        : area
+                     src={
+                      (area.mobile_image && isMobile)
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.mobile_image)}`
+                        : area.image
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.image)}`
+                          : area
                     }
                     width={400}
                     height={400}

@@ -15,6 +15,7 @@ return <div>Data not available</div>;
 }
 
 const activeData = sectionDataThree.additional_fields.tabs[activeTab];
+
 const decodeImageUrl = (url) => {
 return decodeURIComponent(url);
 };
@@ -75,9 +76,15 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
             <>
                 <div className={styles.propertyContent}>
                     <div className={styles.imageContainer}>
-                        <Image src={ activeData.image_field ? `${ process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(activeData.image_field)}` : defaultImage }
-                            alt={`${activeData.alt_text}`} 
+                        
+                        <Image src={
+                            isMobile && activeData.mobile_image
+                                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(activeData.mobile_image)}`
+                                : activeData.image_field
+                                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(activeData.image_field)}`
+                                    : defaultImage
+                        }
+                            alt={`${activeData.alt_text}`}
                             title={`${activeData.alt_text || activeData.title_one || 'Property Image'}`}
                             width={1200} height={600} className={styles.propertyImage}
                             priority

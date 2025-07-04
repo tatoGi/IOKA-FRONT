@@ -1,15 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 const TeamSection = ({ sectionDataFive }) => {
+  
+  const [isMobile, setIsMobile] = useState(false);
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
   const MainTitle = sectionDataFive?.additional_fields?.title || 'Default Title';
   const TeamMembers = sectionDataFive?.additional_fields?.team_members || [];
   const redirectLink = sectionDataFive?.additional_fields?.Redirect_Link || '#'; // Provide a default value
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Check if screen width is <= 768px
+    };
 
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize); // Add resize listener
+    return () => window.removeEventListener("resize", handleResize); // Cleanup listener
+  }, []);
   return (
     <div className="team-section">
       <div className="container-lg">
@@ -23,9 +34,11 @@ const TeamSection = ({ sectionDataFive }) => {
             <div className="team-item" key={index}>
               <Image
                 src={
-                  member.image
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
-                    : "/default.jpg"
+                  (member.mobile_image && isMobile)
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.mobile_image)}`
+                    : member.image
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(member.image)}`
+                      : '/assets/img/default.webp' // fallback image
                 }
                 alt={member.alt_text || "member"}
                 width={200}

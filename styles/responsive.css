@@ -821,12 +821,10 @@
     display: block;
     cursor: pointer;
     z-index: 101;
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
     order: 2;
     width: 21px;
     height: 18px;
-    top: 42px;
+    top: 24px;
     position: absolute;
     height: 21px !important;
   }
@@ -1939,6 +1937,12 @@
     appearance: none;
     outline: none;
     transition: 0.2s;
+    top: 0;
+}
+.logo-img {
+  width: 112px;
+  height: 34px;
+  top: 0px;
 }
     .breadcrumb-section {
         width: 100%;

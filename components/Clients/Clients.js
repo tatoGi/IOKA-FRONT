@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import styles from "./Clients.module.css";
@@ -12,6 +12,16 @@ const Clients = ({ sectionSixData }) => {
   const title = sectionSixData?.title || "Default Title";
   const subtitle = sectionSixData?.additional_fields?.subtitle || "";
   const ratedText = sectionSixData?.additional_fields?.rated_text || "";
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
     dots: false,
@@ -93,9 +103,11 @@ const Clients = ({ sectionSixData }) => {
                     <div className={styles.clientProfile}>
                       <Image
                         src={
-                          testimonial.photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
-                            : "/images/user.png"
+                          isMobile && testimonial.mobile_image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.mobile_image}`
+                            : testimonial.photo
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${testimonial.photo}`
+                              : "/images/user.png"
                         }
                         alt={testimonial.alt_text || testimonial.name}
                         width={50}

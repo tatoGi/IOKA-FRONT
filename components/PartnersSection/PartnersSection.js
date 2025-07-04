@@ -102,10 +102,15 @@ const PartnersSection = () => {
         <div className="partner-swiper-slide">
           <Slider {...settings}>
             {partners.map((partner, index) => (
+             
               <div key={index} className="partner-item">
                 <Link href={partner.url} className="partners-slider-item">
                   <Image 
-                    src={partner.image ? `${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png'} 
+                    src={
+                      isMobile
+                        ? (partner.mobile_image ? `${decodeImageUrl(partner.mobile_image)}` : '/assets/img/placeholder.png')
+                        : (partner.image ? `${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png')
+                    }
                     alt={partner.alt || 'Partner logo'}
                     width={80} 
                     height={80} 
