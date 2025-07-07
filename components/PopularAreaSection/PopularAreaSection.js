@@ -120,7 +120,7 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
               <div className="area-item" key={index}>
                 <div className="area-image-wrapper">
                   <Image
-                     src={
+                     src={  
                       (area.mobile_image && isMobile)
                         ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(area.mobile_image)}`
                         : area.image
@@ -136,18 +136,18 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                 </div>
                 <div className="off-relase-box">
                   {area.property_types?.map((type, typeIndex) => (
-                    <div 
+                    <h3 
                       key={typeIndex} 
                       className="topic"
                       onClick={(e) => handlePropertyTypeClick(e, type)}
                       style={{ cursor: 'pointer' }}
                     >
                       {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </div>
+                    </h3>
                   ))}
                 </div>
                 <div className="area-title">
-                  <div className="ar-title">{area.title}</div>
+                  <h3 className="ar-title">{area.title}</h3>
                   <Link href={area.redirect_link || "#"} target="_blank" className="arrow-box">
                     <WhiteArrow />
                   </Link>
@@ -180,18 +180,18 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                   </div>
                   <div className="off-relase-box">
                     {area.property_types?.map((type, typeIndex) => (
-                      <div 
+                      <h3 
                         key={typeIndex} 
                         className="topic"
                         onClick={(e) => handlePropertyTypeClick(e, type)}
                         style={{ cursor: 'pointer' }}
                       >
                         {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </div>
+                      </h3>
                     ))}
                   </div>
                   <div className="area-title">
-                    <div className="ar-title">{area.title}</div>
+                    <h3 className="ar-title">{area.title}</h3>
                     <Link href={area.redirect_link || "#"} target="_blank" className="arrow-box">
                       <WhiteArrow />
                     </Link>

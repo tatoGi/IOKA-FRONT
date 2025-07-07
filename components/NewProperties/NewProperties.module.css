@@ -77,8 +77,16 @@
   margin-bottom: 2rem;
   padding: 0 2rem 0;
   font-weight: 400;
+  display: flex;
 }
-
+.propertyCardTitle h2{
+  font-family: "Felix Titling", serif;
+  font-size: 40px !important;
+  color: #FFFFFF;
+  margin-bottom: 2rem;
+  padding: 0 2rem 0;
+  font-weight: 400;
+}
 .propertyContent {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -126,7 +134,7 @@
   max-width: 474px;
 }
 
-.features li {
+.features li h3{
   color: #ffff;
   font-family: 'Montserrat', sans-serif;
   position: relative;
@@ -336,10 +344,10 @@
     margin: 0 auto;
   }
 
-  .propertyCardTitle {
+  .propertyCardTitle h2 {
     font-size: 42px;
   }
-
+  
   .imageContainer {
     height: 450px;
   }
@@ -369,7 +377,7 @@
 }
 
 @media (max-width: 1600px) {
-  .propertyCardTitle {
+  .propertyCardTitle h2 {
     font-size: 36px;
     /* Reduced font size */
   }
@@ -423,7 +431,7 @@
 }
 
 @media (max-width: 1400px) {
-  .propertyCardTitle {
+  .propertyCardTitle h2 {
     font-size: 30px !important;
 
   }
@@ -435,7 +443,7 @@
 
 /* Large Laptops and Desktops (1367px - 1920px) */
 @media (max-width:1200px) {
-  .propertyCardTitle {
+  .propertyCardTitle h2 {
     font-size: 24px !important;
   }
 
@@ -446,7 +454,7 @@
 
 /* Small Laptops (1024px - 1366px) */
 @media (min-width: 1025px) and (max-width: 1366px) {
-  .propertyCardTitle {
+  .propertyCardTitle h2{
     font-size: 30px;
   }
 
@@ -687,7 +695,7 @@
     max-width: 400px !important;
   }
 
-  .propertyCardTitle {
+  .propertyCardTitle  h2{
     font-size: 18px !important;
     display: flex;
     justify-content: space-between;

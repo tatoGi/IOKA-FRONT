@@ -50,7 +50,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
             </div>
             {/* {end mobile button} */}
             <div className={styles.propertyCardTitle}>
-                {sectionDataThree.title}
+                  <h2>{sectionDataThree.title}</h2>  
                 <div className={styles.filterButtons}>
                     <div className={styles.buttonGroup}>
                         <button className={activeTab === "offplan" ? styles.active : "" } onClick={()=>
@@ -83,18 +83,19 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                                 : activeData.image_field
                                     ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(activeData.image_field)}`
                                     : defaultImage
-                        }
+                                }
                             alt={`${activeData.alt_text}`}
                             title={`${activeData.alt_text || activeData.title_one || 'Property Image'}`}
                             width={1200} height={600} className={styles.propertyImage}
                             priority
-                            quality={80} />
+                            quality={80}
+                             />
                     </div>
 
                     <div className={styles.propertyInfo}>
                         <ul className={styles.features}>
                             {activeData.properties && activeData.properties.map((property, index) => (
-                            <li key={index}><p>{property.title}</p></li>
+                            <li key={index}><h3>{property.title}</h3></li>
                             ))}
                         </ul>
 
@@ -104,7 +105,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
 
                 <div className={styles.propertyDetails}>
                     <div className={styles.leftContent}>
-                        <h3 className={styles.propertyName}>{activeData.title_one}</h3>
+                        <p className={styles.propertyName}>{activeData.title_one}</p>
                         <p className={styles.propertyType}>{activeData.title_two}</p>
                         <p className={styles.price}>
                             {activeData.number} {activeData.number_suffix}
@@ -126,7 +127,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth <= 768; retu
                                     {activeData?.properties?.length > 0 ? (
                                         activeData.properties.map((property, index) => (
                                             <li key={index}>
-                                               <p>{property.title || `Feature ${index + 1}`}</p> 
+                                               <h3>{property.title || `Feature ${index + 1}`}</h3> 
                                                 </li>
                                         ))
                                     ) : (

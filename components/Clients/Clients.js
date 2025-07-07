@@ -114,7 +114,7 @@ const Clients = ({ sectionSixData }) => {
                         height={50}
                         className={styles.clientImage}
                       />
-                      <h3>{testimonial.name}</h3>
+                      <p>{testimonial.name}</p>
                       <div className={styles.stars}>
                         {[...Array(Number(testimonial.rating))].map((_, index) => (
                           <span key={index} className={styles.star}>
