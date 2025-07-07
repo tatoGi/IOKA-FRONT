@@ -180,14 +180,14 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                   </div>
                   <div className="off-relase-box">
                     {area.property_types?.map((type, typeIndex) => (
-                      <h3 
+                      <span 
                         key={typeIndex} 
                         className="topic"
                         onClick={(e) => handlePropertyTypeClick(e, type)}
                         style={{ cursor: 'pointer' }}
                       >
                         {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </h3>
+                      </span>
                     ))}
                   </div>
                   <div className="area-title">
