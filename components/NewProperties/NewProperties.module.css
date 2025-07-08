@@ -78,6 +78,7 @@
   padding: 0 2rem 0;
   font-weight: 400;
   display: flex;
+  justify-content: space-between;
 }
 .propertyCardTitle h2{
   font-family: "Felix Titling", serif;
