@@ -9,8 +9,11 @@ import WhiteArrow from "../icons/WhiteArrow";
 import axios from "axios";
 import { NAVIGATION_MENU } from '@/routes/apiRoutes';
 
+// Helper to slugify a string
+const slugify = str => str && typeof str === 'string' ? str.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '') : '';
+
 const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationData = [] }) => {
-  
+ 
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [navigationData, setNavigationData] = useState(propNavigationData);
@@ -40,7 +43,6 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
   const decodeImageUrl = (url) => {
     return decodeURIComponent(url);
   };
- 
   const handlePropertyTypeClick = (e, type) => {
     e.preventDefault();
     e.stopPropagation();
@@ -135,16 +137,31 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                   />
                 </div>
                 <div className="off-relase-box">
-                  {area.property_types?.map((type, typeIndex) => (
-                    <h3 
-                      key={typeIndex} 
-                      className="topic"
-                      onClick={(e) => handlePropertyTypeClick(e, type)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </h3>
-                  ))}
+                  {area.property_types?.map((type, typeIndex) => {
+                    const propertyType = type.toLowerCase();
+                    let href = '#';
+                    if (propertyType === 'offplan') {
+                      const offplanPage = navigationData.find(item => item.type_id === 4);
+                      if (offplanPage && offplanPage.slug) {
+                        href = `/offplan/${offplanPage.slug}`;
+                      }
+                    } else if (propertyType === 'rental' || propertyType === 'resale') {
+                      const rentalResalePage = navigationData.find(item => item.type_id === 5);
+                      if (rentalResalePage && rentalResalePage.slug) {
+                        href = `/rental/${rentalResalePage.slug}`;
+                      }
+                    }
+                    return (
+                      <Link
+                        key={typeIndex}
+                        className="topic"
+                        href={href}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {typeof type === 'string' && type.length > 0 ? type.charAt(0).toUpperCase() + type.slice(1) : 'Unknown'}
+                      </Link>
+                    );
+                  })}
                 </div>
                 <div className="area-title">
                   <h3 className="ar-title">{area.title}</h3>
@@ -179,16 +196,33 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                     />
                   </div>
                   <div className="off-relase-box">
-                    {area.property_types?.map((type, typeIndex) => (
-                      <span 
-                        key={typeIndex} 
-                        className="topic"
-                        onClick={(e) => handlePropertyTypeClick(e, type)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </span>
-                    ))}
+                    {area.property_types?.map((type, typeIndex) => {
+                     
+                      const propertyType = type.toLowerCase();
+                      let href = '#';
+                      if (propertyType === 'offplan') {
+                        const offplanPage = navigationData.find(item => item.type_id === 4);
+                       
+                        if (offplanPage && offplanPage.slug) {
+                          href = `/offplan/${offplanPage.slug}`;
+                        }
+                      } else if (propertyType === 'rental' || propertyType === 'resale') {
+                        const rentalResalePage = navigationData.find(item => item.type_id === 5);
+                        if (rentalResalePage && rentalResalePage.slug) {
+                          href = `/rental/${rentalResalePage.slug}`;
+                        }
+                      }
+                      return (
+                        <Link
+                          key={typeIndex}
+                          className="topic"
+                          href={href}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          {typeof type === 'string' && type.length > 0 ? type.charAt(0).toUpperCase() + type.slice(1) : 'Unknown'}
+                        </Link>
+                      );
+                    })}
                   </div>
                   <div className="area-title">
                     <h3 className="ar-title">{area.title}</h3>
