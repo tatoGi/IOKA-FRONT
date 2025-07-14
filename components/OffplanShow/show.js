@@ -130,7 +130,6 @@ const OffplanShow = ({ offplanData }) => {
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showExterior, setShowExterior] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
@@ -231,7 +230,6 @@ const OffplanShow = ({ offplanData }) => {
 
   const shortDescription = offplanData.offplan.description?.slice(0, 300) || '';
 
-  const toggleReadMore = () => setIsExpanded(!isExpanded);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -362,16 +360,9 @@ const OffplanShow = ({ offplanData }) => {
               <div className={style.description}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: isExpanded
-                      ? offplanData.offplan.description
-                      : `${shortDescription}...`
+                    __html: offplanData.offplan.description || ''
                   }}
                 />
-                {offplanData.offplan.description?.length > 300 && (
-                  <button className={style.readMore} onClick={toggleReadMore}>
-                    {isExpanded ? "Read Less" : "Read More"}
-                  </button>
-                )}
               </div>
             </div>
           </div>
