@@ -143,12 +143,12 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                     if (propertyType === 'offplan') {
                       const offplanPage = navigationData.find(item => item.type_id === 4);
                       if (offplanPage && offplanPage.slug) {
-                        href = `/offplan/${offplanPage.slug}`;
+                        href = `/${offplanPage.slug}`;
                       }
                     } else if (propertyType === 'rental' || propertyType === 'resale') {
                       const rentalResalePage = navigationData.find(item => item.type_id === 5);
                       if (rentalResalePage && rentalResalePage.slug) {
-                        href = `/rental/${rentalResalePage.slug}`;
+                        href = `/${rentalResalePage.slug}`;
                       }
                     }
                     return (
@@ -204,12 +204,12 @@ const PopularAreaSection = ({ sectionDataFour, navigationData: propNavigationDat
                         const offplanPage = navigationData.find(item => item.type_id === 4);
                        
                         if (offplanPage && offplanPage.slug) {
-                          href = `/offplan/${offplanPage.slug}`;
+                          href = `/${offplanPage.slug}`;
                         }
                       } else if (propertyType === 'rental' || propertyType === 'resale') {
                         const rentalResalePage = navigationData.find(item => item.type_id === 5);
                         if (rentalResalePage && rentalResalePage.slug) {
-                          href = `/rental/${rentalResalePage.slug}`;
+                          href = `/${rentalResalePage.slug}`;
                         }
                       }
                       return (
