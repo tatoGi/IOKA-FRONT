@@ -366,7 +366,7 @@ const OffplanShow = ({ offplanData }) => {
               </div>
             </div>
           </div>
-
+         
           {/* Right Sidebar */}
           <div className="col-md-5">
             {/* Agent Card */}
@@ -495,15 +495,18 @@ const OffplanShow = ({ offplanData }) => {
               )}
             </div>
             
-            <div className={style.shareIconsWrapper}>
+            
+          </div>
+         
+        </div>
+        <div className={style.shareIconsWrapper}>
               <ShareIcons 
                 url={typeof window !== 'undefined' ? window.location.href : ''} 
                 title={offplanData?.offplan?.title || 'Check out this property'}
               />
             </div>
-          </div>
-        </div>
       </div>
+     
         <div className={style.line}></div>
 
         {/* Building Section */}
