@@ -358,27 +358,35 @@
 
 }
 
-.amenitiesList {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 12px 1fr;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  font-family: 'Montserrat';
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0%;
-
+.amenitiesSection {
+  margin-top: 24px;
 }
 
-.amenitiesList img {
-  margin-right: 10px;
+.amenitiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
 }
 
 .amenitiesList li {
-  text-decoration: none;
-  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 20px;
+  color: rgba(10, 39, 59, 1);
+  white-space: nowrap;
+  margin-bottom: 8px;
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+.amenitiesList img {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
 }
 
 .amenityItem {

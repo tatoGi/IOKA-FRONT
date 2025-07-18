@@ -456,24 +456,31 @@ const OffplanShow = ({ offplanData }) => {
                     className={style.qrText}
                     dangerouslySetInnerHTML={{ __html: offplanData.offplan.qr_text }}
                   />
-                  {!isMobile && (
+                  {!isMobile && 
                     <div className={style.qrButtons}>
-                      <button
-                        className={style.downloadBtn}
-                        onClick={() => window.open(offplanData.offplan.download_brochure, "_blank")}
-                      >
-                        Download Brochure
-                      </button>
-                      <button className={style.enquireBtn}>Enquire now</button>
+                      {offplanData.offplan.download_brochure && (
+                        <button
+                          className={style.downloadBtn}
+                          onClick={() => window.open(offplanData.offplan.download_brochure, "_blank")}
+                        >
+                          Download Brochure
+                        </button>
+                      )}
+                      {offplanData.offplan.enquiry_now && (
+                        <button className={style.enquireBtn}>Enquire now</button>
+                      )}
                     </div>
-                  )}
+                  }
                 </div>
-
               </div>
               {isMobile && (
                 <div className={style.qrButtons}>
-                  <button className={style.downloadBtn}>Download Brochure</button>
-                  <button className={style.enquireBtn}>Enquire now</button>
+                  {offplanData.offplan.download_brochure && (
+                    <button className={style.downloadBtn}>Download Brochure</button>
+                  )}
+                  {offplanData.offplan.enquiry_now && (
+                    <button className={style.enquireBtn}>Enquire now</button>
+                  )}
                 </div>
               )}
             </div>
