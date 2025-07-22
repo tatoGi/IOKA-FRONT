@@ -142,17 +142,36 @@
   margin-bottom: 30px;
   font-family: 'Montserrat';
   letter-spacing: 0%;
-
+  position: relative;
 }
 
-.description p {
+.descriptionText {
   color: #0A273B;
   line-height: 36px;
-  margin-bottom: 16px;
   font-family: 'Montserrat';
   font-size: 20px;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
 
+.descriptionText.collapsed {
+  max-height: 288px; /* 8 lines * 36px line-height */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  position: relative;
+}
+
+.descriptionText.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 100%);
+  pointer-events: none;
 }
 
 .readMore {
@@ -160,13 +179,19 @@
   background: none;
   border: none;
   padding: 0;
+  margin-top: 8px;
   cursor: pointer;
   font-size: 20px;
   font-family: 'Montserrat';
   font-weight: 500;
+  display: inline-block;
+  transition: color 0.2s ease;
 }
 
-
+.readMore:hover {
+  color: #0047b3;
+  text-decoration: underline;
+}
 
 .qrCard {
   margin-top: 82px;

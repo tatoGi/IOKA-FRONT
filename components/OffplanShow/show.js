@@ -131,8 +131,11 @@ const OffplanShow = ({ offplanData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showExterior, setShowExterior] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const descriptionRef = useRef(null);
+  const [showReadMore, setShowReadMore] = useState(false);
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentGallery, setCurrentGallery] = useState([]);
   const [copyAlertoffplan, setCopyAlertoffplan] = useState(false);
@@ -228,10 +231,37 @@ const OffplanShow = ({ offplanData }) => {
     ? offplanData.offplan.interior_gallery
     : safeParse(offplanData?.offplan?.interior_gallery);
 
-  const shortDescription = offplanData.offplan.description?.slice(0, 300) || '';
+  const shortDescription = offplanData.offplan.description?.slice(0, 800) || '';
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    // Check if the description content overflows the container
+    if (descriptionRef.current) {
+      const isOverflowing = descriptionRef.current.scrollHeight > descriptionRef.current.clientHeight;
+      setShowReadMore(isOverflowing);
+    }
+  }, [offplanData.offplan.description]);
+
+  const toggleReadMore = () => {
+    if (isExpanded) {
+      // When collapsing, scroll to the description
+      const descriptionElement = descriptionRef.current;
+      if (descriptionElement) {
+        descriptionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Small timeout to ensure scroll happens before collapse
+        setTimeout(() => {
+          setIsExpanded(false);
+        }, 100);
+      } else {
+        setIsExpanded(false);
+      }
+    } else {
+      // When expanding, just update the state
+      setIsExpanded(true);
+    }
+  };
 
   const renderGalleryImage = (image, index, isMain = false) => {
     if (!image) return null;
@@ -359,10 +389,20 @@ const OffplanShow = ({ offplanData }) => {
               </div>
               <div className={style.description}>
                 <div
+                  ref={descriptionRef}
+                  className={`${style.descriptionText} ${!isExpanded ? style.collapsed : ''}`}
                   dangerouslySetInnerHTML={{
                     __html: offplanData.offplan.description || ''
                   }}
                 />
+                {showReadMore && (
+                  <button 
+                    onClick={toggleReadMore} 
+                    className={style.readMore}
+                  >
+                    {isExpanded ? 'Read Less' : 'Read More'}
+                  </button>
+                )}
               </div>
             </div>
           </div>
