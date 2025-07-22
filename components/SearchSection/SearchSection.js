@@ -39,6 +39,15 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     searchQuery: "",
   });
 
+  
+  // Function to handle sqft range change
+  const handleSqFtChange = (e) => {
+    const newSqFt = e.target.value;
+    const newFilters = { ...filters, sqFt: newSqFt };
+    setFilters(newFilters);
+    onFilterChange({ ...newFilters });
+  };
+
   const [matchingLocations, setMatchingLocations] = useState([]);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,10 +63,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     }
   }, [currentFilters]);
 
-  const closeAllPopups = () => {
-    setShowPricePopup(false);
-    setShowSqFtPopup(false);
-  };
 
   // Debounce function
   const debounce = (func, wait) => {
@@ -199,10 +204,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
   };
 
-  const handleRangeApply = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
-    handleFilterChange(field, value);
-  };
 
   const handleLocationSearch = useCallback(
     debounce(async (query) => {
@@ -315,22 +316,36 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
         </div>
 
         <div className={styles.filterButtons}>
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.propertyType}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("propertyType", e.target.value)}
-          >
-            <option value="">Property Type</option>
-            {filterOptions.propertyTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.propertyType}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("propertyType", e.target.value)}
+              style={{ paddingRight: filters.propertyType !== undefined && filters.propertyType !== '' ? '30px' : '16px' }}
+            >
+              <option value="">Property Type</option>
+              {filterOptions.propertyTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            {(filters.propertyType !== undefined && filters.propertyType !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("propertyType", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
           <div className={styles.filterBtnWrapper}>
             <button
@@ -359,37 +374,65 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             </button>
           </div>
 
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.bedrooms}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
-          >
-            <option value="">Bedrooms</option>
-            {filterOptions.bedrooms.map((num) => (
-              <option key={num} value={num}>
-                {num === "studio" ? "Studio" : num}
-              </option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.bedrooms}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
+              style={{ paddingRight: (filters.bedrooms !== undefined && filters.bedrooms !== '') ? '30px' : '16px' }}
+            >
+              <option value="">Bedrooms</option>
+              {filterOptions.bedrooms.map((num) => (
+                <option key={num} value={num}>
+                  {num === "studio" ? "Studio" : num}
+                </option>
+              ))}
+            </select>
+            {(filters.bedrooms !== undefined && filters.bedrooms !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("bedrooms", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.bathrooms}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
-          >
-            <option value="">Bathrooms</option>
-            {filterOptions.bathrooms.map((num) => (
-             <option key={num} value={num}>{num}</option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.bathrooms}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
+              style={{ paddingRight: (filters.bathrooms !== undefined && filters.bathrooms !== '') ? '30px' : '16px' }}
+            >
+              <option value="">Bathrooms</option>
+              {filterOptions.bathrooms.map((num) => (
+                <option key={num} value={num}>{num}</option>
+              ))}
+            </select>
+            {(filters.bathrooms !== undefined && filters.bathrooms !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("bathrooms", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
           <div className={styles.filterBtnWrapper}>
             <button

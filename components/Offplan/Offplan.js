@@ -71,6 +71,7 @@ const Offplan = ({ initialData, initialPagination }) => {
   };
 
   const handleFilterChange = (filters) => {
+   
     setCurrentPage(1); // Reset to first page when filters change
     if (filters === null) {
       // If filters are null, fetch all properties
@@ -80,20 +81,48 @@ const Offplan = ({ initialData, initialPagination }) => {
       // The filters are mostly formatted. We just need to handle bedrooms/bathrooms.
       const formattedFilters = { ...filters };
 
+      // Handle bedroom filtering
       if (formattedFilters.bedrooms) {
-        if (formattedFilters.bedrooms === "Studio") {
+        // First, remove any existing bedroom filters to avoid conflicts
+        delete formattedFilters.bedrooms_min;
+        delete formattedFilters.bedrooms_max;
+        
+        if (formattedFilters.bedrooms === "0") {
+          // When Studio (0 bedrooms) is selected
           formattedFilters.bedrooms = 0;
         } else if (formattedFilters.bedrooms === "4+") {
-          delete formattedFilters.bedrooms; // remove the "4+" string
+          // When 4+ is selected, we only set the minimum
           formattedFilters.bedrooms_min = 4;
+          delete formattedFilters.bedrooms;
+        } else {
+          // For specific numbers (1, 2, 3), we set the exact number
+          const numBedrooms = parseInt(formattedFilters.bedrooms, 10);
+          if (!isNaN(numBedrooms)) {
+            formattedFilters.bedrooms = numBedrooms;
+          }
         }
       }
+
+      // Handle bathroom filtering
       if (formattedFilters.bathrooms) {
-        if (formattedFilters.bathrooms === "Studio") {
+        // First, remove any existing bathroom filters to avoid conflicts
+        delete formattedFilters.bathrooms_min;
+        delete formattedFilters.bathrooms_max;
+        
+        if (formattedFilters.bathrooms === "0") {
+          // When Studio (0 bathrooms) is selected
           formattedFilters.bathrooms = 0;
         } else if (formattedFilters.bathrooms === "4+") {
-          delete formattedFilters.bathrooms; // remove the "4+" string
-          formattedFilters.bathrooms_min = 4;
+          // When 4+ is selected, we only set the minimum
+          formattedFilters.bathrooms = 4;
+          // Remove the string value to avoid conflicts
+          delete formattedFilters.bathrooms;
+        } else {
+          // For specific numbers (1, 2, 3), ensure it's a number
+          const numBathrooms = parseInt(formattedFilters.bathrooms, 10);
+          if (!isNaN(numBathrooms)) {
+            formattedFilters.bathrooms = numBathrooms;
+          }
         }
       }
 
@@ -110,14 +139,20 @@ const Offplan = ({ initialData, initialPagination }) => {
         sqFt: sqFtRange,
       });
 
+      // Clean up any undefined or null values
+      Object.keys(formattedFilters).forEach(key => {
+        if (formattedFilters[key] === undefined || formattedFilters[key] === '') {
+          delete formattedFilters[key];
+        }
+      });
+
       fetchData(1, formattedFilters);
     }
   };
 
   const fetchData = async (page, filters = {}) => {
     try {
-      const apiUrl =
-        Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
+      const apiUrl = Object.keys(filters).length > 0 ? FILTER_OFFPLAN_API : OFFPLAN_APi;
 
       // Prepare query parameters
       const queryParams = new URLSearchParams();
@@ -125,12 +160,25 @@ const Offplan = ({ initialData, initialPagination }) => {
 
       // Add all filters to query params
       Object.entries(filters).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== "") {
+        // Skip null, undefined, or empty string values
+        if (value === null || value === undefined || value === "") {
+          return;
+        }
+
+        // Handle numbers (convert to string for URLSearchParams)
+        if (typeof value === 'number') {
+          queryParams.append(key, value.toString());
+        }
+        // Handle strings (direct append)
+        else if (typeof value === 'string') {
           queryParams.append(key, value);
         }
       });
 
-      const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
+      const url = `${apiUrl}?${queryParams.toString()}`;
+      console.log('API Request URL:', url);  // Debug log
+      
+      const response = await axios.get(url);
       const data = response.data.data;
       setCardData(Array.isArray(data) ? data : [data]);
       setCurrentPage(response.data.current_page);

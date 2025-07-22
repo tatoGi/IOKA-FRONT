@@ -184,6 +184,36 @@
 .areaButton span{
   margin-right: 16px;
 }
+.filterWithClear {
+  position: relative;
+  display: inline-block;
+}
+
+.filterWithClear .clearButton {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  z-index: 1;
+  transition: color 0.2s;
+}
+
+.filterWithClear .clearButton:hover {
+  color: #333;
+}
+
+.filterBtn {
+  position: relative;
+  padding-right: 30px !important;
+}
+
 .filterBtn select {
   border: none;
   background: transparent;
