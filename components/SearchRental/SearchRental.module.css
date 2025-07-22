@@ -150,11 +150,69 @@
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 13px center;
+  background-position: right 12px center;
   background-size: 14.004688262939453px 8.001562118530273px;
 }
 
+.areaButton{
+  display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 1px solid #07151F;
+      border-radius: 4px;
+      background: white;
+      color: #374151;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 89px;
+      height: 40px;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 14.004688262939453px 8.001562118530273px;
+}
+.areaButton span{
+  margin-right: 16px;
+}
+.filterWithClear {
+  position: relative;
+  display: inline-block;
+}
 
+.filterWithClear .clearButton {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  z-index: 1;
+  transition: color 0.2s;
+}
+
+.filterWithClear .clearButton:hover {
+  color: #333;
+}
+
+.filterBtn {
+  position: relative;
+  padding-right: 30px !important;
+}
 
 .filterBtn select {
   border: none;
@@ -253,7 +311,36 @@ select.filterBtn {
 .clearFilterButton:hover {
   background: #DC2626;
 }
-
+.pricebutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: 1px solid #07151F;
+  border-radius: 4px;
+  background: white;
+  color: #374151;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 89px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.004688262939453 8.001562118530273' fill='none' stroke='%2307151F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='1.5 1.5 7.002344131469727 6.501562118530273 12.504688262939453 1.5'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14.004688262939453px 8.001562118530273px;
+}
+.pricebutton span{
+  margin-right: 16px;
+}
 @media (max-width: 1600px) {
   .searchSection {
     width: 100%;
@@ -344,7 +431,7 @@ select.filterBtn {
   .searchBar {
     width: 100% !important;  
     height: 48px;
-    border-radius: 4px;
+    border-radius: 8px;
     border-width: 1px;
     border-color: #07151F;
     margin-left: 0;
@@ -375,7 +462,7 @@ select.filterBtn {
   .filterBtn {
     padding: 10px 30px;
     white-space: nowrap;
-    border-radius: 4px;
+    border-radius: 8px;
     border-width: 1px;
     border-color: #07151F;
     font-family: 'Montserrat';
@@ -412,7 +499,7 @@ select.filterBtn {
 
 .popupContent {
   background: white;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;
@@ -428,6 +515,7 @@ select.filterBtn {
   color: #333;
   font-size: 20px;
   font-weight: 600;
+  font-family: 'Montserrat';
 }
 
 .rangeInputs {

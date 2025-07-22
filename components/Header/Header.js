@@ -153,7 +153,7 @@ const Header = ({ navigationData }) => {
 
   // Only show pages with active === 1
   const desktopPages = navigationData.filter(page => page.active === 1 && page.type_id !== 3);
-  const mobilePages = navigationData.filter(page => page.active === 1 && page.type_id !== 3);
+  const mobilePages = navigationData.filter(page => page.active === 1);
 
   const currentPage = navigationData.find((page) =>
     normalizedPathname.startsWith(`/${page.slug}`)

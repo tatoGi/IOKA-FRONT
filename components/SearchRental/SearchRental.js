@@ -39,6 +39,15 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     searchQuery: "",
   });
 
+  
+  // Function to handle sqft range change
+  const handleSqFtChange = (e) => {
+    const newSqFt = e.target.value;
+    const newFilters = { ...filters, sqFt: newSqFt };
+    setFilters(newFilters);
+    onFilterChange({ ...newFilters });
+  };
+
   const [matchingLocations, setMatchingLocations] = useState([]);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,10 +63,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     }
   }, [currentFilters]);
 
-  const closeAllPopups = () => {
-    setShowPricePopup(false);
-    setShowSqFtPopup(false);
-  };
 
   // Debounce function
   const debounce = (func, wait) => {
@@ -169,30 +174,10 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     // Format the filters to match backend expectations
     const backendFilters = {
       property_type: updatedFilters.propertyType || null,
+      bedrooms: updatedFilters.bedrooms || null,
+      bathrooms: updatedFilters.bathrooms || null,
       location: updatedFilters.searchQuery || null,
     };
-    
-    // Handle bedrooms - special case for "4+" to filter 4 or more
-    if (updatedFilters.bedrooms) {
-      if (updatedFilters.bedrooms === "4+") {
-        backendFilters.bedrooms_min = 4;
-      } else {
-        backendFilters.bedrooms = updatedFilters.bedrooms;
-      }
-    } else {
-      backendFilters.bedrooms = null;
-    }
-    
-    // Handle bathrooms - special case for "4+" to filter 4 or more
-    if (updatedFilters.bathrooms) {
-      if (updatedFilters.bathrooms === "4+") {
-        backendFilters.bathrooms_min = 4;
-      } else {
-        backendFilters.bathrooms = updatedFilters.bathrooms;
-      }
-    } else {
-      backendFilters.bathrooms = null;
-    }
 
     // Handle price range
     if (updatedFilters.price) {
@@ -219,10 +204,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
   };
 
-  const handleRangeApply = (field, value) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
-    handleFilterChange(field, value);
-  };
 
   const handleLocationSearch = useCallback(
     debounce(async (query) => {
@@ -311,7 +292,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <input
             type="text"
-            placeholder="Search by location"
+            placeholder="City, Building or community"
             className={styles.searchInput}
             value={filters.searchQuery}
             onChange={(e) => {
@@ -335,26 +316,40 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
         </div>
 
         <div className={styles.filterButtons}>
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.propertyType}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("propertyType", e.target.value)}
-          >
-            <option value="">Property Type</option>
-            {filterOptions.propertyTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.propertyType}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("propertyType", e.target.value)}
+              style={{ paddingRight: filters.propertyType !== undefined && filters.propertyType !== '' ? '30px' : '16px' }}
+            >
+              <option value="">Property Type</option>
+              {filterOptions.propertyTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            {(filters.propertyType !== undefined && filters.propertyType !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("propertyType", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
           <div className={styles.filterBtnWrapper}>
             <button
-              className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
+              className={`${styles.pricebutton} ${filters.price ? styles.active : ''}`}
               onClick={() => {
                 setShowPricePopup(!showPricePopup);
                 setShowSqFtPopup(false);
@@ -363,10 +358,10 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               {filters.price ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
               ) : (
-                "Price"
+               <span>Price</span>
               )}
               {filters.price && (
-                <button
+                <span
                   className={styles.clearFilterButton}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -374,46 +369,74 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                   }}
                 >
                   ×
-                </button>
+                </span>
               )}
             </button>
           </div>
 
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.bedrooms}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
-          >
-            <option value="">Bedrooms</option>
-            {filterOptions.bedrooms.map((num) => (
-              <option key={num} value={num}>
-                {num === "studio" ? "Studio" : num}
-              </option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.bedrooms}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
+              style={{ paddingRight: (filters.bedrooms !== undefined && filters.bedrooms !== '') ? '30px' : '16px' }}
+            >
+              <option value="">Bedrooms</option>
+              {filterOptions.bedrooms.map((num) => (
+                <option key={num} value={num}>
+                  {num === "studio" ? "Studio" : num}
+                </option>
+              ))}
+            </select>
+            {(filters.bedrooms !== undefined && filters.bedrooms !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("bedrooms", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
-          <select
-            className={`${styles.filterBtn}`}
-            value={filters.bathrooms}
-            onClick={() => {
-              setShowPricePopup(false);
-              setShowSqFtPopup(false);
-            }}
-            onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
-          >
-            <option value="">Bathrooms</option>
-            {filterOptions.bathrooms.map((num) => (
-              <option key={num} value={num}>{num}</option>
-            ))}
-          </select>
+          <div className={styles.filterWithClear}>
+            <select
+              className={`${styles.filterBtn}`}
+              value={filters.bathrooms}
+              onClick={() => {
+                setShowPricePopup(false);
+                setShowSqFtPopup(false);
+              }}
+              onChange={(e) => handleFilterChange("bathrooms", e.target.value)}
+              style={{ paddingRight: (filters.bathrooms !== undefined && filters.bathrooms !== '') ? '30px' : '16px' }}
+            >
+              <option value="">Bathrooms</option>
+              {filterOptions.bathrooms.map((num) => (
+                <option key={num} value={num}>{num}</option>
+              ))}
+            </select>
+            {(filters.bathrooms !== undefined && filters.bathrooms !== '') && (
+              <button 
+                className={styles.clearButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFilterChange("bathrooms", "");
+                }}
+              >
+                ×
+              </button>
+            )}
+          </div>
 
           <div className={styles.filterBtnWrapper}>
             <button
-              className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
+              className={`${styles.areaButton} ${filters.sqFt ? styles.active : ''}`}
               onClick={() => {
                 setShowSqFtPopup(!showSqFtPopup);
                 setShowPricePopup(false);
@@ -422,10 +445,10 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
               {filters.sqFt ? (
                 <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
               ) : (
-                "Area"
+               <span>Area</span>
               )}
               {filters.sqFt && (
-                <button
+                <span
                   className={styles.clearFilterButton}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -433,7 +456,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
                   }}
                 >
                   ×
-                </button>
+                </span>
               )}
             </button>
           </div>
