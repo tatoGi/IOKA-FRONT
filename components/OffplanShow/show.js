@@ -551,7 +551,17 @@ const OffplanShow = ({ offplanData }) => {
                 <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
                     <li key={index}>
-                      <Image src={success} alt="success" /> {amenity}
+                      {amenity.icon ? (
+                        <Image 
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${amenity.icon}`} 
+                          alt={amenity.name} 
+                          width={20} 
+                          height={20} 
+                        />
+                      ) : (
+                        <Image src={success} alt="success" width={20} height={20} />
+                      )}
+                      {amenity.name}
                     </li>
                   ))}
                 </div>
@@ -594,7 +604,17 @@ const OffplanShow = ({ offplanData }) => {
                 <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
                     <li key={index}>
-                      <Image src={success} alt="success" /> {amenity}
+                      {amenity.icon ? (
+                        <Image 
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${amenity.icon}`} 
+                          alt={amenity.name} 
+                          width={20} 
+                          height={20} 
+                        />
+                      ) : (
+                        <Image src={success} alt="success" width={20} height={20} />
+                      )}
+                      {amenity.name}
                     </li>
                   ))}
                 </div>
