@@ -110,7 +110,7 @@ const Blog = ({ initialData }) => {
               </div>
               <div className={styles["card-body"]}>
                 <h3 className={styles["card-title"]}>
-                  {limitTextLength(card.title, 40)}
+                  {limitTextLength(card.title, 30)}
                 </h3>
                 <div className={styles.date}>
                   <Image
