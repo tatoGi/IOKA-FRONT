@@ -487,13 +487,13 @@ const Offplan = ({ initialData, initialPagination }) => {
                         <span
                           className={`${styles.price} ${styles.textEllipsis}`}
                         >
-                          USD {property?.amount?.toLocaleString() || "0"}
+                          USD {Number(property?.amount)?.toLocaleString() || "0"}
                         </span>
                         <span
                           className={`${styles.price} ${styles.textEllipsis}`}
                         >
                           AED{" "}
-                          {property?.amount_dirhams?.toLocaleString() || "0"}
+                          {Number(property?.amount_dirhams)?.toLocaleString() || "0"}
                         </span>
                       </div>
                     </div>
