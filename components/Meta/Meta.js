@@ -27,8 +27,8 @@ const Meta = ({ items }) => {
   };
 
   // Handle image URLs - if it's a relative path, prepend the site URL
-  const ogImage = getMetaValue('og_image') ? (getMetaValue('og_image').startsWith('http') ? getMetaValue('og_image') : `${siteUrl}/storage/${getMetaValue('og_image')}`) : `${siteUrl}/assets/img/ioka-logo-white.png`;
-  const twitterImage = getMetaValue('twitter_image') ? (getMetaValue('twitter_image').startsWith('http') ? getMetaValue('twitter_image') : `${siteUrl}/storage/${getMetaValue('twitter_image')}`) : `${siteUrl}/assets/img/ioka-logo-white.png`;
+  const ogImage = getMetaValue('og_image') ? (getMetaValue('og_image').startsWith('http') ? getMetaValue('og_image') : `${process.env.NEXT_PUBLIC_API_URL}/storage/${getMetaValue('og_image')}`) : `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
+  const twitterImage = getMetaValue('twitter_image') ? (getMetaValue('twitter_image').startsWith('http') ? getMetaValue('twitter_image') : `${process.env.NEXT_PUBLIC_API_URL}/storage/${getMetaValue('twitter_image')}`) : `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
   
   return (
     <Head>
