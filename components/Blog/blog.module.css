@@ -217,6 +217,7 @@
     margin-bottom: 16px;
     font-weight: 400;
     font-family: 'Montserrat';
+    height: 56px;
 }
 
 /* Create a content wrapper for text elements */
@@ -349,6 +350,7 @@
         margin-bottom: 20px;
         font-weight: 400;
         font-family: 'Montserrat';
+        height: 56px;
     }
 
     .card-img-top {
