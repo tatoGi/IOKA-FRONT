@@ -381,10 +381,10 @@ const OffplanShow = ({ offplanData }) => {
               <div className={style.pricing}>
                 <span className={style.aedPricestart}>Starting Price:</span>
                 <span className={style.aedPrice}>
-                  AED {offplanData.offplan.amount_dirhams}
+                  AED {Number(offplanData.offplan.amount_dirhams).toLocaleString()}
                 </span>
                 <span className={style.usdPrice}>
-                  USD {offplanData.offplan.amount}
+                  USD {Number(offplanData.offplan.amount).toLocaleString()}
                 </span>
               </div>
               <div className={style.description}>
