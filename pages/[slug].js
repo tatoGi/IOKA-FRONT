@@ -133,8 +133,21 @@ export async function getStaticProps({ params }) {
       return { notFound: true };
     }
 
+    // Ensure metadata is included in the page props
+    const pageProps = {
+      pageData: {
+        ...pageData,
+        // Make sure metadata is properly structured
+        metadata: pageData.metadata || {
+          title: pageData.title,
+          description: pageData.desc,
+          // Add any other default meta fields you need
+        }
+      }
+    };
+
     return {
-      props: { pageData },
+      props: pageProps,
       revalidate: 10 // Revalidate the page every 10 seconds
     };
   } catch (error) {

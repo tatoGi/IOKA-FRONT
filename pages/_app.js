@@ -90,6 +90,7 @@ function App({ Component, pageProps }) {
   // Set loading to false once navigation data is available. Settings meta may legitimately be empty
   useEffect(() => {
     if (appData.navigationData.length > 0) {
+      console.log('Navigation data loaded:', appData.navigationData);
       setLoading(false);
     }
   }, [appData.navigationData]);
@@ -99,45 +100,96 @@ function App({ Component, pageProps }) {
       const pathWithoutQuery = router.asPath.split('?')[0];
       const currentSlug = pathWithoutQuery === '/' ? 'IOKA' : pathWithoutQuery.replace(/^\//, '');
 
-      const currentPageData = appData.navigationData.find(page => page.slug === currentSlug);
+      console.log('Looking for page with slug:', currentSlug);
+      const currentPageData = appData.navigationData.find(page => {
+        console.log('Checking page:', page.slug, 'against:', currentSlug);
+        return page.slug === currentSlug;
+      });
 
-      console.log(appData.navigationData);
-      if (currentPageData && currentPageData.metadata) {
-        const apiMeta = currentPageData.metadata;
+      console.log('Found page data:', currentPageData);
+      
+      if (currentPageData) {
+        const apiMeta = currentPageData.metadata || {};
+        console.log('Page metadata:', apiMeta);
+        
         const transformedMeta = {
-          title: apiMeta.meta_title,
-          keywords: apiMeta.meta_keywords,
-          description: apiMeta.meta_description,
-          og_title: apiMeta.og_title,
-          og_description: apiMeta.og_description,
-          og_image: apiMeta.og_image,
-          twitter_card: apiMeta.twitter_card,
-          twitter_title: apiMeta.twitter_title,
-          twitter_description: apiMeta.twitter_description,
-          twitter_image: apiMeta.twitter_image,
+          title: apiMeta.meta_title || currentPageData.title,
+          keywords: apiMeta.meta_keywords || '',
+          description: apiMeta.meta_description || currentPageData.desc || '',
+          og_title: apiMeta.og_title || currentPageData.title,
+          og_description: apiMeta.og_description || apiMeta.meta_description || currentPageData.desc || '',
+          og_image: apiMeta.og_image || `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
+          twitter_card: apiMeta.twitter_card || 'summary_large_image',
+          twitter_title: apiMeta.twitter_title || currentPageData.title,
+          twitter_description: apiMeta.twitter_description || apiMeta.meta_description || currentPageData.desc || '',
+          twitter_image: apiMeta.twitter_image || apiMeta.og_image || `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
         };
         
-        Object.keys(transformedMeta).forEach(key => {
-          if (transformedMeta[key] === undefined || transformedMeta[key] === null) {
-            delete transformedMeta[key];
-          }
-        });
+        console.log('Transformed meta:', transformedMeta);
         setCurrentPageMeta(transformedMeta);
       } else {
-        setCurrentPageMeta({});
+        console.log('No matching page found, using default meta');
+        setCurrentPageMeta({
+          title: 'IOKA Real Estate',
+          description: 'Discover premium real estate properties with IOKA',
+          og_title: 'IOKA Real Estate',
+          og_description: 'Discover premium real estate properties with IOKA',
+          og_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
+          twitter_card: 'summary_large_image',
+          twitter_title: 'IOKA Real Estate',
+          twitter_description: 'Discover premium real estate properties with IOKA',
+          twitter_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`
+        });
       }
     }
   }, [router.asPath, router.isReady, appData.navigationData]);
 
 
 
-  // Convert page meta object to array format expected by Meta component
-  const pageMetaArray = Object.entries(currentPageMeta).map(([key, value]) => ({
+  // Default meta values
+  const defaultMeta = {
+    title: 'IOKA Real Estate',
+    description: 'Discover premium real estate properties with IOKA',
+    og_title: 'IOKA Real Estate',
+    og_description: 'Discover premium real estate properties with IOKA',
+    og_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
+    twitter_card: 'summary_large_image',
+    twitter_title: 'IOKA Real Estate',
+    twitter_description: 'Discover premium real estate properties with IOKA',
+    twitter_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`
+  };
+
+  // Get meta from page props if available (for dynamic pages)
+  const pagePropsMeta = pageProps.pageData?.metadata || {};
+  
+  console.log('pageProps.pageData:', pageProps.pageData);
+  console.log('pagePropsMeta:', pagePropsMeta);
+  console.log('currentPageMeta:', currentPageMeta);
+  
+  // Convert meta objects to array format expected by Meta component
+  const pageMetaArray = Object.entries({
+    ...defaultMeta,
+    ...currentPageMeta
+  }).map(([key, value]) => ({
     key,
-    value
+    value: value || defaultMeta[key] || '' // Fallback to default if value is empty
   }));
   
-  const finalMetaItems = pageMetaArray; // Only use page-specific meta
+  const pagePropsMetaArray = Object.entries({
+    ...defaultMeta,
+    ...pagePropsMeta
+  }).map(([key, value]) => ({
+    key: key.replace('meta_', ''), // Remove 'meta_' prefix if present
+    value: value || defaultMeta[key] || '' // Fallback to default if value is empty
+  }));
+  
+  console.log('pageMetaArray:', pageMetaArray);
+  console.log('pagePropsMetaArray:', pagePropsMetaArray);
+  
+  // Use page props meta if available, otherwise fall back to navigation meta
+  const finalMetaItems = pagePropsMetaArray.length > 0 ? pagePropsMetaArray : pageMetaArray;
+  console.log('finalMetaItems:', finalMetaItems);
+ 
   const TopProgressBar = dynamic(
     () => {
       return import("@/components/TopProgressBar/TopProgressBar");
