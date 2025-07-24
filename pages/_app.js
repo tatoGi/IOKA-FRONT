@@ -101,6 +101,7 @@ function App({ Component, pageProps }) {
 
       const currentPageData = appData.navigationData.find(page => page.slug === currentSlug);
 
+      console.log(appData.navigationData);
       if (currentPageData && currentPageData.metadata) {
         const apiMeta = currentPageData.metadata;
         const transformedMeta = {
@@ -130,23 +131,13 @@ function App({ Component, pageProps }) {
 
 
 
-  const globalMeta = appData.settings?.meta || [];
-  const pageMeta = currentPageMeta;
-
-  const pageMetaArray = Object.keys(pageMeta).map(key => ({
-    key: key,
-    value: pageMeta[key]
+  // Convert page meta object to array format expected by Meta component
+  const pageMetaArray = Object.entries(currentPageMeta).map(([key, value]) => ({
+    key,
+    value
   }));
-
-  const finalMetaItems = [...globalMeta];
-  pageMetaArray.forEach(pageItem => {
-    const index = finalMetaItems.findIndex(globalItem => globalItem.key === pageItem.key);
-    if (index !== -1) {
-      finalMetaItems[index] = pageItem;
-    } else {
-      finalMetaItems.push(pageItem);
-    }
-  });
+  
+  const finalMetaItems = pageMetaArray; // Only use page-specific meta
   const TopProgressBar = dynamic(
     () => {
       return import("@/components/TopProgressBar/TopProgressBar");
