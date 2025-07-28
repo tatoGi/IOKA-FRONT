@@ -1,13 +1,49 @@
+import { useEffect } from 'react';
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
+import usePageMetadata from "@/hooks/usePageMetadata";
 
-const Meta = ({ items }) => {
+const Meta = ({ 
+  title = 'IOKA Real Estate',
+  description = 'Discover premium real estate properties with IOKA',
+  keywords = '',
+  og_title = '',
+  og_description = '',
+  og_image = '',
+  twitter_card = 'summary_large_image',
+  twitter_title = '',
+  twitter_description = '',
+  twitter_image = '',
+  // Pass the slug and type to fetch metadata dynamically
+  slug: propSlug = '',
+  type = 'page'
+}) => {
   const router = useRouter();
+  const { asPath } = router;
   
-  // Use require for favicon - access default export to get the path
-
-
+  // Use provided slug or get from path
+  const slug = propSlug || (asPath === '/' ? 'home' : asPath.replace(/^\//, '').split('?')[0]);
+  
+  // Get metadata using the hook
+  const { 
+    meta: pageMetadata, 
+    loading, 
+    error 
+  } = usePageMetadata(slug, type);
+  
+  // Log any metadata fetching errors and handle loading state
+  useEffect(() => {
+    if (error) {
+      console.error('Metadata error:', error);
+    }
+  }, [error]);
+  
+  // Don't render anything while loading in production
+  if (process.env.NODE_ENV === 'production' && loading) {
+    return null;
+  }
+  
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
   
@@ -16,19 +52,27 @@ const Meta = ({ items }) => {
     (isDevelopment ? 'http://localhost:3000' : 'https://ioka.ae');
   
   // Construct the current URL
-  const currentUrl = `${siteUrl}${router.asPath}`;
+  const currentUrl = `${siteUrl}${asPath}`;
   
-  // Use items prop for metaSettings
-  const metaSettings = items || [];
-
-  const getMetaValue = (key) => {
-    const setting = metaSettings.find(item => item.key === key);
-    return setting?.value || '';
-  };
-
-  // Handle image URLs - if it's a relative path, prepend the site URL
-  const ogImage = getMetaValue('og_image') ? (getMetaValue('og_image').startsWith('http') ? getMetaValue('og_image') : `${process.env.NEXT_PUBLIC_API_URL}/storage/${getMetaValue('og_image')}`) : `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
-  const twitterImage = getMetaValue('twitter_image') ? (getMetaValue('twitter_image').startsWith('http') ? getMetaValue('twitter_image') : `${process.env.NEXT_PUBLIC_API_URL}/storage/${getMetaValue('twitter_image')}`) : `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
+  // Default values
+  const defaultTitle = 'IOKA Real Estate';
+  const defaultDescription = 'Discover premium real estate properties with IOKA';
+  const defaultImage = `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
+  
+  // Set metadata values with fallbacks
+  const metaTitle = pageMetadata?.title || title || defaultTitle;
+  const metaDescription = pageMetadata?.description || description || defaultDescription;
+  const metaKeywords = pageMetadata?.keywords || keywords || '';
+  
+  // Set OpenGraph and Twitter data with fallbacks
+  const ogTitle = pageMetadata?.og?.title || og_title || metaTitle || defaultTitle;
+  const ogDesc = pageMetadata?.og?.description || og_description || metaDescription || defaultDescription;
+  const ogImg = pageMetadata?.og?.image || og_image || defaultImage;
+  
+  const twitterTitle = pageMetadata?.twitter?.title || twitter_title || ogTitle || defaultTitle;
+  const twitterDesc = pageMetadata?.twitter?.description || twitter_description || ogDesc || defaultDescription;
+  const twitterImg = pageMetadata?.twitter?.image || twitter_image || ogImg || defaultImage;
+  const twitterCard = pageMetadata?.twitter?.card || twitter_card || 'summary_large_image';
   
   return (
     <Head>
@@ -36,36 +80,36 @@ const Meta = ({ items }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content="noindex, nofollow" />
       <meta name="googlebot" content="noindex, nofollow" />
+      <meta charSet="utf-8" />
+      <meta name="author" content="IOKA Real Estate" />
+      <meta name="revisit-after" content="7 days" />
 
-      <meta name="keywords" content={getMetaValue('keywords')} />
-      <meta name="description" content={getMetaValue('description')} />
+      {/* Page Title and Description */}
+      <title>{metaTitle}</title>
+      <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={metaKeywords} />
       
-      {/* Favicon - SVG format */}
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={currentUrl} />
+      <meta property="og:title" content={ogTitle} />
+      <meta property="og:description" content={ogDesc} />
+      <meta property="og:image" content={ogImg} />
+      <meta property="og:site_name" content="IOKA Real Estate" />
+
+      {/* Twitter */}
+      <meta property="twitter:card" content={twitterCard} />
+      <meta property="twitter:url" content={currentUrl} />
+      <meta property="twitter:title" content={twitterTitle} />
+      <meta property="twitter:description" content={twitterDesc} />
+      <meta property="twitter:image" content={twitterImg} />
+      <meta name="twitter:site" content="@ioka" />
+      <meta name="twitter:creator" content="@ioka" />
+      
+      {/* Favicon and Canonical */}
+      <link rel="canonical" href={currentUrl} />
       <link rel="icon" type="image/svg+xml" href="/assets/img/Tiffany-01.svg" />
       <link rel="alternate icon" href="/favicon.ico" />
-      
-      <meta charSet="utf-8" />
-      <title>{getMetaValue('title')}</title>
-
-      {/* Open Graph Meta Tags */}
-      <meta property="og:title" content={getMetaValue('og_title')} />
-      <meta property="og:url" content={currentUrl} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:description" content={getMetaValue('og_description')} />
-      <meta property="og:site_name" content="IOKA Real Estate" />
-      <meta property="og:type" content="website" />
-
-      {/* Twitter Meta Tags */}
-      <meta name="twitter:card" content={getMetaValue('twitter_card')} />
-      <meta name="twitter:site" content="IOKA Real Estate" />
-      <meta name="twitter:title" content={getMetaValue('twitter_title')} />
-      <meta name="twitter:description" content={getMetaValue('twitter_description')} />
-      <meta name="twitter:image" content={twitterImage} />
-
-      {/* Additional Meta Tags */}
-      <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
-      <meta name="author" content="IOKA Real Estate" />
       {/* Meta Pixel Code */}
       <script
         dangerouslySetInnerHTML={{

@@ -36,13 +36,14 @@ if (typeof window !== 'undefined') {
 }
 
 function App({ Component, pageProps }) {
+
   const [loading, setLoading] = useState(true);
   const [appData, setAppData] = useState({
     navigationData: [],
-    settings: { meta: [] }
+    settings: {}
   });
-  const [currentPageMeta, setCurrentPageMeta] = useState({});
   const router = useRouter();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,105 +91,18 @@ function App({ Component, pageProps }) {
   // Set loading to false once navigation data is available. Settings meta may legitimately be empty
   useEffect(() => {
     if (appData.navigationData.length > 0) {
-      console.log('Navigation data loaded:', appData.navigationData);
+      
       setLoading(false);
     }
   }, [appData.navigationData]);
 
+  // Router-based effect for page tracking or other routing-related logic
   useEffect(() => {
     if (router.isReady && appData.navigationData && appData.navigationData.length > 0) {
-      const pathWithoutQuery = router.asPath.split('?')[0];
-      const currentSlug = pathWithoutQuery === '/' ? 'IOKA' : pathWithoutQuery.replace(/^\//, '');
-
-      console.log('Looking for page with slug:', currentSlug);
-      const currentPageData = appData.navigationData.find(page => {
-        console.log('Checking page:', page.slug, 'against:', currentSlug);
-        return page.slug === currentSlug;
-      });
-
-      console.log('Found page data:', currentPageData);
-      
-      if (currentPageData) {
-        const apiMeta = currentPageData.metadata || {};
-        console.log('Page metadata:', apiMeta);
-        
-        const transformedMeta = {
-          title: apiMeta.meta_title || currentPageData.title,
-          keywords: apiMeta.meta_keywords || '',
-          description: apiMeta.meta_description || currentPageData.desc || '',
-          og_title: apiMeta.og_title || currentPageData.title,
-          og_description: apiMeta.og_description || apiMeta.meta_description || currentPageData.desc || '',
-          og_image: apiMeta.og_image || `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
-          twitter_card: apiMeta.twitter_card || 'summary_large_image',
-          twitter_title: apiMeta.twitter_title || currentPageData.title,
-          twitter_description: apiMeta.twitter_description || apiMeta.meta_description || currentPageData.desc || '',
-          twitter_image: apiMeta.twitter_image || apiMeta.og_image || `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
-        };
-        
-        console.log('Transformed meta:', transformedMeta);
-        setCurrentPageMeta(transformedMeta);
-      } else {
-        console.log('No matching page found, using default meta');
-        setCurrentPageMeta({
-          title: 'IOKA Real Estate',
-          description: 'Discover premium real estate properties with IOKA',
-          og_title: 'IOKA Real Estate',
-          og_description: 'Discover premium real estate properties with IOKA',
-          og_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
-          twitter_card: 'summary_large_image',
-          twitter_title: 'IOKA Real Estate',
-          twitter_description: 'Discover premium real estate properties with IOKA',
-          twitter_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`
-        });
-      }
+      // Add any routing-related logic here if needed
     }
   }, [router.asPath, router.isReady, appData.navigationData]);
-
-
-
-  // Default meta values
-  const defaultMeta = {
-    title: 'IOKA Real Estate',
-    description: 'Discover premium real estate properties with IOKA',
-    og_title: 'IOKA Real Estate',
-    og_description: 'Discover premium real estate properties with IOKA',
-    og_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`,
-    twitter_card: 'summary_large_image',
-    twitter_title: 'IOKA Real Estate',
-    twitter_description: 'Discover premium real estate properties with IOKA',
-    twitter_image: `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`
-  };
-
-  // Get meta from page props if available (for dynamic pages)
-  const pagePropsMeta = pageProps.pageData?.metadata || {};
-  
-  console.log('pageProps.pageData:', pageProps.pageData);
-  console.log('pagePropsMeta:', pagePropsMeta);
-  console.log('currentPageMeta:', currentPageMeta);
-  
-  // Convert meta objects to array format expected by Meta component
-  const pageMetaArray = Object.entries({
-    ...defaultMeta,
-    ...currentPageMeta
-  }).map(([key, value]) => ({
-    key,
-    value: value || defaultMeta[key] || '' // Fallback to default if value is empty
-  }));
-  
-  const pagePropsMetaArray = Object.entries({
-    ...defaultMeta,
-    ...pagePropsMeta
-  }).map(([key, value]) => ({
-    key: key.replace('meta_', ''), // Remove 'meta_' prefix if present
-    value: value || defaultMeta[key] || '' // Fallback to default if value is empty
-  }));
-  
-  console.log('pageMetaArray:', pageMetaArray);
-  console.log('pagePropsMetaArray:', pagePropsMetaArray);
-  
-  // Use page props meta if available, otherwise fall back to navigation meta
-  const finalMetaItems = pagePropsMetaArray.length > 0 ? pagePropsMetaArray : pageMetaArray;
-  console.log('finalMetaItems:', finalMetaItems);
+ 
  
   const TopProgressBar = dynamic(
     () => {
@@ -206,7 +120,7 @@ function App({ Component, pageProps }) {
   }
   return (
     <div>
-      <Meta items={finalMetaItems} />
+      <Meta />
       <Header navigationData={appData.navigationData} />
       <Layout>
         <SharedLayout>
