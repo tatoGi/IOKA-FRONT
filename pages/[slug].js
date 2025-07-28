@@ -8,7 +8,10 @@ import OffPlan from "@/components/Offplan/Offplan";
 import Rental_Resale from "@/components/Rental_Resale/Rental_Resale";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import Blog from "@/components/Blog/Blog";
-  const DynamicPage = ({ pageData }) => {
+import Meta from "@/components/Meta/Meta";
+
+const DynamicPage = ({ pageData }) => {
+ 
   const router = useRouter();
 
   // Check if pageData or pageData.title is null or undefined
@@ -49,16 +52,17 @@ import Blog from "@/components/Blog/Blog";
   };
 
   return (
-    <div>
-      {/* Render Breadcrumb only if type_id is not 1 */}
-      {pageData.type_id !== 1 && (
-        <Breadcrumb
-          breadcrumbData={[{ title: "Home", path: "/" }, ...breadcrumbData]}
-        />
-      )}
-      {/* Render the page content */}
+    <>
+      <Meta 
+        slug={pageData.slug}
+        type="page"
+        title={pageData.title}
+        description={pageData.desc}
+        keywords={pageData.keywords}
+      />
+      {pageData.breadcrumb && <Breadcrumb data={breadcrumbData} />}
       {renderPage()}
-    </div>
+    </>
   );
 };
 export async function getStaticPaths() {

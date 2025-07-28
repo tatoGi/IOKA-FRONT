@@ -40,10 +40,10 @@ function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
   const [appData, setAppData] = useState({
     navigationData: [],
-    settings: { meta: [] }
+    settings: {}
   });
-  const [currentPageMeta, setCurrentPageMeta] = useState({});
   const router = useRouter();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,6 +96,7 @@ function App({ Component, pageProps }) {
     }
   }, [appData.navigationData]);
 
+  // Router-based effect for page tracking or other routing-related logic
   useEffect(() => {
     if (router.isReady && appData.navigationData && appData.navigationData.length > 0) {
       const pathWithoutQuery = router.asPath.split('?')[0];
@@ -204,7 +205,7 @@ function App({ Component, pageProps }) {
   }
   return (
     <div>
-      <Meta items={finalMetaItems} />
+      <Meta />
       <Header navigationData={appData.navigationData} />
       <Layout>
         <SharedLayout>
