@@ -23,11 +23,7 @@
   height: 100%;
   object-fit: cover;
 }
-.shareToggleButton:hover,
-.shareToggleButton.active {
-  color: white;
-  transform: scale(1.05);
-}
+
 
 .shareIconsWrapper {
   position: absolute;
