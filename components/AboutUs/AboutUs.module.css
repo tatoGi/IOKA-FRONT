@@ -256,14 +256,14 @@
   border: 1px solid #0A273B;
   width: 100%;
   max-width: 85.5rem;
-  height: 25.8125rem;
+  height: 30rem;
   border-radius: 2rem;
   margin-left: 12rem;
 }
 
 .testimonialImageContainer {
   position: absolute;
-  margin-top: 47px;
+  margin-top: 0;
   left: 0rem;
   z-index: 2;
 }
@@ -273,7 +273,7 @@
   z-index: 2;
   background: #fff;
   width: 390px;
-  height: 320px;
+  height: 440px;
   border-radius: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -855,22 +855,12 @@
     transition: 0.3s;
   }
 
-  .testimonialWrapper {
-    max-width: 75rem;
-    height: 22rem;
-    margin-left: 8rem;
-    padding: 33px;
-  }
 
   .testimonialImageContainer {
-    top: 7rem;
+    top: 77rx;
     left: 0rem;
   }
 
-  .testimonialImageWrapper {
-    width: 20rem;
-    height: 12rem;
-  }
 
   .testimonialName {
     font-size: 22px;

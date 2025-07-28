@@ -25,4 +25,8 @@ export const FAQ_API = `${API_BASE_URL}/faqs`;
 export const LOCATION_SEARCH_API = `${API_BASE_URL}/searchOffplanLocations`;
 export const RENTAL_LOCATION_SEARCH_API = `${API_BASE_URL}/searchRentalLocations`;
 export const METADATA_API = `${API_BASE_URL}/metadata`;
+// Format: /metadata/type/slug
+export const getMetadataUrl = (type, slug = '') => {
+  return `${API_BASE_URL}/metadata/${type}${slug ? `/${slug}` : ''}`;
+};
 // Add more routes as needed
