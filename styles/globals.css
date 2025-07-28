@@ -92,6 +92,9 @@ main {
   .mobile-burger-menu{
     display: none;
   }
+  .scroll-header{
+    height: 105px;
+  }
   .scroll-header .header-cont,
  .home-header{
   background: #fff;
@@ -135,6 +138,7 @@ main {
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+
   }
   .header-box{
     display: -webkit-box;

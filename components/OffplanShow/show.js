@@ -339,7 +339,7 @@ const OffplanShow = ({ offplanData }) => {
         <div className="row">
           <div className="col-md-7">
             <div className={style.propertyDetails}>
-              <h2>{offplanData.offplan.title}</h2>
+              <h1>{offplanData.offplan.title}</h1>
               <div className={style.features}>
                 <div className={`${style.feature} ${style.textEllipsis}`}>
                   <Image
