@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import debounce from 'lodash/debounce';
 import SearchSection from "../SearchSection/SearchSection";
 import Image from "next/image";
 import styles from "./Offplan.module.css";
@@ -70,8 +71,37 @@ const Offplan = ({ initialData, initialPagination }) => {
     router.push(`/offplan/${slug}`);
   };
 
+  const handleSearch = useCallback(
+    (query) => {
+      // Create debounced function inside useCallback
+      const search = debounce((query) => {
+        setCurrentPage(1);
+        if (!query || query.trim() === '') {
+          // If search is cleared, refetch without search
+          fetchData(1, {});
+        } else {
+          // Search by title or location using the API's search parameter
+          fetchData(1, { search: query });
+        }
+      }, 300);
+      
+      // Call the debounced function
+      search(query);
+      
+      // Return cleanup function
+      return () => search.cancel();
+    },
+    []
+  );
+  
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      // Any additional cleanup if needed
+    };
+  }, []);
+
   const handleFilterChange = (filters) => {
-   
     setCurrentPage(1); // Reset to first page when filters change
     if (filters === null) {
       // If filters are null, fetch all properties
@@ -126,17 +156,10 @@ const Offplan = ({ initialData, initialPagination }) => {
         }
       }
 
-      // Reconstruct the range strings for the UI state
-      const priceRange = (filters.price_min || filters.price_max)
-        ? `${filters.price_min || ''}-${filters.price_max || ''}`
-        : "";
-      const sqFtRange = (filters.sq_ft_min || filters.sq_ft_max)
-        ? `${filters.sq_ft_min || ''}-${filters.sq_ft_max || ''}`
-        : "";
-        
+      // Always keep the raw string for price and sqFt for UI
       setCurrentFilters({
-        price: priceRange,
-        sqFt: sqFtRange,
+        price: filters.price || "",
+        sqFt: filters.sqFt || ""
       });
 
       // Clean up any undefined or null values
@@ -158,8 +181,16 @@ const Offplan = ({ initialData, initialPagination }) => {
       const queryParams = new URLSearchParams();
       queryParams.append("page", page);
 
-      // Add all filters to query params
-      Object.entries(filters).forEach(([key, value]) => {
+      // Handle search parameter separately to avoid conflicts
+      const { search, ...otherFilters } = filters;
+      
+      if (search) {
+        // Add search parameter for title or location
+        queryParams.append("search", search);
+      }
+
+      // Add all other filters to query params
+      Object.entries(otherFilters).forEach(([key, value]) => {
         // Skip null, undefined, or empty string values
         if (value === null || value === undefined || value === "") {
           return;
@@ -320,6 +351,7 @@ const Offplan = ({ initialData, initialPagination }) => {
       <div className={styles.listSection}>
         <SearchSection
           onFilterChange={handleFilterChange}
+          onSearch={handleSearch}
           filterOptions={filterOptions}
           showPricePopup={showPricePopup}
           setShowPricePopup={setShowPricePopup}

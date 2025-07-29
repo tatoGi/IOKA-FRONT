@@ -109,7 +109,10 @@ const BlogShow = ({ blogData }) => {
           </div>
           <div className="col-md-4 d-none d-md-block">
             <div className={styles.sidebar}>
-              <h3>Similar Articles</h3>
+              <div className={styles.similardiv}>
+              <span className={styles.similarArticles}>Similar Articles</span>
+              </div>
+             
 
               {blogData.related_blogs &&
                 blogData.related_blogs
@@ -128,7 +131,7 @@ const BlogShow = ({ blogData }) => {
                             : baseimage
                         }
                         className={`card-img-top ${styles["card-img-top"]}`}
-                        alt={card.image_alt}
+                        alt={card.image_alt || `Related blog image for ${card.title}`}
                         width={150}
                         height={100}
                       />
@@ -181,7 +184,7 @@ const BlogShow = ({ blogData }) => {
                           : baseimage
                       }
                       className={`card-img-top ${styles["card-img-top"]}`}
-                      alt={card.image_alt}
+                      alt={card.image_alt || `Related blog image for ${card.title}`}
                       width={100}
                       height={80}
                     />

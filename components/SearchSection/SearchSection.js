@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import debounce from 'lodash/debounce';
 import styles from "./SearchSection.module.css";
 import { LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
@@ -12,7 +13,7 @@ const hideEmptyOptionsStyle = `
   }
 `;
 
-const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {} }) => {
+const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {}, onSearch }) => {
   // Add style to head
   useEffect(() => {
     const styleElement = document.createElement('style');
@@ -39,13 +40,60 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     searchQuery: "",
   });
 
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
   // Function to handle sqft range change
   const handleSqFtChange = (e) => {
     const newSqFt = e.target.value;
     const newFilters = { ...filters, sqFt: newSqFt };
     setFilters(newFilters);
     onFilterChange({ ...newFilters });
+  };
+
+  // Create debounced search function
+  const debouncedSearch = useCallback(
+    (query) => {
+      // Create debounced function inside useCallback
+      const search = debounce((query) => {
+        if (onSearch) {
+          onSearch(query);
+        } else {
+          handleLocationSearch(query);
+        }
+      }, 300);
+      
+      // Call the debounced function
+      search(query);
+      
+      // Return cleanup function
+      return () => search.cancel();
+    },
+    [onSearch]
+  );
+  
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      // Any additional cleanup if needed
+    };
+  }, []);
+
+  const handleSearch = (e) => {
+    const query = e.target.value.trim();
+    setSearchQuery(query);
+    
+    // Hide location dropdown when searching
+    setShowLocationDropdown(false);
+    
+    // Clear results if search is empty
+    if (!query) {
+      if (onSearch) onSearch('');
+      setMatchingLocations([]);
+      return;
+    }
+    
+    // Trigger debounced search
+    debouncedSearch(query);
   };
 
   const [matchingLocations, setMatchingLocations] = useState([]);
@@ -87,6 +135,28 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
         property_type: updatedFilters.propertyType || null,
         location: updatedFilters.searchQuery || null,
       };
+
+      // Handle price range
+      if (field === 'price' && value) {
+        const [priceMin, priceMax] = value.split('-');
+        if (priceMin) backendFilters.price_min = priceMin;
+        if (priceMax) backendFilters.price_max = priceMax;
+      } else if (updatedFilters.price) {
+        const [priceMin, priceMax] = updatedFilters.price.split('-');
+        if (priceMin) backendFilters.price_min = priceMin;
+        if (priceMax) backendFilters.price_max = priceMax;
+      }
+
+      // Handle area range (sqFt)
+      if (field === 'sqFt' && value) {
+        const [sqFtMin, sqFtMax] = value.split('-');
+        if (sqFtMin) backendFilters.sq_ft_min = sqFtMin;
+        if (sqFtMax) backendFilters.sq_ft_max = sqFtMax;
+      } else if (updatedFilters.sqFt) {
+        const [sqFtMin, sqFtMax] = updatedFilters.sqFt.split('-');
+        if (sqFtMin) backendFilters.sq_ft_min = sqFtMin;
+        if (sqFtMax) backendFilters.sq_ft_max = sqFtMax;
+      }
       
       // Handle bedrooms - special case for "4+" to filter 4 or more
       if (updatedFilters.bedrooms) {
@@ -144,51 +214,76 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
   const formatRangeDisplay = (value, isPrice = false) => {
     if (!value) return "";
-    const [min, max] = value.split("-");
     
-    if (min && max) {
-      if (isPrice) {
-        return `$${formatNumber(min)} - $${formatNumber(max)}`;
+    // Handle the case where value is already a range string like "min-max"
+    if (typeof value === 'string' && value.includes('-')) {
+      const [min, max] = value.split('-')
+        .map(part => part.trim())
+        .filter(part => part !== '');
+      
+      if (min && max) {
+        if (isPrice) {
+          return `${formatNumber(min)} - ${formatNumber(max)}`;
+        }
+        return `${formatNumber(min)} - ${formatNumber(max)}`;
       }
-      return `${formatNumber(min)} - ${formatNumber(max)}`;
-    }
-    if (min) {
-      if (isPrice) {
-        return `From $${formatNumber(min)}`;
+      if (min) {
+        if (isPrice) {
+          return `From ${formatNumber(min)}`;
+        }
+        return `From ${formatNumber(min)}`;
       }
-      return `From ${formatNumber(min)}`;
-    }
-    if (max) {
-      if (isPrice) {
-        return `Up to $${formatNumber(max)}`;
+      if (max) {
+        if (isPrice) {
+          return `Up to ${formatNumber(max)}`;
+        }
+        return `Up to ${formatNumber(max)}`;
       }
-      return `Up to ${formatNumber(max)}`;
     }
+    
+    // Handle the case where value is a single number
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue)) {
+      return formatNumber(value);
+    }
+    
     return "";
   };
 
+  // Clear a specific filter
   const clearFilter = (field) => {
-    const updatedFilters = { ...filters, [field]: "" };
-    setFilters(updatedFilters);
+    // Create a new filters object without the field being cleared
+    const { [field]: _, ...remainingFilters } = filters;
+    setFilters({
+      ...remainingFilters,
+      // Reset the cleared field to empty string
+      [field]: ""
+    });
     
     // Format the filters to match backend expectations
     const backendFilters = {
-      property_type: updatedFilters.propertyType || null,
-      bedrooms: updatedFilters.bedrooms || null,
-      bathrooms: updatedFilters.bathrooms || null,
-      location: updatedFilters.searchQuery || null,
+      property_type: field === 'propertyType' ? null : (filters.propertyType || null),
+      bedrooms: field === 'bedrooms' ? null : (filters.bedrooms || null),
+      bathrooms: field === 'bathrooms' ? null : (filters.bathrooms || null),
+      location: field === 'searchQuery' ? null : (filters.searchQuery || null),
     };
 
     // Handle price range
-    if (updatedFilters.price) {
-      const [priceMin, priceMax] = updatedFilters.price.split('-');
+    if (field === 'price') {
+      backendFilters.price_min = null;
+      backendFilters.price_max = null;
+    } else if (filters.price) {
+      const [priceMin, priceMax] = filters.price.split('-');
       backendFilters.price_min = priceMin || null;
       backendFilters.price_max = priceMax || null;
     }
 
     // Handle sqFt range
-    if (updatedFilters.sqFt) {
-      const [sqFtMin, sqFtMax] = updatedFilters.sqFt.split('-');
+    if (field === 'sqFt') {
+      backendFilters.sq_ft_min = null;
+      backendFilters.sq_ft_max = null;
+    } else if (filters.sqFt) {
+      const [sqFtMin, sqFtMax] = filters.sqFt.split('-');
       backendFilters.sq_ft_min = sqFtMin || null;
       backendFilters.sq_ft_max = sqFtMax || null;
     }
@@ -204,6 +299,25 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     onFilterChange(Object.keys(filteredParams).length === 0 ? null : filteredParams);
   };
 
+  // Handle price range apply
+  const handlePriceApply = (value) => {
+    setFilters(prev => ({
+      ...prev,
+      price: value || ""
+    }));
+    onFilterChange({ ...filters, price: value });
+    setShowPricePopup(false);
+  };
+
+  // Handle area range apply
+  const handleSqFtApply = (value) => {
+    setFilters(prev => ({
+      ...prev,
+      sqFt: value || ""
+    }));
+    onFilterChange({ ...filters, sqFt: value });
+    setShowSqFtPopup(false);
+  };
 
   const handleLocationSearch = useCallback(
     debounce(async (query) => {
@@ -215,33 +329,101 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
       setIsLoading(true);
       try {
-        const response = await fetch(`${LOCATION_SEARCH_API}?query=${encodeURIComponent(query)}`);
+        // First try searching by location name only
+        let response = await fetch(`${LOCATION_SEARCH_API}?search=location:${encodeURIComponent(query)}`);
         
-        // Check if response is ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // Check if response is JSON
-        const contentType = response.headers.get("content-type");
+        let contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
           throw new Error("Response is not JSON");
         }
         
-        const data = await response.json();
+        let data = await response.json();
+        console.log('Location API Response:', data);
         
-        // Handle both array and object response formats
-        const locations = data.locations || data || [];
+        // If no results found by location, try searching by title
+        if ((!data || (Array.isArray(data) && data.length === 0) || 
+             (data.data && data.data.length === 0) ||
+             (data.locations && data.locations.length === 0))) {
+          
+          response = await fetch(`${LOCATION_SEARCH_API}?search=title:${encodeURIComponent(query)}`);
+          
+          if (response.ok) {
+            contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+              const titleData = await response.json();
+              console.log('Title Search Response:', titleData);
+              
+              // If we got results from title search, use them
+              if (titleData && 
+                  ((Array.isArray(titleData) && titleData.length > 0) ||
+                   (titleData.data && titleData.data.length > 0) ||
+                   (titleData.locations && titleData.locations.length > 0))) {
+                data = titleData;
+              }
+            }
+          }
+        }
         
-        // Transform location data to handle both string and object formats
+        let locations = [];
+        
+        // Handle array response (could be array of properties or locations)
+        if (Array.isArray(data)) {
+          // If it's an array of properties with title and locations
+          if (data.length > 0 && data[0].title && Array.isArray(data[0].locations)) {
+            // Extract unique locations from all properties
+            const allLocations = new Set();
+            data.forEach(property => {
+              if (Array.isArray(property.locations)) {
+                property.locations.forEach(loc => {
+                  if (loc) allLocations.add(loc);
+                });
+              }
+            });
+            locations = Array.from(allLocations);
+          } else {
+            // If it's just a flat array of locations
+            locations = data;
+          }
+        } 
+        // Handle object response
+        else if (data && typeof data === 'object') {
+          // If it's a single property with locations array
+          if (Array.isArray(data.locations)) {
+            locations = data.locations.filter(Boolean);
+          }
+          // If it's a paginated response with data array
+          else if (Array.isArray(data.data)) {
+            locations = data.data;
+          }
+          // If no specific structure found, try to extract values
+          else if (Object.keys(data).length > 0) {
+            locations = Object.values(data).filter(Boolean);
+          }
+        }
+        
+        // Ensure we have an array before proceeding
+        if (!Array.isArray(locations)) {
+          console.error('Unexpected locations format:', locations);
+          locations = [];
+        }
+        
+        // Transform locations to strings, handling different formats
         const transformedLocations = locations.map(location => {
-          if (typeof location === 'string') {
-            return location;
-          } else if (location && typeof location === 'object') {
-            return location.title || location.name || location.location || JSON.stringify(location);
+          if (!location) return '';
+          if (typeof location === 'string') return location;
+          if (typeof location === 'object') {
+            // Try to get a meaningful string representation
+            return location.name || location.title || location.location || 
+                   location.label || location.value || 
+                   (location.locations && location.locations[0]) || // Handle nested locations
+                   JSON.stringify(location);
           }
           return String(location);
-        });
+        }).filter(Boolean); // Remove any empty strings
         
         setMatchingLocations(transformedLocations);
         // Always show dropdown if we're loading or have results
@@ -292,21 +474,11 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <input
             type="text"
-            placeholder="City, Building or community"
+            placeholder="Search by location or property title"
             className={styles.searchInput}
-            value={filters.searchQuery}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFilters(prev => ({ ...prev, searchQuery: value }));
-              handleLocationSearch(value);
-            }}
+            value={searchQuery}
+            onChange={handleSearch}
             onFocus={() => {
-              setShowLocationDropdown(true);
-              if (filters.searchQuery) {
-                handleLocationSearch(filters.searchQuery);
-              }
-            }}
-            onClick={() => {
               setShowLocationDropdown(true);
               if (filters.searchQuery) {
                 handleLocationSearch(filters.searchQuery);
@@ -347,33 +519,40 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             )}
           </div>
 
-          <div className={styles.filterBtnWrapper}>
-            <button
-              className={`${styles.pricebutton} ${filters.price ? styles.active : ''}`}
-              onClick={() => {
-                setShowPricePopup(!showPricePopup);
-                setShowSqFtPopup(false);
-              }}
-            >
-              {filters.price ? (
-                <span className={styles.value}>{formatRangeDisplay(filters.price, true)}</span>
-              ) : (
-               <span>Price</span>
-              )}
-              {filters.price && (
-                <span
-                  className={styles.clearFilterButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    clearFilter("price");
-                  }}
-                >
-                  ×
-                </span>
-              )}
-            </button>
+          <div className={styles.filterWithClear}>
+            <div style={{ position: 'relative' }}>
+              <button
+                className={`${styles.filterBtn} ${filters.price ? styles.active : ''}`}
+                style={{ paddingRight: filters.price ? '30px' : '16px', position: 'relative' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPricePopup(!showPricePopup);
+                  setShowSqFtPopup(false);
+                }}
+              >
+                {filters.price && (
+                  <button 
+                    className={styles.clearButton}
+                    style={{ position: 'absolute', left: 0, top: 10, zIndex: 2 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearFilter("price");
+                      setShowPricePopup(false);
+                    }}
+                  >
+                    ×
+                  </button>
+                )}
+                {filters.price ? (
+                  <span className={styles.value} style={{ paddingRight: '10px' }}>
+                    {`AED ${formatRangeDisplay(filters.price)}`}
+                  </span>
+                ) : (
+                  <span>Price</span>
+                )}
+              </button>
+            </div>
           </div>
-
           <div className={styles.filterWithClear}>
             <select
               className={`${styles.filterBtn}`}
@@ -434,31 +613,40 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
             )}
           </div>
 
-          <div className={styles.filterBtnWrapper}>
-            <button
-              className={`${styles.areaButton} ${filters.sqFt ? styles.active : ''}`}
-              onClick={() => {
-                setShowSqFtPopup(!showSqFtPopup);
-                setShowPricePopup(false);
-              }}
-            >
-              {filters.sqFt ? (
-                <span className={styles.value}>{formatRangeDisplay(filters.sqFt)}</span>
-              ) : (
-               <span>Area</span>
-              )}
-              {filters.sqFt && (
-                <span
-                  className={styles.clearFilterButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    clearFilter("sqFt");
-                  }}
-                >
-                  ×
-                </span>
-              )}
-            </button>
+          <div className={styles.filterWithClear}>
+            <div style={{ position: 'relative' }}>
+              <button
+                className={`${styles.filterBtn} ${filters.sqFt ? styles.active : ''}`}
+                style={{ paddingRight: filters.sqFt ? '30px' : '16px', position: 'relative' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowSqFtPopup(!showSqFtPopup);
+                  setShowPricePopup(false);
+                }}
+              >
+                {filters.sqFt && (
+                  <button 
+                    className={styles.clearButton}
+                    style={{ position: 'absolute', left: 0, top: 10, zIndex: 2 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearFilter("sqFt");
+                      setShowSqFtPopup(false);
+                    }}
+                  >
+                    ×
+                  </button>
+                )}
+                {filters.sqFt ? (
+                  <span className={styles.value} style={{ paddingRight: '10px' }}>
+                    {`${formatRangeDisplay(filters.sqFt)} sq.ft`}
+                  </span>
+                ) : (
+                  <span>Area</span>
+                )}
+              </button>
+            </div>
+           
           </div>
         </div>
       </div>
