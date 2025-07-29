@@ -639,19 +639,63 @@ select.filterBtn {
   max-width: 300px;
 }
 
+.locationDropdown {
+  position: absolute;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 4px;
+  width: 100%;
+  padding: 8px 0;
+}
+
 .locationItem {
-  padding: 8px 16px;
+  padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   color: #07151F;
-  margin-top: 24px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.locationItem:last-child {
+  border-bottom: none;
 }
 
 .locationItem:hover {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
+}
+
+.propertyItem {
+  padding-left: 30px;
+  background-color: #f8f9fa;
+}
+
+.propertyBadge {
+  background-color: #2a5b84;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.loadingItem {
+  padding: 10px 15px;
+  color: #666;
+  font-style: italic;
 }
 
 

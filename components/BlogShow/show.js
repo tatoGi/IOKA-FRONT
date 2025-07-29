@@ -166,7 +166,7 @@ const BlogShow = ({ blogData }) => {
           </div>
           <div className={`d-block d-md-none ${styles.similarArticles}`}>
             <div className={styles.similarArticles_header}>
-              <h3>Similar Articles</h3>
+              <span>Similar Articles</span>
               <span>See All</span>
             </div>
 
