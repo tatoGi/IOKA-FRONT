@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import debounce from 'lodash/debounce';
 import styles from "./SearchRental.module.css";
-import { RENTAL_LOCATION_SEARCH_API, FILTER_RENTAL_RESALE_API } from "@/routes/apiRoutes";
+import { RENTAL_LOCATION_SEARCH_API } from "@/routes/apiRoutes";
 
 // Add a style tag to hide empty options when dropdown is open
 const hideEmptyOptionsStyle = `
@@ -319,7 +319,6 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     setShowSqFtPopup(false);
   };
 
-  // Handle search for both title and location
   const handleLocationSearch = useCallback(
     debounce(async (query) => {
       if (!query.trim()) {
@@ -330,65 +329,125 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
       setIsLoading(true);
       try {
-        // Search by both title and location
-        const url = `${FILTER_RENTAL_RESALE_API}?q=${encodeURIComponent(query)}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
+        // First try searching by location name only
+        let response = await fetch(`${RENTAL_LOCATION_SEARCH_API}?search=location:${encodeURIComponent(query)}`);
         
-        // Process the response to extract both titles and locations
-        let results = [];
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
-        // If the response is an array, use it directly
-        if (Array.isArray(data)) {
-          results = data;
-        } 
-        // If the response is an object, look for common data structures
-        else if (data && typeof data === 'object') {
-          // Check for properties that might contain the results
-          if (Array.isArray(data.data)) {
-            results = data.data;
-          } else if (Array.isArray(data.results)) {
-            results = data.results;
-          } else if (Array.isArray(data.items)) {
-            results = data.items;
-          } else if (Array.isArray(data.properties)) {
-            results = data.properties;
-          } else if (Array.isArray(data.locations)) {
-            results = data.locations;
-          } else if (Object.keys(data).length > 0) {
-            // If no standard array found, use object values
-            results = Object.values(data);
+        let contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Response is not JSON");
+        }
+        
+        let data = await response.json();
+        console.log('Location API Response:', data);
+        
+        // If no results found by location, try searching by title
+        if ((!data || (Array.isArray(data) && data.length === 0) || 
+             (data.data && data.data.length === 0) ||
+             (data.locations && data.locations.length === 0))) {
+          
+          response = await fetch(`${RENTAL_LOCATION_SEARCH_API}?search=title:${encodeURIComponent(query)}`);
+          
+          if (response.ok) {
+            contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+              const titleData = await response.json();
+              console.log('Title Search Response:', titleData);
+              
+              // If we got results from title search, use them
+              if (titleData && 
+                  ((Array.isArray(titleData) && titleData.length > 0) ||
+                   (titleData.data && titleData.data.length > 0) ||
+                   (titleData.locations && titleData.locations.length > 0))) {
+                data = titleData;
+              }
+            }
           }
         }
         
-        if (!Array.isArray(results)) results = [];
+        let locations = [];
         
-        // Transform results to a consistent format
-        const transformedResults = results.map(item => {
-          if (!item) return null;
-          
-          // If it's a string, use it as is
-          if (typeof item === 'string') return { type: 'location', value: item };
-          
-          // If it's an object, extract relevant fields
-          if (typeof item === 'object') {
-            return {
-              type: item.type || 'property',
-              value: item.title || item.name || item.location || item.label || item.value || 
-                     (item.locations && item.locations[0]) || JSON.stringify(item),
-              original: item
-            };
+        // Handle array response (could be array of properties or locations)
+        if (Array.isArray(data)) {
+          // If it's an array of properties with title and locations
+          if (data.length > 0 && data[0].title && Array.isArray(data[0].locations)) {
+            // Extract unique locations from all properties
+            const allLocations = new Set();
+            data.forEach(property => {
+              if (Array.isArray(property.locations)) {
+                property.locations.forEach(loc => {
+                  if (loc) allLocations.add(loc);
+                });
+              }
+            });
+            locations = Array.from(allLocations);
+          } else {
+            // If it's just a flat array of locations
+            locations = data;
           }
-          
-          return { type: 'unknown', value: String(item) };
-        }).filter(Boolean);
+        } 
+        // Handle object response
+        else if (data && typeof data === 'object') {
+          // If it's a single property with locations array
+          if (Array.isArray(data.locations)) {
+            locations = data.locations.filter(Boolean);
+          }
+          // If it's a paginated response with data array
+          else if (Array.isArray(data.data)) {
+            locations = data.data;
+          }
+          // If no specific structure found, try to extract values
+          else if (Object.keys(data).length > 0) {
+            locations = Object.values(data).filter(Boolean);
+          }
+        }
         
-        setMatchingLocations(transformedResults);
+        // Ensure we have an array before proceeding
+        if (!Array.isArray(locations)) {
+          console.error('Unexpected locations format:', locations);
+          locations = [];
+        }
+        
+        // Transform locations to strings, handling different formats
+        const transformedLocations = locations.map(location => {
+          if (!location) return '';
+          if (typeof location === 'string') return location;
+          if (typeof location === 'object') {
+            // Try to get a meaningful string representation
+            return location.name || location.title || location.location || 
+                   location.label || location.value || 
+                   (location.locations && location.locations[0]) || // Handle nested locations
+                   JSON.stringify(location);
+          }
+          return String(location);
+        }).filter(Boolean); // Remove any empty strings
+        
+        setMatchingLocations(transformedLocations);
+        // Always show dropdown if we're loading or have results
         setShowLocationDropdown(true);
       } catch (error) {
-        console.error('Search error:', error);
-        setMatchingLocations([]);
+        console.error('Error fetching locations:', error);
+        
+        // Fallback: provide some basic location suggestions
+        const fallbackLocations = [
+          'Dubai Marina',
+          'Palm Jumeirah',
+          'Downtown Dubai',
+          'JBR',
+          'Business Bay',
+          'Dubai Hills Estate',
+          'Arabian Ranches',
+          'Emirates Hills',
+          'Meadows',
+          'Springs'
+        ].filter(location => 
+          location.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        setMatchingLocations(fallbackLocations);
         setShowLocationDropdown(true);
       } finally {
         setIsLoading(false);
@@ -397,28 +456,12 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
     []
   );
 
-  const handleLocationSelect = (result) => {
-    // Extract the value from the result
-    const value = typeof result === 'object' ? result.value : result;
-    
-    // Update the search query
-    setSearchQuery(value);
+  const handleLocationSelect = (location) => {
+    // Extract the location title if it's an object, otherwise use the string
+    const locationValue = typeof location === 'object' ? location.title : location;
+    setFilters(prev => ({ ...prev, searchQuery: locationValue }));
     setShowLocationDropdown(false);
-    
-    // If we have a result object with type information
-    if (typeof result === 'object') {
-      if (result.type === 'property' && result.original) {
-        // If it's a property, we might want to handle it differently
-        // For example, you might want to navigate directly to the property
-        handleFilterChange("title", value);
-      } else {
-        // For locations, use the location filter
-        handleFilterChange("location", value);
-      }
-    } else {
-      // Fallback to location search for backward compatibility
-      handleFilterChange("location", value);
-    }
+    handleFilterChange("searchQuery", locationValue);
   };
 
   return (
@@ -431,7 +474,7 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
 
           <input
             type="text"
-            placeholder="Search by location, property title, or keywords"
+            placeholder="Search by location or property title"
             className={styles.searchInput}
             value={searchQuery}
             onChange={handleSearch}
@@ -626,21 +669,15 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
           {isLoading ? (
             <div className={styles.locationItem}>Loading...</div>
           ) : matchingLocations && matchingLocations.length > 0 ? (
-            matchingLocations.map((result, index) => {
-              const displayText = typeof result === 'object' ? result.value : result;
-              const isProperty = typeof result === 'object' && result.type === 'property';
-              
-              return (
-                <div
-                  key={index}
-                  className={`${styles.locationItem} ${isProperty ? styles.propertyItem : ''}`}
-                  onClick={() => handleLocationSelect(result)}
-                >
-                  {isProperty && <span className={styles.propertyBadge}>Property</span>}
-                  {displayText}
-                </div>
-              );
-            })
+            matchingLocations.map((location, index) => (
+              <div
+                key={index}
+                className={styles.locationItem}
+                onClick={() => handleLocationSelect(location)}
+              >
+                {typeof location === 'object' ? location.title || location.name : location}
+              </div>
+            ))
           ) : (
             <div className={styles.locationItem}>
               No locations found

@@ -95,6 +95,7 @@ const Rental_Resale = () => {
   }, [topProperties]);
 
   const fetchData = async (page, filterParams = null) => {
+    console.log('fetchData called with page:', page, 'filters:', filterParams);
     setIsLoading(true);
     try {
       // Use FILTER_RENTAL_RESALE_API when filters are present
@@ -109,6 +110,15 @@ const Rental_Resale = () => {
         // Handle property type
         if (filterParams.property_type) {
           queryParams.append("property_type", filterParams.property_type);
+        }
+
+        // Handle exact ID match if provided
+        if (filterParams.id) {
+          queryParams.append("id", filterParams.id);
+        }
+        // Handle title search - use exact match
+        else if (filterParams.title) {
+          queryParams.append("title", `=${filterParams.title}`);
         }
 
         // Handle price range
@@ -143,11 +153,43 @@ const Rental_Resale = () => {
         }
       }
 
-      const response = await axios.get(`${apiUrl}?${queryParams.toString()}`);
-      const data = response.data.data;
-      setCardData(Array.isArray(data) ? data : [data]);
-      setCurrentPage(response.data.current_page);
-      setTotalPages(response.data.last_page);
+      // If we have an ID filter, use it to get a specific property
+      if (filterParams && filterParams.id) {
+        queryParams.append('id', filterParams.id);
+      }
+
+      const requestUrl = `${apiUrl}?${queryParams.toString()}`;
+      console.log('Making API request to:', requestUrl);
+      const response = await axios.get(requestUrl);
+      const responseData = response.data;
+      console.log('API response:', responseData);
+      
+      // Handle the response data
+      if (responseData) {
+        // The API returns data directly in the response
+        const data = responseData.data;
+        
+        // Make sure we always work with an array
+        const resultData = Array.isArray(data) ? data : [data].filter(Boolean);
+        
+        console.log('Setting card data:', resultData);
+        setCardData(resultData);
+        
+        // Update pagination if available in the response
+        if (responseData.current_page !== undefined) {
+          setCurrentPage(responseData.current_page);
+          setTotalPages(responseData.last_page || 1);
+        } else {
+          // If no pagination data, assume we have all results on one page
+          setCurrentPage(1);
+          setTotalPages(1);
+        }
+      } else {
+        console.log('No data in response');
+        setCardData([]);
+        setCurrentPage(1);
+        setTotalPages(1);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       setCardData([]); // Clear data on error
@@ -540,7 +582,36 @@ const Rental_Resale = () => {
           )}
 
           <SearchRental
-            onFilterChange={handleFilterChange}
+            onFilterChange={(filters) => {
+              console.log('Search filters changed:', filters);
+              handleFilterChange(filters);
+              // Trigger a new search when filters change
+              fetchData(1, filters);
+            }}
+            onSearch={(searchParams) => {
+              console.log('Search triggered with params:', searchParams);
+              
+              // Handle both string (for backward compatibility) and object search params
+              let filters = {};
+              
+              if (typeof searchParams === 'object' && searchParams !== null) {
+                // If we have an ID, use that for exact matching
+                if (searchParams.id) {
+                  filters.id = searchParams.id;
+                }
+                // If we have a title, include that too
+                if (searchParams.title) {
+                  filters.title = searchParams.title;
+                }
+              } else if (typeof searchParams === 'string') {
+                // Backward compatibility: if we get a string, treat it as a title
+                filters.title = searchParams;
+              }
+              
+              console.log('Applying search filters:', filters);
+              handleFilterChange(filters);
+              fetchData(1, filters);
+            }}
             filterOptions={filterOptions}
             showPricePopup={showPricePopup}
             setShowPricePopup={setShowPricePopup}
