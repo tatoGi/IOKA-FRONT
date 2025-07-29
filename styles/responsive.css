@@ -206,8 +206,8 @@
     letter-spacing: 0%;
 
   }
-
-  .news-item {
+  /* News section */
+  .desktop-news-grid .news-item {
     max-width: 305px;
   }
 
