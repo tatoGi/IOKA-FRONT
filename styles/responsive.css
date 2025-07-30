@@ -2149,10 +2149,12 @@
   }
 
   .breadcrumb-section {
-    margin-top: 70px;
+    margin-top: 0;
     padding: 8px 0;
   }
-
+  .scroll-header{
+    height: 70px;
+  }
   .mobile-burger-menu {
     right: 24px;
     display: block;

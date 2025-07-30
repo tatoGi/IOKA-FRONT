@@ -855,12 +855,7 @@
     transition: 0.3s;
   }
 
-  .testimonialWrapper {
-    max-width: 75rem;
-    height: 22rem;
-    margin-left: 8rem;
-    padding: 33px;
-  }
+
 
   .testimonialImageContainer {
     position: absolute;
@@ -869,10 +864,7 @@
     z-index: 2;
   }
 
-  .testimonialImageWrapper {
-    width: 20rem;
-    height: 12rem;
-  }
+
 
   .testimonialName {
     font-size: 22px;
