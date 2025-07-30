@@ -13,7 +13,7 @@ const hideEmptyOptionsStyle = `
   }
 `;
 
-const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {}, onSearch }) => {
+const SearchRental = ({ onFilterChange, filterOptions, showPricePopup, setShowPricePopup, showSqFtPopup, setShowSqFtPopup, currentFilters = {}, onSearch }) => {
   // Add style to head
   useEffect(() => {
     const styleElement = document.createElement('style');
@@ -702,4 +702,4 @@ const SearchSection = ({ onFilterChange, filterOptions, showPricePopup, setShowP
   );
 };
 
-export default SearchSection;
+export default SearchRental;

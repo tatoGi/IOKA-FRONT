@@ -116,9 +116,9 @@ const Rental_Resale = () => {
         if (filterParams.id) {
           queryParams.append("id", filterParams.id);
         }
-        // Handle title search - use exact match
+        // Handle title search - use partial matching
         else if (filterParams.title) {
-          queryParams.append("title", `=${filterParams.title}`);
+          queryParams.append("title", filterParams.title);
         }
 
         // Handle price range
