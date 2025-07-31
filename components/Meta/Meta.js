@@ -5,19 +5,13 @@ import Script from "next/script";
 import usePageMetadata from "@/hooks/usePageMetadata";
 
 const Meta = ({ 
-  title = 'IOKA Real Estate',
-  description = 'Discover premium real estate properties with IOKA',
-  keywords = '',
-  og_title = '',
-  og_description = '',
-  og_image = '',
-  twitter_card = 'summary_large_image',
-  twitter_title = '',
-  twitter_description = '',
-  twitter_image = '',
-  // Pass the slug and type to fetch metadata dynamically
+  // For dynamic API fetching
   slug: propSlug = '',
-  type = 'page'
+  type = 'page',
+  // For direct data passing (recommended)
+  data = null,
+  // Legacy support
+  blogData = null
 }) => {
   const router = useRouter();
   const { asPath } = router;
@@ -25,12 +19,14 @@ const Meta = ({
   // Use provided slug or get from path
   const slug = propSlug || (asPath === '/' ? 'home' : asPath.replace(/^\//, '').split('?')[0]);
   
-  // Get metadata using the hook
+  // Get metadata using the hook only if no direct data is provided
+  const directData = data || blogData;
+  const shouldFetchMetadata = !directData;
   const { 
     meta: pageMetadata, 
     loading, 
     error 
-  } = usePageMetadata(slug, type);
+  } = usePageMetadata(shouldFetchMetadata ? slug : '', shouldFetchMetadata ? type : '');
   
   // Log any metadata fetching errors and handle loading state
   useEffect(() => {
@@ -39,8 +35,8 @@ const Meta = ({
     }
   }, [error]);
   
-  // Don't render anything while loading in production
-  if (process.env.NODE_ENV === 'production' && loading) {
+  // Don't render anything while loading in production (only if not using direct data)
+  if (process.env.NODE_ENV === 'production' && loading && !directData) {
     return null;
   }
   
@@ -59,20 +55,77 @@ const Meta = ({
   const defaultDescription = 'Discover premium real estate properties with IOKA';
   const defaultImage = `${process.env.NEXT_PUBLIC_API_URL}/assets/img/ioka-logo-white.png`;
   
-  // Set metadata values with fallbacks
-  const metaTitle = pageMetadata?.title || title || defaultTitle;
-  const metaDescription = pageMetadata?.description || description || defaultDescription;
-  const metaKeywords = pageMetadata?.keywords || keywords || '';
+  // Handle different types of data (blog, offplan, rental, etc.)
+  let metaTitle, metaDescription, metaKeywords, ogTitle, ogDesc, ogImg, twitterTitle, twitterDesc, twitterImg, twitterCardType;
+  let contentData = null;
+  let contentType = 'website';
   
-  // Set OpenGraph and Twitter data with fallbacks
-  const ogTitle = pageMetadata?.og?.title || og_title || metaTitle || defaultTitle;
-  const ogDesc = pageMetadata?.og?.description || og_description || metaDescription || defaultDescription;
-  const ogImg = pageMetadata?.og?.image || og_image || defaultImage;
-  
-  const twitterTitle = pageMetadata?.twitter?.title || twitter_title || ogTitle || defaultTitle;
-  const twitterDesc = pageMetadata?.twitter?.description || twitter_description || ogDesc || defaultDescription;
-  const twitterImg = pageMetadata?.twitter?.image || twitter_image || ogImg || defaultImage;
-  const twitterCard = pageMetadata?.twitter?.card || twitter_card || 'summary_large_image';
+  if (directData) {
+    // Handle blog data structure
+    if (directData.blog) {
+      contentData = directData.blog;
+      contentType = 'article';
+    }
+    // Handle offplan data structure
+    else if (directData.offplan) {
+      contentData = directData.offplan;
+      contentType = 'website';
+    }
+    // Handle rental data structure
+    else if (directData.rental) {
+      contentData = directData.rental;
+      contentType = 'website';
+    }
+    // Handle resale data structure
+    else if (directData.resale) {
+      contentData = directData.resale;
+      contentType = 'website';
+    }
+    // Handle direct content data
+    else {
+      contentData = directData;
+      contentType = type === 'blog' ? 'article' : 'website';
+    }
+    
+    if (contentData) {
+      const metadata = contentData.metadata || {};
+      
+      // Extract metadata with fallbacks
+      metaTitle = metadata.meta_title || contentData.title || contentData.name || defaultTitle;
+      metaDescription = metadata.meta_description || contentData.subtitle || contentData.description ||
+        (contentData.body ? contentData.body.replace(/<[^>]*>/g, '').substring(0, 160) + '...' : defaultDescription);
+      metaKeywords = metadata.meta_keywords || '';
+      
+      // OpenGraph data
+      ogTitle = metadata.og_title || metaTitle;
+      ogDesc = metadata.og_description || metaDescription;
+      ogImg = metadata.og_image || 
+        (contentData.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.banner_image}` : 
+         contentData.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.image}` : 
+         contentData.main_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.main_image}` : defaultImage);
+      
+      // Twitter data
+      twitterTitle = metadata.twitter_title || metaTitle;
+      twitterDesc = metadata.twitter_description || metaDescription;
+      twitterImg = metadata.twitter_image || ogImg;
+      twitterCardType = metadata.twitter_card || 'summary_large_image';
+    }
+  } else {
+    // Use fetched metadata or fallback to defaults
+    metaTitle = pageMetadata?.title || defaultTitle;
+    metaDescription = pageMetadata?.description || defaultDescription;
+    metaKeywords = pageMetadata?.keywords || '';
+    
+    // Set OpenGraph and Twitter data with fallbacks
+    ogTitle = pageMetadata?.og?.title || metaTitle;
+    ogDesc = pageMetadata?.og?.description || metaDescription;
+    ogImg = pageMetadata?.og?.image || defaultImage;
+    
+    twitterTitle = pageMetadata?.twitter?.title || ogTitle;
+    twitterDesc = pageMetadata?.twitter?.description || ogDesc;
+    twitterImg = pageMetadata?.twitter?.image || ogImg;
+    twitterCardType = pageMetadata?.twitter?.card || 'summary_large_image';
+  }
   
   return (
     <Head>
@@ -90,15 +143,24 @@ const Meta = ({
       <meta name="keywords" content={metaKeywords} />
       
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={contentType} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:title" content={ogTitle} />
       <meta property="og:description" content={ogDesc} />
       <meta property="og:image" content={ogImg} />
       <meta property="og:site_name" content="IOKA Real Estate" />
+      {contentData && contentType === 'article' && (
+        <>
+          <meta property="article:published_time" content={contentData.created_at} />
+          <meta property="article:modified_time" content={contentData.updated_at} />
+          {contentData.tags && contentData.tags.map((tag, index) => (
+            <meta key={index} property="article:tag" content={tag.replace('#', '')} />
+          ))}
+        </>
+      )}
 
       {/* Twitter */}
-      <meta property="twitter:card" content={twitterCard} />
+      <meta property="twitter:card" content={twitterCardType} />
       <meta property="twitter:url" content={currentUrl} />
       <meta property="twitter:title" content={twitterTitle} />
       <meta property="twitter:description" content={twitterDesc} />
@@ -110,6 +172,45 @@ const Meta = ({
       <link rel="canonical" href={currentUrl} />
       <link rel="icon" type="image/svg+xml" href="/assets/img/Tiffany-01.svg" />
       <link rel="alternate icon" href="/favicon.ico" />
+      
+      {/* JSON-LD Structured Data */}
+      {contentData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": contentType === 'article' ? "BlogPosting" : "WebPage",
+              "headline": contentData.title || contentData.name,
+              "description": metaDescription,
+              "image": ogImg,
+              "author": {
+                "@type": "Organization",
+                "name": "IOKA Real Estate"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "IOKA Real Estate",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": `${siteUrl}/assets/img/ioka-logo-white.png`
+                }
+              },
+              ...(contentType === 'article' && {
+                "datePublished": contentData.created_at,
+                "dateModified": contentData.updated_at,
+                "articleSection": "Real Estate",
+                "wordCount": contentData.body ? contentData.body.replace(/<[^>]*>/g, '').split(' ').length : 0
+              }),
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": currentUrl
+              },
+              "keywords": metaKeywords
+            })
+          }}
+        />
+      )}
       {/* Meta Pixel Code */}
       <script
         dangerouslySetInnerHTML={{

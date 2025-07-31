@@ -9,6 +9,7 @@ import success from "../../assets/img/succsess.svg";
 import { RENTAL_RESALE_RELATED_API } from "../../routes/apiRoutes";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import ShareIcons from "../ShareIcons/ShareIcons";
+import Meta from "../Meta/Meta";
 import Slider from "react-slick";
 
 // Custom arrow component for the slider
@@ -500,6 +501,7 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
 
   return (
     <>
+      <Meta data={{ rental: RENTAL_RESALE_DATA }} type="rental" />
       {isMobile && (
         <div className={styles.mobileGallery}>
           <div
@@ -1556,5 +1558,8 @@ const RentalResaleShowWithErrorBoundary = (props) => {
     return <div>Something went wrong. Please try again later.</div>;
   }
 };
+
+// Mark this component as having its own metadata
+RentalResaleShowWithErrorBoundary.hasMetadata = true;
 
 export default RentalResaleShowWithErrorBoundary;

@@ -10,7 +10,7 @@ export const getServerSideProps = async (context) => {
     }
     try {
         const response = await axios.get(`${BLOGS_API}/${slug}`);
-        
+       
         if (!response.data) {
             return { notFound: true };
         }
@@ -22,6 +22,7 @@ export const getServerSideProps = async (context) => {
 };
 
 const BlogShowPage = ({ blogData }) => {
+   
     const breadcrumbData = [
         { title: 'Home', path: '/' },
         { title: 'Blog', path: '/blog' },
@@ -34,5 +35,8 @@ const BlogShowPage = ({ blogData }) => {
         </div>
     );
 };
+
+// Mark this page as having its own metadata (via BlogShow component)
+BlogShowPage.hasMetadata = true;
 
 export default BlogShowPage;

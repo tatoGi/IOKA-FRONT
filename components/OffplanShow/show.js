@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ShareIcons from "../ShareIcons/ShareIcons";
+import Meta from "../Meta/Meta";
 
 const Map = dynamic(() => import("./Map"), { ssr: false });
 
@@ -308,6 +309,7 @@ const OffplanShow = ({ offplanData }) => {
 
   return (
     <>
+      <Meta data={offplanData} type="offplan" />
   {copyAlertoffplan && (
         <div className={style.copyAlertoffplan}>Link copied to clipboard!</div>
       )}
@@ -868,5 +870,8 @@ const OffplanShow = ({ offplanData }) => {
     </>
   );
 };
+
+// Mark this component as having its own metadata
+OffplanShow.hasMetadata = true;
 
 export default OffplanShow;

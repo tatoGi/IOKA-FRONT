@@ -8,9 +8,9 @@ import Image from "next/image";
 import ShareIcons from "../ShareIcons/ShareIcons";
 import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is correct
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
+import Meta from "../Meta/Meta";
 
 const BlogShow = ({ blogData }) => {
-
   const router = useRouter(); // Initialize useRouter
 
   if (!blogData) {
@@ -46,7 +46,9 @@ const BlogShow = ({ blogData }) => {
   };
 
   return (
-    <div className={styles.blogShowContainer}>
+    <>
+      <Meta data={blogData} type="blog" />
+      <div className={styles.blogShowContainer}>
       <div className={`d-none d-md-block container ${styles.blogShow}`}>
    
         {/* Container applied only for non-mobile resolutions */}
@@ -206,8 +208,12 @@ const BlogShow = ({ blogData }) => {
        
       </div>
     
-    </div>
+      </div>
+    </>
   );
 };
+
+// Mark this component as having its own metadata
+BlogShow.hasMetadata = true;
 
 export default BlogShow;

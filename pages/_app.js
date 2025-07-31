@@ -120,7 +120,8 @@ function App({ Component, pageProps }) {
   }
   return (
     <div>
-      <Meta />
+      {/* Only add default Meta if the page component doesn't have its own */}
+      {!Component.hasMetadata && <Meta />}
       <Header navigationData={appData.navigationData} />
       <Layout>
         <SharedLayout>
