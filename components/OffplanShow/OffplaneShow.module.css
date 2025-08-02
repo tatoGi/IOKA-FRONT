@@ -1300,6 +1300,12 @@
     text-align: start;
     margin-left: 10px;
   }
+  .qrbody img {
+    width: 150px;
+    height: 130px;
+    border-radius: 8px;
+
+  }
 }
 
 @media (max-width: 1400px) {
