@@ -339,7 +339,7 @@ const OffplanShow = ({ offplanData }) => {
       {/* Main Content */}
       <div className="container">
         <div className="row">
-          <div className="col-md-7">
+          <div className="col-lg-8 col-md-12 pe-lg-5">
             <div className={style.propertyDetails}>
               <h1>{offplanData.offplan.title}</h1>
               <div className={style.features}>
@@ -410,7 +410,7 @@ const OffplanShow = ({ offplanData }) => {
           </div>
          
           {/* Right Sidebar */}
-          <div className="col-md-5">
+          <div className="col-lg-4 col-md-12">
             {/* Agent Card */}
             <div className={style.qrCard}>
               <div className={style.personalInfo}>

@@ -1571,9 +1571,9 @@
 
 
   .qrCode {
-    width: 100px;
+    width: 80px;
     /* Adjust QR code size */
-    height: 100px;
+    height: 80px;
     /* Adjust QR code size */
     border-radius: 8px;
     /* Optional  : Add rounded corners */

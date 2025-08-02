@@ -73,6 +73,7 @@
 .propertyDetails {
   margin-top: 82px;
   margin-bottom: 30px;
+  max-width: 889px;
 }
 
 .propertyDetails h2 {
@@ -221,6 +222,8 @@
   margin-left: auto;
   margin-right: 0;
   max-width: 538px;
+  max-height: 243px;
+  height: 100%;
 }
 
 .qrCardmodern h3 {
@@ -1133,6 +1136,7 @@
   margin-bottom: 10.5px;
   border-bottom: 1px solid #E6EBED;
   padding-bottom: 12px;
+  margin-top: 10px;
 }
 
 .feature {

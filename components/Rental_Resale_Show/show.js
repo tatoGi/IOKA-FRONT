@@ -940,6 +940,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       }
                       alt="QR Code"
                       className={styles.qrCode}
+                      width={80}
+                      height={80}
                     />
 
                     {/* Reference and DLD Permit Number */}
