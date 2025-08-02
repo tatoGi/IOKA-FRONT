@@ -186,12 +186,14 @@
 }
 .filterWithClear {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
 }
 
 .filterWithClear .clearButton {
   position: absolute;
-  right: 30px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -200,18 +202,33 @@
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-  padding: 0 4px;
-  z-index: 1;
-  transition: color 0.2s;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  z-index: 2;
+  transition: all 0.2s ease;
+  pointer-events: auto;
 }
 
 .filterWithClear .clearButton:hover {
-  color: #333;
+  color: #fff;
+  background-color: #999;
 }
 
 .filterBtn {
   position: relative;
   padding-right: 30px !important;
+  min-width: 80px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  z-index: 1;
 }
 
 .filterBtn select {
@@ -564,6 +581,25 @@ select.filterBtn {
   margin-top: 24px;
 }
 
+.clearButton {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #F3F4F6;
+  color: #374151;
+  border: 1px solid #D1D5DB;
+  margin-right: auto;
+}
+
+.clearButton:hover {
+  background-color: #E5E7EB;
+}
+
 .cancelButton,
 .applyButton {
   padding: 12px 24px;
@@ -639,63 +675,19 @@ select.filterBtn {
   max-width: 300px;
 }
 
-.locationDropdown {
-  position: absolute;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 1000;
-  margin-top: 4px;
-  width: 100%;
-  padding: 8px 0;
-}
-
 .locationItem {
-  padding: 10px 15px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: background-color 0.2s;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   color: #07151F;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.locationItem:last-child {
-  border-bottom: none;
+  margin-top: 24px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .locationItem:hover {
-  background-color: #f8f9fa;
-}
-
-.propertyItem {
-  padding-left: 30px;
-  background-color: #f8f9fa;
-}
-
-.propertyBadge {
-  background-color: #2a5b84;
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-right: 8px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-}
-
-.loadingItem {
-  padding: 10px 15px;
-  color: #666;
-  font-style: italic;
+  background-color: #f5f5f5;
 }
 
 
