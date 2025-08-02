@@ -230,10 +230,11 @@
   font-size: 18px;
   color: #333;
   margin-bottom: 24px;
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   width: 100%;
   text-align: start;
-  padding: 0 16px;
+  /* padding: 0 0px; */
+  margin-left: 10px;
 }
 
 .qrbody {
