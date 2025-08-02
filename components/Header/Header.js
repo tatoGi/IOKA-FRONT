@@ -12,19 +12,19 @@ import { Montserrat } from 'next/font/google';
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 const Header = ({ navigationData }) => {
-  
+
   const [activeScroll, setActiveScroll] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  
+
   const normalizedPathname = pathname ? pathname.replace(/\/$/, "") : "";
   const homePage = navigationData.find((page) => page.type_id === 1);
-  const isHomePage = normalizedPathname === "/" || 
-                    normalizedPathname === "/#" || 
-                    (homePage && normalizedPathname === `/${homePage.slug}`);
-  
+  const isHomePage = normalizedPathname === "/" ||
+    normalizedPathname === "/#" ||
+    (homePage && normalizedPathname === `/${homePage.slug}`);
+
   const isSearchPage = normalizedPathname === "/search";
 
   const [inputValue, setInputValue] = useState("");
@@ -72,7 +72,7 @@ const Header = ({ navigationData }) => {
     e.stopPropagation();
     setIsMobileMenuOpen(prev => !prev);
     setIsSearchOpen(false); // Ensure search is closed when mobile menu is opened
-    
+
     // Add/remove body scroll lock
     if (!isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -90,7 +90,7 @@ const Header = ({ navigationData }) => {
 
     function handleScroll() {
       const currentScrollY = window.pageYOffset;
-      
+
       // For home page, add scroll-header only when scrolling
       if (currentScrollY >= 20) {
         setActiveScroll(true);
@@ -133,9 +133,9 @@ const Header = ({ navigationData }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isSearchOpen && 
-          !event.target.closest('.right-form') && 
-          !event.target.closest('.searchbtn')) {
+      if (isSearchOpen &&
+        !event.target.closest('.right-form') &&
+        !event.target.closest('.searchbtn')) {
         setIsSearchOpen(false);
         setInputValue("");
       }
@@ -163,40 +163,38 @@ const Header = ({ navigationData }) => {
 
   return (
     <>
-      <div className="maintenance-banner">
-        <span>This website is currently operating in testing mode—some features may be limited or subject to change.</span>
-      </div>
+
       <header className={activeScroll ? "scroll-header" : ""}>
         <div className="header-cont">
           <div className="container">
             <div className="header-box">
-            <Link href={logoLink} className="logo-img">
-              <div className="left-cont-image">
-                <div className="white-logo">
-                  <Image 
-                    src={Logo} 
-                    alt="logo" 
-                    title="IOKA Logo"
-                    width={138} 
-                    height={42} 
-                    priority={true}
-                    loading="eager"
-                    fetchPriority="high"
-                  />
+              <Link href={logoLink} className="logo-img">
+                <div className="left-cont-image">
+                  <div className="white-logo">
+                    <Image
+                      src={Logo}
+                      alt="logo"
+                      title="IOKA Logo"
+                      width={138}
+                      height={42}
+                      priority={true}
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  </div>
+                  <div className="dark-logo">
+                    <Image
+                      src={LogoDark}
+                      alt="logo"
+                      title="IOKA Logo"
+                      width={138}
+                      height={42}
+                      priority={true}
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  </div>
                 </div>
-                <div className="dark-logo">
-                  <Image 
-                    src={LogoDark} 
-                    alt="logo" 
-                    title="IOKA Logo"
-                    width={138} 
-                    height={42} 
-                    priority={true}
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                </div>
-              </div>
               </Link>
               {/* Mobile Burger Menu */}
               <div
@@ -212,53 +210,51 @@ const Header = ({ navigationData }) => {
                   <div className="burger-line"></div>
                 </div>
               </div>
-              <div className={`header-nav ${
-  isMobileView 
-    ? (isMobileMenuOpen ? "active" : "") 
-    : (isSearchOpen ? "shift-left" : "")
-}`}>
-  <ul>
-    {isMobileView ? (
-      // Mobile view menu items
-      mobilePages.map((page) => (
-        <Link href={`/${page.slug}`} key={page.id}>
-          <li
-            className={`mobile-menu-item ${
-              normalizedPathname === `/${page.slug}`
-                ? "active-link"
-                : ""
-            }`}
-            style={{ padding: '20px 0', fontSize: '18px' }}
-          >
-            <span>{page.title}</span>
-          </li>
-        </Link>
-      ))
-    ) : (
-      // Desktop view menu items
-      desktopPages.map((page) => (
-        <li
-          key={page.id}
-          className={
-            normalizedPathname === `/${page.slug}`
-              ? "active-link"
-              : ""
-          }
-        >
-          <Link href={`/${page.slug}`}>{page.title}</Link>
-        </li>
-      ))
-    )}
-  </ul>
-        </div>
-               
-            
+              <div className={`header-nav ${isMobileView
+                  ? (isMobileMenuOpen ? "active" : "")
+                  : (isSearchOpen ? "shift-left" : "")
+                }`}>
+                <ul>
+                  {isMobileView ? (
+                    // Mobile view menu items
+                    mobilePages.map((page) => (
+                      <Link href={`/${page.slug}`} key={page.id}>
+                        <li
+                          className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
+                              ? "active-link"
+                              : ""
+                            }`}
+                          style={{ padding: '20px 0', fontSize: '18px' }}
+                        >
+                          <span>{page.title}</span>
+                        </li>
+                      </Link>
+                    ))
+                  ) : (
+                    // Desktop view menu items
+                    desktopPages.map((page) => (
+                      <li
+                        key={page.id}
+                        className={
+                          normalizedPathname === `/${page.slug}`
+                            ? "active-link"
+                            : ""
+                        }
+                      >
+                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                      </li>
+                    ))
+                  )}
+                </ul>
+              </div>
+
+
 
               <div className="right-search-contact" style={{ height: "42px" }}>
                 <div className={`right-form ${isSearchOpen && !isMobileMenuOpen ? "active" : ""}`}>
                   <form onSubmit={handleSearch}>
-                    <label 
-                      htmlFor="header-search" 
+                    <label
+                      htmlFor="header-search"
                       className={`search-label ${isSearchOpen ? 'visible' : 'hidden'}`}
                     >
                     </label>
@@ -272,8 +268,8 @@ const Header = ({ navigationData }) => {
                       placeholder={isSearchOpen ? "Search..." : ""}
                       aria-label="Search properties"
                     />
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       className="searchbtn"
                       aria-label="Submit search"
                     >
@@ -302,45 +298,43 @@ const Header = ({ navigationData }) => {
             </div>
           </div>
         </div>
-        
-        <div className={`header-nav mobile-nav ${
-  isMobileView 
-    ? (isMobileMenuOpen ? "active" : "") 
-    : (isSearchOpen ? "shift-left" : "")
-}`}>
-  <ul>
-    {isMobileView ? (
-      // Mobile view menu items
-      mobilePages.map((page) => (
-        <Link href={`/${page.slug}`} key={page.id}>
-          <li
-            className={`mobile-menu-item ${
-              normalizedPathname === `/${page.slug}`
-                ? "active-link"
-                : ""
-            }`}
-            style={{ padding: '20px 0', fontSize: '18px' }}
-          >
-            <span>{page.title}</span>
-          </li>
-        </Link>
-      ))
-    ) : (
-      // Desktop view menu items
-      desktopPages.map((page) => (
-        <li
-          key={page.id}
-          className={
-            normalizedPathname === `/${page.slug}`
-              ? "active-link"
-              : ""
-          }
-        >
-          <Link href={`/${page.slug}`}>{page.title}</Link>
-        </li>
-      ))
-    )}
-  </ul>
+
+        <div className={`header-nav mobile-nav ${isMobileView
+            ? (isMobileMenuOpen ? "active" : "")
+            : (isSearchOpen ? "shift-left" : "")
+          }`}>
+          <ul>
+            {isMobileView ? (
+              // Mobile view menu items
+              mobilePages.map((page) => (
+                <Link href={`/${page.slug}`} key={page.id}>
+                  <li
+                    className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
+                        ? "active-link"
+                        : ""
+                      }`}
+                    style={{ padding: '20px 0', fontSize: '18px' }}
+                  >
+                    <span>{page.title}</span>
+                  </li>
+                </Link>
+              ))
+            ) : (
+              // Desktop view menu items
+              desktopPages.map((page) => (
+                <li
+                  key={page.id}
+                  className={
+                    normalizedPathname === `/${page.slug}`
+                      ? "active-link"
+                      : ""
+                  }
+                >
+                  <Link href={`/${page.slug}`}>{page.title}</Link>
+                </li>
+              ))
+            )}
+          </ul>
         </div>
       </header>
     </>

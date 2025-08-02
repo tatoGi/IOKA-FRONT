@@ -670,7 +670,7 @@
     height: 36px;
     padding: 6px 12px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 16px;
     -webkit-transition: width 0.3s ease;
     -o-transition: width 0.3s ease;
     transition: width 0.3s ease;
@@ -2270,6 +2270,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     color: #0A273B;
     font-size: 16px;
@@ -2735,4 +2736,19 @@ gap: 0;
     will-change: transform;
     transition: border-color 0.3s ease;
 }
+}
+
+/* Prevent iOS Safari zoom on input focus */
+@supports (-webkit-touch-callout: none) {
+  .right-form input {
+    font-size: 16px !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  .right-form.active input {
+    font-size: 16px !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
 }
