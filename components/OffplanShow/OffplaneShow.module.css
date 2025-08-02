@@ -1275,7 +1275,11 @@
   .interiorimage {
     max-width: 320px;
   }
-
+  .propertyDetails{
+    margin-top: 82px;
+    margin-bottom: 30px;
+    max-width: 748px;
+  }
   .modalContent {
     background-color: white;
     padding: 20px 208px;
@@ -1287,6 +1291,15 @@
     overflow-y: auto;
     height: 550px;
   }
+  .qrCardmodern{
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: 'Montserrat';
+    width: 100%;
+    text-align: start;
+    margin-left: 10px;
+  }
 }
 
 @media (max-width: 1400px) {
@@ -1296,8 +1309,9 @@
   }
 
   .qrbody img {
-    width: 149px !important;
-    height: 148px !important;
+    width: 150px;
+    height: 130px;
+    border-radius: 8px;
 
   }
 
