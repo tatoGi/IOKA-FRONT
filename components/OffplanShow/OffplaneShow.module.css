@@ -75,7 +75,15 @@
   margin-bottom: 30px;
   max-width: 889px;
 }
+.propertyDetails h1 {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 12px;
 
+}
 .propertyDetails h2 {
   font-family: 'Montserrat';
   font-weight: 600;
@@ -85,7 +93,16 @@
   margin-bottom: 12px;
 
 }
+.propertyDetails p {
+  font-family: 'Montserrat';
+font-weight: 500;
+font-style: Medium;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
 
+}
+  
 .pricing {
   display: -webkit-box;
   display: -ms-flexbox;
