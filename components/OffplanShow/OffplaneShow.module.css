@@ -4,13 +4,7 @@
 * Autoprefixer: v10.4.7
 * Browsers: last 4 version
 */
-.shareIconsWrapper {
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-  align-items: end;
-  text-align: end;
-}
+
 .offplanebanner {
   position: relative;
   width: 100%;
@@ -1923,6 +1917,22 @@ letter-spacing: 0%;
   .locationSection h4{
     margin-left: 24px;
   }
+  .propertyDetails h1{
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
+  .propertyDetails h3{
+    font-family: 'Montserrat';
+font-weight: 600;
+font-size: 18px;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
 }
 
 @media (max-width:480px) {
@@ -2264,12 +2274,7 @@ letter-spacing: 0%;
     width: auto;
   }
   
-  .shareIconsWrapper {
-    margin-left: 16px;
-    display: flex;
-    align-items: center;
-
-  }
+ 
 
   .contactBtn {
     border-radius: 28px;

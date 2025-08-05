@@ -543,19 +543,17 @@ const OffplanShow = ({ offplanData }) => {
           </div>
          
         </div>
-        <div className={style.shareIconsWrapper}>
-              <ShareIcons 
-                url={typeof window !== 'undefined' ? window.location.href : ''} 
-                title={offplanData?.offplan?.title || 'Check out this property'}
-              />
-            </div>
+        
+      
       </div>
-     
+ 
         <div className={style.line}></div>
 
         {/* Building Section */}
         {isMobile ? (
+          
         <div className={style.buildingSection}>
+             
           <div className="row">
             <div className="col-12 col-md-6">
               <Image
@@ -609,6 +607,12 @@ const OffplanShow = ({ offplanData }) => {
           ) : (
             <div className="container">
                <div className={style.buildingSection}>
+               <div className={style.shareIconsWrapper}>
+              <ShareIcons 
+                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                title={offplanData?.offplan?.title || 'Check out this property'}
+              />
+            </div>
           <div className="row">
             <div className="col-12 col-md-6">
               <Image
@@ -775,7 +779,12 @@ const OffplanShow = ({ offplanData }) => {
           )}
         </div>
       </div>
-
+      <div className={style.shareIconsWrapper}>
+              <ShareIcons 
+                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                title={offplanData?.offplan?.title || 'Check out this property'}
+              />
+            </div>
       {/* Other Properties */}
       <div className="container mb-5">
         <span className={style.sectionTitle}>Other Properties</span>

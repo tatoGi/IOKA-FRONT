@@ -74,14 +74,14 @@ const BlogShow = ({ blogData }) => {
         <Image
             src={
               isMobile
-                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
-                  blogData.blog.mobile_banner_image
-                )}`
+                ? blogData.blog.mobile_banner_image
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.mobile_banner_image)}`
+                  : blogData.blog.banner_image
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.banner_image)}`
+                    : baseimage
                 : blogData.blog.banner_image
-                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
-                  blogData.blog.banner_image
-                )}`
-                : baseimage
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(blogData.blog.banner_image)}`
+                  : baseimage
             }
           alt={blogData.blog.banner_image_alt || "Blog banner image"}
           width={800}
@@ -125,12 +125,14 @@ const BlogShow = ({ blogData }) => {
                       <Image
                         src={
                           isMobile
-                            ? `${process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(card.mobile_image)}`
+                            ? card.mobile_image
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.mobile_image)}`
+                              : card.image
+                                ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
+                                : baseimage
                             : card.image
-                            ? `${process.env.NEXT_PUBLIC_API_URL
-                            }/storage/${decodeImageUrl(card.image)}`
-                            : baseimage
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
+                              : baseimage
                         }
                         className={`card-img-top ${styles["card-img-top"]}`}
                         alt={card.image_alt || `Related blog image for ${card.title}`}

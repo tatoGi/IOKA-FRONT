@@ -60,15 +60,15 @@
 /* Position the icons below the toggle button on mobile */
 @media (max-width: 767px) {
   .shareIconsWrapper {
-    top: 100%;
-    left: 50%;
+    top: 66%;
+    left: 100%;
     transform: translate(-50%, -10px);
     margin-top: 10px;
     flex-direction: row;
   }
   
   .expanded {
-    transform: translate(-50%, 0);
+    transform: translate(0, 0);
   }
 }
 

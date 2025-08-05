@@ -93,13 +93,13 @@ const Blog = ({ initialData }) => {
                 <Image
                   src={
                     isMobile
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(card.mobile_image)}`
+                      ? card.mobile_image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.mobile_image)}`
+                        : card.image
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
+                        : baseimage
                       : card.image
-                      ? `${
-                          process.env.NEXT_PUBLIC_API_URL
-                        }/storage/${decodeImageUrl(card.image)}`
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
                       : baseimage
                   }
                   className={styles["card-img-top"]}
