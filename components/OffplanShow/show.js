@@ -88,13 +88,23 @@ const MobileSlider = ({ images, type, openGalleryModal, offplanData }) => {
 };
 
 const PropertySlider = ({ properties, decodeImageUrl }) => {
+  // Validate and filter properties to prevent object URL issues
+  const validProperties = (properties || []).filter(property => {
+    if (!property || typeof property !== 'object') return false;
+    if (!property.id && !property.slug) return false;
+    return true;
+  }).map(property => ({
+    ...property,
+    slug: typeof property.slug === 'string' ? property.slug : property.id || 'property'
+  }));
+  
   return (
     <Swiper
       className={style.swiper}
       slidesPerView={'auto'}
    
     >
-      {properties.map((property) => (
+      {validProperties.map((property) => (
         <SwiperSlide
           key={property.id}
           className={`${style.swiperSlideForProperties}`}
@@ -141,6 +151,26 @@ const OffplanShow = ({ offplanData }) => {
   const [currentGallery, setCurrentGallery] = useState([]);
   const [copyAlertoffplan, setCopyAlertoffplan] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  
+  // Error logging throttle to prevent spam
+  const errorLoggedRef = useRef(new Set());
+  
+  // Debug navigation issues
+  useEffect(() => {
+    const originalPush = router.push;
+    router.push = (...args) => {
+      if (args[0] && typeof args[0] === 'object' && args[0].toString() === '[object Object]') {
+        console.error('Attempting to navigate with object:', args[0]);
+        console.trace('Navigation stack trace');
+        return;
+      }
+      return originalPush.apply(router, args);
+    };
+    
+    return () => {
+      router.push = originalPush;
+    };
+  }, [router]);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -293,14 +323,18 @@ const OffplanShow = ({ offplanData }) => {
           priority={isMain}
           loading={isMain ? "eager" : "lazy"}
           onError={(e) => {
-            console.error('Error loading image:', {
-              url: imageUrl,
-              originalPath: image,
-              index,
-              galleryType,
-              isMain
-            });
-            e.target.src = baseimage;
+            const errorKey = `${imageUrl}-${index}`;
+            if (!errorLoggedRef.current.has(errorKey)) {
+              console.error('Error loading image:', {
+                url: imageUrl,
+                originalPath: image,
+                index,
+                galleryType,
+                isMain
+              });
+              errorLoggedRef.current.add(errorKey);
+            }
+            e.target.src = baseimage.src || '/assets/img/blogimage.png';
           }}
         />
       </div>
@@ -807,7 +841,7 @@ const OffplanShow = ({ offplanData }) => {
                   <div className={style.overlay}>
                     <div className={style.propertyName}>{property.title}</div>
                     <a
-                      href={`/offplan/${property.slug}`}
+                      href={`/offplan/${typeof property.slug === 'string' ? property.slug : property.id || 'property'}`}
                       className={style.arrowLink}
                       title={`View details for ${property.title}`}
                     >

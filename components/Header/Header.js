@@ -82,12 +82,13 @@ const Header = ({ navigationData }) => {
   };
 
   useEffect(() => {
-    // Set scroll-header immediately for non-home pages
+    // Set scroll-header immediately for non-home pages and don't add scroll listener
     if (!isHomePage && !isSearchPage) {
       setActiveScroll(true);
-      return;
+      return; // Exit early - no scroll listener needed for non-home pages
     }
 
+    // Only add scroll listener for home page
     function handleScroll() {
       const currentScrollY = window.pageYOffset;
 
@@ -99,9 +100,10 @@ const Header = ({ navigationData }) => {
       }
     }
 
-    // Initial check
+    // Initial check for home page
     handleScroll();
 
+    // Add scroll listener only for home page
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage, isSearchPage]);

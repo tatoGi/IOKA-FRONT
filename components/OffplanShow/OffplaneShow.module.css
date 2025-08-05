@@ -397,6 +397,15 @@ letter-spacing: 0%;
   font-size: 14px;
   letter-spacing: 0%;
   text-align: start;
+  /* 4-line limit */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  max-height: calc(1.4em * 4);
 
 }
 
