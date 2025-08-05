@@ -159,10 +159,10 @@ const Rental_Resale = () => {
       }
 
       const requestUrl = `${apiUrl}?${queryParams.toString()}`;
-      console.log('Making API request to:', requestUrl);
+    
       const response = await axios.get(requestUrl);
       const responseData = response.data;
-      console.log('API response:', responseData);
+    
       
       // Handle the response data
       if (responseData) {
@@ -172,7 +172,7 @@ const Rental_Resale = () => {
         // Make sure we always work with an array
         const resultData = Array.isArray(data) ? data : [data].filter(Boolean);
         
-        console.log('Setting card data:', resultData);
+      
         setCardData(resultData);
         
         // Update pagination if available in the response
@@ -662,19 +662,49 @@ const Rental_Resale = () => {
             <div className={Styles.resaleHeader}>
 
             </div>
-
             <div className={Styles.resaleList}>
               {cardData.map((listing) => {
                 let galleryImages = [];
+                
+                // Try to get images from various fields
                 try {
                   if (listing.gallery_images) {
-                    const parsed = JSON.parse(listing.gallery_images);
-                    if (Array.isArray(parsed)) {
-                      galleryImages = parsed;
+                    // Check if it's already an array
+                    if (Array.isArray(listing.gallery_images)) {
+                      galleryImages = listing.gallery_images;
+                    } else {
+                      // Try to parse as JSON string
+                      const parsed = JSON.parse(listing.gallery_images);
+                      if (Array.isArray(parsed) && parsed.length > 0) {
+                        galleryImages = parsed;
+                      }
+                    }
+                  }
+                  
+                  // Fallback to other image fields if gallery_images is empty
+                  if (galleryImages.length === 0) {
+                    const fallbackImages = [];
+                    
+                    // Check various image fields
+                    if (listing.main_image) fallbackImages.push(listing.main_image);
+                    if (listing.image) fallbackImages.push(listing.image);
+                    if (listing.banner_image) fallbackImages.push(listing.banner_image);
+                    if (listing.featured_image) fallbackImages.push(listing.featured_image);
+                    
+                    // If we found any fallback images, use them
+                    if (fallbackImages.length > 0) {
+                      galleryImages = fallbackImages;
                     }
                   }
                 } catch (error) {
-                  // Malformed JSON, galleryImages will remain an empty array, preventing a crash.
+                  // Error parsing gallery_images, try fallback
+                  // Try fallback images even if parsing failed
+                  const fallbackImages = [];
+                  if (listing.main_image) fallbackImages.push(listing.main_image);
+                  if (listing.image) fallbackImages.push(listing.image);
+                  if (fallbackImages.length > 0) {
+                    galleryImages = fallbackImages;
+                  }
                 }
                 return (
                   <div
@@ -763,8 +793,8 @@ const Rental_Resale = () => {
                         ))}
                       </div>
                     )}
-
                     {/* Mobile view slider */}
+                    {isMobile && galleryImages.length > 0 && (
                     <div className={Styles.mobileImageSlider}>
                       <button
                         className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
@@ -804,6 +834,7 @@ const Rental_Resale = () => {
                         }}
                       >
                         {galleryImages.map((image, index) => (
+                         
                           <div key={index} className={Styles.slide}>
                             <Image
                               src={
@@ -860,7 +891,7 @@ const Rental_Resale = () => {
                         ))}
                       </div>
                     </div>
-
+                    )}
                     <div className={Styles.resaleContent}>
                       <h3>{listing.title}</h3>
 
