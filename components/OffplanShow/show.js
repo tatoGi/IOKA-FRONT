@@ -410,7 +410,7 @@ const OffplanShow = ({ offplanData }) => {
           </div>
          
           {/* Right Sidebar */}
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-4 col-md-12 h-100">
             {/* Agent Card */}
             <div className={style.qrCard}>
               <div className={style.personalInfo}>
