@@ -14,8 +14,8 @@ import "../styles/fonts.css";
 import "leaflet/dist/leaflet.css";  // Import Leaflet base styles first
 import "../styles/leaflet.css";     // Then import our Leaflet overrides
 import "../styles/globals.css";     // Then import global styles
-import "../styles/responsive.css";
-import '../styles/404.css';
+import '../styles/404.css';        // Import 404 styles before responsive
+import "../styles/responsive.css";  // Responsive styles last to override when needed
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "yet-another-react-lightbox/styles.css";

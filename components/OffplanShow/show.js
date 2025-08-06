@@ -104,7 +104,7 @@ const PropertySlider = ({ properties, decodeImageUrl }) => {
       slidesPerView={'auto'}
    
     >
-      {validProperties.map((property) => (
+      {validProperties.map((property, index) => (
         <SwiperSlide
           key={property.id}
           className={`${style.swiperSlideForProperties}`}
