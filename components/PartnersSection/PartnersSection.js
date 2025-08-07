@@ -101,10 +101,9 @@ const PartnersSection = () => {
         <div className="partners-title">Partners</div>
         <div className="partner-swiper-slide">
           <Slider {...settings}>
-            {partners.map((partner, index) => (
-             
-              <div key={index} className="partner-item">
-                <Link href={partner.url} className="partners-slider-item">
+            {partners.map((partner, index) => {
+              const PartnerContent = () => (
+                <>
                   <Image 
                     src={
                       isMobile
@@ -118,17 +117,31 @@ const PartnersSection = () => {
                   />
                   {(isMobile || isTablet) && (
                     <div className="partner-title" style={{ textAlign: 'center' }}>
-                      {partner.title}
+                      {partner.title || ''}
                     </div>
                   )}
-                </Link>
-                {!isMobile && !isTablet && (
-                  <div className="partner-title" style={{ textAlign: 'center' }}>
-                    {partner.title}
-                  </div>
-                )}
-              </div>
-            ))}
+                </>
+              );
+
+              return (
+                <div key={index} className="partner-item">
+                  {partner.url ? (
+                    <Link href={partner.url} className="partners-slider-item">
+                      <PartnerContent />
+                    </Link>
+                  ) : (
+                    <div className="partners-slider-item non-clickable">
+                      <PartnerContent />
+                    </div>
+                  )}
+                  {!isMobile && !isTablet && (
+                    <div className="partner-title" style={{ textAlign: 'center' }}>
+                      {partner.title || ''}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </Slider>
         </div>
       </div>

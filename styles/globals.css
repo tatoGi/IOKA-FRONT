@@ -963,6 +963,16 @@ margin-top: 24px;
   border-radius: 50%;
   height: 174px;
 }
+.partners-slider-item.non-clickable{
+  cursor: default;
+}
+.partners-slider-item:not(.non-clickable){
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.partners-slider-item:not(.non-clickable):hover{
+  transform: scale(1.05);
+}
 /* Partner Section */
 /* News section */
 .news-section{
