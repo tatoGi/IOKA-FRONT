@@ -337,7 +337,8 @@ const Developer = ({ initialData, initialPagination }) => {
                         width={400}
                         height={300}
                         className={styles.cardImage}
-                        style={{ objectFit: "cover" }}
+                        style={{ objectFit: "cover", cursor: "pointer" }}
+                        onClick={() => handleReadMore(card.slug)}
                       />
                       {Array.isArray(card.photo) && card.photo.length > 1 && (
                         <div className={styles.imageNav}>
@@ -363,7 +364,13 @@ const Developer = ({ initialData, initialPagination }) => {
 
                     {/* Content Section */}
                     <div className={styles.cardContent}>
-                      <h3 className={styles.title}>{card.title}</h3>
+                      <h3 
+                        className={styles.title}
+                        onClick={() => handleReadMore(card.slug)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {card.title}
+                      </h3>
                       <div className={styles.description}>
                         <div
                           dangerouslySetInnerHTML={{ __html: card.paragraph }}
