@@ -416,7 +416,7 @@ letter-spacing: 0%;
 .amenitiesList {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 24px;
   list-style: none;
   padding: 0;
   margin: 12px 0 0 0;
@@ -898,6 +898,8 @@ letter-spacing: 0%;
   line-height: 100%;
   letter-spacing: 0%;
   color: #E6EBED;
+  max-width: 932px;
+
 }
 
 .switcher {

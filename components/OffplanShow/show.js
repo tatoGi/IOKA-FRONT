@@ -440,6 +440,12 @@ const OffplanShow = ({ offplanData }) => {
                   </button>
                 )}
               </div>
+              <div className={style.shareIconsWrapper + " container"}>
+              <ShareIcons 
+                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                title={offplanData?.offplan?.title || 'Check out this property'}
+              />
+            </div>
             </div>
           </div>
          
@@ -808,12 +814,7 @@ const OffplanShow = ({ offplanData }) => {
           )}
         </div>
       </div>
-      <div className={style.shareIconsWrapper + " container"}>
-              <ShareIcons 
-                url={typeof window !== 'undefined' ? window.location.href : ''} 
-                title={offplanData?.offplan?.title || 'Check out this property'}
-              />
-            </div>
+     
       {/* Other Properties */}
       <div className="container mb-5">
         <span className={style.sectionTitle}>Other Properties</span>
