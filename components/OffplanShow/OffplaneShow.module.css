@@ -1743,6 +1743,19 @@ letter-spacing: 0%;
     grid-template-columns: 1fr;
   }
 
+  /* Ensure amenity text wraps properly on mobile and doesn't overflow */
+  .amenitiesList li {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+  }
+
+  /* Keep icons from shrinking when text wraps */
+  .amenitiesList img {
+    flex-shrink: 0;
+  }
+
   .amenitiesList::marker {
     display: none;
   }
