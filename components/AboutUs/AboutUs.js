@@ -299,7 +299,8 @@ const AboutUs = ({ initialData, id }) => {
                   />
                 </div>
                 <h3>{member.title}</h3>
-                <p>{member.subtitle_2}</p>
+                    <p className={styles.experience}>{member.subtitle_1}</p>
+                <p className={styles.experience}>{member.subtitle_2}</p>
               </div>
             ))}
           </div>

@@ -107,7 +107,11 @@ const PartnersSection = () => {
                   <Image 
                     src={
                       isMobile
-                        ? (partner.mobile_image ? `${decodeImageUrl(partner.mobile_image)}` : '/assets/img/placeholder.png')
+                        ? (
+                            partner.mobile_image
+                              ? `${decodeImageUrl(partner.mobile_image)}`
+                              : (partner.image ? `${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png')
+                          )
                         : (partner.image ? `${decodeImageUrl(partner.image)}` : '/assets/img/placeholder.png')
                     }
                     alt={partner.alt || 'Partner logo'}
