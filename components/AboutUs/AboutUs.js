@@ -256,12 +256,12 @@ const AboutUs = ({ initialData, id }) => {
     <div className={styles.aboutSection}>
       <div className={`container ${isMobile ? styles.mobileContainer : ''} container`}>
         {isMobile && <TestimonialSection />}
-
+        {console.log(cardData)}
         <AboutBanner
           title={cardData?.title || "ABOUT US"}
           description={
             <span
-              dangerouslySetInnerHTML={{ __html: cardData?.additional_fields?.testimonials?.[0]?.description }}
+              dangerouslySetInnerHTML={{ __html: cardData?.additional_fields?.paragraph.title }}
             ></span>
           }
         />
