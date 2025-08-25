@@ -375,6 +375,7 @@ text-align: center;
 
   .mapSection {
     min-height: 300px;
+    max-height: 320px;
   }
 
   .contactDetails {

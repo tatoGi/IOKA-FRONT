@@ -625,6 +625,7 @@ const OffplanShow = ({ offplanData }) => {
                 <h3>Amenities</h3>
                 <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
+                    <ul className={style.amenityItem}>  
                     <li key={index}>
                       {amenity.icon ? (
                         <Image 
@@ -638,7 +639,8 @@ const OffplanShow = ({ offplanData }) => {
                       )}
                       {amenity.name}
                     </li>
-                  ))}
+                    </ul>
+                      ))}
                 </div>
               </div>
             </div>

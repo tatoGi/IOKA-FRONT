@@ -133,6 +133,7 @@ letter-spacing: 0%;
 }
 
 .description p {
+    margin-top: 5px;
     margin-bottom: 20px;
      font-family: 'Montserrat';
 }

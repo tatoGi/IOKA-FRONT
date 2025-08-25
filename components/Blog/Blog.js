@@ -8,11 +8,11 @@ import { BLOGS_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 
-const Blog = ({ initialData }) => {
+const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '' }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardData, setCardData] = useState(initialData || []);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(initialPage || 1);
+  const [totalPages, setTotalPages] = useState(initialTotalPages || 1);
   const [isMounted, setIsMounted] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const router = useRouter();
@@ -24,7 +24,10 @@ const Blog = ({ initialData }) => {
   const fetchData = useCallback(async (page) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${BLOGS_API}?page=${page}`);
+      const params = new URLSearchParams();
+      params.set('page', String(page));
+      if (section) params.set('section', section);
+      const response = await axios.get(`${BLOGS_API}?${params.toString()}`);
       setCardData(response.data.data);
       setTotalPages(response.data.last_page);
     } catch (error) {
@@ -32,7 +35,7 @@ const Blog = ({ initialData }) => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [section]);
 
   useEffect(() => {
     if (!initialData) {
@@ -50,7 +53,7 @@ const Blog = ({ initialData }) => {
       router.push(
         {
           pathname: router.pathname,
-          query: { ...router.query, page }
+          query: { ...router.query, page, ...(section ? { section } : {}) }
         },
         undefined,
         { shallow: true }

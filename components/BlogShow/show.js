@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import styles from "./blogShow.module.css";
 import Image from "next/image";
@@ -44,6 +45,14 @@ const BlogShow = ({ blogData }) => {
   const handleReadMore = (slug) => {
     router.push(`/blog/${slug}`);
   };
+  // Try to derive the section slug from available fields in blogData
+  const sectionSlug =
+    (blogData?.blog && (
+      blogData.blog.section_slug ||
+      (blogData.blog.section && blogData.blog.section.slug) ||
+      blogData.blog.category_slug ||
+      (blogData.blog.category && blogData.blog.category.slug)
+    )) || "";
 
   return (
     <>
@@ -171,7 +180,15 @@ const BlogShow = ({ blogData }) => {
           <div className={`d-block d-md-none ${styles.similarArticles}`}>
             <div className={styles.similarArticles_header}>
               <span>Similar Articles</span>
-              <span>See All</span>
+              {sectionSlug ? (
+                <Link href={{ pathname: "/blog", query: { section: sectionSlug } }}>
+                  <span>See All</span>
+                </Link>
+              ) : (
+                <Link href="/blog">
+                  <span>See All</span>
+                </Link>
+              )}
             </div>
 
             {blogData.related_blogs &&
