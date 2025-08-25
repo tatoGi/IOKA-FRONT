@@ -81,10 +81,16 @@ export async function getStaticPaths() {
 
     const data = await res.json();
     const pages = data.pages;
+    // Filter out routes that conflict with explicit Next.js pages (case-insensitive)
+    const RESERVED_TOP_LEVEL = new Set([
+      'blog',
+    ]);
     // Generate paths from the pages data
-    const paths = pages.map((page) => ({
-      params: { slug: page.slug },
-    }));
+    const paths = pages
+      .filter((page) => page?.slug && !RESERVED_TOP_LEVEL.has(String(page.slug).toLowerCase()))
+      .map((page) => ({
+        params: { slug: page.slug },
+      }));
 
     return {
       paths,
