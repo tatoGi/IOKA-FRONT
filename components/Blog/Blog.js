@@ -63,14 +63,30 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
   };
 
   const limitTextLength = (text, maxLength) => {
-    const strippedText = text.replace(/(<([^>]+)>)/gi, "");
+    const raw = typeof text === 'string' ? text : '';
+    const strippedText = raw.replace(/(<([^>]+)>)/gi, "");
     return strippedText.length > maxLength || strippedText.length <= 3
       ? strippedText.substring(0, maxLength) + "..."
       : strippedText;
   };
 
-  const handleReadMore = (slug) => {
-    router.push(`/blog/${slug}`);
+  const handleReadMore = (itemOrSlug) => {
+    let slug = '';
+    if (typeof itemOrSlug === 'string') {
+      slug = itemOrSlug;
+    } else if (itemOrSlug && typeof itemOrSlug === 'object') {
+      slug = typeof itemOrSlug.slug === 'string' ? itemOrSlug.slug : (itemOrSlug.id ? String(itemOrSlug.id) : '');
+    }
+
+    if (!slug) {
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error('Invalid blog slug for navigation:', itemOrSlug);
+      }
+      return;
+    }
+
+    router.push(`/blog/${encodeURIComponent(slug)}`);
   };
 
   const formatDate = (dateString) => {
@@ -131,7 +147,7 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
                   {limitTextLength(card.body, 108)}
                 </p>
                 <button
-                  onClick={() => handleReadMore(card.slug)}
+                  onClick={() => handleReadMore(card)}
                   className={styles["card-button"]}
                 >
                   Read more

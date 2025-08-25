@@ -10,9 +10,5 @@
         ]
       }
     ],
-    "rewrites": [
-        { "source": "/:path*", "destination": "/:path*" },
-        { "source": "/", "destination": "/index" },
-        { "source": "/:slug", "destination": "/slug" }
-    ]
+    "rewrites": []
   }

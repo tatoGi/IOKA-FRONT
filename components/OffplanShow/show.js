@@ -625,8 +625,11 @@ const OffplanShow = ({ offplanData }) => {
                 <h3>Amenities</h3>
                 <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
-                    <ul className={style.amenityItem}>  
-                    <li key={index}>
+                    <ul
+                      className={style.amenityItem}
+                      key={amenity?.id ?? `${amenity?.name || 'amenity'}-${index}`}
+                    >  
+                    <li>
                       {amenity.icon ? (
                         <Image 
                           src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${amenity.icon}`} 

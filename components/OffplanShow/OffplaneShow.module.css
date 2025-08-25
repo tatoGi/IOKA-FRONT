@@ -2213,7 +2213,9 @@ letter-spacing: 0%;
     left: -1px;
 
   }
-
+  .amenityItem{
+    padding: 0;
+  }
   .qrbody {
     padding: 0;
   }

@@ -294,6 +294,9 @@ letter-spacing: 0%;
     }
 }
 @media (max-width: 480px){
+    .description p{
+        margin-top: 10px;
+    }
     .similarArticles .card {
         display: flex;
         flex-direction: row;

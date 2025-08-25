@@ -220,7 +220,7 @@ const Header = ({ navigationData }) => {
                   {isMobileView ? (
                     // Mobile view menu items
                     mobilePages.map((page) => (
-                      <Link href={`/${page.slug}`} key={page.id}>
+                      <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`} key={page.id}>
                         <li
                           className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
                               ? "active-link"
@@ -243,7 +243,7 @@ const Header = ({ navigationData }) => {
                             : ""
                         }
                       >
-                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                        <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`}>{page.title}</Link>
                       </li>
                     ))
                   )}
@@ -309,7 +309,7 @@ const Header = ({ navigationData }) => {
             {isMobileView ? (
               // Mobile view menu items
               mobilePages.map((page) => (
-                <Link href={`/${page.slug}`} key={page.id}>
+                <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`} key={page.id}>
                   <li
                     className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
                         ? "active-link"
@@ -332,7 +332,7 @@ const Header = ({ navigationData }) => {
                       : ""
                   }
                 >
-                  <Link href={`/${page.slug}`}>{page.title}</Link>
+                  <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`}>{page.title}</Link>
                 </li>
               ))
             )}

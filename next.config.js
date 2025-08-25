@@ -7,6 +7,20 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/Blog',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/Blog/:slug',
+        destination: '/blog/:slug',
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config, { dev, isServer }) => {
     // Optimize CSS loading
     if (!dev && !isServer) {
