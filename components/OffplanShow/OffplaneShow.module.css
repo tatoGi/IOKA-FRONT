@@ -415,21 +415,32 @@ letter-spacing: 0%;
 
 
 
+.amenitiesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 20px;
+}
+
 .amenitiesList li {
   display: flex;
   align-items: center;
   padding: 8px 0;
   font-size: 20px;
   color: rgba(10, 39, 59, 1);
-  white-space: nowrap;
+  white-space: normal;
   font-family: 'Montserrat';
   font-weight: 300;
+  min-width: 0; /* allow wrapping inside grid */
 }
 
 .amenitiesList img {
   margin-right: 8px;
   width: 24px;
   height: 24px;
+  flex-shrink: 0; /* keep icon size when text wraps */
 }
 
 .amenityItem {
@@ -1321,6 +1332,17 @@ letter-spacing: 0%;
     border-radius: 8px;
 
   }
+  .amenitiesList li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 15px;
+    color: rgba(10, 39, 59, 1);
+    white-space: normal;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    min-width: 0;
+}
 }
 
 @media (max-width: 1400px) {
@@ -1339,6 +1361,7 @@ letter-spacing: 0%;
   .buildingImage {
     width: 100% !important;
   }
+  
 }
 
 @media (max-width: 1200px) {
@@ -1853,7 +1876,7 @@ letter-spacing: 0%;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0%;
-    margin-left: 5rem;
+    margin-left: 24px;
 
   }
 
@@ -1910,15 +1933,15 @@ letter-spacing: 0%;
   }
 
   .swiperSlideForProperties {
-    width: 320px !important;
+    width: 100% !important;
     height: 240px !important;
     margin-right: 16px;
 
   }
 
   .swiperSlide {
-    width: 280px !important;
-    height: 240px !important;
+    width: 100% !important;
+    height: auto !important;
     margin-right: 16px;
   }
 
@@ -1929,10 +1952,12 @@ letter-spacing: 0%;
     max-height: 240px;
   }
   .nearbyGrid{
-    margin-left: 24px;
+    margin-left: 16px;
+    margin-right: 16px;
   }
   .locationSection h4{
-    margin-left: 24px;
+    margin-left: 16px;
+    margin-right: 16px;
   }
   .propertyDetails h1{
     font-family: 'Montserrat';
@@ -1984,7 +2009,7 @@ letter-spacing: 0%;
 
   .qrCard {
     margin-top: 0;
-    width: 354px;
+    width: 100%;
     height: 240px;
     border-width: 1px;
     border-radius: 16px;
@@ -1998,12 +2023,12 @@ letter-spacing: 0%;
   }
 
   .qrCard {
-    max-width: 354px;
+    max-width: 100%;
     margin-left: 0;
   }
 
   .qrCardmodern {
-    width: 354px;
+    width: 100%;
   }
 
   .personalInfo img {
@@ -2052,7 +2077,7 @@ letter-spacing: 0%;
     display: flex;
     gap: 12px;
     margin-bottom: 16px;
-    width: 306px;
+    width: 100%;
   }
 
   .contactBtnperson,
@@ -2093,7 +2118,7 @@ letter-spacing: 0%;
   }
 
   .downloadBtn {
-    width: 306px;
+    width: 100%;
     height: 36px;
     gap: 10px;
     border-width: 2px;
@@ -2158,7 +2183,7 @@ letter-spacing: 0%;
   }
 
   .enquireBtn {
-    width: 306px;
+    width: 100%;
     height: 36px;
     gap: 10px;
     border-width: 1px;
@@ -2185,7 +2210,7 @@ letter-spacing: 0%;
     max-width: 1560px;
     position: relative;
     overflow-y: auto;
-    width: 386px;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     gap: 10px;
@@ -2267,10 +2292,11 @@ letter-spacing: 0%;
     padding: 0;
     /* Remove the problematic transform that prevents Swiper initialization */
     /* transform: translate3d(0px, 0px, 0px) !important; */
+    overflow: hidden; /* prevent horizontal scroll bleed */
   }
 
   .amenitiesSection {
-    margin: 24px;
+    margin: 16px;
   }
 
   .nearbyColumn {
@@ -2290,7 +2316,7 @@ letter-spacing: 0%;
     display: flex;
     justify-content: flex-start;
     height: 40px;
-    width: auto;
+    /* width auto here can cause overflow combined with margins; keep full width */
   }
   
  
@@ -2353,8 +2379,8 @@ letter-spacing: 0%;
     height: 200px;
   }
   .swiper-wrapper{
-    width: 268px !important;
-    height: 200px !important;
+    width: 100% !important;
+    height: auto !important;
   }
 }
 
@@ -2381,7 +2407,7 @@ letter-spacing: 0%;
     margin: 24px;
   }
   .featuresSection {
-    margin: 24px;
+    margin: 16px;
   }
   .locationSection h3{
     margin-left: 24px;
@@ -2417,19 +2443,19 @@ letter-spacing: 0%;
 
 
   .contactButtons {
-    width: 280px;
+    width: 100%;
   }
 
   .sharelist {
-    width: 280px;
+    width: 100%;
   }
 
   .downloadBtn {
-    width: 280px;
+    width: 100%;
   }
 
   .enquireBtn {
-    width: 280px;
+    width: 100%;
   }
 
   .sectionTitle {
