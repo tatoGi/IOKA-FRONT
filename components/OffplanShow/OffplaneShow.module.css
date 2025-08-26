@@ -443,11 +443,16 @@ letter-spacing: 0%;
   flex-shrink: 0; /* keep icon size when text wraps */
 }
 
-.amenityItem {
-  position: relative;
-  padding-left: 24px;
-  color: #4B5563;
-  line-height: 1.6;
+.amenitiesItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 20px;
+  color: rgba(10, 39, 59, 1);
+  white-space: normal;
+  font-family: 'Montserrat';
+  font-weight: 300;
+  min-width: 0; /* allow wrapping inside grid */
 }
 
 
@@ -1343,6 +1348,17 @@ letter-spacing: 0%;
     font-weight: 300;
     min-width: 0;
 }
+  .amenitiesItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 15px;
+    color: rgba(10, 39, 59, 1);
+    white-space: normal;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    min-width: 0;
+  }
 }
 
 @media (max-width: 1400px) {
@@ -1722,6 +1738,8 @@ letter-spacing: 0%;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .bannerContent h1 {
@@ -1828,7 +1846,12 @@ letter-spacing: 0%;
 
   .featuresSection,
   .amenitiesSection {
+    /* Reset large left margins from wider breakpoints */
+    margin: 16px;
     margin-bottom: 40px;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .featuresSection h3,
@@ -1846,6 +1869,8 @@ letter-spacing: 0%;
   .featuresList {
     list-style: none;
     padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .featuresList img {
@@ -1860,6 +1885,10 @@ letter-spacing: 0%;
     line-height: 36px;
     letter-spacing: 0%;
     color: #07151F;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
   }
 
   .amenitiesList {

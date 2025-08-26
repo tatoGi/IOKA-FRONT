@@ -623,13 +623,9 @@ const OffplanShow = ({ offplanData }) => {
 
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
-                <div className={style.amenitiesList}>
+                <ul className={style.featuresList}>
                   {amenities.map((amenity, index) => (
-                    <ul
-                      className={style.amenityItem}
-                      key={amenity?.id ?? `${amenity?.name || 'amenity'}-${index}`}
-                    >  
-                    <li>
+                    <li key={index}>
                       {amenity.icon ? (
                         <Image 
                           src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${amenity.icon}`} 
@@ -642,9 +638,8 @@ const OffplanShow = ({ offplanData }) => {
                       )}
                       {amenity.name}
                     </li>
-                    </ul>
-                      ))}
-                </div>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -683,6 +678,7 @@ const OffplanShow = ({ offplanData }) => {
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
                 <div className={style.amenitiesList}>
+                <ul className={style.featuresList}>
                   {amenities.map((amenity, index) => (
                     <li key={index}>
                       {amenity.icon ? (
@@ -698,6 +694,7 @@ const OffplanShow = ({ offplanData }) => {
                       {amenity.name}
                     </li>
                   ))}
+                </ul>
                 </div>
               </div>
             </div>

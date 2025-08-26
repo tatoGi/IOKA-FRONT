@@ -581,6 +581,10 @@
         width: 355px !important;
         padding-left: 0;
     }
+    .sliderWrapper{
+        max-width: 100%;
+        padding: 0 22px;
+    }
 }
 
 @media (max-width:400px) {

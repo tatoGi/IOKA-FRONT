@@ -234,7 +234,7 @@ const Developer = ({ initialData, initialPagination }) => {
   const getImageUrl = (photoJson, cardId) => {
     try {
       if (!photoJson || (Array.isArray(photoJson) && photoJson.length === 0)) {
-        return {defaultImage, alt: 'Default developer image' };
+        return { url: defaultImage, alt: 'Default developer image' };
       }
       const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson);
       if (Array.isArray(photos) && photos.length > 0 && photos[0] && photos[0].file) {
@@ -253,9 +253,19 @@ const Developer = ({ initialData, initialPagination }) => {
           alt: currentPhoto.alt || 'Developer image',
         };
       }
-      return {  defaultImage, alt: 'Default developer image' };
+      return { url: defaultImage, alt: 'Default developer image' };
     } catch (e) {
-      return {  defaultImage, alt: 'Default developer image' };
+      return { url: defaultImage, alt: 'Default developer image' };
+    }
+  };
+
+  // Determine if photoJson has more than one image (handles array or JSON string)
+  const hasMultiplePhotos = (photoJson) => {
+    try {
+      const photos = Array.isArray(photoJson) ? photoJson : JSON.parse(photoJson || '[]');
+      return Array.isArray(photos) && photos.length > 1;
+    } catch {
+      return false;
     }
   };
 
@@ -340,7 +350,7 @@ const Developer = ({ initialData, initialPagination }) => {
                         style={{ objectFit: "cover", cursor: "pointer" }}
                         onClick={() => handleReadMore(card.slug)}
                       />
-                      {Array.isArray(card.photo) && card.photo.length > 1 && (
+                      {hasMultiplePhotos(card.photo) && (
                         <div className={styles.imageNav}>
                           <button
                             onClick={() =>
