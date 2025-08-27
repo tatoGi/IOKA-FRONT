@@ -64,7 +64,7 @@ const BlogShow = ({ blogData }) => {
         <Image
           src={
             isMobile
-              ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(
+              ? `${process.env.NEXT_PUBLIC_API_URL}/${decodeImageUrl(
                 blogData.blog.mobile_banner_image
               )}`
               : blogData.blog.banner_image
