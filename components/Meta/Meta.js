@@ -24,11 +24,16 @@ const Meta = ({
   // Get metadata using the hook only if no direct data is provided
   const directData = data || blogData;
   const shouldFetchMetadata = !directData;
+  
+  // Clean up the type to remove any path parts
+  const cleanType = type ? type.split('/').pop() : 'page';
+  
+  // Get metadata from API if needed
   const { 
     meta: pageMetadata, 
     loading, 
     error 
-  } = usePageMetadata(shouldFetchMetadata ? slug : '', shouldFetchMetadata ? type : '');
+  } = usePageMetadata(shouldFetchMetadata ? slug : '', shouldFetchMetadata ? cleanType : null);
   
   // Log any metadata fetching errors and handle loading state
   useEffect(() => {

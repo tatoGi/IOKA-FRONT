@@ -138,6 +138,7 @@
     color: white;
     text-decoration: none;
     display: inline-block;
+    text-align: center;
 
     font-family: 'Montserrat';
     width: 99px;
@@ -945,7 +946,7 @@
 
     .card-button {
         background-color: #0A273B;
-        padding: 8px;
+        padding: 15px;
         font-size: 12px;
         border-radius: 8px;
         width: 100% !important;

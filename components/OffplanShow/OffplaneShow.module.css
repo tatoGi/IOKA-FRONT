@@ -449,8 +449,8 @@ letter-spacing: 0%;
 
 .amenitiesList img {
   margin-right: 8px;
-  width: 24px;
-  height: 24px;
+  width: 21px;
+  height: 15px;
   flex-shrink: 0; /* keep icon size when text wraps */
 }
 
@@ -2075,7 +2075,11 @@ letter-spacing: 0%;
     font-weight: 600;
     margin-bottom: 8px;
   }
-
+  .description span {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+  }
   .qrCard {
     max-width: 100%;
     margin-left: 0;
@@ -2459,7 +2463,7 @@ letter-spacing: 0%;
   }
   .amenitiesSection {
     width: 100%;
-    margin: 24px;
+    margin: 16px;
   }
   .featuresSection {
     width: 100%;
