@@ -34,5 +34,6 @@ const DeveloperShowPage = ({ developerData  }) => {
         </div>
     );
 };
+DeveloperShowPage.hasMetadata = true;
 
 export default DeveloperShowPage;

@@ -11,14 +11,16 @@ const Meta = ({
   // For direct data passing (recommended)
   data = null,
   // Legacy support
-  blogData = null
+  blogData = null,
+  // Developer mode
+  developer = false
 }) => {
   const router = useRouter();
   const { asPath } = router;
   
   // Use provided slug or get from path
   const slug = propSlug || (asPath === '/' ? 'home' : asPath.replace(/^\//, '').split('?')[0]);
-  
+
   // Get metadata using the hook only if no direct data is provided
   const directData = data || blogData;
   const shouldFetchMetadata = !directData;
@@ -39,13 +41,15 @@ const Meta = ({
   if (process.env.NODE_ENV === 'production' && loading && !directData) {
     return null;
   }
-  
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
   
   // Set the base URL based on environment
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
     (isDevelopment ? 'http://localhost:3000' : 'https://ioka.ae');
+    
+  // Developer mode overrides
+  const isDeveloperMode = developer || isDevelopment;
   
   // Construct the current URL
   const currentUrl = `${siteUrl}${asPath}`;
@@ -59,7 +63,6 @@ const Meta = ({
   let metaTitle, metaDescription, metaKeywords, ogTitle, ogDesc, ogImg, twitterTitle, twitterDesc, twitterImg, twitterCardType;
   let contentData = null;
   let contentType = 'website';
-  
   if (directData) {
     // Handle blog data structure
     if (directData.blog) {
@@ -81,17 +84,21 @@ const Meta = ({
       contentData = directData.resale;
       contentType = 'website';
     }
+    // Handle developer data structure
+    else if (directData.developer) {
+      contentData = directData.developer;
+      contentType = 'website';
+    }
     // Handle direct content data
     else {
       contentData = directData;
       contentType = type === 'blog' ? 'article' : 'website';
     }
-    
     if (contentData) {
       const metadata = contentData.metadata || {};
       
       // Extract metadata with fallbacks
-      metaTitle = metadata.meta_title || contentData.title || contentData.name || defaultTitle;
+      metaTitle = metadata.meta_title || contentData.title || contentData.name || contentData.developer_name || defaultTitle;
       metaDescription = metadata.meta_description || contentData.subtitle || contentData.description ||
         (contentData.body ? contentData.body.replace(/<[^>]*>/g, '').substring(0, 160) + '...' : defaultDescription);
       metaKeywords = metadata.meta_keywords || '';
@@ -131,8 +138,12 @@ const Meta = ({
     <Head>
       {/* Basic Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="robots" content="noindex, nofollow" />
-      <meta name="googlebot" content="noindex, nofollow" />
+      {!isDeveloperMode && (
+        <>
+          <meta name="robots" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex, nofollow" />
+        </>
+      )}
       <meta charSet="utf-8" />
       <meta name="author" content="IOKA Real Estate" />
       <meta name="revisit-after" content="7 days" />
@@ -172,6 +183,11 @@ const Meta = ({
       <link rel="canonical" href={currentUrl} />
       <link rel="icon" type="image/svg+xml" href="/assets/img/Tiffany-01.svg" />
       <link rel="alternate icon" href="/favicon.ico" />
+      
+      {/* Developer Mode Indicator */}
+      {isDeveloperMode && (
+        <meta name="developer-mode" content="enabled" />
+      )}
       
       {/* JSON-LD Structured Data */}
       {contentData && (
