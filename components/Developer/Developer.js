@@ -336,11 +336,7 @@ const Developer = ({ initialData, initialPagination }) => {
                   <div className={styles.cardRow}>
                     {/* Image Section */}
                     <div className={styles.imageContainer}>
-                      {isMobile && (
-                        <div className={styles.mobileTitleOverlay}>
-                          <h3 className={styles.mobileTitle}>{card.title}</h3>
-                        </div>
-                      )}
+                   
                       <Image
                         src={getImageUrl(card.photo, card.id).url}
                         alt={getImageUrl(card.photo, card.id).alt}
