@@ -51,7 +51,6 @@ const Meta = ({
   let contentType = 'website';
   
   if (data) {
-    console.log(data);
     // Handle blog data structure
     if (data.blog) {
       contentData = data.blog;
