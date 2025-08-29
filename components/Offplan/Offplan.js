@@ -6,6 +6,7 @@ import styles from "./Offplan.module.css";
 import { Montserrat } from "next/font/google";
 import { StarIcon } from "../icons/PropertyIcons";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import axios from "axios";
 import { OFFPLAN_APi, FILTER_OFFPLAN_API } from "@/routes/apiRoutes";
 import defaultImage from "../../assets/img/default.webp";
@@ -414,13 +415,21 @@ const Offplan = ({ initialData, initialPagination }) => {
             {cardData
               ?.filter((property) => property?.id)
               .map((property) => (
-                <div
+                <Link
                   key={property?.id || Math.random()}
+                  href={`/offplan/${property?.slug || '#'}`}
                   className={styles.propertyCardLink}
-                  onClick={() =>
-                    property?.slug && handleReadMore(property.slug)
-                  }
-                  style={{ cursor: "pointer" }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (property?.slug) {
+                      if (e.ctrlKey || e.metaKey) {
+                        window.open(`/offplan/${property.slug}`, '_blank');
+                      } else {
+                        handleReadMore(property.slug);
+                      }
+                    }
+                  }}
+                  style={{ textDecoration: 'none', display: 'block' }}
                 >
                   <div className={styles.propertyCard}>
                     <div className={styles.imageContainer}>
@@ -530,7 +539,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
           </div>
         )}

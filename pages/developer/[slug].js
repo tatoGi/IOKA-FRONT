@@ -24,8 +24,8 @@ export const getServerSideProps = async (context) => {
 const DeveloperShowPage = ({ developerData  }) => {
     const breadcrumbData = [
         { title: 'Home', path: '/' },
-        { title: 'Blog', path: '/blog' },
-        { title: developerData.title, path: `/blog/${developerData.slug}` }
+        { title: 'Developer', path: '/developer' },
+        { title: developerData.title, path: `/developer/${developerData.slug}` }
     ];
     return (
         <div>

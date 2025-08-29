@@ -13,6 +13,7 @@ import { DEVELOPER_API } from "@/routes/apiRoutes";
 import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
 import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
+import Link from "next/link";
 
 const Developer = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState(initialData || []);
@@ -431,12 +432,13 @@ const Developer = ({ initialData, initialPagination }) => {
                         </div>
 
                         {/* Right Side: See More Button */}
-                        <button
+                        <Link
+                          href={`/developer/${card.slug}`}
                           className={styles.readMore}
                           onClick={() => handleReadMore(card.slug)}
                         >
                           See More
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

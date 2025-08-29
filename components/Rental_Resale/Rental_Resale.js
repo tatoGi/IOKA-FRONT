@@ -12,6 +12,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import SearchRental from "../SearchRental/SearchRental";
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
+import Link from "next/link";
 
 const Rental_Resale = () => {
   const [cardData, setCardData] = useState([]);
@@ -707,12 +708,11 @@ const Rental_Resale = () => {
                   }
                 }
                 return (
-                  <div
+                  <Link
+                    href={`/rental/${listing.slug}`}
                     key={listing.id}
                     className={Styles.resaleCard}
-                    onClick={() => {
-                      handleReadMore(listing.slug);
-                    }}
+                   
                     style={{ cursor: "pointer" }}
                   >
                     <div className={Styles.largeImage}>
@@ -1017,7 +1017,7 @@ const Rental_Resale = () => {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

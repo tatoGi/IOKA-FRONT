@@ -6,6 +6,7 @@ import BlogIcon from "../../assets/img/calendaricon.svg";
 import axios from "axios";
 import { BLOGS_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 
 const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '' }) => {
@@ -71,22 +72,18 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
   };
 
   const handleReadMore = (itemOrSlug) => {
+    // This function is kept for backward compatibility but is no longer used
+    // since we're now using Next.js Link component directly
     let slug = '';
     if (typeof itemOrSlug === 'string') {
       slug = itemOrSlug;
-    } else if (itemOrSlug && typeof itemOrSlug === 'object') {
-      slug = typeof itemOrSlug.slug === 'string' ? itemOrSlug.slug : (itemOrSlug.id ? String(itemOrSlug.id) : '');
+    } else if (itemOrSlug?.slug) {
+      slug = itemOrSlug.slug;
     }
-
-    if (!slug) {
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.error('Invalid blog slug for navigation:', itemOrSlug);
-      }
-      return;
+    
+    if (slug) {
+      router.push(`/blog/${encodeURIComponent(slug)}`);
     }
-
-    router.push(`/blog/${encodeURIComponent(slug)}`);
   };
 
   const formatDate = (dateString) => {
@@ -146,12 +143,18 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
                 <p className={styles.description}>
                   {limitTextLength(card.body, 108)}
                 </p>
-                <button
-                  onClick={() => handleReadMore(card)}
-                  className={styles["card-button"]}
+                <Link 
+                  href={`/blog/${card.slug}`}
+                  className={`${styles["card-button"]} ${styles.readMoreLink}`}
+                  onClick={(e) => {
+                    if (e.ctrlKey || e.metaKey) {
+                      e.stopPropagation();
+                      window.open(`/blog/${card.slug}`, '_blank');
+                    }
+                  }}
                 >
                   Read more
-                </button>
+                </Link>
               </div>
             </div>
           </div>

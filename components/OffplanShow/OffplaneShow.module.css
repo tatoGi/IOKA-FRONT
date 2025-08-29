@@ -339,6 +339,8 @@ letter-spacing: 0%;
 
 .buildingSection {
   margin: 60px 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .buildingImageWrapper {
@@ -346,6 +348,14 @@ letter-spacing: 0%;
   width: 100%;
   height: auto;
   aspect-ratio: 3/2;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.buildingImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 12px;
 }
 
@@ -1758,6 +1768,21 @@ letter-spacing: 0%;
 
   .buildingSection {
     margin: 32px 0;
+    padding: 0 15px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .buildingSection .row {
+    margin-left: -15px;
+    margin-right: -15px;
+    width: calc(100% + 30px);
+  }
+  
+  .buildingSection .col-12 {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .line {
@@ -1766,9 +1791,16 @@ letter-spacing: 0%;
 
   .buildingImage {
     width: 100%;
-    height: auto;
-    border-radius: 0px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
     max-height: 273px;
+  }
+  
+  .buildingImageWrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 15px;
   }
 
   .amenitiesList {
@@ -2433,9 +2465,11 @@ letter-spacing: 0%;
     width: 100%;
   }
   .amenitiesSection {
+    width: 100%;
     margin: 24px;
   }
   .featuresSection {
+    width: 100%;
     margin: 16px;
   }
   .locationSection h3{
