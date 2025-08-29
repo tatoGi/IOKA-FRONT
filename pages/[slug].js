@@ -94,7 +94,7 @@ export async function getStaticPaths() {
 
     return {
       paths,
-      fallback: false, // or 'blocking' if you want to enable fallback
+      fallback: 'blocking', // This will server-render pages on-demand for new/changed slugs
     };
   } catch (error) {
     console.error('Error in getStaticPaths:', error);
@@ -112,10 +112,12 @@ export async function getStaticProps({ params }) {
     // Handle the root path (`/`)
     const isRootPath = slug === "/";
 
+    // Add revalidation to check for updates (every 60 seconds)
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch, status: ${res.status}`);
+      console.error('Failed to fetch pages:', res.status);
+      return { notFound: true };
     }
 
     const data = await res.json();
@@ -123,7 +125,7 @@ export async function getStaticProps({ params }) {
    
     // If the slug is the root path (`/`), find the home page
     if (isRootPath) {
-      pageData = data.pages.find((page) => page.type_id === 1); // Home page type_id
+      pageData = data.pages.find((page) => page.type_id === 1);
       if (!pageData) {
         // If no home page found, create a default one
         pageData = {
@@ -137,28 +139,40 @@ export async function getStaticProps({ params }) {
     } else {
       // Otherwise, find the page by slug
       pageData = data.pages.find((page) => page.slug === slug);
-    }
-
-    if (!pageData) {
-      return { notFound: true };
-    }
-
-    // Ensure metadata is included in the page props
-    const pageProps = {
-      pageData: {
-        ...pageData,
-        // Make sure metadata is properly structured
-        metadata: pageData.metadata || {
-          title: pageData.title,
-          description: pageData.desc,
-          // Add any other default meta fields you need
+      
+      // If page not found, try to find a redirect
+      if (!pageData) {
+        // Check if there's a redirect in the API response
+        const redirectPage = data.pages.find(page => 
+          page.redirect_from && page.redirect_from.includes(slug)
+        );
+        
+        if (redirectPage) {
+          return {
+            redirect: {
+              destination: `/${redirectPage.slug}`,
+              permanent: true,
+            },
+          };
         }
+        
+        return { notFound: true };
       }
-    };
+    }
 
+    // Revalidate the page every 60 seconds
     return {
-      props: pageProps,
-      revalidate: 10 // Revalidate the page every 10 seconds
+      props: {
+        pageData: {
+          ...pageData,
+          metadata: pageData.metadata || {
+            title: pageData.title,
+            description: pageData.desc,
+            // Add any other default meta fields you need
+          }
+        }
+      },
+      revalidate: 60 // Revalidate every 60 seconds
     };
   } catch (error) {
     console.error("Error fetching page data:", error);
