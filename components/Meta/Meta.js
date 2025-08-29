@@ -1,51 +1,32 @@
 import { useEffect } from 'react';
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Script from "next/script";
-import usePageMetadata from "@/hooks/usePageMetadata";
 
-const Meta = ({ 
-  // For dynamic API fetching
-  slug: propSlug = '',
-  type = 'page',
-  // For direct data passing (recommended)
-  data = null,
-  // Legacy support
-  blogData = null,
-  // Developer mode
+/**
+ * Meta Component for handling page metadata and SEO
+ * @param {Object} props - Component props
+ * @param {Object} props.data - Direct metadata object from API response
+ * @param {string} [props.data.title] - Page title
+ * @param {string} [props.data.description] - Page description
+ * @param {Object} [props.data.og] - OpenGraph metadata
+ * @param {string} [props.data.og.title] - OG title
+ * @param {string} [props.data.og.description] - OG description
+ * @param {string} [props.data.og.image] - OG image URL
+ * @param {Object} [props.data.twitter] - Twitter card metadata
+ * @param {string} [props.data.twitter.card] - Twitter card type
+ * @param {string} [props.data.twitter.title] - Twitter title
+ * @param {string} [props.data.twitter.description] - Twitter description
+ * @param {string} [props.data.twitter.image] - Twitter image URL
+ * @param {string} [props.data.keywords] - Meta keywords
+ * @param {boolean} [developer=false] - Enable developer mode (disables noindex)
+ */
+const Meta = ({
+  data = {},
   developer = false
 }) => {
   const router = useRouter();
   const { asPath } = router;
   
-  // Use provided slug or get from path
-  const slug = propSlug || (asPath === '/' ? 'home' : asPath.replace(/^\//, '').split('?')[0]);
-
-  // Get metadata using the hook only if no direct data is provided
-  const directData = data || blogData;
-  const shouldFetchMetadata = !directData;
-  
-  // Clean up the type to remove any path parts
-  const cleanType = type ? type.split('/').pop() : 'page';
-  
-  // Get metadata from API if needed
-  const { 
-    meta: pageMetadata, 
-    loading, 
-    error 
-  } = usePageMetadata(shouldFetchMetadata ? slug : '', shouldFetchMetadata ? cleanType : null);
-  
-  // Log any metadata fetching errors and handle loading state
-  useEffect(() => {
-    if (error) {
-      console.error('Metadata error:', error);
-    }
-  }, [error]);
-  
-  // Don't render anything while loading in production (only if not using direct data)
-  if (process.env.NODE_ENV === 'production' && loading && !directData) {
-    return null;
-  }
   // Get the current environment
   const isDevelopment = process.env.NODE_ENV === 'development';
   
@@ -68,41 +49,44 @@ const Meta = ({
   let metaTitle, metaDescription, metaKeywords, ogTitle, ogDesc, ogImg, twitterTitle, twitterDesc, twitterImg, twitterCardType;
   let contentData = null;
   let contentType = 'website';
-  if (directData) {
+  
+  if (data) {
+    console.log(data);
     // Handle blog data structure
-    if (directData.blog) {
-      contentData = directData.blog;
+    if (data.blog) {
+      contentData = data.blog;
       contentType = 'article';
     }
     // Handle offplan data structure
-    else if (directData.offplan) {
-      contentData = directData.offplan;
+    else if (data.offplan) {
+      contentData = data.offplan;
       contentType = 'website';
       // Ensure we're using the nested offplan data for metadata
-      if (directData.offplan.metadata) {
-        contentData.metadata = directData.offplan.metadata;
+      if (data.offplan.metadata) {
+        contentData.metadata = data.offplan.metadata;
       }
     }
     // Handle rental data structure
-    else if (directData.rental) {
-      contentData = directData.rental;
+    else if (data.rental) {
+      contentData = data.rental;
       contentType = 'website';
     }
     // Handle resale data structure
-    else if (directData.resale) {
-      contentData = directData.resale;
+    else if (data.resale) {
+      contentData = data.resale;
       contentType = 'website';
     }
     // Handle developer data structure
-    else if (directData.developer) {
-      contentData = directData.developer;
+    else if (data.developer) {
+      contentData = data.developer;
       contentType = 'website';
     }
     // Handle direct content data
     else {
-      contentData = directData;
-      contentType = type === 'blog' ? 'article' : 'website';
+      contentData = data;
+      contentType = 'website';
     }
+    
     if (contentData) {
       const metadata = contentData.metadata || {};
       // Extract metadata with fallbacks
@@ -120,32 +104,30 @@ const Meta = ({
       ogTitle = metadata.og_title || metaTitle;
       ogDesc = metadata.og_description || metaDescription;
       ogImg = metadata.og_image || 
-        (contentData.banner_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.banner_image}` : 
-         contentData.image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.image}` : 
-         contentData.main_image ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.main_image}` : defaultImage);
-      
-      // Twitter data
-      twitterTitle = metadata.twitter_title || metaTitle;
-      twitterDesc = metadata.twitter_description || metaDescription;
-      twitterImg = metadata.twitter_image || ogImg;
-      twitterCardType = metadata.twitter_card || 'summary_large_image';
+        (contentData.banner_image ? 
+          `${process.env.NEXT_PUBLIC_API_URL}/storage/${contentData.banner_image}` : 
+          defaultImage
+        );
     }
   } else {
-    // Use fetched metadata or fallback to defaults
-    metaTitle = pageMetadata?.title || defaultTitle;
-    metaDescription = pageMetadata?.description || defaultDescription;
-    metaKeywords = pageMetadata?.keywords || '';
-    
-    // Set OpenGraph and Twitter data with fallbacks
-    ogTitle = pageMetadata?.og?.title || metaTitle;
-    ogDesc = pageMetadata?.og?.description || metaDescription;
-    ogImg = pageMetadata?.og?.image || defaultImage;
-    
-    twitterTitle = pageMetadata?.twitter?.title || ogTitle;
-    twitterDesc = pageMetadata?.twitter?.description || ogDesc;
-    twitterImg = pageMetadata?.twitter?.image || ogImg;
-    twitterCardType = pageMetadata?.twitter?.card || 'summary_large_image';
+    // Default values if no metadata is available
+    metaTitle = defaultTitle;
+    metaDescription = defaultDescription;
+    metaKeywords = '';
+    ogTitle = metaTitle;
+    ogDesc = metaDescription;
+    ogImg = defaultImage;
+    twitterTitle = metaTitle;
+    twitterDesc = metaDescription;
+    twitterImg = defaultImage;
+    twitterCardType = 'summary_large_image';
   }
+  
+  // Set Twitter values
+  twitterTitle = twitterTitle || ogTitle;
+  twitterDesc = twitterDesc || ogDesc;
+  twitterImg = twitterImg || ogImg;
+  twitterCardType = twitterCardType || 'summary_large_image';
   
   return (
     <Head>

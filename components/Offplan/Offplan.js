@@ -12,7 +12,7 @@ import { OFFPLAN_APi, FILTER_OFFPLAN_API } from "@/routes/apiRoutes";
 import defaultImage from "../../assets/img/default.webp";
 import { Container, Row, Col } from "react-bootstrap"; // Import Bootstrap components
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
-
+import Meta from "../Meta/Meta";
 // Configure Montserrat
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ const montserrat = Montserrat({
 });
 
 const Offplan = ({ initialData, initialPagination }) => {
-  const [cardData, setCardData] = useState(initialData || []);
+  const [cardData, setCardData] = useState([]);
   const [currentPage, setCurrentPage] = useState(
     initialPagination?.current_page || 1
   );
@@ -323,9 +323,8 @@ const Offplan = ({ initialData, initialPagination }) => {
 
   // Fetch data when the component mounts (if no initialData is provided)
   useEffect(() => {
-    if (!initialData?.length && !isLoading) {
-      fetchData(currentPage);
-    }
+    // Always fetch offplan data since initialData is page data, not offplan data
+    fetchData(currentPage);
   }, []);
 
   useEffect(() => {
@@ -348,6 +347,8 @@ const Offplan = ({ initialData, initialPagination }) => {
   };
 
   return (
+    <>
+    <Meta data={initialData} />
     <Container className={`${styles.container} ${montserrat.className}`}>
       <div className={styles.listSection}>
         <SearchSection
@@ -642,6 +643,7 @@ const Offplan = ({ initialData, initialPagination }) => {
         </div>
       </div>
     </Container>
+    </>
   );
 };
 

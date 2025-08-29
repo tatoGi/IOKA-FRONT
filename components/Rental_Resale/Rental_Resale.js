@@ -13,8 +13,9 @@ import homeIcon from "../../assets/img/house-property-svgrepo-com.svg";
 import SearchRental from "../SearchRental/SearchRental";
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
 import Link from "next/link";
+import Meta from "../Meta/Meta";
 
-const Rental_Resale = () => {
+const Rental_Resale = ({ initialData }) => {
   const [cardData, setCardData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -423,6 +424,7 @@ const Rental_Resale = () => {
 
   return (
     <>
+    <Meta data={initialData} />
       <div className="container">
       <h1 className={Styles.main_title}>Ready-to-Rent or Ready-to-Own Properties in Dubai</h1>
       <h2 className={Styles.second_title}>rentals and resale properties with great ROI potential</h2>

@@ -15,8 +15,6 @@ import awardimg1 from "../../assets/img/awardimg1.png";
 import SearchSection from "../SearchSection/SearchSection";
 import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import Link from "next/link";
-import Meta from "../Meta/Meta";
-
 const DeveloperShow = (developerData) => {
   const settings = {
     dots: true,
@@ -241,23 +239,8 @@ const DeveloperShow = (developerData) => {
 
   const [visibleMobileOffplan, setVisibleMobileOffplan] = useState(4);
 
-  // Prepare meta data for the Meta component
-  const metaData = {
-    developer: {
-      ...developerData.developerData,
-      metadata: {
-        ...developerData.developerData.metadata,
-        // Ensure we have fallback values
-        meta_title: developerData.developerData.metadata?.meta_title || developerData.developerData.title,
-        meta_description: developerData.developerData.metadata?.meta_description || developerData.developerData.description || '',
-        og_image: developerData.developerData.metadata?.og_image || developerData.developerData.logo || ''
-      }
-    }
-  };
-
   return (
     <>
-      <Meta data={metaData} type="developer" />
       <div className={styles.developerShowSection}>
       {/* <div className="container">
         <SearchSection />

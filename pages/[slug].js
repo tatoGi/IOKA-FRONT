@@ -11,7 +11,7 @@ import Blog from "@/components/Blog/Blog";
 import Meta from "@/components/Meta/Meta";
 
 const DynamicPage = ({ pageData }) => {
- 
+  console.log(pageData);
   const router = useRouter();
 
   // Check if pageData or pageData.title is null or undefined
@@ -28,19 +28,19 @@ const DynamicPage = ({ pageData }) => {
   const renderPage = () => {
     switch (pageData.type_id) {
       case 1: // Home Page
-        return <Home />;
+        return <Home initialData={pageData} />;
       case 2: // About Page
-        return <About id={pageData.id} />;
+        return <About id={pageData.id} initialData={pageData} />;
       case 3: // Contact Page
-        return <Contact id={pageData.id} />;
+        return <Contact id={pageData.id} initialData={pageData} />;
       case 4: // Off-Plan Page
-        return <OffPlan />;
+        return <OffPlan initialData={pageData} />;
       case 5: // Rental/Resale Page
-        return <Rental_Resale />;
+        return <Rental_Resale initialData={pageData} />;
       case 6: // Blog Page
-        return <Blog />;
+        return <Blog initialData={pageData} />;
       case 7: // Developer Page
-        return <Developer />;
+        return <Developer initialData={pageData} />;
       default:
         return (
           <div>

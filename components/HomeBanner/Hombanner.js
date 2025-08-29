@@ -12,9 +12,10 @@ import Clients from "../Clients/Clients";
 import { SECTION_API } from "../../routes/apiRoutes"; // Import the route
 import { useRouter } from "next/router"; // Import useRouter
 import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
+import Meta from "../Meta/Meta";
 
 const Hombanner = ({ initialData, navigationData }) => {
-  
+  console.log(initialData);
   
   const [isLoading, setIsLoading] = useState(true);
   const [cardData, setCardData] = useState(initialData || []);
@@ -58,6 +59,7 @@ const Hombanner = ({ initialData, navigationData }) => {
   // Render sections only if they exist
   return (
     <>
+    <Meta data={initialData} />
       <div className="home-banner">
         <div className="banner-slider">
           {sections["section_one"] && (

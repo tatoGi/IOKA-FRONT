@@ -14,10 +14,11 @@ import styles from "./Developer.module.css";
 import defaultImage from "../../assets/img/default.webp";
 import { DEVELOPER_SEARCH_API } from "@/routes/apiRoutes";
 import Link from "next/link";
-
+import Meta from "../Meta/Meta";
 const Developer = ({ initialData, initialPagination }) => {
-  const [cardData, setCardData] = useState(initialData || []);
-  const [filteredData, setFilteredData] = useState(initialData || []);
+ 
+  const [cardData, setCardData] = useState([]);
+  const [filteredData, setFilteredData] = useState(Array.isArray(initialData) ? initialData : []);
   const [currentPage, setCurrentPage] = useState(
     initialPagination?.current_page || 1
   );
@@ -49,11 +50,14 @@ const Developer = ({ initialData, initialPagination }) => {
     try {
       const response = await axios.get(`${DEVELOPER_API}?page=${page}`);
       const data = response.data.data;
-      setCardData(Array.isArray(data) ? data : [data]);
-      setFilteredData(Array.isArray(data) ? data : [data]);
+      const processedData = Array.isArray(data) ? data : (data ? [data] : []);
+      setCardData(processedData);
+      setFilteredData(processedData);
       setTotalPages(response.data.last_page);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setCardData([]);
+      setFilteredData([]);
     } finally {
       setIsLoading(false);
     }
@@ -77,10 +81,8 @@ const Developer = ({ initialData, initialPagination }) => {
 
   // Fetch data when the component mounts
   useEffect(() => {
-    if (!initialData) {
-      fetchData(currentPage);
-    }
-  }, [currentPage, initialData]);
+    fetchData(currentPage);
+  }, [currentPage]);
 
   // Filter data based on search query
   useEffect(() => {
@@ -203,7 +205,7 @@ const Developer = ({ initialData, initialPagination }) => {
       const { data, meta } = response.data;
 
       // Process the data to match the expected format
-      const processedData = Array.isArray(data) ? data : [data];
+      const processedData = Array.isArray(data) ? data : (data ? [data] : []);
 
       setCardData(processedData);
       setFilteredData(processedData);
@@ -221,6 +223,8 @@ const Developer = ({ initialData, initialPagination }) => {
       );
     } catch (error) {
       console.error("Error fetching page:", error);
+      setCardData([]);
+      setFilteredData([]);
     } finally {
       setIsLoading(false);
     }
@@ -300,9 +304,9 @@ const Developer = ({ initialData, initialPagination }) => {
     }
   };
 
-  return (
+    return (
     <>
-   
+     <Meta data={initialData} />
       <div className="container py-4">
       <h1 className={styles.title_main}> Trusted Developers Behind Iconic Projects in Dubai</h1>
       <h2 className={styles.title_second}>
@@ -331,7 +335,7 @@ const Developer = ({ initialData, initialPagination }) => {
           ) : noResults ? (
             <div className="text-center py-5">No developers found.</div>
           ) : (
-            filteredData.map((card) => (
+            (Array.isArray(filteredData) ? filteredData : []).map((card) => (
               <div key={card.id} className={styles.cardWrapper}>
                 <div className={styles.card}>
                   <div className={styles.cardRow}>
@@ -449,7 +453,7 @@ const Developer = ({ initialData, initialPagination }) => {
         </div>
 
         {/* Pagination */}
-        {!isLoading && !noResults && filteredData.length > 0 && (
+        {!isLoading && !noResults && Array.isArray(filteredData) && filteredData.length > 0 && (
         <div className={styles.pagination}>
         {isMobile ? (
           <div className={`${styles.mobilePagination} container`} >

@@ -13,9 +13,9 @@ import { Pagination } from 'swiper';
 import "swiper/css";
 import "swiper/css/pagination";
 import Slider from "react-slick";
-
+import Meta from "../Meta/Meta";
 const AboutUs = ({ initialData, id }) => {
-  const [cardData, setCardData] = useState(initialData || null);
+  const [cardData, setCardData] = useState([]);
   const [sectionFiveData, setSectionFiveData] = useState(null);
   const router = useRouter();
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -48,8 +48,7 @@ const AboutUs = ({ initialData, id }) => {
       }
 
       try {
-        // Only fetch if we don't have initial data
-        if (!initialData) {
+      
           const [aboutResponse, teamResponse] = await Promise.all([
             axios.get(`${ABOUT_API}/${id}`),
             axios.get(`${SECTION_API}`)
@@ -65,7 +64,7 @@ const AboutUs = ({ initialData, id }) => {
           if (aboutResponse.data && aboutResponse.data.about) {
             setCardData(aboutResponse.data.about);
           }
-        }
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -253,6 +252,8 @@ const AboutUs = ({ initialData, id }) => {
   };
 
   return (
+    <>
+    <Meta data={initialData} />
     <div className={styles.aboutSection}>
       <div className={`container ${isMobile ? styles.mobileContainer : ''} container`}>
         {isMobile && <TestimonialSection />}
@@ -316,6 +317,7 @@ const AboutUs = ({ initialData, id }) => {
         <PartnersSection />
       </div>
     </div>
+    </>
   );
 };
 

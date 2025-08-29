@@ -8,16 +8,16 @@ import { BLOGS_API } from "../../routes/apiRoutes";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
-
+import Meta from "../Meta/Meta";
 const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '' }) => {
+ 
   const [isLoading, setIsLoading] = useState(false);
-  const [cardData, setCardData] = useState(initialData || []);
+  const [cardData, setCardData] = useState([]);
   const [currentPage, setCurrentPage] = useState(initialPage || 1);
   const [totalPages, setTotalPages] = useState(initialTotalPages || 1);
   const [isMounted, setIsMounted] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const router = useRouter();
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -39,10 +39,9 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
   }, [section]);
 
   useEffect(() => {
-    if (!initialData) {
-      fetchData(currentPage);
-    }
-  }, [currentPage, initialData, fetchData]);
+    // Always fetch blog data since initialData is page data, not blog data
+    fetchData(currentPage);
+  }, [currentPage, fetchData]);
 
   // Don't render until component is mounted to prevent hydration mismatch
   if (!isMounted) {
@@ -96,6 +95,8 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
   };
 
   return (
+    <>
+    <Meta data={initialData} />
     <div className="container mt-3">
       <div className={`${styles.title}`}>
         <h1> Insights from Dubai’s Real Estate Market</h1>
@@ -258,6 +259,7 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
           )}
         </div>
     </div>
+    </>
   );
 };
 
