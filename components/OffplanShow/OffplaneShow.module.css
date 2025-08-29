@@ -357,6 +357,7 @@ letter-spacing: 0%;
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  max-height: 508px;
 }
 
 .buildingImage {
@@ -1298,15 +1299,6 @@ letter-spacing: 0%;
   font-family: 'Montserrat';
 }
 
-@media (max-width: 1650px) {
-  .featuresSection {
-    margin-left: 10rem;
-  }
-
-  .amenitiesSection {
-    margin-left: 10rem;
-  }
-}
 
 @media (max-width: 1600px) {
   .exteriorimage {
@@ -1925,6 +1917,7 @@ letter-spacing: 0%;
 
   .amenitiesList {
     font-size: 14px;
+    gap:0;
   }
 
   .locationSection {

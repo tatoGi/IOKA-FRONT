@@ -341,9 +341,24 @@ const OffplanShow = ({ offplanData }) => {
     );
   };
 
+  // Prepare meta data for the Meta component
+  const metaData = {
+    ...offplanData,
+    title: offplanData?.offplan?.title || 'Offplan Property',
+    description: offplanData?.offplan?.description ? 
+      offplanData.offplan.description.replace(/<[^>]*>/g, '').substring(0, 160) + '...' : 
+      'Discover this amazing offplan property',
+    image: offplanData?.offplan?.banner_photo ? 
+      `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(offplanData.offplan.banner_photo)}` : 
+      null,
+    type: 'website',
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://ioka.ae'}${router.asPath}`,
+    metadata: offplanData?.offplan?.metadata || {}
+  };
+
   return (
     <>
-      <Meta data={offplanData} type="offplan" />
+      <Meta data={metaData} type="offplan" />
   {copyAlertoffplan && (
         <div className={style.copyAlertoffplan}>Link copied to clipboard!</div>
       )}
@@ -623,7 +638,7 @@ const OffplanShow = ({ offplanData }) => {
 
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
-                <ul className={style.featuresList}>
+                <div className={style.amenitiesList}>
                   {amenities.map((amenity, index) => (
                     <li key={index}>
                       {amenity.icon ? (
@@ -639,7 +654,7 @@ const OffplanShow = ({ offplanData }) => {
                       {amenity.name}
                     </li>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -678,7 +693,6 @@ const OffplanShow = ({ offplanData }) => {
               <div className={style.amenitiesSection}>
                 <h3>Amenities</h3>
                 <div className={style.amenitiesList}>
-                <ul className={style.featuresList}>
                   {amenities.map((amenity, index) => (
                     <li key={index}>
                       {amenity.icon ? (
@@ -694,7 +708,7 @@ const OffplanShow = ({ offplanData }) => {
                       {amenity.name}
                     </li>
                   ))}
-                </ul>
+               
                 </div>
               </div>
             </div>

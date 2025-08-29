@@ -73,6 +73,10 @@ const Meta = ({
     else if (directData.offplan) {
       contentData = directData.offplan;
       contentType = 'website';
+      // Ensure we're using the nested offplan data for metadata
+      if (directData.offplan.metadata) {
+        contentData.metadata = directData.offplan.metadata;
+      }
     }
     // Handle rental data structure
     else if (directData.rental) {
@@ -96,9 +100,13 @@ const Meta = ({
     }
     if (contentData) {
       const metadata = contentData.metadata || {};
-      
       // Extract metadata with fallbacks
-      metaTitle = metadata.meta_title || contentData.title || contentData.name || contentData.developer_name || defaultTitle;
+      metaTitle = metadata.meta_title || 
+                contentData.title || 
+                contentData.name || 
+                contentData.developer_name || 
+                (contentData.offplan?.title) ||
+                defaultTitle;
       metaDescription = metadata.meta_description || contentData.subtitle || contentData.description ||
         (contentData.body ? contentData.body.replace(/<[^>]*>/g, '').substring(0, 160) + '...' : defaultDescription);
       metaKeywords = metadata.meta_keywords || '';
