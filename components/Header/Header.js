@@ -220,7 +220,7 @@ const Header = ({ navigationData }) => {
                   {isMobileView ? (
                     // Mobile view menu items
                     mobilePages.map((page) => (
-                      <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`} key={page.id}>
+                      <Link href={`/${page.slug}`} key={page.id}>
                         <li
                           className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
                               ? "active-link"
@@ -309,7 +309,7 @@ const Header = ({ navigationData }) => {
             {isMobileView ? (
               // Mobile view menu items
               mobilePages.map((page) => (
-                <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`} key={page.id}>
+                <Link href={`/${page.slug}`} key={page.id}>
                   <li
                     className={`mobile-menu-item ${normalizedPathname === `/${page.slug}`
                         ? "active-link"
