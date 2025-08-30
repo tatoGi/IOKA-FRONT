@@ -332,7 +332,7 @@ const Header = ({ navigationData }) => {
                       : ""
                   }
                 >
-                  <Link href={page.type_id === 6 ? '/blog' : `/${page.slug}`}>{page.title}</Link>
+                  <Link href={ `/${page.slug}`}>{page.title}</Link>
                 </li>
               ))
             )}
