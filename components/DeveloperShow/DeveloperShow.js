@@ -962,7 +962,9 @@ const DeveloperShow = (developerData) => {
                    
                       <div className={styles.awardBottom}>
                        
-                        <button className={styles.viewAwardBtn}>View Awards</button>
+                        <a href={award.award_link || '#'} className={styles.viewAwardBtn} target="_blank" rel="noopener noreferrer">
+                          View Awards
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1013,7 +1015,9 @@ const DeveloperShow = (developerData) => {
                     </div>
                     <div className={styles.awardBottom}>
                       <span className={styles.awardYear}>{awards[0].award_year}</span>
-                      <button className={styles.viewAwardBtn}>View Awards</button>
+                      <a href={awards[0].award_link || '#'} className={styles.viewAwardBtn} target="_blank" rel="noopener noreferrer">
+                        View Awards
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1085,7 +1089,9 @@ const DeveloperShow = (developerData) => {
                       )}
                       <div className={styles.awardBottom}>
                         {!isMobileView && <span className={styles.awardYear}>{award.award_year}</span>}
-                        <button className={styles.viewAwardBtn}>View Awards</button>
+                        <a href={award.award_link || '#'} className={styles.viewAwardBtn} target="_blank" rel="noopener noreferrer">
+                          View Awards
+                        </a>
                       </div>
                     </div>
                   </div>
