@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Styles from "./RentalList.module.css";
 import Image from "next/image";
-import defaultImage from "../../assets/img/default.webp";
 import { BsWhatsapp } from "react-icons/bs";
 import callVector from "../../assets/img/call.svg";
 import agentifno from "../../assets/img/agentinfo.png";

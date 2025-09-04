@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./blog.module.css";
-import baseimage from "../../assets/img/blogimage.png";
 import Image from "next/image";
 import BlogIcon from "../../assets/img/calendaricon.svg";
 import axios from "axios";
@@ -109,15 +108,11 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
               <div className={styles.imageContainer}>
                 <Image
                   src={
-                    isMobile
-                      ? card.mobile_image
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.mobile_image)}`
-                        : card.image
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
-                        : baseimage
+                    isMobile && card.mobile_image
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.mobile_image)}`
                       : card.image
                       ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(card.image)}`
-                      : baseimage
+                      : ''
                   }
                   className={styles["card-img-top"]}
                   alt={card.image_alt || card.title}

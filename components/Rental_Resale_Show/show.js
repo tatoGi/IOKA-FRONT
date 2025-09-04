@@ -850,8 +850,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <Image
                         src={
                           RENTAL_RESALE_DATA.agent_photo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
-                            : defaultImage
+                             `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
+                           
                         }
                         alt={RENTAL_RESALE_DATA.title}
                         width={80}
@@ -935,8 +935,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <Image
                       src={
                         RENTAL_RESALE_DATA.qr_photo
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
-                          : "/default.jpg"
+                           `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
+                         
                       }
                       alt="QR Code"
                       className={styles.qrCode}
@@ -1243,12 +1243,12 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <Image
                         src={
                           getFirstGalleryImage(property.gallery_images)
-                            ? `${
+                             `${
                                 process.env.NEXT_PUBLIC_API_URL
                               }/storage/${decodeImageUrl(
                                 getFirstGalleryImage(property.gallery_images)
                               )}`
-                            : defaultImage
+                           
                         }
                         alt={property.title}
                         fill
@@ -1355,12 +1355,12 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       <Image
                         src={
                           getFirstGalleryImage(property.gallery_images)
-                            ? `${
+                             `${
                                 process.env.NEXT_PUBLIC_API_URL
                               }/storage/${decodeImageUrl(
                                 getFirstGalleryImage(property.gallery_images)
                               )}`
-                            : defaultImage
+                          
                         }
                         alt={property.title}
                         fill

@@ -8,7 +8,6 @@ import styles from "./blogShow.module.css";
 import Image from "next/image";
 import ShareIcons from "../ShareIcons/ShareIcons";
 import BlogIcon from "../../assets/img/calendarBlue.svg"; // Ensure this path is correct
-import baseimage from "../../assets/img/blogimage.png"; // Ensure this path is correct
 import Meta from "../Meta/Meta";
 
 const BlogShow = ({ blogData }) => {
