@@ -847,11 +847,12 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                 <div className={styles.sharediv}>
                   <div className={styles.content_sharediv}>
                     <div className={styles.imageContainer_share}>
+                      
                       <Image
                         src={
                           RENTAL_RESALE_DATA.agent_photo
-                             `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
-                           
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${getAgentPhotoPath(RENTAL_RESALE_DATA.agent_photo)}`
+                            : '/assets/img/default-agent.png'
                         }
                         alt={RENTAL_RESALE_DATA.title}
                         width={80}
@@ -935,8 +936,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                     <Image
                       src={
                         RENTAL_RESALE_DATA.qr_photo
-                           `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
-                         
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
+                          : '/assets/img/default-qr.png'
                       }
                       alt="QR Code"
                       className={styles.qrCode}
