@@ -372,7 +372,7 @@
   overflow: hidden;
   background: white;
   width: 504px !important;
-  height: 600px;
+  height: 576px;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -517,7 +517,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 12px;
-  margin-top: auto;
+  margin-top: 24px;
 }
 
 .actionButton {
@@ -1344,7 +1344,7 @@
     overflow: hidden;
     background: white;
     width: 417px !important;
-    height: 600px;
+    height: 576px;
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
