@@ -220,19 +220,25 @@ const DeveloperShow = (developerData) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: offplanListings.length === 1 ? 1 : 3,
+    slidesToShow: offplanListings.length === 1 ? 1 : offplanListings.length === 2 ? 2 : 3,
     slidesToScroll: 1,
     arrows: false, // We'll use custom arrows
-    centerMode: false, // Ensure items are left-aligned, especially when there's only one
+    centerMode: offplanListings.length === 2,
     variableWidth: false,
     responsive: [
       {
         breakpoint: 1200,
-        settings: { slidesToShow: offplanListings.length === 1 ? 1 : 2 }
+        settings: { 
+          slidesToShow: offplanListings.length === 1 ? 1 : offplanListings.length === 2 ? 2 : 2,
+          centerMode: offplanListings.length === 2
+        }
       },
       {
         breakpoint: 768,
-        settings: { slidesToShow: 1 }
+        settings: { 
+          slidesToShow: 1,
+          centerMode: false
+        }
       }
     ]
   };
@@ -591,10 +597,10 @@ const DeveloperShow = (developerData) => {
                     <Image
                       src={
                         listing.main_photo
-                          ? `${
+                           `${
                               process.env.NEXT_PUBLIC_API_URL
                             }/storage/${decodeImageUrl(listing.main_photo)}`
-                          : baseimage
+                          
                       }
                       alt={listing.title}
                       layout="fill"
@@ -686,9 +692,7 @@ const DeveloperShow = (developerData) => {
                   <Image
                     src={
                       rentalListings[0].main_photo
-                        ? `${
-                            process.env.NEXT_PUBLIC_API_URL
-                          }/storage/${decodeImageUrl(rentalListings[0].main_photo)}`
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(rentalListings[0].main_photo)}`
                         : baseimage
                     }
                     alt={rentalListings[0].title}
@@ -914,12 +918,14 @@ const DeveloperShow = (developerData) => {
                   <div key={index} className={styles.awardCard}>
                     <div className={styles.awardLeft}>
                       <div className={styles.awardTeamImage}>
-                        <Image
-                          src={awardimg1}
-                          alt="Team Photo"
-                          layout="fill"
-                          objectFit="cover"
-                        />
+                        {award.award_photo ? (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(award.award_photo)}`}
+                            alt="Award Photo"
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        ) : null}
                       </div>
                     </div>
 
@@ -942,21 +948,22 @@ const DeveloperShow = (developerData) => {
                           <span>{award.award_year}</span>
                         </div>
                       <div className={styles.awardIconWrapper}>
-                        
+                        {award.award_photo ? (
                         <Image
                           src={
                             award.award_photo
-                              ? `${
+                              `${
                                   process.env.NEXT_PUBLIC_API_URL
                                 }/storage/${decodeImageUrl(award.award_photo)}`
-                              : EmaarLogo
+                              
                           }
                           alt={award.logo_alt || "Award Trophy"}
                           width={156}
                           height={108}
                           className={styles.trophyImage}
                         />
-                       
+                        ) : null}
+
                       </div>
                       </div>
                    
@@ -974,14 +981,16 @@ const DeveloperShow = (developerData) => {
               <div className={styles.singleAwardContainer}>
                 <div className={styles.awardCard}>
                   <div className={styles.awardLeft}>
-                    <div className={styles.awardTeamImage}>
-                      <Image
-                        src={awardimg1}
-                        alt="Team Photo"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
+                    {awards[0].award_photo && (
+                      <div className={styles.awardTeamImage}>
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(awards[0].award_photo)}`}
+                          alt="Award Photo"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className={styles.awardRight}>
@@ -998,21 +1007,17 @@ const DeveloperShow = (developerData) => {
                         }}
                       />
                     </div>
-                    <div className={styles.awardIconWrapper}>
-                      <Image
-                        src={
-                          awards[0].award_photo
-                            ? `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }/storage/${decodeImageUrl(awards[0].award_photo)}`
-                            : EmaarLogo
-                        }
-                        alt="Award Trophy"
-                        width={156}
-                        height={108}
-                        className={styles.trophyImage}
-                      />
-                    </div>
+                    {awards[0].award_photo && (
+                      <div className={styles.awardIconWrapper}>
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(awards[0].award_photo)}`}
+                          alt="Award Trophy"
+                          width={156}
+                          height={108}
+                          className={styles.trophyImage}
+                        />
+                      </div>
+                    )}
                     <div className={styles.awardBottom}>
                       <span className={styles.awardYear}>{awards[0].award_year}</span>
                       <a href={awards[0].award_link || '#'} className={styles.viewAwardBtn} target="_blank" rel="noopener noreferrer">
@@ -1028,12 +1033,14 @@ const DeveloperShow = (developerData) => {
                   <div key={index} className={styles.awardCard}>
                     <div className={styles.awardLeft}>
                       <div className={styles.awardTeamImage}>
-                        <Image
-                          src={awardimg1}
-                          alt="Team Photo"
-                          layout="fill"
-                          objectFit="cover"
-                        />
+                        {award.award_photo ? (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(award.award_photo)}`}
+                            alt="Award Photo"
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        ) : null}
                       </div>
                     </div>
 

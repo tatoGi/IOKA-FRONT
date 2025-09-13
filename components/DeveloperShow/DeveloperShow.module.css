@@ -355,7 +355,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 16px;
+  gap: 24px;
   -webkit-transition: -webkit-transform 0.5s ease;
   transition: -webkit-transform 0.5s ease;
   -o-transition: transform 0.5s ease;
@@ -372,9 +372,12 @@
   overflow: hidden;
   background: white;
   width: 504px !important;
+  height: 600px;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .propertyImage {
@@ -417,6 +420,9 @@
 
 .propertyInfo {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .propertyInfo h4 {
@@ -511,6 +517,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 12px;
+  margin-top: auto;
 }
 
 .actionButton {
@@ -1336,11 +1343,15 @@
     border-radius: 8px;
     overflow: hidden;
     background: white;
-    width: 417px;
+    width: 417px !important;
+    height: 600px;
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
   }
+  
 }
 
 @media (max-width: 1000px) {
