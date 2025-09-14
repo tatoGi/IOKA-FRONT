@@ -15,7 +15,6 @@ import { useMediaQuery } from "react-responsive"; // Import useMediaQuery
 import Meta from "../Meta/Meta";
 
 const Hombanner = ({ initialData, navigationData }) => {
-  console.log(initialData);
   
   const [isLoading, setIsLoading] = useState(true);
   const [cardData, setCardData] = useState(initialData || []);

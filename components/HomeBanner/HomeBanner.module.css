@@ -111,19 +111,33 @@
 /* --- Search Section --- */
 .banner-search {
   position: absolute;
-  top: 50%;
-  /* Center vertically */
+  top: calc(50% + 72px); /* 72px below h3 */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: 90%;
-  /* Use percentage for better responsiveness */
   max-width: 697px;
-  /* Max width for desktop */
   z-index: 10;
-  margin-top: 100px;
-  /* Push down from vertical center */
   text-align: center;
   /* Mobile adjustments are in the media query */
+}
+
+/* Ensure banner content has proper spacing */
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 72px; /* Space for search */
+}
+
+/* Position pagination 319px from bottom */
+.swiper-pagination {
+  bottom: 319px !important;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
 .search-tabs {

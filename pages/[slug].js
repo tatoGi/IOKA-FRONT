@@ -11,7 +11,6 @@ import Blog from "@/components/Blog/Blog";
 import Meta from "@/components/Meta/Meta";
 
 const DynamicPage = ({ pageData }) => {
-  console.log(pageData);
   const router = useRouter();
 
   // Check if pageData or pageData.title is null or undefined
