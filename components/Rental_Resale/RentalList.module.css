@@ -2146,7 +2146,7 @@
     .mobilePagination {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -2313,11 +2313,13 @@ letter-spacing: 0%;
       margin: 16px 0 0 0;
       max-width: 322px;
       font-size: 14px;
-      margin: 16px 0 0 0;
-      max-width: 322px;
       display: -webkit-box;
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
+      display: -ms-flexbox;
+      -ms-line-clamp: 5;
+      -ms-box-orient: vertical;
+      line-clamp: 5;
       overflow: hidden;
     }
     .propertyActions{
@@ -2353,7 +2355,7 @@ letter-spacing: 0%;
 .mobilePagination {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -2493,6 +2495,10 @@ margin-right: 56px;
       display: -webkit-box;
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
+      display: -ms-flexbox;
+      -ms-line-clamp: 5;
+      -ms-box-orient: vertical;
+      line-clamp: 5;
       overflow: hidden;
     }
   }

@@ -451,7 +451,7 @@ color: rgba(7, 21, 31, 1);
 .mobilePagination {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -712,20 +712,11 @@ margin-right: 56px;
     color: #07151F;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* Limit text to 6 lines with cross-browser compatibility */
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    display: -moz-box;
-    -moz-line-clamp: 6;
-    -moz-box-orient: vertical;
-    display: box;
+    display: flex;
+    flex-direction: column;
     line-clamp: 6;
-    box-orient: vertical;
-    /* Fallback for browsers that don't support line-clamp */
     max-height: calc(1.3em * 6);
   }
-
 
   .communitiesSection {
     margin-top: 0;

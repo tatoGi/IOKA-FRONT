@@ -1,11 +1,20 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://www.ioka.ae';
-const API_HOSTNAME = new URL(API_BASE_URL).hostname;
+let API_HOSTNAME = 'ioka.ae';
+
+try {
+  API_HOSTNAME = new URL(API_BASE_URL).hostname;
+} catch (e) {
+  console.warn('Invalid API_BASE_URL, using default');
+}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizeCss: true,
+  },
+  compiler: {
+    styledComponents: true,
   },
   async redirects() {
     return [

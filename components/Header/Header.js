@@ -7,9 +7,8 @@ import SearchBtn from "../icons/SearchBtn";
 import SearchCloseBtn from "../icons/SearchCloseBtn";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({ subsets: ['latin'] });
+// Using CSS modules for font loading instead of next/font
+import styles from './Header.module.css';
 
 const Header = ({ navigationData }) => {
 

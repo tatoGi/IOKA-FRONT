@@ -6,7 +6,7 @@ import SharedLayout from "@/components/Layout/SharedLayout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { montserrat } from '../utils/fonts';
+// Using Google Fonts via link tag in _document.js instead of @next/font
 import "nprogress/nprogress.css";
 // Import styles in correct order
 import "../styles/bootstrap.css";
@@ -36,13 +36,14 @@ if (typeof window !== 'undefined') {
 }
 
 function App({ Component, pageProps }) {
-
   const [loading, setLoading] = useState(true);
   const [appData, setAppData] = useState({
     navigationData: [],
     settings: {}
   });
   const router = useRouter();
+  
+  // Font is now handled by _document.js
 
 
   useEffect(() => {
@@ -125,10 +126,8 @@ function App({ Component, pageProps }) {
       <Header navigationData={appData.navigationData} />
       <Layout>
         <SharedLayout>
-          <div className={montserrat.variable}>
-            <TopProgressBar />
-            <Component {...pageProps} navigationData={appData.navigationData} />
-          </div>
+          <TopProgressBar />
+          <Component {...pageProps} navigationData={appData.navigationData} />
         </SharedLayout>
       </Layout>
       <Footer navigationData={appData.navigationData} settings={appData.settings} />

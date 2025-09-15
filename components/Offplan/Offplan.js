@@ -3,22 +3,15 @@ import debounce from 'lodash/debounce';
 import SearchSection from "../SearchSection/SearchSection";
 import Image from "next/image";
 import styles from "./Offplan.module.css";
-import { Montserrat } from "next/font/google";
 import { StarIcon } from "../icons/PropertyIcons";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import { OFFPLAN_APi, FILTER_OFFPLAN_API } from "@/routes/apiRoutes";
 import defaultImage from "../../assets/img/default.webp";
-import { Container, Row, Col } from "react-bootstrap"; // Import Bootstrap components
+import { Container, Row, Col } from "react-bootstrap";
 import RangeInputPopup from "../SearchSection/RangeInputPopup";
 import Meta from "../Meta/Meta";
-// Configure Montserrat
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat"
-});
 
 const Offplan = ({ initialData, initialPagination }) => {
   const [cardData, setCardData] = useState([]);
@@ -349,7 +342,7 @@ const Offplan = ({ initialData, initialPagination }) => {
   return (
     <>
     <Meta data={initialData} />
-    <Container className={`${styles.container} ${montserrat.className}`}>
+    <Container className={styles.container}>
       <div className={styles.listSection}>
         <SearchSection
           onFilterChange={handleFilterChange}

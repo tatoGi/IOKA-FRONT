@@ -167,6 +167,17 @@ const Footer = ({ navigationData, settings }) => {
                 </div>
                 <div className="f-text-0">{getSettingValue('contact.phone')}</div>
               </a>
+              
+              <a 
+                href={`tel:${getSettingValue('contact.phone').replace(/[^\d+]/g, '')}`} 
+                className="footer-contact-item"
+                title={`Call us at ${getSettingValue('contact.phone')}`}
+              >
+                <div className="icon-00">
+                  <PhoneIcon />
+                </div>
+                <div className="f-text-0">+971557314993</div>
+              </a>
               <a 
                 href={`mailto:${getSettingValue('contact.email')}`} 
                 className="footer-contact-item"
@@ -247,6 +258,16 @@ const Footer = ({ navigationData, settings }) => {
                       <PhoneIcon />
                     </div>
                     <div className="f-text-0">{getSettingValue('contact.phone')}</div>
+                  </a>
+                  <a 
+                    href="tel:+971557314993" 
+                    className="footer-contact-item"
+                    title={`Call us at +971557314993`}
+                  >
+                    <div className="icon-00">
+                      <PhoneIcon />
+                    </div>
+                    <div className="f-text-0">+971557314993</div>
                   </a>
                   <a 
                     href={`mailto:${getSettingValue('contact.email')}`} 
