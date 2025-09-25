@@ -522,6 +522,7 @@ const Offplan = ({ initialData, initialPagination }) => {
                         <span
                           className={`${styles.price} ${styles.textEllipsis}`}
                         >
+                         
                           USD {Number(property?.amount)?.toLocaleString() || "0"}
                         </span>
                         <span

@@ -933,17 +933,20 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                   </h2>
                   <div className={styles.regulatoryInfo}>
                     {/* QR Code */}
-                    <Image
-                      src={
-                        RENTAL_RESALE_DATA.qr_photo
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
-                          : '/assets/img/default-qr.png'
-                      }
-                      alt="QR Code"
-                      className={styles.qrCode}
-                      width={80}
-                      height={80}
-                    />
+                    <div className={styles.qrCodeContainer}>
+                      <Image
+                        src={
+                          RENTAL_RESALE_DATA.qr_photo
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${RENTAL_RESALE_DATA.qr_photo}`
+                            : '/assets/img/default-qr.png'
+                        }
+                        alt="QR Code"
+                        className={styles.qrCode}
+                        width={160}
+                        height={160}
+                        priority
+                      />
+                    </div>
 
                     {/* Reference and DLD Permit Number */}
                     <div className={styles.infoText}>
@@ -1155,6 +1158,8 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
                       }
                       alt="QR Code"
                       className={styles.qrCode}
+                      width={80}
+                      height={80} 
                     />
 
                     {/* Reference and DLD Permit Number */}
