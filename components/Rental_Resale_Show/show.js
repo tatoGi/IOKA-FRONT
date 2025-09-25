@@ -375,16 +375,20 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
     { ssr: false }
   );
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === galleryImages.length - 1 ? 0 : prev + 1
-    );
+  const nextSlide = (e) => {
+    e?.stopPropagation?.();
+    setCurrentSlide(prev => {
+      const nextIndex = prev < galleryImages.length - 1 ? prev + 1 : 0;
+      return nextIndex;
+    });
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? galleryImages.length - 1 : prev - 1
-    );
+  const prevSlide = (e) => {
+    e?.stopPropagation?.();
+    setCurrentSlide(prev => {
+      const prevIndex = prev > 0 ? prev - 1 : galleryImages.length - 1;
+      return prevIndex;
+    });
   };
 
   const scrollToNextProperty = () => {
@@ -502,39 +506,59 @@ const RentalResaleShow = ({ RENTAL_RESALE_DATA }) => {
   return (
     <>
       <Meta data={{ rental: RENTAL_RESALE_DATA }} type="rental" />
-      {isMobile && (
+      {isMobile && galleryImages.length > 0 && (
         <div className={styles.mobileGallery}>
-          <div
-            className={styles.sliderContainer}
-            style={{
-              transform: `translateX(-${currentSlide * 100}%)`,
-              width: `${galleryImages.length * 100}%`
-            }}
-          >
-            {galleryImages.map((image, index) => (
-              <div key={index} className={styles.mobileImage}>
-                {isClient && renderGalleryImage(image, index)}
+          <div className={styles.sliderWrapper}>
+            <div
+              className={styles.sliderContainer}
+              style={{
+                transform: `translateX(-${(currentSlide / galleryImages.length) * 100}%)`,
+                width: `${galleryImages.length * 100}%`,
+                display: 'flex',
+                height: '100%',
+                transition: 'transform 0.3s ease-in-out'
+              }}
+            >
+              {galleryImages.map((image, index) => (
+                <div 
+                  key={index} 
+                  className={styles.mobileImage} 
+                  style={{ 
+                    width: `${100 / galleryImages.length}%`,
+                    flexShrink: 0,
+                    position: 'relative',
+                    height: '100%'
+                  }}
+                >
+                  {isClient && renderGalleryImage(image, index)}
+                </div>
+              ))}
+            </div>
+          </div>
+          {galleryImages.length > 1 && (
+            <>
+              <div className={styles.sliderControls}>
+                <button
+                  onClick={prevSlide}
+                  className={`${styles.sliderArrow} ${styles.prevArrow}`}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className={`${styles.sliderArrow} ${styles.nextArrow}`}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
               </div>
-            ))}
-          </div>
-          <div className={styles.sliderControls}>
-            <button
-              onClick={prevSlide}
-              className={`${styles.sliderArrow} ${styles.prevArrow}`}
-            >
-              ‹
-            </button>
-            <button
-              onClick={nextSlide}
-              className={`${styles.sliderArrow} ${styles.nextArrow}`}
-            >
-              ›
-            </button>
-          </div>
-          <div className={styles.photoCount}>
-            <Image src={galleryIcon} alt="gallery" width={16} height={16} />+
-            {galleryImages.length - 1}
-          </div>
+              <div className={styles.photoCount}>
+                <Image src={galleryIcon} alt="gallery" width={16} height={16} />
+                {currentSlide + 1}/{galleryImages.length}
+              </div>
+            </>
+          )}
         </div>
       )}
       <div className= "container">

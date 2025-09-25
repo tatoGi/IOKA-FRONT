@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Styles from "./RentalList.module.css";
 import Image from "next/image";
 import { BsWhatsapp } from "react-icons/bs";
@@ -66,34 +66,56 @@ const Rental_Resale = ({ initialData }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const calculateLayout = () => {
-      if (propertyCardRef.current && sliderRef.current) {
-        const cardWidth = propertyCardRef.current.offsetWidth;
-        const gap = 35;
-        const currentSlideOffset = cardWidth + gap;
-        setSlideOffset(currentSlideOffset);
+  const calculateLayout = useCallback(() => {
+    // Handle property cards layout
+    if (propertyCardRef.current && sliderRef.current) {
+      const cardWidth = propertyCardRef.current.offsetWidth;
+      const gap = 35;
+      const currentSlideOffset = cardWidth + gap;
+      setSlideOffset(currentSlideOffset);
 
-        const containerWidth = sliderRef.current.offsetWidth;
-        const currentVisibleItems = Math.max(1, Math.floor(containerWidth / currentSlideOffset));
-        setVisibleItems(currentVisibleItems);
+      const containerWidth = sliderRef.current.offsetWidth;
+      const currentVisibleItems = Math.max(1, Math.floor(containerWidth / currentSlideOffset));
+      setVisibleItems(currentVisibleItems);
 
-        if (topProperties.length > 0) {
-          const newMaxSlide = Math.max(0, topProperties.length - currentVisibleItems);
-          setMaxSlide(newMaxSlide);
-        } else {
-          setMaxSlide(0);
-        }
+      if (topProperties.length > 0) {
+        const newMaxSlide = Math.max(0, topProperties.length - currentVisibleItems);
+        setMaxSlide(newMaxSlide);
+      } else {
+        setMaxSlide(0);
       }
-    };
+    }
+    
+    // Handle image slider layout
+    if (slideRef.current) {
+      const sliderContainer = slideRef.current.parentElement;
+      if (sliderContainer) {
+        const containerWidth = sliderContainer.offsetWidth;
+        const slides = slideRef.current.children;
+        
+        // Set each slide width to match container width
+        Array.from(slides).forEach(slide => {
+          slide.style.width = `${containerWidth}px`;
+        });
+        
+        // Update container width to fit all slides
+        slideRef.current.style.width = `${containerWidth * slides.length}px`;
+      }
+    }
+  }, [topProperties]);
 
+  useEffect(() => {
+    // Initial layout calculation
     calculateLayout();
+    
+    // Add resize event listener
     window.addEventListener('resize', calculateLayout);
 
+    // Cleanup function
     return () => {
       window.removeEventListener('resize', calculateLayout);
     };
-  }, [topProperties]);
+  }, [calculateLayout]);
 
   const fetchData = async (page, filterParams = null) => {
     console.log('fetchData called with page:', page, 'filters:', filterParams);
@@ -727,7 +749,7 @@ const Rental_Resale = ({ initialData }) => {
                         alt={listing.title}
                         style={{ objectFit: "cover" }}
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 580px"
+                        
                       />
                       {Array.isArray(listing.tags) ? (
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', position: 'absolute', bottom: '10px', left: '10px' }}>
@@ -820,11 +842,10 @@ const Rental_Resale = ({ initialData }) => {
                           />
                         </svg>
                       </button>
-                      <div
-                        className={Styles.slideContainer}
+                      <div className={Styles.slideContainer}
                         ref={slideRef}
                         style={{
-                          transform: `translateX(-${currentImageIndex * 100}%)`,
+                          transform: `translateX(-${(currentImageIndex / galleryImages.length) * 100}%)`,
                           width: `${galleryImages.length * 100}%`
                         }}
                         onTouchStart={handleTouchStart}
@@ -835,19 +856,24 @@ const Rental_Resale = ({ initialData }) => {
                         }}
                       >
                         {galleryImages.map((image, index) => (
-                         
                           <div key={index} className={Styles.slide}>
                             <Image
                               src={
                                 image
-                                  ? `${process.env.NEXT_PUBLIC_API_URL
-                                  }/storage/${decodeImageUrl(image)}`
+                                  ? `${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(image)}`
                                   : defaultImage
                               }
                               alt={`Property Image ${index + 1}`}
                               fill
-                              style={{ objectFit: "cover" }}
-                              sizes="100vw"
+                              style={{ 
+                                objectFit: 'cover',
+                                width: '100%',
+                                height: '100%',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0
+                              }}
+                              sizes="(max-width: 768px) 100vw, 50vw"
                               priority={index === 0}
                             />
                           </div>
