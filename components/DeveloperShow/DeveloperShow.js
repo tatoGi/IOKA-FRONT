@@ -950,13 +950,7 @@ const DeveloperShow = (developerData) => {
                       <div className={styles.awardIconWrapper}>
                         {award.award_photo ? (
                         <Image
-                          src={
-                            award.award_photo
-                              `${
-                                  process.env.NEXT_PUBLIC_API_URL
-                                }/storage/${decodeImageUrl(award.award_photo)}`
-                              
-                          }
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${decodeImageUrl(award.award_photo)}`}
                           alt={award.logo_alt || "Award Trophy"}
                           width={156}
                           height={108}
