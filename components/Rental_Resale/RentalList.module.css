@@ -1882,7 +1882,6 @@
     }
   
     .slide {
-      flex: 0 0 100%;
       position: relative;
       height: 100%;
       min-height: 300px;

@@ -822,6 +822,7 @@ const Rental_Resale = ({ initialData }) => {
                       <button
                         className={`${Styles.sliderArrow} ${Styles.prevArrow}`}
                         onClick={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           setCurrentImageIndex((prev) => Math.max(prev - 1, 0));
                         }}
@@ -882,6 +883,7 @@ const Rental_Resale = ({ initialData }) => {
                       <button
                         className={`${Styles.sliderArrow} ${Styles.nextArrow}`}
                         onClick={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           setCurrentImageIndex((prev) =>
                             prev + 1 < galleryImages.length ? prev + 1 : prev
@@ -911,6 +913,7 @@ const Rental_Resale = ({ initialData }) => {
                             className={`${Styles.indicator} ${index === currentImageIndex ? Styles.active : ""
                               }`}
                             onClick={(e) => {
+                              e.preventDefault();
                               e.stopPropagation();
                               setCurrentImageIndex(index);
                             }}
