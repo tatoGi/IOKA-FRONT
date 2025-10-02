@@ -103,7 +103,7 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
       </div>
       <div className="row">
         {cardData.map((card, index) => (
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index}>
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
             <div className={`${styles.card}`}>
               <div className={styles.imageContainer}>
                 <Image
