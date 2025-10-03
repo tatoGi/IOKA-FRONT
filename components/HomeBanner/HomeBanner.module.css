@@ -110,8 +110,8 @@
 
 /* --- Search Section --- */
 .banner-search {
-  position: absolute;
-  top: calc(50% + 72px); /* 72px below h3 */
+  position: relative;
+  top: -200px; /* 72px below h3 */
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -1179,7 +1179,8 @@ letter-spacing: 0%;
 
   /* --- Mobile Search Positioning & Layout --- */
   .banner-search {
-    top: 239px;
+    position: relative;
+    top: -200px;
     /* Remove fixed top */
     bottom: 5%;
     /* Position from bottom */
