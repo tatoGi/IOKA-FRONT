@@ -104,6 +104,7 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
       <div className="row">
         {cardData.map((card, index) => (
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
+            <Link href={`/blog/${card.slug}`}>
             <div className={`${styles.card}`}>
               <div className={styles.imageContainer}>
                 <Image
@@ -153,6 +154,7 @@ const Blog = ({ initialData, initialTotalPages = 1, initialPage = 1, section = '
                 </Link>
               </div>
             </div>
+            </Link>
           </div>
         ))}
       </div>

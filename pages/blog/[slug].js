@@ -1,85 +1,85 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
-import axios from 'axios';
-import { BLOGS_API } from '../../routes/apiRoutes';
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import axios from "axios";
+import { BLOGS_API } from "../../routes/apiRoutes";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 
 // Dynamically import the BlogShow component with no SSR
-const BlogShow = dynamic(
-  () => import('../../components/BlogShow/show'),
-  { ssr: false, loading: () => <div>Loading...</div> }
-);
+const BlogShow = dynamic(() => import("../../components/BlogShow/show"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+});
 
 export async function getStaticPaths() {
   // Pre-render the most popular blog posts at build time
   try {
     const response = await axios.get(BLOGS_API);
-    
+
     // Debug: Log the response structure
-    console.log('Blog API Response:', {
+    console.log("Blog API Response:", {
       status: response.status,
       statusText: response.statusText,
-      dataType: Array.isArray(response.data) ? 'array' : typeof response.data,
+      dataType: Array.isArray(response.data) ? "array" : typeof response.data,
       data: response.data
     });
-    
+
     // Handle case where data might be nested in a data property
-    const blogPosts = Array.isArray(response.data) 
-      ? response.data 
-      : (response.data?.data || []);
-    
+    const blogPosts = Array.isArray(response.data)
+      ? response.data
+      : response.data?.data || [];
+
     if (!Array.isArray(blogPosts)) {
-      console.error('Unexpected blog posts format:', blogPosts);
-      return { paths: [], fallback: 'blocking' };
+      console.error("Unexpected blog posts format:", blogPosts);
+      return { paths: [], fallback: "blocking" };
     }
-    
+
     const paths = blogPosts
-      .filter(post => post?.slug) // Only include posts with a slug
+      .filter((post) => post?.slug) // Only include posts with a slug
       .map((post) => ({
-        params: { slug: post.slug },
+        params: { slug: post.slug }
       }));
-      
+
     console.log(`Generated ${paths.length} blog paths`);
-    return { paths, fallback: 'blocking' };
+    return { paths, fallback: "blocking" };
   } catch (error) {
-    console.error('Error fetching blog paths:', {
+    console.error("Error fetching blog paths:", {
       message: error.message,
       response: error.response?.data,
       status: error.response?.status
     });
-    return { paths: [], fallback: 'blocking' };
+    return { paths: [], fallback: "blocking" };
   }
 }
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  
+
   if (!slug) {
     return { notFound: true };
   }
-  
+
   try {
     const response = await axios.get(`${BLOGS_API}/${slug}`);
-    
+
     if (!response.data) {
       return { notFound: true };
     }
-    
+
     return {
-      props: { 
+      props: {
         initialBlogData: response.data,
-        slug 
+        slug
       },
-      revalidate: 60 * 60, // Revalidate at most once per hour
+      revalidate: 60 * 60 // Revalidate at most once per hour
     };
   } catch (error) {
-    console.error('Error fetching blog post:', error);
+    console.error("Error fetching blog post:", error);
     return { notFound: true };
   }
 }
 
-const BlogShowPage = ({ initialBlogData, slug }) => {
+const BlogShowPage = ({ initialBlogData, slug, navigationData }) => {
   const router = useRouter();
   const [blogData, setBlogData] = useState(initialBlogData);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,13 +93,13 @@ const BlogShowPage = ({ initialBlogData, slug }) => {
           const response = await axios.get(`${BLOGS_API}/${slug}`);
           setBlogData(response.data);
         } catch (error) {
-          console.error('Error fetching blog data:', error);
+          console.error("Error fetching blog data:", error);
         } finally {
           setIsLoading(false);
         }
       }
     };
-    
+
     fetchData();
   }, [slug, blogData]);
 
@@ -112,15 +112,15 @@ const BlogShowPage = ({ initialBlogData, slug }) => {
   }
 
   const breadcrumbData = [
-    { title: 'Home', path: '/' },
-    { title: 'Blog', path: '/blog' },
-    { title: blogData.blog.title || 'Blog Post', path: `/blog/${slug}` }
+    { title: "Home", path: "/" },
+    { title: "Blog", path: "/blog" },
+    { title: blogData.blog.title || "Blog Post", path: `/blog/${slug}` }
   ];
 
   return (
     <div>
       <Breadcrumb breadcrumbData={breadcrumbData} />
-      <BlogShow blogData={blogData} />
+      <BlogShow blogData={blogData} navigationData={navigationData} />
     </div>
   );
 };
