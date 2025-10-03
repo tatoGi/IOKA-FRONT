@@ -11,6 +11,7 @@ import FacebookIcon from "../icons/FacebookIcon";
 import XIcon from "../icons/XIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 import { SUBSCRIBE_API } from "@/routes/apiRoutes";
+import { useRouter } from "next/router";
 
 const isMobile = () => {
   if (typeof window !== "undefined") {
@@ -26,7 +27,7 @@ const Footer = ({ navigationData, settings }) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     const handleResize = () => setMobileView(isMobile());
     handleResize(); // Check on initial render
@@ -50,57 +51,55 @@ const Footer = ({ navigationData, settings }) => {
   };
 
   const showAlertMessage = useCallback((message) => {
-    setAlertMessage(message);
-    setShowAlert(true);
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          setShowAlert(false);
-        });
-      }, 2000);
-    });
-  }, []);
-
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch(SUBSCRIBE_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setShowSuccess(true);
-        setEmail("");
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            requestAnimationFrame(() => {
-              setShowSuccess(false);
-            });
-          }, 2000);
-        });
-      } else {
-        if (data.errors?.email?.includes("The email has already been taken.")) {
-          showAlertMessage("This email is already subscribed. Please use a different email address.");
-        } else {
-          showAlertMessage("Failed to subscribe. Please try again.");
-        }
-      }
-    } catch (error) {
-      showAlertMessage("An error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [email, showAlertMessage]);
+     setAlertMessage(message);
+     setShowAlert(true);
+     // Use requestAnimationFrame for smoother animations
+     requestAnimationFrame(() => {
+       setTimeout(() => {
+         requestAnimationFrame(() => {
+           setShowAlert(false);
+         });
+       }, 2000);
+     });
+   }, []);
+   const handleSubmit = useCallback(async (e) => {
+     e.preventDefault();
+     setIsSubmitting(true);
+ 
+     try {
+       const response = await fetch(SUBSCRIBE_API, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({ email }),
+       });
+ 
+       const data = await response.json();
+ 
+       if (response.ok) {
+         setShowSuccess(true);
+         setEmail("");
+         // Show success message briefly before redirecting
+         requestAnimationFrame(() => {
+           setTimeout(() => {
+             // Redirect to thank-you page
+             router.push('/thank-you');
+           }, 1000);
+         });
+       } else {
+         if (data.errors?.email?.includes("The email has already been taken.")) {
+           showAlertMessage("This email is already subscribed. Please use a different email address.");
+         } else {
+           showAlertMessage("Failed to subscribe. Please try again.");
+         }
+       }
+     } catch (error) {
+       showAlertMessage("An error occurred. Please try again.");
+     } finally {
+       setIsSubmitting(false);
+     }
+   }, [email, showAlertMessage, router]);
 
   return (
     <div className="footer">
@@ -320,8 +319,21 @@ const Footer = ({ navigationData, settings }) => {
                     </div>
                   )}
                   {showAlert && (
-                    <div className="alert alert-error">
-                      {alertMessage}
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      width: '100%',
+                      marginTop: '10px'
+                    }}>
+                      <div className="alert alert-error" style={{
+                        textAlign: 'center',
+                        display: 'inline-block',
+                        margin: '0 auto',
+                        padding: '8px 16px',
+                        borderRadius: '4px'
+                      }}>
+                        {alertMessage}
+                      </div>
                     </div>
                   )}
                 </form>

@@ -33,7 +33,9 @@
     max-height: 412px;
     border: 1px solid #E6EBED;
 }
-
+.description{
+    font-family: 'Montserrat';
+}
 .card:hover {
     border-color: #0A273B;
 }
