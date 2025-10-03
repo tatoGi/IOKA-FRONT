@@ -35,6 +35,7 @@
 }
 .description{
     font-family: 'Montserrat';
+    font-size: 14px;
 }
 .card:hover {
     border-color: #0A273B;
