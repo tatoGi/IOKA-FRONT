@@ -175,7 +175,9 @@
     letter-spacing: 0%;
     text-transform: uppercase;
   }
-
+  .home-banner .banner-slider{
+    max-height: 730px;
+  }
   .popular-area-section {
     padding: 60px 0;
   }

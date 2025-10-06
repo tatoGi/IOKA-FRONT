@@ -32,7 +32,9 @@ body {
   width: 100%;
   height: 100%;
 }
-
+.home-banner .banner-slider{
+  max-height: 826px;
+}
 .maintenance-banner {
   background-color: #2E7D32; /* Darker green for better contrast with white text */
   color: white;
